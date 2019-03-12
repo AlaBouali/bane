@@ -158,4 +158,4 @@ parameter: query method: GET=> [+]Payload was found
 <br>parameter: query method: POST=> [-]Payload was not found
 >>> 
 
-there is a default payload which is used in case you didn't modify the "payload" paramter (set by default to: None) to any XSS payload.you can set differnet xss payloads to test everytime with possibility to use a proxy.
+there is a default payload which is used in case you didn't modify the "payload" parameter (set by default to: None) to any XSS payload.you can set differnet xss payloads to test everytime with possibility to use a proxy.
