@@ -161,10 +161,18 @@ parameter: query method: GET=> [+]Payload was found
 there is a default payload which is used in case you didn't modify the "payload" parameter (set by default to: None) to any XSS payload.you can set differnet xss payloads to test everytime with possibility to use a proxy.
 
 
+there is another functions to test with:
+
+>>>bane.xssget('http://example.com/index.php',{parameter: xss-payload-here})
+
+>>>bane.xsspost('http://example.com/index.php',{parameter: xss-payload-here})
+
+
+
 
 3-FI (File Inclusion): (useful link: https://www.acunetix.com/vulnerabilities/web/file-inclusion/ )
 
-we can test a web application if it is vulnerable to FI using this function:
+<br>we can test a web application if it is vulnerable to FI using this function:
 
 >>>bane('http://example.com/index.php?file=page1.php')
 
@@ -172,4 +180,25 @@ we can test a web application if it is vulnerable to FI using this function:
 ,<br>"Nullbyte":nullbyte #(True if "nullbyte" parameter is set to True
 <br>,'Link':r.url #the result URL}
 
-<br>
+
+4-PHP code injection: (useful link: https://www.acunetix.com/vulnerabilities/web/php-code-injection/ )
+
+
+to test a web application against PHP code injection we can use those functions:
+
+
+>>>bane.injectlink('http://example.com/index.php?id=2')
+
+<br>if it returns:
+
+<br>0: not vulnerable
+<br>1: vulnerable
+
+
+you can use another functions to do that as well:
+
+>>>bane.getinject('http://example.com/index.php',param=parameter-here)
+
+>>>bane.postinject('http://example.com/index.php',param=parameter-here)
+
+
