@@ -76,8 +76,8 @@ This python library is made for educationnal purposes only. Me, as the creator a
 this is dedicated to my mentor: Zachary Barker ( https://www.facebook.com/zachary.barker.5439 ), he was my leader and teacher through my journey in hacking world and groups, we have been through a lot together and were there in many operations when i was an active member in blackhat community but now he is dead in a hit-and-run :( . he was one of my true cyber bros:
 
 -S0u1 ( https://www.facebook.com/S0u1.HLoTW ) : programmer and blackhat.
--Vince ( https://www.facebook.com/vincelinux ) : Linux and hardware expert, social engeneering and programmer.
--Zachary Barker (lulz zombie) : teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat.
+<br>-Vince ( https://www.facebook.com/vincelinux ) : Linux and hardware expert, social engeneering and programmer.
+<br>-Zachary Barker (lulz zombie) : teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat.
 
 in the honor of all my bros and the memory of my bro zach im sharing all my personal hacking tools with public for the first time. plz use it wisely :)
 
@@ -93,7 +93,7 @@ I-INSTALLING THE LIBRARY AND IMPORTING:
 
 you can use pip to do that:
 
-pip install bane<br>
+pip install bane
 
 <br>or you can clone the project's link then run setup.py<br>
 
@@ -114,21 +114,21 @@ II-USAGE:
 this module have many incredible, useful and easy use functions that can be implemented in any project that is related to Web Application's Security.
 
 default parameters:
-logs=True (print the test's result on the screen, set to False to not display).
-returning=False (return a value indicating the success (1/True) or fail (0/False) of the test).
-timeout: timeout value.
-proxy: same way as you use "proxies" parameters in requests.
+<br>logs=True (print the test's result on the screen, set to False to not display).
+<br>returning=False (return a value indicating the success (1/True) or fail (0/False) of the test).
+<br>timeout: timeout value.
+<br>proxy: same way as you use "proxies" parameters in requests.
 
 1-SQL-Injection: (useful link: https://www.acunetix.com/websitesecurity/sql-injection2/ )
 
 
 let's start with a simple SQL Injection testing. there are some techniques that can tell us if the web application is vulnerable to SQL-Injection or not, there is:
 
--Error Based.
--boolean based.
--time based.
+<br>-Error Based.
+<br>-boolean based.
+<br>-time based.
 
-here we have functions that can determinate whether the web application is vulnerable to SQL-Injection or not using the mentioned techniques.
+<br>here we have functions that can determinate whether the web application is vulnerable to SQL-Injection or not using the mentioned techniques.
 
 >>>bane.sqlieb('http://example.com/index.php?id=5')#testing for Error Based SQLI
 
@@ -138,8 +138,8 @@ here we have functions that can determinate whether the web application is vulne
 
 they return only 2 possible results:
 
-0: the target is not vulnerable.
-1: the target is vulnerable.
+<br>0: the target is not vulnerable.
+<br>1: the target is vulnerable.
 
 
 2-XSS: (useful link: https://www.acunetix.com/vulnerabilities/web/cross-site-scripting/ )
@@ -150,7 +150,7 @@ Cross-site Scripting (XSS) refers to client-side code injection attack wherein a
 here we have a function to get all html inputs in any webpage and test each input one by one against this attack.
 
 >>> bane.xss('https://xss-game.appspot.com/level1/frame')
-<br>Getting parameters...
+Getting parameters...
 <br>Test has started...
 <br>Payload:
 <script>alert("Vulnerable!!!");</script>
