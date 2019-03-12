@@ -75,9 +75,9 @@ This python library is made for educationnal purposes only. Me, as the creator a
 
 this is dedicated to my mentor: Zachary Barker ( https://www.facebook.com/zachary.barker.5439 ), he was my leader and teacher through my journey in hacking world and groups, we have been through a lot together and were there in many operations when i was an active member in blackhat community but now he is dead in a hit-and-run :( . he was one of my true cyber bros:
 
--S0u1 ( https://www.facebook.com/S0u1.HLoTW ) : programmer and blackhat
--Vince ( https://www.facebook.com/vincelinux ) : Linux and hardware expert, social engeneering and programmer
--Zachary Barker (lulz zombie) : teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat
+-S0u1 ( https://www.facebook.com/S0u1.HLoTW ) : programmer and blackhat.
+-Vince ( https://www.facebook.com/vincelinux ) : Linux and hardware expert, social engeneering and programmer.
+-Zachary Barker (lulz zombie) : teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat.
 
 in the honor of all my bros and the memory of my bro zach im sharing all my personal hacking tools with public for the first time. plz use it wisely :)
 
@@ -93,15 +93,15 @@ I-INSTALLING THE LIBRARY AND IMPORTING:
 
 you can use pip to do that:
 
-pip install bane
+pip install bane<br>
 
-or you can clone the project's link then run setup.py
+<br>or you can clone the project's link then run setup.py<br>
 
-git clone https://github.com/AlaBouali/bane
-cd bane
-python setup.py install
+<br>git clone https://github.com/AlaBouali/bane
+<br>cd bane
+<br>python setup.py install
 
-to import it you just do:
+<br>to import it you just do:
 
 >>>import bane
 >>>
@@ -114,19 +114,19 @@ II-USAGE:
 this module have many incredible, useful and easy use functions that can be implemented in any project that is related to Web Application's Security.
 
 default parameters:
-logs=True (print the test's result on the screen, set to False to not display)
-returning=False (return a value indicating the success (1/True) or fail (0/False) of the test)
-timeout: timeout value
-proxy: same way as you use "proxies" parameters in requests
+logs=True (print the test's result on the screen, set to False to not display).
+returning=False (return a value indicating the success (1/True) or fail (0/False) of the test).
+timeout: timeout value.
+proxy: same way as you use "proxies" parameters in requests.
 
 1-SQL-Injection: (useful link: https://www.acunetix.com/websitesecurity/sql-injection2/ )
 
 
 let's start with a simple SQL Injection testing. there are some techniques that can tell us if the web application is vulnerable to SQL-Injection or not, there is:
 
--Error Based
--boolean based
--time based
+-Error Based.
+-boolean based.
+-time based.
 
 here we have functions that can determinate whether the web application is vulnerable to SQL-Injection or not using the mentioned techniques.
 
@@ -138,8 +138,8 @@ here we have functions that can determinate whether the web application is vulne
 
 they return only 2 possible results:
 
-0: the target is not vulnerable
-1: the target is vulnerable
+0: the target is not vulnerable.
+1: the target is vulnerable.
 
 
 2-XSS: (useful link: https://www.acunetix.com/vulnerabilities/web/cross-site-scripting/ )
@@ -150,69 +150,12 @@ Cross-site Scripting (XSS) refers to client-side code injection attack wherein a
 here we have a function to get all html inputs in any webpage and test each input one by one against this attack.
 
 >>> bane.xss('https://xss-game.appspot.com/level1/frame')
-Getting parameters...
-Test has started...
-Payload:
+<br>Getting parameters...
+<br>Test has started...
+<br>Payload:
 <script>alert("Vulnerable!!!");</script>
 parameter: query method: GET=> [+]Payload was found
-parameter: query method: POST=> [-]Payload was not found
->>> 
-
->>> bane.xss('https://www.facebook.com/login.php')
-Getting parameters...
-Test has started...
-Payload:
-<script>alert("Vulnerable!!!");</script>
-parameter: jazoest method: GET=> [-]Payload was not found
-parameter: jazoest method: POST=> [-]Payload was not found
-parameter: lsd method: GET=> [-]Payload was not found
-parameter: lsd method: POST=> [-]Payload was not found
-parameter: display method: GET=> [-]Payload was not found
-parameter: display method: POST=> [-]Payload was not found
-parameter: enable_profile_selector method: GET=> [-]Payload was not found
-parameter: enable_profile_selector method: POST=> [-]Payload was not found
-parameter: isprivate method: GET=> [-]Payload was not found
-parameter: isprivate method: POST=> [-]Payload was not found
-parameter: legacy_return method: GET=> [-]Payload was not found
-parameter: legacy_return method: POST=> [-]Payload was not found
-parameter: profile_selector_ids method: GET=> [-]Payload was not found
-parameter: profile_selector_ids method: POST=> [-]Payload was not found
-parameter: return_session method: GET=> [-]Payload was not found
-parameter: return_session method: POST=> [-]Payload was not found
-parameter: skip_api_login method: GET=> [-]Payload was not found
-parameter: skip_api_login method: POST=> [-]Payload was not found
-parameter: signed_next method: GET=> [-]Payload was not found
-parameter: signed_next method: POST=> [-]Payload was not found
-parameter: trynum method: GET=> [-]Payload was not found
-parameter: trynum method: POST=> [-]Payload was not found
-parameter: timezone method: GET=> [-]Payload was not found
-parameter: timezone method: POST=> [-]Payload was not found
-parameter: lgndim method: GET=> [-]Payload was not found
-parameter: lgndim method: POST=> [-]Payload was not found
-parameter: lgnrnd method: GET=> [-]Payload was not found
-parameter: lgnrnd method: POST=> [-]Payload was not found
-parameter: lgnjs method: GET=> [-]Payload was not found
-parameter: lgnjs method: POST=> [-]Payload was not found
-parameter: email method: GET=> [-]Payload was not found
-parameter: email method: POST=> [-]Payload was not found
-parameter: pass method: GET=> [-]Payload was not found
-parameter: pass method: POST=> [-]Payload was not found
-parameter: prefill_contact_point method: GET=> [-]Payload was not found
-parameter: prefill_contact_point method: POST=> [-]Payload was not found
-parameter: prefill_source method: GET=> [-]Payload was not found
-parameter: prefill_source method: POST=> [-]Payload was not found
-parameter: prefill_type method: GET=> [-]Payload was not found
-parameter: prefill_type method: POST=> [-]Payload was not found
-parameter: first_prefill_source method: GET=> [-]Payload was not found
-parameter: first_prefill_source method: POST=> [-]Payload was not found
-parameter: first_prefill_type method: GET=> [-]Payload was not found
-parameter: first_prefill_type method: POST=> [-]Payload was not found
-parameter: had_cp_prefilled method: GET=> [-]Payload was not found
-parameter: had_cp_prefilled method: POST=> [-]Payload was not found
-parameter: had_password_prefilled method: GET=> [-]Payload was not found
-parameter: had_password_prefilled method: POST=> [-]Payload was not found
-parameter: ab_test_data method: GET=> [-]Payload was not found
-parameter: ab_test_data method: POST=> [-]Payload was not found
+<br>parameter: query method: POST=> [-]Payload was not found
 >>> 
 
 there is a default payload which is used in case you didn't modify the "payload" paramter (set by default to: None) to any XSS payload.you can set differnet xss payloads to test everytime with possibility to use a proxy.
