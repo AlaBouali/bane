@@ -1,12 +1,6 @@
 "Oh, you think darkness is your ally. But you merely adopted the dark; I was born in it, molded by it. I didn't see the light until I was already a man, by then it was nothing to me but BLINDING! The shadows betray you, because they belong to me!" -Bane (Dark Knight)
 
-``````````````  `````````````````````````````````````` ``` ``   ```` `````````````````` ` ``````````
-````````  ```                         `   ``    ``                                             `````
-`````                                                                                           `  `
-```                                                                                                `
- ``                                                                                                 
-                                                                                                    
-                                                                                                    
+                                                                                                  
                                                                                                     
                                                                                                     
                                     .///` `.--::::::---.`` `///.                                    
@@ -63,15 +57,10 @@
                               -o++oy.:    .- /`o::oo:-+-/ --    /o++++o:                            
                                    `os      .. /..//../ ..`    `s:                                  
                                     `o+.       `:`:-.-.     `.++-                                   
-`                                     `/+/.`    `.  .`   `-++:`                                     
+                                      `/+/.`    `.  .`   `-++:`                                     
                                          `:+++/:-...-:+++/-                                         
-``                                            `.-::--`                                              
-`                                                                                                  `
-```                                                                                               ``
-``                                                                                              ````
-````` `                                                                                    ``  `````
-``````````     ` `                                         ` `   `   ` ``   ` ```     `` ```````````                      
-
+                                              `.-::--`                                              
+                                                                                                   `
 
 
 This python library is made for educationnal purposes only. Me, as the creator and developper, not responsible for any misuse for this module in any malicious activity. it is made as a tool to understand how hackers can create their tools and performe their attacks. it contains most of known attacks and exploits.
