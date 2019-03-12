@@ -147,7 +147,7 @@ they return only 2 possible results:
 
 Cross-site Scripting (XSS) refers to client-side code injection attack wherein an attacker can execute malicious scripts into a legitimate website or web application. XSS occurs when a web application makes use of unvalidated or unencoded user input within the output it generates.
 
-here we have a function to get all html inputs in any webpage and test each input one by one against this attack.
+here we have a function to get all html inputs in any webpage and test each input one by one against this attack with both: GET and POST methods.
 
 >>> bane.xss('https://xss-game.appspot.com/level1/frame')
 <br>Getting parameters...
@@ -159,3 +159,17 @@ parameter: query method: GET=> [+]Payload was found
 >>> 
 
 there is a default payload which is used in case you didn't modify the "payload" parameter (set by default to: None) to any XSS payload.you can set differnet xss payloads to test everytime with possibility to use a proxy.
+
+
+
+3-FI (File Inclusion): (useful link: https://www.acunetix.com/vulnerabilities/web/file-inclusion/ )
+
+we can test a web application if it is vulnerable to FI using this function:
+
+>>>bane('http://example.com/index.php?file=page1.php')
+
+<br>it returns (in case the parameter "returning" set to: True) a dict that contains <br>{"Status":status#(1 if success or 0 is fail)
+,<br>"Nullbyte":nullbyte #(True if "nullbyte" parameter is set to True
+<br>,'Link':r.url #the result URL}
+
+<br>
