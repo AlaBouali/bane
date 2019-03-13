@@ -205,11 +205,11 @@ there is another functions to test with:
 
 
 
-<br><h2>5-command execution:</h2> (useful link: https://www.owasp.org/index.php/Testing_for_Command_Injection_(OTG-INPVAL-013) )
+<br><h2>5-command injection:</h2> (useful link: https://www.owasp.org/index.php/Testing_for_Command_Injection_(OTG-INPVAL-013) )
 
 <br>OS command injection is a technique used via a web interface in order to execute OS commands on a web server. The user supplies operating system commands through a web interface in order to execute OS commands. Any web interface that is not properly sanitized is subject to this exploit. With the ability to execute OS commands, the user can upload malicious programs or even obtain passwords. OS command injection is preventable when security is emphasized during the design and development of applications. 
 
-here we can test the web application against this type of vulnerabilities using those functions:
+<br>here we can test the web application against this type of vulnerabilities using those functions:
 
 
 >>>bane.execlink('http://example.com/index.php?doc=1')
@@ -218,3 +218,24 @@ here we can test the web application against this type of vulnerabilities using 
 
 >>>bane.postexec('http://example.com/index.php',param=your_parameter_here)
 
+
+<br><h2>5-forced browsing:</h2> (useful link: https://www.owasp.org/index.php/Forced_browsing )
+
+<br>Forced browsing is an attack where the aim is to enumerate and access resources that are not referenced by the application, but are still accessible.
+
+An attacker can use Brute Force techniques to search for unlinked contents in the domain directory, such as temporary directories and files, and old backup and configuration files. These resources may store sensitive information about web applications and operational systems, such as source code, credentials, internal network addressing, and so on, thus being considered a valuable resource for intruders.
+
+This attack is performed manually when the application index directories and pages are based on number generation or predictable values, or using automated tools for common files and directory names.
+
+This attack is also known as Predictable Resource Location, File Enumeration, Directory Enumeration, and Resource Enumeration. 
+
+<br><h3>admin panel:</h3>
+we can access and enumerate some or all internal admin panel pages using this method and takeover the panel!!!
+
+>>>bane.forcebrowsing('http://example.com/admin/')
+
+<br><h3>filemanager:</h3>
+
+<br>we can bruteforce the path to a possible filemanager and takeover it using this technique:
+
+>>>bane.filemanager('http://example.com')
