@@ -205,4 +205,16 @@ there is another functions to test with:
 
 
 
-<br>
+<br><h2>5-command execution:</h2> (useful link: https://www.owasp.org/index.php/Testing_for_Command_Injection_(OTG-INPVAL-013) )
+
+<br>OS command injection is a technique used via a web interface in order to execute OS commands on a web server. The user supplies operating system commands through a web interface in order to execute OS commands. Any web interface that is not properly sanitized is subject to this exploit. With the ability to execute OS commands, the user can upload malicious programs or even obtain passwords. OS command injection is preventable when security is emphasized during the design and development of applications. 
+
+here we can test the web application against this type of vulnerabilities using those functions:
+
+
+>>>bane.execlink('http://example.com/index.php?doc=1')
+
+>>>bane.getexec('http://example.com/index.php',param=your_parameter_here)
+
+>>>bane.postexec('http://example.com/index.php',param=your_parameter_here)
+
