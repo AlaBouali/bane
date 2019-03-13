@@ -267,3 +267,9 @@ we can access and enumerate some or all internal admin panel pages using this me
 
 >>>bane.connectionslimit('www.google.com',p=80)
 
+
+<br><h2>7-Bruteforce attacks:</h2> (useful link: https://www.acunetix.com/vulnerabilities/web/login-page-password-guessing-attack/ )
+
+<br><h3>FTP:</h3>
+
+>>>wordlist[
