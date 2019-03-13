@@ -168,18 +168,19 @@ there is another functions to test with:
 
 
 
-<br><h1>3-FI:</h1> (File Inclusion): (useful link: https://www.acunetix.com/vulnerabilities/web/file-inclusion/ )
+<br><br><h1>3-FI:</h1> (File Inclusion): (useful link: https://www.acunetix.com/vulnerabilities/web/file-inclusion/ )
 
-<br>we can test a web application if it is vulnerable to FI using this function:
+<br><br>we can test a web application if it is vulnerable to FI using this function:
 
->>>bane('http://example.com/index.php?file=page1.php')
+>>>bane.fi('http://example.com/index.php?file=page1.php')
 
-<br>it returns (in case the parameter "returning" set to: True) a dict that contains <br>{"Status":status#(1 if success or 0 is fail)
-,<br>"Nullbyte":nullbyte #(True if "nullbyte" parameter is set to True
-<br>,'Link':r.url #the result URL}
+<br>it returns (in case the parameter "returning" set to: True) a dict that contains 
+<br>{ "Status" : status # ==>1 if success or 0 is fail
+,<br>"Nullbyte" : nullbyte # ==>True if "nullbyte" parameter is set to True
+<br>,"Link" : r.url # ==> the result URL}<br>
 
 
-<h1>4-PHP code injection:</h1> (useful link: https://www.acunetix.com/vulnerabilities/web/php-code-injection/ )
+<br><h1>4-PHP code injection:</h1> (useful link: https://www.acunetix.com/vulnerabilities/web/php-code-injection/ )
 
 
 <br>to test a web application against PHP code injection we can use those functions:
