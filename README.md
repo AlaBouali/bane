@@ -111,13 +111,16 @@ II-USAGE:
 
 this module have many incredible, useful and easy use functions that can be implemented in any project that is related to Web Application's Security.
 
+<br><h1>Vulnerabilities:</h1>
+
+
 default parameters:
 <br>logs=True (print the test's result on the screen, set to False to not display).
 <br>returning=False (return a value indicating the success (1/True) or fail (0/False) of the test).
 <br>timeout: timeout value.
 <br>proxy: same way as you use "proxies" parameters in requests.
 
-<h1>1-SQL-Injection:</h1> (useful link: https://www.acunetix.com/websitesecurity/sql-injection2/ )
+<h2>1-SQL-Injection:</h2> (useful link: https://www.acunetix.com/websitesecurity/sql-injection2/ )
 
 
 <br>let's start with a simple SQL Injection testing. there are some techniques that can tell us if the web application is vulnerable to SQL-Injection or not, there is:
@@ -140,7 +143,7 @@ they return only 2 possible results:
 <br>1: the target is vulnerable.<br>
 
 
-<h1>2-XSS:</h1> (useful link: https://www.acunetix.com/vulnerabilities/web/cross-site-scripting/ )
+<h2>2-XSS:</h2> (useful link: https://www.acunetix.com/vulnerabilities/web/cross-site-scripting/ )
 
 
 <br>Cross-site Scripting (XSS) refers to client-side code injection attack wherein an attacker can execute malicious scripts into a legitimate website or web application. XSS occurs when a web application makes use of unvalidated or unencoded user input within the output it generates.
@@ -168,7 +171,7 @@ there is another functions to test with:
 
 
 
-<br><br><h1>3-FI:</h1> (File Inclusion): (useful link: https://www.acunetix.com/vulnerabilities/web/file-inclusion/ )
+<br><br><h2>3-FI:</h2> (File Inclusion): (useful link: https://www.acunetix.com/vulnerabilities/web/file-inclusion/ )
 
 <br><br>we can test a web application if it is vulnerable to FI using this function:
 
@@ -180,7 +183,7 @@ there is another functions to test with:
 <br>,"Link" : r.url # ==> the result URL}<br>
 
 
-<br><h1>4-PHP code injection:</h1> (useful link: https://www.acunetix.com/vulnerabilities/web/php-code-injection/ )
+<br><h2>4-PHP code injection:</h2> (useful link: https://www.acunetix.com/vulnerabilities/web/php-code-injection/ )
 
 
 <br>to test a web application against PHP code injection we can use those functions:
@@ -201,3 +204,5 @@ there is another functions to test with:
 >>>bane.postinject('http://example.com/index.php',param=parameter-here)
 
 
+
+<br>
