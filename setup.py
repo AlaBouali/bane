@@ -14,10 +14,10 @@ setuptools.setup(
     url="https://github.com/AlaBouali/bane",
     packages=setuptools.find_packages(),
     python_requires=">=2.7",
-    install_requires=['pexpect','paramiko','PySocks','requests','bs4','scapy','stem','MySQL-python'],
+    install_requires=['pexpect','paramiko','PySocks','requests','bs4','scapy','stem','mysql-connector'],
     classifiers=[
         "Programming Language :: Python :: 2.7",
-        "License :: OSI Approved :: GNU General Public License v3.0",
+        "License :: OSI Approved :: MIT License ",
         "Operating System :: Unix",
     ],
 )
