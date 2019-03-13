@@ -234,8 +234,36 @@ we can access and enumerate some or all internal admin panel pages using this me
 
 >>>bane.forcebrowsing('http://example.com/admin/')
 
+<br>the default extension is "php", you can change it as you like to: asp, aspx... using the parameter "ext".
+
 <br><h3>filemanager:</h3>
 
 <br>we can bruteforce the path to a possible filemanager and takeover it using this technique:
 
 >>>bane.filemanager('http://example.com')
+
+
+<br><h2>6-Slow DoS vulnerabilities:</h2> (useful link: https://www.cloudflare.com/learning/ddos/ddos-low-and-slow-attack/ )
+
+<br><h3>high timeout value:</h3>
+
+>>>bane.timeouttest('www.google.com',p=443)
+
+<br><h3>slow GET attack test:</h3>
+
+>>>bane.slowgettest('www.google.com',p=80)
+
+<br><h3>slow POST attack test:</h3>
+
+>>>bane.slowposttest('www.google.com',p=80)
+
+
+<br><h3>slow read attack test:</h3>
+
+>>>bane.slowreadtest('www.google.com',p=80)
+
+
+<br><h3>connections per IP test:</h3>
+
+>>>bane.connectionslimit('www.google.com',p=80)
+
