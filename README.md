@@ -86,9 +86,7 @@ now let's start some tutorials, shall we?
 ---------------------------------------------------------------------------------------------------------------------------
                                                       TUTORIALS:
 ---------------------------------------------------------------------------------------------------------------------------
-
 I-INSTALLING THE LIBRARY AND IMPORTING:
-
 ---------------------------------------------------------------------------------------------------------------------------
 
 you can use pip to do that:
@@ -119,10 +117,10 @@ default parameters:
 <br>timeout: timeout value.
 <br>proxy: same way as you use "proxies" parameters in requests.
 
-1-SQL-Injection: (useful link: https://www.acunetix.com/websitesecurity/sql-injection2/ )
+<h1>1-SQL-Injection:</h1> (useful link: https://www.acunetix.com/websitesecurity/sql-injection2/ )
 
 
-let's start with a simple SQL Injection testing. there are some techniques that can tell us if the web application is vulnerable to SQL-Injection or not, there is:
+<br>let's start with a simple SQL Injection testing. there are some techniques that can tell us if the web application is vulnerable to SQL-Injection or not, there is:
 
 <br>-Error Based.
 <br>-boolean based.
@@ -139,15 +137,15 @@ let's start with a simple SQL Injection testing. there are some techniques that 
 they return only 2 possible results:
 
 <br>0: the target is not vulnerable.
-<br>1: the target is vulnerable.
+<br>1: the target is vulnerable.<br>
 
 
-2-XSS: (useful link: https://www.acunetix.com/vulnerabilities/web/cross-site-scripting/ )
+<h1>2-XSS:</h1> (useful link: https://www.acunetix.com/vulnerabilities/web/cross-site-scripting/ )
 
 
-Cross-site Scripting (XSS) refers to client-side code injection attack wherein an attacker can execute malicious scripts into a legitimate website or web application. XSS occurs when a web application makes use of unvalidated or unencoded user input within the output it generates.
+<br>Cross-site Scripting (XSS) refers to client-side code injection attack wherein an attacker can execute malicious scripts into a legitimate website or web application. XSS occurs when a web application makes use of unvalidated or unencoded user input within the output it generates.
 
-here we have a function to get all html inputs in any webpage and test each input one by one against this attack with both: GET and POST methods.
+<br>here we have a function to get all html inputs in any webpage and test each input one by one against this attack with both: GET and POST methods.
 
 >>> bane.xss('https://xss-game.appspot.com/level1/frame')
 <br>Getting parameters...
@@ -160,17 +158,17 @@ parameter: query method: GET=> [+]Payload was found
 
 there is a default payload which is used in case you didn't modify the "payload" parameter (set by default to: None) to any XSS payload.you can set differnet xss payloads to test everytime with possibility to use a proxy.
 
-
+<br>
 there is another functions to test with:
 
 >>>bane.xssget('http://example.com/index.php',{parameter: xss-payload-here})
 
->>>bane.xsspost('http://example.com/index.php',{parameter: xss-payload-here})
+>>>bane.xsspost('http://example.com/index.php',{parameter: xss-payload-here})<br>
 
 
 
 
-3-FI (File Inclusion): (useful link: https://www.acunetix.com/vulnerabilities/web/file-inclusion/ )
+<br><h1>3-FI:</h1> (File Inclusion): (useful link: https://www.acunetix.com/vulnerabilities/web/file-inclusion/ )
 
 <br>we can test a web application if it is vulnerable to FI using this function:
 
@@ -181,10 +179,10 @@ there is another functions to test with:
 <br>,'Link':r.url #the result URL}
 
 
-4-PHP code injection: (useful link: https://www.acunetix.com/vulnerabilities/web/php-code-injection/ )
+<h1>4-PHP code injection:</h1> (useful link: https://www.acunetix.com/vulnerabilities/web/php-code-injection/ )
 
 
-to test a web application against PHP code injection we can use those functions:
+<br>to test a web application against PHP code injection we can use those functions:
 
 
 >>>bane.injectlink('http://example.com/index.php?id=2')
@@ -195,7 +193,7 @@ to test a web application against PHP code injection we can use those functions:
 <br>1: vulnerable
 
 
-you can use another functions to do that as well:
+<br>you can use another functions to do that as well:
 
 >>>bane.getinject('http://example.com/index.php',param=parameter-here)
 
