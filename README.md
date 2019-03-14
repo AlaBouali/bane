@@ -414,3 +414,7 @@ we can access and enumerate some or all internal admin panel pages using this me
 <br>it takes the following parameters:
 
 <br>proto:set by default to: "ssh", it can be set to: "ftp","ssh","telnet","smtp","mysql"<br>p: target port, set by default to: 22<br>wl: the list contains usernames and passwords seperated by ":", ex: ["admin:admin","admin:12345","root:root"]
+
+>>>wordlist=["admin:admin","admin:12345","root:root"]
+>>>bane.hydra("example.com",proto="telnet",p=23,wl=wordlist)
+
