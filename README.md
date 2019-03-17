@@ -80,7 +80,7 @@ this is dedicated to my mentor: Zachary Barker ( https://www.facebook.com/zachar
 <br>-Zachary Barker (lulz zombie) : teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat.
 <br>-Lulztigre (https://www.twitter.com/lulztigre) : Bug Bounty Hunter, Penetration Tester And Python Programmer.
 <br>-Jen Hill.
-in the honor of all my bros and the memory of my bro zach im sharing all my personal hacking tools with public for the first time. plz use it wisely :)
+<br>in the honor of all my bros and the memory of my bro zach im sharing all my personal hacking tools with public for the first time. plz use it wisely :)
 
 now let's start some tutorials, shall we?
 
