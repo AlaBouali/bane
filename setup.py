@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="bane",
     version="1.3",
-    author="Ala Bouali",
+    author="AlaBouali",
     author_email="trap.leader.123@gmail.com",
     description="cyber security library",
     long_description=long_description,
