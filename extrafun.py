@@ -1,3 +1,39 @@
+def getdnsservers(version=0,proxy={},timeout=10):
+ '''
+   this function is to get public DNS servers. it returns a list.
+
+   version: (set by default to: 0) 
+   4: IPv4 servers
+   6: IPv6 servers
+   0: both versions
+
+'''
+ if version==0:
+  try:
+   r=requests.get('https://public-dns.info/nameservers.txt',headers = {'User-Agent': random.choice(ua)},proxies=proxy,timeout=timeout).text
+   return r.split('\n')
+  except:
+   pass
+ elif version==4:
+  try:
+   l=[]
+   r=requests.get('https://public-dns.info/nameservers.txt',headers = {'User-Agent': random.choice(ua)},proxies=proxy,timeout=timeout).text
+   for x in r.split('\n'):
+    if '.' in x:
+     l.append(x)
+   return l
+  except:
+   pass
+ elif version==6:
+  try:
+   l=[]
+   r=requests.get('https://public-dns.info/nameservers.txt',headers = {'User-Agent': random.choice(ua)},proxies=proxy,timeout=timeout).text
+   for x in r.split('\n'):
+    if ':' in x:
+     l.append(x)
+   return l
+  except:
+   pass
 def escape_html(s):
  '''
    function to return escaped html string
