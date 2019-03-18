@@ -1,3 +1,13 @@
+def escape_html(s):
+ '''
+   function to return escaped html string
+ '''
+ return cgi.escape(s,quote=True)
+def unescape_html(s):
+ '''
+   function to return unescaped html string
+ '''
+ return HTMLParser.HTMLParser().unescape(s).encode("utf-8")
 def virustotal(f,proxy={},timeout=5):
  s=sha256fl(f)
  u="https://www.virustotal.com/en/file/"+s+"/analysis/"
