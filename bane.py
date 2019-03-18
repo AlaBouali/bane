@@ -74,7 +74,7 @@ from scrappin import *
 from infoin import *
 from formin import *
 from hashin import *
-from Dosin import *
+from dosin import *
 from filin import *
 from scannin import *
 from iot import *
