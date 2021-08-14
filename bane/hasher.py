@@ -106,7 +106,7 @@ def xor_file(f,key):
   with open(f,"rb") as f: 
    w=f.read()
   f.close()
-  return xor(w,key)
+  return xor_hash(w,key)
 def md5_file(f):
  if f:
   with open(f,"rb") as f: 

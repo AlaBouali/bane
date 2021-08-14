@@ -40,8 +40,8 @@ def delete_file(w):
  if os.path.exists(w):
   os.remove(w)
 
-def write_file(w,fi):
-    with open(fi ,"a+") as f:
+def write_file(w,fi,encode="utf-8"):
+    with open(fi ,"a+",encoding=encode) as f:
         f.write(w+'\n')
     f.close()
 def read_file(w):
