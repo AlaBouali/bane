@@ -285,7 +285,7 @@ class port_scan:
         else:
          self.result.update({p:0})
          
- def __init__(self,u,ports=[21,22,23,25,43,53,80,443,2082,3306],timeout=2,retry=0):
+ def __init__(self,u,ports=[21,22,23,25,43,53,80,443,2082,3306],threads_daemon=True,timeout=2,retry=0):
   try:
    thr=[]
    self.retry=retry
@@ -295,7 +295,10 @@ class port_scan:
    self.target=u
    for x in range(len(self.por)):
     self.flag2=x
-    thr.append(threading.Thread(target=self.scan).start())
+    t=threading.Thread(target=self.scan)
+    t.daemon=threads_daemon
+    t.start()
+    thr.append(t)
     time.sleep(.001)
    while(len(self.result)!=len(ports)):
     time.sleep(.1)
