@@ -36,7 +36,7 @@ def getip():
 '''
 
 class mass_scan:
- def __init__(self,file_name="results.csv",protocol="telnet",telnet_bots=True,logs=True,threads=100,word_list=[],ip_range=None,timeout=7,p=23):
+ def __init__(self,file_name="results.csv",protocol="telnet",telnet_bots=True,threads_daemon=True,logs=True,threads=100,word_list=[],ip_range=None,timeout=7,p=23):
   self.word_list=word_list
   self.logs=logs
   self.protocol=protocol.lower()
@@ -51,7 +51,7 @@ class mass_scan:
    write_file("protocol,ip,port,username,password",self.file_name)
   for x in range(threads):
    t=threading.Thread(target=self.scan)
-   t.daemon=True
+   t.daemon=threads_daemon
    t.start()
  def scan(self):
   try:

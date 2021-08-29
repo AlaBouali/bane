@@ -15,13 +15,13 @@ from .pager import *
 
 class http_auth_bruteforce:
  __slots__=["logs","stop","finish","result"]
- def __init__(self,u,word_list=[],logs=True,domain=None,proxy=None,proxies=None,cookie=None,user_agent=None,timeout=10):
+ def __init__(self,u,word_list=[],threads_daemon=True,logs=True,domain=None,proxy=None,proxies=None,cookie=None,user_agent=None,timeout=10):
   self.stop=False
   self.logs=logs
   self.finish=False
   self.result={}
   t=threading.Thread(target=self.crack,args=(u,domain,word_list,logs,proxy,proxies,cookie,user_agent,timeout,))
-  t.daemon=True
+  t.daemon=threads_daemon
   t.start()
  def done(self):
   return self.finish
@@ -160,13 +160,13 @@ class web_login_bruteforce:
   except:
    return True
   
- def __init__(self,u,word_list=[],logs=True,proxy=None,proxies=None,cookie=None,user_agent=None,timeout=10):
+ def __init__(self,u,word_list=[],threads_daemon=True,logs=True,proxy=None,proxies=None,cookie=None,user_agent=None,timeout=10):
   self.stop=False
   self.finish=False
   self.logs=logs
   self.result={}
   t=threading.Thread(target=self.crack,args=(u,word_list,logs,proxy,proxies,cookie,user_agent,timeout,))
-  t.daemon=True
+  t.daemon=threads_daemon
   t.start()
  def done(self):
   return self.finish
@@ -207,7 +207,7 @@ class web_login_bruteforce:
 
 class filemanager_finder:
  __slots__=["logs","stop","finish","result"]
- def __init__(self,u,logs=True,user_agent=None,cookie=None,timeout=10,proxy=None,proxies=None):
+ def __init__(self,u,logs=True,threads_daemon=True,user_agent=None,cookie=None,timeout=10,proxy=None,proxies=None):
   '''
    u: the link: http://www.example.com
    logs: (set by default to True) the show the process and requests
@@ -227,7 +227,7 @@ class filemanager_finder:
   self.finish=False
   self.result={}
   t=threading.Thread(target=self.crack,args=(u,logs,user_agent,cookie,timeout,proxy,proxies,))
-  t.daemon=True
+  t.daemon=threads_daemon
   t.start()
  def crack(self,u,logs,user_agent,cookie,timeout,proxy,proxies):
   for i in manager:
@@ -276,7 +276,7 @@ class filemanager_finder:
 
 class force_browsing:
  __slots__=["stop","finish","result","logs"]
- def __init__(self,u,timeout=10,logs=True,ext='php',user_agent=None,cookie=None,proxy=None,proxies=None):
+ def __init__(self,u,timeout=10,threads_daemon=True,logs=True,ext='php',user_agent=None,cookie=None,proxy=None,proxies=None):
   '''
    this function is using "Forced Browsing" technique which is aim to access restricted areas without providing any credentials!!!
    it is used here to gain access to admin control panel by trying different possible combinations of links with the given URL.
@@ -309,7 +309,7 @@ class force_browsing:
   self.result={}
   self.logs=logs
   t=threading.Thread(target=self.crack,args=(u,timeout,logs,ext,user_agent,cookie,proxy,proxies,))
-  t.daemon=True
+  t.daemon=threads_daemon
   t.start()
  def crack(self,u,timeout=10,logs=True,ext='php',user_agent=None,cookie=None,proxy=None,proxies=None):
   l=[]
@@ -361,13 +361,13 @@ class admin_panel_finder:
 
   >>>bane.admin_panel_finder('http://www.example.com',ext='aspx',timeout=5)
  '''
- def __init__(self,u,logs=True,user_agent=None,cookie=None,ext='php',timeout=10,proxy=None,proxies=None):
+ def __init__(self,u,logs=True,threads_daemon=True,user_agent=None,cookie=None,ext='php',timeout=10,proxy=None,proxies=None):
   self.logs=logs
   self.stop=False
   self.finish=False
   self.result={}
   t=threading.Thread(target=self.crack,args=(u,timeout,logs,ext,user_agent,cookie,proxy,proxies,))
-  t.daemon=True
+  t.daemon=threads_daemon
   t.start()
  def crack(self,u,timeout=10,logs=True,ext='php',user_agent=None,cookie=None,proxy=None,proxies=None):
   links=[]
@@ -554,7 +554,7 @@ def mysql(u,username,password,timeout=5,p=3306):
 
 class hydra:
  __slots__=["stop","finish","result","logs"]
- def __init__(self,u,p=22,protocol="ssh",word_list=[],logs=True,exchange_key=None,timeout=5,ehlo=False,helo=True,ttls=False,proxy=None,proxies=None):
+ def __init__(self,u,p=22,protocol="ssh",word_list=[],threads_daemon=True,logs=True,exchange_key=None,timeout=5,ehlo=False,helo=True,ttls=False,proxy=None,proxies=None):
   '''
    this function is similar to hydra tool to bruteforce attacks on different ports.
 
@@ -565,7 +565,7 @@ class hydra:
   self.finish=False
   self.result={}
   t=threading.Thread(target=self.crack,args=(u,p,protocol,word_list,logs,exchange_key,timeout,ehlo,helo,ttls,proxy,proxies,))
-  t.daemon=True
+  t.daemon=threads_daemon
   t.start()
  def crack(self,u,p,protocol,word_list,logs,exchange_key,timeout,ehlo,helo,ttls,proxy,proxies):
   o=''
@@ -619,13 +619,13 @@ class hydra:
 
 class decrypt:
  __slots__=["stop","finish","result","logs"]
- def __init__(self,u,word_list=[],md5_hash=False,sha1_hash=False,sha256_hash=False,sha224_hash=False,sha384_hash=False,sha512_hash=False,base64_hash=False,caesar_hash=False,logs=False):
+ def __init__(self,u,word_list=[],threads_daemon=True,md5_hash=False,sha1_hash=False,sha256_hash=False,sha224_hash=False,sha384_hash=False,sha512_hash=False,base64_hash=False,caesar_hash=False,logs=False):
   self.logs=logs
   self.stop=False
   self.finish=False
   self.result={}
   t=threading.Thread(target=self.crack,args=(u,word_list,md5_hash,sha1_hash,sha256_hash,sha224_hash,sha384_hash,sha512_hash,base64_hash,caesar_hash,logs,))
-  t.daemon=True
+  t.daemon=threads_daemon
   t.start()
  def crack(self,u,word_list,md5_hash,sha1_hash,sha256_hash,sha224_hash,sha384_hash,sha512_hash,base64_hash,caesar_hash,logs):
   if self.logs==True:
