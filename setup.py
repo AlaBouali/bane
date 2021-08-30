@@ -52,7 +52,7 @@ if (sys.platform == "win32") or( sys.platform == "win64"):
 
 setuptools.setup(
     name="bane",
-    version="4.7.0",
+    version="4.7.1",
     author="AlaBouali",
     author_email="trap.leader.123@gmail.com",
     description="cyber security library",
