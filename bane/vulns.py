@@ -108,19 +108,31 @@ def html_hexadecimal_encoder(text,random_level=1):
 
 def setup_to_submit(form):
  d={}
+ f={}
  for x in form["inputs"]:
-  d.update({x["name"]:x["value"]})
- return d
+  if x["type"]=="file":
+   f.update({x["name"]:x["value"]})
+  else:
+   d.update({x["name"]:x["value"]})
+ return d,f
 
-def xss_submit(parsed,payload,debug=False):
+def xss_submit(parsed,payload,replaceble_parameters,debug=False):
   '''
    this function is for xss test with GET requests.
 
   '''
-  d=setup_to_submit(parsed[0])
+  d,fi=setup_to_submit(parsed[0])
+  for x in d:
+   for y in replaceble_parameters:
+    if x==y:
+     for z in replaceble_parameters[y]:
+      d[x]=d[x].replace(z[0],z[1])
+  parsed[1].update({"Referer":parsed[0]["action"],"Origin":parsed[0]["action"].split("://")[0]+"://"+parsed[0]["action"].split("://")[1].split("/")[0]})
   if debug==True:
    for x in d:
     print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,d[x]))
+   for x in fi:
+    print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,fi[x]))
   if parsed[0]["method"]=="get":
    try:
      c=requests.get(parsed[0]["action"], params= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
@@ -130,7 +142,7 @@ def xss_submit(parsed,payload,debug=False):
     pass
   else:
    try:
-     c=requests.post(parsed[0]["action"], data= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
+     c=requests.post(parsed[0]["action"], data= d,files=fi,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
      if payload in c:
       return (True,find_xss_context(c,payload))
    except Exception as e:
@@ -155,7 +167,7 @@ def setup_ua(usra):
 
 
 
-def xss(u,payload=None,unicode_random_level=0,js_function="alert",context_breaker='">',save_to_file=None,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False):
+def xss(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_parameters={"phpvalue":((".",""),)},context_breaker='">',save_to_file=None,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False):
   '''
    this function is for xss test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -212,10 +224,10 @@ def xss(u,payload=None,unicode_random_level=0,js_function="alert",context_breake
      extr=[]
      l=[]
      for x in l1['inputs']:
-       if x["type"] in ["text","textarea","email","tel","search","url","password","number","select"]:#any input type that accept direct input from keyboard
+       if x["type"] in ["file","text","textarea","email","tel","search","url","password","number","select"]:#any input type that accept direct input from keyboard
         i=x["name"]
         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty)
-        xss_res=xss_submit(parsed_form,xp,debug=debug)
+        xss_res=xss_submit(parsed_form,xp,replaceble_parameters,debug=debug)
         if xss_res[0]==True:
           x="parameter: '"+i+"' => [+]Payload was found"
           vul.append((i,xss_res[1]))
@@ -239,15 +251,19 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False):
    this function is for xss test with GET requests.
 
   '''
-  d=setup_to_submit(parsed[0])
+  d,fi=setup_to_submit(parsed[0])
   for x in d:
    for y in replaceble_parameters:
     if x==y:
-     d[x]=d[x].replace(replaceble_parameters[y][0],replaceble_parameters[y][1])
+     for z in replaceble_parameters[y]:
+      d[x]=d[x].replace(z[0],z[1])
   if debug==True:
    for x in d:
     print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,d[x]))
+   for x in fi:
+    print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,fi[x]))
   t=time.time()
+  parsed[1].update({"Referer":parsed[0]["action"],"Origin":parsed[0]["action"].split("://")[0]+"://"+parsed[0]["action"].split("://")[1].split("/")[0]})
   if parsed[0]["method"]=="get":
    try:
      c=requests.get(parsed[0]["action"], params= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
@@ -262,7 +278,7 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False):
     pass
   else:
    try:
-     c=requests.post(parsed[0]["action"], data= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
+     c=requests.post(parsed[0]["action"], data= d,files=fi,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
      if based_on[0]=="file":
       c=requests.get(parsed[0]["action"].replace(parsed[0]["action"].split("/")[-1],based_on[1]+".txt"), params= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False)
       if ((c.status_code==200)and (len(c.text)==0)):
@@ -275,7 +291,7 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False):
   return (False,'')
 
 
-def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},start_line=None,replaceble_parameters={"phpvalue":(".","")},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
+def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},start_line=None,replaceble_parameters={"phpvalue":((".",""),)},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
   '''
    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -413,7 +429,7 @@ def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},start_line=
      l=[]
      for x in l1['inputs']:
       try:
-       if x["type"] in ["text","textarea","email","tel","search","url","password","number","select"]:#any input type that accept direct input from keyboard
+       if x["type"] in ["file","text","textarea","email","tel","search","url","password","number","select"]:#any input type that accept direct input from keyboard
         i=x["name"]
         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty)
         _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug)
@@ -428,6 +444,7 @@ def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},start_line=
         if logs==True:
          print (colr+x+Style.RESET_ALL)
       except Exception as ex:
+       print(ex)
        break
     dic.update({form_index:{"Action":u,"Method":l1['method'],"Passed":vul,"Failed":sec}})
    if based_on_o=="time":

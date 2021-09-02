@@ -174,7 +174,7 @@ def geoip(u,timeout=15,proxy=None):
  return {}
 
 
-def headers(u,timeout=10,user_agent=None,cookie=None,logs=True,returning=False,proxy=None):
+def headers(u,timeout=10,user_agent=None,cookie=None,extra_headers=None,logs=True,returning=False,proxy=None):
  if user_agent:
    us=user_agent
  else:
@@ -183,6 +183,8 @@ def headers(u,timeout=10,user_agent=None,cookie=None,logs=True,returning=False,p
     heads={'User-Agent': us,'Cookie':cookie}
  else:
    heads={'User-Agent': us}
+ if extra_headers:
+  heads.update(extra_headers)
  try:
    if proxy:
     proxy={'http':'http://'+proxy}

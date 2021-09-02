@@ -420,11 +420,20 @@ def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,ti
 def form_filler(form,param,payload,auto_fill=10):
  for x in form["inputs"]:
    if x["name"].strip()==param:
-    x["value"]=payload
+    if x["type"]=="file":
+     x["value"]=(payload+".png",empty_png)
+    else:
+     x["value"]=payload
    else:
     if x["value"]=="":
-     for i in range(auto_fill):
-      x["value"]+=random.choice(lis)
+     if x["type"]=="file":
+      x["value"]=("bane_test"+str(random.randint(100000,999999))+".png",empty_png)
+     else:
+      for i in range(auto_fill):
+       if x["type"]=="number":
+        x["value"]+=str(random.randint(1,9))
+       else:
+        x["value"]+=random.choice(lis)
     if x["type"]=="select":
      if len(x["value"])==0 or x["value"]=="":
       x["value"]=""
