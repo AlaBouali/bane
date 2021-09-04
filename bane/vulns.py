@@ -444,7 +444,6 @@ def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},start_line=
         if logs==True:
          print (colr+x+Style.RESET_ALL)
       except Exception as ex:
-       print(ex)
        break
     dic.update({form_index:{"Action":u,"Method":l1['method'],"Passed":vul,"Failed":sec}})
    if based_on_o=="time":

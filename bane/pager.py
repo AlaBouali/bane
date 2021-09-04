@@ -171,6 +171,18 @@ def forms(u,value=True,html_comments=False,user_agent=None,timeout=10,bypass=Fal
   pass
  return fom
 
+def sort_inputs(l):
+ a=[]
+ d=[]
+ for x in l:
+  if x["type"] not in [u"radio",u"checkbox"]:
+   d.append(x)
+  if x["name"] not in a and (x["type"]==u"radio" or x["type"]==u"checkbox")  :
+   a.append(x["name"])
+ for x in a:
+  d.append({'type': [ i["type"] for i in l if i["name"]==x][0], 'name':x,"value":[ i["value"] for i in l if i["name"]==x]})
+ return d
+
 def forms_parser(u,html_comments=False,user_agent=None,timeout=10,bypass=False,proxy=None,cookie=None):
  '''
    same as "forms" function but it return detailed information about all forms in a given page
@@ -263,10 +275,10 @@ def forms_parser(u,html_comments=False,user_agent=None,timeout=10,bypass=False,p
      y={"name":s,"value":opts,"type":"select"}
      if y not in l:
       l.append(y)
-   fom.append({'inputs':l,'action':ac,'method':me,"hidden_values":h_v}) 
+   fom.append({'inputs':sort_inputs(l),'action':ac,'method':me,"hidden_values":h_v}) 
    l=[]
  except Exception as e:
-  print(e)
+  pass
  return fom
 
 def forms_parser_text(u,text,html_comments=False):
@@ -349,7 +361,7 @@ def forms_parser_text(u,text,html_comments=False):
      y={"name":s,"value":opts,"type":"select"}
      if y not in l:
       l.append(y)
-   fom.append({'inputs':l,'action':ac,'method':me,"hidden_values":h_v}) 
+   fom.append({'inputs':sort_inputs(l),'action':ac,'method':me,"hidden_values":h_v}) 
    l=[]
  except Exception as e:
   pass
@@ -434,7 +446,7 @@ def form_filler(form,param,payload,auto_fill=10):
         x["value"]+=str(random.randint(1,9))
        else:
         x["value"]+=random.choice(lis)
-    if x["type"]=="select":
+    if x["type"] in ["select","radio","checkbox"]:
      if len(x["value"])==0 or x["value"]=="":
       x["value"]=""
       for i in range(auto_fill):
