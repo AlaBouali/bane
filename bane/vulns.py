@@ -167,7 +167,7 @@ def setup_ua(usra):
 
 
 
-def xss(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_parameters={"phpvalue":((".",""),)},context_breaker='">',save_to_file=None,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False):
+def xss(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',context_breaker='">',save_to_file=None,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False):
   '''
    this function is for xss test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -226,7 +226,7 @@ def xss(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_par
      for x in l1['inputs']:
        if x["type"] in ["file","text","textarea","email","tel","search","url","password","number","select"]:#any input type that accept direct input from keyboard
         i=x["name"]
-        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty)
+        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension)
         xss_res=xss_submit(parsed_form,xp,replaceble_parameters,debug=debug)
         if xss_res[0]==True:
           x="parameter: '"+i+"' => [+]Payload was found"
@@ -291,7 +291,7 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False):
   return (False,'')
 
 
-def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},start_line=None,replaceble_parameters={"phpvalue":((".",""),)},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
+def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_extension='png',start_line=None,replaceble_parameters={"phpvalue":((".",""),)},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
   '''
    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -431,7 +431,7 @@ def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},start_line=
       try:
        if x["type"] in ["file","text","textarea","email","tel","search","url","password","number","select"]:#any input type that accept direct input from keyboard
         i=x["name"]
-        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty)
+        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension)
         _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug)
         if _res[0]==True:
           x="parameter: '"+i+"' => [+] Vulnerable !!"

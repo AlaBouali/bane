@@ -173,6 +173,30 @@ def geoip(u,timeout=15,proxy=None):
   pass
  return {}
 
+def http_options(u,timeout=10,user_agent=None,cookie=None,extra_headers=None,logs=True,returning=False,proxy=None):
+ if user_agent:
+   us=user_agent
+ else:
+   us=random.choice(ua)
+ if cookie:
+    heads={'User-Agent': us,'Cookie':cookie}
+ else:
+   heads={'User-Agent': us}
+ if extra_headers:
+  heads.update(extra_headers)
+ try:
+   if proxy:
+    proxy={'http':'http://'+proxy}
+   s=requests.session()
+   a=s.options(u,headers = heads ,proxies=proxy,timeout=timeout).headers
+ except Exception as ex:
+   return []
+ b=[]
+ if 'Access-Control-Allow-Methods' in a:
+  b+=[ x.strip() for x in a['Access-Control-Allow-Methods'].split(',')]
+ if 'Allow' in a:
+  b+=[ x.strip() for x in a['Allow'].split(',')]
+ return b
 
 def headers(u,timeout=10,user_agent=None,cookie=None,extra_headers=None,logs=True,returning=False,proxy=None):
  if user_agent:

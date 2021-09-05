@@ -404,7 +404,7 @@ def set_correct_cookies(new_cookies,cookie=None):
  return cookies
 
 
-def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,timeout,auto_fill):
+def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,timeout,auto_fill,file_extension='png'):
   cookies=None
   if proxy:
    proxy={'http':'http://'+proxy}
@@ -426,20 +426,20 @@ def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,ti
   h={"User-Agent":user_agent}
   if cookies and len(cookies.strip())>0:
    h.update({"Cookie":cookies})
-  return form_filler(form,parameter,payload,auto_fill=auto_fill),h,proxy,timeout
+  return form_filler(form,parameter,payload,auto_fill=auto_fill,file_extension=file_extension),h,proxy,timeout
   
 
-def form_filler(form,param,payload,auto_fill=10):
+def form_filler(form,param,payload,file_extension='png',auto_fill=10):
  for x in form["inputs"]:
    if x["name"].strip()==param:
     if x["type"]=="file":
-     x["value"]=(payload+".png",empty_png)
+     x["value"]=(payload+"."+file_extension,files_upload[file_extension])
     else:
      x["value"]=payload
    else:
     if x["value"]=="":
      if x["type"]=="file":
-      x["value"]=("bane_test"+str(random.randint(100000,999999))+".png",empty_png)
+      x["value"]=("bane_test"+str(random.randint(100000,999999))+"."+file_extension,files_upload[file_extension])
      else:
       for i in range(auto_fill):
        if x["type"]=="number":
