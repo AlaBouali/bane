@@ -42,7 +42,7 @@ def info(u,timeout=10,proxy=None,logs=False,returning=True):
    >>>bane.info(domain)
 '''
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  try:
   h=''
   u='https://check-host.net/ip-info?host='+u
@@ -102,7 +102,7 @@ def norton_rate(u,timeout=30,proxy=None):
    >>>bane.norton_rate(domain)
 '''
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  try:
   ur=urllib.quote(u, safe='')
   ul='https://safeweb.norton.com/report/show?url='+ur
@@ -166,7 +166,7 @@ def geoip(u,timeout=15,proxy=None):
  '''
  try:
    if proxy:
-    proxy={'http':'http://'+proxy}
+    proxy={'http':'http://'+proxy,'https':'http://'+proxy}
    r=requests.get('https://geoip-db.com/jsonp/'+u,headers = {'User-Agent': random.choice(ua)},proxies=proxy,timeout=timeout).text
    return json.loads(r.split('(')[1].split(')')[0])
  except:
@@ -186,7 +186,7 @@ def http_options(u,timeout=10,user_agent=None,cookie=None,extra_headers=None,log
   heads.update(extra_headers)
  try:
    if proxy:
-    proxy={'http':'http://'+proxy}
+    proxy={'http':'http://'+proxy,'https':'http://'+proxy}
    s=requests.session()
    a=s.options(u,headers = heads ,proxies=proxy,timeout=timeout).headers
  except Exception as ex:
@@ -211,7 +211,7 @@ def headers(u,timeout=10,user_agent=None,cookie=None,extra_headers=None,logs=Tru
   heads.update(extra_headers)
  try:
    if proxy:
-    proxy={'http':'http://'+proxy}
+    proxy={'http':'http://'+proxy,'https':'http://'+proxy}
    s=requests.session()
    a=s.get(u,headers = heads ,proxies=proxy,timeout=timeout).headers
  except Exception as ex:
@@ -232,7 +232,7 @@ def reverse_ip_lookup(u,timeout=10,logs=True,returning=False,proxy=None):
 
  '''
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  try:
    r=requests.get("https://api.hackertarget.com/reverseiplookup/?q="+u,headers = {'User-Agent': random.choice(ua)} ,proxies=proxy,timeout=timeout).text
    return r.split('\n')
@@ -341,7 +341,7 @@ def subdomains_crt(domain,timeout=120,user_agent=None,proxy=None):
  else:
   us=random.choice(ua)
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if "://" in domain:
   domain=domain.split("://")[1].split('/')[0]
  if "www." in domain:

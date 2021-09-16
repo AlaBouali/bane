@@ -43,7 +43,7 @@ def inputs(u,html_comments=False,value=False,timeout=10,user_agent=None,bypass=F
  else:
   us=random.choice(ua)
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if bypass==True:
   u+='#'
  if cookie:
@@ -101,7 +101,7 @@ def forms(u,value=True,html_comments=False,user_agent=None,timeout=10,bypass=Fal
  else:
    us=random.choice(ua)
  if proxy:
-   proxy={'http':'http://'+proxy}
+   proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if bypass==True:
    u+='#'
  if cookie:
@@ -194,7 +194,7 @@ def forms_parser(u,html_comments=False,user_agent=None,timeout=10,bypass=False,p
  else:
    us=random.choice(ua)
  if proxy:
-   proxy={'http':'http://'+proxy}
+   proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if bypass==True:
    u+='#'
  if cookie:
@@ -223,6 +223,7 @@ def forms_parser(u,html_comments=False,user_agent=None,timeout=10,bypass=False,p
    except:
     tb_selects=[]
    ac=f.get('action')
+   enc_ty=f.get('enctype','application/x-www-form-urlencoded')
    if not ac:
     ac=u
    """if len(ac)==0:
@@ -275,7 +276,7 @@ def forms_parser(u,html_comments=False,user_agent=None,timeout=10,bypass=False,p
      y={"name":s,"value":opts,"type":"select"}
      if y not in l:
       l.append(y)
-   fom.append({'inputs':sort_inputs(l),'action':ac,'method':me,"hidden_values":h_v}) 
+   fom.append({'inputs':sort_inputs(l),'action':ac,'enctype':enc_ty,'method':me,"hidden_values":h_v}) 
    l=[]
  except Exception as e:
   pass
@@ -309,6 +310,7 @@ def forms_parser_text(u,text,html_comments=False):
    except:
     tb_selects=[]
    ac=f.get('action')
+   enc_ty=f.get('enctype','application/x-www-form-urlencoded')
    if not ac:
     ac=u
    """if len(ac)==0:
@@ -361,7 +363,7 @@ def forms_parser_text(u,text,html_comments=False):
      y={"name":s,"value":opts,"type":"select"}
      if y not in l:
       l.append(y)
-   fom.append({'inputs':sort_inputs(l),'action':ac,'method':me,"hidden_values":h_v}) 
+   fom.append({'inputs':sort_inputs(l),'action':ac,'enctype':enc_ty,'method':me,"hidden_values":h_v}) 
    l=[]
  except Exception as e:
   pass
@@ -407,7 +409,7 @@ def set_correct_cookies(new_cookies,cookie=None):
 def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,timeout,auto_fill,file_extension='png'):
   cookies=None
   if proxy:
-   proxy={'http':'http://'+proxy}
+   proxy={'http':'http://'+proxy,'https':'http://'+proxy}
   h={"User-Agent":user_agent}
   if cookie:
    h.update({"Cookie":cookie})
@@ -503,7 +505,7 @@ def crawl(u,timeout=10,html_comments=False,user_agent=None,bypass=False,proxy=No
  else:
   us=random.choice(ua)
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  h={}
  if bypass==True:
   u+='#'
@@ -570,7 +572,7 @@ def media(u,timeout=10,html_comments=False,user_agent=None,bypass=False,proxy=No
    hea={'User-Agent': us}
  h={}
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  try:
   if bypass==True:
    u+='#'
@@ -621,7 +623,7 @@ def subdomains_extract(u,timeout=10,html_comments=False,user_agent=None,bypass=F
  else:
   us=random.choice(ua)
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  h={}
  if cookie:
   hea={'User-Agent': us,'Cookie':cookie}

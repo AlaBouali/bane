@@ -9,7 +9,7 @@ else:
 
 def wp_xmlrpc_methods(u,user_agent=None,cookie=None,path='/xmlrpc.php',timeout=10,proxy=None):
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if u[len(u)-1]=='/':
   u=u[0:len(u)-1]
  if user_agent:
@@ -37,7 +37,7 @@ def wp_xmlrpc_methods(u,user_agent=None,cookie=None,path='/xmlrpc.php',timeout=1
 
 def wp_xmlrpc_bruteforce(u,user_agent=None,cookie=None,path='/xmlrpc.php',timeout=10,proxy=None):
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if u[len(u)-1]=='/':
   u=u[0:len(u)-1]
  if user_agent:
@@ -66,7 +66,7 @@ def wp_xmlrpc_bruteforce(u,user_agent=None,cookie=None,path='/xmlrpc.php',timeou
 
 def wp_xmlrpc_mass_bruteforce(u,user_agent=None,cookie=None,path='/xmlrpc.php',timeout=10,proxy=None):
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if u[len(u)-1]=='/':
   u=u[0:len(u)-1]
  if user_agent:
@@ -95,7 +95,7 @@ def wp_xmlrpc_mass_bruteforce(u,user_agent=None,cookie=None,path='/xmlrpc.php',t
 
 def wp_xmlrpc_pingback(u,user_agent=None,test_url="https://www.google.com/",cookie=None,path='/xmlrpc.php',timeout=10,proxy=None):
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if u[len(u)-1]=='/':
   u=u[0:len(u)-1]
  if user_agent:
@@ -126,7 +126,7 @@ def wp_xmlrpc_pingback(u,user_agent=None,test_url="https://www.google.com/",cook
 def wp_xmlrpc_pingback_exploit(u,user_agent=None,target_url="https://www.google.com/",cookie=None,path='/xmlrpc.php',timeout=10,proxy=None):
  url=u.split('://')[0]+"://"+urlparse(u).netloc
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if user_agent:
   us=user_agent
  else:
@@ -160,7 +160,7 @@ def wpadmin(u,username,password,user_agent=None,cookie=None,path='/xmlrpc.php',t
    this function is to check the wordpress given logins using the xmlrpc.php file. if they are correct it returns True, else False
 '''
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if u[len(u)-1]=='/':
   u=u[0:len(u)-1]
  if user_agent:
@@ -191,7 +191,7 @@ def wpadmin_mass(u,word_list=[],user_agent=None,cookie=None,path='/xmlrpc.php',t
    this function is to check the wordpress given logins using the xmlrpc.php file. if they are correct it returns True, else False
 '''
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if u[len(u)-1]=='/':
   u=u[0:len(u)-1]
  if user_agent:
@@ -237,7 +237,7 @@ def wp_users(u,path='/wp-json/wp/v2/users',timeout=10,user_agent=None,cookie=Non
  if cookie:
   hed.update({"Cookie":cookie})
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if u[len(u)-1]=='/':
   u=u[0:len(u)-1]
  u+=path
@@ -264,7 +264,7 @@ def wp_user(u,path='/wp-json/wp/v2/users/',user=1,user_agent=None,cookie=None,ti
  if cookie:
   hed.update({"Cookie":cookie})
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if u[len(u)-1]=='/':
   u=u[0:len(u)-1]
  u+=path+str(user)
@@ -287,7 +287,7 @@ def wp_users_enumeration(u,path='/',timeout=15,user_agent=None,cookie=None,proxy
  d=u.split('://')[1].split("/")[0]
  u=u.split(d)[0]+d
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  l=[]
  for x in range(start,end+1):
   try:
@@ -313,7 +313,7 @@ def wp_version(u,timeout=15,user_agent=None,cookie=None,proxy=None):
  if cookie:
   hed.update({"Cookie":cookie})
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  try:
   r=requests.get(u,headers = hed,proxies=proxy,timeout=timeout, verify=False).text
   return r.split('<meta name="generator" content="')[1].split('"')[0].strip().split(' ')[1]

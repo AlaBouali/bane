@@ -55,7 +55,7 @@ class S0u1wp():
         else:
          self.headers={'User-Agent': us}
         if proxy:
-         self.proxy={'http':'http://'+proxy}
+         self.proxy={'http':'http://'+proxy,'https':'http://'+proxy}
         else:
          self.proxy=None
         try:

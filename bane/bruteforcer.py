@@ -35,10 +35,10 @@ class http_auth_bruteforce:
    hed.update({"Cookie":cookie})
   prox=None
   if proxy:
-   prox={'http':'http://'+proxy}
+   prox={'http':'http://'+proxy,'https':'http://'+proxy}
   if proxies:
    prox=random.choice(proxies)
-   prox={'http':'http://'+prox}
+   prox={'http':'http://'+prox,'https':'http://'+prox}
   try:
    if self.logs==True:
     print("[*]Checking Authentication Type:")
@@ -117,7 +117,7 @@ def access(u,timeout=10,user_agent=None,cookie=None,bypass=False,proxy=None):
  if cookie:
      hed.update({"Cookie":cookie})
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  try:
    r=requests.get(u,  headers = {'User-Agent': random.choice(ua)} , allow_redirects=False,proxies=proxy,timeout=timeout, verify=False) 
    if r.status_code == requests.codes.ok:
@@ -130,6 +130,9 @@ def access(u,timeout=10,user_agent=None,cookie=None,bypass=False,proxy=None):
 class web_login_bruteforce:
  __slots__=["stop","finish","result","logs"]
  def try_combo(self,url,username,password,cookie,user_agent,proxy,timeout):
+  prox=None
+  if proxy:
+   proxy={'http':'http://'+proxy,'https':'http://'+proxy}
   cookies=None
   h={"User-Agent":user_agent}
   if cookie:
@@ -236,9 +239,10 @@ class filemanager_finder:
     self.finish=True
     break
    if proxy:
-    proxy={'http':'http://'+proxy}
+    proxy={'http':'http://'+proxy,'https':'http://'+proxy}
    if proxies:
-    proxy={'http':'http://'+random.choice(proxies)}
+    prx=random.choice(proxies)
+    proxy={'http':'http://'+prx,'https':'http://'+prx}
    if user_agent:
      us=user_agent
    else:
@@ -397,9 +401,10 @@ class admin_panel_finder:
     break
    try:
     if proxy:
-     proxy={'http':'http://'+proxy}
+     proxy={'http':'http://'+proxy,'https':'http://'+proxy}
     if proxies:
-     proxy={'http':'http://'+random.choice(proxies)}
+     prx=random.choice(proxies)
+     proxy={'http':'http://'+prx,'https':'http://'+prx}
     if user_agent:
      us=user_agent
     else:

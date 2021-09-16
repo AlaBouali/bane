@@ -110,7 +110,7 @@ def webhint_report(ur,proxy=None,timeout=10):
 '''
  u="https://webhint.io/scanner/"
  if proxy:
-  proxy={'http':'http://'+proxy}
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  r=''
  if ("://" not in ur):
   return r
