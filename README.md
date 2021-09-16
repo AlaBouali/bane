@@ -302,9 +302,9 @@ II-Usage (General usage):
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"sql":"sql_server"}, timeout=15 )#test for SQL Server
 
 
-</pre></div><h4>File inclusion:</h4>
+</pre></div><h4>Path traversal:</h4>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.file_inclusion(link, timeout=15 )
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.path_traversal(link, timeout=15 )
 
 </pre></div><h4>Clickjacking:</h4>
 
