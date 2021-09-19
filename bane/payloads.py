@@ -5,7 +5,7 @@ sql_errors=['sqlite3.OperationalError','error in your SQL syntax','mysql_fetch',
 
 env_paths=['/','/demo/','/turnero/Acceso/','/china-tickets/','/club/','/laravel-5.6/','/laravel/','/vendor/','/subdomains/program/html/','/test/laravel/','/test/']
 
-csrf_strings=['csrf', 'auth', 'token']
+csrf_strings=['csrf', 'auth', 'token','xsrf','secret']
 
 
 files_upload={
