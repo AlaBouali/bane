@@ -475,10 +475,11 @@ def valid_parameter(parm):
  except:
   return True
 
-def path_traversal_check(u,php_wrapper="file",null_byte=False,bypass=False,target_os="linux",proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None):
+def path_traversal_check(u,php_wrapper="file",linux_file=0,null_byte=False,bypass=False,target_os="linux",proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None):
  '''
    this function is for FI vulnerability test using a link
 '''
+ linux_files["{}proc{}version","{}etc{}passwd"]
  if proxy:
   proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if proxies:
