@@ -304,7 +304,7 @@ II-Usage (General usage):
 
 </pre></div><h4>Path traversal:</h4>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.path_traversal(link, timeout=15 )
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.path_traversal_url(link, timeout=15 )
 
 </pre></div><h4>Clickjacking:</h4>
 
