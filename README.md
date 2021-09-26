@@ -119,6 +119,157 @@ then import it and start using it as in the tutorials below:
 II-Usage (General usage):
 ---------------------------------------------------------------------------------------------------------------------------
 
+# Vulnerabilities TESTING:
+
+<h4>Automatic XSS scan for page:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.xss_forms(link , payload="<script>alert(123)</script>" , timeout=15 )
+</pre></div>
+
+<h4>Remote Command Execution Linux Time-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"command":"linux"},based_on='time', timeout=15 )
+</pre></div>
+<h4>Remote Command Execution Linux File-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"command":"linux"},based_on='file', timeout=15 )
+</pre></div>
+
+<h4>Remote Command Execution Windows Time-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"command":"windows"},based_on='time', timeout=15 )
+</pre></div>
+<h4>Remote Command Execution Windows File-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"command":"windows"},based_on='file', timeout=15 )
+
+</pre></div><h4>Remote Code Execution PHP Time-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"code":"php"},based_on='time', timeout=15 )
+</pre></div><h4>Remote Code Execution PHP File-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"code":"php"},based_on='file', timeout=15 )
+
+</pre></div><h4>Remote Code Execution PYTHON Time-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"code":"python"},based_on='time', timeout=15 )
+</pre></div><h4>Remote Code Execution PYTHON File-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"code":"python"},based_on='file', timeout=15 )
+
+</pre></div><h4>Remote Code Execution PERL Time-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"code":"perl"},based_on='time', timeout=15 )
+</pre></div><h4>Remote Code Execution PERL File-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"code":"perl"},based_on='file', timeout=15 )
+
+</pre></div><h4>Remote Code Execution RUBY Time-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"code":"ruby"},based_on='time', timeout=15 )
+</pre></div><h4>Remote Code Execution RUBY File-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"code":"ruby"},based_on='file', timeout=15 )
+
+</pre></div><h4>Remote Code Execution NODEJS Time-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"code":"nodejs"},based_on='time', timeout=15 )
+</pre></div><h4>Remote Code Execution NODEJS File-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"code":"nodejs"},based_on='file', timeout=15 )
+
+</pre></div><h4>SQL-Injection Time-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"sql":"mysql"}, timeout=15 )#test for MySQL
+</pre></div><h4>SQL-Injection Time-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"sql":"oracle"}, timeout=15 )#test for Oracle
+</pre></div><h4>SQL-Injection Time-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"sql":"postgre"}, timeout=15 )#test for Postgre
+</pre></div><h4>SQL-Injection Time-Based:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"sql":"sql_server"}, timeout=15 )#test for SQL Server
+
+
+</pre></div><h4>Path traversal:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.path_traversal_url(link, timeout=15 )
+
+</pre></div><h4>SSRF:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.ssrf_url(link, timeout=15 )
+
+
+</pre></div><h4>Clickjacking:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.clickjacking(link, timeout=15 )
+
+</pre></div>
+
+</pre></div><h4>HTTP Strict Transport Security (HSTS):</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.hsts(link, timeout=15 )
+
+</pre></div>
+
+
+<h4>CORS Misconfigurations:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.cors_misconfigurations(link, timeout=15 )
+
+
+
+</pre></div><h4>CSRF:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">cookie="session=fgyujikop"#just an example of cookie sinceit requires a session
+<br>bane.csrf_forms(link, timeout=15 , cookie=cookie )
+
+
+</pre></div><h4>Headers timeout:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.headers_timeout_test(IP , port=80, max_timeout=30 )
+</pre></div><h4>Slow GET test:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.slow_get_test(IP , port=80, duration=180 )
+</pre></div><h4>Maximum number of allowed connections from a single host:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.max_connections_limit(IP , port=80, connections=150 , duration=180 )
+</pre></div><h4>Slow POST test:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.slow_post_test(IP , port=80, duration=180 )
+</pre></div><h4>Slow Read test:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.slow_read_test(IP , port=80, duration=180 )
+
+</pre></div><h4>Android Debug Bridge (ADB) exploit:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.adb_exploit(IP , timeout=5 )
+
+</pre></div><h4>Exposed unauthenticated Telnet server:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.exposed_telnet(IP , timeout=5 )
+
+</pre></div><h4>Exposed "/.env" File:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.exposed_env(link , timeout=15 )
+
+</pre></div><h4>Vulners API Search for known vulnerabilities on a particular software:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.vulners_search("wordpress",version="4.7.4")#just an example
+
+
+</pre></div><h4>PHPUNIT exploit:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.phpunit_exploit(link , timeout=15 )
+
+</pre></div><h4>Shodan report:</h4>
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">api_key="ghbjklmjklmjlkml...."
+<br>bane.shodan_report(IP , api_key)
+</pre></div>
+
+
+
 # DDoS:
 
 <h4>UDP FLOOD:</h4>
@@ -229,147 +380,6 @@ II-Usage (General usage):
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.wp_scan(link , timeout=15 )
 </pre></div>
 
-# Vulnerabilities TESTING:
-
-<h4>Automatic XSS scan for page:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.xss(link , payload="<script>alert(123)</script>" , timeout=15 )
-</pre></div>
-
-<h4>Remote Command Execution Linux Time-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"command":"linux"},based_on='time', timeout=15 )
-</pre></div>
-<h4>Remote Command Execution Linux File-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"command":"linux"},based_on='file', timeout=15 )
-</pre></div>
-
-<h4>Remote Command Execution Windows Time-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"command":"windows"},based_on='time', timeout=15 )
-</pre></div>
-<h4>Remote Command Execution Windows File-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"command":"windows"},based_on='file', timeout=15 )
-
-</pre></div><h4>Remote Code Execution PHP Time-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"code":"php"},based_on='time', timeout=15 )
-</pre></div><h4>Remote Code Execution PHP File-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"code":"php"},based_on='file', timeout=15 )
-
-</pre></div><h4>Remote Code Execution PYTHON Time-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"code":"python"},based_on='time', timeout=15 )
-</pre></div><h4>Remote Code Execution PYTHON File-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"code":"python"},based_on='file', timeout=15 )
-
-</pre></div><h4>Remote Code Execution PERL Time-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"code":"perl"},based_on='time', timeout=15 )
-</pre></div><h4>Remote Code Execution PERL File-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"code":"perl"},based_on='file', timeout=15 )
-
-</pre></div><h4>Remote Code Execution RUBY Time-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"code":"ruby"},based_on='time', timeout=15 )
-</pre></div><h4>Remote Code Execution RUBY File-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"code":"ruby"},based_on='file', timeout=15 )
-
-</pre></div><h4>Remote Code Execution NODEJS Time-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"code":"nodejs"},based_on='time', timeout=15 )
-</pre></div><h4>Remote Code Execution NODEJS File-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"code":"nodejs"},based_on='file', timeout=15 )
-
-</pre></div><h4>SQL-Injection Time-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"sql":"mysql"}, timeout=15 )#test for MySQL
-</pre></div><h4>SQL-Injection Time-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"sql":"oracle"}, timeout=15 )#test for Oracle
-</pre></div><h4>SQL-Injection Time-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"sql":"postgre"}, timeout=15 )#test for Postgre
-</pre></div><h4>SQL-Injection Time-Based:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"sql":"sql_server"}, timeout=15 )#test for SQL Server
-
-
-</pre></div><h4>Path traversal:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.path_traversal_url(link, timeout=15 )
-
-</pre></div><h4>Clickjacking:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.clickjacking(link, timeout=15 )
-
-</pre></div>
-
-</pre></div><h4>HTTP Strict Transport Security (HSTS):</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.hsts(link, timeout=15 )
-
-</pre></div>
-
-
-<h4>CORS Misconfigurations:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.cors_misconfigurations(link, timeout=15 )
-
-</pre></div><h4>CSRF:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">cookie="session=fgyujikop"#just an example of cookie sinceit requires a session
-<br>bane.csrf(link, timeout=15 , cookie=cookie )
-
-
-</pre></div><h4>Headers timeout:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.headers_timeout_test(IP , port=80, max_timeout=30 )
-</pre></div><h4>Slow GET test:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.slow_get_test(IP , port=80, duration=180 )
-</pre></div><h4>Maximum number of allowed connections from a single host:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.max_connections_limit(IP , port=80, connections=150 , duration=180 )
-</pre></div><h4>Slow POST test:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.slow_post_test(IP , port=80, duration=180 )
-</pre></div><h4>Slow Read test:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.slow_read_test(IP , port=80, duration=180 )
-
-</pre></div><h4>Android Debug Bridge (ADB) exploit:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.adb_exploit(IP , timeout=5 )
-
-</pre></div><h4>Exposed unauthenticated Telnet server:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.exposed_telnet(IP , timeout=5 )
-
-</pre></div><h4>Exposed "/.env" File:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.exposed_env(link , timeout=15 )
-
-</pre></div><h4>Vulners API Search for known vulnerabilities on a particular software:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.vulners_search("wordpress",version="4.7.4")#just an example
-
-
-</pre></div><h4>PHPUNIT exploit:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.phpunit_exploit(link , timeout=15 )
-
-</pre></div><h4>Shodan report:</h4>
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">api_key="ghbjklmjklmjlkml...."
-<br>bane.shodan_report(IP , api_key)
-</pre></div>
 
 # Proxies collecting:
 
