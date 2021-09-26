@@ -198,7 +198,17 @@ II-Usage (General usage):
 
 </pre></div><h4>SSRF:</h4>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.ssrf_url(link, timeout=15 )
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.ssrf_url(link )
+
+</pre></div><h4>CRLF header injection:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.crlf_header_injection(link, timeout=15 )
+
+
+</pre></div><h4>CRLF body injection:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.crlf_body_injection(link, timeout=15 )
+
 
 
 </pre></div><h4>Clickjacking:</h4>
