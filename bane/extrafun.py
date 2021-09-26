@@ -44,6 +44,7 @@ def write_file(w,fi,encode="utf-8"):
     with open(fi ,"a+",encoding=encode) as f:
         f.write(w+'\n')
     f.close()
+
 def read_file(w):
     with open(w ,"r") as f:
         l= f.readlines()

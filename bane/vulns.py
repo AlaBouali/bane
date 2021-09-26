@@ -172,7 +172,7 @@ def setup_ua(usra):
 
 
 
-def xss(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',context_breaker='">',save_to_file=None,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False):
+def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',context_breaker='">',save_to_file=None,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False):
   '''
    this function is for xss test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -301,7 +301,7 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype
   return (False,'')
 
 
-def rce(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_extension='png',start_line=None,replaceble_parameters={"phpvalue":((".",""),)},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
+def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_extension='png',start_line=None,replaceble_parameters={"phpvalue":((".",""),)},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
   '''
    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -479,7 +479,7 @@ def path_traversal_check(u,php_wrapper="file",linux_file=0,null_byte=False,bypas
  '''
    this function is for FI vulnerability test using a link
 '''
- linux_files["{}proc{}version","{}etc{}passwd"]
+ linux_files=["{}proc{}version","{}etc{}passwd"]
  if proxy:
   proxy={'http':'http://'+proxy,'https':'http://'+proxy}
  if proxies:
@@ -551,6 +551,65 @@ def path_traversal_url(u,null_byte=False,bypass=False,target_os="linux",php_wrap
          if q[1] not in res:
           res.append(q[1])
  return res
+ 
+
+def ssrf_check(u,null_byte=False,link="http://www.google.com",signature="<title>Google</title>",proxy=None,proxies=None,timeout=25,user_agent=None,cookie=None):
+ '''
+   this function is for FI vulnerability test using a link
+'''
+ l=link
+ if proxy:
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
+ if proxies:
+  prx=random.choice(proxies)
+  proxy={'http':'http://'+prx,'https':'http://'+prx}
+ if user_agent:
+   us=user_agent
+ else:
+   us=random.choice(ua)
+ if cookie:
+    heads={'User-Agent': us,'Cookie':cookie}
+ else:
+   heads={'User-Agent': us}
+ if ("=" not in u):
+  return (False,'')
+ if null_byte==True:
+   l+="%00"
+ try:
+    r=requests.get(u.format(l),headers=heads,proxies=proxy,timeout=timeout, verify=False)
+    if (signature in r.text) or (r.status_code==504):
+     return (True,r.url)
+ except Exception as e:
+    pass
+ return (False,'')
+
+
+def ssrf_url(u,null_byte=False,link="http://www.google.com",timeout=120,signature="<title>Google</title>",proxy=None,proxies=None,user_agent=None,cookie=None): 
+ res=[]
+ if u.split("?")[0][-1]!="/" and '.' not in u.split("?")[0].rsplit('/', 1)[-1]:
+    u=u.replace('?','/?')
+ a=crawl(u,proxy=proxy,timeout=timeout,cookie=cookie,user_agent=user_agent)
+ l=[]
+ d=a.values()
+ for x in d:
+  if len(x[3])>0:
+   l.append(x)
+ o=[]
+ for x in l:
+  ur=x[1]
+  if ur.split("?")[0] not in o:
+   o.append(ur.split("?")[0])
+   if ur.split("?")[0][-1]!="/" and '.' not in ur.split("?")[0].rsplit('/', 1)[-1]:
+    ur=ur.replace('?','/?')
+   for y in x[3]:
+    if valid_parameter(y[1])==True:
+     trgt=ur.replace(y[0]+"="+y[1],y[0]+"={}")
+     q=ssrf_check(trgt,null_byte=null_byte,proxy=proxy,link=link,signature=signature,proxies=proxies,timeout=timeout,cookie=cookie,user_agent=user_agent)
+     if q[0]==True:
+      if q[1] not in res:
+        res.append(q[1])
+ return res
+
 
 def clickjacking(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False):
  if proxy:
@@ -574,6 +633,85 @@ def clickjacking(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False
  except:
   return False
  return click
+
+
+
+def set_requests(u,method="GET",data={},params={},headers={},files={},proxy={},timeout=15):
+ s = requests.Session()
+ req = requests.Request(method=method ,url=u, headers=headers, data=data, files=files,params=params)
+ prep = req.prepare()
+ prep.url = u
+ return s.send(prep, verify=False,proxies=proxy,timeout=timeout)
+ 
+
+
+def crlf_unicode_encode(random_level=0,line_feed_only=False,carriage_return_only=False):
+ if line_feed_only==False and carriage_return_only==False:
+  if random_level==1:
+   return random.choice(['%E5%98%8D','%0d'])+random.choice(['%E5%98%8A','%0a'])
+  if random_level==2:
+   return "%E5%98%8D%E5%98%8A"
+  else:
+   return '%0d%0a'
+ else:
+  if line_feed_only==True and carriage_return_only==False:
+   if random_level==1:
+    return random.choice(['%E5%98%8A','%0a'])
+   if random_level==2:
+    return "%E5%98%8A"
+   else:
+    return '%0a'
+  if carriage_return_only==True and line_feed_only==False:
+   if random_level==1:
+    return random.choice(['%E5%98%8D','%0d'])
+   if random_level==2:
+    return "%E5%98%8D"
+   else:
+    return '%0d'
+ return '%0d%0a'
+
+
+
+def crlf_header_injection(u,unicode_random_level=0,carriage_return_only=False,line_feed_only=False,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False):
+ if proxy:
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
+ if user_agent:
+   us=user_agent
+ else:
+   us=random.choice(ua)
+ if cookie:
+    heads={'User-Agent': us,'Cookie':cookie}
+ else:
+   heads={'User-Agent': us}
+ try:
+  r=set_requests(u+crlf_unicode_encode(random_level=unicode_random_level,carriage_return_only=carriage_return_only)+'banetest:%20test',method='GET',headers=heads,proxy=proxy,timeout=timeout)
+  return 'banetest' in r.headers
+ except Exception as e:
+  pass
+ return False
+
+
+
+ 
+def crlf_body_injection(u,proxy=None,unicode_random_level=0,carriage_return_only=False,line_feed_only=False,timeout=10,user_agent=None,cookie=None,debug=False):
+ if proxy:
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
+ if user_agent:
+   us=user_agent
+ else:
+   us=random.choice(ua)
+ if cookie:
+    heads={'User-Agent': us,'Cookie':cookie}
+ else:
+   heads={'User-Agent': us}
+ try:
+  r=set_requests(u+crlf_unicode_encode(random_level=unicode_random_level,carriage_return_only=carriage_return_only)+crlf_unicode_encode(random_level=unicode_random_level,carriage_return_only=carriage_return_only)+'banetest:%20test',method='GET',headers=heads,proxy=proxy,timeout=timeout)
+  return 'banetest;$@*' in r.text
+ except Exception as e:
+  pass
+ return False
+
+
 
 
 def hsts(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False):
@@ -602,7 +740,8 @@ def hsts(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False):
  return hs
 
 
-def csrf(u,proxy=None,timeout=10,logs=True,user_agent=None,cookie=None):
+
+def csrf_filter_tokens(u,proxy=None,timeout=10,user_agent=None,cookie=None):
  if not cookie or len(cookie.strip())==0:
   raise Exception("This attack requires authentication !! You need to set a Cookie")
  res={"Vulnerable":[],"Safe":[]}
@@ -613,35 +752,71 @@ def csrf(u,proxy=None,timeout=10,logs=True,user_agent=None,cookie=None):
   coun+=1
   vuln=True
   hd_v=False
-  print(Fore.BLUE+"Form: "+Fore.WHITE+str(f.index(x))+Fore.BLUE+"\nAction: "+Fore.WHITE+x['action']+Fore.BLUE+"\nMethod: "+Fore.WHITE+x['method']+Style.RESET_ALL)
+  #print(Fore.BLUE+"Form: "+Fore.WHITE+str(f.index(x))+Fore.BLUE+"\nAction: "+Fore.WHITE+x['action']+Fore.BLUE+"\nMethod: "+Fore.WHITE+x['method']+Style.RESET_ALL)
   for y in x["inputs"]:
-   print("Name: {} | Type: {} | Value: {}".format(y["name"],y["type"],y["value"]))
+   #print("Name: {} | Type: {} | Value: {}".format(y["name"],y["type"],y["value"]))
    if y["type"].lower()=="hidden":
     hd_v=True
    if y["type"].lower()=="hidden" and any(ele in y["name"].lower() for ele in csrf_strings):#and y["value"]==f1f["inputs"][con]["value"]:
     vuln=False
   if vuln==True:
    if hd_v==True:#if there is no Anti-CSRF Tokens then we check if the Hidden fields can be predicted or not (keep their values or change them by request)
-    print(Fore.YELLOW+"[i] Validating hidden values' prediction..."+Style.RESET_ALL)
+    #print(Fore.YELLOW+"[i] Validating hidden values' prediction..."+Style.RESET_ALL)
     for i in x["hidden_values"]:
      if len(x["hidden_values"][i])>0:
       if x["hidden_values"][i]!=f1[coun]["hidden_values"][i]:
        vuln=False
   if vuln==True:
    colr=Fore.GREEN
-   if logs==True:
-    print (colr+"[+] Vulnerable"+Style.RESET_ALL)
+   """if logs==True:
+    print (colr+"[+] Vulnerable"+Style.RESET_ALL)"""
    res["Vulnerable"].append(x)
   else:
    colr=Fore.RED
-   if logs==True:
-    print (colr+"[-] Not vulnerable"+Style.RESET_ALL)
+   """if logs==True:
+    print (colr+"[-] Not vulnerable"+Style.RESET_ALL)"""
    res["Safe"].append(x)
  return res
 
 
+def set_requests(u,method="GET",data={},files={},params={},headers={},proxy={},timeout=15):
+ s = requests.Session()
+ req = requests.Request(method=method ,url=u, headers=headers, data=data, files=files,params=params)
+ prep = req.prepare()
+ prep.url = u
+ return s.send(prep, verify=False,proxies=proxy,timeout=timeout)
 
-def cors_reflection(u,proxy=None,timeout=10,user_agent=None,cookie=None,origin="www.evil-domain.com",debug=False):
+
+def csrf_forms(u,proxy=None,timeout=10,user_agent=None,cookie=None,file_extension='png',fill_empty=10,referer="http://www.evil.com"):
+ vu=[]
+ if not cookie or len(cookie.strip())==0:
+  raise Exception("This attack requires authentication !! You need to set a Cookie")
+ v=csrf_filter_tokens(u,proxy=proxy,timeout=timeout,user_agent=user_agent,cookie=cookie)["Vulnerable"]
+ if proxy:
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
+ if user_agent:
+  h={"User-Agent":user_agent}
+ else:
+  h={"User-Agent":random.choice(ua)}
+ h.update({"cookie":cookie})
+ h.update({"Referer":referer,"Origin":referer.split("://")[0]+"://"+referer.split("://")[1].split("/")[0]})
+ for x in v:
+  x=form_filler(x,"","",file_extension=file_extension,auto_fill=fill_empty)
+  d,f=setup_to_submit(x)
+  l=[d[y] for y in d]
+  for j in f:
+   l.append(f[j][0])
+  if x["method"]=="get":
+   r=requests.get(x["action"],params=d,proxies=proxy,timeout=timeout,headers=h)
+  else:
+   if 'application/json' in x["enctype"]:
+    d=json.dumps(d)
+   r=requests.post(x["action"],data=d,files=f,proxies=proxy,timeout=timeout,headers=h)
+  if all(i in r.text for i in l):
+    vu.append(x)
+ return vu
+
+def cors_reflection(u,proxy=None,timeout=10,user_agent=None,cookie=None,origin="www.evil-domain.com",debug=False,fill=10):
  a=None
  b=None
  if proxy:

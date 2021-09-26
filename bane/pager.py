@@ -522,6 +522,7 @@ def crawl(u,timeout=10,html_comments=False,user_agent=None,bypass=False,proxy=No
   """if ur[-1]=='/':
    ur=ur[:-1]"""
   index_link=0
+  h.update({-1:("Source_url",u,urlparse(u).path,[ (x,furl.furl(u).args[x]) for x in furl.furl(u).args])})
   for a in soup.find_all('a'):
    u=ur
    if a.has_attr('href'):
