@@ -235,7 +235,7 @@ II-Usage (General usage):
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">cookie="session=fgyujikop"#just an example of cookie sinceit requires a session
 <br>bane.csrf_forms(link, timeout=15 , cookie=cookie )
 
-
+<!--
 </pre></div><h4>Headers timeout:</h4>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.headers_timeout_test(IP , port=80, max_timeout=30 )
@@ -251,7 +251,7 @@ II-Usage (General usage):
 </pre></div><h4>Slow Read test:</h4>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.slow_read_test(IP , port=80, duration=180 )
-
+-->
 </pre></div><h4>Android Debug Bridge (ADB) exploit:</h4>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.adb_exploit(IP , timeout=5 )
