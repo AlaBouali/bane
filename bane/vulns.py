@@ -172,7 +172,7 @@ def setup_ua(usra):
 
 
 
-def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',context_breaker='">',save_to_file=None,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False):
+def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',context_breaker='">',save_to_file=None,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False):
   '''
    this function is for xss test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -229,9 +229,10 @@ def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",replaceb
      extr=[]
      l=[]
      for x in l1['inputs']:
+      if x["name"].strip() not in leave_empty and x["name"].strip() not in dont_send:
        if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
         i=x["name"]
-        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension)
+        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send)
         xss_res=xss_submit(parsed_form,xp,replaceble_parameters,debug=debug,enctype=l1['enctype'])
         if xss_res[0]==True:
           x="parameter: '"+i+"' => [+]Payload was found"
@@ -301,7 +302,7 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype
   return (False,'')
 
 
-def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_extension='png',start_line=None,replaceble_parameters={"phpvalue":((".",""),)},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
+def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_extension='png',start_line=None,replaceble_parameters={"phpvalue":((".",""),)},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
   '''
    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -438,23 +439,24 @@ def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_
      extr=[]
      l=[]
      for x in l1['inputs']:
-      try:
-       if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
-        i=x["name"]
-        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension)
-        _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug,enctype=l1['enctype'])
-        if _res[0]==True:
-          x="parameter: '"+i+"' => [+] Vulnerable !!"
-          vul.append((i,_res[1]))
-          colr=Fore.GREEN
-        else:
-         x="parameter: '"+i+"' => [-] Not Vulnerable"
-         sec.append(i)
-         colr=Fore.RED
-        if logs==True:
-         print (colr+x+Style.RESET_ALL)
-      except Exception as ex:
-       break
+      if x["name"].strip() not in leave_empty and x["name"].strip() not in dont_send:
+       try:
+        if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
+         i=x["name"]
+         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send)
+         _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug,enctype=l1['enctype'])
+         if _res[0]==True:
+           x="parameter: '"+i+"' => [+] Vulnerable !!"
+           vul.append((i,_res[1]))
+           colr=Fore.GREEN
+         else:
+          x="parameter: '"+i+"' => [-] Not Vulnerable"
+          sec.append(i)
+          colr=Fore.RED
+         if logs==True:
+          print (colr+x+Style.RESET_ALL)
+       except Exception as ex:
+        break
     dic.update({form_index:{"Action":u,"Method":l1['method'],"Passed":vul,"Failed":sec}})
    if based_on_o=="time":
     final={"Payload":xp.replace(" {} ".format(int(delay)+2)," {} ".format(int(delay))),"Based on":based_on_o,"Injection":injection,"Page":target_page,"Output":dic}
@@ -787,7 +789,7 @@ def set_requests(u,method="GET",data={},files={},params={},headers={},proxy={},t
  return s.send(prep, verify=False,proxies=proxy,timeout=timeout)
 
 
-def csrf_forms(u,proxy=None,timeout=10,user_agent=None,cookie=None,file_extension='png',fill_empty=10,referer="http://www.evil.com"):
+def csrf_forms(u,proxy=None,timeout=10,user_agent=None,cookie=None,file_extension='png',fill_empty=10,referer="http://www.evil.com",leave_empty=[],dont_send=[]):
  vu=[]
  if not cookie or len(cookie.strip())==0:
   raise Exception("This attack requires authentication !! You need to set a Cookie")
@@ -801,7 +803,7 @@ def csrf_forms(u,proxy=None,timeout=10,user_agent=None,cookie=None,file_extensio
  h.update({"cookie":cookie})
  h.update({"Referer":referer,"Origin":referer.split("://")[0]+"://"+referer.split("://")[1].split("/")[0]})
  for x in v:
-  x=form_filler(x,"","",file_extension=file_extension,auto_fill=fill_empty)
+  x=form_filler(x,"","",file_extension=file_extension,auto_fill=fill_empty,leave_empty=leave_empty,dont_send=dont_send)
   d,f=setup_to_submit(x)
   l=[d[y] for y in d]
   for j in f:
@@ -947,7 +949,7 @@ def cors_misconfigurations(u,origin="www.evil-domain.com",origin_reflection=True
     print("[-] Not vulnerable")
  return res
 
-
+"""
 '''
   the following functions are used to check any kind of Slow HTTP attacks vulnerabilities that will lead to a possible DoS.
 '''
@@ -1162,6 +1164,7 @@ def slow_read_test(u,port=80,logs=True,timeout=5,duration=180,randomly=False,wai
    print("==>connection closed at: {} seconds".format(int(time.time()-ti)))
   return int(time.time()-ti)
 
+"""
 
 def adb_exploit(u,timeout=5,p=5555):
     try:
