@@ -1,5 +1,5 @@
 #coding: utf-8
-import subprocess,os,xtelnet,sys,cgi,re,json
+import subprocess,os,xtelnet,sys,cgi,re,json,warnings
 from colorama import Fore, Back, Style
 if  sys.version_info < (3,0):
  if (sys.platform.lower() == "win32") or( sys.platform.lower() == "win64"):
@@ -816,7 +816,46 @@ def csrf_forms(u,proxy=None,timeout=10,user_agent=None,cookie=None,file_extensio
    r=requests.post(x["action"],data=d,files=f,proxies=proxy,timeout=timeout,headers=h)
   if all(i in r.text for i in l):
     vu.append(x)
+  elif r.status_code==200 and any(i in r.text for i in l):
+   vu.append(x)
+  elif r.status_code==200 and not any(i in r.text for i in l):
+   warnings.warn("HTTP Status Code: 200 , but we didn't find our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
+   vu.append(x)
  return vu
+
+
+def file_upload(u,proxy=None,timeout=10,user_agent=None,cookie=None,file_extension='png',fill_empty=10,referer=None,leave_empty=[],dont_send=[],mime_type=None):
+ l=[]
+ x=forms_parser(u,proxy=proxy,timeout=timeout,user_agent=user_agent,cookie=cookie)
+ fo=get_upload_form(x)
+ d,f=setup_to_submit(form_filler(fo,'','',mime_type=mime_type))
+ if not referer or len(referer)==0:
+  referer=u
+ for j in f:
+   l.append(f[j][0])
+ if proxy:
+  proxy={'http':'http://'+proxy,'https':'http://'+proxy}
+ if user_agent:
+  h={"User-Agent":user_agent}
+ else:
+  h={"User-Agent":random.choice(ua)}
+ if 'application/json' in fo["enctype"]:
+    d=json.dumps(d)
+ h.update({"cookie":cookie})
+ print(fo)
+ h.update({"Referer":referer,"Origin":referer.split("://")[0]+"://"+referer.split("://")[1].split("/")[0]})
+ r=requests.post(fo["action"],data=d,files=f,proxies=proxy,timeout=timeout,headers=h)
+ if all(i in r.text for i in l):
+    return True
+ elif r.status_code==200 and any(i in r.text for i in l):
+   return True
+ elif r.status_code==200 and not any(i in r.text for i in l):
+   warnings.warn("HTTP Status Code: 200 , but we didn't find our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
+   return True
+ return False
+
+
+
 
 def cors_reflection(u,proxy=None,timeout=10,user_agent=None,cookie=None,origin="www.evil-domain.com",debug=False,fill=10):
  a=None

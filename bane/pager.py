@@ -431,7 +431,7 @@ def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,ti
   return form_filler(form,parameter,payload,auto_fill=auto_fill,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send),h,proxy,timeout
   
 
-def form_filler(form,param,payload,file_extension='png',auto_fill=10,leave_empty=[],dont_send=[]):
+def form_filler(form,param,payload,file_extension='png',auto_fill=10,leave_empty=[],dont_send=[],mime_type=None):
  for x in form["inputs"]:
   if x["name"].strip() in dont_send:
    form["inputs"].remove(x)
@@ -439,13 +439,19 @@ def form_filler(form,param,payload,file_extension='png',auto_fill=10,leave_empty
    if x["name"].strip() not in leave_empty:
     if x["name"].strip()==param:
      if x["type"]=="file":
-      x["value"]=(payload+"."+file_extension,files_upload[file_extension])
+      if not mime_type:
+       x["value"]=(payload+"."+file_extension,files_upload[file_extension])
+      else:
+       x["value"]=(payload+"."+file_extension,files_upload[file_extension],mime_type)
      else:
       x["value"]=payload
     else:
      if x["value"]=="":
       if x["type"]=="file":
-       x["value"]=("bane_test"+str(random.randint(100000,999999))+"."+file_extension,files_upload[file_extension])
+       if not mime_type:
+        x["value"]=("bane_test"+str(random.randint(100000,999999))+"."+file_extension,files_upload[file_extension])
+       else:
+        x["value"]=("bane_test"+str(random.randint(100000,999999))+"."+file_extension,files_upload[file_extension],mime_type)
       else:
        for i in range(auto_fill):
         if x["type"]=="number":
@@ -469,6 +475,7 @@ def get_login_form(url,text):
     return x
  raise Exception('No login form')
 
+
 def set_login_form(url,text,username,password):
  a=get_login_form(url,text)
  d={}
@@ -480,6 +487,21 @@ def set_login_form(url,text,username,password):
   else:
    d.update({x["name"]:x["value"]})
  return [d,a["action"]]
+
+def get_upload_form(a):
+ for x in a:
+  for i in x["inputs"]:
+   if i["type"].lower().strip()=="file":
+    return x
+ raise Exception('No file upload form')
+
+def get_upload_form_text(url,text):
+ a=forms_parser_text(url,text)
+ for x in a:
+  for i in x["inputs"]:
+   if i["type"].lower().strip()=="file":
+    return x
+ raise Exception('No file upload form')
 
 
 def crawl(u,timeout=10,html_comments=False,user_agent=None,bypass=False,proxy=None,cookie=None):
@@ -546,6 +568,59 @@ def crawl(u,timeout=10,html_comments=False,user_agent=None,bypass=False,proxy=No
  except Exception as ex:
   pass
  return h
+
+def crawl(u,text,html_comments=False):
+ '''
+   this function is used to crawl any given link and returns a list of all available links on that webpage with ability to bypass anti-crawlers
+   
+   the function takes those arguments:
+   
+   u: the targeted link
+   timeout: (set by default to 10) timeout flag for the request
+   bypass: (set by default to False) option to bypass anti-crawlers by simply adding "#" to the end of the link :)
+
+   usage:
+
+   >>>import bane
+   >>>url='http://www.example.com'
+   >>>bane.crawl(url)
+   
+   >>>bane.crawl(url,bypass=True)
+'''
+ if urlparse(u).path=='':
+  u+="/"
+ if u.split("?")[0][-1]!="/" and '.' not in u.split("?")[0].rsplit('/', 1)[-1]:
+    u=u.replace('?','/?')
+ try:
+  c=text
+  if html_comments==False:
+   c=remove_html_comments(c)
+  soup = BeautifulSoup(c,"html.parser")
+  ur=u.replace(u.split("/")[-1],'')
+  """if ur[-1]=='/':
+   ur=ur[:-1]"""
+  index_link=0
+  h.update({-1:("Source_url",u,urlparse(u).path,[ (x,furl.furl(u).args[x]) for x in furl.furl(u).args])})
+  for a in soup.find_all('a'):
+   u=ur
+   if a.has_attr('href'):
+    try:
+     txt=a.text
+     a=str(a['href'])
+     if ("://" not in a):
+      if a[0]=="/":
+       a=a[1:len(a)]
+      a=u+a
+     if (a not in h.values()) and (u in a):
+      if (a!=u+"/") and (a!=u):
+       h.update({index_link:(txt,a,urlparse(a).path,[ (x,furl.furl(a).args[x]) for x in furl.furl(a).args])})
+       index_link+=1
+    except Exception as e:
+     pass
+ except Exception as ex:
+  pass
+ return h
+
 
 def media(u,timeout=10,html_comments=False,user_agent=None,bypass=False,proxy=None,cookie=None):
  '''
