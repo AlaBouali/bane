@@ -238,7 +238,7 @@ II-Usage (General usage):
 
 </pre></div><h4>File upload:</h4>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.file_upload(link, timeout=15 , cookie=cookie )
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.file_upload(link, timeout=15 )
 
 
 <!--
