@@ -1,5 +1,5 @@
 #coding: utf-8
-import subprocess,os,xtelnet,sys,cgi,re,json,warnings
+import subprocess,os,xtelnet,sys,cgi,re,json
 from colorama import Fore, Back, Style
 if  sys.version_info < (3,0):
  if (sys.platform.lower() == "win32") or( sys.platform.lower() == "win64"):
@@ -252,7 +252,7 @@ def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",replaceb
    return {"Payload":xp,"Page":target_page,"Output":dic}
 
 
-def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype='application/x-www-form-urlencoded'):
+def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype='application/x-www-form-urlencoded',type_injection="code"):
   '''
    this function is for xss test with GET requests.
 
@@ -283,8 +283,12 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype
       if ((c.status_code==200)and (len(c.text)==0)):
         return (True, parsed[0]["action"].replace(parsed[0]["action"].split("/")[-1],based_on[1])+".txt")
      if based_on[0]=="time":
-      if int(time.time()-t)>=based_on[1]-2:
-       return (True,'')
+      if type_injection=="command":
+       if (int(time.time()-t)>=based_on[1]-2) or(c.status_code==504) :
+        return (True,'')
+      else:
+       if (int(time.time()-t)>=based_on[1]) or(c.status_code==504) :
+        return (True,'')
    except Exception as e:
     if "Read timed out" in str(e):
      if based_on[0]=="time":
@@ -297,8 +301,11 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype
       if ((c.status_code==200)and (len(c.text)==0)):
         return (True, parsed[0]["action"].replace(parsed[0]["action"].split("/")[-1],based_on[1])+".txt")
      if based_on[0]=="time":
-      if int(time.time()-t)>=based_on[1]-2:
-       return (True,'')
+      if (int(time.time()-t)>=based_on[1]-2) or(c.status_code==504) :
+        return (True,'')
+      else:
+       if (int(time.time()-t)>=based_on[1]) or(c.status_code==504) :
+        return (True,'')
    except Exception as e:
     if "Read timed out" in str(e):
      if based_on[0]=="time":
@@ -306,7 +313,7 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype
   return (False,'')
 
 
-def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},code_operator_right='',code_operator_left='',command_operator_right='|',command_operator_left='&',sql_operator_right="or '",sql_operator_left="' or ",file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},based_on="time",delay=10,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False,mime_type=None):
+def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},code_operator_right='',code_operator_left='',command_operator_right='|',command_operator_left='&',sql_operator_right="or '",sql_operator_left="' or ",file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},based_on="time",delay=10,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=120,user_agent=None,cookie=None,debug=False,mime_type=None):
   '''
    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -469,7 +476,7 @@ def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},code_
         if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
          i=x["name"]
          parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type)
-         _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug,enctype=l1['enctype'])
+         _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug,enctype=l1['enctype'],type_injection=list(injection.keys())[0])
          if _res[0]==True:
            x="parameter: '"+i+"' => [+] Vulnerable !!"
            vul.append((i,_res[1]))
@@ -809,7 +816,7 @@ def csrf_filter_tokens(u,proxy=None,timeout=10,user_agent=None,cookie=None):
 
 
 
-def csrf_forms(u,proxy=None,timeout=10,user_agent=None,cookie=None,replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',fill_empty=10,referer="http://www.evil.com",leave_empty=[],dont_send=[],mime_type=None):
+def csrf_forms(u,proxy=None,timeout=10,show_warnings=True,user_agent=None,cookie=None,replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',fill_empty=10,referer="http://www.evil.com",leave_empty=[],dont_send=[],mime_type=None):
  vu=[]
  if not cookie or len(cookie.strip())==0:
   raise Exception("This attack requires authentication !! You need to set a Cookie")
@@ -843,14 +850,16 @@ def csrf_forms(u,proxy=None,timeout=10,user_agent=None,cookie=None,replaceble_pa
     vu.append(x)
   elif r.status_code==200 and any(i in r.text for i in l):
    vu.append(x)
-   warnings.warn("HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
+   if show_warnings==True:
+    print("Warning: HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
   elif r.status_code==200 and not any(i in r.text for i in l):
-   warnings.warn("HTTP Status Code: 200 , but we didn't find any of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
+   if show_warnings==True:
+    print("Warning: HTTP Status Code: 200 , but we didn't find any of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
    vu.append(x)
  return vu
 
 
-def file_upload(u,proxy=None,timeout=10,user_agent=None,cookie=None,replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',fill_empty=10,referer=None,leave_empty=[],dont_send=[],mime_type=None):
+def file_upload(u,proxy=None,timeout=10,show_warnings=True,user_agent=None,cookie=None,replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',fill_empty=10,referer=None,leave_empty=[],dont_send=[],mime_type=None):
  l=[]
  x=forms_parser(u,proxy=proxy,timeout=timeout,user_agent=user_agent,cookie=cookie)
  fo=get_upload_form(x)
@@ -879,10 +888,12 @@ def file_upload(u,proxy=None,timeout=10,user_agent=None,cookie=None,replaceble_p
   if all(i in r.text for i in l):
     return True
   elif r.status_code==200 and any(i in r.text for i in l):
-   warnings.warn("HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
+   if show_warnings==True:
+    print("Warning: HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
    return True
   elif r.status_code==200 and not any(i in r.text for i in l):
-   warnings.warn("HTTP Status Code: 200 , but we didn't find our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
+   if show_warnings==True:
+    print("Warning: HTTP Status Code: 200 , but we didn't find our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
    return True
  except:
   pass
