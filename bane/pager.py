@@ -406,7 +406,7 @@ def set_correct_cookies(new_cookies,cookie=None):
  return cookies
 
 
-def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,timeout,auto_fill,file_extension='png',leave_empty=[],dont_send=[]):
+def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,timeout,auto_fill,file_extension='png',leave_empty=[],dont_send=[],mime_type=None):
   cookies=None
   if proxy:
    proxy={'http':'http://'+proxy,'https':'http://'+proxy}
@@ -428,8 +428,8 @@ def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,ti
   h={"User-Agent":user_agent}
   if cookies and len(cookies.strip())>0:
    h.update({"Cookie":cookies})
-  return form_filler(form,parameter,payload,auto_fill=auto_fill,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send),h,proxy,timeout
-  
+  return form_filler(form,parameter,payload,auto_fill=auto_fill,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type),h,proxy,timeout
+
 
 def form_filler(form,param,payload,file_extension='png',auto_fill=10,leave_empty=[],dont_send=[],mime_type=None):
  for x in form["inputs"]:
