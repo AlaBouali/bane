@@ -9,7 +9,7 @@ if os.path.isdir('/home/')==True:
   print('\n\nYou didn\'t the installation run with root privilege !\nYou will have to install the following packages manually: sshpass , nodejs\n\n\n')
  if os.getenv("SUDO_USER"):
   pm="apt"
-  for x in ["apt","yum","pacman","dnf","zypper"]:
+  for x in ["apt","yum","pacman","dnf","zypper","brew"]:
    if subprocess.call(["which", x], stdout=subprocess.PIPE, stderr=subprocess.PIPE)==0:
     pm=x
     break
@@ -52,7 +52,7 @@ if (sys.platform == "win32") or( sys.platform == "win64"):
 
 setuptools.setup(
     name="bane",
-    version="4.7.3",
+    version="4.7.5",
     author="AlaBouali",
     author_email="trap.leader.123@gmail.com",
     description="cyber security library",
