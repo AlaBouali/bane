@@ -68,14 +68,14 @@
 ---------------------------------------------------------------------------------------------------------------------------
 
 This python library is made for educationnal purposes only. Me, as the creator and developper, not responsible for any misuse for this module in any malicious activity. it is made as a tool to understand how hackers can create their tools and performe their attacks. it contains most of known attacks and exploits. it can be used to perform: DoS and DDoS attacks (all known tools are included), information gathering, scrapping proxies, crawling, google dorking, checking for vulnerabilities (sql injection (all types), xss, command execution, php code injection, FI, forced browsing<br>) and even more ;)
+<br>The module can be used as a codebase for more sophisticated and advanced scanning tools to help securing websites !! I hope you guys use it wisely and carefully ;)
 
 ---------------------------------------------------------------------------------------------------------------------------
                                                       SPECIAL SPEECH:
 ---------------------------------------------------------------------------------------------------------------------------
 
-this is dedicated to my mentor: Zachary Barker ( https://www.facebook.com/zachary.barker.5439 ), he was my leader and teacher through my journey in hacking world and groups, we have been through a lot together and were there in many operations when i was an active member in blackhat community but now he is dead in a hit-and-run :( . he was one of my true cyber bros:
-
--S0u1 ( https://www.facebook.com/S0u1.HLoTW ) : programmer and blackhat.
+This is dedicated to my mentor: Zachary Barker ( https://www.facebook.com/zachary.barker.5439 ), he was my leader and teacher through my journey in hacking world and groups as hacktivists, we have been through a lot together and were there in many operations when i was an active member in blackhat community but now he is dead in a hit-and-run :( . he was one of my true cyber bros:
+<br>-S0u1 ( https://www.facebook.com/S0u1.HLoTW ) : programmer and blackhat.
 <br>-Vince ( https://www.facebook.com/vincelinux ) : Linux and hardware expert, social engeneering and programmer.
 <br>-Zachary Barker (lulz zombie) : teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat.
 <br>-Lulztigre (https://www.twitter.com/lulztigre) : Bug Bounty Hunter, Penetration Tester And Python Programmer.
@@ -200,11 +200,11 @@ II-Usage (General usage):
 
 </pre></div><h4>Path traversal:</h4>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.path_traversal_url(link, timeout=15 )
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.path_traversal_urls(link, timeout=15 )
 
 </pre></div><h4>SSRF:</h4>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.ssrf_url(link )
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.ssrf_urls(link )
 
 </pre></div><h4>CRLF header injection:</h4>
 
