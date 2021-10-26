@@ -126,6 +126,12 @@ II-Usage (General usage):
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.xss_forms(link , payload="<script>alert(123)</script>" , timeout=15 )
 </pre></div>
 
+<h4>SSTI:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.ssti_forms(link  , timeout=15 )
+</pre></div>
+
+
 <h4>Remote Command Execution Linux Time-Based:</h4>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce_forms(link ,injection={"command":"linux"},based_on='time', timeout=15 )
