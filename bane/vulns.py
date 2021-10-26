@@ -502,6 +502,127 @@ def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},code_
    
 
 
+
+
+def ssti_submit(parsed,payload,replaceble_parameters,debug=False,enctype='application/x-www-form-urlencoded',eval_value=1111111101):
+  '''
+   this function is for xss test with GET requests.
+  '''
+  d,fi=setup_to_submit(parsed[0])
+  for x in d:
+   for y in replaceble_parameters:
+    if x==y:
+     for z in replaceble_parameters[y]:
+      d[x]=d[x].replace(z[0],z[1])
+  if debug==True:
+   for x in d:
+    print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,d[x]))
+   for x in fi:
+    print("{}{} : {}{}".format(Fore.MAGENTA,x,Fore.WHITE,fi[x]))
+  if 'application/json' in enctype:
+   d=json.dumps(d)
+  if not fi:
+   parsed[1].update({"Content-Type":enctype,"Referer":parsed[0]["action"],"Origin":parsed[0]["action"].split("://")[0]+"://"+parsed[0]["action"].split("://")[1].split("/")[0]})
+  else:
+   parsed[1].update({"Referer":parsed[0]["action"],"Origin":parsed[0]["action"].split("://")[0]+"://"+parsed[0]["action"].split("://")[1].split("/")[0]})
+  if parsed[0]["method"]=="get":
+   try:
+     c=requests.get(parsed[0]["action"], params= d,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
+     if "{}".format(eval_value) in c:
+        return (True, (payload,"{}".format(eval_value)))
+   except Exception as e:
+    pass
+  else:
+   try:
+     c=requests.post(parsed[0]["action"], data= d,files=fi,headers = parsed[1],proxies=parsed[2],timeout=parsed[3], verify=False).text
+     if "{}".format(eval_value) in c:
+        return (True, (payload,"{}".format(eval_value)))
+   except Exception as e:
+    pass
+  return (False,'')
+
+
+def safe_eval(a,o,b):
+ if a.strip().isnumeric()==False or b.strip().isnumeric()==False:
+  raise Exception("For security reasons, ONLY NUMERIC VALUES ARE EVALUATED !!")
+ if o.strip() not in ["+","-","*","/"]:
+  raise Exception("For security reasons, ONLY OPERATORS ALLOWED ARE: + , - , * , /!!")
+ return eval(a+o+b)
+
+
+def ssti_forms(u,payload_index=0,values=(9,123456789),operator="*",save_to_file=None,file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=120,user_agent=None,cookie=None,debug=False,mime_type=None):
+  '''
+   this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
+   usage:
+  
+   >>>import bane
+   >>>bane.rce('http://phptester.net/")
+  '''
+  target_page=u
+  xp=ssti_list[payload_index]%{"payload":"{}{}{}".format(values[0],operator,values[1])}
+  xp_eval=safe_eval("{}".format(values[0]),operator,"{}".format(values[1]))
+  target_page=u
+  form_index=-1
+  if proxy:
+   proxy=proxy
+  if proxies:
+   proxy=random.choice(proxies)
+  dic={}
+  if logs==True:
+   print(Fore.WHITE+"[~]Getting forms..."+Style.RESET_ALL)
+  hu=True
+  fom=forms_parser(u,proxy=proxy,timeout=timeout,cookie=cookie,user_agent=user_agent)
+  if len(fom)==0:
+   if logs==True:
+    print(Fore.RED+"[-]No forms were found!!!"+Style.RESET_ALL)
+   hu=False
+  if hu==True:
+   for l1 in fom:
+    form_index+=1
+    lst={}
+    vul=[]
+    sec=[]
+    hu=True
+    u=l1['action']
+    if logs==True:
+     print(Fore.BLUE+"Form: "+Fore.WHITE+str(form_index)+Fore.BLUE+"\nAction: "+Fore.WHITE+u+Fore.BLUE+"\nMethod: "+Fore.WHITE+l1['method']+Fore.BLUE+"\nPayload: "+Fore.WHITE+xp+Style.RESET_ALL)
+     """if len(inputs(u,proxy=proxy,timeout=timeout,value=True,cookie=cookie,user_agent=user_agent))==0:
+     if logs==True:
+      print(Fore.YELLOW+"[-]No parameters found on that page !! Moving on.."+Style.RESET_ALL)"""
+    if True:
+     extr=[]
+     l=[]
+     for x in l1['inputs']:
+      if x["name"].strip() not in leave_empty and x["name"].strip() not in dont_send:
+       try:
+        if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
+         i=x["name"]
+         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type)
+         _res=ssti_submit(parsed_form,xp,replaceble_parameters,debug=debug,enctype=l1['enctype'],eval_value=xp_eval)
+         if _res[0]==True:
+           x="parameter: '"+i+"' => [+] Vulnerable !!"
+           vul.append((i,_res[1]))
+           colr=Fore.GREEN
+         else:
+          x="parameter: '"+i+"' => [-] Not Vulnerable"
+          sec.append(i)
+          colr=Fore.RED
+         if logs==True:
+          print (colr+x+Style.RESET_ALL)
+       except Exception as ex:
+        break
+    dic.update({form_index:{"Action":u,"Method":l1['method'],"Passed":vul,"Failed":sec}})
+   final={"Payload":xp,"Page":target_page,"Output":dic}
+   if save_to_file:
+    with open(save_to_file.split('.')[0]+".json", 'w') as outfile:
+     json.dump(final, outfile, indent=4)
+    outfile.close() 
+   return final
+   
+
+
+
+
 def valid_parameter(parm):
  try:
   float(parm)

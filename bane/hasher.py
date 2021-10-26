@@ -1,6 +1,6 @@
 import hashlib,base64,sys
 
-def xor_hash(data, key):
+def xor_string(data, key):
  '''
    function to return XOR encrypted string
  '''
@@ -27,7 +27,7 @@ def xor_hash(data, key):
  data=None
  key=None
  return c
-def md5_hash(w,encode=None):
+def md5_string(w,encode=None):
  if w:
   if encode:
    w.encode(encode)
@@ -35,7 +35,7 @@ def md5_hash(w,encode=None):
    function to return md5 encrypted string
   '''
   return hashlib.md5(w).hexdigest()
-def sha1_hash(w,encode=None):
+def sha1_string(w,encode=None):
  if w:
   if encode:
    w.encode(encode)
@@ -43,7 +43,7 @@ def sha1_hash(w,encode=None):
    function to return sha1 encrypted string
   '''
   return hashlib.sha1(w).hexdigest()
-def sha256_hash(w,encode=None):
+def sha256_string(w,encode=None):
  if w:
   if encode:
    w.encode(encode)
@@ -67,7 +67,7 @@ def base64_decode(w,encode=None):
    function to return base64 decoded string
   '''
   return base64.b64decode(w)
-def sha224_hash(w,encode=None):
+def sha224_string(w,encode=None):
  if w:
   if encode:
    w.encode(encode)
@@ -75,7 +75,7 @@ def sha224_hash(w,encode=None):
    function to return sha224 encrypted string
   '''
   return hashlib.sha224(w).hexdigest()
-def sha384_hash(w,encode=None):
+def sha384_string(w,encode=None):
  if w:
   if encode:
    w.encode(encode)
@@ -83,7 +83,7 @@ def sha384_hash(w,encode=None):
    function to return sha384 encrypted string
   '''
   return hashlib.sha384(w).hexdigest()
-def sha512_hash(w,encode=None):
+def sha512_string(w,encode=None):
  if w:
   if encode:
    w.encode(encode)
@@ -106,43 +106,43 @@ def xor_file(f,key):
   with open(f,"rb") as f: 
    w=f.read()
   f.close()
-  return xor_hash(w,key)
+  return xor_string(w,key)
 def md5_file(f):
  if f:
   with open(f,"rb") as f: 
    w=f.read()
   f.close()
-  return md5_hash(w)
+  return md5_string(w)
 def sha1_file(f):
  if f:
   with open(f,"rb") as f: 
    w=f.read()
   f.close()
-  return sha1_hash(w)
+  return sha1_string(w)
 def sha224_file(f):
  if f:
   with open(f,"rb") as f: 
    w=f.read()
   f.close()
-  return sha224_hash(w)
+  return sha224_string(w)
 def sha256_file(f):
  if f:
   with open(f,"rb") as f: 
    w=f.read()
   f.close()
-  return sha256_hash(w)
+  return sha256_string(w)
 def sha384_file(f):
  if f:
   with open(f,"rb") as f: 
    w=f.read()
   f.close()
-  return sha384_hash(w)
+  return sha384_string(w)
 def sha512_file(f):
  if f:
   with open(f,"rb") as f: 
    w=f.read()
   f.close()
-  return sha512_hash(w)
+  return sha512_string(w)
 def base64_encode_file(f):
  if f:
   with open(f,"rb") as f: 
@@ -226,7 +226,7 @@ def dmd5(w,z):
   >>> bane.caesar('ala',5)
   'fqf'
 '''
-def caesar_hash(w,k):
+def caesar_string(w,k):
  if (type(k) is not int) or (k not in range(1,27)):
      raise Exception('the key must be an integer between: 1 and 26')
  if (not w) or (len(w)==0):

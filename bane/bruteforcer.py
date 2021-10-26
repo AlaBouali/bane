@@ -625,15 +625,15 @@ class hydra:
 
 class decrypt:
  __slots__=["stop","finish","result","logs"]
- def __init__(self,u,word_list=[],threads_daemon=True,md5_hash=False,sha1_hash=False,sha256_hash=False,sha224_hash=False,sha384_hash=False,sha512_hash=False,base64_hash=False,caesar_hash=False,logs=False):
+ def __init__(self,u,word_list=[],threads_daemon=True,md5_hash=False,sha1_hash=False,sha256_hash=False,sha224_hash=False,sha384_hash=False,sha512_hash=False,base64_string=False,caesar_hash=False,logs=False):
   self.logs=logs
   self.stop=False
   self.finish=False
   self.result={}
-  t=threading.Thread(target=self.crack,args=(u,word_list,md5_hash,sha1_hash,sha256_hash,sha224_hash,sha384_hash,sha512_hash,base64_hash,caesar_hash,logs,))
+  t=threading.Thread(target=self.crack,args=(u,word_list,md5_hash,sha1_hash,sha256_hash,sha224_hash,sha384_hash,sha512_hash,base64_string,caesar_hash,logs,))
   t.daemon=threads_daemon
   t.start()
- def crack(self,u,word_list,md5_hash,sha1_hash,sha256_hash,sha224_hash,sha384_hash,sha512_hash,base64_hash,caesar_hash,logs):
+ def crack(self,u,word_list,md5_hash,sha1_hash,sha256_hash,sha224_hash,sha384_hash,sha512_hash,base64_string,caesar_hash,logs):
   if self.logs==True:
    print('[!]hash: '+u+'\nbruteforcing has started!!!\n')
   for x in word_list:
@@ -675,8 +675,8 @@ class decrypt:
       print("[+]Hash match found: "+x+" | Type: sha512")
      self.result={u:["sha512:"+x]}
      break
-   if base64_hash==True:
-    if base64decode(x)==u:
+   if base64_string==True:
+    if base64_decode(x)==u:
      if self.logs==True:
       print("[+]Hash match found: "+x+" | Type: base64")
      self.result={u:["base64:"+x]}

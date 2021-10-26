@@ -52,6 +52,12 @@ def read_file(w):
     return l
 
 def create_file(w):
+    direc,file=os.path.split(w)
+    print(direc)
+    try:
+        os.makedirs(direc, exist_ok=True)
+    except:
+        pass
     with open(w ,"a+") as f:
      pass
     f.close()

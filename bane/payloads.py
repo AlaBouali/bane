@@ -74,6 +74,9 @@ Hello
 'txt':'hello'
 
 }
+
+ssti_list=["{{%(payload)s}}","{%(payload)s}","@(%(payload)s)","${%(payload)s}","#{%(payload)s}","${{%(payload)s}}","#{{%(payload)s}}","<%= %(payload)s %>","#{set} ($run= %(payload)s ) $run","#set ($run= %(payload)s ) $run "]
+
 seqnumber=0
 ackseq=0
 urg_ptr=0
