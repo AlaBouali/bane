@@ -67,8 +67,8 @@
                                                       INTRODUCTION:
 ---------------------------------------------------------------------------------------------------------------------------
 
-This python library is made for educationnal purposes only. Me, as the creator and developper, not responsible for any misuse for this module in any malicious activity. it is made as a tool to understand how hackers can create their tools and performe their attacks. it contains most of known attacks and exploits. it can be used to perform: DoS and DDoS attacks (all known tools are included), information gathering, scrapping proxies, crawling, google dorking, checking for vulnerabilities (sql injection (all types), xss, command execution, php code injection, FI, forced browsing<br>) and even more ;)
-<br>The module can be used as a codebase for more sophisticated and advanced scanning tools to help securing websites !! I hope you guys use it wisely and carefully ;)
+This python library is made for educational purposes only. Me, as the creator and developer, not responsible for any misuse for this module in any malicious activity. It is made as a tool to understand how hackers can create their tools and perform their attacks. It contains most of known attacks and exploits. it can be used to perform: DoS and DDoS attacks (all known tools are included), information gathering, scrapping proxies, crawling, google dorking, checking for vulnerabilities (sql injection (all types), xss, command execution, php code injection, FI, forced browsing<br>) and even more ;)
+<br>The module can be used as a "codebase" for more sophisticated and advanced scanning tools to help securing websites !! I hope you guys use it wisely and carefully ;)
 
 ---------------------------------------------------------------------------------------------------------------------------
                                                       SPECIAL SPEECH:
