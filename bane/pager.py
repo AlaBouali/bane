@@ -569,7 +569,7 @@ def crawl(u,timeout=10,html_comments=False,user_agent=None,bypass=False,proxy=No
   pass
  return h
 
-def crawl(u,text,html_comments=False):
+def crawl_text(u,text,html_comments=False):
  '''
    this function is used to crawl any given link and returns a list of all available links on that webpage with ability to bypass anti-crawlers
    

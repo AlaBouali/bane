@@ -648,6 +648,7 @@ def path_traversal_check(u,php_wrapper="file",linux_file=0,null_byte=False,bypas
     heads={'User-Agent': us,'Cookie':cookie}
  else:
    heads={'User-Agent': us}
+ heads.update({"Referer":u,"Origin":u.split("://")[0]+"://"+u.split("://")[1].split("/")[0]})
  if ("=" not in u):
   return (False,'')
  else:
@@ -671,7 +672,7 @@ def path_traversal_check(u,php_wrapper="file",linux_file=0,null_byte=False,bypas
     pass
  return (False,'')
  
-def path_traversal_url(u,null_byte=False,bypass=False,target_os="linux",php_wrapper="file",proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None): 
+def path_traversal_urls(u,null_byte=False,bypass=False,target_os="linux",php_wrapper="file",proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None): 
  res=[]
  if u.split("?")[0][-1]!="/" and '.' not in u.split("?")[0].rsplit('/', 1)[-1]:
     u=u.replace('?','/?')
@@ -726,6 +727,7 @@ def ssrf_check(u,null_byte=False,link="http://www.google.com",signature="<title>
     heads={'User-Agent': us,'Cookie':cookie}
  else:
    heads={'User-Agent': us}
+ heads.update({"Referer":u,"Origin":u.split("://")[0]+"://"+u.split("://")[1].split("/")[0]})
  if ("=" not in u):
   return (False,'')
  if null_byte==True:
@@ -740,7 +742,7 @@ def ssrf_check(u,null_byte=False,link="http://www.google.com",signature="<title>
  return (False,'')
 
 
-def ssrf_url(u,null_byte=False,link="http://www.google.com",timeout=120,signature="<title>Google</title>",proxy=None,proxies=None,user_agent=None,cookie=None): 
+def ssrf_urls(u,null_byte=False,link="http://www.google.com",timeout=120,signature="<title>Google</title>",proxy=None,proxies=None,user_agent=None,cookie=None): 
  res=[]
  if u.split("?")[0][-1]!="/" and '.' not in u.split("?")[0].rsplit('/', 1)[-1]:
     u=u.replace('?','/?')
