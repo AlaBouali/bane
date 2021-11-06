@@ -172,7 +172,7 @@ def setup_ua(usra):
 
 
 
-def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',context_breaker='">',save_to_file=None,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False,mime_type=None):
+def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",predefined_inputs={},replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',context_breaker='">',save_to_file=None,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False,mime_type=None):
   '''
    this function is for xss test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -232,7 +232,7 @@ def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",replaceb
       if x["name"].strip() not in leave_empty and x["name"].strip() not in dont_send:
        if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
         i=x["name"]
-        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type)
+        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs)
         xss_res=xss_submit(parsed_form,xp,replaceble_parameters,debug=debug,enctype=l1['enctype'])
         if xss_res[0]==True:
           x="parameter: '"+i+"' => [+]Payload was found"
@@ -313,7 +313,7 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype
   return (False,'')
 
 
-def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},code_operator_right='',code_operator_left='',command_operator_right='|',command_operator_left='&',sql_operator_right="or '",sql_operator_left="' or ",file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},based_on="time",delay=10,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=120,user_agent=None,cookie=None,debug=False,mime_type=None):
+def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},code_operator_right='',code_operator_left='',command_operator_right='|',command_operator_left='&',sql_operator_right="or '",sql_operator_left="' or ",file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},based_on="time",delay=10,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=120,user_agent=None,cookie=None,debug=False,mime_type=None,predefined_inputs={}):
   '''
    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
@@ -475,7 +475,7 @@ def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},code_
        try:
         if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
          i=x["name"]
-         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type)
+         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs)
          _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug,enctype=l1['enctype'],type_injection=list(injection.keys())[0])
          if _res[0]==True:
            x="parameter: '"+i+"' => [+] Vulnerable !!"
@@ -550,7 +550,7 @@ def safe_eval(a,o,b):
  return eval(a+o+b)
 
 
-def ssti_forms(u,payload_index=0,values=(9,123456789),operator="*",save_to_file=None,file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=120,user_agent=None,cookie=None,debug=False,mime_type=None):
+def ssti_forms(u,payload_index=0,values=(9,123456789),operator="*",save_to_file=None,file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=120,user_agent=None,cookie=None,debug=False,mime_type=None,predefined_inputs={}):
   '''
    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
    usage:
@@ -597,7 +597,7 @@ def ssti_forms(u,payload_index=0,values=(9,123456789),operator="*",save_to_file=
        try:
         if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
          i=x["name"]
-         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type)
+         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs)
          _res=ssti_submit(parsed_form,xp,replaceble_parameters,debug=debug,enctype=l1['enctype'],eval_value=xp_eval)
          if _res[0]==True:
            x="parameter: '"+i+"' => [+] Vulnerable !!"
@@ -939,7 +939,7 @@ def csrf_filter_tokens(u,proxy=None,timeout=10,user_agent=None,cookie=None):
 
 
 
-def csrf_forms(u,proxy=None,timeout=10,show_warnings=True,user_agent=None,cookie=None,replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',fill_empty=10,referer="http://www.evil.com",leave_empty=[],dont_send=[],mime_type=None):
+def csrf_forms(u,proxy=None,timeout=10,show_warnings=True,user_agent=None,cookie=None,replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',fill_empty=10,referer="http://www.evil.com",leave_empty=[],dont_send=[],mime_type=None,predefined_inputs={}):
  vu=[]
  if not cookie or len(cookie.strip())==0:
   raise Exception("This attack requires authentication !! You need to set a Cookie")
@@ -953,7 +953,7 @@ def csrf_forms(u,proxy=None,timeout=10,show_warnings=True,user_agent=None,cookie
  h.update({"cookie":cookie})
  h.update({"Referer":referer,"Origin":referer.split("://")[0]+"://"+referer.split("://")[1].split("/")[0]})
  for x in v:
-  x=form_filler(x,"","",file_extension=file_extension,auto_fill=fill_empty,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type)
+  x=form_filler(x,"","",file_extension=file_extension,auto_fill=fill_empty,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs)
   d,f=setup_to_submit(x)
   for g in d:
    for y in replaceble_parameters:
@@ -982,11 +982,11 @@ def csrf_forms(u,proxy=None,timeout=10,show_warnings=True,user_agent=None,cookie
  return vu
 
 
-def file_upload(u,proxy=None,timeout=10,show_warnings=True,user_agent=None,cookie=None,replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',fill_empty=10,referer=None,leave_empty=[],dont_send=[],mime_type=None):
+def file_upload(u,proxy=None,timeout=10,show_warnings=True,user_agent=None,cookie=None,replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',fill_empty=10,referer=None,leave_empty=[],dont_send=[],mime_type=None,predefined_inputs={}):
  l=[]
  x=forms_parser(u,proxy=proxy,timeout=timeout,user_agent=user_agent,cookie=cookie)
  fo=get_upload_form(x)
- d,f=setup_to_submit(form_filler(fo,'','',mime_type=mime_type))
+ d,f=setup_to_submit(form_filler(fo,'','',mime_type=mime_type,predefined_inputs=predefined_inputs))
  for x in d:
    for y in replaceble_parameters:
     if x==y:
