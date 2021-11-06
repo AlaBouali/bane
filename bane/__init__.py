@@ -11,7 +11,7 @@ facebook:
 
 linkedin:
 
-      https://www.linkedin.com/in/ala-bouali-bb17ab132/
+      https://tn.linkedin.com/in/ala-bouali-a85a49206
 '''
 from bane.payloads import *
 from bane.ddos import *
