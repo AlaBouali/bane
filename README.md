@@ -75,7 +75,7 @@ This python library is made for educational purposes only. Me, as the creator an
 ---------------------------------------------------------------------------------------------------------------------------
 
 This is dedicated to my mentor: Zachary Barker ( https://www.facebook.com/zachary.barker.5439 ), he was my leader and teacher through my journey in hacking world and groups as hacktivists, we have been through a lot together and were there in many operations when i was an active member in blackhat community but now he is dead in a hit-and-run :( . he was one of my true cyber bros:
-<br>-S0u1 ( https://www.facebook.com/S0u1.HLoTW ) : programmer and blackhat.
+<br>-S0u1 ( https://twitter.com/YourAnonS0u1 ) : programmer and blackhat.
 <br>-Vince ( https://www.facebook.com/vincelinux ) : Linux and hardware expert, social engeneering and programmer.
 <br>-Zachary Barker (lulz zombie) : teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat.
 <br>-Lulztigre (https://www.twitter.com/lulztigre) : Bug Bounty Hunter, Penetration Tester And Python Programmer.
