@@ -75,7 +75,7 @@ Hello
 
 }
 
-ssti_list=["{{%(payload)s}}","{%(payload)s}","@(%(payload)s)","${%(payload)s}","#{%(payload)s}","${{%(payload)s}}","#{{%(payload)s}}","<%= %(payload)s %>","#{set} ($run= %(payload)s ) $run","#set ($run= %(payload)s ) $run "]
+ssti_list=["{{payload}}","{payload}","@(payload)","${payload}","#{payload}","${{payload}}","#{{payload}}","<%= payload %>","#{set} ($run= payload ) $run","#set ($run= payload ) $run "]
 
 seqnumber=0
 ackseq=0

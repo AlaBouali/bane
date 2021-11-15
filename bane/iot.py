@@ -20,7 +20,7 @@ def getip():
    if o1 in f:
     if ((o1==192)and(o2!=168)):
      return '{}.{}.{}.{}'.format(o1,o2,random.randint(0,255),random.randint(0,255))
-    if ((o2==172)and((o2<=16)and(o2>=32))):
+    if ((o1==172)and((o2<=16)and(o2>=32))):
      return '{}.{}.{}.{}'.format(o1,o2,random.randint(0,255),random.randint(0,255))
     if((o1==100)and(o2!=64)):
      return '{}.{}.{}.{}'.format(o1,o2,random.randint(0,255),random.randint(0,255))

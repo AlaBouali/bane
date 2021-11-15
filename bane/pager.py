@@ -406,7 +406,7 @@ def set_correct_cookies(new_cookies,cookie=None):
  return cookies
 
 
-def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,timeout,auto_fill,file_extension='png',leave_empty=[],dont_send=[],mime_type=None,predefined_inputs={}):
+def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,timeout,auto_fill,file_extension='png',dont_change={},number=(1,9),leave_empty=[],dont_send=[],mime_type=None,predefined_inputs={}):
   cookies=None
   if proxy:
    proxy={'http':'http://'+proxy,'https':'http://'+proxy}
@@ -428,13 +428,13 @@ def set_up_injection(url,form_index,parameter,payload,cookie,user_agent,proxy,ti
   h={"User-Agent":user_agent}
   if cookies and len(cookies.strip())>0:
    h.update({"Cookie":cookies})
-  return form_filler(form,parameter,payload,auto_fill=auto_fill,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs),h,proxy,timeout
+  return form_filler(form,parameter,payload,auto_fill=auto_fill,number=number,dont_change=dont_change,file_extension=file_extension,leave_empty=leave_empty,dont_send=dont_send,mime_type=mime_type,predefined_inputs=predefined_inputs),h,proxy,timeout
 
 
-def form_filler(form,param,payload,file_extension='png',auto_fill=10,leave_empty=[],dont_send=[],mime_type=None,predefined_inputs={}):
+def form_filler(form,param,payload,file_extension='png',dont_change={},number=(1,9),auto_fill=10,leave_empty=[],dont_send=[],mime_type=None,predefined_inputs={}):
  for x in form["inputs"]:
-  if x["name"].strip() in predefined_inputs:
-   x["value"]=predefined_inputs[x["name"]]
+  if x["name"].strip() in dont_change:
+   x["value"]=dont_change[x["name"]]
   else:
    if x["name"].strip() in dont_send:
     form["inputs"].remove(x)
@@ -449,25 +449,29 @@ def form_filler(form,param,payload,file_extension='png',auto_fill=10,leave_empty
       else:
        x["value"]=payload
      else:
-      if x["value"]=="":
-       if x["type"]=="file":
-        if not mime_type:
-         x["value"]=("bane_test"+str(random.randint(100000,999999))+"."+file_extension,files_upload[file_extension])
-        else:
-         x["value"]=("bane_test"+str(random.randint(100000,999999))+"."+file_extension,files_upload[file_extension],mime_type)
-       else:
-        for i in range(auto_fill):
-         if x["type"]=="number":
-          x["value"]+=str(random.randint(1,9))
+      if x["name"].strip() in predefined_inputs:
+       x["value"]=predefined_inputs[x["name"]]
+      else:
+       if x["value"]=="":
+        if x["type"]=="file":
+         if not mime_type:
+          x["value"]=("bane_test"+str(random.randint(100000,999999))+"."+file_extension,files_upload[file_extension])
          else:
+          x["value"]=("bane_test"+str(random.randint(100000,999999))+"."+file_extension,files_upload[file_extension],mime_type)
+        else:
+         if x["type"]=="number":
+          for i in range(number[0],number[1]):
+           x["value"]+=str(random.randint(1,9))
+         else:
+          for i in range(auto_fill): 
+           x["value"]+=random.choice(lis)
+       if x["type"] in ["select","radio","checkbox"]:
+        if len(x["value"])==0 or x["value"]=="":
+         x["value"]=""
+         for i in range(auto_fill):
           x["value"]+=random.choice(lis)
-      if x["type"] in ["select","radio","checkbox"]:
-       if len(x["value"])==0 or x["value"]=="":
-        x["value"]=""
-        for i in range(auto_fill):
-         x["value"]+=random.choice(lis)
-       else:
-        x["value"]=random.choice(x["value"])
+        else:
+         x["value"]=random.choice(x["value"])
  return form
 
 def get_login_form(url,text):
