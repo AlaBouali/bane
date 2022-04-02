@@ -59,10 +59,11 @@ def read_file(w):
 def create_file(w):
     direc, file = os.path.split(w)
     try:
-        os.makedirs(direc, exist_ok=True)
+        if not os.path.exists(direc):
+            os.makedirs(direc)
     except:
         pass
-    with open(w, "a+") as f:
+    with open(w, "w") as f:
         pass
     f.close()
 
