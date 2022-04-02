@@ -7,13 +7,18 @@ I've edited this script to be compatible with python2.X/3.X
 """
 
 def get_dict(d):
- if  sys.version_info < (3,0):
-  return d.iteritems()
- else:
-  return tuple(d.items())
+    if  sys.version_info < (3,0):
+        return d.iteritems()
+    else:
+        return tuple(d.items())
+
+
 """
 P.S: I didn't write the following class but i find it very useful to encode XSS payloads. I would like to thank the guy who did it, good job bro <3
 """
+
+
+
 class js_fuck(object):
     '''
     Encodes/Decodes Javascript using JSFuck 0.4.0
