@@ -53,7 +53,6 @@ def read_file(w):
 
 def create_file(w):
     direc,file=os.path.split(w)
-    print(direc)
     try:
         os.makedirs(direc, exist_ok=True)
     except:

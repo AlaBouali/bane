@@ -239,7 +239,7 @@ def forms_parser(u,html_comments=False,user_agent=None,timeout=10,bypass=False,p
       if ac[0]=="/":
        ac=ac[1:len(ac)]
       ac=ur+"/"+ac
-   me=f.get('method')
+   me=f.get('method','get')
    if not me :
     me="get"
    if len(me)==0:
@@ -250,7 +250,7 @@ def forms_parser(u,html_comments=False,user_agent=None,timeout=10,bypass=False,p
     if r.has_attr('name'):
      s=r.get("name")
      v=r.renderContents().decode().split('</textarea>')[0]
-     typ=r.get("type","textarea")
+     typ=r.get("type","textarea").lower()
      y={"name":s,"value":v,"type":typ}
      if y not in l:
       l.append(y)
@@ -260,7 +260,7 @@ def forms_parser(u,html_comments=False,user_agent=None,timeout=10,bypass=False,p
     if r.has_attr('name'):
      s=r.get("name")
      v=r.get("value",'')
-     typ=r.get("type","text")
+     typ=r.get("type","text").lower()
      y={"name":s,"value":v,"type":typ}
      if typ.lower()=="hidden":
       h_v.update({s:v})
@@ -276,7 +276,7 @@ def forms_parser(u,html_comments=False,user_agent=None,timeout=10,bypass=False,p
      y={"name":s,"value":opts,"type":"select"}
      if y not in l:
       l.append(y)
-   fom.append({'inputs':sort_inputs(l),'action':ac,'enctype':enc_ty,'method':me,"hidden_values":h_v}) 
+   fom.append({'inputs':sort_inputs(l),'action':ac.lower(),'enctype':enc_ty.lower(),'method':me.lower(),"hidden_values":h_v}) 
    l=[]
  except Exception as e:
   pass
@@ -310,7 +310,7 @@ def forms_parser_text(u,text,html_comments=False):
    except:
     tb_selects=[]
    ac=f.get('action')
-   enc_ty=f.get('enctype','application/x-www-form-urlencoded')
+   enc_ty=f.get('enctype','application/x-www-form-urlencoded').lower()
    if not ac:
     ac=u
    """if len(ac)==0:
@@ -326,7 +326,7 @@ def forms_parser_text(u,text,html_comments=False):
       if ac[0]=="/":
        ac=ac[1:len(ac)]
       ac=ur+"/"+ac
-   me=f.get('method')
+   me=f.get('method','get').lower()
    if not me :
     me="get"
    if len(me)==0:
@@ -337,7 +337,7 @@ def forms_parser_text(u,text,html_comments=False):
     if r.has_attr('name'):
      s=r.get("name")
      v=r.renderContents().decode().split('</textarea>')[0]
-     typ=r.get("type","textarea")
+     typ=r.get("type","textarea").lower()
      y={"name":s,"value":v,"type":typ}
      if y not in l:
       l.append(y)
@@ -347,7 +347,7 @@ def forms_parser_text(u,text,html_comments=False):
     if r.has_attr('name'):
      s=r.get("name")
      v=r.get("value",'')
-     typ=r.get("type","text")
+     typ=r.get("type","text").lower()
      y={"name":s,"value":v,"type":typ}
      if typ.lower()=="hidden":
       h_v.update({s:v})
