@@ -13,8 +13,10 @@ if sys.version_info < (3, 0):
         Style.RESET_ALL = ""
     import urllib, HTMLParser
     from urlparse import urlparse
+    from urllib import unquote as url_decode
 else:
     from urllib.parse import urlparse
+    from urllib.parse import unquote as url_decode
     import urllib.parse as urllib
     import html.parser as HTMLParser
 
@@ -135,6 +137,7 @@ def xss_submit(
     enctype="application/x-www-form-urlencoded",
 ):
     """"""
+    p_o_c=parsed[0].copy()
     d, fi = setup_to_submit(parsed[0])
     for x in d:
         for y in replaceble_parameters:
@@ -167,6 +170,7 @@ def xss_submit(
             print("{}{} : {}{}".format(Fore.MAGENTA, x, Fore.WHITE, fi[x]))
     if "application/json" in enctype:
         d = json.dumps(d)
+    c=''
     if parsed[0]["method"] == "get":
         try:
             c = requests.get(
@@ -178,7 +182,7 @@ def xss_submit(
                 verify=False,
             ).text
             if payload in c:
-                return (True, find_xss_context(c, payload))
+                return (True, {"reflection":find_xss_context(c, payload),"p_o_c":p_o_c},any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
         except Exception as e:
             pass
     else:
@@ -193,10 +197,10 @@ def xss_submit(
                 verify=False,
             ).text
             if payload in c:
-                return (True, find_xss_context(c, payload))
+                return (True, {"reflection":find_xss_context(c, payload),"p_o_c":p_o_c},any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
         except Exception as e:
             pass
-    return (False, "")
+    return (False, "",any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
 
 
 def setup_proxy(pr, prs):
@@ -219,6 +223,8 @@ def xss_forms(
     unicode_random_level=0,
     number=(1, 9),
     js_function="alert",
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
     dont_change={},
     predefined_inputs={},
     replaceble_parameters={"phpvalue": ((".", ""),)},
@@ -253,7 +259,7 @@ def xss_forms(
         proxy = proxy
     if proxies:
         proxy = random.choice(proxies)
-    dic = {}
+    dic = []
     pre_apyload = True
     if payload:
         xp_f = payload
@@ -266,7 +272,7 @@ def xss_forms(
         print(Fore.WHITE + "[~]Getting forms..." + Style.RESET_ALL)
     hu = True
     fom = forms_parser(
-        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent
+        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True
     )
     if len(fom) == 0:
         if logs == True:
@@ -285,6 +291,12 @@ def xss_forms(
             lst = {}
             vul = []
             sec = []
+            sql_e=[]
+            xml_e=[]
+            p_t_e=[]
+            ssrf_e=[]
+            p_t_erros=[]
+            ssrf_errors=[]
             hu = True
             u = l1["action"]
             if logs == True:
@@ -335,6 +347,7 @@ def xss_forms(
                                 "select",
                                 "radio",
                                 "checkbox",
+                                "color"
                             ]
                             and x["name"] not in dont_change
                         ):  # any input type that accept direct input from keyboard
@@ -350,6 +363,8 @@ def xss_forms(
                                 timeout,
                                 fill_empty,
                                 file_extension=file_extension,
+                                email_extension=email_extension,
+                                phone_pattern=phone_pattern,
                                 dont_change=dont_change,
                                 number=number,
                                 leave_empty=leave_empty,
@@ -366,22 +381,36 @@ def xss_forms(
                             )
                             if xss_res[0] == True:
                                 x = "parameter: '" + i + "' => [+]Payload was found"
-                                vul.append((i, xss_res[1]))
+                                vul.append({'parameter':i, 'context': xss_res[1]})
                                 colr = Fore.GREEN
                             else:
                                 x = "parameter: '" + i + "' => [-]Payload was not found"
-                                sec.append(i)
+                                #sec.append(i)
                                 colr = Fore.RED
+                            if xss_res[2] == True:
+                                x+=Fore.YELLOW+"\n[i] SQL Error detected"
+                                sql_e.append({'parameter':i, 'p_o_c': xss_res[-1]})
+                            if xss_res[3] == True:
+                                x+=Fore.YELLOW+"\n[i] XML parsing Error detected (potential XML injection)"
+                                xml_e.append({'parameter':i, 'p_o_c': xss_res[-1]})
+                            if xss_res[4] == True:
+                                x+=Fore.YELLOW+"\n[i] Fetching URL Error detected (potential SSRF)"
+                                ssrf_e.append({'parameter':i, 'p_o_c': xss_res[-1]})
+                            if xss_res[5] == True:
+                                x+=Fore.YELLOW+"\n[i] Reading file Error detected (potential path traversal)"
+                                p_t_e.append({'parameter':i, 'p_o_c': xss_res[-1]})
                             if logs == True:
                                 print(colr + x + Style.RESET_ALL)
-            dic.update(
+            dic.append(
                 {
-                    form_index: {
-                        "Form": u,
-                        "Method": l1["method"],
-                        "Passed": vul,
-                        "Failed": sec,
-                    }
+                    "form": u,
+                    "method": l1["method"],
+                    "vulnerable": vul,
+                    #"safe": sec,
+                    "sql_errors":sql_e,
+                    "xml_parsing_errors":xml_e,
+                    "fetching_url_errors":ssrf_e,
+                    "reading_file_errors":p_t_e
                 }
             )
         if save_to_file:
@@ -392,7 +421,425 @@ def xss_forms(
                     indent=4,
                 )
             outfile.close()
-        return {"Payload": xp, "Page": target_page, "Output": dic}
+        return {"payload": xp, "page": target_page, "result": dic}
+
+
+
+
+def xss(
+    u,
+    max_pages=5,
+    pages=[],
+    payload=None,
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
+    unicode_random_level=0,
+    number=(1, 9),
+    js_function="alert",
+    dont_change={},
+    predefined_inputs={},
+    replaceble_parameters={"phpvalue": ((".", ""),)},
+    file_extension="png",
+    context_breaker='">',
+    save_to_file=None,
+    logs=True,
+    fill_empty=10,
+    leave_empty=[],
+    dont_send=["btnClear"],
+    proxy=None,
+    proxies=None,
+    timeout=10,
+    user_agent=None,
+    cookie=None,
+    debug=False,
+    mime_type=None,
+):
+    l=[]
+    if pages==[]:
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+    for x in pages:
+        if logs==True:
+            print('\n\nPage: {}\n'.format(x))
+        l.append(xss_forms(x,
+                           payload=None,
+                            unicode_random_level=unicode_random_level,
+                            number=number,
+                            js_function=js_function,
+                            dont_change=dont_change,
+                            email_extension=email_extension,
+                            phone_pattern=phone_pattern,
+                            predefined_inputs=predefined_inputs,
+                            replaceble_parameters=replaceble_parameters,
+                            file_extension=file_extension,
+                            context_breaker=context_breaker,
+                            save_to_file=save_to_file,
+                            logs=logs,
+                            fill_empty=fill_empty,
+                            leave_empty=leave_empty,
+                            dont_send=dont_send,
+                            proxy=proxy,
+                            proxies=proxies,
+                            timeout=timeout,
+                            user_agent=user_agent,
+                            cookie=cookie,
+                            debug=debug,
+                            mime_type=mime_type))
+    f=[]
+    for x in l:
+        if x !=None:
+            n=x.copy()
+            n['result']=[]
+            for i in x['result']:
+                if len(i['vulnerable']) > 0 or len(i['sql_errors']) > 0 or len(i['xml_parsing_errors'])>0 or len(i['fetching_url_errors'])>0 or len(i['reading_file_errors']) > 0:
+                    n['result'].append(i)
+            if n['result']!=[]:
+                f.append(n)
+    return f
+
+
+def is_valid_open_redirect(req,payload):
+    return url_decode(payload)==req.headers['location']
+
+
+
+def open_redirect_submit(
+    parsed,
+    payload,
+    replaceble_parameters,
+    debug=False,
+    enctype="application/x-www-form-urlencoded",
+):
+    """"""
+    p_o_c=parsed[0].copy()
+    d, fi = setup_to_submit(parsed[0])
+    for x in d:
+        for y in replaceble_parameters:
+            if x == y:
+                for z in replaceble_parameters[y]:
+                    d[x] = d[x].replace(z[0], z[1])
+    if not fi:
+        parsed[1].update(
+            {
+                "Content-Type": enctype,
+                "Referer": parsed[0]["action"],
+                "Origin": parsed[0]["action"].split("://")[0]
+                + "://"
+                + parsed[0]["action"].split("://")[1].split("/")[0],
+            }
+        )
+    else:
+        parsed[1].update(
+            {
+                "Referer": parsed[0]["action"],
+                "Origin": parsed[0]["action"].split("://")[0]
+                + "://"
+                + parsed[0]["action"].split("://")[1].split("/")[0],
+            }
+        )
+    if debug == True:
+        for x in d:
+            print("{}{} : {}{}".format(Fore.MAGENTA, x, Fore.WHITE, d[x]))
+        for x in fi:
+            print("{}{} : {}{}".format(Fore.MAGENTA, x, Fore.WHITE, fi[x]))
+    if "application/json" in enctype:
+        d = json.dumps(d)
+    c=''
+    if parsed[0]["method"] == "get":
+        try:
+            c = requests.get(
+                parsed[0]["action"],
+                params=d,
+                headers=parsed[1],
+                proxies=parsed[2],
+                timeout=parsed[3],
+                verify=False,
+                allow_redirects=False
+            )
+            if is_valid_open_redirect(c,payload):
+                return (True, {"p_o_c":p_o_c},any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
+        except Exception as e:
+            pass
+    else:
+        try:
+            c = requests.post(
+                parsed[0]["action"],
+                data=d,
+                files=fi,
+                headers=parsed[1],
+                proxies=parsed[2],
+                timeout=parsed[3],
+                verify=False,
+                allow_redirects=False
+            )
+            if is_valid_open_redirect(c,payload)==True:
+                return (True, {"p_o_c":p_o_c},any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
+        except Exception as e:
+            pass
+    return (False, "",any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
+
+
+
+def open_redirect_forms(
+    u,
+    payload='http://www.google.com',
+    number=(1, 9),
+    dont_change={},
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
+    predefined_inputs={},
+    replaceble_parameters={"phpvalue": ((".", ""),)},
+    file_extension="png",
+    save_to_file=None,
+    logs=True,
+    fill_empty=10,
+    leave_empty=[],
+    dont_send=["btnClear"],
+    proxy=None,
+    proxies=None,
+    timeout=10,
+    user_agent=None,
+    cookie=None,
+    debug=False,
+    mime_type=None,
+):
+    """
+    this function is for xss test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
+
+    usage:
+
+    >>>import bane
+    >>>bane.xss_forms('http://www.example.com/")
+
+    >>>bane.xss_forms('http://www.example.com/',payload="<script>alert(123);</script>")
+
+    """
+    target_page = u
+    if proxy:
+        proxy = proxy
+    if proxies:
+        proxy = random.choice(proxies)
+    dic = []
+    pre_apyload = True
+    if logs == True:
+        print(Fore.WHITE + "[~]Getting forms..." + Style.RESET_ALL)
+    hu = True
+    fom = forms_parser(
+        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True
+    )
+    if len(fom) == 0:
+        if logs == True:
+            print(Fore.RED + "[-]No forms were found!!!" + Style.RESET_ALL)
+        hu = False
+    if hu == True:
+        form_index = -1
+        for l1 in fom:
+            form_index += 1
+            xp=payload
+            lst = {}
+            vul = []
+            sec = []
+            sql_e=[]
+            xml_e=[]
+            p_t_e=[]
+            ssrf_e=[]
+            p_t_erros=[]
+            ssrf_errors=[]
+            hu = True
+            u = l1["action"]
+            if logs == True:
+                print(
+                    Fore.BLUE
+                    + "Form: "
+                    + Fore.WHITE
+                    + str(form_index)
+                    + Fore.BLUE
+                    + "\nAction: "
+                    + Fore.WHITE
+                    + u
+                    + Fore.BLUE
+                    + "\nMethod: "
+                    + Fore.WHITE
+                    + l1["method"]
+                    + Fore.BLUE
+                    + "\nPayload: "
+                    + Fore.WHITE
+                    + xp
+                    + Style.RESET_ALL
+                )
+            """if len(inputs(u,proxy=proxy,timeout=timeout,value=True,cookie=cookie,user_agent=user_agent))==0:
+     hu=False
+     if logs==True:
+      print(Fore.YELLOW+"[-]No parameters found on that page !! Moving on.."+Style.RESET_ALL)"""
+            if True:
+                extr = []
+                l = []
+                for x in l1["inputs"]:
+                    if (
+                        x["name"].strip() not in leave_empty
+                        and x["name"].strip() not in dont_send
+                    ):
+                        if (
+                            x["type"]
+                            in [
+                                "hidden",
+                                "file",
+                                "text",
+                                "textarea",
+                                "email",
+                                "tel",
+                                "search",
+                                "url",
+                                "password",
+                                "number",
+                                "select",
+                                "radio",
+                                "checkbox",
+                                "color"
+                            ]
+                            and x["name"] not in dont_change
+                        ):  # any input type that accept direct input from keyboard
+                            i = x["name"]
+                            parsed_form = set_up_injection(
+                                target_page,
+                                form_index,
+                                i,
+                                xp,
+                                cookie,
+                                setup_ua(user_agent),
+                                setup_proxy(proxy, proxies),
+                                timeout,
+                                fill_empty,
+                                file_extension=file_extension,
+                                dont_change=dont_change,
+                                email_extension=email_extension,
+                                phone_pattern=phone_pattern,
+                                number=number,
+                                leave_empty=leave_empty,
+                                dont_send=dont_send,
+                                mime_type=mime_type,
+                                predefined_inputs=predefined_inputs,
+                            )
+                            xss_res = open_redirect_submit(
+                                parsed_form,
+                                xp,
+                                replaceble_parameters,
+                                debug=debug,
+                                enctype=l1["enctype"],
+                            )
+                            if xss_res[0] == True:
+                                x = "parameter: '" + i + "' => [+]Open redirect detected"
+                                vul.append({'parameter':i, 'context':xss_res[1]})
+                                colr = Fore.GREEN
+                            else:
+                                x = "parameter: '" + i + "' => [-]Failed"
+                                #sec.append(i)
+                                colr = Fore.RED
+                            if xss_res[2] == True:
+                                x+=Fore.YELLOW+"\n[i] SQL Error detected"
+                                sql_e.append({'parameter':i, 'p_o_c': xss_res[-1]})
+                            if xss_res[3]==True:
+                                x+=Fore.YELLOW+"\n[i] XML parsing Error detected"
+                                xml_e.append({'parameter':i, 'p_o_c': xss_res[-1]})
+                            if xss_res[4] == True:
+                                x+=Fore.YELLOW+"\n[i] Fetching URL Error detected (potential SSRF)"
+                                ssrf_e.append({'parameter':i, 'p_o_c': xss_res[-1]})
+                            if xss_res[5] == True:
+                                x+=Fore.YELLOW+"\n[i] Reading file Error detected (potential path traversal)"
+                                p_t_e.append({'parameter':i, 'p_o_c': xss_res[-1]})
+                            if logs == True:
+                                print(colr + x + Style.RESET_ALL)
+            dic.append(
+                {
+                    "form": u,
+                    "method": l1["method"],
+                    "vulnerable": vul,
+                    #"safe": sec,
+                    "sql_errors":sql_e,
+                    "xml_parsing_errors":xml_e,
+                    "fetching_url_errors":ssrf_e,
+                    "reading_file_errors":p_t_e
+                }
+            )
+        if save_to_file:
+            with open(save_to_file.split(".")[0] + ".json", "w") as outfile:
+                json.dump(
+                    {"payload": xp, "page": target_page, "result": dic},
+                    outfile,
+                    indent=4,
+                )
+            outfile.close()
+        return {"payload": xp, "page": target_page, "result": dic}
+
+
+
+
+def open_redirect(
+    u,
+    max_pages=5,
+    pages=[],
+    payload='http://www.google.com',
+    number=(1, 9),
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
+    js_function="alert",
+    dont_change={},
+    predefined_inputs={},
+    replaceble_parameters={"phpvalue": ((".", ""),)},
+    file_extension="png",
+    context_breaker='">',
+    save_to_file=None,
+    logs=True,
+    fill_empty=10,
+    leave_empty=[],
+    dont_send=["btnClear"],
+    proxy=None,
+    proxies=None,
+    timeout=10,
+    user_agent=None,
+    cookie=None,
+    debug=False,
+    mime_type=None,
+):
+    l=[]
+    if pages==[]:
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+    for x in pages:
+        if logs==True:
+            print('\n\nPage: {}\n'.format(x))
+        l.append(open_redirect_forms(x,
+                           payload=payload,
+                            number=number,
+                            dont_change=dont_change,
+                            predefined_inputs=predefined_inputs,
+                            replaceble_parameters=replaceble_parameters,
+                            file_extension=file_extension,
+                            save_to_file=save_to_file,
+                            email_extension=email_extension,
+                            phone_pattern=phone_pattern,
+                            logs=logs,
+                            fill_empty=fill_empty,
+                            leave_empty=leave_empty,
+                            dont_send=dont_send,
+                            proxy=proxy,
+                            proxies=proxies,
+                            timeout=timeout,
+                            user_agent=user_agent,
+                            cookie=cookie,
+                            debug=debug,
+                            mime_type=mime_type))
+    f=[]
+    for x in l:
+        if x !=None:
+            n=x.copy()
+            n['result']=[]
+            for i in x['result']:
+                if len(i['vulnerable']) > 0 or len(i['sql_errors']) > 0 or len(i['xml_parsing_errors'])>0 or len(i['fetching_url_errors'])>0 or len(i['reading_file_errors']) > 0:
+                    n['result'].append(i)
+            if n['result']!=[]:
+                f.append(n)
+    return f
+
+
 
 
 def rce_submit(
@@ -405,6 +852,7 @@ def rce_submit(
     type_injection="code",
 ):
     """"""
+    p_o_c=parsed[0].copy()
     d, fi = setup_to_submit(parsed[0])
     for x in d:
         for y in replaceble_parameters:
@@ -438,6 +886,7 @@ def rce_submit(
                 + parsed[0]["action"].split("://")[1].split("/")[0],
             }
         )
+    c=''
     if parsed[0]["method"] == "get":
         try:
             c = requests.get(
@@ -447,7 +896,7 @@ def rce_submit(
                 proxies=parsed[2],
                 timeout=parsed[3],
                 verify=False,
-            ).text
+            )
             if based_on[0] == "file":
                 c = requests.get(
                     parsed[0]["action"].replace(
@@ -462,24 +911,27 @@ def rce_submit(
                 if (c.status_code == 200) and (len(c.text) == 0):
                     return (
                         True,
-                        parsed[0]["action"].replace(
+                        {"reflection":parsed[0]["action"].replace(
                             parsed[0]["action"].split("/")[-1], based_on[1]
                         )
-                        + ".txt",
+                        + ".txt","p_o_c":p_o_c},
+                        any(s in c.text for s in sql_errors),
+                        any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c
                     )
             if based_on[0] == "time":
                 if type_injection == "command":
                     if (int(time.time() - t) >= based_on[1] - 2) or (
                         c.status_code == 504
                     ):
-                        return (True, "")
+                        return (True, {"p_o_c":p_o_c},any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
                 else:
                     if (int(time.time() - t) >= based_on[1]) or (c.status_code == 504):
-                        return (True, "")
+                        return (True, {"p_o_c":p_o_c},any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
         except Exception as e:
+            #print(str(e))
             if "Read timed out" in str(e):
-                if based_on[0] == "time":
-                    return (True, "")
+                #if based_on[0] == "time":
+                    return (True, {"p_o_c":p_o_c},False,False,False,False)
     else:
         try:
             c = requests.post(
@@ -490,7 +942,7 @@ def rce_submit(
                 proxies=parsed[2],
                 timeout=parsed[3],
                 verify=False,
-            ).text
+            )
             if based_on[0] == "file":
                 c = requests.get(
                     parsed[0]["action"].replace(
@@ -505,22 +957,25 @@ def rce_submit(
                 if (c.status_code == 200) and (len(c.text) == 0):
                     return (
                         True,
-                        parsed[0]["action"].replace(
+                        {"reflection":parsed[0]["action"].replace(
                             parsed[0]["action"].split("/")[-1], based_on[1]
                         )
-                        + ".txt",
+                        + ".txt","p_o_c":p_o_c},
+                        any(s in c.text for s in sql_errors),
+                        any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c
                     )
             if based_on[0] == "time":
                 if (int(time.time() - t) >= based_on[1] - 2) or (c.status_code == 504):
-                    return (True, "")
+                    return (True, {"p_o_c":p_o_c},any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
                 else:
                     if (int(time.time() - t) >= based_on[1]) or (c.status_code == 504):
-                        return (True, "")
+                        return (True, {"p_o_c":p_o_c},any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
         except Exception as e:
+            #print(str(e))
             if "Read timed out" in str(e):
-                if based_on[0] == "time":
-                    return (True, "")
-    return (False, "")
+                #if based_on[0] == "time":
+                    return (True, {"p_o_c":p_o_c},any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
+    return (False, "",any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
 
 
 def rce_forms(
@@ -529,8 +984,10 @@ def rce_forms(
     save_to_file=None,
     dont_change={},
     number=(1, 9),
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
     injection={"code": "php"},
-    code_operator_right="",
+    code_operator_right="; ",
     code_operator_left="",
     command_operator_right="|",
     command_operator_left="&",
@@ -647,12 +1104,12 @@ def rce_forms(
         proxy = proxy
     if proxies:
         proxy = random.choice(proxies)
-    dic = {}
+    dic = []
     if logs == True:
         print(Fore.WHITE + "[~]Getting forms..." + Style.RESET_ALL)
     hu = True
     fom = forms_parser(
-        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent
+        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True
     )
     if len(fom) == 0:
         if logs == True:
@@ -662,6 +1119,12 @@ def rce_forms(
         for l1 in fom:
             form_index += 1
             lst = {}
+            sql_e=[]
+            xml_e=[]
+            p_t_e=[]
+            ssrf_e=[]
+            p_t_erros=[]
+            ssrf_errors=[]
             vul = []
             sec = []
             hu = True
@@ -716,6 +1179,7 @@ def rce_forms(
                                     "select",
                                     "radio",
                                     "checkbox",
+                                    "color"
                                 ]
                                 and x["name"] not in dont_change
                             ):  # any input type that accept direct input from keyboard
@@ -732,6 +1196,8 @@ def rce_forms(
                                     fill_empty,
                                     file_extension=file_extension,
                                     number=number,
+                                    email_extension=email_extension,
+                                    phone_pattern=phone_pattern,
                                     leave_empty=leave_empty,
                                     dont_send=dont_send,
                                     mime_type=mime_type,
@@ -749,49 +1215,147 @@ def rce_forms(
                                 )
                                 if _res[0] == True:
                                     x = "parameter: '" + i + "' => [+] Vulnerable !!"
-                                    vul.append((i, _res[1]))
+                                    vul.append({'parameter':i, 'context': _res[1]})
                                     colr = Fore.GREEN
                                 else:
                                     x = "parameter: '" + i + "' => [-] Not Vulnerable"
-                                    sec.append(i)
+                                    #sec.append(i)
                                     colr = Fore.RED
+                                if _res[2] == True:
+                                    x+=Fore.YELLOW+"\n[i] SQL Error detected"
+                                    sql_e.append({'parameter':i, 'p_o_c': _res[-1]})
+                                if _res[3]==True:
+                                    x+=Fore.YELLOW+"\n[i] XML parsing Error detected"
+                                    xml_e.append({'parameter':i, 'p_o_c': _res[-1]})
+                                if _res[4] == True:
+                                    x+=Fore.YELLOW+"\n[i] Fetching URL Error detected (potential SSRF)"
+                                    ssrf_e.append({'parameter':i, 'p_o_c': _res[-1]})
+                                if _res[5] == True:
+                                    x+=Fore.YELLOW+"\n[i] Reading file Error detected (potential path traversal)"
+                                    p_t_e.append({'parameter':i, 'p_o_c': _res[-1]})
                                 if logs == True:
                                     print(colr + x + Style.RESET_ALL)
                         except Exception as ex:
-                            break
-            dic.update(
+                            pass#raise(ex)
+            dic.append(
                 {
-                    form_index: {
-                        "Action": u,
-                        "Method": l1["method"],
-                        "Passed": vul,
-                        "Failed": sec,
-                    }
+                    "action": u,
+                    "method": l1["method"],
+                    "vulnerable": vul,
+                    #"safe": sec,
+                    "sql_errors":sql_e,
+                    "xml_parsing_errors":xml_e,
+                    "fetching_url_errors":ssrf_e,
+                    "reading_file_errors":p_t_e
                 }
             )
         if based_on_o == "time":
             final = {
-                "Payload": xp.replace(
+                "payload": xp.replace(
                     " {} ".format(int(delay) + 2), " {} ".format(int(delay))
                 ),
-                "Based on": based_on_o,
-                "Injection": injection,
-                "Page": target_page,
-                "Output": dic,
+                "based_on": based_on_o,
+                "injection": injection,
+                "page": target_page,
+                "result": dic,
             }
         else:
             final = {
-                "Payload": xp,
-                "Based on": based_on_o,
-                "Injection": injection,
-                "Page": target_page,
-                "Output": dic,
+                "payload": xp,
+                "based_on": based_on_o,
+                "injection": injection,
+                "page": target_page,
+                "result": dic,
             }
         if save_to_file:
             with open(save_to_file.split(".")[0] + ".json", "w") as outfile:
                 json.dump(final, outfile, indent=4)
             outfile.close()
         return final
+
+
+
+def rce(
+    u,
+    max_pages=5,
+    pages=[],
+    payload_index=0,
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
+    save_to_file=None,
+    dont_change={},
+    number=(1, 9),
+    injection={"code": "php"},
+    code_operator_right="; ",
+    code_operator_left="",
+    command_operator_right="|",
+    command_operator_left="&",
+    sql_operator_right="or '",
+    sql_operator_left="' or ",
+    file_extension="png",
+    replaceble_parameters={"phpvalue": ((".", ""),)},
+    based_on="time",
+    delay=10,
+    logs=True,
+    fill_empty=10,
+    leave_empty=[],
+    dont_send=["btnClear"],
+    proxy=None,
+    proxies=None,
+    timeout=120,
+    user_agent=None,
+    cookie=None,
+    debug=False,
+    mime_type=None,
+    predefined_inputs={},
+):
+    l=[]
+    if pages==[]:
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+    for x in pages:
+        if logs==True:
+            print('\n\nPage: {}\n'.format(x))
+        l.append(rce_forms(x,
+                            payload_index=payload_index,
+                            save_to_file=save_to_file,
+                            dont_change=dont_change,
+                            number=number,
+                            email_extension=email_extension,
+                            phone_pattern=phone_pattern,
+                            injection=injection,
+                            code_operator_right=code_operator_right,
+                            code_operator_left=code_operator_left,
+                            command_operator_right=command_operator_right,
+                            command_operator_left=command_operator_left,
+                            sql_operator_right=sql_operator_right,
+                            sql_operator_left=sql_operator_left,
+                            file_extension=file_extension,
+                            replaceble_parameters=replaceble_parameters,
+                            based_on=based_on,
+                            delay=delay,
+                            logs=logs,
+                            fill_empty=fill_empty,
+                            leave_empty=leave_empty,
+                            dont_send=dont_send,
+                            proxy=proxy,
+                            proxies=proxies,
+                            timeout=timeout,
+                            user_agent=user_agent,
+                            cookie=cookie,
+                            debug=debug,
+                            mime_type=mime_type,
+                            predefined_inputs=predefined_inputs))
+    f=[]
+    for x in l:
+        if x !=None:
+            n=x.copy()
+            n['result']=[]
+            for i in x['result']:
+                if len(i['vulnerable']) > 0 or len(i['sql_errors']) > 0 or len(i['xml_parsing_errors'])>0 or len(i['fetching_url_errors'])>0 or len(i['reading_file_errors']) > 0:
+                    n['result'].append(i)
+            if n['result']!=[]:
+                f.append(n)
+    return f
 
 
 
@@ -805,6 +1369,7 @@ def ssti_submit(
     eval_value=1111111101,
 ):
     """"""
+    p_o_c=parsed[0].copy()
     d, fi = setup_to_submit(parsed[0])
     for x in d:
         for y in replaceble_parameters:
@@ -837,6 +1402,7 @@ def ssti_submit(
                 + parsed[0]["action"].split("://")[1].split("/")[0],
             }
         )
+    c=''
     if parsed[0]["method"] == "get":
         try:
             c = requests.get(
@@ -848,7 +1414,7 @@ def ssti_submit(
                 verify=False,
             ).text
             if "{}".format(eval_value) in c:
-                return (True, (payload, "{}".format(eval_value)))
+                return (True, {"p_o_c":p_o_c,"payload":payload, "result":"{}".format(eval_value)},any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
         except Exception as e:
             pass
     else:
@@ -863,10 +1429,10 @@ def ssti_submit(
                 verify=False,
             ).text
             if "{}".format(eval_value) in c:
-                return (True, (payload, "{}".format(eval_value)))
+                return (True, {"p_o_c":p_o_c,"payload":payload, "result":"{}".format(eval_value)},any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
         except Exception as e:
             pass
-    return (False, "")
+    return (False, "",any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
 
 
 def safe_eval(a, o, b):
@@ -883,6 +1449,8 @@ def ssti_forms(
     u,
     payload_index=0,
     values=(9, 123456789),
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
     dont_change={},
     number=(1, 9),
     payload_keyword="payload",
@@ -921,12 +1489,12 @@ def ssti_forms(
         proxy = proxy
     if proxies:
         proxy = random.choice(proxies)
-    dic = {}
+    dic = []
     if logs == True:
         print(Fore.WHITE + "[~]Getting forms..." + Style.RESET_ALL)
     hu = True
     fom = forms_parser(
-        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent
+        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True
     )
     if len(fom) == 0:
         if logs == True:
@@ -938,6 +1506,10 @@ def ssti_forms(
             lst = {}
             vul = []
             sec = []
+            sql_e=[]
+            xml_e=[]
+            p_t_e=[]
+            ssrf_e=[]
             hu = True
             u = l1["action"]
             if logs == True:
@@ -988,6 +1560,7 @@ def ssti_forms(
                                     "select",
                                     "radio",
                                     "checkbox",
+                                    "color"
                                 ]
                                 and x["name"] not in dont_change
                             ):  # any input type that accept direct input from keyboard
@@ -1004,6 +1577,8 @@ def ssti_forms(
                                     fill_empty,
                                     file_extension=file_extension,
                                     number=number,
+                                    email_extension=email_extension,
+                                    phone_pattern=phone_pattern,
                                     leave_empty=leave_empty,
                                     dont_send=dont_send,
                                     mime_type=mime_type,
@@ -1020,32 +1595,118 @@ def ssti_forms(
                                 )
                                 if _res[0] == True:
                                     x = "parameter: '" + i + "' => [+] Vulnerable !!"
-                                    vul.append((i, _res[1]))
+                                    vul.append({'parameter':i, 'context':_res[1]})
                                     colr = Fore.GREEN
                                 else:
                                     x = "parameter: '" + i + "' => [-] Not Vulnerable"
-                                    sec.append(i)
+                                    #sec.append(i)
                                     colr = Fore.RED
+                                if _res[2] == True:
+                                    x+=Fore.YELLOW+"\n[i] SQL Error detected"
+                                    sql_e.append({'parameter':i, 'p_o_c': _res[-1]})
+                                if _res[3]==True:
+                                    x+=Fore.YELLOW+"\n[i] XML parsing Error detected"
+                                    xml_e.append({'parameter':i, 'p_o_c': _res[-1]})
+                                if _res[4] == True:
+                                    x+=Fore.YELLOW+"\n[i] Fetching URL Error detected (potential SSRF)"
+                                    ssrf_e.append({'parameter':i, 'p_o_c': _res[-1]})
+                                if _res[5] == True:
+                                    x+=Fore.YELLOW+"\n[i] Reading file Error detected (potential path traversal)"
+                                    p_t_e.append({'parameter':i, 'p_o_c': _res[-1]})
                                 if logs == True:
                                     print(colr + x + Style.RESET_ALL)
                         except Exception as ex:
                             break
-            dic.update(
+            dic.append(
                 {
-                    form_index: {
-                        "Action": u,
-                        "Method": l1["method"],
-                        "Passed": vul,
-                        "Failed": sec,
-                    }
+                    "action": u,
+                    "method": l1["method"],
+                    "vulnerable": vul,
+                    #"safe": sec,
+                    "sql_errors":sql_e,
+                    "xml_parsing_errors":xml_e,
+                    "fetching_url_errors":ssrf_e,
+                    "reading_file_errors":p_t_e
                 }
             )
-        final = {"Payload": xp, "Page": target_page, "Output": dic}
+        final = {"payload": xp, "page": target_page, "result": dic}
         if save_to_file:
             with open(save_to_file.split(".")[0] + ".json", "w") as outfile:
                 json.dump(final, outfile, indent=4)
             outfile.close()
         return final
+
+def ssti(
+    u,
+    max_pages=5,
+    pages=[],
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
+    payload_index=0,
+    values=(9, 123456789),
+    dont_change={},
+    number=(1, 9),
+    payload_keyword="payload",
+    operator="*",
+    save_to_file=None,
+    file_extension="png",
+    replaceble_parameters={"phpvalue": ((".", ""),)},
+    logs=True,
+    fill_empty=10,
+    leave_empty=[],
+    dont_send=["btnClear"],
+    proxy=None,
+    proxies=None,
+    timeout=120,
+    user_agent=None,
+    cookie=None,
+    debug=False,
+    mime_type=None,
+    predefined_inputs={},
+):
+    l=[]
+    if pages==[]:
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+    for x in pages:
+        if logs==True:
+            print('\n\nPage: {}\n'.format(x))
+        l.append(ssti_forms(x,
+                            payload_index=payload_index,
+                            values=values,
+                            email_extension=email_extension,
+                            phone_pattern=phone_pattern,
+                            dont_change=dont_change,
+                            number=number,
+                            payload_keyword=payload_keyword,
+                            operator=operator,
+                            save_to_file=save_to_file,
+                            file_extension=file_extension,
+                            replaceble_parameters=replaceble_parameters,
+                            logs=logs,
+                            fill_empty=fill_empty,
+                            leave_empty=leave_empty,
+                            dont_send=dont_send,
+                            proxy=proxy,
+                            proxies=proxies,
+                            timeout=timeout,
+                            user_agent=user_agent,
+                            cookie=cookie,
+                            debug=debug,
+                            mime_type=mime_type,
+                            predefined_inputs=predefined_inputs))
+    f=[]
+    for x in l:
+        if x !=None:
+            n=x.copy()
+            n['result']=[]
+            for i in x['result']:
+                if len(i['vulnerable']) > 0 or len(i['sql_errors']) > 0 or len(i['xml_parsing_errors'])>0 or len(i['fetching_url_errors'])>0 or len(i['reading_file_errors']) > 0:
+                    n['result'].append(i)
+            if n['result']!=[]:
+                f.append(n)
+    return f
+
+
 
 
 def valid_parameter(parm):
@@ -1072,11 +1733,8 @@ def path_traversal_check(
     """
     this function is for FI vulnerability test using a link"""
     linux_files = ["{}proc{}version", "{}etc{}passwd"]
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if proxies:
-        prx = random.choice(proxies)
-        proxy = {"http": "http://" + prx, "https": "http://" + prx}
+        proxy = random.choice(proxies)
     if user_agent:
         us = user_agent
     else:
@@ -1231,6 +1889,45 @@ def path_traversal_urls(
                                     res.append(q[1])
     return res
 
+def path_traversal(
+    u,
+    max_pages=5,
+    logs=True,
+    null_byte=False,
+    bypass=False,
+    target_os="linux",
+    php_wrapper=None,#"file",
+    proxy=None,
+    proxies=None,
+    timeout=10,
+    user_agent=None,
+    cookie=None,
+    pages=[]
+):
+    l=[]
+    if pages==[]:
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+    for x in pages:
+        if logs==True:
+            print('\n\nPage: {}\n'.format(x))
+        result=path_traversal_urls(x,
+                            null_byte=null_byte,
+                            bypass=bypass,
+                            target_os=target_os,
+                            php_wrapper=php_wrapper,
+                            proxy=proxy,
+                            proxies=proxies,
+                            timeout=timeout,
+                            user_agent=user_agent,
+                            cookie=cookie)
+        if logs==True:
+            for r in result:
+                print(r)
+        l.append({'page':x,'result':result})
+    return  [x for x in l if x['result']!=[]]
+
+
+
 
 def ssrf_check(
     u,
@@ -1246,11 +1943,8 @@ def ssrf_check(
     """
     this function is for FI vulnerability test using a link"""
     l = link
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if proxies:
-        prx = random.choice(proxies)
-        proxy = {"http": "http://" + prx, "https": "http://" + prx}
+        proxy = random.choice(proxies)
     if user_agent:
         us = user_agent
     else:
@@ -1330,12 +2024,45 @@ def ssrf_urls(
                             res.append(q[1])
     return res
 
+def ssrf(
+    u,
+    max_pages=5,
+    logs=True,
+    null_byte=False,
+    link="http://www.google.com",
+    timeout=120,
+    signature="<title>Google</title>",
+    proxy=None,
+    proxies=None,
+    user_agent=None,
+    cookie=None,
+    pages=[]
+):
+    l=[]
+    if pages==[]:
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+    for x in pages:
+        if logs==True:
+            print('\n\nPage: {}\n'.format(x))
+        result=ssrf_urls(x,
+                        null_byte=null_byte,
+                        link=link,
+                        timeout=timeout,
+                        signature=signature,
+                        proxy=proxy,
+                        proxies=proxies,
+                        user_agent=user_agent,
+                        cookie=cookie)
+        if logs==True:
+            for r in result:
+                print(r)
+        l.append({'page':x,'result':result})
+    return  [x for x in l if x['result']!=[]]
+
 
 
 
 def clickjacking(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=False):
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if user_agent:
         us = user_agent
     else:
@@ -1415,8 +2142,6 @@ def crlf_header_injection(
     cookie=None,
     debug=False,
 ):
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if user_agent:
         us = user_agent
     else:
@@ -1437,6 +2162,7 @@ def crlf_header_injection(
             headers=heads,
             proxy=proxy,
             timeout=timeout,
+            verify=False,
         )
         return "banetest" in r.headers
     except Exception as e:
@@ -1455,8 +2181,6 @@ def crlf_body_injection(
     cookie=None,
     debug=False,
 ):
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if user_agent:
         us = user_agent
     else:
@@ -1481,6 +2205,7 @@ def crlf_body_injection(
             headers=heads,
             proxy=proxy,
             timeout=timeout,
+            verify=False,
         )
         return "banetest;$@*" in r.text
     except Exception as e:
@@ -1489,8 +2214,6 @@ def crlf_body_injection(
 
 
 def hsts(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=False):
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if user_agent:
         us = user_agent
     else:
@@ -1588,8 +2311,6 @@ def csrf_forms(
     v = csrf_filter_tokens(
         u, proxy=proxy, timeout=timeout, user_agent=user_agent, cookie=cookie
     )["Vulnerable"]
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if user_agent:
         h = {"User-Agent": user_agent}
     else:
@@ -1626,18 +2347,18 @@ def csrf_forms(
             l.append(f[j][0])
         if x["method"] == "get":
             r = requests.get(
-                x["action"], params=d, proxies=proxy, timeout=timeout, headers=h
+                x["action"], params=d, proxies=proxy, timeout=timeout, headers=h,verify=False,
             )
         else:
             if "application/json" in x["enctype"]:
                 d = json.dumps(d)
             r = requests.post(
-                x["action"], data=d, files=f, proxies=proxy, timeout=timeout, headers=h
+                x["action"], data=d, files=f, proxies=proxy, timeout=timeout, headers=h,verify=False,
             )
         if all(i in r.text for i in l):
-            vu.append((x, "Found all data"))
+            vu.append({'form':x, 'status':"Found all data"})
         elif r.status_code == 200 and any(i in r.text for i in l):
-            vu.append((x, "Found some data"))
+            vu.append({'form':x, 'status':"Found some data"})
             if show_warnings == True:
                 print(
                     "Warning: HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again"
@@ -1655,15 +2376,157 @@ def csrf_forms(
                 print(
                     "Warning: HTTP Status Code: 200 , but we didn't find any of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again"
                 )
-            vu.append((x, "Found no data but Status Code: 200"))
+            vu.append({'form':x, 'status':"Found no data but Status Code: 200"})
     return vu
 
 
+def csrf(
+    u,
+    max_pages=5,
+    logs=True,
+    proxy=None,
+    timeout=10,
+    show_warnings=True,
+    user_agent=None,
+    cookie=None,
+    replaceble_parameters={"phpvalue": ((".", ""),)},
+    file_extension="png",
+    fill_empty=10,
+    referer="http://www.evil.com",
+    leave_empty=[],
+    dont_send=[],
+    mime_type=None,
+    predefined_inputs={},
+    pages=[]
+):
+    l=[]
+    if pages==[]:
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+    for x in pages:
+        if logs==True:
+            print('\n\nPage: {}\n'.format(x))
+        result=csrf_forms(x,
+                        proxy=proxy,
+                        timeout=timeout,
+                        show_warnings=show_warnings,
+                        user_agent=user_agent,
+                        cookie=cookie,
+                        replaceble_parameters=replaceble_parameters,
+                        file_extension=file_extension,
+                        fill_empty=fill_empty,
+                        referer=referer,
+                        leave_empty=leave_empty,
+                        dont_send=dont_send,
+                        mime_type=mime_type,
+                        predefined_inputs=predefined_inputs)
+        if logs==True:
+            for r in result:
+                print(r)
+        l.append({'page':x,'result':result})
+    return  [x for x in l if x['result']!=[]]
+
+
+
+
+def file_upload_forms(
+    u,
+    proxy=None,
+    timeout=10,
+    show_warnings=True,
+    user_agent=None,
+    cookie=None,
+    replaceble_parameters={"phpvalue": ((".", ""),)},
+    file_extension="png",
+    fill_empty=10,
+    dont_change=[],
+    referer=None,
+    leave_empty=[],
+    dont_send=[],
+    mime_type=None,
+    predefined_inputs={},
+):
+    l = []
+    result=[]
+    x = forms_parser(
+        u, proxy=proxy, timeout=timeout, user_agent=user_agent, cookie=cookie
+    )
+    fos = get_upload_form(x)
+    for fo in fos:
+        d, f = setup_to_submit(
+            form_filler(
+                fo,
+                "",
+                "",
+                mime_type=mime_type,
+                file_extension=file_extension,
+                predefined_inputs=predefined_inputs,
+                leave_empty=leave_empty,
+                dont_change=dont_change,
+                dont_send=dont_send
+            )
+        )
+        for x in d:
+            for y in replaceble_parameters:
+                if x == y:
+                    for z in replaceble_parameters[y]:
+                        d[x] = d[x].replace(z[0], z[1])
+        if not referer or len(referer) == 0:
+            referer = u
+        for j in f:
+            l.append(f[j][0])
+        if user_agent:
+            h = {"User-Agent": user_agent}
+        else:
+            h = {"User-Agent": random.choice(ua)}
+        if "application/json" in fo["enctype"]:
+            d = json.dumps(d)
+        h.update({"cookie": cookie})
+        h.update(
+            {
+                "Referer": referer,
+                "Origin": referer.split("://")[0]
+                + "://"
+                + referer.split("://")[1].split("/")[0],
+            }
+        )
+        try:
+            r = requests.post(
+                fo["action"], data=d, files=f, proxies=proxy, timeout=timeout, headers=h,verify=False,
+            )
+            if (
+                r.status_code == 200
+                and not any(i in r.text for i in l)
+                and any(
+                    i in r.text.lower() for i in ["only accept", "invalid","not valid","not a valid", "unacceptable","not allowed","not accepted","not acceptable"]
+                )
+            ):
+                pass#result.append({"form":fo,"vulnerable": False, 'status':"Unacceptable file extension"})
+            elif all(i in r.text for i in l):
+                result.append({"form":fo,"vulnerable":True, 'status':"Found all data"})
+            elif r.status_code == 200 and any(i in r.text for i in l):
+                if show_warnings == True:
+                    print(
+                        "Warning: HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again"
+                    )
+                result.append({"form":fo,"vulnerable":True, 'status':"HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again"
+                    })
+            elif r.status_code == 200 and not any(i in r.text for i in l):
+                if show_warnings == True:
+                    print(
+                        "Warning: HTTP Status Code: 200 , but we didn't find our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again"
+                    )
+                result.append({"form":fo,"vulnerable": True, 'status':"HTTP Status Code: 200 , but we didn't find our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again"})
+        except Exception as ex:
+            #raise(ex)
+            pass#result.append({"form":fo,"vulnerable": False, 'status':"Found no data and Status Code NOT: 200"})
+    return result
 
 
 
 def file_upload(
     u,
+    max_pages=5,
+    logs=True,
     proxy=None,
     timeout=10,
     show_warnings=True,
@@ -1677,78 +2540,35 @@ def file_upload(
     dont_send=[],
     mime_type=None,
     predefined_inputs={},
+    pages=[]
 ):
-    l = []
-    x = forms_parser(
-        u, proxy=proxy, timeout=timeout, user_agent=user_agent, cookie=cookie
-    )
-    fo = get_upload_form(x)
-    d, f = setup_to_submit(
-        form_filler(
-            fo,
-            "",
-            "",
-            mime_type=mime_type,
-            file_extension=file_extension,
-            predefined_inputs=predefined_inputs,
-        )
-    )
-    for x in d:
-        for y in replaceble_parameters:
-            if x == y:
-                for z in replaceble_parameters[y]:
-                    d[x] = d[x].replace(z[0], z[1])
-    if not referer or len(referer) == 0:
-        referer = u
-    for j in f:
-        l.append(f[j][0])
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
-    if user_agent:
-        h = {"User-Agent": user_agent}
-    else:
-        h = {"User-Agent": random.choice(ua)}
-    if "application/json" in fo["enctype"]:
-        d = json.dumps(d)
-    h.update({"cookie": cookie})
-    h.update(
-        {
-            "Referer": referer,
-            "Origin": referer.split("://")[0]
-            + "://"
-            + referer.split("://")[1].split("/")[0],
-        }
-    )
-    try:
-        r = requests.post(
-            fo["action"], data=d, files=f, proxies=proxy, timeout=timeout, headers=h
-        )
-        if all(i in r.text for i in l):
-            return True, "Found all data"
-        elif r.status_code == 200 and any(i in r.text for i in l):
-            if show_warnings == True:
-                print(
-                    "Warning: HTTP Status Code: 200 , but we didn't find some of our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again"
-                )
-            return True, "Missing some data"
-        elif (
-            r.status_code == 200
-            and not any(i in r.text for i in l)
-            and any(
-                i in r.text.lower() for i in ["only accept", "invalid", "unacceptable"]
-            )
-        ):
-            return False, "Unacceptable file extension"
-        elif r.status_code == 200 and not any(i in r.text for i in l):
-            if show_warnings == True:
-                print(
-                    "Warning: HTTP Status Code: 200 , but we didn't find our submitted data, so it's probably vulnerable but they are saved somewhere else..\nPlease check manually by visiting the form again"
-                )
-            return True, "Missing all data but Status Code: 200"
-    except:
-        pass
-    return False, "Found no data and Status Code NOT: 200"
-
+    l=[]
+    if pages==[]:
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+    for x in pages:
+        if logs==True:
+            print('\n\nPage: {}\n'.format(x))
+        result=file_upload_forms(x,
+                                proxy=proxy,
+                                timeout=timeout,
+                                show_warnings=show_warnings,
+                                user_agent=user_agent,
+                                cookie=cookie,
+                                replaceble_parameters=replaceble_parameters,
+                                file_extension=file_extension,
+                                fill_empty=fill_empty,
+                                referer=referer,
+                                leave_empty=leave_empty,
+                                dont_send=dont_send,
+                                mime_type=mime_type,
+                                predefined_inputs=predefined_inputs)
+        #result={'vulnerable':result[0],'status':result[1]}
+        if logs==True:
+            for r in result:
+                print(r)
+        if result!=[]:
+            l.append({'page':x,'result':result})
+    return  l#[x for x in l if x['result']['vulnerable']!=False]
 
 
 
@@ -1764,8 +2584,6 @@ def cors_reflection(
 ):
     a = None
     b = None
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if user_agent:
         us = user_agent
     else:
@@ -1809,8 +2627,6 @@ def cors_reflection(
 def cors_wildcard(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=False):
     a = None
     b = None
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if user_agent:
         us = user_agent
     else:
@@ -1854,8 +2670,6 @@ def cors_wildcard(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug
 def cors_null(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=False):
     a = None
     b = None
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if user_agent:
         us = user_agent
     else:
@@ -1906,7 +2720,7 @@ def proxies_select(proxy, proxies):
     return None
 
 
-def cors_misconfigurations(
+def cors_misconfigurations_urls(
     u,
     origin="www.evil-domain.com",
     origin_reflection=True,
@@ -1934,11 +2748,11 @@ def cors_misconfigurations(
             debug=debug,
         )
         if tes1[0] == True:
-            res.update({"cors_reflection": tes1[1]})
+            res.update({"cors_reflection": tes1[1],'vulnerable':True})
             if logs == True:
                 print("[+] Vulnerable !!")
         else:
-            res.update({"cors_reflection": tes1[1]})
+            res.update({"cors_reflection": tes1[1],'vulnerable':False})
             if logs == True:
                 print("[-] Not vulnerable")
     if wildcard_origin == True:
@@ -1953,11 +2767,11 @@ def cors_misconfigurations(
             debug=debug,
         )
         if tes2[0] == True:
-            res.update({"wildcard_origin": tes2[1]})
+            res.update({"wildcard_origin": tes2[1],'vulnerable':True})
             if logs == True:
                 print("[+] Vulnerable !!")
         else:
-            res.update({"wildcard_origin": tes2[1]})
+            res.update({"wildcard_origin": tes2[1],'vulnerable':False})
             if logs == True:
                 print("[-] Not vulnerable")
     if origin_reflection == True:
@@ -1972,14 +2786,57 @@ def cors_misconfigurations(
             debug=debug,
         )
         if tes3[0] == True:
-            res.update({"null_origin": tes3[1]})
+            res.update({"null_origin": tes3[1],'vulnerable':True})
             if logs == True:
                 print("[+] Vulnerable !!")
         else:
-            res.update({"null_origin": tes3[1]})
+            res.update({"null_origin": tes3[1],'vulnerable':False})
             if logs == True:
                 print("[-] Not vulnerable")
     return res
+
+
+
+def cors_misconfigurations(
+    urls,
+    origin="www.evil-domain.com",
+    origin_reflection=True,
+    wildcard_origin=True,
+    null_origin=True,
+    proxy=None,
+    proxies=None,
+    timeout=10,
+    user_agent=None,
+    cookie=None,
+    logs=True,
+    debug=False,
+):
+    l=[]
+    for x in urls:
+        if logs==True:
+            print('\n\nPage: {}\n'.format(x))
+        result=cors_misconfigurations_urls(x,
+                                            origin=origin,
+                                            origin_reflection=origin_reflection,
+                                            wildcard_origin=wildcard_origin,
+                                            null_origin=null_origin,
+                                            proxy=proxy,
+                                            proxies=proxies,
+                                            timeout=timeout,
+                                            user_agent=user_agent,
+                                            cookie=cookie,
+                                            logs=logs,
+                                            debug=debug,)
+        result={'vulnerable':result[0],'status':result[1]}
+        if logs==True:
+            for r in result:
+                print(r)
+        l.append({'page':x,'result':result})
+    return  [x for x in l if x['result']['vulnerable']!=False]
+
+
+
+
 
 """
 '''
@@ -2246,8 +3103,6 @@ def exposed_env(
             hea = {"User-Agent": us, "Cookie": cookie}
         else:
             hea = {"User-Agent": us}
-        if proxy:
-            proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
         try:
             if urlparse(u).path == "/":
                 u += path + ".env"
@@ -2307,8 +3162,6 @@ def vulners_search(
         hea = {"User-Agent": us, "Cookie": cookie}
     else:
         hea = {"User-Agent": us}
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     try:
         ver = ""
         if version:
@@ -2340,22 +3193,21 @@ def vulners_search(
             with open(file_name.split(".")[0] + ".json", "w") as outfile:
                 json.dump(c, outfile, indent=4)
             outfile.close()
-            l = {}
+            l = []
             m = c["data"]["search"]
             i = 0
             for x in m:
-                l.update(
-                    {
-                        x["_source"]["description"].encode("utf-8", "ignore"): x[
+                #print(x)
+                l.append(
+                     x[
                             "_source"
-                        ]["cvss"]
-                    }
+                        ]
                 )
                 i += 1
             return l
     except:
         pass
-    return {}
+    return []
 
 
 def shodan_report(ip, api_key, file_name="shodan_report"):
@@ -2378,8 +3230,6 @@ def phpunit_exploit(
     timeout=10,
     proxy=None,
 ):
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if u[len(u) - 1] == "/":
         u = u[0 : len(u) - 1]
     if user_agent:

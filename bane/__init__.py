@@ -3,15 +3,15 @@
 
 email:
 
-      trap.leader.123@gmail.com
+      ala.bouali.1997@gmail.com
 
 facebook:
 
-      https://www.facebook.com/ala.chamtouri.73
+      https://www.facebook.com/ala.bouali.99
 
 linkedin:
 
-      https://tn.linkedin.com/in/ala-bouali-a85a49206
+      https://tn.linkedin.com/in/ala-bouali
 '''
 from bane.payloads import *
 from bane.ddos import *
@@ -26,5 +26,4 @@ from bane.wp import *
 from bane.proxer import *
 from bane.amplifier import *
 from bane.updating import *
-from bane.wp_scanning import *
 from bane.swtch import *

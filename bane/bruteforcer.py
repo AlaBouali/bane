@@ -68,10 +68,10 @@ class http_auth_bruteforce:
             hed.update({"Cookie": cookie})
         prox = None
         if proxy:
-            prox = {"http": "http://" + proxy, "https": "http://" + proxy}
+            prox = proxy#{"http": "http://" + proxy, "https": "http://" + proxy}
         if proxies:
             prox = random.choice(proxies)
-            prox = {"http": "http://" + prox, "https": "http://" + prox}
+            #prox = {"http": "http://" + prox, "https": "http://" + prox}
         try:
             if self.logs == True:
                 print("[*]Checking Authentication Type:")
@@ -114,11 +114,8 @@ class http_auth_bruteforce:
                 if self.logs == True:
                     print("[*]Trying: {} {}".format(username, password))
                 prox = None
-                if proxy:
-                    prox = {"http": "http://" + proxy}
                 if proxies:
                     prox = random.choice(proxies)
-                    prox = {"http": "http://" + prox}
                 if user_agent:
                     us = user_agent
                 else:
@@ -166,8 +163,6 @@ def access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     try:
         r = requests.get(
             u,
@@ -190,8 +185,6 @@ class web_login_bruteforce:
 
     def try_combo(self, url, username, password, cookie, user_agent, proxy, timeout):
         prox = None
-        if proxy:
-            proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
         cookies = None
         h = {"User-Agent": user_agent}
         if cookie:
@@ -359,11 +352,6 @@ class filemanager_finder:
             if self.stop == True:
                 self.finish = True
                 break
-            if proxy:
-                proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
-            if proxies:
-                prx = random.choice(proxies)
-                proxy = {"http": "http://" + prx, "https": "http://" + prx}
             if user_agent:
                 us = user_agent
             else:
@@ -510,7 +498,7 @@ class force_browsing:
                 if proxy:
                     proxy = proxy
                 if proxies:
-                    proxyrandom.choice(proxies)
+                    proxy=random.choice(proxies)
                 if user_agent:
                     us = user_agent
                 else:
@@ -619,11 +607,8 @@ class admin_panel_finder:
             if self.stop == True:
                 break
             try:
-                if proxy:
-                    proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
                 if proxies:
-                    prx = random.choice(proxies)
-                    proxy = {"http": "http://" + prx, "https": "http://" + prx}
+                    proxy = random.choice(proxies)
                 if user_agent:
                     us = user_agent
                 else:
@@ -834,6 +819,8 @@ class hydra:
         ttls=False,
         proxy=None,
         proxies=None,
+        user_agent=None,
+        cookie=None
     ):
         """
         this function is similar to hydra tool to bruteforce attacks on different ports.
@@ -858,6 +845,8 @@ class hydra:
                 ttls,
                 proxy,
                 proxies,
+                user_agent,
+                cookie
             ),
         )
         t.daemon = threads_daemon
@@ -877,6 +866,8 @@ class hydra:
         ttls,
         proxy,
         proxies,
+        user_agent,
+        cookie
     ):
         o = ""
         if protocol == "telnet":

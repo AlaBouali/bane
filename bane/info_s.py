@@ -12,9 +12,10 @@ else:
     from kamene.config import conf
 
     conf.ipv6_enabled = False
-    from kamene.all import *
+    from kamene.all import IP,TCP,sr
 if os.path.isdir("/data/data/com.termux/") == False:
     import dns.resolver
+
 
 
 def remove_html_tags(text):
@@ -44,8 +45,6 @@ def info(u, timeout=10, proxy=None, logs=False, returning=True):
     >>>import bane
     >>>domain='www.google.com'
     >>>bane.info(domain)"""
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     try:
         h = ""
         u = "https://check-host.net/ip-info?host=" + u
@@ -106,8 +105,6 @@ def norton_rate(u, timeout=30, proxy=None):
     >>>import bane
     >>>url='http://www.example.com'
     >>>bane.norton_rate(domain)"""
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     try:
         ur = urllib.quote(u, safe="")
         ul = "https://safeweb.norton.com/report/show?url=" + ur
@@ -130,32 +127,18 @@ def norton_rate(u, timeout=30, proxy=None):
         pass
 
 
-def myip(proxy=None, proxy_type=None, timeout=15):
+def myip(proxy=None, timeout=15):
     """
     this function is for getting your ip using: ipinfo.io
     usage:
     >>>import bane
     >>>bane.myip()
     xxx.xx.xxx.xxx"""
-    proxies = {}
-    if proxy:
-        if proxy_type.lower() == "http":
-            proxies = {
-                "http": "http://" + proxy,
-            }
-        if proxy_type.lower() == "socks4":
-            proxies = {
-                "http": "socks4://" + proxy,
-            }
-        if proxy_type.lower() == "socks5":
-            proxies = {
-                "http": "socks5://" + proxy,
-            }
     try:
         return requests.get(
             "http://ipinfo.io/ip",
             headers={"User-Agent": random.choice(ua)},
-            proxies=proxies,
+            proxies=proxy,
             timeout=timeout,
         ).text.strip()
     except:
@@ -189,8 +172,6 @@ def geoip(u, timeout=15, proxy=None):
     this function is for getting: geoip informations
     """
     try:
-        if proxy:
-            proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
         r = requests.get(
             "https://geoip-db.com/jsonp/" + u,
             headers={"User-Agent": random.choice(ua)},
@@ -224,8 +205,6 @@ def http_options(
     if extra_headers:
         heads.update(extra_headers)
     try:
-        if proxy:
-            proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
         s = requests.session()
         a = s.options(u, headers=heads, proxies=proxy, timeout=timeout).headers
     except Exception as ex:
@@ -259,8 +238,7 @@ def headers(
     if extra_headers:
         heads.update(extra_headers)
     try:
-        if proxy:
-            proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
+        #"safe": sec,
         s = requests.session()
         a = s.get(u, headers=heads, proxies=proxy, timeout=timeout).headers
     except Exception as ex:
@@ -280,8 +258,6 @@ def reverse_ip_lookup(u, timeout=10, logs=True, returning=False, proxy=None):
     bane.reverse_ip_lookup('XXX.XXX.XXX.XXX',proxy='IP:PORT')
 
     """
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     try:
         r = requests.get(
             "https://api.hackertarget.com/reverseiplookup/?q=" + u,
@@ -361,67 +337,79 @@ def host_alive(target):
     r = None
     return False
 
+def close_socket(soc):
+    try:
+        soc.close()
+    except:
+        pass
 
 def tcp_scan(ip, port=1, timeout=2, retry=1, check_open=False):
-    syn = IP(dst=ip) / TCP(dport=port, flags="S")
+    s=socket.socket()
+    s.settimeout(timeout)
+    try:
+        connection=s.connect_ex((ip,port))
+        s.close()
+        if connection==0:
+            close_socket(s)
+            return True
+    except:
+        pass
+    close_socket(s)
+    return False
+    """syn = IP(dst=ip) / TCP(dport=port, flags="S")
     ans, unans = sr(syn, timeout=timeout, retry=retry, verbose=0)
     for sent, received in ans:
-        if check_open == True:
-            if received[TCP].flags == "SA":
+            print(port,received[TCP].flags)
+        #if check_open == True:
+            if received[TCP].flags == 18:
                 return True
             else:
                 return False
-        if received[TCP].flags == "RA" or received[TCP].flags == "SA":
-            return True
-    return False
+            '''if received[TCP].flags == "RA" or received[TCP].flags == "SA":
+            return True'''
+    return False"""
 
 
 class port_scan:
-    __slots__ = ["timeout", "por", "result", "target", "retry"]
+    __slots__ = ["result"]
 
-    def scan(self):
-        p = self.por[self.flag2]
+    def scan(self,target,port,check_open,timeout,retry):
         a = tcp_scan(
-            self.target,
-            port=int(p),
-            check_open=True,
-            timeout=self.timeout,
-            retry=self.retry,
+            target,
+            port=int(port),
+            check_open=check_open,
+            timeout=timeout,
+            retry=retry,
         )
         if a == True:
-            self.result.update({p: 1})
+            self.result.update({str(port): "open"})
         else:
-            self.result.update({p: 0})
+            self.result.update({str(port): "closed"})
 
     def __init__(
         self,
         u,
         ports=[21, 22, 23, 25, 43, 53, 80, 443, 2082, 3306],
         threads_daemon=True,
-        timeout=2,
+        timeout=3,
         retry=0,
+        check_open=True,
     ):
-        try:
-            thr = []
-            self.retry = retry
-            self.result = {}
-            self.timeout = timeout
-            self.por = ports
-            self.target = u
-            for x in range(len(self.por)):
-                self.flag2 = x
-                t = threading.Thread(target=self.scan)
+            self.result={}
+        #try:
+            for x in ports:
+                t = threading.Thread(target=self.scan,args=(u,x,check_open,timeout,retry))#,kwargs={"port": self.por[x]})
                 t.daemon = threads_daemon
                 t.start()
-                thr.append(t)
+                #thr.append(t)
                 time.sleep(0.001)
             while len(self.result) != len(ports):
                 time.sleep(0.1)
-        except:
-            pass
-        for x in self.__dict__:
+        #except:
+         #   pass
+            """for x in self.__dict__:
             if x != "result":
-                self.__dict__[x] = None
+                self.__dict__[x] = None"""
 
 
 def subdomains_crt(domain, timeout=120, user_agent=None, proxy=None):
@@ -429,8 +417,6 @@ def subdomains_crt(domain, timeout=120, user_agent=None, proxy=None):
         us = user_agent
     else:
         us = random.choice(ua)
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if "://" in domain:
         domain = domain.split("://")[1].split("/")[0]
     if "www." in domain:
@@ -443,6 +429,7 @@ def subdomains_crt(domain, timeout=120, user_agent=None, proxy=None):
             timeout=timeout,
             verify=False,
         ).json()
+        #print(r)
         a = [x["name_value"].split("\\")[0] for x in r if ("*." not in x["name_value"])]
         l = []
         for x in a:
@@ -451,12 +438,13 @@ def subdomains_crt(domain, timeout=120, user_agent=None, proxy=None):
             else:
                 l.append(x)
         return list(dict.fromkeys(l))
-    except:
+    except Exception as ex:
+        #print(ex)
         return []
 
 
 def subdomains_finder(
-    u, process_check_interval=5, logs=True, requests_timeout=15, https=False
+    u, process_check_interval=5, logs=True, requests_timeout=15, https=False,proxy=None
 ):
     https_flag = 0
     if (https == True) or ("https://" in u):
@@ -477,6 +465,7 @@ def subdomains_finder(
                     "test_host": host,
                 },
                 timeout=requests_timeout,
+                proxies=proxy
             ).text
             if '"isFinished":"no"' not in r:
                 if logs == True:

@@ -1,15 +1,161 @@
-import requests, random, re, time, furl, sys
+import requests, random, re, time, furl, sys, datetime , string
 
 if sys.version_info < (3, 0):
-    from urlparse import urlparse
+    from urlparse import urlparse,urljoin
+    from urllib import unquote as url_decode
 else:
-    from urllib.parse import urlparse
+    from urllib.parse import urlparse,urljoin
+    from urllib.parse import unquote as url_decode
+
+
+
 import urllib3
+
+
+
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import bs4
 from bs4 import BeautifulSoup
 from bane.payloads import *
+
+def generate_random_url():
+    protocols = ["http", "https"]
+    protocol = random.choice(protocols)
+    domain = random.choice(domainl)
+    return "{}://{}/".format(protocol,domain)
+
+
+def generate_random_phone_number(pattern):
+    phone_number = ""
+    for char in pattern:
+        if char == "X":
+            random_digit = str(random.randint(0, 9))
+            phone_number += random_digit
+        else:
+            phone_number += char
+    return phone_number
+
+def generate_random_html_input_color():
+    # Generate random RGB values
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+
+    # Convert RGB to hexadecimal
+    color_hex = "#{:02X}{:02X}{:02X}".format(r, g, b)
+    return color_hex
+
+
+def random_date(start_date, end_date):
+    if start_date==end_date:
+        return start_date
+    start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+    end_date = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+    
+    time_between_dates = end_date - start_date
+    days_between_dates = time_between_dates.days
+    random_number_of_days = random.randrange(days_between_dates)
+    
+    random_date = start_date + datetime.timedelta(days=random_number_of_days)
+    return random_date.strftime("%Y-%m-%d")
+
+
+def spider_url(base_url, include_id=False,max_pages=50,timeout=15,cookie=None,user_agent=None,proxy=None,headers={}):
+    domain=base_url.split('://')[1].split('/')[0]
+    h={}
+    if cookie:
+        h.update({'Cookie':cookie})
+    if user_agent:
+        h.update({'User-Agent':user_agent})
+    else:
+        h.update({'User-Agent':random.choice(ua)})
+    h.update(headers)
+    visited_urls = set()
+    urls_to_visit = [base_url]
+    collected_urls = set()
+    root_urls=[]
+
+    while urls_to_visit and len(collected_urls) < max_pages:
+        url = urls_to_visit.pop(0)
+        try:
+            response = requests.get(url,headers=h,timeout=timeout,proxies=proxy,verify=False)
+            response.raise_for_status()  # Check for any request errors
+
+            # Parse the HTML content
+            soup = BeautifulSoup(response.content, 'html.parser')
+
+            # Extract all links from the page
+            for anchor_tag in soup.find_all('a', href=True):
+                href = anchor_tag['href']
+                absolute_url = urljoin(url, href)
+                try:
+                    this_domain=absolute_url.split('://')[1].split('/')[0]
+                except:
+                    this_domain=''
+
+                if absolute_url not in visited_urls and absolute_url.split('?')[0].split('#')[0] not in root_urls and domain == this_domain:
+                    visited_urls.add(absolute_url)
+                    urls_to_visit.append(absolute_url)
+                    root_urls.append(absolute_url.split('?')[0].split('#')[0])
+            if include_id==True:
+                collected_urls.add({'url':url,'id':anchor_tag.get('id','')})
+            else:
+                collected_urls.add(url)
+            #print(len(collected_urls))
+
+        except requests.exceptions.RequestException as e:
+            print("Error fetching URL: {}".format(e))
+
+    return list(collected_urls)
+
+
+
+def url_to_get_form(u,url_id):
+    #print('&'.join(u.split('?')[1:]).replace('?','&').split('&'))
+    #print(u.split('?')[1].split('&'))
+    inputs=[]
+    for x in '&'.join(u.split('?')[1:]).replace('?','&').split('&'):
+        try:
+            inputs.append({'name':x.split('=')[0],'type':'text','value':x.split('=')[1]})
+        except:
+            inputs.append({'name':x.split('=')[0],'type':'text','value':''})
+    #inputs=[ {'name':x.split('=')[0],'type':'text','value':x.split('=')[1]} for x in u.split('?')[1].split('&')]
+    return {
+                    "inputs": inputs,
+                    "action": u.split('?')[0],
+                    "enctype": 'application/x-www-form-urlencoded',
+                    "method": 'get',
+                    "id":url_id,
+                    "hidden_values": [],
+                    "is_url":True
+                }
+
+
+def get_links_from_page_source(soup,url,url_id):
+    if url.endswith('/')==False:
+        url+='/'
+    domain=url.split('/')[0] if url.startswith('http')==False else url.split('://')[1].split('/')[0]
+    l=soup.find_all('a')
+    links=[{'url':x['href'].replace('&amp;','&'),'id':x.get('id','')} for x in l if x.has_attr('href')]
+    media_tags = soup.find_all(['img', 'audio', 'video', 'source','embed'])
+    links+=[{'url':x['src'].replace('&amp;','&'),'id':x.get('id','') } for x in media_tags if x.has_attr('src')]
+    links.append({'url':url,'id':url_id})
+    #print(links)
+    #links_list=[]
+    root_links=[]
+    forms=[]
+    for l in links:
+        x=l['url']
+        l_id=l['id']
+        if '?' in x and x.split('?')[0] not in root_links:
+            a=urljoin(url, x)
+            #print(a)
+            if a.startswith(url.split(domain)[0]+domain)==True:
+                forms.append(url_to_get_form(a,l_id))
+                root_links.append(x.split('?')[0])
+    return forms
+
 
 
 def remove_html_comments(text):
@@ -51,8 +197,6 @@ def inputs(
         us = user_agent
     else:
         us = random.choice(ua)
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if bypass == True:
         u += "#"
     if cookie:
@@ -121,8 +265,6 @@ def forms(
         us = user_agent
     else:
         us = random.choice(ua)
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if bypass == True:
         u += "#"
     if cookie:
@@ -222,18 +364,19 @@ def forms_parser(
     bypass=False,
     proxy=None,
     cookie=None,
+    include_links=False
 ):
     """
     same as "forms" function but it return detailed information about all forms in a given page
     """
     if urlparse(u).path == "":
         u += "/"
+    domain=u.split('://')[1].split('/')[0]
+    base_url=u.split('://')[0]+domain
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     if bypass == True:
         u += "#"
     if cookie:
@@ -251,6 +394,7 @@ def forms_parser(
         soup = BeautifulSoup(c, "html.parser")
         i = soup.find_all("form")
         for f in i:
+            form_id=f.get('id','')
             try:
                 tb_inputs = f.find_all("table")[0].find_all("input")
             except:
@@ -263,7 +407,7 @@ def forms_parser(
                 tb_selects = f.find_all("table")[0].find_all("select")
             except:
                 tb_selects = []
-            ac = f.get("action")
+            ac = urljoin(u, f.get("action",''))
             enc_ty = f.get("enctype", "application/x-www-form-urlencoded")
             if not ac:
                 ac = u
@@ -286,49 +430,89 @@ def forms_parser(
             if len(me) == 0:
                 me = "get"
             me = me.lower()
+            """radios={}
+            checkxoes={}"""
             p = f.find_all("textarea") + tb_textareas
             for r in p:
+                required=False
+                if 'required' in r.attrs:
+                    required=True
                 if r.has_attr("name"):
                     s = r.get("name")
                     v = r.renderContents().decode().split("</textarea>")[0]
                     typ = r.get("type", "textarea").lower()
-                    y = {"name": s, "value": v, "type": typ}
+                    max_size=r.get('maxlength',10)
+                    if r.get('size',0)!=0:
+                            max_size= r.get('size',10)
+                    y = {"name": s, "value": v, "type": typ,'max':max_size,'min':r.get('minlength',1),'required':required}
                     if y not in l:
                         l.append(y)
             h_v = {}
             p = f.find_all("input") + tb_inputs
             for r in p:
+                required=False
+                if 'required' in r.attrs:
+                    required=True
                 if r.has_attr("name"):
                     s = r.get("name")
                     v = r.get("value", "")
                     typ = r.get("type", "text").lower()
-                    y = {"name": s, "value": v, "type": typ}
+                    y = {"name": s, "value": v, "type": typ,'required':required}
+                    if y['type'] in ['text','password','email','url','tel','search']:
+                        max_size=r.get('maxlength',10)
+                        if r.get('size',0)!=0:
+                            max_size= r.get('size',10)
+                        y.update({'max':int(max_size),'min':int(r.get('minlength',1))})
+                    elif y['type']=='number':
+                        y.update({'max':int(r.get('max',10)),'min':int(r.get('min',1))})
+                    elif y['type']=='date':
+                        y.update({'max':r.get('max',datetime.datetime.today().strftime("%Y-%m-%d")),'min':r.get('min',datetime.datetime.today().strftime("%Y-%m-%d"))})
+                    elif y['type']=='file':
+                        y.update({'accept':[ x.replace('.','').strip() for x in y.get('accept','.png').split(',')]})
+                    """elif y['type']=='radio':
+                        if y['name'] not in radios:
+                            radios[y['name']]=[]
+                        radios[y['name']].append(y)
+                    elif y['type']=='checkbox':
+                        if y['name'] not in checkxoes:
+                            checkxoes[y['name']]=[]
+                        checkxoes[y['name']].append(y)"""
                     if typ.lower() == "hidden":
                         h_v.update({s: v})
-                    if y not in l:
+                    if y not in l :#and y['name'] not in radios and y['name'] not in checkxoes:
                         l.append(y)
             p = f.find_all("select") + tb_selects
             opts = []
             for r in p:
+                required=False
+                if 'required' in r.attrs:
+                    required=True
                 if r.has_attr("name"):
                     s = r.get("name")
                     for x in r.find_all("option"):
                         opts.append(x.text)
-                    y = {"name": s, "value": opts, "type": "select"}
+                    y = {"name": s, "value": opts, "type": "select",'required':required}
                     if y not in l:
                         l.append(y)
+            """for x in radios:
+                l.append({'name':x,'type':'radio','value':[i['value'] for i in radios[x]]})
+            for x in checkxoes:
+                l.append({'name':x,'type':'checkbox','value':[i['value'] for i in checkxoes[x]]})"""
             fom.append(
                 {
+                    'id':form_id,
                     "inputs": sort_inputs(l),
                     "action": ac.lower(),
                     "enctype": enc_ty.lower(),
                     "method": me.lower(),
                     "hidden_values": h_v,
+                    "is_url":False
                 }
             )
             l = []
     except Exception as e:
         pass
+    fom+=get_links_from_page_source(soup,u,'')
     return fom
 
 
@@ -347,6 +531,7 @@ def forms_parser_text(u, text, html_comments=False):
         soup = BeautifulSoup(c, "html.parser")
         i = soup.find_all("form")
         for f in i:
+            form_id=f.get('id','')
             try:
                 tb_inputs = f.find_all("table")[0].find_all("input")
             except:
@@ -359,7 +544,7 @@ def forms_parser_text(u, text, html_comments=False):
                 tb_selects = f.find_all("table")[0].find_all("select")
             except:
                 tb_selects = []
-            ac = f.get("action")
+            ac = urljoin(u, f.get("action",''))
             enc_ty = f.get("enctype", "application/x-www-form-urlencoded").lower()
             if not ac:
                 ac = u
@@ -382,49 +567,89 @@ def forms_parser_text(u, text, html_comments=False):
             if len(me) == 0:
                 me = "get"
             me = me.lower()
+            """radios={}
+            checkxoes={}"""
             p = f.find_all("textarea") + tb_textareas
             for r in p:
+                required=False
+                if 'required' in r.attrs:
+                    required=True
                 if r.has_attr("name"):
                     s = r.get("name")
                     v = r.renderContents().decode().split("</textarea>")[0]
                     typ = r.get("type", "textarea").lower()
-                    y = {"name": s, "value": v, "type": typ}
+                    max_size=r.get('maxlength',10)
+                    if r.get('size',0)!=0:
+                            max_size= r.get('size',10)
+                    y = {"name": s, "value": v, "type": typ,'max':max_size,'min':r.get('minlength',1),'required':required}
                     if y not in l:
                         l.append(y)
             h_v = {}
             p = f.find_all("input") + tb_inputs
             for r in p:
+                required=False
+                if 'required' in r.attrs:
+                    required=True
                 if r.has_attr("name"):
                     s = r.get("name")
                     v = r.get("value", "")
                     typ = r.get("type", "text").lower()
-                    y = {"name": s, "value": v, "type": typ}
+                    y = {"name": s, "value": v, "type": typ,'required':required}
+                    if y['type'] in ['text','password','email','url','tel','search']:
+                        max_size=r.get('maxlength',10)
+                        if r.get('size',0)!=0:
+                            max_size= r.get('size',10)
+                        y.update({'max':int(max_size),'min':int(r.get('minlength',1))})
+                    elif y['type']=='number':
+                        y.update({'max':int(r.get('max',10)),'min':int(r.get('min',1))})
+                    elif y['type']=='date':
+                        y.update({'max':r.get('max',datetime.datetime.today().strftime("%Y-%m-%d")),'min':r.get('min',datetime.datetime.today().strftime("%Y-%m-%d"))})
+                    elif y['type']=='file':
+                        y.update({'accept':[ x.replace('.','').strip() for x in y.get('accept','.png').split(',')]})
+                    """elif y['type']=='radio':
+                        if y['name'] not in radios:
+                            radios[y['name']]=[]
+                        radios[y['name']].append(y)
+                    elif y['type']=='checkbox':
+                        if y['name'] not in checkxoes:
+                            checkxoes[y['name']]=[]
+                        checkxoes[y['name']].append(y)"""
                     if typ.lower() == "hidden":
                         h_v.update({s: v})
-                    if y not in l:
+                    if y not in l :#and y['name'] not in radios and y['name'] not in checkxoes:
                         l.append(y)
             p = f.find_all("select") + tb_selects
             opts = []
             for r in p:
+                required=False
+                if 'required' in r.attrs:
+                    required=True
                 if r.has_attr("name"):
                     s = r.get("name")
                     for x in r.find_all("option"):
                         opts.append(x.text)
-                    y = {"name": s, "value": opts, "type": "select"}
+                    y = {"name": s, "value": opts, "type": "select",'required':required}
                     if y not in l:
                         l.append(y)
+            """for x in radios:
+                l.append({'name':x,'type':'radio','value':[i['value'] for i in radios[x]]})
+            for x in checkxoes:
+                l.append({'name':x,'type':'checkbox','value':[i['value'] for i in checkxoes[x]]})"""
             fom.append(
                 {
+                    'id':form_id,
                     "inputs": sort_inputs(l),
                     "action": ac,
                     "enctype": enc_ty,
                     "method": me,
                     "hidden_values": h_v,
+                    "is_url":False
                 }
             )
             l = []
     except Exception as e:
-        pass
+        pass #raise(e)
+    fom+=get_links_from_page_source(soup,u,'')
     return fom
 
 
@@ -477,6 +702,8 @@ def set_up_injection(
     timeout,
     auto_fill,
     file_extension="png",
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
     dont_change={},
     number=(1, 9),
     leave_empty=[],
@@ -485,8 +712,6 @@ def set_up_injection(
     predefined_inputs={},
 ):
     cookies = None
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     h = {"User-Agent": user_agent}
     if cookie:
         h.update({"Cookie": cookie})
@@ -513,6 +738,8 @@ def set_up_injection(
             auto_fill=auto_fill,
             number=number,
             dont_change=dont_change,
+            email_extension=email_extension,
+            phone_pattern=phone_pattern,
             file_extension=file_extension,
             leave_empty=leave_empty,
             dont_send=dont_send,
@@ -530,6 +757,8 @@ def form_filler(
     param,
     payload,
     file_extension="png",
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
     dont_change={},
     number=(1, 9),
     auto_fill=10,
@@ -547,6 +776,8 @@ def form_filler(
             else:
                 if x["name"].strip() not in leave_empty:
                     if x["name"].strip() == param:
+                        if file_extension==None:
+                            file_extension=random.choice(x["accept"])
                         if x["type"] == "file":
                             if not mime_type:
                                 x["value"] = (
@@ -585,12 +816,26 @@ def form_filler(
                                             mime_type,
                                         )
                                 else:
-                                    if x["type"] == "number":
-                                        for i in range(number[0], number[1]):
-                                            x["value"] += str(random.randint(1, 9))
-                                    else:
-                                        for i in range(auto_fill):
-                                            x["value"] += random.choice(lis)
+                                    #if x['value']=='':
+                                        if x["type"] == "number":
+                                            x["value"] += str(random.randint(int(float(x.get('min',0))), int(float(x.get('max',9)))))
+                                        elif x['type'] in ['text','password','search','textarea']:
+                                            leng=random.randint(int(float(x.get('min',1))), int(float(x.get('max',10)))+1)
+                                            for i in range(leng):
+                                                x["value"] += random.choice(lis)
+                                        elif x['type']=='email':
+                                            leng=random.randint(int(float(x.get('min',1))), int(float(x.get('max',15)))-len(email_extension)+1)
+                                            for i in range(leng):
+                                                x["value"] += random.choice(string.ascii_lowercase)
+                                            x["value"]+=email_extension
+                                        elif x['type']=='tel':
+                                            x["value"]=generate_random_phone_number(phone_pattern)
+                                        elif x['type']=='url':
+                                            x["value"]=generate_random_url()
+                                        elif x['type']=='date':
+                                            x["value"]=random_date(x['min'], x['max'])
+                                        elif x['type']=='color':
+                                            x['value']=generate_random_html_input_color()      
                             if x["type"] in ["select", "radio", "checkbox"]:
                                 if len(x["value"]) == 0 or x["value"] == "":
                                     x["value"] = ""
@@ -598,6 +843,7 @@ def form_filler(
                                         x["value"] += random.choice(lis)
                                 else:
                                     x["value"] = random.choice(x["value"])
+    #print(form)
     return form
 
 
@@ -628,20 +874,26 @@ def set_login_form(url, text, username, password):
 
 
 def get_upload_form(a):
+    l=[]
     for x in a:
         for i in x["inputs"]:
             if i["type"].lower().strip() == "file":
-                return x
-    raise Exception("No file upload form")
+                l.append(x)
+    if l==[]:
+        raise Exception("No file upload form")
+    return l
 
 
 def get_upload_form_text(url, text):
+    l=[]
     a = forms_parser_text(url, text)
     for x in a:
         for i in x["inputs"]:
             if i["type"].lower().strip() == "file":
-                return x
-    raise Exception("No file upload form")
+                l.append(x)
+    if l==[]:
+        raise Exception("No file upload form")
+    return l
 
 
 def crawl(
@@ -677,8 +929,6 @@ def crawl(
         us = user_agent
     else:
         us = random.choice(ua)
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     h = {}
     if bypass == True:
         u += "#"
@@ -761,6 +1011,7 @@ def crawl_text(u, text, html_comments=False):
         u += "/"
     if u.split("?")[0][-1] != "/" and "." not in u.split("?")[0].rsplit("/", 1)[-1]:
         u = u.replace("?", "/?")
+    h={}
     try:
         c = text
         if html_comments == False:
@@ -849,8 +1100,6 @@ def media(
     else:
         hea = {"User-Agent": us}
     h = {}
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     try:
         if bypass == True:
             u += "#"
@@ -915,8 +1164,6 @@ def subdomains_extract(
         us = user_agent
     else:
         us = random.choice(ua)
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     h = {}
     if cookie:
         hea = {"User-Agent": us, "Cookie": cookie}

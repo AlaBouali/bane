@@ -14,7 +14,7 @@ from bane.pager import crawl
 
 
 def clear_file(w):
-    with open(w, "w"):
+    with open(w, "w") as f:
         pass
     f.close()
 
@@ -150,8 +150,6 @@ def webhint_report(ur, proxy=None, timeout=10):
     """
     this function takes any webpage link and returns a report link from webhint.io."""
     u = "https://webhint.io/scanner/"
-    if proxy:
-        proxy = {"http": "http://" + proxy, "https": "http://" + proxy}
     r = ""
     if "://" not in ur:
         return r
