@@ -1,18 +1,20 @@
 #coding: utf-8
-'''
 
-email:
 
-      ala.bouali.1997@gmail.com
+__version__='4.8.7'
 
-facebook:
+__author__="Ala Bouali"
 
-      https://www.facebook.com/ala.bouali.99
+__author_nicknames__=["Merlin", "Chaotic Mind", "Ala", "Mr. Ego", "G0D Ala"]
 
-linkedin:
+__author_email__="ala.bouali.1997@gmail.com"
 
-      https://tn.linkedin.com/in/ala-bouali
-'''
+__author_github__="https://github.com/AlaBouali"
+
+__author_linkedin__="https://tn.linkedin.com/in/ala-bouali"
+
+
+
 from bane.payloads import *
 from bane.ddos import *
 from bane.hasher import *
@@ -27,3 +29,6 @@ from bane.proxer import *
 from bane.amplifier import *
 from bane.updating import *
 from bane.swtch import *
+from bane.drupal import *
+from bane.joomla import *
+from bane.magento import *

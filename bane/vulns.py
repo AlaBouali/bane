@@ -31,7 +31,7 @@ from bane.payloads import *
 from bane.pager import *
 from bane.js_fuck import js_fuck
 from bane.extrafun import write_file, delete_file
-
+from bane.info_s import extract_root_domain
 
 def random_string(size):
     s = ""
@@ -2061,8 +2061,130 @@ def ssrf(
 
 
 
+def ssrf(
+    u,
+    max_pages=5,
+    logs=True,
+    null_byte=False,
+    link="http://www.google.com",
+    timeout=120,
+    signature="<title>Google</title>",
+    proxy=None,
+    proxies=None,
+    user_agent=None,
+    cookie=None,
+    pages=[]
+):
+    l=[]
+    if pages==[]:
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+    for x in pages:
+        if logs==True:
+            print('\n\nPage: {}\n'.format(x))
+        result=ssrf_urls(x,
+                        null_byte=null_byte,
+                        link=link,
+                        timeout=timeout,
+                        signature=signature,
+                        proxy=proxy,
+                        proxies=proxies,
+                        user_agent=user_agent,
+                        cookie=cookie)
+        if logs==True:
+            for r in result:
+                print(r)
+        l.append({'page':x,'result':result})
+    return  [x for x in l if x['result']!=[]]
 
-def clickjacking(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=False):
+
+
+def sniffable_links(u, proxy=None, timeout=10, user_agent=None, cookie=None,content=None,logs=True,request_headers=None):
+    if user_agent:
+        us = user_agent
+    else:
+        us = random.choice(ua)
+    if cookie:
+        heads = {"User-Agent": us, "Cookie": cookie}
+    else:
+        heads = {"User-Agent": us}
+    vul=[]
+    try:
+        if content==None:
+            r=requests.get(u,headers=heads,timeout=timeout,verify=False,proxies=proxy)
+            for x in r.headers:
+                    if x.lower().strip() == "strict-transport-security":
+                        if logs == True:
+                            print("\n[-] Not vulnerable: Strict-Transport-Security is set")
+                        return []
+            soup = BeautifulSoup(r.content, 'html.parser')
+        else:
+            soup = BeautifulSoup(content, 'html.parser')
+            if request_headers!=None:
+                for x in request_headers:
+                    if x.lower().strip() == "strict-transport-security":
+                        if logs == True:
+                            print("\n[-] Not vulnerable: Strict-Transport-Security is set")
+                        return []
+        if u:
+                parsed_url = urlparse(u)
+                if parsed_url.netloc == urlparse(u).netloc:
+                    if parsed_url.scheme != 'https' and parsed_url.geturl().startswith('//')==False:
+                        parsed_url=parsed_url.geturl()
+                        if parsed_url not in vul:
+                            vul.append(parsed_url)
+                            if logs==True:
+                                print('\t[+] Vulnerable : {}'.format(parsed_url))
+        media_elements=soup.find_all(['img', 'audio', 'video', 'source','embed', 'script', 'link', 'a'])
+        for element in media_elements:
+            src_or_href = element.get('src') or element.get('href')
+            if src_or_href:
+                parsed_url = urlparse(urljoin(u,src_or_href))
+                if parsed_url.netloc == urlparse(u).netloc:
+                    if parsed_url.scheme != 'https' and parsed_url.geturl().startswith('//')==False:
+                        parsed_url=parsed_url.geturl()
+                        if parsed_url not in vul:
+                            vul.append(parsed_url)
+                            if logs==True:
+                                print('\t[+] Vulnerable : {}'.format(parsed_url))
+    except Exception as ex:
+        return vul
+    return vul
+    
+
+def interceptable_links(
+    u, 
+    max_pages=5,
+    proxy=None,
+    timeout=10,
+    user_agent=None,
+    cookie=None,
+    content=None,
+    logs=True,
+    pages=[]
+):
+    l=[]
+    if pages==[]:
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+    for x in pages:
+        if logs==True:
+            print('\n\nPage: {}\n'.format(x))
+        result=sniffable_links(x,
+                        proxy=proxy,
+                        timeout=timeout,
+                        user_agent=user_agent, 
+                        cookie=cookie,
+                        content=content,
+                        logs=logs,
+                        )
+        if logs==True:
+            for r in result:
+                print(r)
+        l.append({'page':x,'result':result})
+    return  [x for x in l if x['result']!=[]]
+
+
+
+def page_clickjacking(u, proxy=None, timeout=10, user_agent=None, cookie=None, logs=False,request_headers=None):
     if user_agent:
         us = user_agent
     else:
@@ -2072,21 +2194,22 @@ def clickjacking(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=
     else:
         heads = {"User-Agent": us}
     try:
-        r = requests.get(
-            u, headers=heads, proxies=proxy, timeout=timeout, verify=False
-        ).headers
+        if request_headers==None:
+            r = requests.get(
+                u, headers=heads, proxies=proxy, timeout=timeout, verify=False
+            ).headers
+        else:
+            r=request_headers
         click = True
         for x in r:
-            if (
-                x.lower().strip() == "x-frame-options"
-                or x.lower().strip() == "content-security-policy"
-            ):
+            if x.lower().strip() == "x-frame-options":
                 click = False
-            if debug == True:
+            if logs == True:
                 print(x + " : " + r[x])
     except:
         return False
     return click
+
 
 
 def set_requests(
@@ -2213,7 +2336,10 @@ def crlf_body_injection(
     return False
 
 
-def hsts(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=False):
+def scan_backend_technology(u, proxy=None, timeout=10, user_agent=None, cookie=None, logs=True,request_headers=None):
+    domain=u.split('://')[1].split('/')[0].split(':')[0]
+    root_domain=extract_root_domain(domain)
+    ip=socket.gethostbyname(domain.split(':')[0])
     if user_agent:
         us = user_agent
     else:
@@ -2222,21 +2348,77 @@ def hsts(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=False):
         heads = {"User-Agent": us, "Cookie": cookie}
     else:
         heads = {"User-Agent": us}
-    if "://" in u:
-        u = u.split("://")[1]
     try:
-        r = requests.get(
-            "https://" + u, headers=heads, proxies=proxy, timeout=timeout, verify=False
-        ).headers
-        hs = True
-        for x in r:
-            if x.lower().strip() == "strict-transport-security":
-                hs = False
-            if debug == True:
-                print(x + " : " + r[x])
+        if request_headers==None:
+            r = requests.get(
+                u, headers=heads, proxies=proxy, timeout=timeout, verify=False
+            ).headers
+        else:
+            r=request_headers
+        server=r.get('Server','')
+        try:
+            server_os=[x for x in server.split() if x.startswith('(')==True][0].replace('(','').replace(')','')
+        except:
+            server_os=''
+        backend=r.get('X-Powered-By','')
+        if logs==True:
+            print("Site info:\n\n\tURL: {}\n\tDomain: {}\n\tRoot domain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n".format(u,domain,root_domain,ip,server,server_os,backend))
+        backend_technology_exploits={}
+        if backend!='':
+            bk=[]
+            for back in backend.split():
+                if logs==True:
+                    print('[i] looking for exploits for : {}\n'.format(back))
+                if '/' not in back:
+                    if logs==True:
+                        print('\t[-] unknown version\n')
+                else:
+                    bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1])
+                for x in bk:
+                    for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
+                        try:
+                            del x[i]
+                        except:
+                            pass
+                backend_technology_exploits.update({back:bk})
+                if logs==True:
+                    if len(bk)==0:
+                        print('\t[-] none was found')
+                    else:
+                        for x in bk:
+                            print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
+                            print()
+        server_exploits={}
+        if server!='':
+            for sv in server.split():
+                if sv.startswith('(')==False:
+                    sv_e=[]
+                    if logs==True:
+                        print('[i] looking for exploits for : {}\n'.format(sv))
+                    if '/' in sv:
+                        sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1])
+                    else:
+                        if logs==True:
+                            print('\t[-] unknown version\n')
+                    for x in sv_e:
+                        for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
+                            try:
+                                del x[i]
+                            except:
+                                pass
+                    server_exploits.update({sv:sv_e})
+                    if logs==True:
+                        if len(sv_e)==0:
+                            print('\t[-] none was found')
+                        else:
+                            for x in sv_e:
+                                print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
+                                print()        
     except Exception as e:
-        return False
-    return hs
+        return {}
+    return {'server_exploits':server_exploits,'backend_technology_exploits':backend_technology_exploits}
+
+
 
 
 def csrf_filter_tokens(u, proxy=None, timeout=10, user_agent=None, cookie=None):
@@ -3084,6 +3266,34 @@ def exposed_telnet(u, p=23, timeout=5):
     return False
 
 
+def exposed_git(
+    u,
+    user_agent=None,
+    cookie=None,
+    proxy=None,
+    timeout=15,
+):
+    if u.endswith('/')==True:
+        u+=+'.git'
+    else:
+        u+=+'/.git'
+    if user_agent:
+            us = user_agent
+    else:
+            us = random.choice(ua)
+    if cookie:
+            hea = {"User-Agent": us, "Cookie": cookie}
+    else:
+            hea = {"User-Agent": us}
+    try:
+        r=requests.get(u,timeout=timeout,verify=False,proxies=proxy,headers=hea)
+        if "index of" in r.text.lower() and "/.git" in r.text.lower():
+            return True
+    except:
+        return False
+
+
+
 def exposed_env(
     u,
     user_agent=None,
@@ -3140,6 +3350,7 @@ def exposed_env(
 def vulners_search(
     software,
     file_name="",
+    save_to_file=False,
     max_vulnerabilities=100,
     version="",
     software_type="software",
@@ -3190,9 +3401,10 @@ def vulners_search(
         )
         c = json.loads(r.text)
         if c["result"] == "OK":
-            with open(file_name.split(".")[0] + ".json", "w") as outfile:
-                json.dump(c, outfile, indent=4)
-            outfile.close()
+            if save_to_file==True:
+                with open(file_name.split(".")[0] + ".json", "w") as outfile:
+                    json.dump(c, outfile, indent=4)
+                outfile.close()
             l = []
             m = c["data"]["search"]
             i = 0
@@ -3210,13 +3422,14 @@ def vulners_search(
     return []
 
 
-def shodan_report(ip, api_key, file_name="shodan_report"):
+def shodan_report(ip, api_key, file_name="shodan_report",save_to_file=False):
     u = "https://api.shodan.io/shodan/host/{}?key={}".format(ip, api_key)
     try:
         r = requests.get(u, headers={"User-Agent": random.choice(ua)}).text
-        with open(file_name.split(".")[0] + ".json", "w") as outfile:
-            json.dump(json.loads(r), outfile, indent=4)
-        outfile.close()
+        if save_to_file==True:
+            with open(file_name.split(".")[0] + ".json", "w") as outfile:
+                json.dump(json.loads(r), outfile, indent=4)
+            outfile.close()
         return json.loads(r)
     except:
         return {}
@@ -3253,3 +3466,25 @@ def phpunit_exploit(
     except:
         pass
     return False
+
+
+def springboot_actuator(u,user_agent=None,cookie=None,proxy=None,timeout=None,path='/actuator'):
+    if u[len(u) - 1] == "/":
+        u = u[0 : len(u) - 1]
+    if user_agent:
+        us = user_agent
+    else:
+        us = random.choice(ua)
+    hed = {"User-Agent": us}
+    if cookie:
+        hed.update({"Cookie": cookie})
+    try:
+        return requests.get(
+            u + path,
+            headers=hed,
+            proxies=proxy,
+            timeout=timeout,
+            verify=False,
+        ).json()
+    except:
+        pass

@@ -1,6 +1,7 @@
 import requests, random, json, sys,socket
 import urllib3,time
-from bane.vulns import vulners_search
+from bane.vulns import vulners_search,sniffable_links,page_clickjacking
+from bane.info_s import get_subdomains,extract_root_domain
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 from bane.payloads import ua
@@ -396,7 +397,7 @@ def wp_users_enumeration(
                 l.append({'id':x, 'name':a,'slug':c})
                 if logs == True:
                     print(
-                        "[+] id: {} | name: {} | slug: {}".format(
+                        "\t[+] id: {} | name: {} | slug: {}".format(
                             x,#.encode("utf-8", "replace"), 
                             a,
                             c
@@ -432,6 +433,11 @@ def wp_version(u, timeout=15, user_agent=None, cookie=None, proxy=None):
 
 
 
+def version_string_to_list(version):
+    return [int(x) for x in version.split('.')]
+
+
+
 
 def extract_with_versions(cve_list,software_version):
     results = []
@@ -446,6 +452,8 @@ def extract_with_versions(cve_list,software_version):
                 c=title.split(version)[0].split()
                 if c[-1].strip()=='<':
                     comparison='<'
+                elif c[-1].strip()=='>':
+                    comparison='>'
                 elif c[-1].strip()=='<=':
                     comparison='<='
                 else:
@@ -454,15 +462,20 @@ def extract_with_versions(cve_list,software_version):
                 comparison='=='
         if version=='':
             version=software_version
-        if eval('"{}"{}"{}"'.format(software_version,comparison,version))==True:
-            results.append(cve)
-    
+        if '-' not in version:
+            if eval('{}{}{}'.format(version_string_to_list(software_version),comparison,version_string_to_list(version)))==True:
+                results.append(cve)
+        else:
+            if eval('{}>{} and {}<{}'.format(version_string_to_list(software_version),version_string_to_list(version.split('-')[0].strip()),version_string_to_list(software_version),version_string_to_list(version.split('-')[1].strip())))==True:
+                results.append(cve)
     return results
 
 
 
 
 def fetch_wp_exploits(s,max_tries=3,proxy=None,user_agent=None,timeout=15,cookie=None,sleep_time_min=10,sleep_time_max=20,when_blocked_sleep=30):
+    if s['version'].strip()=='':
+        return []
     if user_agent:
         us = user_agent
     else:
@@ -498,9 +511,10 @@ def fetch_wp_exploits(s,max_tries=3,proxy=None,user_agent=None,timeout=15,cookie
 
 
 
-def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,proxy=None,user_enum_start=1,user_enum_end=20,wpscan_cookie=None,sleep_time_min=10,sleep_time_max=20,when_blocked_sleep=30,logs=True):
-    domain=u.split('://')[1].split('/')[0]
-    ip=socket.gethostbyname(domain)
+def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,proxy=None,user_enum_start=1,user_enum_end=20,wpscan_cookie=None,sleep_time_min=10,sleep_time_max=20,when_blocked_sleep=30,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True):
+    domain=u.split('://')[1].split('/')[0].split(':')[0]
+    root_domain=extract_root_domain(domain)
+    ip=socket.gethostbyname(domain.split(':')[0])
     if u[len(u) - 1] == "/":
         u = u[0 : len(u) - 1]
     if user_agent:
@@ -511,8 +525,12 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
     if cookie:
         hed.update({"Cookie": cookie})
     response = requests.get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
-    server=response.headers.get('Server','Unknown')
-    backend=response.headers.get('X-Powered-By','Unknown')
+    server=response.headers.get('Server','')
+    try:
+        server_os=[x for x in server.split() if x.startswith('(')==True][0].replace('(','').replace(')','')
+    except:
+        server_os=''
+    backend=response.headers.get('X-Powered-By','')
     html_content = response.text
 
     # Parse the HTML content
@@ -523,13 +541,23 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
     plugins = []
     try:
         #print(response.split('<meta name="generator" content="')[1].split('"')[0])
-        wp_version=response.text.split('<meta name="generator" content="')[1].split('"')[0].strip().split(" ")[1]
+        wp_version=response.text.lower().split('<meta name="generator" content="wordpress')[1].split('"')[0].strip()
     except Exception as ex:
-        #print(ex)
+        #raise(ex)
         wp_version=''
     # Extract themes
     if logs==True:
-        print("WordPress site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tBackend technology: {}\n\tWordPress version: {}\n".format(u,domain,ip,server,backend,wp_version))
+        print("WordPress site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tWordPress version: {}\n".format(u,domain,ip,server,server_os,backend,wp_version))
+    clickj=page_clickjacking(u,request_headers=response.headers)
+    if logs==True:
+        print("[i] Looking for subdomains...")
+    subs=get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=proxy,subdomains_only=subdomains_only)
+    if logs==True:
+        print("[i] Cheking if we can sniff some cookies over some links...")
+        print()
+    media_non_ssl=sniffable_links(u,content=response.text,logs=logs,request_headers=response.headers)
+    if logs==True:
+        print()
     theme_links = soup.find_all('link', rel='stylesheet')
     for link in theme_links:
         href = link.get('href')
@@ -565,14 +593,21 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
     json_users=wp_users(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=proxy)
     if logs==True:
         for x in json_users:
-            print('[+] id: {} | name: {} | slug: {}'.format(x['id'],x['name'],x['slug']))
+            print('\t[+] id: {} | name: {} | slug: {}'.format(x['id'],x['name'],x['slug']))
         print()
     if json_users==[]:
         users_json_exposed=False
     can_enumerate_users=True
+    if logs==True:
+        print('[i] Trying enumerating the authors...')
     enumerated_users= wp_users_enumeration(u,logs=logs,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=proxy,start=user_enum_start,end=user_enum_end)
     if enumerated_users==[]:
         can_enumerate_users=False
+    else:
+        if logs==True:
+            print()
+            for x in enumerated_users:
+                print('\t[+] id: {} | name: {} | slug: {}'.format(x['id'],x['name'],x['slug']))
     if logs==True:
         print()
         print('[i] Checking if XMLRPC is enabled from: {}'.format(u+'/xmlrpc.php'))
@@ -583,17 +618,20 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
         if len(xmlrpcs)>0:
             print('[+] enabled')
             if can_b_u==True:
-                print('[+] Vulnerable to users bruteforce')
+                print('\t[+] Vulnerable to users bruteforce')
             if can_pb==True:
-                print('[+] Vulnerable to pingback')
+                print('\t[+] Vulnerable to pingback')
         else:
-            print('[-] disabled')
+            print('\t[-] disabled')
         print()
     wp_vulns=[]
     if wp_version!='':
         if logs==True:
             print('[i] looking for exploits for version: {}\n'.format(wp_version))
-        wp_vulns=vulners_search('wordpress',version=wp_version)
+        wpvulns=vulners_search('wordpress',version=wp_version)
+        for x in wpvulns:
+            if 'wordpress' in x['title'].lower() or 'wordpress' in x['description'].lower():
+                wp_vulns.append(x)
         for x in wp_vulns:
             for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
                 try:
@@ -602,11 +640,62 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
                     pass
         if logs==True:
             if len(wp_vulns)==0:
-                print('[-] none was found')
+                print('\t[-] none was found')
             else:
                 for x in wp_vulns:
-                    print("Title : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
-            print()
+                    print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
+                    print()
+    backend_technology_exploits={}
+    if backend!='':
+        bk=[]
+        for back in backend.split():
+            if logs==True:
+                print('[i] looking for exploits for : {}\n'.format(back))
+            if '/' not in back:
+                if logs==True:
+                    print('\t[-] unknown version\n')
+            else:
+                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1])
+            for x in bk:
+                for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
+                    try:
+                        del x[i]
+                    except:
+                        pass
+            backend_technology_exploits.update({back:bk})
+            if logs==True:
+                if len(bk)==0:
+                    print('\t[-] none was found')
+                else:
+                    for x in bk:
+                        print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
+                        print()
+    server_exploits={}
+    if server!='':
+        for sv in server.split():
+            if sv.startswith('(')==False:
+                sv_e=[]
+                if logs==True:
+                    print('[i] looking for exploits for : {}\n'.format(sv))
+                if '/' in sv:
+                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1])
+                else:
+                    if logs==True:
+                        print('\t[-] unknown version\n')
+                for x in sv_e:
+                    for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
+                        try:
+                            del x[i]
+                        except:
+                            pass
+                server_exploits.update({sv:sv_e})
+                if logs==True:
+                    if len(sv_e)==0:
+                        print('\t[-] none was found')
+                    else:
+                        for x in sv_e:
+                            print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
+                            print()
     if len(themes)>0:
         if logs==True:
             print('[i] looking for exploits for the themes:\n')
@@ -617,7 +706,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
         if logs==True:
             for i in x['exploits']:
                 print("\tTitle: {}\n\tLink: {}".format(i['title'],i['exploit_url']))
-            print()
+                print()
     if len(plugins)>0:
         if logs==True:
             print()
@@ -630,4 +719,4 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
             for i in x['exploits']:
                 print("\tTitle: {}\n\tLink: {}".format(i['title'],i['exploit_url']))
                 print()
-    return {'url':u,'domain':domain,'ip':ip,'Server':server,'backend_technology':backend,'wordpress_version':wp_version,'themes':themes,'plugins':plugins,'users_json_exposed':users_json_exposed,'exopsed_json_users':{'users':json_users,'path':json_path},'can_enumerate_users':can_enumerate_users,'enumerated_users':enumerated_users,'enabled_xmlrpc_methods':xmlrpcs,"xmlrpc_bruteforce_users":can_b_u,"pingback_enabled":can_pb,"exploits":wp_vulns}
+    return {'url':u,'domain':domain,'ip':ip,'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'wordpress_version':wp_version,'sniffable_links':media_non_ssl,'clickjackable':clickj,'themes':themes,'plugins':plugins,'users_json_exposed':users_json_exposed,'exopsed_json_users':{'users':json_users,'path':json_path},'can_enumerate_users':can_enumerate_users,'enumerated_users':enumerated_users,'enabled_xmlrpc_methods':xmlrpcs,"xmlrpc_bruteforce_users":can_b_u,"pingback_enabled":can_pb,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}
