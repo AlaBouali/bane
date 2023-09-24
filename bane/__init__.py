@@ -15,20 +15,20 @@ __author_linkedin__="https://tn.linkedin.com/in/ala-bouali"
 
 
 
-from bane.payloads import *
-from bane.ddos import *
-from bane.hasher import *
-from bane.pager import *
-from bane.info_s import *
-from bane.extrafun import *
-from bane.bruteforcer import *
-from bane.iot import *
-from bane.vulns import *
-from bane.wp import *
-from bane.proxer import *
-from bane.amplifier import *
-from bane.updating import *
-from bane.swtch import *
-from bane.drupal import *
-from bane.joomla import *
-from bane.magento import *
+from bane.common.payloads import *
+from bane.ddos.ddos import *
+from bane.cryptographers.hasher import *
+from bane.utils.pager import *
+from bane.gather_info.info_s import *
+from bane.utils.extrafun import *
+from bane.bruteforce.bruteforcer import *
+from bane.scanners.botnet.iot import *
+from bane.scanners.vulnerabilities.vulns import *
+from bane.scanners.cms.wp import *
+from bane.utils.proxer import *
+from bane.scanners.network_protocols.amplifier import *
+from bane.utils.updating import *
+from bane.utils.swtch import *
+from bane.scanners.cms.drupal import *
+from bane.scanners.cms.joomla import *
+from bane.scanners.cms.magento import *

