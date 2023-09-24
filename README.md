@@ -275,6 +275,15 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 </pre></div><h4>Exposed "/.env" File:</h4>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.exposed_env(link , timeout=15 )
+</pre></div><h4>Exposed "/.git" File:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.exposed_git(link , timeout=15 )
+</pre></div><h4>Sniffable links via network:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.interceptable_links(link , timeout=15 )
+</pre></div><h4>Springboot actuator:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.springboot_actuator(link , timeout=15 )
 
 </pre></div><h4>Vulners API Search for known vulnerabilities on a particular software:</h4>
 
@@ -335,12 +344,35 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.slow_read(IP, p= port , duration= 300 , set_tor=False , threads=500 , timeout=5 )
 </pre></div>
 
-# WordPress testing:
+# Backend technologies scan:
 
-<h4>Full scan:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.scan_backend_technology(link , timeout=15 )
+</pre></div>
+
+
+# CMS testing:
+
+<h4>WordPress scan:</h4>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.get_wp_infos(link , timeout=15 )
 </pre></div>
+<h4>Drupal scan:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.get_drupal_infos(link , timeout=15 )
+</pre></div>
+<h4>Joomla scan:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.get_joomla_infos(link , timeout=15 )
+</pre></div>
+<h4>Magento scan:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.get_magento_infos(link , timeout=15 )
+</pre></div>
+
+
+# WordPress testing:
+
 
 
 <h4>Users list:</h4>
@@ -511,7 +543,7 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.port_scan( IP , ports=[21,22,23,25,43,53,80,443,2082,3306] , timeout=5 ).result
 </pre></div><h4>Subdomains finder:</h4>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.subdomains_finder( domain )
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.get_subdomains( domain )
 
 </pre></div>
 
