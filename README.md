@@ -219,13 +219,9 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 
 </pre></div><h4>Clickjacking:</h4>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.clickjacking(link, timeout=15 )
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.page_clickjacking(link, timeout=15 )
 
 </pre></div>
-
-</pre></div><h4>HTTP Strict Transport Security (HSTS):</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.hsts(link, timeout=15 )
 
 </pre></div>
 
