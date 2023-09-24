@@ -433,27 +433,15 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 
 # Proxies collecting:
 
-</pre></div><h4>Mass HTTP proxies gathering:</h4>
+</pre></div><h4>HTTP proxies gathering:</h4>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.masshttp()
-</pre></div><h4>Mass SOCKS4 proxies gathering:</h4>
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.proxyscrape()
+</pre></div><h4>SOCKS4 proxies gathering:</h4>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.massocks4()
-</pre></div><h4>Mass SOCKS5 proxies gathering:</h4>
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.proxyscrape(protocol="socks4")
+</pre></div><h4>SOCKS5 proxies gathering:</h4>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.massocks5()
-</pre></div><h4>Some HTTP proxies gathering:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.http()
-</pre></div><h4>Some HTTPS proxies gathering:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.https()
-</pre></div><h4>Some SOCKS4 proxies gathering:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.socks4()
-</pre></div><h4>Some SOCKS5 proxies gathering:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.socks5()
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.proxyscrape(protocol="socks5")
 </pre></div><h4>Checking proxy:</h4>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.proxy_check(IP , port , proto="http" , timeout=5)
