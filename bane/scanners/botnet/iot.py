@@ -5,7 +5,7 @@ from ftplib import FTP
 
 import mysqlcp
 from bane.bruteforce.hydra import *
-from bane.utils.extrafun import write_file
+from bane.utils.handle_files import write_file
 
 
 def getip():

@@ -29,7 +29,7 @@ from bs4 import BeautifulSoup
 from bane.common.payloads import *
 from bane.utils.pager import *
 from bane.utils.js_fuck import js_fuck
-from bane.utils.extrafun import write_file, delete_file
+from bane.utils.handle_files import write_file, delete_file
 from bane.gather_info.info_s import extract_root_domain
 
 

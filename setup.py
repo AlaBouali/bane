@@ -52,7 +52,7 @@ if (sys.platform == "win32") or( sys.platform == "win64"):
 
 setuptools.setup(
     name="bane",
-    version="4.8.8",
+    version="4.8.9",
     author="AlaBouali",
     author_email="trap.leader.123@gmail.com",
     description="cyber security library, penetration testing module",
@@ -61,7 +61,7 @@ setuptools.setup(
     url="https://github.com/AlaBouali/bane",
     python_requires=">=2.7",
     install_requires=req,
-    packages=["bane"],
+    packages=setuptools.find_packages(),
     license="MIT License",
     classifiers=[
         "Programming Language :: Python",

@@ -1,15 +1,13 @@
 import cgi, requests, os, random, re, hashlib, urllib, sys, cfscrape, json, gc
-from bane.common.payloads import ua
-from bane.cryptographers.hasher import *
-from bane.utils.handle_files import *
-from bane.utils.handle_instances import *
+from bane.cryptographers import *
+from bane.utils import *
 if sys.version_info < (3, 0):
     import HTMLParser
 else:
     import html.parser as HTMLParser
 import bs4
 from bs4 import BeautifulSoup
-from bane.common.payloads import *
+from bane.common import *
 from bane.utils.pager import crawl
 
 
