@@ -74,13 +74,13 @@ This python library is made for educational purposes only. Me, as the creator an
                                                       SPECIAL SPEECH:
 ---------------------------------------------------------------------------------------------------------------------------
 
-This is dedicated to my mentor: Zachary Barker ( https://www.facebook.com/zachary.barker.5439 ), he was my leader and teacher through my journey in hacking world and groups as hacktivists, we have been through a lot together and were there in many operations when i was an active member in blackhat community but now he is dead in a hit-and-run :( . he was one of my true cyber bros:
+This is dedicated to my mentor: Zachary Barker ( https://www.facebook.com/zachary.barker.5439 ), he was my leader and teacher through my journey in and advantures in this crazy underground world, we have been through a lot together and were close but now he is dead in a hit-and-run :( . he was one of my true cyber bros:
 <br>-S0u1 ( https://twitter.com/YourAnonS0u1 ) : programmer and blackhat.
 <br>-Vince ( https://www.facebook.com/vincelinux ) : Linux and hardware expert, social engeneering and programmer.
 <br>-Zachary Barker (lulz zombie) : teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat.
 <br>-Lulztigre (https://www.twitter.com/lulztigre) : Bug Bounty Hunter, Penetration Tester And Python Programmer.
 <br>-Jen Hill.
-<br>in the honor of all my bros and the memory of my bro zach im sharing all my personal hacking tools with public for the first time. plz use it wisely :)
+<br>in the honor of all my people and the memory of my brother zach im sharing all my personal hacking tools with public. plz use them wisely :)
 
 now let's start some tutorials, shall we?
 
@@ -529,7 +529,12 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.get_subdomains( domain )
 
+</pre></div><h4>Extract sensitive data from Javascript files and code embeded in the page:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.examine_js_code( url )
+
 </pre></div>
+
 
 # Encryption & Hashing:
 

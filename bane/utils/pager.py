@@ -1265,9 +1265,9 @@ def readable_js_code(code):
 
 def examine_js_code(u,
                     user_agent=None,
-        timeout=10,
-        proxy=None,
-        cookie=None,
+                    timeout=10,
+                    proxy=None,
+                    cookie=None,
     ):
     domain=u.split('://')[1].split('/')[0]
     if user_agent:
