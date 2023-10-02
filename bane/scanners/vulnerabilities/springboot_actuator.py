@@ -1,6 +1,6 @@
 from bane.scanners.vulnerabilities.utils import *
 
-def springboot_actuator(u,user_agent=None,cookie=None,proxy=None,timeout=None,path='/actuator'):
+def springboot_actuator(u,user_agent=None,cookie=None,proxy=None,timeout=None,path='/actuator',headers={}):
     if u[len(u) - 1] == "/":
         u = u[0 : len(u) - 1]
     if user_agent:
@@ -10,6 +10,7 @@ def springboot_actuator(u,user_agent=None,cookie=None,proxy=None,timeout=None,pa
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     try:
         return requests.get(
             u + path,

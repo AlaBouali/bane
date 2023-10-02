@@ -10,6 +10,7 @@ def cors_reflection(
     origin="www.evil-domain.com",
     debug=False,
     fill=10,
+    headers={}
 ):
     a = None
     b = None
@@ -22,6 +23,7 @@ def cors_reflection(
     else:
         heads = {"User-Agent": us}
     heads.update({"Origin": origin})
+    heads.update(headers)
     try:
         r = requests.get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
@@ -53,7 +55,7 @@ def cors_reflection(
     )
 
 
-def cors_wildcard(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=False):
+def cors_wildcard(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=False,headers={}):
     a = None
     b = None
     if user_agent:
@@ -65,6 +67,7 @@ def cors_wildcard(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug
     else:
         heads = {"User-Agent": us}
     heads.update({"Origin": "*"})
+    heads.update(headers)
     try:
         r = requests.get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
@@ -96,7 +99,7 @@ def cors_wildcard(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug
     )
 
 
-def cors_null(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=False):
+def cors_null(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=False,headers={}):
     a = None
     b = None
     if user_agent:
@@ -108,6 +111,7 @@ def cors_null(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=Fal
     else:
         heads = {"User-Agent": us}
     heads.update({"Origin": "null"})
+    heads.update(headers)
     try:
         r = requests.get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
@@ -162,6 +166,7 @@ def cors_misconfigurations_urls(
     cookie=None,
     logs=True,
     debug=False,
+    headers={}
 ):
     res = {}
     if origin_reflection == True:
@@ -175,6 +180,7 @@ def cors_misconfigurations_urls(
             timeout=timeout,
             proxy=proxies_select(proxy, proxies),
             debug=debug,
+            headers=headers
         )
         if tes1[0] == True:
             res.update({"cors_reflection": tes1[1],'vulnerable':True})
@@ -194,6 +200,7 @@ def cors_misconfigurations_urls(
             timeout=timeout,
             proxy=proxies_select(proxy, proxies),
             debug=debug,
+            headers=headers
         )
         if tes2[0] == True:
             res.update({"wildcard_origin": tes2[1],'vulnerable':True})
@@ -213,6 +220,7 @@ def cors_misconfigurations_urls(
             timeout=timeout,
             proxy=proxies_select(proxy, proxies),
             debug=debug,
+            headers=headers
         )
         if tes3[0] == True:
             res.update({"null_origin": tes3[1],'vulnerable':True})
@@ -239,6 +247,7 @@ def cors_misconfigurations(
     cookie=None,
     logs=True,
     debug=False,
+    headers={}
 ):
     l=[]
     for x in urls:
@@ -255,7 +264,9 @@ def cors_misconfigurations(
                                             user_agent=user_agent,
                                             cookie=cookie,
                                             logs=logs,
-                                            debug=debug,)
+                                            debug=debug,
+                                            headers=headers
+                                            )
         result={'vulnerable':result[0],'status':result[1]}
         if logs==True:
             for r in result:

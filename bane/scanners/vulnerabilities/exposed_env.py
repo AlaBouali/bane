@@ -9,6 +9,7 @@ def exposed_env(
     path="",
     brute_force=True,
     timeout=15,
+    headers={}
 ):
     if brute_force == False:
         if user_agent:
@@ -19,6 +20,7 @@ def exposed_env(
             hea = {"User-Agent": us, "Cookie": cookie}
         else:
             hea = {"User-Agent": us}
+        hea.update(headers)
         try:
             if urlparse(u).path == "/":
                 u += path + ".env"
@@ -47,6 +49,7 @@ def exposed_env(
                 proxy=proxy,
                 path=x,
                 timeout=timeout,
+                headers=headers
             )
             if a[0] == True:
                 return a

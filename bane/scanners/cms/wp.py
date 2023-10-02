@@ -4,7 +4,7 @@ from bane.scanners.cms.utils import *
 
 
 def wp_xmlrpc_methods(
-    u, user_agent=None, cookie=None, path="/xmlrpc.php", timeout=10, proxy=None
+    u, user_agent=None, cookie=None, path="/xmlrpc.php", timeout=10, proxy=None,headers={}
 ):
     if u[len(u) - 1] == "/":
         u = u[0 : len(u) - 1]
@@ -15,6 +15,7 @@ def wp_xmlrpc_methods(
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     u += path
     post = """
  <?xml version="1.0" encoding="utf-8"?> 
@@ -37,7 +38,7 @@ def wp_xmlrpc_methods(
 
 
 def wp_xmlrpc_bruteforce(
-    u, user_agent=None, cookie=None, path="/xmlrpc.php", timeout=10, proxy=None
+    u, user_agent=None, cookie=None, path="/xmlrpc.php", timeout=10, proxy=None,headers={}
 ):
     if u[len(u) - 1] == "/":
         u = u[0 : len(u) - 1]
@@ -48,6 +49,7 @@ def wp_xmlrpc_bruteforce(
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     u += path
     post = """
  <?xml version="1.0" encoding="utf-8"?> 
@@ -71,7 +73,7 @@ def wp_xmlrpc_bruteforce(
 
 
 def wp_xmlrpc_mass_bruteforce(
-    u, user_agent=None, cookie=None, path="/xmlrpc.php", timeout=10, proxy=None
+    u, user_agent=None, cookie=None, path="/xmlrpc.php", timeout=10, proxy=None, headers={}
 ):
     if u[len(u) - 1] == "/":
         u = u[0 : len(u) - 1]
@@ -82,6 +84,7 @@ def wp_xmlrpc_mass_bruteforce(
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     u += path
     post = """
  <?xml version="1.0" encoding="utf-8"?> 
@@ -113,6 +116,7 @@ def wp_xmlrpc_pingback(
     path="/xmlrpc.php",
     timeout=10,
     proxy=None,
+    headers={}
 ):
     if u[len(u) - 1] == "/":
         u = u[0 : len(u) - 1]
@@ -123,6 +127,7 @@ def wp_xmlrpc_pingback(
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     u += path
     post = """
  <?xml version="1.0" encoding="utf-8"?> 
@@ -154,6 +159,7 @@ def wp_xmlrpc_pingback_exploit(
     path="/xmlrpc.php",
     timeout=10,
     proxy=None,
+    headers={}
 ):
     url = u.split("://")[0] + "://" + urlparse(u).netloc
     if user_agent:
@@ -163,6 +169,7 @@ def wp_xmlrpc_pingback_exploit(
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     url += path
     post = (
         """<?xml version="1.0" encoding="UTF-8"?>
@@ -200,6 +207,7 @@ def wpadmin(
     path="/xmlrpc.php",
     timeout=10,
     proxy=None,
+    headers={}
 ):
     """
     this function is to check the wordpress given logins using the xmlrpc.php file. if they are correct it returns True, else False"""
@@ -212,6 +220,7 @@ def wpadmin(
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     u += path
     post = """<methodCall>
 <methodName>wp.getUsersBlogs</methodName>
@@ -241,6 +250,7 @@ def wpadmin_mass(
     path="/xmlrpc.php",
     timeout=10,
     proxy=None,
+    headers={}
 ):
     """
     this function is to check the wordpress given logins using the xmlrpc.php file. if they are correct it returns True, else False"""
@@ -253,6 +263,7 @@ def wpadmin_mass(
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     u += path
     post = """
  <?xml version="1.0"?>
@@ -287,7 +298,7 @@ def wpadmin_mass(
 
 
 def wp_users(
-    u, path="/wp-json/wp/v2/users", timeout=10, user_agent=None, cookie=None, proxy=None
+    u, path="/wp-json/wp/v2/users", timeout=10, user_agent=None, cookie=None, proxy=None, headers={}
 ):
     """
     this function is to get WP users"""
@@ -298,6 +309,7 @@ def wp_users(
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     if u[len(u) - 1] == "/":
         u = u[0 : len(u) - 1]
     u += path
@@ -324,6 +336,7 @@ def wp_user(
     cookie=None,
     timeout=10,
     proxy=None,
+    headers={}
 ):
     """
     this function is to return all informations about a WP user with a given index integer"""
@@ -336,6 +349,7 @@ def wp_user(
         hed.update({"Cookie": cookie})
     if u[len(u) - 1] == "/":
         u = u[0 : len(u) - 1]
+    hed.update(headers)
     u += path + str(user)
     try:
         r = requests.get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
@@ -355,6 +369,7 @@ def wp_users_enumeration(
     start=1,
     end=20,
     logs=True,
+    headers={}
 ):
     if user_agent:
         us = user_agent
@@ -363,6 +378,7 @@ def wp_users_enumeration(
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     d = u.split("://")[1].split("/")[0]
     u = u.split(d)[0] + d
     l = []
@@ -396,7 +412,7 @@ def wp_users_enumeration(
     return l
 
 
-def wp_version(u, timeout=15, user_agent=None, cookie=None, proxy=None):
+def wp_version(u, timeout=15, user_agent=None, cookie=None, proxy=None,headers={}):
     if user_agent:
         us = user_agent
     else:
@@ -404,6 +420,7 @@ def wp_version(u, timeout=15, user_agent=None, cookie=None, proxy=None):
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     try:
         r = requests.get(
             u, headers=hed, proxies=proxy, timeout=timeout, verify=False
@@ -497,7 +514,7 @@ def fetch_wp_exploits(s,max_tries=3,proxy=None,user_agent=None,timeout=15,cookie
 
 
 
-def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,proxy=None,user_enum_start=1,user_enum_end=20,wpscan_cookie=None,sleep_time_min=10,sleep_time_max=20,when_blocked_sleep=30,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True):
+def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,proxy=None,user_enum_start=1,user_enum_end=20,wpscan_cookie=None,sleep_time_min=10,sleep_time_max=20,when_blocked_sleep=30,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={}):
     domain=u.split('://')[1].split('/')[0].split(':')[0]
     root_domain=extract_root_domain(domain)
     ip=socket.gethostbyname(domain.split(':')[0])
@@ -510,6 +527,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     response = requests.get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
     server=response.headers.get('Server','')
     try:
@@ -576,7 +594,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
     json_path=u+'/wp-json/wp/v2/users'
     if logs==True:
         print('[i] Fetching users from: {}'.format(json_path))
-    json_users=wp_users(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=proxy)
+    json_users=wp_users(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=proxy,headers=headers)
     if logs==True:
         for x in json_users:
             print('\t[+] id: {} | name: {} | slug: {}'.format(x['id'],x['name'],x['slug']))
@@ -586,7 +604,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
     can_enumerate_users=True
     if logs==True:
         print('[i] Trying enumerating the authors...')
-    enumerated_users= wp_users_enumeration(u,logs=logs,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=proxy,start=user_enum_start,end=user_enum_end)
+    enumerated_users= wp_users_enumeration(u,logs=logs,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=proxy,start=user_enum_start,end=user_enum_end,headers=headers)
     if enumerated_users==[]:
         can_enumerate_users=False
     else:
@@ -597,7 +615,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
     if logs==True:
         print()
         print('[i] Checking if XMLRPC is enabled from: {}'.format(u+'/xmlrpc.php'))
-    xmlrpcs=wp_xmlrpc_methods(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=proxy)
+    xmlrpcs=wp_xmlrpc_methods(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=proxy,headers=headers)
     can_b_u=("wp.getUsersBlogs" in xmlrpcs) and ("system.multicall" in xmlrpcs)
     can_pb="pingback.ping" in xmlrpcs
     if logs==True:
@@ -614,7 +632,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
     if wp_version!='':
         if logs==True:
             print('[i] looking for exploits for version: {}\n'.format(wp_version))
-        wpvulns=vulners_search('wordpress',version=wp_version)
+        wpvulns=vulners_search('wordpress',version=wp_version,proxy=proxy)
         for x in wpvulns:
             if 'wordpress' in x['title'].lower() or 'wordpress' in x['description'].lower():
                 wp_vulns.append(x)
@@ -641,7 +659,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
                 if logs==True:
                     print('\t[-] unknown version\n')
             else:
-                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1])
+                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=proxy)
             for x in bk:
                 for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
                     try:
@@ -664,7 +682,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
                 if logs==True:
                     print('[i] looking for exploits for : {}\n'.format(sv))
                 if '/' in sv:
-                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1])
+                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=proxy)
                 else:
                     if logs==True:
                         print('\t[-] unknown version\n')

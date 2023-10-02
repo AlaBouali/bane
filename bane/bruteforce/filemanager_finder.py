@@ -13,6 +13,7 @@ class filemanager_finder:
         timeout=10,
         proxy=None,
         proxies=None,
+        headers={}
     ):
         """
         u: the link: http://www.example.com
@@ -36,18 +37,18 @@ class filemanager_finder:
             target=self.crack,
             args=(
                 u,
-                logs,
                 user_agent,
                 cookie,
                 timeout,
                 proxy,
                 proxies,
+                headers,
             ),
         )
         t.daemon = threads_daemon
         t.start()
 
-    def crack(self, u, logs, user_agent, cookie, timeout, proxy, proxies):
+    def crack(self, u, user_agent, cookie, timeout, proxy, proxies,headers):
         for i in manager:
             if self.stop == True:
                 self.finish = True
@@ -59,6 +60,7 @@ class filemanager_finder:
             hed = {"User-Agent": us}
             if cookie:
                 hed.update({"Cookie": cookie})
+            hed.update(headers)
             try:
                 if u[len(u) - 1] == "/":
                     u = u[0 : len(u) - 1]

@@ -11,6 +11,7 @@ def ssrf_check(
     timeout=25,
     user_agent=None,
     cookie=None,
+    headers={}
 ):
     """
     this function is for FI vulnerability test using a link"""
@@ -31,6 +32,7 @@ def ssrf_check(
             "Origin": u.split("://")[0] + "://" + u.split("://")[1].split("/")[0],
         }
     )
+    heads.update(headers)
     if "=" not in u:
         return (False, "")
     if null_byte == True:
@@ -57,11 +59,12 @@ def ssrf_urls(
     proxies=None,
     user_agent=None,
     cookie=None,
+    headers={}
 ):
     res = []
     if u.split("?")[0][-1] != "/" and "." not in u.split("?")[0].rsplit("/", 1)[-1]:
         u = u.replace("?", "/?")
-    a = crawl(u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent)
+    a = crawl(u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,headers=headers)
     l = []
     d = a.values()
     for x in d:
@@ -90,47 +93,13 @@ def ssrf_urls(
                         timeout=timeout,
                         cookie=cookie,
                         user_agent=user_agent,
+                        headers=headers
                     )
                     if q[0] == True:
                         if q[1] not in res:
                             res.append(q[1])
     return res
 
-def ssrf(
-    u,
-    max_pages=5,
-    logs=True,
-    null_byte=False,
-    link="http://www.google.com",
-    timeout=120,
-    signature="<title>Google</title>",
-    proxy=None,
-    proxies=None,
-    user_agent=None,
-    cookie=None,
-    pages=[]
-):
-    l=[]
-    if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
-    for x in pages:
-        if logs==True:
-            print('\n\nPage: {}\n'.format(x))
-        result=ssrf_urls(x,
-                        null_byte=null_byte,
-                        link=link,
-                        timeout=timeout,
-                        signature=signature,
-                        proxy=proxy,
-                        proxies=proxies,
-                        user_agent=user_agent,
-                        cookie=cookie)
-        if logs==True:
-            for r in result:
-                print(r)
-        l.append({'page':x,'result':result})
-    return  [x for x in l if x['result']!=[]]
-
 
 
 def ssrf(
@@ -145,11 +114,12 @@ def ssrf(
     proxies=None,
     user_agent=None,
     cookie=None,
-    pages=[]
+    pages=[],
+    headers={}
 ):
     l=[]
     if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy,headers=headers)
     for x in pages:
         if logs==True:
             print('\n\nPage: {}\n'.format(x))
@@ -161,7 +131,8 @@ def ssrf(
                         proxy=proxy,
                         proxies=proxies,
                         user_agent=user_agent,
-                        cookie=cookie)
+                        cookie=cookie,
+                        headers=headers)
         if logs==True:
             for r in result:
                 print(r)

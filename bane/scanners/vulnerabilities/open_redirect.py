@@ -105,6 +105,7 @@ def open_redirect_forms(
     cookie=None,
     debug=False,
     mime_type=None,
+    headers={}
 ):
     """
     this function is for xss test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
@@ -128,7 +129,7 @@ def open_redirect_forms(
         print(Fore.WHITE + "[~]Getting forms..." + Style.RESET_ALL)
     hu = True
     fom = forms_parser(
-        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True
+        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True,headers=headers
     )
     if len(fom) == 0:
         if logs == True:
@@ -222,6 +223,7 @@ def open_redirect_forms(
                                 dont_send=dont_send,
                                 mime_type=mime_type,
                                 predefined_inputs=predefined_inputs,
+                                headers=headers
                             )
                             xss_res = open_redirect_submit(
                                 parsed_form,
@@ -303,10 +305,11 @@ def open_redirect(
     cookie=None,
     debug=False,
     mime_type=None,
+    headers={}
 ):
     l=[]
     if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy,headers=headers)
     for x in pages:
         if logs==True:
             print('\n\nPage: {}\n'.format(x))
@@ -330,7 +333,8 @@ def open_redirect(
                             user_agent=user_agent,
                             cookie=cookie,
                             debug=debug,
-                            mime_type=mime_type))
+                            mime_type=mime_type,
+                            headers=headers))
     f=[]
     for x in l:
         if x !=None:

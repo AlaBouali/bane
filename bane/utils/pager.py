@@ -367,7 +367,8 @@ def forms_parser(
     bypass=False,
     proxy=None,
     cookie=None,
-    include_links=False
+    include_links=True,
+    headers={}
 ):
     """
     same as "forms" function but it return detailed information about all forms in a given page
@@ -386,6 +387,7 @@ def forms_parser(
         hea = {"User-Agent": us, "Cookie": cookie}
     else:
         hea = {"User-Agent": us}
+    hea.update(headers)
     l = []
     fom = []
     try:
@@ -444,9 +446,9 @@ def forms_parser(
                     s = r.get("name")
                     v = r.renderContents().decode().split("</textarea>")[0]
                     typ = r.get("type", "textarea").lower()
-                    max_size=r.get('maxlength',10)
+                    max_size=r.get('maxlength',64)
                     if r.get('size',0)!=0:
-                            max_size= r.get('size',10)
+                            max_size= r.get('size',64)
                     y = {"name": s, "value": v, "type": typ,'max':max_size,'min':r.get('minlength',1),'required':required}
                     if y not in l:
                         l.append(y)
@@ -462,9 +464,9 @@ def forms_parser(
                     typ = r.get("type", "text").lower()
                     y = {"name": s, "value": v, "type": typ,'required':required}
                     if y['type'] in ['text','password','email','url','tel','search']:
-                        max_size=r.get('maxlength',10)
+                        max_size=r.get('maxlength',64)
                         if r.get('size',0)!=0:
-                            max_size= r.get('size',10)
+                            max_size= r.get('size',64)
                         y.update({'max':int(max_size),'min':int(r.get('minlength',1))})
                     elif y['type']=='number':
                         y.update({'max':int(r.get('max',10)),'min':int(r.get('min',1))})
@@ -515,11 +517,12 @@ def forms_parser(
             l = []
     except Exception as e:
         pass
-    fom+=get_links_from_page_source(soup,u,'')
+    if include_links==True:
+        fom+=get_links_from_page_source(soup,u,'')
     return fom
 
 
-def forms_parser_text(u, text, html_comments=False):
+def forms_parser_text(u, text, html_comments=False,include_links=True):
     """
     same as "forms" function but it return detailed information about all forms in a given page
     """
@@ -581,9 +584,9 @@ def forms_parser_text(u, text, html_comments=False):
                     s = r.get("name")
                     v = r.renderContents().decode().split("</textarea>")[0]
                     typ = r.get("type", "textarea").lower()
-                    max_size=r.get('maxlength',10)
+                    max_size=r.get('maxlength',64)
                     if r.get('size',0)!=0:
-                            max_size= r.get('size',10)
+                            max_size= r.get('size',64)
                     y = {"name": s, "value": v, "type": typ,'max':max_size,'min':r.get('minlength',1),'required':required}
                     if y not in l:
                         l.append(y)
@@ -599,12 +602,12 @@ def forms_parser_text(u, text, html_comments=False):
                     typ = r.get("type", "text").lower()
                     y = {"name": s, "value": v, "type": typ,'required':required}
                     if y['type'] in ['text','password','email','url','tel','search']:
-                        max_size=r.get('maxlength',10)
+                        max_size=r.get('maxlength',64)
                         if r.get('size',0)!=0:
-                            max_size= r.get('size',10)
+                            max_size= r.get('size',64)
                         y.update({'max':int(max_size),'min':int(r.get('minlength',1))})
                     elif y['type']=='number':
-                        y.update({'max':int(r.get('max',10)),'min':int(r.get('min',1))})
+                        y.update({'max':int(r.get('max',64)),'min':int(r.get('min',1))})
                     elif y['type']=='date':
                         y.update({'max':r.get('max',datetime.datetime.today().strftime("%Y-%m-%d")),'min':r.get('min',datetime.datetime.today().strftime("%Y-%m-%d"))})
                     elif y['type']=='file':
@@ -652,7 +655,8 @@ def forms_parser_text(u, text, html_comments=False):
             l = []
     except Exception as e:
         pass #raise(e)
-    fom+=get_links_from_page_source(soup,u,'')
+    if include_links==True:
+        fom+=get_links_from_page_source(soup,u,'')
     return fom
 
 
@@ -713,12 +717,15 @@ def set_up_injection(
     dont_send=[],
     mime_type=None,
     predefined_inputs={},
+    headers={}
 ):
     cookies = None
     h = {"User-Agent": user_agent}
     if cookie:
         h.update({"Cookie": cookie})
         cookies = cookie
+    h.update(headers)
+    
     try:
         r = requests.get(url, proxies=proxy, headers=h, verify=False, timeout=timeout)
     except:
@@ -733,6 +740,7 @@ def set_up_injection(
     h = {"User-Agent": user_agent}
     if cookies and len(cookies.strip()) > 0:
         h.update({"Cookie": cookies})
+    h.update(headers)
     return (
         form_filler(
             form,
@@ -823,7 +831,7 @@ def form_filler(
                                         if x["type"] == "number":
                                             x["value"] += str(random.randint(int(float(x.get('min',0))), int(float(x.get('max',9)))))
                                         elif x['type'] in ['text','password','search','textarea']:
-                                            leng=random.randint(int(float(x.get('min',1))), int(float(x.get('max',10)))+1)
+                                            leng=random.randint(int(float(x.get('min',1))), int(float(x.get('max',64)))+1)
                                             for i in range(leng):
                                                 x["value"] += random.choice(lis)
                                         elif x['type']=='email':
@@ -907,6 +915,7 @@ def crawl(
     bypass=False,
     proxy=None,
     cookie=None,
+    headers={}
 ):
     """
     this function is used to crawl any given link and returns a list of all available links on that webpage with ability to bypass anti-crawlers
@@ -939,6 +948,7 @@ def crawl(
         hea = {"User-Agent": us, "Cookie": cookie}
     else:
         hea = {"User-Agent": us}
+    hea.update(headers)
     try:
         c = requests.get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
@@ -1075,6 +1085,7 @@ def media(
     bypass=False,
     proxy=None,
     cookie=None,
+    headers={}
 ):
     """
     this funtion was made to collect the social media links related to the targeted link (facebook, twitter, instagram...).
@@ -1106,10 +1117,7 @@ def media(
     try:
         if bypass == True:
             u += "#"
-        if cookie:
-            hea = {"User-Agent": us, "Cookie": cookie}
-        else:
-            hea = {"User-Agent": us}
+        hea.update(headers)
         c = requests.get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
         ).text
@@ -1144,6 +1152,7 @@ def subdomains_extract(
     bypass=False,
     proxy=None,
     cookie=None,
+    headers={}
 ):
     """
     this function collects the subdomains found on the targeted webpage.
@@ -1172,6 +1181,7 @@ def subdomains_extract(
         hea = {"User-Agent": us, "Cookie": cookie}
     else:
         hea = {"User-Agent": us}
+    hea.update(headers)
     try:
         if bypass == True:
             u += "#"
@@ -1219,12 +1229,15 @@ def extract_urls_from_js(js_content, base_url):
         urls.append(x)
     return urls
 
+
+
 def fetch_url(
         u,
         user_agent=None,
         timeout=10,
         proxy=None,
         cookie=None,
+        headers={}
     ):
     if user_agent:
         us = user_agent
@@ -1234,6 +1247,7 @@ def fetch_url(
         hea = {"User-Agent": us, "Cookie": cookie}
     else:
         hea = {"User-Agent": us}
+    hea.update(headers)
     try:
         return requests.get(u,timeout=timeout,proxies=proxy,verify=False,headers=hea).text
     except:
@@ -1268,6 +1282,7 @@ def examine_js_code(u,
                     timeout=10,
                     proxy=None,
                     cookie=None,
+                    headers={}
     ):
     domain=u.split('://')[1].split('/')[0]
     if user_agent:
@@ -1278,6 +1293,7 @@ def examine_js_code(u,
         hea = {"User-Agent": us, "Cookie": cookie}
     else:
         hea = {"User-Agent": us}
+    hea.update(headers)
     try:
         r= requests.get(u,timeout=timeout,proxies=proxy,verify=False,headers=hea).text
         soup = BeautifulSoup(r, 'html.parser')
@@ -1297,7 +1313,7 @@ def examine_js_code(u,
                 url_domain=url.split('://')[1].split('/')[0]
                 if extract_root_domain(url_domain)==extract_root_domain(domain):
                     #print(url_domain)
-                    code=fetch_url(url,user_agent=user_agent,timeout=timeout,proxy=proxy,cookie=cookie)
+                    code=fetch_url(url,user_agent=user_agent,timeout=timeout,proxy=proxy,cookie=cookie,headers=headers)
                     secrets.append({'url':url,'secrets':extract_secrets_from_text(code)})#,'endpoints':extract_urls_from_js(code,url)})
 
     except Exception as ex:
@@ -1349,5 +1365,55 @@ def extract_secrets_from_text(js_content):
                         if len(l)>0:
                             tokens_dict[key] = l
             except Exception as ex:
-                raise(ex)
+                pass
     return tokens_dict
+
+
+
+
+def generate_human_poc(data):
+    if "is_url" not in data:
+        raise ValueError("The 'is_url' key is missing in the input data")
+
+    if data["is_url"]:
+        # If is_url is True, generate a URL
+        url = data.get("action", "")
+        if not url:
+            raise ValueError("Missing 'action' key for URL generation")
+        
+        query_parameters = []
+        for input_field in data.get("inputs", []):
+            name = input_field.get("name", "")
+            value = input_field.get("value", "")
+            query_parameters.append("{}={}".format(name,value))
+        
+        if query_parameters:
+            url += "?" + "&".join(query_parameters)
+
+        return url
+
+    else:
+        # If is_url is False, generate an HTML form
+        form_id = data.get("id", "")
+        form_method = data.get("method", "post")
+        form_action = data.get("action", "")
+        form_enctype = data.get("enctype", "application/x-www-form-urlencoded")
+
+        inputs = ""
+        for input_field in data.get("inputs", []):
+            name = input_field.get("name", "")
+            value = input_field.get("value", "")
+            input_type = input_field.get("type", "text")
+            required = "required" if input_field.get("required", False) else ""
+            input_element = "<input type='{}' name='{}' value='{}' {}>".format(input_type,name,value,required)
+            inputs += input_element
+
+        html_form = """
+        <form id='{}' method='{}' action='{}' enctype='{}'>
+            {}
+        </form>
+        """.format(form_id,form_method,form_action,form_enctype,inputs)
+        return html_form
+
+
+

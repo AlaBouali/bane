@@ -1,6 +1,6 @@
 from bane.scanners.vulnerabilities.utils import *
 
-def page_clickjacking(u, proxy=None, timeout=10, user_agent=None, cookie=None, logs=False,request_headers=None):
+def page_clickjacking(u, proxy=None, timeout=10, user_agent=None, cookie=None, logs=False,request_headers=None,headers={}):
     if user_agent:
         us = user_agent
     else:
@@ -9,6 +9,7 @@ def page_clickjacking(u, proxy=None, timeout=10, user_agent=None, cookie=None, l
         heads = {"User-Agent": us, "Cookie": cookie}
     else:
         heads = {"User-Agent": us}
+    heads.update(headers)
     try:
         if request_headers==None:
             r = requests.get(

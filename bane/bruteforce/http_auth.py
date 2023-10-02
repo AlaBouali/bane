@@ -15,6 +15,7 @@ class http_auth_bruteforce:
         cookie=None,
         user_agent=None,
         timeout=10,
+        headers={}
     ):
         self.stop = False
         self.logs = logs
@@ -32,6 +33,7 @@ class http_auth_bruteforce:
                 cookie,
                 user_agent,
                 timeout,
+                headers,
             ),
         )
         t.daemon = threads_daemon
@@ -41,7 +43,7 @@ class http_auth_bruteforce:
         return self.finish
 
     def crack(
-        self, u, domain, word_list, logs, proxy, proxies, cookie, user_agent, timeout
+        self, u, domain, word_list, logs, proxy, proxies, cookie, user_agent, timeout,headers
     ):
         if user_agent:
             us = user_agent
@@ -50,6 +52,7 @@ class http_auth_bruteforce:
         hed = {"User-Agent": us}
         if cookie:
             hed.update({"Cookie": cookie})
+        hed.update(headers)
         prox = None
         if proxy:
             prox = proxy#{"http": "http://" + proxy, "https": "http://" + proxy}

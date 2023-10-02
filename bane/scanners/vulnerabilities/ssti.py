@@ -110,6 +110,7 @@ def ssti_forms(
     debug=False,
     mime_type=None,
     predefined_inputs={},
+    headers={}
 ):
     """
     this function is for SSTI test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
@@ -134,7 +135,7 @@ def ssti_forms(
         print(Fore.WHITE + "[~]Getting forms..." + Style.RESET_ALL)
     hu = True
     fom = forms_parser(
-        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True
+        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True,headers=headers
     )
     if len(fom) == 0:
         if logs == True:
@@ -224,6 +225,7 @@ def ssti_forms(
                                     mime_type=mime_type,
                                     predefined_inputs=predefined_inputs,
                                     dont_change=dont_change,
+                                    headers=headers
                                 )
                                 _res = ssti_submit(
                                     parsed_form,
@@ -303,10 +305,11 @@ def ssti(
     debug=False,
     mime_type=None,
     predefined_inputs={},
+    headers={}
 ):
     l=[]
     if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy,headers=headers)
     for x in pages:
         if logs==True:
             print('\n\nPage: {}\n'.format(x))
@@ -333,7 +336,8 @@ def ssti(
                             cookie=cookie,
                             debug=debug,
                             mime_type=mime_type,
-                            predefined_inputs=predefined_inputs))
+                            predefined_inputs=predefined_inputs,
+                            headers=headers))
     f=[]
     for x in l:
         if x !=None:
@@ -345,4 +349,3 @@ def ssti(
             if n['result']!=[]:
                 f.append(n)
     return f
-

@@ -15,6 +15,7 @@ def path_traversal_check(
     timeout=10,
     user_agent=None,
     cookie=None,
+    headers={}
 ):
     """
     this function is for FI vulnerability test using a link"""
@@ -35,6 +36,7 @@ def path_traversal_check(
             "Origin": u.split("://")[0] + "://" + u.split("://")[1].split("/")[0],
         }
     )
+    heads.update(headers)
     if "=" not in u:
         return (False, "")
     else:
@@ -101,6 +103,7 @@ def path_traversal_urls(
     timeout=10,
     user_agent=None,
     cookie=None,
+    headers={}
 ):
     res = []
     if u.split("?")[0][-1] != "/" and "." not in u.split("?")[0].rsplit("/", 1)[-1]:
@@ -136,6 +139,7 @@ def path_traversal_urls(
                         timeout=timeout,
                         cookie=cookie,
                         user_agent=user_agent,
+                        headers=headers
                     )
                     if q[0] == True:
                         if q[1] not in res:
@@ -153,6 +157,7 @@ def path_traversal_urls(
                             timeout=timeout,
                             cookie=cookie,
                             user_agent=user_agent,
+                            headers=headers
                         )
                         if q[0] == True:
                             if q[1] not in res:
@@ -169,6 +174,7 @@ def path_traversal_urls(
                                 cookie=cookie,
                                 user_agent=user_agent,
                                 target_os="windows",
+                                headers=headers
                             )
                             if q[0] == True:
                                 if q[1] not in res:
@@ -188,7 +194,8 @@ def path_traversal(
     timeout=10,
     user_agent=None,
     cookie=None,
-    pages=[]
+    pages=[],
+    headers={}
 ):
     l=[]
     if pages==[]:
@@ -205,7 +212,8 @@ def path_traversal(
                             proxies=proxies,
                             timeout=timeout,
                             user_agent=user_agent,
-                            cookie=cookie)
+                            cookie=cookie,
+                            headers=headers)
         if logs==True:
             for r in result:
                 print(r)

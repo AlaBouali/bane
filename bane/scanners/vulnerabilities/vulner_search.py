@@ -2,6 +2,7 @@ from bane.scanners.vulnerabilities.utils import *
 
 def vulners_search(
     software,
+    url="https://vulners.com/api/v3/burp/software/",
     file_name="",
     save_to_file=False,
     max_vulnerabilities=100,
@@ -9,13 +10,13 @@ def vulners_search(
     software_type="software",
     user_agent=None,
     cookie=None,
-    proxies=None,
+    api_key='',
     proxy=None,
     timeout=20,
 ):
     if not file_name:
         if version:
-            file_name = software + "-" + version.replace(".", "-")
+            file_name = software + "_" + version.replace(".", "-")
         else:
             file_name = software
     if user_agent:
@@ -43,9 +44,10 @@ def vulners_search(
             "version": ver,
             "type": ty,
             "software": software,
+            'apikey':api_key
         }
         r = requests.get(
-            "https://vulners.com/api/v3/burp/software/",
+            url,
             params=d,
             headers=hea,
             proxies=proxy,

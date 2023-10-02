@@ -1,17 +1,17 @@
 from bane.scanners.vulnerabilities.utils import *
 
 
-def csrf_filter_tokens(u, proxy=None, timeout=10, user_agent=None, cookie=None):
+def csrf_filter_tokens(u, proxy=None, timeout=10, user_agent=None, cookie=None,headers={}):
     if not cookie or len(cookie.strip()) == 0:
         raise Exception(
             "This attack requires authentication !! You need to set a Cookie"
         )
     res = {"Vulnerable": [], "Safe": []}
     f = forms_parser(
-        u, timeout=timeout, user_agent=user_agent, cookie=cookie, proxy=proxy
+        u, timeout=timeout, user_agent=user_agent, cookie=cookie, proxy=proxy, headers=headers
     )
     f1 = forms_parser(
-        u, timeout=timeout, user_agent=user_agent, cookie=cookie, proxy=proxy
+        u, timeout=timeout, user_agent=user_agent, cookie=cookie, proxy=proxy, headers=headers
     )
     coun = -1
     for x in f:
@@ -64,6 +64,7 @@ def csrf_forms(
     dont_send=[],
     mime_type=None,
     predefined_inputs={},
+    headers={}
 ):
     vu = []
     if not cookie or len(cookie.strip()) == 0:
@@ -71,7 +72,7 @@ def csrf_forms(
             "This attack requires authentication !! You need to set a Cookie"
         )
     v = csrf_filter_tokens(
-        u, proxy=proxy, timeout=timeout, user_agent=user_agent, cookie=cookie
+        u, proxy=proxy, timeout=timeout, user_agent=user_agent, cookie=cookie, headers=headers
     )["Vulnerable"]
     if user_agent:
         h = {"User-Agent": user_agent}
@@ -86,6 +87,7 @@ def csrf_forms(
             + referer.split("://")[1].split("/")[0],
         }
     )
+    h.update(headers)
     for x in v:
         x = form_filler(
             x,
@@ -159,7 +161,8 @@ def csrf(
     dont_send=[],
     mime_type=None,
     predefined_inputs={},
-    pages=[]
+    pages=[],
+    headers={}
 ):
     l=[]
     if pages==[]:
@@ -180,7 +183,8 @@ def csrf(
                         leave_empty=leave_empty,
                         dont_send=dont_send,
                         mime_type=mime_type,
-                        predefined_inputs=predefined_inputs)
+                        predefined_inputs=predefined_inputs,
+                        headers=headers)
         if logs==True:
             for r in result:
                 print(r)

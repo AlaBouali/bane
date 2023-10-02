@@ -7,6 +7,7 @@ def exposed_git(
     cookie=None,
     proxy=None,
     timeout=15,
+    headers={}
 ):
     if u.endswith('/')==True:
         u+=+'.git'
@@ -20,6 +21,7 @@ def exposed_git(
             hea = {"User-Agent": us, "Cookie": cookie}
     else:
             hea = {"User-Agent": us}
+    hea.update(headers)
     try:
         r=requests.get(u,timeout=timeout,verify=False,proxies=proxy,headers=hea)
         if "index of" in r.text.lower() and "/.git" in r.text.lower():

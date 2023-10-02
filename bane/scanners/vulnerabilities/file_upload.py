@@ -17,6 +17,7 @@ def file_upload_forms(
     dont_send=[],
     mime_type=None,
     predefined_inputs={},
+    headers={}
 ):
     l = []
     result=[]
@@ -62,6 +63,7 @@ def file_upload_forms(
                 + referer.split("://")[1].split("/")[0],
             }
         )
+        h.update(headers)
         try:
             r = requests.post(
                 fo["action"], data=d, files=f, proxies=proxy, timeout=timeout, headers=h,verify=False,
@@ -113,7 +115,8 @@ def file_upload(
     dont_send=[],
     mime_type=None,
     predefined_inputs={},
-    pages=[]
+    pages=[],
+    headers={}
 ):
     l=[]
     if pages==[]:
@@ -134,7 +137,8 @@ def file_upload(
                                 leave_empty=leave_empty,
                                 dont_send=dont_send,
                                 mime_type=mime_type,
-                                predefined_inputs=predefined_inputs)
+                                predefined_inputs=predefined_inputs,
+                                headers=headers)
         #result={'vulnerable':result[0],'status':result[1]}
         if logs==True:
             for r in result:

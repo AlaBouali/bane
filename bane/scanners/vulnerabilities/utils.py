@@ -24,7 +24,7 @@ import requests, socket, random, time, ssl
 import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-import bs4
+import bs4,socks
 from bs4 import BeautifulSoup
 from bane.common.payloads import *
 from bane.utils.pager import *

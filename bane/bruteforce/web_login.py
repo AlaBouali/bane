@@ -5,13 +5,14 @@ from bane.bruteforce.utils import *
 class web_login_bruteforce:
     __slots__ = ["stop", "finish", "result", "logs"]
 
-    def try_combo(self, url, username, password, cookie, user_agent, proxy, timeout):
+    def try_combo(self, url, username, password, cookie, user_agent, proxy, timeout,headers):
         prox = None
         cookies = None
         h = {"User-Agent": user_agent}
         if cookie:
             h.update({"Cookie": cookie})
             cookies = cookie
+        h.update(headers)
         try:
             r = requests.get(
                 url, proxies=proxy, headers=h, verify=False, timeout=timeout
@@ -60,6 +61,7 @@ class web_login_bruteforce:
         cookie=None,
         user_agent=None,
         timeout=10,
+        headers={}
     ):
         self.stop = False
         self.finish = False
@@ -76,6 +78,7 @@ class web_login_bruteforce:
                 cookie,
                 user_agent,
                 timeout,
+                headers,
             ),
         )
         t.daemon = threads_daemon
@@ -84,7 +87,7 @@ class web_login_bruteforce:
     def done(self):
         return self.finish
 
-    def crack(self, u, word_list, logs, proxy, proxies, cookie, user_agent, timeout):
+    def crack(self, u, word_list, logs, proxy, proxies, cookie, user_agent, timeout,headers):
         for x in word_list:
             try:
                 if self.stop == True:
@@ -104,7 +107,7 @@ class web_login_bruteforce:
                 if proxies:
                     prox = random.choice(proxies)
                 if (
-                    self.try_combo(u, username, password, cookie, us, prox, timeout)
+                    self.try_combo(u, username, password, cookie, us, prox, timeout,headers)
                     == True
                 ):
                     if self.logs == True:

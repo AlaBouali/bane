@@ -1,6 +1,6 @@
 from bane.scanners.cms.utils import *
 
-def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True):
+def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={}):
     domain=u.split('://')[1].split('/')[0].split(':')[0]
     root_domain=extract_root_domain(domain)
     ip=socket.gethostbyname(domain.split(':')[0])
@@ -13,6 +13,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     try:
         response = requests.get(u+"/magento_version", headers=hed, proxies=proxy, timeout=timeout, verify=False)
         version= response.text.split('Magento/')[1].split()[0].strip()
@@ -62,7 +63,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
     if version!='':
         if logs==True:
             print('[i] looking for exploits for version: {}\n'.format(version))
-        wpvulns=vulners_search('magento',version=version)
+        wpvulns=vulners_search('magento',version=version,proxy=proxy)
         wp_vulns=[]
         for x in wpvulns:
             if 'magento' in x['title'].lower() or 'magento' in x['description'].lower():
@@ -90,7 +91,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
                 if logs==True:
                     print('\t[-] unknown version\n')
             else:
-                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1])
+                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=proxy)
             for x in bk:
                 for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
                     try:
@@ -113,7 +114,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
                 if logs==True:
                     print('[i] looking for exploits for : {}\n'.format(sv))
                 if '/' in sv:
-                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1])
+                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=proxy)
                 else:
                     if logs==True:
                         print('\t[-] unknown version\n')

@@ -174,7 +174,8 @@ class hydra:
         proxy=None,
         proxies=None,
         user_agent=None,
-        cookie=None
+        cookie=None,
+        headers={}
     ):
         """
         this function is similar to hydra tool to bruteforce attacks on different ports.
@@ -200,7 +201,8 @@ class hydra:
                 proxy,
                 proxies,
                 user_agent,
-                cookie
+                cookie,
+                headers,
             ),
         )
         t.daemon = threads_daemon
@@ -221,7 +223,8 @@ class hydra:
         proxy,
         proxies,
         user_agent,
-        cookie
+        cookie,
+        headers
     ):
         o = ""
         if protocol == "telnet":
@@ -264,6 +267,7 @@ class hydra:
                     user_agent=user_agent,
                     cookie=cookie,
                     timeout=timeout,
+                    headers=headers
                 )
             elif protocol == "smtp":
                 r = s(u, p, user, pwd, ehlo=ehlo, helo=helo, ttls=ttls)

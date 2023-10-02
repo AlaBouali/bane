@@ -1,4 +1,4 @@
-import requests, socks, socket, random, re
+import requests, socks, socket, random, re,os,sys
 import bs4
 from bs4 import BeautifulSoup
 from bane.common.payloads import *
@@ -31,7 +31,7 @@ def proxyscrape(protocol="http", timeout=10, country="all", ssl="all", anonymity
     ).text.split("\r\n")
 
 
-def proxy_check(ip, p, proto="http", timeout=5):
+def proxy_check(ip, p, proto="http",username=None,password=None, timeout=5):
     """
     this function is to check if the proxy is dead or not.
 
@@ -43,11 +43,15 @@ def proxy_check(ip, p, proto="http", timeout=5):
     timeout: (set by default to: 5) the connection's timeout
     """
     i = False
-    if (proto == "http") or (proto == "https"):
+    if proto == "http":
+        if username==None and password==None:
+            proxy={"http": "http://" + ip + ":" + p}
+        else:
+            proxy={"http": "http://{}:{}@{}:{}".format(username,password,ip,p)}
         try:
             requests.get(
-                "http://www.google.com",
-                proxies={proto: "http://" + ip + ":" + p},
+                "http://ipinfo.io/ip",
+                proxies=proxy,
                 timeout=timeout,
             )
             i = True
@@ -56,22 +60,130 @@ def proxy_check(ip, p, proto="http", timeout=5):
     elif proto == "socks4":
         try:
             s = socks.socksocket()
-            s.setproxy(socks.PROXY_TYPE_SOCKS4, ip, p, True)
+            s.setproxy( 
+                    proxy_type=socks.SOCKS4,
+                    addr=ip,
+                    port=p,
+                    username=username,
+                    password=password,
+            )
             s.settimeout(timeout)
             s.connect(("www.google.com", 80))
+            s.close()
             i = True
         except:
             pass
     elif proto == "socks5":
         try:
             s = socks.socksocket()
-            s.setproxy(socks.PROXY_TYPE_SOCKS5, ip, p, True)
+            s.setproxy( 
+                    proxy_type=socks.SOCKS5,
+                    addr=ip,
+                    port=p,
+                    username=username,
+                    password=password,
+            )
             s.settimeout(timeout)
             s.connect(("www.google.com", 80))
+            s.close()
             i = True
         except:
             pass
     return i
+
+
+def get_tor_socks5_proxy_windows(host=tor_proxy_host,port=tor_proxy_socks5_port_windows):
+    proxy=tor_socks5_proxy.copy()
+    for x in proxy:
+        proxy[x]=proxy[x].format(host,port)
+    return proxy
+
+
+def get_tor_socks5_proxy_linux(host=tor_proxy_host,port=tor_proxy_socks5_port_linux):
+    proxy=tor_socks5_proxy.copy()
+    for x in proxy:
+        proxy[x]=proxy[x].format(host,port)
+    return proxy
+
+
+def get_tor_socks5_proxy():
+    if (sys.platform.lower() == "win32") or (sys.platform.lower() == "win64"):
+        return get_tor_socks5_proxy_windows()
+    return get_tor_socks5_proxy_linux()
+
+
+def get_burpsuit_proxy(host=burpsuit_proxy_host,port=burpsuit_proxy_port):
+    proxy=burpsuit_http_proxy.copy()
+    for x in proxy:
+        proxy[x]=proxy[x].format(host,port)
+    return proxy
+
+
+def get_socks5_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None):
+    try:
+        s = socks.socksocket()
+        s.setproxy( 
+                    proxy_type=socks.SOCKS5,
+                    addr=proxy_host,
+                    port=proxy_port,
+                    username=username,
+                    password=password,
+            )
+        s.connect((host,port))
+        return s
+    except:
+        return
+
+
+def get_socks4_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None):
+    try:
+        s = socks.socksocket()
+        s.setproxy( 
+                    proxy_type=socks.SOCKS4,
+                    addr=proxy_host,
+                    port=proxy_port,
+                    username=username,
+                    password=password,
+            )
+        s.connect((host,port))
+        return s
+    except:
+        return
+
+
+def get_http_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None):
+    try:
+        s = socks.socksocket()
+        s.setproxy( 
+                    proxy_type=socks.HTTP,
+                    addr=proxy_host,
+                    port=proxy_port,
+                    username=username,
+                    password=password,
+            )
+        s.connect((host,port))
+        return s
+    except:
+        return
+
+
+def get_socks5_proxy(proxy_host,proxy_port,username=None,password=None):
+    if username==None and password==None:
+        return {'http': 'socks5h://{}:{}'.format(proxy_host,proxy_port), 'https': 'socks5h://{}:{}'.format(proxy_host,proxy_port)}
+    return {'http': 'socks5h://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port), 'https': 'socks5h://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port)}
+
+
+def get_socks4_proxy(proxy_host,proxy_port,username=None,password=None):
+    if username==None and password==None:
+        return {'http': 'socks4h://{}:{}'.format(proxy_host,proxy_port), 'https': 'socks4h://{}:{}'.format(proxy_host,proxy_port)}
+    return {'http': 'socks4h://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port), 'https': 'socks4h://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port)}
+
+
+def get_http_proxy(proxy_host,proxy_port,username=None,password=None):
+    if username==None and password==None:
+        return {'http': 'http://{}:{}'.format(proxy_host,proxy_port), 'https': 'http://{}:{}'.format(proxy_host,proxy_port)}
+    return {'http': 'http://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port), 'https': 'http://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port)}
+
 
 
 '''def masshttp(count=None, timeout=15):

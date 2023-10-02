@@ -53,6 +53,7 @@ def crlf_header_injection(
     user_agent=None,
     cookie=None,
     debug=False,
+    headers={}
 ):
     if user_agent:
         us = user_agent
@@ -62,6 +63,7 @@ def crlf_header_injection(
         heads = {"User-Agent": us, "Cookie": cookie}
     else:
         heads = {"User-Agent": us}
+    heads.update(headers)
     try:
         r = set_requests(
             u
@@ -92,6 +94,7 @@ def crlf_body_injection(
     user_agent=None,
     cookie=None,
     debug=False,
+    headers={}
 ):
     if user_agent:
         us = user_agent
@@ -101,6 +104,7 @@ def crlf_body_injection(
         heads = {"User-Agent": us, "Cookie": cookie}
     else:
         heads = {"User-Agent": us}
+    heads.update(headers)
     try:
         r = set_requests(
             u

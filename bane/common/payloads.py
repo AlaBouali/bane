@@ -213,6 +213,40 @@ js_exposed_secrets_regexs={
 
 ssti_list=["{{payload}}","{payload}","@(payload)","${payload}","#{payload}","${{payload}}","#{{payload}}","<%= payload %>","#{set} ($run= payload ) $run","#set ($run= payload ) $run "]
 
+
+default_tor_socks5_proxy_linux={'http': 'socks5h://127.0.0.1:9050', 'https': 'socks5h://127.0.0.1:9050'}
+
+default_tor_socks5_proxy_windows={'http': 'socks5h://127.0.0.1:9150', 'https': 'socks5h://127.0.0.1:9150'}
+
+default_tor_http_proxy={'http': 'http://127.0.0.1:8118', 'https': 'http://127.0.0.1:8118'}
+
+default_burpsuit_http_proxy={
+    "http": "http://127.0.0.1:8080",
+    "https": "http://127.0.0.1:8080",
+}
+
+burpsuit_proxy_host="127.0.0.1"
+
+burpsuit_proxy_port=8080
+
+burpsuit_http_proxy={
+    "http": "http://{}:{}",
+    "https": "http://{}:{}",
+}
+
+tor_proxy_host="127.0.0.1"
+
+tor_proxy_socks5_port_windows=9150
+
+tor_proxy_socks5_port_linux=9050
+
+tor_proxy_http_port=8118
+
+tor_socks5_proxy={'http': 'socks5h://{}:{}', 'https': 'socks5h://{}:{}'}
+
+tor_http_proxy={'http': 'http://{}:{}', 'https': 'http://{}:{}'}
+
+
 seqnumber=0
 ackseq=0
 urg_ptr=0

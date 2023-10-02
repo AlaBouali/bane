@@ -1,7 +1,7 @@
 from bane.bruteforce.utils import *
 
 
-def access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None):
+def access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None,headers={}):
     if bypass == True:
         u += "#"
     if user_agent:
@@ -11,6 +11,7 @@ def access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
+    hed.update(headers)
     try:
         r = requests.get(
             u,
@@ -43,6 +44,7 @@ class force_browsing:
         cookie=None,
         proxy=None,
         proxies=None,
+        headers={}
     ):
         """
         this function is using "Forced Browsing" technique which is aim to access restricted areas without providing any credentials!!!
@@ -85,6 +87,7 @@ class force_browsing:
                 cookie,
                 proxy,
                 proxies,
+                headers,
             ),
         )
         t.daemon = threads_daemon

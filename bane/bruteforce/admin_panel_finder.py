@@ -22,7 +22,7 @@ class admin_panel_finder:
     def __init__(
         self,
         u,
-        logs=True,
+        logs=True, 
         threads_daemon=True,
         user_agent=None,
         cookie=None,
@@ -30,6 +30,7 @@ class admin_panel_finder:
         timeout=10,
         proxy=None,
         proxies=None,
+        headers={}
     ):
         self.logs = logs
         self.stop = False
@@ -46,6 +47,7 @@ class admin_panel_finder:
                 cookie,
                 proxy,
                 proxies,
+                headers,
             ),
         )
         t.daemon = threads_daemon
@@ -54,13 +56,14 @@ class admin_panel_finder:
     def crack(
         self,
         u,
-        timeout=10,
-        logs=True,
-        ext="php",
-        user_agent=None,
-        cookie=None,
-        proxy=None,
-        proxies=None,
+        timeout,
+        logs,
+        ext,
+        user_agent,
+        cookie,
+        proxy,
+        proxies,
+        headers
     ):
         links = []
         ext = ext.strip()
@@ -96,10 +99,11 @@ class admin_panel_finder:
                 hed = {"User-Agent": us}
                 if cookie:
                     hed.update({"Cookie": cookie})
+                hed.update(headers)
                 if u[len(u) - 1] == "/":
                     u = u[0 : len(u) - 1]
                 g = u + i
-                if self.logs == True:
+                if logs == True:
                     print("[*]Trying:", g)
                 r = requests.get(
                     g,
@@ -110,16 +114,16 @@ class admin_panel_finder:
                     verify=False,
                 )
                 if r.status_code == requests.codes.ok:
-                    if self.logs == True:
+                    if logs == True:
                         print("[+]FOUND!!!")
                     k.append(g)
                 else:
-                    if self.logs == True:
+                    if logs == True:
                         print("[-]failed")
             except KeyboardInterrupt:
                 break
             except Exception as e:
-                if self.logs == True:
+                if logs == True:
                     print("[-]Failed")
         self.result = {u: k}
         self.finish = True

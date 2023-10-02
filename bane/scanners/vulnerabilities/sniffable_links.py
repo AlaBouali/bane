@@ -1,6 +1,6 @@
 from bane.scanners.vulnerabilities.utils import *
 
-def sniffable_links(u, proxy=None, timeout=10, user_agent=None, cookie=None,content=None,logs=True,request_headers=None):
+def sniffable_links(u, proxy=None, timeout=10, user_agent=None, cookie=None,content=None,logs=True,request_headers=None,headers={}):
     if user_agent:
         us = user_agent
     else:
@@ -9,6 +9,7 @@ def sniffable_links(u, proxy=None, timeout=10, user_agent=None, cookie=None,cont
         heads = {"User-Agent": us, "Cookie": cookie}
     else:
         heads = {"User-Agent": us}
+    heads.update(headers)
     vul=[]
     try:
         if content==None:
@@ -62,11 +63,12 @@ def interceptable_links(
     cookie=None,
     content=None,
     logs=True,
-    pages=[]
+    pages=[],
+    headers={}
 ):
     l=[]
     if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy,headers={})
     for x in pages:
         if logs==True:
             print('\n\nPage: {}\n'.format(x))
@@ -77,6 +79,7 @@ def interceptable_links(
                         cookie=cookie,
                         content=content,
                         logs=logs,
+                        headers=headers
                         )
         if logs==True:
             for r in result:
