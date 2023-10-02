@@ -45,13 +45,14 @@ def proxy_check(ip, p, proto="http",username=None,password=None, timeout=5):
     i = False
     if proto == "http":
         if username==None and password==None:
-            proxy={"http": "http://" + ip + ":" + p}
+            proxy={"http": "http://{}:{}".format(ip,p)}
         else:
             proxy={"http": "http://{}:{}@{}:{}".format(username,password,ip,p)}
         try:
             requests.get(
                 "http://ipinfo.io/ip",
                 proxies=proxy,
+                headers={"User-Agent": random.choice(ua)},
                 timeout=timeout,
             )
             i = True
@@ -110,6 +111,13 @@ def get_tor_socks5_proxy():
     if (sys.platform.lower() == "win32") or (sys.platform.lower() == "win64"):
         return get_tor_socks5_proxy_windows()
     return get_tor_socks5_proxy_linux()
+
+
+def get_tor_http_proxy(host=tor_proxy_host,port=tor_proxy_http_port):
+    proxy=tor_http_proxy.copy()
+    for x in proxy:
+        proxy[x]=proxy[x].format(host,port)
+    return proxy
 
 
 def get_burpsuit_proxy(host=burpsuit_proxy_host,port=burpsuit_proxy_port):
