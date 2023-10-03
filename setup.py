@@ -35,11 +35,11 @@ if termux==False:
 #protobuf==3.6.1
 
 if  sys.version_info < (3,0):
- req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","scapy","stem","cfscrape","google","colorama","dnspython"]
+ req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","stem","cfscrape","google","colorama","dnspython"]
  if adr==True:
-    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","cfscrape","scapy","google","colorama","dnspython"]
+    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","cfscrape","scapy==2.4.0","google","colorama","dnspython"]
  if termux==True:
-    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","scapy","cfscrape","google","colorama","dnspython"]
+    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","cfscrape","google","colorama","dnspython"]
 else:
  req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql","kamene==0.32","stem","cfscrape","google","colorama","dnspython"]
  if adr==True:
@@ -61,7 +61,7 @@ if platform.system()=='Java':
 
 setuptools.setup(
     name="bane",
-    version="4.9.6",
+    version="4.9.7",
     author="AlaBouali",
     author_email="trap.leader.123@gmail.com",
     description="cyber security library, penetration testing module",

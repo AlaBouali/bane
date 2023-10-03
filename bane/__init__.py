@@ -1,11 +1,11 @@
 #coding: utf-8
 
 
-__version__='4.9.6'
+__version__='4.9.7'
 
 __author__="Ala Bouali"
 
-__author_nicknames__=["Merlin", "Chaotic Mind", "Ala", "Mr. Ego", "G0D Ala"]
+__author_nicknames__=["Merlin", "Chaotic Mind", "Ala", "Mr. Ego"]
 
 __author_email__="ala.bouali.1997@gmail.com"
 
