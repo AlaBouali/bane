@@ -53,15 +53,15 @@ req+=['jsbeautifier','tldextract']
 if platform.system()=='Java':
     if "stem" in req:
         req.remove("stem")
-    if "scapy" in req:
-      req.remove('scapy')
+    if "scapy==2.4.0" in req:
+      req.remove('scapy==2.4.0')
     if "jsbeautifier" in req:
       req.remove('jsbeautifier')
 
 
 setuptools.setup(
     name="bane",
-    version="4.9.7",
+    version="4.9.8",
     author="AlaBouali",
     author_email="trap.leader.123@gmail.com",
     description="cyber security library, penetration testing module",
