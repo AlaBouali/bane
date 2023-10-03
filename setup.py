@@ -49,7 +49,7 @@ else:
 if (sys.platform == "win32") or( sys.platform == "win64"):
  req+=["win_inet_pton"]
 
-req.append('jsbeautifier')
+req+=['jsbeautifier','tldextract']
 if platform.system()=='Java':
     if "stem" in req:
         req.remove("stem")
