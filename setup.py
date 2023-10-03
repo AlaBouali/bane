@@ -55,11 +55,13 @@ if platform.system()=='Java':
         req.remove("stem")
     if "scapy" in req:
       req.remove('scapy')
+    if "jsbeautifier" in req:
+      req.remove('jsbeautifier')
 
 
 setuptools.setup(
     name="bane",
-    version="4.9.3",
+    version="4.9.4",
     author="AlaBouali",
     author_email="trap.leader.123@gmail.com",
     description="cyber security library, penetration testing module",

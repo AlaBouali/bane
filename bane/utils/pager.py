@@ -1,5 +1,9 @@
-import requests, random, re, time, furl, sys, datetime , string,jsbeautifier,json,ast
+import requests, random, re, time, furl, sys, datetime , string,json,ast
 
+try:
+    import jsbeautifier
+except:
+    pass
 if sys.version_info < (3, 0):
     from urlparse import urlparse,urljoin
     from urllib import unquote as url_decode
