@@ -3,7 +3,6 @@ from bane.common.payloads import *
 from bane.scanners.vulnerabilities.vulns import adb_exploit, exposed_telnet
 from ftplib import FTP
 
-import mysqlcp
 from bane.bruteforce.hydra import *
 from bane.utils.handle_files import write_file
 

@@ -90,7 +90,8 @@ now let's start some tutorials, shall we?
 I-INSTALLING THE LIBRARY AND IMPORTING:
 ---------------------------------------------------------------------------------------------------------------------------
 if you are using windows , please, first download and install "npcap" from <a href="https://npcap.com/#download">here</a> and restart your computer after that. then install bane.<br>
-you can use pip to do that ( if you are on linux you must run it with "sudo" ) :
+also, if you are using "jython" , please got the location of the jython "site-packages" example: "C:\jython\Lib\site-packages\dns" , open the file "resolver.py" and comment the line "1149" : <b>socket.SOCK_DGRAM: [socket.SOL_UDP],</b> by putting "#" in front of it.<br>
+you can use pip to do install bane ( if you are on linux you must run it with "sudo" ) :
 
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">pip install bane</pre></div>

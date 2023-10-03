@@ -1,7 +1,7 @@
 #coding: utf-8
 
 
-__version__='4.9.5'
+__version__='4.9.6'
 
 __author__="Ala Bouali"
 
