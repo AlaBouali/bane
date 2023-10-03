@@ -1,5 +1,14 @@
-import subprocess, os, xtelnet, sys, cgi, re, json
+import subprocess, os, xtelnet, sys, cgi, re, json,platform
 from colorama import Fore, Back, Style
+
+if platform.system()=='Java':
+        Fore.WHITE = ""
+        Fore.GREEN = ""
+        Fore.RED = ""
+        Fore.YELLOW = ""
+        Fore.BLUE = ""
+        Fore.MAGENTA = ""
+        Style.RESET_ALL = ""
 
 if sys.version_info < (3, 0):
     if (sys.platform.lower() == "win32") or (sys.platform.lower() == "win64"):

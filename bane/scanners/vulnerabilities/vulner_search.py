@@ -14,6 +14,8 @@ def vulners_search(
     proxy=None,
     timeout=20,
 ):
+    if api_key==None:
+        api_key=''
     if not file_name:
         if version:
             file_name = software + "_" + version.replace(".", "-")

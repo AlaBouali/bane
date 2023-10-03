@@ -1,7 +1,7 @@
 from bane.scanners.vulnerabilities.utils import *
 from bane.scanners.vulnerabilities.vulner_search import vulners_search
 
-def scan_backend_technology(u, proxy=None, timeout=10, user_agent=None, cookie=None, logs=True,request_headers=None,headers={}):
+def scan_backend_technology(u, proxy=None, timeout=10, user_agent=None, cookie=None, logs=True,request_headers=None,headers={},api_key=None):
     domain=u.split('://')[1].split('/')[0].split(':')[0]
     root_domain=extract_root_domain(domain)
     ip=socket.gethostbyname(domain.split(':')[0])
@@ -39,7 +39,7 @@ def scan_backend_technology(u, proxy=None, timeout=10, user_agent=None, cookie=N
                     if logs==True:
                         print('\t[-] unknown version\n')
                 else:
-                    bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=proxy)
+                    bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=proxy,api_key=api_key)
                 for x in bk:
                     for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
                         try:
@@ -62,7 +62,7 @@ def scan_backend_technology(u, proxy=None, timeout=10, user_agent=None, cookie=N
                     if logs==True:
                         print('[i] looking for exploits for : {}\n'.format(sv))
                     if '/' in sv:
-                        sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=proxy)
+                        sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=proxy,api_key=api_key)
                     else:
                         if logs==True:
                             print('\t[-] unknown version\n')

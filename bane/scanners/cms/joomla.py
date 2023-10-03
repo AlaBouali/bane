@@ -1,6 +1,6 @@
 from bane.scanners.cms.utils import *
 
-def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={}):
+def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None):
     domain=u.split('://')[1].split('/')[0].split(':')[0]
     root_domain=extract_root_domain(domain)
     ip=socket.gethostbyname(domain.split(':')[0])
@@ -45,7 +45,7 @@ def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=Tr
     if version!='':
         if logs==True:
             print('[i] looking for exploits for version: {}\n'.format(version))
-        wpvulns=vulners_search('joomla',version=version,proxy=proxy)
+        wpvulns=vulners_search('joomla',version=version,proxy=proxy,api_key=api_key)
         for x in wpvulns:
             if 'joomla' in x['title'].lower() or 'joomla' in x['description'].lower():
                 wp_vulns.append(x)
@@ -72,7 +72,7 @@ def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=Tr
                 if logs==True:
                     print('\t[-] unknown version\n')
             else:
-                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=proxy)
+                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=proxy,api_key=api_key)
             for x in bk:
                 for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
                     try:
@@ -95,7 +95,7 @@ def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=Tr
                 if logs==True:
                     print('[i] looking for exploits for : {}\n'.format(sv))
                 if '/' in sv:
-                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=proxy)
+                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=proxy,api_key=api_key)
                 else:
                     if logs==True:
                         print('\t[-] unknown version\n')

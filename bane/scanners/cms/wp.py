@@ -514,7 +514,7 @@ def fetch_wp_exploits(s,max_tries=3,proxy=None,user_agent=None,timeout=15,cookie
 
 
 
-def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,proxy=None,user_enum_start=1,user_enum_end=20,wpscan_cookie=None,sleep_time_min=10,sleep_time_max=20,when_blocked_sleep=30,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={}):
+def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,proxy=None,user_enum_start=1,user_enum_end=20,wpscan_cookie=None,sleep_time_min=10,sleep_time_max=20,when_blocked_sleep=30,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None):
     domain=u.split('://')[1].split('/')[0].split(':')[0]
     root_domain=extract_root_domain(domain)
     ip=socket.gethostbyname(domain.split(':')[0])
@@ -632,7 +632,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
     if wp_version!='':
         if logs==True:
             print('[i] looking for exploits for version: {}\n'.format(wp_version))
-        wpvulns=vulners_search('wordpress',version=wp_version,proxy=proxy)
+        wpvulns=vulners_search('wordpress',version=wp_version,proxy=proxy,api_key=api_key)
         for x in wpvulns:
             if 'wordpress' in x['title'].lower() or 'wordpress' in x['description'].lower():
                 wp_vulns.append(x)
@@ -659,7 +659,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
                 if logs==True:
                     print('\t[-] unknown version\n')
             else:
-                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=proxy)
+                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=proxy,api_key=api_key)
             for x in bk:
                 for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
                     try:
@@ -682,7 +682,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
                 if logs==True:
                     print('[i] looking for exploits for : {}\n'.format(sv))
                 if '/' in sv:
-                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=proxy)
+                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=proxy,api_key=api_key)
                 else:
                     if logs==True:
                         print('\t[-] unknown version\n')
