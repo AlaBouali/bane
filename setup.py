@@ -1,8 +1,7 @@
 #for windows you need to download: winpcap: http://www.win10pcap.org/download/
 import sys,setuptools,os,subprocess,platform
-long_description=""
-"""with open("README.md", "r") as fh:
-    long_description = fh.read()"""
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 termux=False
 
 if os.path.isdir('/home/')==True:
@@ -50,6 +49,7 @@ else:
 if (sys.platform == "win32") or( sys.platform == "win64"):
  req+=["win_inet_pton"]
 
+req.append('jsbeautifier')
 if platform.system()=='Java':
     if "stem" in req:
         req.remove("stem")
