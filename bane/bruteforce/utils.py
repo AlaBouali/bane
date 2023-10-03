@@ -9,7 +9,7 @@ if os.path.isdir("/data/data") == True:
     adr = True
 if os.path.isdir("/data/data/com.termux/") == True:
     termux = True
-import mysqlcp
+import pymysql
 from ..utils.pager import *
 from ..scanners.cms.wp import wpadmin
 from ..cryptographers.hasher import *

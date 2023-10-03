@@ -147,8 +147,8 @@ def ftp(ip, username, password, timeout=5):
 
 def mysql(u, username, password, timeout=5, p=3306):
     try:
-        s = mysqlcp.session(u, username, password, timeout=timeout, port=p)
-        s.destroy()
+        s=pymysql.connect(host=u,port=p,user=username,password=password,connect_timeout=timeout)
+        s.close()
         return True
     except Exception as e:
         pass

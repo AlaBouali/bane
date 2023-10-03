@@ -5,7 +5,7 @@ try:
     from stem import Signal
     from stem.control import Controller
 except:
-    pass
+    stem=None
 
 
 def tor_switch_no_password(interval=30, logs=True):
@@ -23,7 +23,7 @@ def tor_switch_no_password(interval=30, logs=True):
     >>>bane.torswitch1(new=15)
     """
     i = True
-    if (sys.platform == "win32") or (sys.platform == "win64"):
+    if (sys.platform == "win32") or (sys.platform == "win64") or stem==None:
         print("[-]This option is not for windows")
         i = False
     if i == True:

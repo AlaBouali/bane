@@ -1,7 +1,8 @@
 #for windows you need to download: winpcap: http://www.win10pcap.org/download/
-import sys,setuptools,os,subprocess
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+import sys,setuptools,os,subprocess,platform
+long_description=""
+"""with open("README.md", "r") as fh:
+    long_description = fh.read()"""
 termux=False
 
 if os.path.isdir('/home/')==True:
@@ -35,24 +36,30 @@ if termux==False:
 #protobuf==3.6.1
 
 if  sys.version_info < (3,0):
- req=["furl","future","xtelnet","requests","PySocks","bs4","mysqlcp","scapy","stem","cfscrape","google","colorama","dnspython"]
+ req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","scapy","stem","cfscrape","google","colorama","dnspython"]
  if adr==True:
-    req=["furl","future","xtelnet","requests","PySocks","bs4","mysqlcp","cfscrape","scapy","google","colorama","dnspython"]
+    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","cfscrape","scapy","google","colorama","dnspython"]
  if termux==True:
-    req=["furl","future","xtelnet","requests","PySocks","bs4","mysqlcp","scapy","cfscrape","google","colorama","dnspython"]
+    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","scapy","cfscrape","google","colorama","dnspython"]
 else:
- req=["furl","future","xtelnet","requests","PySocks","bs4","mysqlcp","kamene==0.32","stem","cfscrape","google","colorama","dnspython"]
+ req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql","kamene==0.32","stem","cfscrape","google","colorama","dnspython"]
  if adr==True:
-    req=["furl","future","xtelnet","requests","PySocks","bs4","mysqlcp","cfscrape","kamene==0.32","google","colorama","dnspython"]
+    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql","cfscrape","kamene==0.32","google","colorama","dnspython"]
  if termux==True:
-    req=["furl","future","xtelnet","requests","PySocks","bs4","mysqlcp","kamene==0.32","cfscrape","google","colorama","dnspython"]
+    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql","kamene==0.32","cfscrape","google","colorama","dnspython"]
 if (sys.platform == "win32") or( sys.platform == "win64"):
  req+=["win_inet_pton"]
+
+if platform.system()=='Java':
+    if "stem" in req:
+        req.remove("stem")
+    if "scapy" in req:
+      req.remove('scapy')
 
 
 setuptools.setup(
     name="bane",
-    version="4.9.1",
+    version="4.9.2",
     author="AlaBouali",
     author_email="trap.leader.123@gmail.com",
     description="cyber security library, penetration testing module",

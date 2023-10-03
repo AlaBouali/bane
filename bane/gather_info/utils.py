@@ -3,16 +3,19 @@ import bs4
 from bs4 import BeautifulSoup
 from bane.common.payloads import *
 import tldextract
-if sys.version_info < (3, 0):
-    from scapy.config import conf
+try:
+    if sys.version_info < (3, 0):
+        from scapy.config import conf
 
-    conf.ipv6_enabled = False
-    from scapy.all import *
-else:
-    from kamene.config import conf
+        conf.ipv6_enabled = False
+        from scapy.all import *
+    else:
+        from kamene.config import conf
 
-    conf.ipv6_enabled = False
-    from kamene.all import IP,TCP,sr
+        conf.ipv6_enabled = False
+        from kamene.all import IP,TCP,sr
+except:
+    pass
 if os.path.isdir("/data/data/com.termux/") == False:
     import dns.resolver
 

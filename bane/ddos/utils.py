@@ -7,10 +7,13 @@ if sys.version_info < (3, 0):
     # Python 2.x
     import httplib
     import urllib2
-    from scapy.config import conf
+    try:
+        from scapy.config import conf
 
-    conf.ipv6_enabled = False
-    from scapy.all import *
+        conf.ipv6_enabled = False
+        from scapy.all import *
+    except:
+        pass
 else:
     # Python 3.x
     import http.client
