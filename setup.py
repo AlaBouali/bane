@@ -59,7 +59,7 @@ if platform.system()=='Java':
 
 setuptools.setup(
     name="bane",
-    version="4.9.2",
+    version="4.9.3",
     author="AlaBouali",
     author_email="trap.leader.123@gmail.com",
     description="cyber security library, penetration testing module",
