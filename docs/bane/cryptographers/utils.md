@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>bane.cryptographers.md5 API documentation</title>
+<title>bane.cryptographers.utils API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,39 +19,14 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>bane.cryptographers.md5</code></h1>
+<h1 class="title">Module <code>bane.cryptographers.utils</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from bane.cryptographers.utils import *
-
-def md5_string(w, encode=None):
-    if w:
-        if encode:
-            w.encode(encode)
-        &#34;&#34;&#34;
-   function to return md5 encrypted string
-  &#34;&#34;&#34;
-        return hashlib.md5(w).hexdigest()
-
-
-def md5_file(f):
-    if f:
-        with open(f, &#34;rb&#34;) as f:
-            w = f.read()
-        f.close()
-        return md5_string(w)
-
-
-def dmd5(w, z):
-    if w and z:
-        w = hashlib.md5(w).hexdigest()
-        if w == z:
-            return True
-        return False</code></pre>
+<pre><code class="python">import hashlib, base64, sys</code></pre>
 </details>
 </section>
 <section>
@@ -59,62 +34,6 @@ def dmd5(w, z):
 <section>
 </section>
 <section>
-<h2 class="section-title" id="header-functions">Functions</h2>
-<dl>
-<dt id="bane.cryptographers.md5.dmd5"><code class="name flex">
-<span>def <span class="ident">dmd5</span></span>(<span>w, z)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def dmd5(w, z):
-    if w and z:
-        w = hashlib.md5(w).hexdigest()
-        if w == z:
-            return True
-        return False</code></pre>
-</details>
-</dd>
-<dt id="bane.cryptographers.md5.md5_file"><code class="name flex">
-<span>def <span class="ident">md5_file</span></span>(<span>f)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def md5_file(f):
-    if f:
-        with open(f, &#34;rb&#34;) as f:
-            w = f.read()
-        f.close()
-        return md5_string(w)</code></pre>
-</details>
-</dd>
-<dt id="bane.cryptographers.md5.md5_string"><code class="name flex">
-<span>def <span class="ident">md5_string</span></span>(<span>w, encode=None)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def md5_string(w, encode=None):
-    if w:
-        if encode:
-            w.encode(encode)
-        &#34;&#34;&#34;
-   function to return md5 encrypted string
-  &#34;&#34;&#34;
-        return hashlib.md5(w).hexdigest()</code></pre>
-</details>
-</dd>
-</dl>
 </section>
 <section>
 </section>
@@ -127,14 +46,7 @@ def dmd5(w, z):
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="bane.cryptographers" href="index.html">bane.cryptographers</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="">
-<li><code><a title="bane.cryptographers.md5.dmd5" href="#bane.cryptographers.md5.dmd5">dmd5</a></code></li>
-<li><code><a title="bane.cryptographers.md5.md5_file" href="#bane.cryptographers.md5.md5_file">md5_file</a></code></li>
-<li><code><a title="bane.cryptographers.md5.md5_string" href="#bane.cryptographers.md5.md5_string">md5_string</a></code></li>
+<li><code><a title="bane.cryptographers" href="index.md">bane.cryptographers</a></code></li>
 </ul>
 </li>
 </ul>

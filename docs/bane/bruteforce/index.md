@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>bane.cryptographers.caesar API documentation</title>
+<title>bane.bruteforce API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,133 +19,60 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>bane.cryptographers.caesar</code></h1>
+<h1 class="title">Module <code>bane.bruteforce</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def caesar_string(w, k):
-    if (type(k) is not int) or (k not in range(1, 27)):
-        raise Exception(&#34;the key must be an integer between: 1 and 26&#34;)
-    if (not w) or (len(w) == 0):
-        raise Exception(&#34;You must provide data&#34;)
-    a = &#34;abcdefghijklmnopqrstuvwxyz&#34;
-    b = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;
-    c = &#34;&#34;
-    for i in w:
-        &#34;&#34;&#34;if (k&gt;26) or (k&lt;1) or (ord(i) not in range(32,127)):
-        break&#34;&#34;&#34;
-        if i in a:
-            c += a[(a.index(i) + k) % 26]
-        elif i in b:
-            c += b[(b.index(i) + k) % 26]
-        else:
-            c += i
-    return c
-
-
-&#34;&#34;&#34;
-  function to do simple caesar decryption lol.
-  
-  it takes 2 arguments:
-
-  the first one is the string to decrypt and the second is the second is the decryption key (integer between: 1 and 26)
-
-  example:
-
-  &gt;&gt;&gt; bane.dcaesar(&#39;fqf&#39;,5)
-  &#39;ala&#39;
-&#34;&#34;&#34;
-
-
-def dcaesar(w, k):
-    if (type(k) is not int) or (k not in range(1, 27)):
-        raise Exception(&#34;the key must be an integer between: 1 and 26&#34;)
-    if (not w) or (len(w) == 0):
-        raise Exception(&#34;You must provide data&#34;)
-    a = &#34;abcdefghijklmnopqrstuvwxyz&#34;
-    b = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;
-    c = &#34;&#34;
-    for i in w:
-        &#34;&#34;&#34;if (k&gt;26) or (k&lt;1) or (ord(i) not in range(32,128)):
-        break&#34;&#34;&#34;
-        if i in a:
-            c += a[(a.index(i) - k) % 26]
-        elif i in b:
-            c += b[(b.index(i) - k) % 26]
-        else:
-            c += i
-    return c</code></pre>
+<pre><code class="python">from .bruteforcer import *</code></pre>
 </details>
 </section>
 <section>
-</section>
-<section>
-</section>
-<section>
-<h2 class="section-title" id="header-functions">Functions</h2>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
-<dt id="bane.cryptographers.caesar.caesar_string"><code class="name flex">
-<span>def <span class="ident">caesar_string</span></span>(<span>w, k)</span>
-</code></dt>
+<dt><code class="name"><a title="bane.bruteforce.admin_panel_finder" href="admin_panel_finder.md">bane.bruteforce.admin_panel_finder</a></code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def caesar_string(w, k):
-    if (type(k) is not int) or (k not in range(1, 27)):
-        raise Exception(&#34;the key must be an integer between: 1 and 26&#34;)
-    if (not w) or (len(w) == 0):
-        raise Exception(&#34;You must provide data&#34;)
-    a = &#34;abcdefghijklmnopqrstuvwxyz&#34;
-    b = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;
-    c = &#34;&#34;
-    for i in w:
-        &#34;&#34;&#34;if (k&gt;26) or (k&lt;1) or (ord(i) not in range(32,127)):
-        break&#34;&#34;&#34;
-        if i in a:
-            c += a[(a.index(i) + k) % 26]
-        elif i in b:
-            c += b[(b.index(i) + k) % 26]
-        else:
-            c += i
-    return c</code></pre>
-</details>
 </dd>
-<dt id="bane.cryptographers.caesar.dcaesar"><code class="name flex">
-<span>def <span class="ident">dcaesar</span></span>(<span>w, k)</span>
-</code></dt>
+<dt><code class="name"><a title="bane.bruteforce.bruteforcer" href="bruteforcer.md">bane.bruteforce.bruteforcer</a></code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def dcaesar(w, k):
-    if (type(k) is not int) or (k not in range(1, 27)):
-        raise Exception(&#34;the key must be an integer between: 1 and 26&#34;)
-    if (not w) or (len(w) == 0):
-        raise Exception(&#34;You must provide data&#34;)
-    a = &#34;abcdefghijklmnopqrstuvwxyz&#34;
-    b = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;
-    c = &#34;&#34;
-    for i in w:
-        &#34;&#34;&#34;if (k&gt;26) or (k&lt;1) or (ord(i) not in range(32,128)):
-        break&#34;&#34;&#34;
-        if i in a:
-            c += a[(a.index(i) - k) % 26]
-        elif i in b:
-            c += b[(b.index(i) - k) % 26]
-        else:
-            c += i
-    return c</code></pre>
-</details>
+</dd>
+<dt><code class="name"><a title="bane.bruteforce.decrypt" href="decrypt.md">bane.bruteforce.decrypt</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.bruteforce.filemanager_finder" href="filemanager_finder.md">bane.bruteforce.filemanager_finder</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.bruteforce.force_browsing" href="force_browsing.md">bane.bruteforce.force_browsing</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.bruteforce.http_auth" href="http_auth.md">bane.bruteforce.http_auth</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.bruteforce.hydra" href="hydra.md">bane.bruteforce.hydra</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.bruteforce.utils" href="utils.md">bane.bruteforce.utils</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.bruteforce.web_login" href="web_login.md">bane.bruteforce.web_login</a></code></dt>
+<dd>
+<div class="desc"></div>
 </dd>
 </dl>
+</section>
+<section>
+</section>
+<section>
 </section>
 <section>
 </section>
@@ -158,13 +85,20 @@ def dcaesar(w, k):
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="bane.cryptographers" href="index.html">bane.cryptographers</a></code></li>
+<li><code><a title="bane" href="../index.md">bane</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="">
-<li><code><a title="bane.cryptographers.caesar.caesar_string" href="#bane.cryptographers.caesar.caesar_string">caesar_string</a></code></li>
-<li><code><a title="bane.cryptographers.caesar.dcaesar" href="#bane.cryptographers.caesar.dcaesar">dcaesar</a></code></li>
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="bane.bruteforce.admin_panel_finder" href="admin_panel_finder.md">bane.bruteforce.admin_panel_finder</a></code></li>
+<li><code><a title="bane.bruteforce.bruteforcer" href="bruteforcer.md">bane.bruteforce.bruteforcer</a></code></li>
+<li><code><a title="bane.bruteforce.decrypt" href="decrypt.md">bane.bruteforce.decrypt</a></code></li>
+<li><code><a title="bane.bruteforce.filemanager_finder" href="filemanager_finder.md">bane.bruteforce.filemanager_finder</a></code></li>
+<li><code><a title="bane.bruteforce.force_browsing" href="force_browsing.md">bane.bruteforce.force_browsing</a></code></li>
+<li><code><a title="bane.bruteforce.http_auth" href="http_auth.md">bane.bruteforce.http_auth</a></code></li>
+<li><code><a title="bane.bruteforce.hydra" href="hydra.md">bane.bruteforce.hydra</a></code></li>
+<li><code><a title="bane.bruteforce.utils" href="utils.md">bane.bruteforce.utils</a></code></li>
+<li><code><a title="bane.bruteforce.web_login" href="web_login.md">bane.bruteforce.web_login</a></code></li>
 </ul>
 </li>
 </ul>

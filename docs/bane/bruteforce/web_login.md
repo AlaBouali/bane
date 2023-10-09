@@ -443,7 +443,7 @@ class web_login_bruteforce:
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="bane.bruteforce" href="index.html">bane.bruteforce</a></code></li>
+<li><code><a title="bane.bruteforce" href="index.md">bane.bruteforce</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>

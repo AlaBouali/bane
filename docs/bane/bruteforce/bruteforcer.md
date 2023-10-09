@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>bane.bruteforce API documentation</title>
+<title>bane.bruteforce.bruteforcer API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,56 +19,23 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>bane.bruteforce</code></h1>
+<h1 class="title">Module <code>bane.bruteforce.bruteforcer</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from .bruteforcer import *</code></pre>
+<pre><code class="python">from bane.bruteforce.admin_panel_finder import *
+from bane.bruteforce.decrypt import *
+from bane.bruteforce.filemanager_finder import *
+from bane.bruteforce.force_browsing import *
+from bane.bruteforce.http_auth import *
+from bane.bruteforce.hydra import *
+from bane.bruteforce.web_login import *</code></pre>
 </details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
-<dl>
-<dt><code class="name"><a title="bane.bruteforce.admin_panel_finder" href="admin_panel_finder.html">bane.bruteforce.admin_panel_finder</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.bruteforce.bruteforcer" href="bruteforcer.html">bane.bruteforce.bruteforcer</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.bruteforce.decrypt" href="decrypt.html">bane.bruteforce.decrypt</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.bruteforce.filemanager_finder" href="filemanager_finder.html">bane.bruteforce.filemanager_finder</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.bruteforce.force_browsing" href="force_browsing.html">bane.bruteforce.force_browsing</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.bruteforce.http_auth" href="http_auth.html">bane.bruteforce.http_auth</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.bruteforce.hydra" href="hydra.html">bane.bruteforce.hydra</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.bruteforce.utils" href="utils.html">bane.bruteforce.utils</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.bruteforce.web_login" href="web_login.html">bane.bruteforce.web_login</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-</dl>
 </section>
 <section>
 </section>
@@ -85,20 +52,7 @@
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="bane" href="../index.html">bane</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
-<ul>
-<li><code><a title="bane.bruteforce.admin_panel_finder" href="admin_panel_finder.html">bane.bruteforce.admin_panel_finder</a></code></li>
-<li><code><a title="bane.bruteforce.bruteforcer" href="bruteforcer.html">bane.bruteforce.bruteforcer</a></code></li>
-<li><code><a title="bane.bruteforce.decrypt" href="decrypt.html">bane.bruteforce.decrypt</a></code></li>
-<li><code><a title="bane.bruteforce.filemanager_finder" href="filemanager_finder.html">bane.bruteforce.filemanager_finder</a></code></li>
-<li><code><a title="bane.bruteforce.force_browsing" href="force_browsing.html">bane.bruteforce.force_browsing</a></code></li>
-<li><code><a title="bane.bruteforce.http_auth" href="http_auth.html">bane.bruteforce.http_auth</a></code></li>
-<li><code><a title="bane.bruteforce.hydra" href="hydra.html">bane.bruteforce.hydra</a></code></li>
-<li><code><a title="bane.bruteforce.utils" href="utils.html">bane.bruteforce.utils</a></code></li>
-<li><code><a title="bane.bruteforce.web_login" href="web_login.html">bane.bruteforce.web_login</a></code></li>
+<li><code><a title="bane.bruteforce" href="index.md">bane.bruteforce</a></code></li>
 </ul>
 </li>
 </ul>

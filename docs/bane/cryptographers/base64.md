@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>bane.cryptographers.sha384 API documentation</title>
+<title>bane.cryptographers.base64 API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,7 +19,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>bane.cryptographers.sha384</code></h1>
+<h1 class="title">Module <code>bane.cryptographers.base64</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
@@ -28,29 +28,41 @@
 </summary>
 <pre><code class="python">from bane.cryptographers.utils import *
 
-def sha384_string(w, encode=None):
+def base64_encode(w, encode=None):
     if w:
         if encode:
             w.encode(encode)
         &#34;&#34;&#34;
-   function to return sha384 encrypted string
+   function to return base64 encoded string
   &#34;&#34;&#34;
-        return hashlib.sha384(w).hexdigest()
+        return base64.b64encode(w)
 
-def sha384_file(f):
+
+def base64_decode(w, encode=None):
+    if w:
+        if encode:
+            w.encode(encode)
+        &#34;&#34;&#34;
+   function to return base64 decoded string
+  &#34;&#34;&#34;
+        return base64.b64decode(w)
+
+
+
+def base64_encode_file(f):
     if f:
         with open(f, &#34;rb&#34;) as f:
             w = f.read()
         f.close()
-        return sha384_string(w)
+        return base64_encode(w)
 
 
-def dsha384(w, z):
-    if w and z:
-        w = hashlib.sha384(w).hexdigest()
-        if w == z:
-            return True
-        return False</code></pre>
+def base64_decode_file(f):
+    if f:
+        with open(f, &#34;rb&#34;) as f:
+            w = f.read()
+        f.close()
+        return base64_decode(w)</code></pre>
 </details>
 </section>
 <section>
@@ -60,8 +72,8 @@ def dsha384(w, z):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="bane.cryptographers.sha384.dsha384"><code class="name flex">
-<span>def <span class="ident">dsha384</span></span>(<span>w, z)</span>
+<dt id="bane.cryptographers.base64.base64_decode"><code class="name flex">
+<span>def <span class="ident">base64_decode</span></span>(<span>w, encode=None)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -69,48 +81,67 @@ def dsha384(w, z):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def dsha384(w, z):
-    if w and z:
-        w = hashlib.sha384(w).hexdigest()
-        if w == z:
-            return True
-        return False</code></pre>
-</details>
-</dd>
-<dt id="bane.cryptographers.sha384.sha384_file"><code class="name flex">
-<span>def <span class="ident">sha384_file</span></span>(<span>f)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def sha384_file(f):
-    if f:
-        with open(f, &#34;rb&#34;) as f:
-            w = f.read()
-        f.close()
-        return sha384_string(w)</code></pre>
-</details>
-</dd>
-<dt id="bane.cryptographers.sha384.sha384_string"><code class="name flex">
-<span>def <span class="ident">sha384_string</span></span>(<span>w, encode=None)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def sha384_string(w, encode=None):
+<pre><code class="python">def base64_decode(w, encode=None):
     if w:
         if encode:
             w.encode(encode)
         &#34;&#34;&#34;
-   function to return sha384 encrypted string
+   function to return base64 decoded string
   &#34;&#34;&#34;
-        return hashlib.sha384(w).hexdigest()</code></pre>
+        return base64.b64decode(w)</code></pre>
+</details>
+</dd>
+<dt id="bane.cryptographers.base64.base64_decode_file"><code class="name flex">
+<span>def <span class="ident">base64_decode_file</span></span>(<span>f)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def base64_decode_file(f):
+    if f:
+        with open(f, &#34;rb&#34;) as f:
+            w = f.read()
+        f.close()
+        return base64_decode(w)</code></pre>
+</details>
+</dd>
+<dt id="bane.cryptographers.base64.base64_encode"><code class="name flex">
+<span>def <span class="ident">base64_encode</span></span>(<span>w, encode=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def base64_encode(w, encode=None):
+    if w:
+        if encode:
+            w.encode(encode)
+        &#34;&#34;&#34;
+   function to return base64 encoded string
+  &#34;&#34;&#34;
+        return base64.b64encode(w)</code></pre>
+</details>
+</dd>
+<dt id="bane.cryptographers.base64.base64_encode_file"><code class="name flex">
+<span>def <span class="ident">base64_encode_file</span></span>(<span>f)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def base64_encode_file(f):
+    if f:
+        with open(f, &#34;rb&#34;) as f:
+            w = f.read()
+        f.close()
+        return base64_encode(w)</code></pre>
 </details>
 </dd>
 </dl>
@@ -126,14 +157,15 @@ def dsha384(w, z):
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="bane.cryptographers" href="index.html">bane.cryptographers</a></code></li>
+<li><code><a title="bane.cryptographers" href="index.md">bane.cryptographers</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="bane.cryptographers.sha384.dsha384" href="#bane.cryptographers.sha384.dsha384">dsha384</a></code></li>
-<li><code><a title="bane.cryptographers.sha384.sha384_file" href="#bane.cryptographers.sha384.sha384_file">sha384_file</a></code></li>
-<li><code><a title="bane.cryptographers.sha384.sha384_string" href="#bane.cryptographers.sha384.sha384_string">sha384_string</a></code></li>
+<li><code><a title="bane.cryptographers.base64.base64_decode" href="#bane.cryptographers.base64.base64_decode">base64_decode</a></code></li>
+<li><code><a title="bane.cryptographers.base64.base64_decode_file" href="#bane.cryptographers.base64.base64_decode_file">base64_decode_file</a></code></li>
+<li><code><a title="bane.cryptographers.base64.base64_encode" href="#bane.cryptographers.base64.base64_encode">base64_encode</a></code></li>
+<li><code><a title="bane.cryptographers.base64.base64_encode_file" href="#bane.cryptographers.base64.base64_encode_file">base64_encode_file</a></code></li>
 </ul>
 </li>
 </ul>

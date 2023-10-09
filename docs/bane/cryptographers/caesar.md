@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>bane.cryptographers API documentation</title>
+<title>bane.cryptographers.caesar API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,68 +19,133 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>bane.cryptographers</code></h1>
+<h1 class="title">Module <code>bane.cryptographers.caesar</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from .hasher import *</code></pre>
+<pre><code class="python">def caesar_string(w, k):
+    if (type(k) is not int) or (k not in range(1, 27)):
+        raise Exception(&#34;the key must be an integer between: 1 and 26&#34;)
+    if (not w) or (len(w) == 0):
+        raise Exception(&#34;You must provide data&#34;)
+    a = &#34;abcdefghijklmnopqrstuvwxyz&#34;
+    b = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;
+    c = &#34;&#34;
+    for i in w:
+        &#34;&#34;&#34;if (k&gt;26) or (k&lt;1) or (ord(i) not in range(32,127)):
+        break&#34;&#34;&#34;
+        if i in a:
+            c += a[(a.index(i) + k) % 26]
+        elif i in b:
+            c += b[(b.index(i) + k) % 26]
+        else:
+            c += i
+    return c
+
+
+&#34;&#34;&#34;
+  function to do simple caesar decryption lol.
+  
+  it takes 2 arguments:
+
+  the first one is the string to decrypt and the second is the second is the decryption key (integer between: 1 and 26)
+
+  example:
+
+  &gt;&gt;&gt; bane.dcaesar(&#39;fqf&#39;,5)
+  &#39;ala&#39;
+&#34;&#34;&#34;
+
+
+def dcaesar(w, k):
+    if (type(k) is not int) or (k not in range(1, 27)):
+        raise Exception(&#34;the key must be an integer between: 1 and 26&#34;)
+    if (not w) or (len(w) == 0):
+        raise Exception(&#34;You must provide data&#34;)
+    a = &#34;abcdefghijklmnopqrstuvwxyz&#34;
+    b = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;
+    c = &#34;&#34;
+    for i in w:
+        &#34;&#34;&#34;if (k&gt;26) or (k&lt;1) or (ord(i) not in range(32,128)):
+        break&#34;&#34;&#34;
+        if i in a:
+            c += a[(a.index(i) - k) % 26]
+        elif i in b:
+            c += b[(b.index(i) - k) % 26]
+        else:
+            c += i
+    return c</code></pre>
 </details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="bane.cryptographers.base64" href="base64.html">bane.cryptographers.base64</a></code></dt>
+<dt id="bane.cryptographers.caesar.caesar_string"><code class="name flex">
+<span>def <span class="ident">caesar_string</span></span>(<span>w, k)</span>
+</code></dt>
 <dd>
 <div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def caesar_string(w, k):
+    if (type(k) is not int) or (k not in range(1, 27)):
+        raise Exception(&#34;the key must be an integer between: 1 and 26&#34;)
+    if (not w) or (len(w) == 0):
+        raise Exception(&#34;You must provide data&#34;)
+    a = &#34;abcdefghijklmnopqrstuvwxyz&#34;
+    b = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;
+    c = &#34;&#34;
+    for i in w:
+        &#34;&#34;&#34;if (k&gt;26) or (k&lt;1) or (ord(i) not in range(32,127)):
+        break&#34;&#34;&#34;
+        if i in a:
+            c += a[(a.index(i) + k) % 26]
+        elif i in b:
+            c += b[(b.index(i) + k) % 26]
+        else:
+            c += i
+    return c</code></pre>
+</details>
 </dd>
-<dt><code class="name"><a title="bane.cryptographers.caesar" href="caesar.html">bane.cryptographers.caesar</a></code></dt>
+<dt id="bane.cryptographers.caesar.dcaesar"><code class="name flex">
+<span>def <span class="ident">dcaesar</span></span>(<span>w, k)</span>
+</code></dt>
 <dd>
 <div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.cryptographers.hasher" href="hasher.html">bane.cryptographers.hasher</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.cryptographers.md5" href="md5.html">bane.cryptographers.md5</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.cryptographers.sha1" href="sha1.html">bane.cryptographers.sha1</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.cryptographers.sha224" href="sha224.html">bane.cryptographers.sha224</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.cryptographers.sha256" href="sha256.html">bane.cryptographers.sha256</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.cryptographers.sha384" href="sha384.html">bane.cryptographers.sha384</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.cryptographers.sha512" href="sha512.html">bane.cryptographers.sha512</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.cryptographers.utils" href="utils.html">bane.cryptographers.utils</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="bane.cryptographers.xor" href="xor.html">bane.cryptographers.xor</a></code></dt>
-<dd>
-<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dcaesar(w, k):
+    if (type(k) is not int) or (k not in range(1, 27)):
+        raise Exception(&#34;the key must be an integer between: 1 and 26&#34;)
+    if (not w) or (len(w) == 0):
+        raise Exception(&#34;You must provide data&#34;)
+    a = &#34;abcdefghijklmnopqrstuvwxyz&#34;
+    b = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;
+    c = &#34;&#34;
+    for i in w:
+        &#34;&#34;&#34;if (k&gt;26) or (k&lt;1) or (ord(i) not in range(32,128)):
+        break&#34;&#34;&#34;
+        if i in a:
+            c += a[(a.index(i) - k) % 26]
+        elif i in b:
+            c += b[(b.index(i) - k) % 26]
+        else:
+            c += i
+    return c</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -93,22 +158,13 @@
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="bane" href="../index.html">bane</a></code></li>
+<li><code><a title="bane.cryptographers" href="index.md">bane.cryptographers</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
-<ul>
-<li><code><a title="bane.cryptographers.base64" href="base64.html">bane.cryptographers.base64</a></code></li>
-<li><code><a title="bane.cryptographers.caesar" href="caesar.html">bane.cryptographers.caesar</a></code></li>
-<li><code><a title="bane.cryptographers.hasher" href="hasher.html">bane.cryptographers.hasher</a></code></li>
-<li><code><a title="bane.cryptographers.md5" href="md5.html">bane.cryptographers.md5</a></code></li>
-<li><code><a title="bane.cryptographers.sha1" href="sha1.html">bane.cryptographers.sha1</a></code></li>
-<li><code><a title="bane.cryptographers.sha224" href="sha224.html">bane.cryptographers.sha224</a></code></li>
-<li><code><a title="bane.cryptographers.sha256" href="sha256.html">bane.cryptographers.sha256</a></code></li>
-<li><code><a title="bane.cryptographers.sha384" href="sha384.html">bane.cryptographers.sha384</a></code></li>
-<li><code><a title="bane.cryptographers.sha512" href="sha512.html">bane.cryptographers.sha512</a></code></li>
-<li><code><a title="bane.cryptographers.utils" href="utils.html">bane.cryptographers.utils</a></code></li>
-<li><code><a title="bane.cryptographers.xor" href="xor.html">bane.cryptographers.xor</a></code></li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="bane.cryptographers.caesar.caesar_string" href="#bane.cryptographers.caesar.caesar_string">caesar_string</a></code></li>
+<li><code><a title="bane.cryptographers.caesar.dcaesar" href="#bane.cryptographers.caesar.dcaesar">dcaesar</a></code></li>
 </ul>
 </li>
 </ul>

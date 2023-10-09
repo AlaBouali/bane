@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>bane.common API documentation</title>
+<title>bane.cryptographers.xor API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,28 +19,115 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>bane.common</code></h1>
+<h1 class="title">Module <code>bane.cryptographers.xor</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from .payloads import *</code></pre>
+<pre><code class="python">from bane.cryptographers.utils import *
+
+def xor_string(data, key):
+    &#34;&#34;&#34;
+    function to return XOR encrypted string
+    &#34;&#34;&#34;
+    i = 0
+    c = &#34;&#34;
+    l = len(data)
+    k = len(key)
+    if (not data) or (l == 0):
+        raise Exception(&#34;You must provide data&#34;)
+    if (not key) or (k == 0):
+        raise Exception(&#34;You must provide a key&#34;)
+    while i &lt; l:
+        for x in key:
+            if i == l:
+                break
+            if type(data[i]) == str:
+                c += chr(ord(data[i]) ^ ord(x))
+            else:
+                c += chr(data[i] ^ ord(x))
+            i += 1
+    i = None
+    l = None
+    k = None
+    data = None
+    key = None
+    return c
+
+
+def xor_file(f, key):
+    if f and key:
+        with open(f, &#34;rb&#34;) as f:
+            w = f.read()
+        f.close()
+        return xor_string(w, key)</code></pre>
 </details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="bane.common.payloads" href="payloads.html">bane.common.payloads</a></code></dt>
+<dt id="bane.cryptographers.xor.xor_file"><code class="name flex">
+<span>def <span class="ident">xor_file</span></span>(<span>f, key)</span>
+</code></dt>
 <dd>
 <div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def xor_file(f, key):
+    if f and key:
+        with open(f, &#34;rb&#34;) as f:
+            w = f.read()
+        f.close()
+        return xor_string(w, key)</code></pre>
+</details>
+</dd>
+<dt id="bane.cryptographers.xor.xor_string"><code class="name flex">
+<span>def <span class="ident">xor_string</span></span>(<span>data, key)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>function to return XOR encrypted string</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def xor_string(data, key):
+    &#34;&#34;&#34;
+    function to return XOR encrypted string
+    &#34;&#34;&#34;
+    i = 0
+    c = &#34;&#34;
+    l = len(data)
+    k = len(key)
+    if (not data) or (l == 0):
+        raise Exception(&#34;You must provide data&#34;)
+    if (not key) or (k == 0):
+        raise Exception(&#34;You must provide a key&#34;)
+    while i &lt; l:
+        for x in key:
+            if i == l:
+                break
+            if type(data[i]) == str:
+                c += chr(ord(data[i]) ^ ord(x))
+            else:
+                c += chr(data[i] ^ ord(x))
+            i += 1
+    i = None
+    l = None
+    k = None
+    data = None
+    key = None
+    return c</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -53,12 +140,13 @@
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="bane" href="../index.html">bane</a></code></li>
+<li><code><a title="bane.cryptographers" href="index.md">bane.cryptographers</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
-<ul>
-<li><code><a title="bane.common.payloads" href="payloads.html">bane.common.payloads</a></code></li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="bane.cryptographers.xor.xor_file" href="#bane.cryptographers.xor.xor_file">xor_file</a></code></li>
+<li><code><a title="bane.cryptographers.xor.xor_string" href="#bane.cryptographers.xor.xor_string">xor_string</a></code></li>
 </ul>
 </li>
 </ul>

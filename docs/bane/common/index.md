@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>bane.cryptographers.hasher API documentation</title>
+<title>bane.common API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,25 +19,24 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>bane.cryptographers.hasher</code></h1>
+<h1 class="title">Module <code>bane.common</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from bane.cryptographers.base64 import *
-from bane.cryptographers.caesar import *
-from bane.cryptographers.md5 import *
-from bane.cryptographers.sha1 import *
-from bane.cryptographers.sha224 import *
-from bane.cryptographers.sha256 import *
-from bane.cryptographers.sha384 import *
-from bane.cryptographers.sha512 import *
-from bane.cryptographers.xor import *</code></pre>
+<pre><code class="python">from .payloads import *</code></pre>
 </details>
 </section>
 <section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="bane.common.payloads" href="payloads.md">bane.common.payloads</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
 </section>
 <section>
 </section>
@@ -54,7 +53,12 @@ from bane.cryptographers.xor import *</code></pre>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="bane.cryptographers" href="index.html">bane.cryptographers</a></code></li>
+<li><code><a title="bane" href="../index.md">bane</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="bane.common.payloads" href="payloads.md">bane.common.payloads</a></code></li>
 </ul>
 </li>
 </ul>

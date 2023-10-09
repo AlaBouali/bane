@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>bane.bruteforce.utils API documentation</title>
+<title>bane.cryptographers API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,100 +19,68 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>bane.bruteforce.utils</code></h1>
+<h1 class="title">Module <code>bane.cryptographers</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import requests, random, smtplib, telnetlib, sys, os, hashlib, base64, subprocess, time, xtelnet, os, threading  # ,requests_ntlm
-import urllib3
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-from ftplib import FTP
-from ..common.payloads import *
-from ..utils.proxer import get_socks_proxy_socket
-
-if os.path.isdir(&#34;/data/data&#34;) == True:
-    adr = True
-if os.path.isdir(&#34;/data/data/com.termux/&#34;) == True:
-    termux = True
-import pymysql
-from ..utils.pager import *
-from ..scanners.cms.wp import wpadmin
-from ..cryptographers.hasher import *
-from ..utils.pager import *
-
-
-
-def process_threaded(a, check_interval=0.1):
-    while True:
-        try:
-            if a.done() == True:
-                try:
-                    return a.result
-                except:
-                    pass
-                try:
-                    return a.counter
-                except:
-                    return
-            time.sleep(check_interval)
-        except KeyboardInterrupt:
-            a.stop = True
-            try:
-                return a.result
-            except:
-                pass
-            try:
-                return a.counter
-            except:
-                pass</code></pre>
+<pre><code class="python">from .hasher import *</code></pre>
 </details>
 </section>
 <section>
-</section>
-<section>
-</section>
-<section>
-<h2 class="section-title" id="header-functions">Functions</h2>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
-<dt id="bane.bruteforce.utils.process_threaded"><code class="name flex">
-<span>def <span class="ident">process_threaded</span></span>(<span>a, check_interval=0.1)</span>
-</code></dt>
+<dt><code class="name"><a title="bane.cryptographers.base64" href="base64.md">bane.cryptographers.base64</a></code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def process_threaded(a, check_interval=0.1):
-    while True:
-        try:
-            if a.done() == True:
-                try:
-                    return a.result
-                except:
-                    pass
-                try:
-                    return a.counter
-                except:
-                    return
-            time.sleep(check_interval)
-        except KeyboardInterrupt:
-            a.stop = True
-            try:
-                return a.result
-            except:
-                pass
-            try:
-                return a.counter
-            except:
-                pass</code></pre>
-</details>
+</dd>
+<dt><code class="name"><a title="bane.cryptographers.caesar" href="caesar.md">bane.cryptographers.caesar</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.cryptographers.hasher" href="hasher.md">bane.cryptographers.hasher</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.cryptographers.md5" href="md5.md">bane.cryptographers.md5</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.cryptographers.sha1" href="sha1.md">bane.cryptographers.sha1</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.cryptographers.sha224" href="sha224.md">bane.cryptographers.sha224</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.cryptographers.sha256" href="sha256.md">bane.cryptographers.sha256</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.cryptographers.sha384" href="sha384.md">bane.cryptographers.sha384</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.cryptographers.sha512" href="sha512.md">bane.cryptographers.sha512</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.cryptographers.utils" href="utils.md">bane.cryptographers.utils</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="bane.cryptographers.xor" href="xor.md">bane.cryptographers.xor</a></code></dt>
+<dd>
+<div class="desc"></div>
 </dd>
 </dl>
+</section>
+<section>
+</section>
+<section>
 </section>
 <section>
 </section>
@@ -125,12 +93,22 @@ def process_threaded(a, check_interval=0.1):
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="bane.bruteforce" href="index.html">bane.bruteforce</a></code></li>
+<li><code><a title="bane" href="../index.md">bane</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="">
-<li><code><a title="bane.bruteforce.utils.process_threaded" href="#bane.bruteforce.utils.process_threaded">process_threaded</a></code></li>
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="bane.cryptographers.base64" href="base64.md">bane.cryptographers.base64</a></code></li>
+<li><code><a title="bane.cryptographers.caesar" href="caesar.md">bane.cryptographers.caesar</a></code></li>
+<li><code><a title="bane.cryptographers.hasher" href="hasher.md">bane.cryptographers.hasher</a></code></li>
+<li><code><a title="bane.cryptographers.md5" href="md5.md">bane.cryptographers.md5</a></code></li>
+<li><code><a title="bane.cryptographers.sha1" href="sha1.md">bane.cryptographers.sha1</a></code></li>
+<li><code><a title="bane.cryptographers.sha224" href="sha224.md">bane.cryptographers.sha224</a></code></li>
+<li><code><a title="bane.cryptographers.sha256" href="sha256.md">bane.cryptographers.sha256</a></code></li>
+<li><code><a title="bane.cryptographers.sha384" href="sha384.md">bane.cryptographers.sha384</a></code></li>
+<li><code><a title="bane.cryptographers.sha512" href="sha512.md">bane.cryptographers.sha512</a></code></li>
+<li><code><a title="bane.cryptographers.utils" href="utils.md">bane.cryptographers.utils</a></code></li>
+<li><code><a title="bane.cryptographers.xor" href="xor.md">bane.cryptographers.xor</a></code></li>
 </ul>
 </li>
 </ul>
