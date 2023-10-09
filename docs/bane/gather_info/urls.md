@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport">
-<meta content="pdoc 0.10.0" name="generator"/>
-<title>bane.gather_info.urls API documentation</title>
-<meta content="" name="description"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" rel="preload stylesheet"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" rel="preload stylesheet"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" rel="stylesheet preload"/>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
-<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script crossorigin="" defer="" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
-</meta></head>
 <body>
 <main>
 <article id="content">
@@ -32,7 +14,7 @@
 
 
 def norton_rate(u, timeout=30, proxy=None):
-    """
+    &#34;&#34;&#34;
     this function takes any giving and gives a security report from: safeweb.norton.com, if it is a: spam domain, contains a malware...
     it takes 3 arguments:
     u: the link to check
@@ -40,26 +22,26 @@ def norton_rate(u, timeout=30, proxy=None):
     returning: (set by default to: False) returning the report as a string format if it is set to: True.
     usage:
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;url='http://www.example.com'
-    &gt;&gt;&gt;bane.norton_rate(domain)"""
+    &gt;&gt;&gt;url=&#39;http://www.example.com&#39;
+    &gt;&gt;&gt;bane.norton_rate(domain)&#34;&#34;&#34;
     try:
-        ur = urllib.quote(u, safe="")
-        ul = "https://safeweb.norton.com/report/show?url=" + ur
+        ur = urllib.quote(u, safe=&#34;&#34;)
+        ul = &#34;https://safeweb.norton.com/report/show?url=&#34; + ur
         c = requests.Session().et(
             ul,
-            headers={"User-Agent": random.choice(ua)},
+            headers={&#34;User-Agent&#34;: random.choice(ua)},
             proxies=proxy,
             timeout=timeout,
         ).text
-        soup = BeautifulSoup(c, "html.parser")
-        s = soup.find_all("div", class_="communityRatings")
-        s = remove_html_tags(str(s[0])).strip().split("\n")
-        while "" in s:
-            s.remove("")
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        s = soup.find_all(&#34;div&#34;, class_=&#34;communityRatings&#34;)
+        s = remove_html_tags(str(s[0])).strip().split(&#34;\n&#34;)
+        while &#34;&#34; in s:
+            s.remove(&#34;&#34;)
         try:
-            return {"Profile": s[0], "Rate": float(s[1]), "By": s[2]}
+            return {&#34;Profile&#34;: s[0], &#34;Rate&#34;: float(s[1]), &#34;By&#34;: s[2]}
         except:
-            return {"Profile": s[0], "Rate": float(s[1])}
+            return {&#34;Profile&#34;: s[0], &#34;Rate&#34;: float(s[1])}
     except:
         pass
 
@@ -79,9 +61,9 @@ def http_options(
     else:
         us = random.choice(ua)
     if cookie:
-        heads = {"User-Agent": us, "Cookie": cookie}
+        heads = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        heads = {"User-Agent": us}
+        heads = {&#34;User-Agent&#34;: us}
     if extra_headers:
         heads.update(extra_headers)
     try:
@@ -90,10 +72,10 @@ def http_options(
     except Exception as ex:
         return []
     b = []
-    if "Access-Control-Allow-Methods" in a:
-        b += [x.strip() for x in a["Access-Control-Allow-Methods"].split(",")]
-    if "Allow" in a:
-        b += [x.strip() for x in a["Allow"].split(",")]
+    if &#34;Access-Control-Allow-Methods&#34; in a:
+        b += [x.strip() for x in a[&#34;Access-Control-Allow-Methods&#34;].split(&#34;,&#34;)]
+    if &#34;Allow&#34; in a:
+        b += [x.strip() for x in a[&#34;Allow&#34;].split(&#34;,&#34;)]
     return b
 
 
@@ -112,41 +94,41 @@ def headers(
     else:
         us = random.choice(ua)
     if cookie:
-        heads = {"User-Agent": us, "Cookie": cookie}
+        heads = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        heads = {"User-Agent": us}
+        heads = {&#34;User-Agent&#34;: us}
     if extra_headers:
         heads.update(extra_headers)
     try:
-        #"safe": sec,
+        #&#34;safe&#34;: sec,
         s = requests.session()
         a = s.get(u, headers=heads, proxies=proxy, timeout=timeout).headers
     except Exception as ex:
         return None
     if logs == True:
         for x in a:
-            print("{} : {}".format(x, a[x]))
+            print(&#34;{} : {}&#34;.format(x, a[x]))
     if returning == True:
         return a
 
 
 def webhint_report(ur, proxy=None, timeout=10):
-    """
-    this function takes any webpage link and returns a report link from webhint.io."""
-    u = "https://webhint.io/scanner/"
-    r = ""
-    if "://" not in ur:
+    &#34;&#34;&#34;
+    this function takes any webpage link and returns a report link from webhint.io.&#34;&#34;&#34;
+    u = &#34;https://webhint.io/scanner/&#34;
+    r = &#34;&#34;
+    if &#34;://&#34; not in ur:
         return r
     try:
         s = requests.session()
         s.get(u, proxies=proxy, timeout=timeout)
-        data = {"url": ur}
+        data = {&#34;url&#34;: ur}
         a = s.post(u, data, proxies=proxy, timeout=timeout).text
-        soup = BeautifulSoup(a, "html.parser")
-        s = soup.find_all("span", class_="permalink-content")
+        soup = BeautifulSoup(a, &#34;html.parser&#34;)
+        s = soup.find_all(&#34;span&#34;, class_=&#34;permalink-content&#34;)
         for x in s:
             try:
-                r = x.a["href"]
+                r = x.a[&#34;href&#34;]
             except Exception as ex:
                 pass
     except Exception as e:
@@ -185,20 +167,20 @@ def webhint_report(ur, proxy=None, timeout=10):
     else:
         us = random.choice(ua)
     if cookie:
-        heads = {"User-Agent": us, "Cookie": cookie}
+        heads = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        heads = {"User-Agent": us}
+        heads = {&#34;User-Agent&#34;: us}
     if extra_headers:
         heads.update(extra_headers)
     try:
-        #"safe": sec,
+        #&#34;safe&#34;: sec,
         s = requests.session()
         a = s.get(u, headers=heads, proxies=proxy, timeout=timeout).headers
     except Exception as ex:
         return None
     if logs == True:
         for x in a:
-            print("{} : {}".format(x, a[x]))
+            print(&#34;{} : {}&#34;.format(x, a[x]))
     if returning == True:
         return a</code></pre>
 </details>
@@ -227,9 +209,9 @@ def webhint_report(ur, proxy=None, timeout=10):
     else:
         us = random.choice(ua)
     if cookie:
-        heads = {"User-Agent": us, "Cookie": cookie}
+        heads = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        heads = {"User-Agent": us}
+        heads = {&#34;User-Agent&#34;: us}
     if extra_headers:
         heads.update(extra_headers)
     try:
@@ -238,10 +220,10 @@ def webhint_report(ur, proxy=None, timeout=10):
     except Exception as ex:
         return []
     b = []
-    if "Access-Control-Allow-Methods" in a:
-        b += [x.strip() for x in a["Access-Control-Allow-Methods"].split(",")]
-    if "Allow" in a:
-        b += [x.strip() for x in a["Allow"].split(",")]
+    if &#34;Access-Control-Allow-Methods&#34; in a:
+        b += [x.strip() for x in a[&#34;Access-Control-Allow-Methods&#34;].split(&#34;,&#34;)]
+    if &#34;Allow&#34; in a:
+        b += [x.strip() for x in a[&#34;Allow&#34;].split(&#34;,&#34;)]
     return b</code></pre>
 </details>
 </dd>
@@ -249,7 +231,7 @@ def webhint_report(ur, proxy=None, timeout=10):
 <span>def <span class="ident">norton_rate</span></span>(<span>u, timeout=30, proxy=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>this function takes any giving and gives a security report from: safeweb.norton.com, if it is a: spam domain, contains a malware…
+<div class="desc"><p>this function takes any giving and gives a security report from: safeweb.norton.com, if it is a: spam domain, contains a malware&hellip;
 it takes 3 arguments:
 u: the link to check
 logs: (set by default to: True) showing the process and the report, you can turn it off by setting it to:False
@@ -269,7 +251,7 @@ bane.norton_rate(domain)</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def norton_rate(u, timeout=30, proxy=None):
-    """
+    &#34;&#34;&#34;
     this function takes any giving and gives a security report from: safeweb.norton.com, if it is a: spam domain, contains a malware...
     it takes 3 arguments:
     u: the link to check
@@ -277,26 +259,26 @@ bane.norton_rate(domain)</p>
     returning: (set by default to: False) returning the report as a string format if it is set to: True.
     usage:
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;url='http://www.example.com'
-    &gt;&gt;&gt;bane.norton_rate(domain)"""
+    &gt;&gt;&gt;url=&#39;http://www.example.com&#39;
+    &gt;&gt;&gt;bane.norton_rate(domain)&#34;&#34;&#34;
     try:
-        ur = urllib.quote(u, safe="")
-        ul = "https://safeweb.norton.com/report/show?url=" + ur
+        ur = urllib.quote(u, safe=&#34;&#34;)
+        ul = &#34;https://safeweb.norton.com/report/show?url=&#34; + ur
         c = requests.Session().et(
             ul,
-            headers={"User-Agent": random.choice(ua)},
+            headers={&#34;User-Agent&#34;: random.choice(ua)},
             proxies=proxy,
             timeout=timeout,
         ).text
-        soup = BeautifulSoup(c, "html.parser")
-        s = soup.find_all("div", class_="communityRatings")
-        s = remove_html_tags(str(s[0])).strip().split("\n")
-        while "" in s:
-            s.remove("")
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        s = soup.find_all(&#34;div&#34;, class_=&#34;communityRatings&#34;)
+        s = remove_html_tags(str(s[0])).strip().split(&#34;\n&#34;)
+        while &#34;&#34; in s:
+            s.remove(&#34;&#34;)
         try:
-            return {"Profile": s[0], "Rate": float(s[1]), "By": s[2]}
+            return {&#34;Profile&#34;: s[0], &#34;Rate&#34;: float(s[1]), &#34;By&#34;: s[2]}
         except:
-            return {"Profile": s[0], "Rate": float(s[1])}
+            return {&#34;Profile&#34;: s[0], &#34;Rate&#34;: float(s[1])}
     except:
         pass</code></pre>
 </details>
@@ -311,22 +293,22 @@ bane.norton_rate(domain)</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def webhint_report(ur, proxy=None, timeout=10):
-    """
-    this function takes any webpage link and returns a report link from webhint.io."""
-    u = "https://webhint.io/scanner/"
-    r = ""
-    if "://" not in ur:
+    &#34;&#34;&#34;
+    this function takes any webpage link and returns a report link from webhint.io.&#34;&#34;&#34;
+    u = &#34;https://webhint.io/scanner/&#34;
+    r = &#34;&#34;
+    if &#34;://&#34; not in ur:
         return r
     try:
         s = requests.session()
         s.get(u, proxies=proxy, timeout=timeout)
-        data = {"url": ur}
+        data = {&#34;url&#34;: ur}
         a = s.post(u, data, proxies=proxy, timeout=timeout).text
-        soup = BeautifulSoup(a, "html.parser")
-        s = soup.find_all("span", class_="permalink-content")
+        soup = BeautifulSoup(a, &#34;html.parser&#34;)
+        s = soup.find_all(&#34;span&#34;, class_=&#34;permalink-content&#34;)
         for x in s:
             try:
-                r = x.a["href"]
+                r = x.a[&#34;href&#34;]
             except Exception as ex:
                 pass
     except Exception as e:
@@ -347,15 +329,15 @@ bane.norton_rate(domain)</p>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a href="index.md" title="bane.gather_info">bane.gather_info</a></code></li>
+<li><code><a title="bane.gather_info" href="index.md">bane.gather_info</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a href="#bane.gather_info.urls.headers" title="bane.gather_info.urls.headers">headers</a></code></li>
-<li><code><a href="#bane.gather_info.urls.http_options" title="bane.gather_info.urls.http_options">http_options</a></code></li>
-<li><code><a href="#bane.gather_info.urls.norton_rate" title="bane.gather_info.urls.norton_rate">norton_rate</a></code></li>
-<li><code><a href="#bane.gather_info.urls.webhint_report" title="bane.gather_info.urls.webhint_report">webhint_report</a></code></li>
+<li><code><a title="bane.gather_info.urls.headers" href="#bane.gather_info.urls.headers">headers</a></code></li>
+<li><code><a title="bane.gather_info.urls.http_options" href="#bane.gather_info.urls.http_options">http_options</a></code></li>
+<li><code><a title="bane.gather_info.urls.norton_rate" href="#bane.gather_info.urls.norton_rate">norton_rate</a></code></li>
+<li><code><a title="bane.gather_info.urls.webhint_report" href="#bane.gather_info.urls.webhint_report">webhint_report</a></code></li>
 </ul>
 </li>
 </ul>

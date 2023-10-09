@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport">
-<meta content="pdoc 0.10.0" name="generator"/>
-<title>bane.bruteforce.web_login API documentation</title>
-<meta content="" name="description"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" rel="preload stylesheet"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" rel="preload stylesheet"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" rel="stylesheet preload"/>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
-<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script crossorigin="" defer="" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
-</meta></head>
 <body>
 <main>
 <article id="content">
@@ -32,14 +14,14 @@
 
 
 class web_login_bruteforce:
-    __slots__ = ["stop", "finish", "result", "logs"]
+    __slots__ = [&#34;stop&#34;, &#34;finish&#34;, &#34;result&#34;, &#34;logs&#34;]
 
     def try_combo(self, url, username, password, cookie, user_agent, proxy, timeout,headers):
         prox = None
         cookies = None
-        h = {"User-Agent": user_agent}
+        h = {&#34;User-Agent&#34;: user_agent}
         if cookie:
-            h.update({"Cookie": cookie})
+            h.update({&#34;Cookie&#34;: cookie})
             cookies = cookie
         h.update(headers)
         try:
@@ -50,21 +32,21 @@ class web_login_bruteforce:
             return False
         cook = None
         try:
-            cook = r.headers["Set-cookie"]
+            cook = r.headers[&#34;Set-cookie&#34;]
         except:
             pass
         cookies = set_correct_cookies(cook, cookie=cookie)
         form = set_login_form(url, r.text, username, password)
-        h = {"User-Agent": user_agent}
+        h = {&#34;User-Agent&#34;: user_agent}
         if cookies:
-            h.update({"Cookie": cookies})
+            h.update({&#34;Cookie&#34;: cookies})
         d = form[0]
         h.update(
             {
-                "Referer": form[1],
-                "Origin": form[1].split("://")[0]
-                + "://"
-                + form[1].split("://")[1].split("/")[0],
+                &#34;Referer&#34;: form[1],
+                &#34;Origin&#34;: form[1].split(&#34;://&#34;)[0]
+                + &#34;://&#34;
+                + form[1].split(&#34;://&#34;)[1].split(&#34;/&#34;)[0],
             }
         )
         try:
@@ -122,10 +104,10 @@ class web_login_bruteforce:
                 if self.stop == True:
                     self.finish = True
                     break
-                username = x.split(":")[0]
-                password = x.split(":")[1]
+                username = x.split(&#34;:&#34;)[0]
+                password = x.split(&#34;:&#34;)[1]
                 if self.logs == True:
-                    print("[*]Trying: {} {}".format(username, password))
+                    print(&#34;[*]Trying: {} {}&#34;.format(username, password))
                 if user_agent:
                     us = user_agent
                 else:
@@ -140,17 +122,17 @@ class web_login_bruteforce:
                     == True
                 ):
                     if self.logs == True:
-                        print("[+]Success")
-                    self.result = {u: username + ":" + password}
+                        print(&#34;[+]Success&#34;)
+                    self.result = {u: username + &#34;:&#34; + password}
                     self.finish = True
                     break
                 else:
                     if self.logs == True:
-                        print("[-]Fail")
+                        print(&#34;[-]Fail&#34;)
             except Exception as e:
                 pass
                 if self.logs == True:
-                    print("[-]Fail")
+                    print(&#34;[-]Fail&#34;)
         self.finish = True</code></pre>
 </details>
 </section>
@@ -174,14 +156,14 @@ class web_login_bruteforce:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class web_login_bruteforce:
-    __slots__ = ["stop", "finish", "result", "logs"]
+    __slots__ = [&#34;stop&#34;, &#34;finish&#34;, &#34;result&#34;, &#34;logs&#34;]
 
     def try_combo(self, url, username, password, cookie, user_agent, proxy, timeout,headers):
         prox = None
         cookies = None
-        h = {"User-Agent": user_agent}
+        h = {&#34;User-Agent&#34;: user_agent}
         if cookie:
-            h.update({"Cookie": cookie})
+            h.update({&#34;Cookie&#34;: cookie})
             cookies = cookie
         h.update(headers)
         try:
@@ -192,21 +174,21 @@ class web_login_bruteforce:
             return False
         cook = None
         try:
-            cook = r.headers["Set-cookie"]
+            cook = r.headers[&#34;Set-cookie&#34;]
         except:
             pass
         cookies = set_correct_cookies(cook, cookie=cookie)
         form = set_login_form(url, r.text, username, password)
-        h = {"User-Agent": user_agent}
+        h = {&#34;User-Agent&#34;: user_agent}
         if cookies:
-            h.update({"Cookie": cookies})
+            h.update({&#34;Cookie&#34;: cookies})
         d = form[0]
         h.update(
             {
-                "Referer": form[1],
-                "Origin": form[1].split("://")[0]
-                + "://"
-                + form[1].split("://")[1].split("/")[0],
+                &#34;Referer&#34;: form[1],
+                &#34;Origin&#34;: form[1].split(&#34;://&#34;)[0]
+                + &#34;://&#34;
+                + form[1].split(&#34;://&#34;)[1].split(&#34;/&#34;)[0],
             }
         )
         try:
@@ -264,10 +246,10 @@ class web_login_bruteforce:
                 if self.stop == True:
                     self.finish = True
                     break
-                username = x.split(":")[0]
-                password = x.split(":")[1]
+                username = x.split(&#34;:&#34;)[0]
+                password = x.split(&#34;:&#34;)[1]
                 if self.logs == True:
-                    print("[*]Trying: {} {}".format(username, password))
+                    print(&#34;[*]Trying: {} {}&#34;.format(username, password))
                 if user_agent:
                     us = user_agent
                 else:
@@ -282,17 +264,17 @@ class web_login_bruteforce:
                     == True
                 ):
                     if self.logs == True:
-                        print("[+]Success")
-                    self.result = {u: username + ":" + password}
+                        print(&#34;[+]Success&#34;)
+                    self.result = {u: username + &#34;:&#34; + password}
                     self.finish = True
                     break
                 else:
                     if self.logs == True:
-                        print("[-]Fail")
+                        print(&#34;[-]Fail&#34;)
             except Exception as e:
                 pass
                 if self.logs == True:
-                    print("[-]Fail")
+                    print(&#34;[-]Fail&#34;)
         self.finish = True</code></pre>
 </details>
 <h3>Instance variables</h3>
@@ -331,10 +313,10 @@ class web_login_bruteforce:
             if self.stop == True:
                 self.finish = True
                 break
-            username = x.split(":")[0]
-            password = x.split(":")[1]
+            username = x.split(&#34;:&#34;)[0]
+            password = x.split(&#34;:&#34;)[1]
             if self.logs == True:
-                print("[*]Trying: {} {}".format(username, password))
+                print(&#34;[*]Trying: {} {}&#34;.format(username, password))
             if user_agent:
                 us = user_agent
             else:
@@ -349,17 +331,17 @@ class web_login_bruteforce:
                 == True
             ):
                 if self.logs == True:
-                    print("[+]Success")
-                self.result = {u: username + ":" + password}
+                    print(&#34;[+]Success&#34;)
+                self.result = {u: username + &#34;:&#34; + password}
                 self.finish = True
                 break
             else:
                 if self.logs == True:
-                    print("[-]Fail")
+                    print(&#34;[-]Fail&#34;)
         except Exception as e:
             pass
             if self.logs == True:
-                print("[-]Fail")
+                print(&#34;[-]Fail&#34;)
     self.finish = True</code></pre>
 </details>
 </dd>
@@ -388,9 +370,9 @@ class web_login_bruteforce:
 <pre><code class="python">def try_combo(self, url, username, password, cookie, user_agent, proxy, timeout,headers):
     prox = None
     cookies = None
-    h = {"User-Agent": user_agent}
+    h = {&#34;User-Agent&#34;: user_agent}
     if cookie:
-        h.update({"Cookie": cookie})
+        h.update({&#34;Cookie&#34;: cookie})
         cookies = cookie
     h.update(headers)
     try:
@@ -401,21 +383,21 @@ class web_login_bruteforce:
         return False
     cook = None
     try:
-        cook = r.headers["Set-cookie"]
+        cook = r.headers[&#34;Set-cookie&#34;]
     except:
         pass
     cookies = set_correct_cookies(cook, cookie=cookie)
     form = set_login_form(url, r.text, username, password)
-    h = {"User-Agent": user_agent}
+    h = {&#34;User-Agent&#34;: user_agent}
     if cookies:
-        h.update({"Cookie": cookies})
+        h.update({&#34;Cookie&#34;: cookies})
     d = form[0]
     h.update(
         {
-            "Referer": form[1],
-            "Origin": form[1].split("://")[0]
-            + "://"
-            + form[1].split("://")[1].split("/")[0],
+            &#34;Referer&#34;: form[1],
+            &#34;Origin&#34;: form[1].split(&#34;://&#34;)[0]
+            + &#34;://&#34;
+            + form[1].split(&#34;://&#34;)[1].split(&#34;/&#34;)[0],
         }
     )
     try:
@@ -444,21 +426,21 @@ class web_login_bruteforce:
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a href="index.md" title="bane.bruteforce">bane.bruteforce</a></code></li>
+<li><code><a title="bane.bruteforce" href="index.md">bane.bruteforce</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a href="#bane.bruteforce.web_login.web_login_bruteforce" title="bane.bruteforce.web_login.web_login_bruteforce">web_login_bruteforce</a></code></h4>
+<h4><code><a title="bane.bruteforce.web_login.web_login_bruteforce" href="#bane.bruteforce.web_login.web_login_bruteforce">web_login_bruteforce</a></code></h4>
 <ul class="two-column">
-<li><code><a href="#bane.bruteforce.web_login.web_login_bruteforce.crack" title="bane.bruteforce.web_login.web_login_bruteforce.crack">crack</a></code></li>
-<li><code><a href="#bane.bruteforce.web_login.web_login_bruteforce.done" title="bane.bruteforce.web_login.web_login_bruteforce.done">done</a></code></li>
-<li><code><a href="#bane.bruteforce.web_login.web_login_bruteforce.finish" title="bane.bruteforce.web_login.web_login_bruteforce.finish">finish</a></code></li>
-<li><code><a href="#bane.bruteforce.web_login.web_login_bruteforce.logs" title="bane.bruteforce.web_login.web_login_bruteforce.logs">logs</a></code></li>
-<li><code><a href="#bane.bruteforce.web_login.web_login_bruteforce.result" title="bane.bruteforce.web_login.web_login_bruteforce.result">result</a></code></li>
-<li><code><a href="#bane.bruteforce.web_login.web_login_bruteforce.stop" title="bane.bruteforce.web_login.web_login_bruteforce.stop">stop</a></code></li>
-<li><code><a href="#bane.bruteforce.web_login.web_login_bruteforce.try_combo" title="bane.bruteforce.web_login.web_login_bruteforce.try_combo">try_combo</a></code></li>
+<li><code><a title="bane.bruteforce.web_login.web_login_bruteforce.crack" href="#bane.bruteforce.web_login.web_login_bruteforce.crack">crack</a></code></li>
+<li><code><a title="bane.bruteforce.web_login.web_login_bruteforce.done" href="#bane.bruteforce.web_login.web_login_bruteforce.done">done</a></code></li>
+<li><code><a title="bane.bruteforce.web_login.web_login_bruteforce.finish" href="#bane.bruteforce.web_login.web_login_bruteforce.finish">finish</a></code></li>
+<li><code><a title="bane.bruteforce.web_login.web_login_bruteforce.logs" href="#bane.bruteforce.web_login.web_login_bruteforce.logs">logs</a></code></li>
+<li><code><a title="bane.bruteforce.web_login.web_login_bruteforce.result" href="#bane.bruteforce.web_login.web_login_bruteforce.result">result</a></code></li>
+<li><code><a title="bane.bruteforce.web_login.web_login_bruteforce.stop" href="#bane.bruteforce.web_login.web_login_bruteforce.stop">stop</a></code></li>
+<li><code><a title="bane.bruteforce.web_login.web_login_bruteforce.try_combo" href="#bane.bruteforce.web_login.web_login_bruteforce.try_combo">try_combo</a></code></li>
 </ul>
 </li>
 </ul>

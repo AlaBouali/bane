@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport">
-<meta content="pdoc 0.10.0" name="generator"/>
-<title>bane.utils.pager API documentation</title>
-<meta content="" name="description"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" rel="preload stylesheet"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" rel="preload stylesheet"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" rel="stylesheet preload"/>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
-<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script crossorigin="" defer="" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
-</meta></head>
 <body>
 <main>
 <article id="content">
@@ -56,16 +38,16 @@ from bane.gather_info.info_s import extract_root_domain
 
 
 def generate_random_url():
-    protocols = ["http", "https"]
+    protocols = [&#34;http&#34;, &#34;https&#34;]
     protocol = random.choice(protocols)
     domain = random.choice(domainl)
-    return "{}://{}/".format(protocol,domain)
+    return &#34;{}://{}/&#34;.format(protocol,domain)
 
 
 def generate_random_phone_number(pattern):
-    phone_number = ""
+    phone_number = &#34;&#34;
     for char in pattern:
-        if char == "X":
+        if char == &#34;X&#34;:
             random_digit = str(random.randint(0, 9))
             phone_number += random_digit
         else:
@@ -79,33 +61,33 @@ def generate_random_html_input_color():
     b = random.randint(0, 255)
 
     # Convert RGB to hexadecimal
-    color_hex = "#{:02X}{:02X}{:02X}".format(r, g, b)
+    color_hex = &#34;#{:02X}{:02X}{:02X}&#34;.format(r, g, b)
     return color_hex
 
 
 def random_date(start_date, end_date):
     if start_date==end_date:
         return start_date
-    start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
-    end_date = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+    start_date = datetime.datetime.strptime(start_date, &#34;%Y-%m-%d&#34;)
+    end_date = datetime.datetime.strptime(end_date, &#34;%Y-%m-%d&#34;)
     
     time_between_dates = end_date - start_date
     days_between_dates = time_between_dates.days
     random_number_of_days = random.randrange(days_between_dates)
     
     random_date = start_date + datetime.timedelta(days=random_number_of_days)
-    return random_date.strftime("%Y-%m-%d")
+    return random_date.strftime(&#34;%Y-%m-%d&#34;)
 
 
 def spider_url(base_url, include_id=False,max_pages=50,timeout=15,cookie=None,user_agent=None,proxy=None,headers={}):
-    domain=base_url.split('://')[1].split('/')[0]
+    domain=base_url.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
     h={}
     if cookie:
-        h.update({'Cookie':cookie})
+        h.update({&#39;Cookie&#39;:cookie})
     if user_agent:
-        h.update({'User-Agent':user_agent})
+        h.update({&#39;User-Agent&#39;:user_agent})
     else:
-        h.update({'User-Agent':random.choice(ua)})
+        h.update({&#39;User-Agent&#39;:random.choice(ua)})
     h.update(headers)
     visited_urls = set()
     urls_to_visit = [base_url]
@@ -119,83 +101,83 @@ def spider_url(base_url, include_id=False,max_pages=50,timeout=15,cookie=None,us
             response.raise_for_status()  # Check for any request errors
 
             # Parse the HTML content
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = BeautifulSoup(response.content, &#39;html.parser&#39;)
 
             # Extract all links from the page
-            for anchor_tag in soup.find_all('a', href=True):
-                href = anchor_tag['href']
+            for anchor_tag in soup.find_all(&#39;a&#39;, href=True):
+                href = anchor_tag[&#39;href&#39;]
                 absolute_url = urljoin(url, href)
                 try:
-                    this_domain=absolute_url.split('://')[1].split('/')[0]
+                    this_domain=absolute_url.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
                 except:
-                    this_domain=''
+                    this_domain=&#39;&#39;
 
-                if absolute_url not in visited_urls and absolute_url.split('?')[0].split('#')[0] not in root_urls and domain == this_domain:
+                if absolute_url not in visited_urls and absolute_url.split(&#39;?&#39;)[0].split(&#39;#&#39;)[0] not in root_urls and domain == this_domain:
                     visited_urls.add(absolute_url)
                     urls_to_visit.append(absolute_url)
-                    root_urls.append(absolute_url.split('?')[0].split('#')[0])
+                    root_urls.append(absolute_url.split(&#39;?&#39;)[0].split(&#39;#&#39;)[0])
             if include_id==True:
-                collected_urls.add({'url':url,'id':anchor_tag.get('id','')})
+                collected_urls.add({&#39;url&#39;:url,&#39;id&#39;:anchor_tag.get(&#39;id&#39;,&#39;&#39;)})
             else:
                 collected_urls.add(url)
             #print(len(collected_urls))
 
         except requests.exceptions.RequestException as e:
-            print("Error fetching URL: {}".format(e))
+            print(&#34;Error fetching URL: {}&#34;.format(e))
 
     return list(collected_urls)
 
 
 
 def url_to_get_form(u,url_id):
-    #print('&amp;'.join(u.split('?')[1:]).replace('?','&amp;').split('&amp;'))
-    #print(u.split('?')[1].split('&amp;'))
+    #print(&#39;&amp;&#39;.join(u.split(&#39;?&#39;)[1:]).replace(&#39;?&#39;,&#39;&amp;&#39;).split(&#39;&amp;&#39;))
+    #print(u.split(&#39;?&#39;)[1].split(&#39;&amp;&#39;))
     inputs=[]
-    for x in '&amp;'.join(u.split('?')[1:]).replace('?','&amp;').split('&amp;'):
+    for x in &#39;&amp;&#39;.join(u.split(&#39;?&#39;)[1:]).replace(&#39;?&#39;,&#39;&amp;&#39;).split(&#39;&amp;&#39;):
         try:
-            inputs.append({'name':x.split('=')[0],'type':'text','value':x.split('=')[1]})
+            inputs.append({&#39;name&#39;:x.split(&#39;=&#39;)[0],&#39;type&#39;:&#39;text&#39;,&#39;value&#39;:x.split(&#39;=&#39;)[1]})
         except:
-            inputs.append({'name':x.split('=')[0],'type':'text','value':''})
-    #inputs=[ {'name':x.split('=')[0],'type':'text','value':x.split('=')[1]} for x in u.split('?')[1].split('&amp;')]
+            inputs.append({&#39;name&#39;:x.split(&#39;=&#39;)[0],&#39;type&#39;:&#39;text&#39;,&#39;value&#39;:&#39;&#39;})
+    #inputs=[ {&#39;name&#39;:x.split(&#39;=&#39;)[0],&#39;type&#39;:&#39;text&#39;,&#39;value&#39;:x.split(&#39;=&#39;)[1]} for x in u.split(&#39;?&#39;)[1].split(&#39;&amp;&#39;)]
     return {
-                    "inputs": inputs,
-                    "action": u.split('?')[0],
-                    "enctype": 'application/x-www-form-urlencoded',
-                    "method": 'get',
-                    "id":url_id,
-                    "hidden_values": [],
-                    "is_url":True
+                    &#34;inputs&#34;: inputs,
+                    &#34;action&#34;: u.split(&#39;?&#39;)[0],
+                    &#34;enctype&#34;: &#39;application/x-www-form-urlencoded&#39;,
+                    &#34;method&#34;: &#39;get&#39;,
+                    &#34;id&#34;:url_id,
+                    &#34;hidden_values&#34;: [],
+                    &#34;is_url&#34;:True
                 }
 
 
 def get_links_from_page_source(soup,url,url_id):
-    if url.endswith('/')==False:
-        url+='/'
-    domain=url.split('/')[0] if url.startswith('http')==False else url.split('://')[1].split('/')[0]
-    l=soup.find_all('a')
-    links=[{'url':x['href'].replace('&amp;amp;','&amp;'),'id':x.get('id','')} for x in l if x.has_attr('href')]
-    media_tags = soup.find_all(['img', 'audio', 'video', 'source','embed'])
-    links+=[{'url':x['src'].replace('&amp;amp;','&amp;'),'id':x.get('id','') } for x in media_tags if x.has_attr('src')]
-    links.append({'url':url,'id':url_id})
+    if url.endswith(&#39;/&#39;)==False:
+        url+=&#39;/&#39;
+    domain=url.split(&#39;/&#39;)[0] if url.startswith(&#39;http&#39;)==False else url.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
+    l=soup.find_all(&#39;a&#39;)
+    links=[{&#39;url&#39;:x[&#39;href&#39;].replace(&#39;&amp;amp;&#39;,&#39;&amp;&#39;),&#39;id&#39;:x.get(&#39;id&#39;,&#39;&#39;)} for x in l if x.has_attr(&#39;href&#39;)]
+    media_tags = soup.find_all([&#39;img&#39;, &#39;audio&#39;, &#39;video&#39;, &#39;source&#39;,&#39;embed&#39;])
+    links+=[{&#39;url&#39;:x[&#39;src&#39;].replace(&#39;&amp;amp;&#39;,&#39;&amp;&#39;),&#39;id&#39;:x.get(&#39;id&#39;,&#39;&#39;) } for x in media_tags if x.has_attr(&#39;src&#39;)]
+    links.append({&#39;url&#39;:url,&#39;id&#39;:url_id})
     #print(links)
     #links_list=[]
     root_links=[]
     forms=[]
     for l in links:
-        x=l['url']
-        l_id=l['id']
-        if '?' in x and x.split('?')[0] not in root_links:
+        x=l[&#39;url&#39;]
+        l_id=l[&#39;id&#39;]
+        if &#39;?&#39; in x and x.split(&#39;?&#39;)[0] not in root_links:
             a=urljoin(url, x)
             #print(a)
             if a.startswith(url.split(domain)[0]+domain)==True:
                 forms.append(url_to_get_form(a,l_id))
-                root_links.append(x.split('?')[0])
+                root_links.append(x.split(&#39;?&#39;)[0])
     return forms
 
 
 
 def remove_html_comments(text):
-    return re.sub(r"&lt;!--(.|\s|\n)*?--&gt;", "", text, flags=re.DOTALL)
+    return re.sub(r&#34;&lt;!--(.|\s|\n)*?--&gt;&#34;, &#34;&#34;, text, flags=re.DOTALL)
 
 
 def inputs(
@@ -208,37 +190,37 @@ def inputs(
     proxy=None,
     cookie=None,
 ):
-    """
+    &#34;&#34;&#34;
      this function is to get the names and values of input fields on a given webpage to scan.
 
      it takes 4 arguments:
 
-     u: the page's link (http://...)
-     value: (set by default to: False) to return the value of the fields set it to:True then the field's name and value will be string of 2
-     values sperated by ":"
+     u: the page&#39;s link (http://...)
+     value: (set by default to: False) to return the value of the fields set it to:True then the field&#39;s name and value will be string of 2
+     values sperated by &#34;:&#34;
      timeout: (set by default to: 10) timeout flag for the request
      bypass: (set by default to: False) to bypass anti-crawlers
 
     usage:
 
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;link='http://www.example.com'
+    &gt;&gt;&gt;link=&#39;http://www.example.com&#39;
     &gt;&gt;&gt;bane.inputs(link)
-    ['email','password','rememberme']
+    [&#39;email&#39;,&#39;password&#39;,&#39;rememberme&#39;]
     &gt;&gt;&gt;a=bane.inputs(link,value=True)
-    ['email','password','rememberme:yes','rememberme:no']
+    [&#39;email&#39;,&#39;password&#39;,&#39;rememberme:yes&#39;,&#39;rememberme:no&#39;]
 
-    """
+    &#34;&#34;&#34;
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     if bypass == True:
-        u += "#"
+        u += &#34;#&#34;
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     l = []
     try:
         c = requests.Session().get(
@@ -246,33 +228,33 @@ def inputs(
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        p = soup.find_all("textarea")
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        p = soup.find_all(&#34;textarea&#34;)
         for r in p:
-            if r.has_attr("name"):
-                s = r.get("name")
-                v = r.get("value")
+            if r.has_attr(&#34;name&#34;):
+                s = r.get(&#34;name&#34;)
+                v = r.get(&#34;value&#34;)
                 if v == None:
-                    v = ""
+                    v = &#34;&#34;
             if value == True:
-                y = s + ":" + v
+                y = s + &#34;:&#34; + v
             else:
                 y = s
             if y not in l:
                 l.append(y)
-        p = soup.find_all("input")
+        p = soup.find_all(&#34;input&#34;)
         for r in p:
-            v = ""
-            if r.has_attr("name"):
+            v = &#34;&#34;
+            if r.has_attr(&#34;name&#34;):
                 s = str(r)
-                s = s.split('name="')[1].split(",")[0]
-                s = s.split('"')[0].split(",")[0]
-                if r.has_attr("value") and (value == True):
+                s = s.split(&#39;name=&#34;&#39;)[1].split(&#34;,&#34;)[0]
+                s = s.split(&#39;&#34;&#39;)[0].split(&#34;,&#34;)[0]
+                if r.has_attr(&#34;value&#34;) and (value == True):
                     v = str(r)
-                    v = v.split('value="')[1].split(",")[0]
-                    v = v.split('"')[0].split(",")[0]
+                    v = v.split(&#39;value=&#34;&#39;)[1].split(&#34;,&#34;)[0]
+                    v = v.split(&#39;&#34;&#39;)[0].split(&#34;,&#34;)[0]
             if value == True:
-                y = s + ":" + v
+                y = s + &#34;:&#34; + v
             else:
                 y = s
             if y not in l:
@@ -292,21 +274,21 @@ def forms(
     proxy=None,
     cookie=None,
 ):
-    """
-    same as "inputs" function but it works on forms input fields only
-    """
-    if urlparse(u).path == "":
-        u += "/"
+    &#34;&#34;&#34;
+    same as &#34;inputs&#34; function but it works on forms input fields only
+    &#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     if bypass == True:
-        u += "#"
+        u += &#34;#&#34;
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     l = []
     fom = []
     try:
@@ -315,58 +297,58 @@ def forms(
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        i = soup.find_all("form")
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        i = soup.find_all(&#34;form&#34;)
         for f in i:
-            ac = f.get("action")
+            ac = f.get(&#34;action&#34;)
             if not ac:
                 ac = u
-            """if len(ac)==0:
+            &#34;&#34;&#34;if len(ac)==0:
     ac=u
-   if ac[0]=="/":
-    url_o="/".join(u.split('/')[:-1])
+   if ac[0]==&#34;/&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
     ac=url_o+ac
-   if ac[:4]!="http":
-    url_o="/".join(u.split('/')[:-1])
-    ac=url_o+"/"+ac"""
-            if "://" not in ac:
-                ur = u[: u.rfind("/")]
-                if ac[0] == "/":
+   if ac[:4]!=&#34;http&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
+    ac=url_o+&#34;/&#34;+ac&#34;&#34;&#34;
+            if &#34;://&#34; not in ac:
+                ur = u[: u.rfind(&#34;/&#34;)]
+                if ac[0] == &#34;/&#34;:
                     ac = ac[1 : len(ac)]
-                ac = ur + "/" + ac
-            me = f.get("method")
+                ac = ur + &#34;/&#34; + ac
+            me = f.get(&#34;method&#34;)
             if not me:
-                me = "get"
+                me = &#34;get&#34;
             if len(me) == 0:
-                me = "get"
+                me = &#34;get&#34;
             me = me.lower()
-            p = f.find_all("textarea")
+            p = f.find_all(&#34;textarea&#34;)
             for r in p:
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.get("value")
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.get(&#34;value&#34;)
                     if v == None:
-                        v = ""
+                        v = &#34;&#34;
                 if value == True:
-                    y = s + ":" + v
+                    y = s + &#34;:&#34; + v
                 else:
                     y = s
                 if y not in l:
                     l.append(y)
-            p = f.find_all("input")
+            p = f.find_all(&#34;input&#34;)
             for r in p:
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.get("value")
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.get(&#34;value&#34;)
                     if v == None:
-                        v = ""
+                        v = &#34;&#34;
                 if value == True:
-                    y = s + ":" + v
+                    y = s + &#34;:&#34; + v
                 else:
                     y = s
                 if y not in l:
                     l.append(y)
-            fom.append({"inputs": l, "action": ac, "method": me})
+            fom.append({&#34;inputs&#34;: l, &#34;action&#34;: ac, &#34;method&#34;: me})
             l = []
     except Exception as e:
         pass
@@ -377,16 +359,16 @@ def sort_inputs(l):
     a = []
     d = []
     for x in l:
-        if x["type"] not in [u"radio", u"checkbox"]:
+        if x[&#34;type&#34;] not in [u&#34;radio&#34;, u&#34;checkbox&#34;]:
             d.append(x)
-        if x["name"] not in a and (x["type"] == u"radio" or x["type"] == u"checkbox"):
-            a.append(x["name"])
+        if x[&#34;name&#34;] not in a and (x[&#34;type&#34;] == u&#34;radio&#34; or x[&#34;type&#34;] == u&#34;checkbox&#34;):
+            a.append(x[&#34;name&#34;])
     for x in a:
         d.append(
             {
-                "type": [i["type"] for i in l if i["name"] == x][0],
-                "name": x,
-                "value": [i["value"] for i in l if i["name"] == x],
+                &#34;type&#34;: [i[&#34;type&#34;] for i in l if i[&#34;name&#34;] == x][0],
+                &#34;name&#34;: x,
+                &#34;value&#34;: [i[&#34;value&#34;] for i in l if i[&#34;name&#34;] == x],
             }
         )
     return d
@@ -403,23 +385,23 @@ def forms_parser(
     include_links=True,
     headers={}
 ):
-    """
-    same as "forms" function but it return detailed information about all forms in a given page
-    """
-    if urlparse(u).path == "":
-        u += "/"
-    domain=u.split('://')[1].split('/')[0]
-    base_url=u.split('://')[0]+domain
+    &#34;&#34;&#34;
+    same as &#34;forms&#34; function but it return detailed information about all forms in a given page
+    &#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
+    domain=u.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
+    base_url=u.split(&#39;://&#39;)[0]+domain
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     if bypass == True:
-        u += "#"
+        u += &#34;#&#34;
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     hea.update(headers)
     l = []
     fom = []
@@ -429,276 +411,276 @@ def forms_parser(
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        i = soup.find_all("form")
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        i = soup.find_all(&#34;form&#34;)
         for f in i:
-            form_id=f.get('id','')
+            form_id=f.get(&#39;id&#39;,&#39;&#39;)
             try:
-                tb_inputs = f.find_all("table")[0].find_all("input")
+                tb_inputs = f.find_all(&#34;table&#34;)[0].find_all(&#34;input&#34;)
             except:
                 tb_inputs = []
             try:
-                tb_textareas = f.find_all("table")[0].find_all("textarea")
+                tb_textareas = f.find_all(&#34;table&#34;)[0].find_all(&#34;textarea&#34;)
             except:
                 tb_textareas = []
             try:
-                tb_selects = f.find_all("table")[0].find_all("select")
+                tb_selects = f.find_all(&#34;table&#34;)[0].find_all(&#34;select&#34;)
             except:
                 tb_selects = []
-            ac = urljoin(u, f.get("action",''))
-            enc_ty = f.get("enctype", "application/x-www-form-urlencoded")
+            ac = urljoin(u, f.get(&#34;action&#34;,&#39;&#39;))
+            enc_ty = f.get(&#34;enctype&#34;, &#34;application/x-www-form-urlencoded&#34;)
             if not ac:
                 ac = u
-            """if len(ac)==0:
+            &#34;&#34;&#34;if len(ac)==0:
     ac=u
-   if ac[0]=="/":
-    url_o="/".join(u.split('/')[:-1])
+   if ac[0]==&#34;/&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
     ac=url_o+ac
-   if ac[:4]!="http":
-    url_o="/".join(u.split('/')[:-1])
-    ac=url_o+"/"+ac"""
-            if "://" not in ac:
-                ur = u[: u.rfind("/")]
-                if ac[0] == "/":
+   if ac[:4]!=&#34;http&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
+    ac=url_o+&#34;/&#34;+ac&#34;&#34;&#34;
+            if &#34;://&#34; not in ac:
+                ur = u[: u.rfind(&#34;/&#34;)]
+                if ac[0] == &#34;/&#34;:
                     ac = ac[1 : len(ac)]
-                ac = ur + "/" + ac
-            me = f.get("method", "get")
+                ac = ur + &#34;/&#34; + ac
+            me = f.get(&#34;method&#34;, &#34;get&#34;)
             if not me:
-                me = "get"
+                me = &#34;get&#34;
             if len(me) == 0:
-                me = "get"
+                me = &#34;get&#34;
             me = me.lower()
-            """radios={}
-            checkxoes={}"""
-            p = f.find_all("textarea") + tb_textareas
+            &#34;&#34;&#34;radios={}
+            checkxoes={}&#34;&#34;&#34;
+            p = f.find_all(&#34;textarea&#34;) + tb_textareas
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.renderContents().decode().split("&lt;/textarea&gt;")[0]
-                    typ = r.get("type", "textarea").lower()
-                    max_size=r.get('maxlength',64)
-                    if r.get('size',0)!=0:
-                            max_size= r.get('size',64)
-                    y = {"name": s, "value": v, "type": typ,'max':max_size,'min':r.get('minlength',1),'required':required}
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.renderContents().decode().split(&#34;&lt;/textarea&gt;&#34;)[0]
+                    typ = r.get(&#34;type&#34;, &#34;textarea&#34;).lower()
+                    max_size=r.get(&#39;maxlength&#39;,64)
+                    if r.get(&#39;size&#39;,0)!=0:
+                            max_size= r.get(&#39;size&#39;,64)
+                    y = {&#34;name&#34;: s, &#34;value&#34;: v, &#34;type&#34;: typ,&#39;max&#39;:max_size,&#39;min&#39;:r.get(&#39;minlength&#39;,1),&#39;required&#39;:required}
                     if y not in l:
                         l.append(y)
             h_v = {}
-            p = f.find_all("input") + tb_inputs
+            p = f.find_all(&#34;input&#34;) + tb_inputs
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.get("value", "")
-                    typ = r.get("type", "text").lower()
-                    y = {"name": s, "value": v, "type": typ,'required':required}
-                    if y['type'] in ['text','password','email','url','tel','search']:
-                        max_size=r.get('maxlength',64)
-                        if r.get('size',0)!=0:
-                            max_size= r.get('size',64)
-                        y.update({'max':int(max_size),'min':int(r.get('minlength',1))})
-                    elif y['type']=='number':
-                        y.update({'max':int(r.get('max',10)),'min':int(r.get('min',1))})
-                    elif y['type']=='date':
-                        y.update({'max':r.get('max',datetime.datetime.today().strftime("%Y-%m-%d")),'min':r.get('min',datetime.datetime.today().strftime("%Y-%m-%d"))})
-                    elif y['type']=='file':
-                        y.update({'accept':[ x.replace('.','').strip() for x in y.get('accept','.png').split(',')]})
-                    """elif y['type']=='radio':
-                        if y['name'] not in radios:
-                            radios[y['name']]=[]
-                        radios[y['name']].append(y)
-                    elif y['type']=='checkbox':
-                        if y['name'] not in checkxoes:
-                            checkxoes[y['name']]=[]
-                        checkxoes[y['name']].append(y)"""
-                    if typ.lower() == "hidden":
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.get(&#34;value&#34;, &#34;&#34;)
+                    typ = r.get(&#34;type&#34;, &#34;text&#34;).lower()
+                    y = {&#34;name&#34;: s, &#34;value&#34;: v, &#34;type&#34;: typ,&#39;required&#39;:required}
+                    if y[&#39;type&#39;] in [&#39;text&#39;,&#39;password&#39;,&#39;email&#39;,&#39;url&#39;,&#39;tel&#39;,&#39;search&#39;]:
+                        max_size=r.get(&#39;maxlength&#39;,64)
+                        if r.get(&#39;size&#39;,0)!=0:
+                            max_size= r.get(&#39;size&#39;,64)
+                        y.update({&#39;max&#39;:int(max_size),&#39;min&#39;:int(r.get(&#39;minlength&#39;,1))})
+                    elif y[&#39;type&#39;]==&#39;number&#39;:
+                        y.update({&#39;max&#39;:int(r.get(&#39;max&#39;,10)),&#39;min&#39;:int(r.get(&#39;min&#39;,1))})
+                    elif y[&#39;type&#39;]==&#39;date&#39;:
+                        y.update({&#39;max&#39;:r.get(&#39;max&#39;,datetime.datetime.today().strftime(&#34;%Y-%m-%d&#34;)),&#39;min&#39;:r.get(&#39;min&#39;,datetime.datetime.today().strftime(&#34;%Y-%m-%d&#34;))})
+                    elif y[&#39;type&#39;]==&#39;file&#39;:
+                        y.update({&#39;accept&#39;:[ x.replace(&#39;.&#39;,&#39;&#39;).strip() for x in y.get(&#39;accept&#39;,&#39;.png&#39;).split(&#39;,&#39;)]})
+                    &#34;&#34;&#34;elif y[&#39;type&#39;]==&#39;radio&#39;:
+                        if y[&#39;name&#39;] not in radios:
+                            radios[y[&#39;name&#39;]]=[]
+                        radios[y[&#39;name&#39;]].append(y)
+                    elif y[&#39;type&#39;]==&#39;checkbox&#39;:
+                        if y[&#39;name&#39;] not in checkxoes:
+                            checkxoes[y[&#39;name&#39;]]=[]
+                        checkxoes[y[&#39;name&#39;]].append(y)&#34;&#34;&#34;
+                    if typ.lower() == &#34;hidden&#34;:
                         h_v.update({s: v})
-                    if y not in l :#and y['name'] not in radios and y['name'] not in checkxoes:
+                    if y not in l :#and y[&#39;name&#39;] not in radios and y[&#39;name&#39;] not in checkxoes:
                         l.append(y)
-            p = f.find_all("select") + tb_selects
+            p = f.find_all(&#34;select&#34;) + tb_selects
             opts = []
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    for x in r.find_all("option"):
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    for x in r.find_all(&#34;option&#34;):
                         opts.append(x.text)
-                    y = {"name": s, "value": opts, "type": "select",'required':required}
+                    y = {&#34;name&#34;: s, &#34;value&#34;: opts, &#34;type&#34;: &#34;select&#34;,&#39;required&#39;:required}
                     if y not in l:
                         l.append(y)
-            """for x in radios:
-                l.append({'name':x,'type':'radio','value':[i['value'] for i in radios[x]]})
+            &#34;&#34;&#34;for x in radios:
+                l.append({&#39;name&#39;:x,&#39;type&#39;:&#39;radio&#39;,&#39;value&#39;:[i[&#39;value&#39;] for i in radios[x]]})
             for x in checkxoes:
-                l.append({'name':x,'type':'checkbox','value':[i['value'] for i in checkxoes[x]]})"""
+                l.append({&#39;name&#39;:x,&#39;type&#39;:&#39;checkbox&#39;,&#39;value&#39;:[i[&#39;value&#39;] for i in checkxoes[x]]})&#34;&#34;&#34;
             fom.append(
                 {
-                    'id':form_id,
-                    "inputs": sort_inputs(l),
-                    "action": ac.lower(),
-                    "enctype": enc_ty.lower(),
-                    "method": me.lower(),
-                    "hidden_values": h_v,
-                    "is_url":False
+                    &#39;id&#39;:form_id,
+                    &#34;inputs&#34;: sort_inputs(l),
+                    &#34;action&#34;: ac.lower(),
+                    &#34;enctype&#34;: enc_ty.lower(),
+                    &#34;method&#34;: me.lower(),
+                    &#34;hidden_values&#34;: h_v,
+                    &#34;is_url&#34;:False
                 }
             )
             l = []
     except Exception as e:
         pass
     if include_links==True:
-        fom+=get_links_from_page_source(soup,u,'')
+        fom+=get_links_from_page_source(soup,u,&#39;&#39;)
     return fom
 
 
 def forms_parser_text(u, text, html_comments=False,include_links=True):
-    """
-    same as "forms" function but it return detailed information about all forms in a given page
-    """
-    if urlparse(u).path == "":
-        u += "/"
+    &#34;&#34;&#34;
+    same as &#34;forms&#34; function but it return detailed information about all forms in a given page
+    &#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
     l = []
     fom = []
     try:
         c = text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        i = soup.find_all("form")
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        i = soup.find_all(&#34;form&#34;)
         for f in i:
-            form_id=f.get('id','')
+            form_id=f.get(&#39;id&#39;,&#39;&#39;)
             try:
-                tb_inputs = f.find_all("table")[0].find_all("input")
+                tb_inputs = f.find_all(&#34;table&#34;)[0].find_all(&#34;input&#34;)
             except:
                 tb_inputs = []
             try:
-                tb_textareas = f.find_all("table")[0].find_all("textarea")
+                tb_textareas = f.find_all(&#34;table&#34;)[0].find_all(&#34;textarea&#34;)
             except:
                 tb_textareas = []
             try:
-                tb_selects = f.find_all("table")[0].find_all("select")
+                tb_selects = f.find_all(&#34;table&#34;)[0].find_all(&#34;select&#34;)
             except:
                 tb_selects = []
-            ac = urljoin(u, f.get("action",''))
-            enc_ty = f.get("enctype", "application/x-www-form-urlencoded").lower()
+            ac = urljoin(u, f.get(&#34;action&#34;,&#39;&#39;))
+            enc_ty = f.get(&#34;enctype&#34;, &#34;application/x-www-form-urlencoded&#34;).lower()
             if not ac:
                 ac = u
-            """if len(ac)==0:
+            &#34;&#34;&#34;if len(ac)==0:
     ac=u
-   if ac[0]=="/":
-    url_o="/".join(u.split('/')[:-1])
+   if ac[0]==&#34;/&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
     ac=url_o+ac
-   if ac[:4]!="http":
-    url_o="/".join(u.split('/')[:-1])
-    ac=url_o+"/"+ac"""
-            if "://" not in ac:
-                ur = u[: u.rfind("/")]
-                if ac[0] == "/":
+   if ac[:4]!=&#34;http&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
+    ac=url_o+&#34;/&#34;+ac&#34;&#34;&#34;
+            if &#34;://&#34; not in ac:
+                ur = u[: u.rfind(&#34;/&#34;)]
+                if ac[0] == &#34;/&#34;:
                     ac = ac[1 : len(ac)]
-                ac = ur + "/" + ac
-            me = f.get("method", "get").lower()
+                ac = ur + &#34;/&#34; + ac
+            me = f.get(&#34;method&#34;, &#34;get&#34;).lower()
             if not me:
-                me = "get"
+                me = &#34;get&#34;
             if len(me) == 0:
-                me = "get"
+                me = &#34;get&#34;
             me = me.lower()
-            """radios={}
-            checkxoes={}"""
-            p = f.find_all("textarea") + tb_textareas
+            &#34;&#34;&#34;radios={}
+            checkxoes={}&#34;&#34;&#34;
+            p = f.find_all(&#34;textarea&#34;) + tb_textareas
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.renderContents().decode().split("&lt;/textarea&gt;")[0]
-                    typ = r.get("type", "textarea").lower()
-                    max_size=r.get('maxlength',64)
-                    if r.get('size',0)!=0:
-                            max_size= r.get('size',64)
-                    y = {"name": s, "value": v, "type": typ,'max':max_size,'min':r.get('minlength',1),'required':required}
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.renderContents().decode().split(&#34;&lt;/textarea&gt;&#34;)[0]
+                    typ = r.get(&#34;type&#34;, &#34;textarea&#34;).lower()
+                    max_size=r.get(&#39;maxlength&#39;,64)
+                    if r.get(&#39;size&#39;,0)!=0:
+                            max_size= r.get(&#39;size&#39;,64)
+                    y = {&#34;name&#34;: s, &#34;value&#34;: v, &#34;type&#34;: typ,&#39;max&#39;:max_size,&#39;min&#39;:r.get(&#39;minlength&#39;,1),&#39;required&#39;:required}
                     if y not in l:
                         l.append(y)
             h_v = {}
-            p = f.find_all("input") + tb_inputs
+            p = f.find_all(&#34;input&#34;) + tb_inputs
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.get("value", "")
-                    typ = r.get("type", "text").lower()
-                    y = {"name": s, "value": v, "type": typ,'required':required}
-                    if y['type'] in ['text','password','email','url','tel','search']:
-                        max_size=r.get('maxlength',64)
-                        if r.get('size',0)!=0:
-                            max_size= r.get('size',64)
-                        y.update({'max':int(max_size),'min':int(r.get('minlength',1))})
-                    elif y['type']=='number':
-                        y.update({'max':int(r.get('max',64)),'min':int(r.get('min',1))})
-                    elif y['type']=='date':
-                        y.update({'max':r.get('max',datetime.datetime.today().strftime("%Y-%m-%d")),'min':r.get('min',datetime.datetime.today().strftime("%Y-%m-%d"))})
-                    elif y['type']=='file':
-                        y.update({'accept':[ x.replace('.','').strip() for x in y.get('accept','.png').split(',')]})
-                    """elif y['type']=='radio':
-                        if y['name'] not in radios:
-                            radios[y['name']]=[]
-                        radios[y['name']].append(y)
-                    elif y['type']=='checkbox':
-                        if y['name'] not in checkxoes:
-                            checkxoes[y['name']]=[]
-                        checkxoes[y['name']].append(y)"""
-                    if typ.lower() == "hidden":
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.get(&#34;value&#34;, &#34;&#34;)
+                    typ = r.get(&#34;type&#34;, &#34;text&#34;).lower()
+                    y = {&#34;name&#34;: s, &#34;value&#34;: v, &#34;type&#34;: typ,&#39;required&#39;:required}
+                    if y[&#39;type&#39;] in [&#39;text&#39;,&#39;password&#39;,&#39;email&#39;,&#39;url&#39;,&#39;tel&#39;,&#39;search&#39;]:
+                        max_size=r.get(&#39;maxlength&#39;,64)
+                        if r.get(&#39;size&#39;,0)!=0:
+                            max_size= r.get(&#39;size&#39;,64)
+                        y.update({&#39;max&#39;:int(max_size),&#39;min&#39;:int(r.get(&#39;minlength&#39;,1))})
+                    elif y[&#39;type&#39;]==&#39;number&#39;:
+                        y.update({&#39;max&#39;:int(r.get(&#39;max&#39;,64)),&#39;min&#39;:int(r.get(&#39;min&#39;,1))})
+                    elif y[&#39;type&#39;]==&#39;date&#39;:
+                        y.update({&#39;max&#39;:r.get(&#39;max&#39;,datetime.datetime.today().strftime(&#34;%Y-%m-%d&#34;)),&#39;min&#39;:r.get(&#39;min&#39;,datetime.datetime.today().strftime(&#34;%Y-%m-%d&#34;))})
+                    elif y[&#39;type&#39;]==&#39;file&#39;:
+                        y.update({&#39;accept&#39;:[ x.replace(&#39;.&#39;,&#39;&#39;).strip() for x in y.get(&#39;accept&#39;,&#39;.png&#39;).split(&#39;,&#39;)]})
+                    &#34;&#34;&#34;elif y[&#39;type&#39;]==&#39;radio&#39;:
+                        if y[&#39;name&#39;] not in radios:
+                            radios[y[&#39;name&#39;]]=[]
+                        radios[y[&#39;name&#39;]].append(y)
+                    elif y[&#39;type&#39;]==&#39;checkbox&#39;:
+                        if y[&#39;name&#39;] not in checkxoes:
+                            checkxoes[y[&#39;name&#39;]]=[]
+                        checkxoes[y[&#39;name&#39;]].append(y)&#34;&#34;&#34;
+                    if typ.lower() == &#34;hidden&#34;:
                         h_v.update({s: v})
-                    if y not in l :#and y['name'] not in radios and y['name'] not in checkxoes:
+                    if y not in l :#and y[&#39;name&#39;] not in radios and y[&#39;name&#39;] not in checkxoes:
                         l.append(y)
-            p = f.find_all("select") + tb_selects
+            p = f.find_all(&#34;select&#34;) + tb_selects
             opts = []
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    for x in r.find_all("option"):
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    for x in r.find_all(&#34;option&#34;):
                         opts.append(x.text)
-                    y = {"name": s, "value": opts, "type": "select",'required':required}
+                    y = {&#34;name&#34;: s, &#34;value&#34;: opts, &#34;type&#34;: &#34;select&#34;,&#39;required&#39;:required}
                     if y not in l:
                         l.append(y)
-            """for x in radios:
-                l.append({'name':x,'type':'radio','value':[i['value'] for i in radios[x]]})
+            &#34;&#34;&#34;for x in radios:
+                l.append({&#39;name&#39;:x,&#39;type&#39;:&#39;radio&#39;,&#39;value&#39;:[i[&#39;value&#39;] for i in radios[x]]})
             for x in checkxoes:
-                l.append({'name':x,'type':'checkbox','value':[i['value'] for i in checkxoes[x]]})"""
+                l.append({&#39;name&#39;:x,&#39;type&#39;:&#39;checkbox&#39;,&#39;value&#39;:[i[&#39;value&#39;] for i in checkxoes[x]]})&#34;&#34;&#34;
             fom.append(
                 {
-                    'id':form_id,
-                    "inputs": sort_inputs(l),
-                    "action": ac,
-                    "enctype": enc_ty,
-                    "method": me,
-                    "hidden_values": h_v,
-                    "is_url":False
+                    &#39;id&#39;:form_id,
+                    &#34;inputs&#34;: sort_inputs(l),
+                    &#34;action&#34;: ac,
+                    &#34;enctype&#34;: enc_ty,
+                    &#34;method&#34;: me,
+                    &#34;hidden_values&#34;: h_v,
+                    &#34;is_url&#34;:False
                 }
             )
             l = []
     except Exception as e:
         pass #raise(e)
     if include_links==True:
-        fom+=get_links_from_page_source(soup,u,'')
+        fom+=get_links_from_page_source(soup,u,&#39;&#39;)
     return fom
 
 
 def cookies_to_dict(cookies):
     d = {}
-    a = cookies.split(";")
+    a = cookies.split(&#34;;&#34;)
     for x in a:
-        if "=" in x:
-            d.update({x.split("=")[0].strip(): x.split("=")[1].strip()})
+        if &#34;=&#34; in x:
+            d.update({x.split(&#34;=&#34;)[0].strip(): x.split(&#34;=&#34;)[1].strip()})
     return d
 
 
@@ -710,17 +692,17 @@ def update_cookies(cookies, cook):
     if cook:
         c2 = cookies_to_dict(cook)
     c2.update(c1)
-    cookie = ""
+    cookie = &#34;&#34;
     for x in c2:
-        cookie += x + "=" + c2[x] + ";"
+        cookie += x + &#34;=&#34; + c2[x] + &#34;;&#34;
     return cookie
 
 
 def set_correct_cookies(new_cookies, cookie=None):
     if not cookie:
-        cookie = ""
+        cookie = &#34;&#34;
     if not new_cookies:
-        new_cookies = ""
+        new_cookies = &#34;&#34;
     if cookie and len(cookie) &gt; 0:
         if new_cookies and len(new_cookies) &gt; 0:
             cookies = update_cookies(new_cookies, cookie)
@@ -741,9 +723,9 @@ def set_up_injection(
     proxy,
     timeout,
     auto_fill,
-    file_extension="png",
-    email_extension='@gmail.com',
-    phone_pattern='XXX-XXX-XXXX',
+    file_extension=&#34;png&#34;,
+    email_extension=&#39;@gmail.com&#39;,
+    phone_pattern=&#39;XXX-XXX-XXXX&#39;,
     dont_change={},
     number=(1, 9),
     leave_empty=[],
@@ -753,9 +735,9 @@ def set_up_injection(
     headers={}
 ):
     cookies = None
-    h = {"User-Agent": user_agent}
+    h = {&#34;User-Agent&#34;: user_agent}
     if cookie:
-        h.update({"Cookie": cookie})
+        h.update({&#34;Cookie&#34;: cookie})
         cookies = cookie
     h.update(headers)
     
@@ -765,14 +747,14 @@ def set_up_injection(
         return False
     cook = None
     try:
-        cook = r.headers["Set-cookie"]
+        cook = r.headers[&#34;Set-cookie&#34;]
     except:
         pass
     cookies = set_correct_cookies(cook, cookie=cookie)
     form = forms_parser_text(url, r.text)[form_index]
-    h = {"User-Agent": user_agent}
+    h = {&#34;User-Agent&#34;: user_agent}
     if cookies and len(cookies.strip()) &gt; 0:
-        h.update({"Cookie": cookies})
+        h.update({&#34;Cookie&#34;: cookies})
     h.update(headers)
     return (
         form_filler(
@@ -800,9 +782,9 @@ def form_filler(
     form,
     param,
     payload,
-    file_extension="png",
-    email_extension='@gmail.com',
-    phone_pattern='XXX-XXX-XXXX',
+    file_extension=&#34;png&#34;,
+    email_extension=&#39;@gmail.com&#39;,
+    phone_pattern=&#39;XXX-XXX-XXXX&#39;,
     dont_change={},
     number=(1, 9),
     auto_fill=10,
@@ -811,82 +793,82 @@ def form_filler(
     mime_type=None,
     predefined_inputs={},
 ):
-    for x in form["inputs"]:
-        if x["name"].strip() in dont_change:
-            x["value"] = dont_change[x["name"]]
+    for x in form[&#34;inputs&#34;]:
+        if x[&#34;name&#34;].strip() in dont_change:
+            x[&#34;value&#34;] = dont_change[x[&#34;name&#34;]]
         else:
-            if x["name"].strip() in dont_send:
-                form["inputs"].remove(x)
+            if x[&#34;name&#34;].strip() in dont_send:
+                form[&#34;inputs&#34;].remove(x)
             else:
-                if x["name"].strip() not in leave_empty:
-                    if x["name"].strip() == param:
+                if x[&#34;name&#34;].strip() not in leave_empty:
+                    if x[&#34;name&#34;].strip() == param:
                         if file_extension==None:
-                            file_extension=random.choice(x["accept"])
-                        if x["type"] == "file":
+                            file_extension=random.choice(x[&#34;accept&#34;])
+                        if x[&#34;type&#34;] == &#34;file&#34;:
                             if not mime_type:
-                                x["value"] = (
-                                    payload + "." + file_extension,
+                                x[&#34;value&#34;] = (
+                                    payload + &#34;.&#34; + file_extension,
                                     files_upload[file_extension],
                                 )
                             else:
-                                x["value"] = (
-                                    payload + "." + file_extension,
+                                x[&#34;value&#34;] = (
+                                    payload + &#34;.&#34; + file_extension,
                                     files_upload[file_extension],
                                     mime_type,
                                 )
                         else:
-                            x["value"] = payload
+                            x[&#34;value&#34;] = payload
                     else:
-                        if x["name"].strip() in predefined_inputs:
-                            x["value"] = predefined_inputs[x["name"]]
+                        if x[&#34;name&#34;].strip() in predefined_inputs:
+                            x[&#34;value&#34;] = predefined_inputs[x[&#34;name&#34;]]
                         else:
-                            if x["value"] == "":
-                                if x["type"] == "file":
+                            if x[&#34;value&#34;] == &#34;&#34;:
+                                if x[&#34;type&#34;] == &#34;file&#34;:
                                     if not mime_type:
-                                        x["value"] = (
-                                            "bane_test"
+                                        x[&#34;value&#34;] = (
+                                            &#34;bane_test&#34;
                                             + str(random.randint(100000, 999999))
-                                            + "."
+                                            + &#34;.&#34;
                                             + file_extension,
                                             files_upload[file_extension],
                                         )
                                     else:
-                                        x["value"] = (
-                                            "bane_test"
+                                        x[&#34;value&#34;] = (
+                                            &#34;bane_test&#34;
                                             + str(random.randint(100000, 999999))
-                                            + "."
+                                            + &#34;.&#34;
                                             + file_extension,
                                             files_upload[file_extension],
                                             mime_type,
                                         )
                                 else:
-                                    #if x['value']=='':
-                                        if x["type"] == "number":
-                                            x["value"] += str(random.randint(int(float(x.get('min',0))), int(float(x.get('max',9)))))
-                                        elif x['type'] in ['text','password','search','textarea']:
-                                            leng=random.randint(int(float(x.get('min',1))), int(float(x.get('max',64)))+1)
+                                    #if x[&#39;value&#39;]==&#39;&#39;:
+                                        if x[&#34;type&#34;] == &#34;number&#34;:
+                                            x[&#34;value&#34;] += str(random.randint(int(float(x.get(&#39;min&#39;,0))), int(float(x.get(&#39;max&#39;,9)))))
+                                        elif x[&#39;type&#39;] in [&#39;text&#39;,&#39;password&#39;,&#39;search&#39;,&#39;textarea&#39;]:
+                                            leng=random.randint(int(float(x.get(&#39;min&#39;,1))), int(float(x.get(&#39;max&#39;,64)))+1)
                                             for i in range(leng):
-                                                x["value"] += random.choice(lis)
-                                        elif x['type']=='email':
-                                            leng=random.randint(int(float(x.get('min',1))), int(float(x.get('max',15)))-len(email_extension)+1)
+                                                x[&#34;value&#34;] += random.choice(lis)
+                                        elif x[&#39;type&#39;]==&#39;email&#39;:
+                                            leng=random.randint(int(float(x.get(&#39;min&#39;,1))), int(float(x.get(&#39;max&#39;,15)))-len(email_extension)+1)
                                             for i in range(leng):
-                                                x["value"] += random.choice(string.ascii_lowercase)
-                                            x["value"]+=email_extension
-                                        elif x['type']=='tel':
-                                            x["value"]=generate_random_phone_number(phone_pattern)
-                                        elif x['type']=='url':
-                                            x["value"]=generate_random_url()
-                                        elif x['type']=='date':
-                                            x["value"]=random_date(x['min'], x['max'])
-                                        elif x['type']=='color':
-                                            x['value']=generate_random_html_input_color()      
-                            if x["type"] in ["select", "radio", "checkbox"]:
-                                if len(x["value"]) == 0 or x["value"] == "":
-                                    x["value"] = ""
+                                                x[&#34;value&#34;] += random.choice(string.ascii_lowercase)
+                                            x[&#34;value&#34;]+=email_extension
+                                        elif x[&#39;type&#39;]==&#39;tel&#39;:
+                                            x[&#34;value&#34;]=generate_random_phone_number(phone_pattern)
+                                        elif x[&#39;type&#39;]==&#39;url&#39;:
+                                            x[&#34;value&#34;]=generate_random_url()
+                                        elif x[&#39;type&#39;]==&#39;date&#39;:
+                                            x[&#34;value&#34;]=random_date(x[&#39;min&#39;], x[&#39;max&#39;])
+                                        elif x[&#39;type&#39;]==&#39;color&#39;:
+                                            x[&#39;value&#39;]=generate_random_html_input_color()      
+                            if x[&#34;type&#34;] in [&#34;select&#34;, &#34;radio&#34;, &#34;checkbox&#34;]:
+                                if len(x[&#34;value&#34;]) == 0 or x[&#34;value&#34;] == &#34;&#34;:
+                                    x[&#34;value&#34;] = &#34;&#34;
                                     for i in range(auto_fill):
-                                        x["value"] += random.choice(lis)
+                                        x[&#34;value&#34;] += random.choice(lis)
                                 else:
-                                    x["value"] = random.choice(x["value"])
+                                    x[&#34;value&#34;] = random.choice(x[&#34;value&#34;])
     #print(form)
     return form
 
@@ -894,37 +876,37 @@ def form_filler(
 def get_login_form(url, text):
     a = forms_parser_text(url, text)
     for x in a:
-        for i in x["inputs"]:
-            if i["type"].lower().strip() == "password":
+        for i in x[&#34;inputs&#34;]:
+            if i[&#34;type&#34;].lower().strip() == &#34;password&#34;:
                 return x
-    raise Exception("No login form")
+    raise Exception(&#34;No login form&#34;)
 
 
 def set_login_form(url, text, username, password):
     a = get_login_form(url, text)
     d = {}
-    for x in a["inputs"]:
-        if x["type"].lower().strip() == "password":
-            d.update({x["name"]: password})
+    for x in a[&#34;inputs&#34;]:
+        if x[&#34;type&#34;].lower().strip() == &#34;password&#34;:
+            d.update({x[&#34;name&#34;]: password})
         elif (
-            x["type"].lower().strip() == "text"
-            or x["type"].lower().strip() == "email"
-            or x["type"].lower().strip() == "tel"
+            x[&#34;type&#34;].lower().strip() == &#34;text&#34;
+            or x[&#34;type&#34;].lower().strip() == &#34;email&#34;
+            or x[&#34;type&#34;].lower().strip() == &#34;tel&#34;
         ):
-            d.update({x["name"]: username})
+            d.update({x[&#34;name&#34;]: username})
         else:
-            d.update({x["name"]: x["value"]})
-    return [d, a["action"]]
+            d.update({x[&#34;name&#34;]: x[&#34;value&#34;]})
+    return [d, a[&#34;action&#34;]]
 
 
 def get_upload_form(a):
     l=[]
     for x in a:
-        for i in x["inputs"]:
-            if i["type"].lower().strip() == "file":
+        for i in x[&#34;inputs&#34;]:
+            if i[&#34;type&#34;].lower().strip() == &#34;file&#34;:
                 l.append(x)
     if l==[]:
-        raise Exception("No file upload form")
+        raise Exception(&#34;No file upload form&#34;)
     return l
 
 
@@ -932,11 +914,11 @@ def get_upload_form_text(url, text):
     l=[]
     a = forms_parser_text(url, text)
     for x in a:
-        for i in x["inputs"]:
-            if i["type"].lower().strip() == "file":
+        for i in x[&#34;inputs&#34;]:
+            if i[&#34;type&#34;].lower().strip() == &#34;file&#34;:
                 l.append(x)
     if l==[]:
-        raise Exception("No file upload form")
+        raise Exception(&#34;No file upload form&#34;)
     return l
 
 
@@ -950,37 +932,37 @@ def crawl(
     cookie=None,
     headers={}
 ):
-    """
+    &#34;&#34;&#34;
     this function is used to crawl any given link and returns a list of all available links on that webpage with ability to bypass anti-crawlers
 
     the function takes those arguments:
 
     u: the targeted link
     timeout: (set by default to 10) timeout flag for the request
-    bypass: (set by default to False) option to bypass anti-crawlers by simply adding "#" to the end of the link :)
+    bypass: (set by default to False) option to bypass anti-crawlers by simply adding &#34;#&#34; to the end of the link :)
 
     usage:
 
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;url='http://www.example.com'
+    &gt;&gt;&gt;url=&#39;http://www.example.com&#39;
     &gt;&gt;&gt;bane.crawl(url)
 
-    &gt;&gt;&gt;bane.crawl(url,bypass=True)"""
-    if urlparse(u).path == "":
-        u += "/"
-    if u.split("?")[0][-1] != "/" and "." not in u.split("?")[0].rsplit("/", 1)[-1]:
-        u = u.replace("?", "/?")
+    &gt;&gt;&gt;bane.crawl(url,bypass=True)&#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
+    if u.split(&#34;?&#34;)[0][-1] != &#34;/&#34; and &#34;.&#34; not in u.split(&#34;?&#34;)[0].rsplit(&#34;/&#34;, 1)[-1]:
+        u = u.replace(&#34;?&#34;, &#34;/?&#34;)
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     h = {}
     if bypass == True:
-        u += "#"
+        u += &#34;#&#34;
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     hea.update(headers)
     try:
         c = requests.Session().get(
@@ -988,33 +970,33 @@ def crawl(
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        ur = u.replace(u.split("/")[-1], "")
-        """if ur[-1]=='/':
-   ur=ur[:-1]"""
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        ur = u.replace(u.split(&#34;/&#34;)[-1], &#34;&#34;)
+        &#34;&#34;&#34;if ur[-1]==&#39;/&#39;:
+   ur=ur[:-1]&#34;&#34;&#34;
         index_link = 0
         h.update(
             {
                 -1: (
-                    "Source_url",
+                    &#34;Source_url&#34;,
                     u,
                     urlparse(u).path,
                     [(x, furl.furl(u).args[x]) for x in furl.furl(u).args],
                 )
             }
         )
-        for a in soup.find_all("a"):
+        for a in soup.find_all(&#34;a&#34;):
             u = ur
-            if a.has_attr("href"):
+            if a.has_attr(&#34;href&#34;):
                 try:
                     txt = a.text
-                    a = str(a["href"])
-                    if "://" not in a:
-                        if a[0] == "/":
+                    a = str(a[&#34;href&#34;])
+                    if &#34;://&#34; not in a:
+                        if a[0] == &#34;/&#34;:
                             a = a[1 : len(a)]
                         a = u + a
                     if (a not in h.values()) and (u in a):
-                        if (a != u + "/") and (a != u):
+                        if (a != u + &#34;/&#34;) and (a != u):
                             h.update(
                                 {
                                     index_link: (
@@ -1037,58 +1019,58 @@ def crawl(
 
 
 def crawl_text(u, text, html_comments=False):
-    """
+    &#34;&#34;&#34;
     this function is used to crawl any given link and returns a list of all available links on that webpage with ability to bypass anti-crawlers
 
     the function takes those arguments:
 
     u: the targeted link
     timeout: (set by default to 10) timeout flag for the request
-    bypass: (set by default to False) option to bypass anti-crawlers by simply adding "#" to the end of the link :)
+    bypass: (set by default to False) option to bypass anti-crawlers by simply adding &#34;#&#34; to the end of the link :)
 
     usage:
 
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;url='http://www.example.com'
+    &gt;&gt;&gt;url=&#39;http://www.example.com&#39;
     &gt;&gt;&gt;bane.crawl(url)
 
-    &gt;&gt;&gt;bane.crawl(url,bypass=True)"""
-    if urlparse(u).path == "":
-        u += "/"
-    if u.split("?")[0][-1] != "/" and "." not in u.split("?")[0].rsplit("/", 1)[-1]:
-        u = u.replace("?", "/?")
+    &gt;&gt;&gt;bane.crawl(url,bypass=True)&#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
+    if u.split(&#34;?&#34;)[0][-1] != &#34;/&#34; and &#34;.&#34; not in u.split(&#34;?&#34;)[0].rsplit(&#34;/&#34;, 1)[-1]:
+        u = u.replace(&#34;?&#34;, &#34;/?&#34;)
     h={}
     try:
         c = text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        ur = u.replace(u.split("/")[-1], "")
-        """if ur[-1]=='/':
-   ur=ur[:-1]"""
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        ur = u.replace(u.split(&#34;/&#34;)[-1], &#34;&#34;)
+        &#34;&#34;&#34;if ur[-1]==&#39;/&#39;:
+   ur=ur[:-1]&#34;&#34;&#34;
         index_link = 0
         h.update(
             {
                 -1: (
-                    "Source_url",
+                    &#34;Source_url&#34;,
                     u,
                     urlparse(u).path,
                     [(x, furl.furl(u).args[x]) for x in furl.furl(u).args],
                 )
             }
         )
-        for a in soup.find_all("a"):
+        for a in soup.find_all(&#34;a&#34;):
             u = ur
-            if a.has_attr("href"):
+            if a.has_attr(&#34;href&#34;):
                 try:
                     txt = a.text
-                    a = str(a["href"])
-                    if "://" not in a:
-                        if a[0] == "/":
+                    a = str(a[&#34;href&#34;])
+                    if &#34;://&#34; not in a:
+                        if a[0] == &#34;/&#34;:
                             a = a[1 : len(a)]
                         a = u + a
                     if (a not in h.values()) and (u in a):
-                        if (a != u + "/") and (a != u):
+                        if (a != u + &#34;/&#34;) and (a != u):
                             h.update(
                                 {
                                     index_link: (
@@ -1120,56 +1102,56 @@ def media(
     cookie=None,
     headers={}
 ):
-    """
+    &#34;&#34;&#34;
     this funtion was made to collect the social media links related to the targeted link (facebook, twitter, instagram...).
 
     the function takes those arguments:
 
     u: the targeted link
     timeout: (set by default to 10) timeout flag for the request
-    bypass: (set by default to False) option to bypass anti-crawlers by simply adding "#" to the end of the link :)
+    bypass: (set by default to False) option to bypass anti-crawlers by simply adding &#34;#&#34; to the end of the link :)
 
     usage:
 
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;url='http://www.example.com'
+    &gt;&gt;&gt;url=&#39;http://www.example.com&#39;
     &gt;&gt;&gt;bane.media(url)
 
-    &gt;&gt;&gt;bane.media(url,bypass=True)"""
-    if urlparse(u).path == "":
-        u += "/"
+    &gt;&gt;&gt;bane.media(url,bypass=True)&#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     h = {}
     try:
         if bypass == True:
-            u += "#"
+            u += &#34;#&#34;
         hea.update(headers)
         c = requests.Session().get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        ul = u.split("://")[1].split('"')[0]
-        ur = ul.replace("www.", "")
-        for a in soup.findAll("a"):
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        ul = u.split(&#34;://&#34;)[1].split(&#39;&#34;&#39;)[0]
+        ur = ul.replace(&#34;www.&#34;, &#34;&#34;)
+        for a in soup.findAll(&#34;a&#34;):
             try:
                 if (
-                    a.has_attr("href")
-                    and (u not in a["href"])
-                    and (ur not in a["href"])
-                    and (a["href"][:4] == "http")
+                    a.has_attr(&#34;href&#34;)
+                    and (u not in a[&#34;href&#34;])
+                    and (ur not in a[&#34;href&#34;])
+                    and (a[&#34;href&#34;][:4] == &#34;http&#34;)
                 ):
                     txt = a.text
-                    if a["href"] not in h:
-                        h.update({txt: a["href"]})
+                    if a[&#34;href&#34;] not in h:
+                        h.update({txt: a[&#34;href&#34;]})
             except:
                 pass
     except:
@@ -1187,54 +1169,54 @@ def subdomains_extract(
     cookie=None,
     headers={}
 ):
-    """
+    &#34;&#34;&#34;
     this function collects the subdomains found on the targeted webpage.
 
     the function takes those arguments:
 
     u: the targeted link
     timeout: (set by default to 10) timeout flag for the request
-    bypass: (set by default to False) option to bypass anti-crawlers by simply adding "#" to the end of the link :)
+    bypass: (set by default to False) option to bypass anti-crawlers by simply adding &#34;#&#34; to the end of the link :)
 
     usage:
 
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;url='http://www.example.com'
+    &gt;&gt;&gt;url=&#39;http://www.example.com&#39;
     &gt;&gt;&gt;bane.subdomains_extract(url)
 
-    &gt;&gt;&gt;bane.subdomains_extract(url,bypass=True)"""
-    if urlparse(u).path == "":
-        u += "/"
+    &gt;&gt;&gt;bane.subdomains_extract(url,bypass=True)&#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     h = {}
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     hea.update(headers)
     try:
         if bypass == True:
-            u += "#"
+            u += &#34;#&#34;
         c = requests.Session().get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        ul = u.split("://")[1].split("/")[0]
-        soup = BeautifulSoup(c, "html.parser")
-        for a in soup.findAll("a"):
+        ul = u.split(&#34;://&#34;)[1].split(&#34;/&#34;)[0]
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        for a in soup.findAll(&#34;a&#34;):
             if (
-                a.has_attr("href")
-                and (ul.replace("www", "") in a["href"])
-                and (ul not in a["href"])
-                and (a["href"][:4] == "http")
+                a.has_attr(&#34;href&#34;)
+                and (ul.replace(&#34;www&#34;, &#34;&#34;) in a[&#34;href&#34;])
+                and (ul not in a[&#34;href&#34;])
+                and (a[&#34;href&#34;][:4] == &#34;http&#34;)
             ):
                 txt = a.text
                 try:
-                    hr = a["href"].split("://")[1].split("/")[0]
+                    hr = a[&#34;href&#34;].split(&#34;://&#34;)[1].split(&#34;/&#34;)[0]
                     h.update({txt: hr})
                 except Exception as e:
                     pass
@@ -1247,18 +1229,18 @@ def subdomains_extract(
 
 def extract_urls_from_js(js_content, base_url):
     # Regular expression to match URLs in JavaScript code
-    url_pattern = re.compile(r'https?://\S+|/\S+')
+    url_pattern = re.compile(r&#39;https?://\S+|/\S+&#39;)
 
     # Find all matches in the JavaScript code
     matches = re.findall(url_pattern, js_content)
 
-    # Filter out URLs that start with '/'
-    extracted_urls = [match if match.startswith('http') else base_url + match for match in matches]
+    # Filter out URLs that start with &#39;/&#39;
+    extracted_urls = [match if match.startswith(&#39;http&#39;) else base_url + match for match in matches]
     urls=[]
     for x in extracted_urls:
-        x=x.split('"')[0]
-        x=x.split(';')[0]
-        x=x.split("'")[0]
+        x=x.split(&#39;&#34;&#39;)[0]
+        x=x.split(&#39;;&#39;)[0]
+        x=x.split(&#34;&#39;&#34;)[0]
         urls.append(x)
     return urls
 
@@ -1277,31 +1259,31 @@ def fetch_url(
     else:
         us = random.choice(ua)
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     hea.update(headers)
     try:
         return requests.Session().get(u,timeout=timeout,proxies=proxy,verify=False,headers=hea).text
     except:
-        return ''
+        return &#39;&#39;
 
 
 
 def extract_urls_from_js(js_content, base_url):
     # Regular expression to match URLs in JavaScript code
-    url_pattern = re.compile(r'https?://\S+|/\S+')
+    url_pattern = re.compile(r&#39;https?://\S+|/\S+&#39;)
 
     # Find all matches in the JavaScript code
     matches = re.findall(url_pattern, js_content)
 
-    # Filter out URLs that start with '/'
-    extracted_urls = [match if match.startswith('http') else base_url + match for match in matches]
+    # Filter out URLs that start with &#39;/&#39;
+    extracted_urls = [match if match.startswith(&#39;http&#39;) else base_url + match for match in matches]
     urls=[]
     for x in extracted_urls:
-        x=x.split('"')[0]
-        x=x.split(';')[0]
-        x=x.split("'")[0]
+        x=x.split(&#39;&#34;&#39;)[0]
+        x=x.split(&#39;;&#39;)[0]
+        x=x.split(&#34;&#39;&#34;)[0]
         urls.append(x)
     return urls
 
@@ -1317,41 +1299,41 @@ def examine_js_code(u,
                     cookie=None,
                     headers={}
     ):
-    domain=u.split('://')[1].split('/')[0]
+    domain=u.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     hea.update(headers)
     try:
         r= requests.Session().get(u,timeout=timeout,proxies=proxy,verify=False,headers=hea).text
-        soup = BeautifulSoup(r, 'html.parser')
-        script_tags = soup.find_all('script')
-        code=''
+        soup = BeautifulSoup(r, &#39;html.parser&#39;)
+        script_tags = soup.find_all(&#39;script&#39;)
+        code=&#39;&#39;
         for script in script_tags:
-            if script.has_attr('src'):
+            if script.has_attr(&#39;src&#39;):
                 pass
             else:
                 code+=script.get_text()
         secrets=[]
         #print(code)
-        secrets.append({'url':u,'secrets':extract_secrets_from_text(code)})#,'endpoints':extract_urls_from_js(code,u)})
+        secrets.append({&#39;url&#39;:u,&#39;secrets&#39;:extract_secrets_from_text(code)})#,&#39;endpoints&#39;:extract_urls_from_js(code,u)})
         for script in script_tags:
-            if script.has_attr('src'):
-                url=urljoin(u,script['src'])
-                url_domain=url.split('://')[1].split('/')[0]
+            if script.has_attr(&#39;src&#39;):
+                url=urljoin(u,script[&#39;src&#39;])
+                url_domain=url.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
                 if extract_root_domain(url_domain)==extract_root_domain(domain):
                     #print(url_domain)
                     code=fetch_url(url,user_agent=user_agent,timeout=timeout,proxy=proxy,cookie=cookie,headers=headers)
-                    secrets.append({'url':url,'secrets':extract_secrets_from_text(code)})#,'endpoints':extract_urls_from_js(code,url)})
+                    secrets.append({&#39;url&#39;:url,&#39;secrets&#39;:extract_secrets_from_text(code)})#,&#39;endpoints&#39;:extract_urls_from_js(code,url)})
 
     except Exception as ex:
         pass
-    return [ x for x in secrets if len(list(x['secrets'].keys()))&gt;0]
+    return [ x for x in secrets if len(list(x[&#39;secrets&#39;].keys()))&gt;0]
 
 
 
@@ -1361,23 +1343,23 @@ def extract_secrets_from_text(js_content):
         #for pattern in x:
             l=[]
             try:
-                if key=='firebase_config':
+                if key==&#39;firebase_config&#39;:
                     if matches:
                         for match in matches:
                             apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId, measurementId, vapidKey = match
                             d={
-                                        "apiKey": apiKey,
-                                        "authDomain": authDomain,
-                                        "projectId": projectId,
-                                        "storageBucket": storageBucket,
-                                        "messagingSenderId": messagingSenderId,
-                                        "appId": appId,
-                                        "measurementId": measurementId,
-                                        "vapidKey": vapidKey
+                                        &#34;apiKey&#34;: apiKey,
+                                        &#34;authDomain&#34;: authDomain,
+                                        &#34;projectId&#34;: projectId,
+                                        &#34;storageBucket&#34;: storageBucket,
+                                        &#34;messagingSenderId&#34;: messagingSenderId,
+                                        &#34;appId&#34;: appId,
+                                        &#34;measurementId&#34;: measurementId,
+                                        &#34;vapidKey&#34;: vapidKey
                                     }
                             l.append(d)
                         tokens_dict[key] = l
-                elif key=='json_configs':
+                elif key==&#39;json_configs&#39;:
                     matches=re.findall(pattern, js_content, re.DOTALL)
                     if matches:
                         l=[]
@@ -1392,7 +1374,7 @@ def extract_secrets_from_text(js_content):
                     matches = re.findall(pattern, js_content)
                     if matches:
                         for x in matches:
-                            if '"{}"'.format(x) in js_content or "'{}'".format(x) in js_content or "={}".format(x) in js_content or "= {}".format(x) in js_content or ":{}".format(x) in js_content or ": {}".format(x) in js_content:
+                            if &#39;&#34;{}&#34;&#39;.format(x) in js_content or &#34;&#39;{}&#39;&#34;.format(x) in js_content or &#34;={}&#34;.format(x) in js_content or &#34;= {}&#34;.format(x) in js_content or &#34;:{}&#34;.format(x) in js_content or &#34;: {}&#34;.format(x) in js_content:
                                 l.append(x)
                         l=list(set(l))
                         if len(l)&gt;0:
@@ -1405,47 +1387,47 @@ def extract_secrets_from_text(js_content):
 
 
 def generate_human_poc(data):
-    if "is_url" not in data:
-        raise ValueError("The 'is_url' key is missing in the input data")
+    if &#34;is_url&#34; not in data:
+        raise ValueError(&#34;The &#39;is_url&#39; key is missing in the input data&#34;)
 
-    if data["is_url"]:
+    if data[&#34;is_url&#34;]:
         # If is_url is True, generate a URL
-        url = data.get("action", "")
+        url = data.get(&#34;action&#34;, &#34;&#34;)
         if not url:
-            raise ValueError("Missing 'action' key for URL generation")
+            raise ValueError(&#34;Missing &#39;action&#39; key for URL generation&#34;)
         
         query_parameters = []
-        for input_field in data.get("inputs", []):
-            name = input_field.get("name", "")
-            value = input_field.get("value", "")
-            query_parameters.append("{}={}".format(name,value))
+        for input_field in data.get(&#34;inputs&#34;, []):
+            name = input_field.get(&#34;name&#34;, &#34;&#34;)
+            value = input_field.get(&#34;value&#34;, &#34;&#34;)
+            query_parameters.append(&#34;{}={}&#34;.format(name,value))
         
         if query_parameters:
-            url += "?" + "&amp;".join(query_parameters)
+            url += &#34;?&#34; + &#34;&amp;&#34;.join(query_parameters)
 
         return url
 
     else:
         # If is_url is False, generate an HTML form
-        form_id = data.get("id", "")
-        form_method = data.get("method", "post")
-        form_action = data.get("action", "")
-        form_enctype = data.get("enctype", "application/x-www-form-urlencoded")
+        form_id = data.get(&#34;id&#34;, &#34;&#34;)
+        form_method = data.get(&#34;method&#34;, &#34;post&#34;)
+        form_action = data.get(&#34;action&#34;, &#34;&#34;)
+        form_enctype = data.get(&#34;enctype&#34;, &#34;application/x-www-form-urlencoded&#34;)
 
-        inputs = ""
-        for input_field in data.get("inputs", []):
-            name = input_field.get("name", "")
-            value = input_field.get("value", "")
-            input_type = input_field.get("type", "text")
-            required = "required" if input_field.get("required", False) else ""
-            input_element = "&lt;input type='{}' name='{}' value='{}' {}&gt;".format(input_type,name,value,required)
+        inputs = &#34;&#34;
+        for input_field in data.get(&#34;inputs&#34;, []):
+            name = input_field.get(&#34;name&#34;, &#34;&#34;)
+            value = input_field.get(&#34;value&#34;, &#34;&#34;)
+            input_type = input_field.get(&#34;type&#34;, &#34;text&#34;)
+            required = &#34;required&#34; if input_field.get(&#34;required&#34;, False) else &#34;&#34;
+            input_element = &#34;&lt;input type=&#39;{}&#39; name=&#39;{}&#39; value=&#39;{}&#39; {}&gt;&#34;.format(input_type,name,value,required)
             inputs += input_element
 
-        html_form = """
-        &lt;form id='{}' method='{}' action='{}' enctype='{}'&gt;
+        html_form = &#34;&#34;&#34;
+        &lt;form id=&#39;{}&#39; method=&#39;{}&#39; action=&#39;{}&#39; enctype=&#39;{}&#39;&gt;
             {}
         &lt;/form&gt;
-        """.format(form_id,form_method,form_action,form_enctype,inputs)
+        &#34;&#34;&#34;.format(form_id,form_method,form_action,form_enctype,inputs)
         return html_form</code></pre>
 </details>
 </section>
@@ -1467,10 +1449,10 @@ def generate_human_poc(data):
 </summary>
 <pre><code class="python">def cookies_to_dict(cookies):
     d = {}
-    a = cookies.split(";")
+    a = cookies.split(&#34;;&#34;)
     for x in a:
-        if "=" in x:
-            d.update({x.split("=")[0].strip(): x.split("=")[1].strip()})
+        if &#34;=&#34; in x:
+            d.update({x.split(&#34;=&#34;)[0].strip(): x.split(&#34;=&#34;)[1].strip()})
     return d</code></pre>
 </details>
 </dd>
@@ -1508,37 +1490,37 @@ bane.crawl(url)</p>
     cookie=None,
     headers={}
 ):
-    """
+    &#34;&#34;&#34;
     this function is used to crawl any given link and returns a list of all available links on that webpage with ability to bypass anti-crawlers
 
     the function takes those arguments:
 
     u: the targeted link
     timeout: (set by default to 10) timeout flag for the request
-    bypass: (set by default to False) option to bypass anti-crawlers by simply adding "#" to the end of the link :)
+    bypass: (set by default to False) option to bypass anti-crawlers by simply adding &#34;#&#34; to the end of the link :)
 
     usage:
 
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;url='http://www.example.com'
+    &gt;&gt;&gt;url=&#39;http://www.example.com&#39;
     &gt;&gt;&gt;bane.crawl(url)
 
-    &gt;&gt;&gt;bane.crawl(url,bypass=True)"""
-    if urlparse(u).path == "":
-        u += "/"
-    if u.split("?")[0][-1] != "/" and "." not in u.split("?")[0].rsplit("/", 1)[-1]:
-        u = u.replace("?", "/?")
+    &gt;&gt;&gt;bane.crawl(url,bypass=True)&#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
+    if u.split(&#34;?&#34;)[0][-1] != &#34;/&#34; and &#34;.&#34; not in u.split(&#34;?&#34;)[0].rsplit(&#34;/&#34;, 1)[-1]:
+        u = u.replace(&#34;?&#34;, &#34;/?&#34;)
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     h = {}
     if bypass == True:
-        u += "#"
+        u += &#34;#&#34;
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     hea.update(headers)
     try:
         c = requests.Session().get(
@@ -1546,33 +1528,33 @@ bane.crawl(url)</p>
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        ur = u.replace(u.split("/")[-1], "")
-        """if ur[-1]=='/':
-   ur=ur[:-1]"""
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        ur = u.replace(u.split(&#34;/&#34;)[-1], &#34;&#34;)
+        &#34;&#34;&#34;if ur[-1]==&#39;/&#39;:
+   ur=ur[:-1]&#34;&#34;&#34;
         index_link = 0
         h.update(
             {
                 -1: (
-                    "Source_url",
+                    &#34;Source_url&#34;,
                     u,
                     urlparse(u).path,
                     [(x, furl.furl(u).args[x]) for x in furl.furl(u).args],
                 )
             }
         )
-        for a in soup.find_all("a"):
+        for a in soup.find_all(&#34;a&#34;):
             u = ur
-            if a.has_attr("href"):
+            if a.has_attr(&#34;href&#34;):
                 try:
                     txt = a.text
-                    a = str(a["href"])
-                    if "://" not in a:
-                        if a[0] == "/":
+                    a = str(a[&#34;href&#34;])
+                    if &#34;://&#34; not in a:
+                        if a[0] == &#34;/&#34;:
                             a = a[1 : len(a)]
                         a = u + a
                     if (a not in h.values()) and (u in a):
-                        if (a != u + "/") and (a != u):
+                        if (a != u + &#34;/&#34;) and (a != u):
                             h.update(
                                 {
                                     index_link: (
@@ -1619,58 +1601,58 @@ bane.crawl(url)</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def crawl_text(u, text, html_comments=False):
-    """
+    &#34;&#34;&#34;
     this function is used to crawl any given link and returns a list of all available links on that webpage with ability to bypass anti-crawlers
 
     the function takes those arguments:
 
     u: the targeted link
     timeout: (set by default to 10) timeout flag for the request
-    bypass: (set by default to False) option to bypass anti-crawlers by simply adding "#" to the end of the link :)
+    bypass: (set by default to False) option to bypass anti-crawlers by simply adding &#34;#&#34; to the end of the link :)
 
     usage:
 
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;url='http://www.example.com'
+    &gt;&gt;&gt;url=&#39;http://www.example.com&#39;
     &gt;&gt;&gt;bane.crawl(url)
 
-    &gt;&gt;&gt;bane.crawl(url,bypass=True)"""
-    if urlparse(u).path == "":
-        u += "/"
-    if u.split("?")[0][-1] != "/" and "." not in u.split("?")[0].rsplit("/", 1)[-1]:
-        u = u.replace("?", "/?")
+    &gt;&gt;&gt;bane.crawl(url,bypass=True)&#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
+    if u.split(&#34;?&#34;)[0][-1] != &#34;/&#34; and &#34;.&#34; not in u.split(&#34;?&#34;)[0].rsplit(&#34;/&#34;, 1)[-1]:
+        u = u.replace(&#34;?&#34;, &#34;/?&#34;)
     h={}
     try:
         c = text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        ur = u.replace(u.split("/")[-1], "")
-        """if ur[-1]=='/':
-   ur=ur[:-1]"""
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        ur = u.replace(u.split(&#34;/&#34;)[-1], &#34;&#34;)
+        &#34;&#34;&#34;if ur[-1]==&#39;/&#39;:
+   ur=ur[:-1]&#34;&#34;&#34;
         index_link = 0
         h.update(
             {
                 -1: (
-                    "Source_url",
+                    &#34;Source_url&#34;,
                     u,
                     urlparse(u).path,
                     [(x, furl.furl(u).args[x]) for x in furl.furl(u).args],
                 )
             }
         )
-        for a in soup.find_all("a"):
+        for a in soup.find_all(&#34;a&#34;):
             u = ur
-            if a.has_attr("href"):
+            if a.has_attr(&#34;href&#34;):
                 try:
                     txt = a.text
-                    a = str(a["href"])
-                    if "://" not in a:
-                        if a[0] == "/":
+                    a = str(a[&#34;href&#34;])
+                    if &#34;://&#34; not in a:
+                        if a[0] == &#34;/&#34;:
                             a = a[1 : len(a)]
                         a = u + a
                     if (a not in h.values()) and (u in a):
-                        if (a != u + "/") and (a != u):
+                        if (a != u + &#34;/&#34;) and (a != u):
                             h.update(
                                 {
                                     index_link: (
@@ -1708,41 +1690,41 @@ bane.crawl(url)</p>
                     cookie=None,
                     headers={}
     ):
-    domain=u.split('://')[1].split('/')[0]
+    domain=u.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     hea.update(headers)
     try:
         r= requests.Session().get(u,timeout=timeout,proxies=proxy,verify=False,headers=hea).text
-        soup = BeautifulSoup(r, 'html.parser')
-        script_tags = soup.find_all('script')
-        code=''
+        soup = BeautifulSoup(r, &#39;html.parser&#39;)
+        script_tags = soup.find_all(&#39;script&#39;)
+        code=&#39;&#39;
         for script in script_tags:
-            if script.has_attr('src'):
+            if script.has_attr(&#39;src&#39;):
                 pass
             else:
                 code+=script.get_text()
         secrets=[]
         #print(code)
-        secrets.append({'url':u,'secrets':extract_secrets_from_text(code)})#,'endpoints':extract_urls_from_js(code,u)})
+        secrets.append({&#39;url&#39;:u,&#39;secrets&#39;:extract_secrets_from_text(code)})#,&#39;endpoints&#39;:extract_urls_from_js(code,u)})
         for script in script_tags:
-            if script.has_attr('src'):
-                url=urljoin(u,script['src'])
-                url_domain=url.split('://')[1].split('/')[0]
+            if script.has_attr(&#39;src&#39;):
+                url=urljoin(u,script[&#39;src&#39;])
+                url_domain=url.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
                 if extract_root_domain(url_domain)==extract_root_domain(domain):
                     #print(url_domain)
                     code=fetch_url(url,user_agent=user_agent,timeout=timeout,proxy=proxy,cookie=cookie,headers=headers)
-                    secrets.append({'url':url,'secrets':extract_secrets_from_text(code)})#,'endpoints':extract_urls_from_js(code,url)})
+                    secrets.append({&#39;url&#39;:url,&#39;secrets&#39;:extract_secrets_from_text(code)})#,&#39;endpoints&#39;:extract_urls_from_js(code,url)})
 
     except Exception as ex:
         pass
-    return [ x for x in secrets if len(list(x['secrets'].keys()))&gt;0]</code></pre>
+    return [ x for x in secrets if len(list(x[&#39;secrets&#39;].keys()))&gt;0]</code></pre>
 </details>
 </dd>
 <dt id="bane.utils.pager.extract_secrets_from_text"><code class="name flex">
@@ -1760,23 +1742,23 @@ bane.crawl(url)</p>
         #for pattern in x:
             l=[]
             try:
-                if key=='firebase_config':
+                if key==&#39;firebase_config&#39;:
                     if matches:
                         for match in matches:
                             apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId, measurementId, vapidKey = match
                             d={
-                                        "apiKey": apiKey,
-                                        "authDomain": authDomain,
-                                        "projectId": projectId,
-                                        "storageBucket": storageBucket,
-                                        "messagingSenderId": messagingSenderId,
-                                        "appId": appId,
-                                        "measurementId": measurementId,
-                                        "vapidKey": vapidKey
+                                        &#34;apiKey&#34;: apiKey,
+                                        &#34;authDomain&#34;: authDomain,
+                                        &#34;projectId&#34;: projectId,
+                                        &#34;storageBucket&#34;: storageBucket,
+                                        &#34;messagingSenderId&#34;: messagingSenderId,
+                                        &#34;appId&#34;: appId,
+                                        &#34;measurementId&#34;: measurementId,
+                                        &#34;vapidKey&#34;: vapidKey
                                     }
                             l.append(d)
                         tokens_dict[key] = l
-                elif key=='json_configs':
+                elif key==&#39;json_configs&#39;:
                     matches=re.findall(pattern, js_content, re.DOTALL)
                     if matches:
                         l=[]
@@ -1791,7 +1773,7 @@ bane.crawl(url)</p>
                     matches = re.findall(pattern, js_content)
                     if matches:
                         for x in matches:
-                            if '"{}"'.format(x) in js_content or "'{}'".format(x) in js_content or "={}".format(x) in js_content or "= {}".format(x) in js_content or ":{}".format(x) in js_content or ": {}".format(x) in js_content:
+                            if &#39;&#34;{}&#34;&#39;.format(x) in js_content or &#34;&#39;{}&#39;&#34;.format(x) in js_content or &#34;={}&#34;.format(x) in js_content or &#34;= {}&#34;.format(x) in js_content or &#34;:{}&#34;.format(x) in js_content or &#34;: {}&#34;.format(x) in js_content:
                                 l.append(x)
                         l=list(set(l))
                         if len(l)&gt;0:
@@ -1812,18 +1794,18 @@ bane.crawl(url)</p>
 </summary>
 <pre><code class="python">def extract_urls_from_js(js_content, base_url):
     # Regular expression to match URLs in JavaScript code
-    url_pattern = re.compile(r'https?://\S+|/\S+')
+    url_pattern = re.compile(r&#39;https?://\S+|/\S+&#39;)
 
     # Find all matches in the JavaScript code
     matches = re.findall(url_pattern, js_content)
 
-    # Filter out URLs that start with '/'
-    extracted_urls = [match if match.startswith('http') else base_url + match for match in matches]
+    # Filter out URLs that start with &#39;/&#39;
+    extracted_urls = [match if match.startswith(&#39;http&#39;) else base_url + match for match in matches]
     urls=[]
     for x in extracted_urls:
-        x=x.split('"')[0]
-        x=x.split(';')[0]
-        x=x.split("'")[0]
+        x=x.split(&#39;&#34;&#39;)[0]
+        x=x.split(&#39;;&#39;)[0]
+        x=x.split(&#34;&#39;&#34;)[0]
         urls.append(x)
     return urls</code></pre>
 </details>
@@ -1850,14 +1832,14 @@ bane.crawl(url)</p>
     else:
         us = random.choice(ua)
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     hea.update(headers)
     try:
         return requests.Session().get(u,timeout=timeout,proxies=proxy,verify=False,headers=hea).text
     except:
-        return ''</code></pre>
+        return &#39;&#39;</code></pre>
 </details>
 </dd>
 <dt id="bane.utils.pager.form_filler"><code class="name flex">
@@ -1873,9 +1855,9 @@ bane.crawl(url)</p>
     form,
     param,
     payload,
-    file_extension="png",
-    email_extension='@gmail.com',
-    phone_pattern='XXX-XXX-XXXX',
+    file_extension=&#34;png&#34;,
+    email_extension=&#39;@gmail.com&#39;,
+    phone_pattern=&#39;XXX-XXX-XXXX&#39;,
     dont_change={},
     number=(1, 9),
     auto_fill=10,
@@ -1884,82 +1866,82 @@ bane.crawl(url)</p>
     mime_type=None,
     predefined_inputs={},
 ):
-    for x in form["inputs"]:
-        if x["name"].strip() in dont_change:
-            x["value"] = dont_change[x["name"]]
+    for x in form[&#34;inputs&#34;]:
+        if x[&#34;name&#34;].strip() in dont_change:
+            x[&#34;value&#34;] = dont_change[x[&#34;name&#34;]]
         else:
-            if x["name"].strip() in dont_send:
-                form["inputs"].remove(x)
+            if x[&#34;name&#34;].strip() in dont_send:
+                form[&#34;inputs&#34;].remove(x)
             else:
-                if x["name"].strip() not in leave_empty:
-                    if x["name"].strip() == param:
+                if x[&#34;name&#34;].strip() not in leave_empty:
+                    if x[&#34;name&#34;].strip() == param:
                         if file_extension==None:
-                            file_extension=random.choice(x["accept"])
-                        if x["type"] == "file":
+                            file_extension=random.choice(x[&#34;accept&#34;])
+                        if x[&#34;type&#34;] == &#34;file&#34;:
                             if not mime_type:
-                                x["value"] = (
-                                    payload + "." + file_extension,
+                                x[&#34;value&#34;] = (
+                                    payload + &#34;.&#34; + file_extension,
                                     files_upload[file_extension],
                                 )
                             else:
-                                x["value"] = (
-                                    payload + "." + file_extension,
+                                x[&#34;value&#34;] = (
+                                    payload + &#34;.&#34; + file_extension,
                                     files_upload[file_extension],
                                     mime_type,
                                 )
                         else:
-                            x["value"] = payload
+                            x[&#34;value&#34;] = payload
                     else:
-                        if x["name"].strip() in predefined_inputs:
-                            x["value"] = predefined_inputs[x["name"]]
+                        if x[&#34;name&#34;].strip() in predefined_inputs:
+                            x[&#34;value&#34;] = predefined_inputs[x[&#34;name&#34;]]
                         else:
-                            if x["value"] == "":
-                                if x["type"] == "file":
+                            if x[&#34;value&#34;] == &#34;&#34;:
+                                if x[&#34;type&#34;] == &#34;file&#34;:
                                     if not mime_type:
-                                        x["value"] = (
-                                            "bane_test"
+                                        x[&#34;value&#34;] = (
+                                            &#34;bane_test&#34;
                                             + str(random.randint(100000, 999999))
-                                            + "."
+                                            + &#34;.&#34;
                                             + file_extension,
                                             files_upload[file_extension],
                                         )
                                     else:
-                                        x["value"] = (
-                                            "bane_test"
+                                        x[&#34;value&#34;] = (
+                                            &#34;bane_test&#34;
                                             + str(random.randint(100000, 999999))
-                                            + "."
+                                            + &#34;.&#34;
                                             + file_extension,
                                             files_upload[file_extension],
                                             mime_type,
                                         )
                                 else:
-                                    #if x['value']=='':
-                                        if x["type"] == "number":
-                                            x["value"] += str(random.randint(int(float(x.get('min',0))), int(float(x.get('max',9)))))
-                                        elif x['type'] in ['text','password','search','textarea']:
-                                            leng=random.randint(int(float(x.get('min',1))), int(float(x.get('max',64)))+1)
+                                    #if x[&#39;value&#39;]==&#39;&#39;:
+                                        if x[&#34;type&#34;] == &#34;number&#34;:
+                                            x[&#34;value&#34;] += str(random.randint(int(float(x.get(&#39;min&#39;,0))), int(float(x.get(&#39;max&#39;,9)))))
+                                        elif x[&#39;type&#39;] in [&#39;text&#39;,&#39;password&#39;,&#39;search&#39;,&#39;textarea&#39;]:
+                                            leng=random.randint(int(float(x.get(&#39;min&#39;,1))), int(float(x.get(&#39;max&#39;,64)))+1)
                                             for i in range(leng):
-                                                x["value"] += random.choice(lis)
-                                        elif x['type']=='email':
-                                            leng=random.randint(int(float(x.get('min',1))), int(float(x.get('max',15)))-len(email_extension)+1)
+                                                x[&#34;value&#34;] += random.choice(lis)
+                                        elif x[&#39;type&#39;]==&#39;email&#39;:
+                                            leng=random.randint(int(float(x.get(&#39;min&#39;,1))), int(float(x.get(&#39;max&#39;,15)))-len(email_extension)+1)
                                             for i in range(leng):
-                                                x["value"] += random.choice(string.ascii_lowercase)
-                                            x["value"]+=email_extension
-                                        elif x['type']=='tel':
-                                            x["value"]=generate_random_phone_number(phone_pattern)
-                                        elif x['type']=='url':
-                                            x["value"]=generate_random_url()
-                                        elif x['type']=='date':
-                                            x["value"]=random_date(x['min'], x['max'])
-                                        elif x['type']=='color':
-                                            x['value']=generate_random_html_input_color()      
-                            if x["type"] in ["select", "radio", "checkbox"]:
-                                if len(x["value"]) == 0 or x["value"] == "":
-                                    x["value"] = ""
+                                                x[&#34;value&#34;] += random.choice(string.ascii_lowercase)
+                                            x[&#34;value&#34;]+=email_extension
+                                        elif x[&#39;type&#39;]==&#39;tel&#39;:
+                                            x[&#34;value&#34;]=generate_random_phone_number(phone_pattern)
+                                        elif x[&#39;type&#39;]==&#39;url&#39;:
+                                            x[&#34;value&#34;]=generate_random_url()
+                                        elif x[&#39;type&#39;]==&#39;date&#39;:
+                                            x[&#34;value&#34;]=random_date(x[&#39;min&#39;], x[&#39;max&#39;])
+                                        elif x[&#39;type&#39;]==&#39;color&#39;:
+                                            x[&#39;value&#39;]=generate_random_html_input_color()      
+                            if x[&#34;type&#34;] in [&#34;select&#34;, &#34;radio&#34;, &#34;checkbox&#34;]:
+                                if len(x[&#34;value&#34;]) == 0 or x[&#34;value&#34;] == &#34;&#34;:
+                                    x[&#34;value&#34;] = &#34;&#34;
                                     for i in range(auto_fill):
-                                        x["value"] += random.choice(lis)
+                                        x[&#34;value&#34;] += random.choice(lis)
                                 else:
-                                    x["value"] = random.choice(x["value"])
+                                    x[&#34;value&#34;] = random.choice(x[&#34;value&#34;])
     #print(form)
     return form</code></pre>
 </details>
@@ -1983,21 +1965,21 @@ bane.crawl(url)</p>
     proxy=None,
     cookie=None,
 ):
-    """
-    same as "inputs" function but it works on forms input fields only
-    """
-    if urlparse(u).path == "":
-        u += "/"
+    &#34;&#34;&#34;
+    same as &#34;inputs&#34; function but it works on forms input fields only
+    &#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     if bypass == True:
-        u += "#"
+        u += &#34;#&#34;
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     l = []
     fom = []
     try:
@@ -2006,58 +1988,58 @@ bane.crawl(url)</p>
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        i = soup.find_all("form")
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        i = soup.find_all(&#34;form&#34;)
         for f in i:
-            ac = f.get("action")
+            ac = f.get(&#34;action&#34;)
             if not ac:
                 ac = u
-            """if len(ac)==0:
+            &#34;&#34;&#34;if len(ac)==0:
     ac=u
-   if ac[0]=="/":
-    url_o="/".join(u.split('/')[:-1])
+   if ac[0]==&#34;/&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
     ac=url_o+ac
-   if ac[:4]!="http":
-    url_o="/".join(u.split('/')[:-1])
-    ac=url_o+"/"+ac"""
-            if "://" not in ac:
-                ur = u[: u.rfind("/")]
-                if ac[0] == "/":
+   if ac[:4]!=&#34;http&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
+    ac=url_o+&#34;/&#34;+ac&#34;&#34;&#34;
+            if &#34;://&#34; not in ac:
+                ur = u[: u.rfind(&#34;/&#34;)]
+                if ac[0] == &#34;/&#34;:
                     ac = ac[1 : len(ac)]
-                ac = ur + "/" + ac
-            me = f.get("method")
+                ac = ur + &#34;/&#34; + ac
+            me = f.get(&#34;method&#34;)
             if not me:
-                me = "get"
+                me = &#34;get&#34;
             if len(me) == 0:
-                me = "get"
+                me = &#34;get&#34;
             me = me.lower()
-            p = f.find_all("textarea")
+            p = f.find_all(&#34;textarea&#34;)
             for r in p:
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.get("value")
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.get(&#34;value&#34;)
                     if v == None:
-                        v = ""
+                        v = &#34;&#34;
                 if value == True:
-                    y = s + ":" + v
+                    y = s + &#34;:&#34; + v
                 else:
                     y = s
                 if y not in l:
                     l.append(y)
-            p = f.find_all("input")
+            p = f.find_all(&#34;input&#34;)
             for r in p:
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.get("value")
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.get(&#34;value&#34;)
                     if v == None:
-                        v = ""
+                        v = &#34;&#34;
                 if value == True:
-                    y = s + ":" + v
+                    y = s + &#34;:&#34; + v
                 else:
                     y = s
                 if y not in l:
                     l.append(y)
-            fom.append({"inputs": l, "action": ac, "method": me})
+            fom.append({&#34;inputs&#34;: l, &#34;action&#34;: ac, &#34;method&#34;: me})
             l = []
     except Exception as e:
         pass
@@ -2084,23 +2066,23 @@ bane.crawl(url)</p>
     include_links=True,
     headers={}
 ):
-    """
-    same as "forms" function but it return detailed information about all forms in a given page
-    """
-    if urlparse(u).path == "":
-        u += "/"
-    domain=u.split('://')[1].split('/')[0]
-    base_url=u.split('://')[0]+domain
+    &#34;&#34;&#34;
+    same as &#34;forms&#34; function but it return detailed information about all forms in a given page
+    &#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
+    domain=u.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
+    base_url=u.split(&#39;://&#39;)[0]+domain
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     if bypass == True:
-        u += "#"
+        u += &#34;#&#34;
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     hea.update(headers)
     l = []
     fom = []
@@ -2110,129 +2092,129 @@ bane.crawl(url)</p>
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        i = soup.find_all("form")
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        i = soup.find_all(&#34;form&#34;)
         for f in i:
-            form_id=f.get('id','')
+            form_id=f.get(&#39;id&#39;,&#39;&#39;)
             try:
-                tb_inputs = f.find_all("table")[0].find_all("input")
+                tb_inputs = f.find_all(&#34;table&#34;)[0].find_all(&#34;input&#34;)
             except:
                 tb_inputs = []
             try:
-                tb_textareas = f.find_all("table")[0].find_all("textarea")
+                tb_textareas = f.find_all(&#34;table&#34;)[0].find_all(&#34;textarea&#34;)
             except:
                 tb_textareas = []
             try:
-                tb_selects = f.find_all("table")[0].find_all("select")
+                tb_selects = f.find_all(&#34;table&#34;)[0].find_all(&#34;select&#34;)
             except:
                 tb_selects = []
-            ac = urljoin(u, f.get("action",''))
-            enc_ty = f.get("enctype", "application/x-www-form-urlencoded")
+            ac = urljoin(u, f.get(&#34;action&#34;,&#39;&#39;))
+            enc_ty = f.get(&#34;enctype&#34;, &#34;application/x-www-form-urlencoded&#34;)
             if not ac:
                 ac = u
-            """if len(ac)==0:
+            &#34;&#34;&#34;if len(ac)==0:
     ac=u
-   if ac[0]=="/":
-    url_o="/".join(u.split('/')[:-1])
+   if ac[0]==&#34;/&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
     ac=url_o+ac
-   if ac[:4]!="http":
-    url_o="/".join(u.split('/')[:-1])
-    ac=url_o+"/"+ac"""
-            if "://" not in ac:
-                ur = u[: u.rfind("/")]
-                if ac[0] == "/":
+   if ac[:4]!=&#34;http&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
+    ac=url_o+&#34;/&#34;+ac&#34;&#34;&#34;
+            if &#34;://&#34; not in ac:
+                ur = u[: u.rfind(&#34;/&#34;)]
+                if ac[0] == &#34;/&#34;:
                     ac = ac[1 : len(ac)]
-                ac = ur + "/" + ac
-            me = f.get("method", "get")
+                ac = ur + &#34;/&#34; + ac
+            me = f.get(&#34;method&#34;, &#34;get&#34;)
             if not me:
-                me = "get"
+                me = &#34;get&#34;
             if len(me) == 0:
-                me = "get"
+                me = &#34;get&#34;
             me = me.lower()
-            """radios={}
-            checkxoes={}"""
-            p = f.find_all("textarea") + tb_textareas
+            &#34;&#34;&#34;radios={}
+            checkxoes={}&#34;&#34;&#34;
+            p = f.find_all(&#34;textarea&#34;) + tb_textareas
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.renderContents().decode().split("&lt;/textarea&gt;")[0]
-                    typ = r.get("type", "textarea").lower()
-                    max_size=r.get('maxlength',64)
-                    if r.get('size',0)!=0:
-                            max_size= r.get('size',64)
-                    y = {"name": s, "value": v, "type": typ,'max':max_size,'min':r.get('minlength',1),'required':required}
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.renderContents().decode().split(&#34;&lt;/textarea&gt;&#34;)[0]
+                    typ = r.get(&#34;type&#34;, &#34;textarea&#34;).lower()
+                    max_size=r.get(&#39;maxlength&#39;,64)
+                    if r.get(&#39;size&#39;,0)!=0:
+                            max_size= r.get(&#39;size&#39;,64)
+                    y = {&#34;name&#34;: s, &#34;value&#34;: v, &#34;type&#34;: typ,&#39;max&#39;:max_size,&#39;min&#39;:r.get(&#39;minlength&#39;,1),&#39;required&#39;:required}
                     if y not in l:
                         l.append(y)
             h_v = {}
-            p = f.find_all("input") + tb_inputs
+            p = f.find_all(&#34;input&#34;) + tb_inputs
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.get("value", "")
-                    typ = r.get("type", "text").lower()
-                    y = {"name": s, "value": v, "type": typ,'required':required}
-                    if y['type'] in ['text','password','email','url','tel','search']:
-                        max_size=r.get('maxlength',64)
-                        if r.get('size',0)!=0:
-                            max_size= r.get('size',64)
-                        y.update({'max':int(max_size),'min':int(r.get('minlength',1))})
-                    elif y['type']=='number':
-                        y.update({'max':int(r.get('max',10)),'min':int(r.get('min',1))})
-                    elif y['type']=='date':
-                        y.update({'max':r.get('max',datetime.datetime.today().strftime("%Y-%m-%d")),'min':r.get('min',datetime.datetime.today().strftime("%Y-%m-%d"))})
-                    elif y['type']=='file':
-                        y.update({'accept':[ x.replace('.','').strip() for x in y.get('accept','.png').split(',')]})
-                    """elif y['type']=='radio':
-                        if y['name'] not in radios:
-                            radios[y['name']]=[]
-                        radios[y['name']].append(y)
-                    elif y['type']=='checkbox':
-                        if y['name'] not in checkxoes:
-                            checkxoes[y['name']]=[]
-                        checkxoes[y['name']].append(y)"""
-                    if typ.lower() == "hidden":
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.get(&#34;value&#34;, &#34;&#34;)
+                    typ = r.get(&#34;type&#34;, &#34;text&#34;).lower()
+                    y = {&#34;name&#34;: s, &#34;value&#34;: v, &#34;type&#34;: typ,&#39;required&#39;:required}
+                    if y[&#39;type&#39;] in [&#39;text&#39;,&#39;password&#39;,&#39;email&#39;,&#39;url&#39;,&#39;tel&#39;,&#39;search&#39;]:
+                        max_size=r.get(&#39;maxlength&#39;,64)
+                        if r.get(&#39;size&#39;,0)!=0:
+                            max_size= r.get(&#39;size&#39;,64)
+                        y.update({&#39;max&#39;:int(max_size),&#39;min&#39;:int(r.get(&#39;minlength&#39;,1))})
+                    elif y[&#39;type&#39;]==&#39;number&#39;:
+                        y.update({&#39;max&#39;:int(r.get(&#39;max&#39;,10)),&#39;min&#39;:int(r.get(&#39;min&#39;,1))})
+                    elif y[&#39;type&#39;]==&#39;date&#39;:
+                        y.update({&#39;max&#39;:r.get(&#39;max&#39;,datetime.datetime.today().strftime(&#34;%Y-%m-%d&#34;)),&#39;min&#39;:r.get(&#39;min&#39;,datetime.datetime.today().strftime(&#34;%Y-%m-%d&#34;))})
+                    elif y[&#39;type&#39;]==&#39;file&#39;:
+                        y.update({&#39;accept&#39;:[ x.replace(&#39;.&#39;,&#39;&#39;).strip() for x in y.get(&#39;accept&#39;,&#39;.png&#39;).split(&#39;,&#39;)]})
+                    &#34;&#34;&#34;elif y[&#39;type&#39;]==&#39;radio&#39;:
+                        if y[&#39;name&#39;] not in radios:
+                            radios[y[&#39;name&#39;]]=[]
+                        radios[y[&#39;name&#39;]].append(y)
+                    elif y[&#39;type&#39;]==&#39;checkbox&#39;:
+                        if y[&#39;name&#39;] not in checkxoes:
+                            checkxoes[y[&#39;name&#39;]]=[]
+                        checkxoes[y[&#39;name&#39;]].append(y)&#34;&#34;&#34;
+                    if typ.lower() == &#34;hidden&#34;:
                         h_v.update({s: v})
-                    if y not in l :#and y['name'] not in radios and y['name'] not in checkxoes:
+                    if y not in l :#and y[&#39;name&#39;] not in radios and y[&#39;name&#39;] not in checkxoes:
                         l.append(y)
-            p = f.find_all("select") + tb_selects
+            p = f.find_all(&#34;select&#34;) + tb_selects
             opts = []
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    for x in r.find_all("option"):
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    for x in r.find_all(&#34;option&#34;):
                         opts.append(x.text)
-                    y = {"name": s, "value": opts, "type": "select",'required':required}
+                    y = {&#34;name&#34;: s, &#34;value&#34;: opts, &#34;type&#34;: &#34;select&#34;,&#39;required&#39;:required}
                     if y not in l:
                         l.append(y)
-            """for x in radios:
-                l.append({'name':x,'type':'radio','value':[i['value'] for i in radios[x]]})
+            &#34;&#34;&#34;for x in radios:
+                l.append({&#39;name&#39;:x,&#39;type&#39;:&#39;radio&#39;,&#39;value&#39;:[i[&#39;value&#39;] for i in radios[x]]})
             for x in checkxoes:
-                l.append({'name':x,'type':'checkbox','value':[i['value'] for i in checkxoes[x]]})"""
+                l.append({&#39;name&#39;:x,&#39;type&#39;:&#39;checkbox&#39;,&#39;value&#39;:[i[&#39;value&#39;] for i in checkxoes[x]]})&#34;&#34;&#34;
             fom.append(
                 {
-                    'id':form_id,
-                    "inputs": sort_inputs(l),
-                    "action": ac.lower(),
-                    "enctype": enc_ty.lower(),
-                    "method": me.lower(),
-                    "hidden_values": h_v,
-                    "is_url":False
+                    &#39;id&#39;:form_id,
+                    &#34;inputs&#34;: sort_inputs(l),
+                    &#34;action&#34;: ac.lower(),
+                    &#34;enctype&#34;: enc_ty.lower(),
+                    &#34;method&#34;: me.lower(),
+                    &#34;hidden_values&#34;: h_v,
+                    &#34;is_url&#34;:False
                 }
             )
             l = []
     except Exception as e:
         pass
     if include_links==True:
-        fom+=get_links_from_page_source(soup,u,'')
+        fom+=get_links_from_page_source(soup,u,&#39;&#39;)
     return fom</code></pre>
 </details>
 </dd>
@@ -2246,140 +2228,140 @@ bane.crawl(url)</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def forms_parser_text(u, text, html_comments=False,include_links=True):
-    """
-    same as "forms" function but it return detailed information about all forms in a given page
-    """
-    if urlparse(u).path == "":
-        u += "/"
+    &#34;&#34;&#34;
+    same as &#34;forms&#34; function but it return detailed information about all forms in a given page
+    &#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
     l = []
     fom = []
     try:
         c = text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        i = soup.find_all("form")
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        i = soup.find_all(&#34;form&#34;)
         for f in i:
-            form_id=f.get('id','')
+            form_id=f.get(&#39;id&#39;,&#39;&#39;)
             try:
-                tb_inputs = f.find_all("table")[0].find_all("input")
+                tb_inputs = f.find_all(&#34;table&#34;)[0].find_all(&#34;input&#34;)
             except:
                 tb_inputs = []
             try:
-                tb_textareas = f.find_all("table")[0].find_all("textarea")
+                tb_textareas = f.find_all(&#34;table&#34;)[0].find_all(&#34;textarea&#34;)
             except:
                 tb_textareas = []
             try:
-                tb_selects = f.find_all("table")[0].find_all("select")
+                tb_selects = f.find_all(&#34;table&#34;)[0].find_all(&#34;select&#34;)
             except:
                 tb_selects = []
-            ac = urljoin(u, f.get("action",''))
-            enc_ty = f.get("enctype", "application/x-www-form-urlencoded").lower()
+            ac = urljoin(u, f.get(&#34;action&#34;,&#39;&#39;))
+            enc_ty = f.get(&#34;enctype&#34;, &#34;application/x-www-form-urlencoded&#34;).lower()
             if not ac:
                 ac = u
-            """if len(ac)==0:
+            &#34;&#34;&#34;if len(ac)==0:
     ac=u
-   if ac[0]=="/":
-    url_o="/".join(u.split('/')[:-1])
+   if ac[0]==&#34;/&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
     ac=url_o+ac
-   if ac[:4]!="http":
-    url_o="/".join(u.split('/')[:-1])
-    ac=url_o+"/"+ac"""
-            if "://" not in ac:
-                ur = u[: u.rfind("/")]
-                if ac[0] == "/":
+   if ac[:4]!=&#34;http&#34;:
+    url_o=&#34;/&#34;.join(u.split(&#39;/&#39;)[:-1])
+    ac=url_o+&#34;/&#34;+ac&#34;&#34;&#34;
+            if &#34;://&#34; not in ac:
+                ur = u[: u.rfind(&#34;/&#34;)]
+                if ac[0] == &#34;/&#34;:
                     ac = ac[1 : len(ac)]
-                ac = ur + "/" + ac
-            me = f.get("method", "get").lower()
+                ac = ur + &#34;/&#34; + ac
+            me = f.get(&#34;method&#34;, &#34;get&#34;).lower()
             if not me:
-                me = "get"
+                me = &#34;get&#34;
             if len(me) == 0:
-                me = "get"
+                me = &#34;get&#34;
             me = me.lower()
-            """radios={}
-            checkxoes={}"""
-            p = f.find_all("textarea") + tb_textareas
+            &#34;&#34;&#34;radios={}
+            checkxoes={}&#34;&#34;&#34;
+            p = f.find_all(&#34;textarea&#34;) + tb_textareas
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.renderContents().decode().split("&lt;/textarea&gt;")[0]
-                    typ = r.get("type", "textarea").lower()
-                    max_size=r.get('maxlength',64)
-                    if r.get('size',0)!=0:
-                            max_size= r.get('size',64)
-                    y = {"name": s, "value": v, "type": typ,'max':max_size,'min':r.get('minlength',1),'required':required}
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.renderContents().decode().split(&#34;&lt;/textarea&gt;&#34;)[0]
+                    typ = r.get(&#34;type&#34;, &#34;textarea&#34;).lower()
+                    max_size=r.get(&#39;maxlength&#39;,64)
+                    if r.get(&#39;size&#39;,0)!=0:
+                            max_size= r.get(&#39;size&#39;,64)
+                    y = {&#34;name&#34;: s, &#34;value&#34;: v, &#34;type&#34;: typ,&#39;max&#39;:max_size,&#39;min&#39;:r.get(&#39;minlength&#39;,1),&#39;required&#39;:required}
                     if y not in l:
                         l.append(y)
             h_v = {}
-            p = f.find_all("input") + tb_inputs
+            p = f.find_all(&#34;input&#34;) + tb_inputs
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    v = r.get("value", "")
-                    typ = r.get("type", "text").lower()
-                    y = {"name": s, "value": v, "type": typ,'required':required}
-                    if y['type'] in ['text','password','email','url','tel','search']:
-                        max_size=r.get('maxlength',64)
-                        if r.get('size',0)!=0:
-                            max_size= r.get('size',64)
-                        y.update({'max':int(max_size),'min':int(r.get('minlength',1))})
-                    elif y['type']=='number':
-                        y.update({'max':int(r.get('max',64)),'min':int(r.get('min',1))})
-                    elif y['type']=='date':
-                        y.update({'max':r.get('max',datetime.datetime.today().strftime("%Y-%m-%d")),'min':r.get('min',datetime.datetime.today().strftime("%Y-%m-%d"))})
-                    elif y['type']=='file':
-                        y.update({'accept':[ x.replace('.','').strip() for x in y.get('accept','.png').split(',')]})
-                    """elif y['type']=='radio':
-                        if y['name'] not in radios:
-                            radios[y['name']]=[]
-                        radios[y['name']].append(y)
-                    elif y['type']=='checkbox':
-                        if y['name'] not in checkxoes:
-                            checkxoes[y['name']]=[]
-                        checkxoes[y['name']].append(y)"""
-                    if typ.lower() == "hidden":
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    v = r.get(&#34;value&#34;, &#34;&#34;)
+                    typ = r.get(&#34;type&#34;, &#34;text&#34;).lower()
+                    y = {&#34;name&#34;: s, &#34;value&#34;: v, &#34;type&#34;: typ,&#39;required&#39;:required}
+                    if y[&#39;type&#39;] in [&#39;text&#39;,&#39;password&#39;,&#39;email&#39;,&#39;url&#39;,&#39;tel&#39;,&#39;search&#39;]:
+                        max_size=r.get(&#39;maxlength&#39;,64)
+                        if r.get(&#39;size&#39;,0)!=0:
+                            max_size= r.get(&#39;size&#39;,64)
+                        y.update({&#39;max&#39;:int(max_size),&#39;min&#39;:int(r.get(&#39;minlength&#39;,1))})
+                    elif y[&#39;type&#39;]==&#39;number&#39;:
+                        y.update({&#39;max&#39;:int(r.get(&#39;max&#39;,64)),&#39;min&#39;:int(r.get(&#39;min&#39;,1))})
+                    elif y[&#39;type&#39;]==&#39;date&#39;:
+                        y.update({&#39;max&#39;:r.get(&#39;max&#39;,datetime.datetime.today().strftime(&#34;%Y-%m-%d&#34;)),&#39;min&#39;:r.get(&#39;min&#39;,datetime.datetime.today().strftime(&#34;%Y-%m-%d&#34;))})
+                    elif y[&#39;type&#39;]==&#39;file&#39;:
+                        y.update({&#39;accept&#39;:[ x.replace(&#39;.&#39;,&#39;&#39;).strip() for x in y.get(&#39;accept&#39;,&#39;.png&#39;).split(&#39;,&#39;)]})
+                    &#34;&#34;&#34;elif y[&#39;type&#39;]==&#39;radio&#39;:
+                        if y[&#39;name&#39;] not in radios:
+                            radios[y[&#39;name&#39;]]=[]
+                        radios[y[&#39;name&#39;]].append(y)
+                    elif y[&#39;type&#39;]==&#39;checkbox&#39;:
+                        if y[&#39;name&#39;] not in checkxoes:
+                            checkxoes[y[&#39;name&#39;]]=[]
+                        checkxoes[y[&#39;name&#39;]].append(y)&#34;&#34;&#34;
+                    if typ.lower() == &#34;hidden&#34;:
                         h_v.update({s: v})
-                    if y not in l :#and y['name'] not in radios and y['name'] not in checkxoes:
+                    if y not in l :#and y[&#39;name&#39;] not in radios and y[&#39;name&#39;] not in checkxoes:
                         l.append(y)
-            p = f.find_all("select") + tb_selects
+            p = f.find_all(&#34;select&#34;) + tb_selects
             opts = []
             for r in p:
                 required=False
-                if 'required' in r.attrs:
+                if &#39;required&#39; in r.attrs:
                     required=True
-                if r.has_attr("name"):
-                    s = r.get("name")
-                    for x in r.find_all("option"):
+                if r.has_attr(&#34;name&#34;):
+                    s = r.get(&#34;name&#34;)
+                    for x in r.find_all(&#34;option&#34;):
                         opts.append(x.text)
-                    y = {"name": s, "value": opts, "type": "select",'required':required}
+                    y = {&#34;name&#34;: s, &#34;value&#34;: opts, &#34;type&#34;: &#34;select&#34;,&#39;required&#39;:required}
                     if y not in l:
                         l.append(y)
-            """for x in radios:
-                l.append({'name':x,'type':'radio','value':[i['value'] for i in radios[x]]})
+            &#34;&#34;&#34;for x in radios:
+                l.append({&#39;name&#39;:x,&#39;type&#39;:&#39;radio&#39;,&#39;value&#39;:[i[&#39;value&#39;] for i in radios[x]]})
             for x in checkxoes:
-                l.append({'name':x,'type':'checkbox','value':[i['value'] for i in checkxoes[x]]})"""
+                l.append({&#39;name&#39;:x,&#39;type&#39;:&#39;checkbox&#39;,&#39;value&#39;:[i[&#39;value&#39;] for i in checkxoes[x]]})&#34;&#34;&#34;
             fom.append(
                 {
-                    'id':form_id,
-                    "inputs": sort_inputs(l),
-                    "action": ac,
-                    "enctype": enc_ty,
-                    "method": me,
-                    "hidden_values": h_v,
-                    "is_url":False
+                    &#39;id&#39;:form_id,
+                    &#34;inputs&#34;: sort_inputs(l),
+                    &#34;action&#34;: ac,
+                    &#34;enctype&#34;: enc_ty,
+                    &#34;method&#34;: me,
+                    &#34;hidden_values&#34;: h_v,
+                    &#34;is_url&#34;:False
                 }
             )
             l = []
     except Exception as e:
         pass #raise(e)
     if include_links==True:
-        fom+=get_links_from_page_source(soup,u,'')
+        fom+=get_links_from_page_source(soup,u,&#39;&#39;)
     return fom</code></pre>
 </details>
 </dd>
@@ -2393,47 +2375,47 @@ bane.crawl(url)</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def generate_human_poc(data):
-    if "is_url" not in data:
-        raise ValueError("The 'is_url' key is missing in the input data")
+    if &#34;is_url&#34; not in data:
+        raise ValueError(&#34;The &#39;is_url&#39; key is missing in the input data&#34;)
 
-    if data["is_url"]:
+    if data[&#34;is_url&#34;]:
         # If is_url is True, generate a URL
-        url = data.get("action", "")
+        url = data.get(&#34;action&#34;, &#34;&#34;)
         if not url:
-            raise ValueError("Missing 'action' key for URL generation")
+            raise ValueError(&#34;Missing &#39;action&#39; key for URL generation&#34;)
         
         query_parameters = []
-        for input_field in data.get("inputs", []):
-            name = input_field.get("name", "")
-            value = input_field.get("value", "")
-            query_parameters.append("{}={}".format(name,value))
+        for input_field in data.get(&#34;inputs&#34;, []):
+            name = input_field.get(&#34;name&#34;, &#34;&#34;)
+            value = input_field.get(&#34;value&#34;, &#34;&#34;)
+            query_parameters.append(&#34;{}={}&#34;.format(name,value))
         
         if query_parameters:
-            url += "?" + "&amp;".join(query_parameters)
+            url += &#34;?&#34; + &#34;&amp;&#34;.join(query_parameters)
 
         return url
 
     else:
         # If is_url is False, generate an HTML form
-        form_id = data.get("id", "")
-        form_method = data.get("method", "post")
-        form_action = data.get("action", "")
-        form_enctype = data.get("enctype", "application/x-www-form-urlencoded")
+        form_id = data.get(&#34;id&#34;, &#34;&#34;)
+        form_method = data.get(&#34;method&#34;, &#34;post&#34;)
+        form_action = data.get(&#34;action&#34;, &#34;&#34;)
+        form_enctype = data.get(&#34;enctype&#34;, &#34;application/x-www-form-urlencoded&#34;)
 
-        inputs = ""
-        for input_field in data.get("inputs", []):
-            name = input_field.get("name", "")
-            value = input_field.get("value", "")
-            input_type = input_field.get("type", "text")
-            required = "required" if input_field.get("required", False) else ""
-            input_element = "&lt;input type='{}' name='{}' value='{}' {}&gt;".format(input_type,name,value,required)
+        inputs = &#34;&#34;
+        for input_field in data.get(&#34;inputs&#34;, []):
+            name = input_field.get(&#34;name&#34;, &#34;&#34;)
+            value = input_field.get(&#34;value&#34;, &#34;&#34;)
+            input_type = input_field.get(&#34;type&#34;, &#34;text&#34;)
+            required = &#34;required&#34; if input_field.get(&#34;required&#34;, False) else &#34;&#34;
+            input_element = &#34;&lt;input type=&#39;{}&#39; name=&#39;{}&#39; value=&#39;{}&#39; {}&gt;&#34;.format(input_type,name,value,required)
             inputs += input_element
 
-        html_form = """
-        &lt;form id='{}' method='{}' action='{}' enctype='{}'&gt;
+        html_form = &#34;&#34;&#34;
+        &lt;form id=&#39;{}&#39; method=&#39;{}&#39; action=&#39;{}&#39; enctype=&#39;{}&#39;&gt;
             {}
         &lt;/form&gt;
-        """.format(form_id,form_method,form_action,form_enctype,inputs)
+        &#34;&#34;&#34;.format(form_id,form_method,form_action,form_enctype,inputs)
         return html_form</code></pre>
 </details>
 </dd>
@@ -2453,7 +2435,7 @@ bane.crawl(url)</p>
     b = random.randint(0, 255)
 
     # Convert RGB to hexadecimal
-    color_hex = "#{:02X}{:02X}{:02X}".format(r, g, b)
+    color_hex = &#34;#{:02X}{:02X}{:02X}&#34;.format(r, g, b)
     return color_hex</code></pre>
 </details>
 </dd>
@@ -2467,9 +2449,9 @@ bane.crawl(url)</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def generate_random_phone_number(pattern):
-    phone_number = ""
+    phone_number = &#34;&#34;
     for char in pattern:
-        if char == "X":
+        if char == &#34;X&#34;:
             random_digit = str(random.randint(0, 9))
             phone_number += random_digit
         else:
@@ -2487,10 +2469,10 @@ bane.crawl(url)</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def generate_random_url():
-    protocols = ["http", "https"]
+    protocols = [&#34;http&#34;, &#34;https&#34;]
     protocol = random.choice(protocols)
     domain = random.choice(domainl)
-    return "{}://{}/".format(protocol,domain)</code></pre>
+    return &#34;{}://{}/&#34;.format(protocol,domain)</code></pre>
 </details>
 </dd>
 <dt id="bane.utils.pager.get_links_from_page_source"><code class="name flex">
@@ -2503,27 +2485,27 @@ bane.crawl(url)</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_links_from_page_source(soup,url,url_id):
-    if url.endswith('/')==False:
-        url+='/'
-    domain=url.split('/')[0] if url.startswith('http')==False else url.split('://')[1].split('/')[0]
-    l=soup.find_all('a')
-    links=[{'url':x['href'].replace('&amp;amp;','&amp;'),'id':x.get('id','')} for x in l if x.has_attr('href')]
-    media_tags = soup.find_all(['img', 'audio', 'video', 'source','embed'])
-    links+=[{'url':x['src'].replace('&amp;amp;','&amp;'),'id':x.get('id','') } for x in media_tags if x.has_attr('src')]
-    links.append({'url':url,'id':url_id})
+    if url.endswith(&#39;/&#39;)==False:
+        url+=&#39;/&#39;
+    domain=url.split(&#39;/&#39;)[0] if url.startswith(&#39;http&#39;)==False else url.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
+    l=soup.find_all(&#39;a&#39;)
+    links=[{&#39;url&#39;:x[&#39;href&#39;].replace(&#39;&amp;amp;&#39;,&#39;&amp;&#39;),&#39;id&#39;:x.get(&#39;id&#39;,&#39;&#39;)} for x in l if x.has_attr(&#39;href&#39;)]
+    media_tags = soup.find_all([&#39;img&#39;, &#39;audio&#39;, &#39;video&#39;, &#39;source&#39;,&#39;embed&#39;])
+    links+=[{&#39;url&#39;:x[&#39;src&#39;].replace(&#39;&amp;amp;&#39;,&#39;&amp;&#39;),&#39;id&#39;:x.get(&#39;id&#39;,&#39;&#39;) } for x in media_tags if x.has_attr(&#39;src&#39;)]
+    links.append({&#39;url&#39;:url,&#39;id&#39;:url_id})
     #print(links)
     #links_list=[]
     root_links=[]
     forms=[]
     for l in links:
-        x=l['url']
-        l_id=l['id']
-        if '?' in x and x.split('?')[0] not in root_links:
+        x=l[&#39;url&#39;]
+        l_id=l[&#39;id&#39;]
+        if &#39;?&#39; in x and x.split(&#39;?&#39;)[0] not in root_links:
             a=urljoin(url, x)
             #print(a)
             if a.startswith(url.split(domain)[0]+domain)==True:
                 forms.append(url_to_get_form(a,l_id))
-                root_links.append(x.split('?')[0])
+                root_links.append(x.split(&#39;?&#39;)[0])
     return forms</code></pre>
 </details>
 </dd>
@@ -2539,10 +2521,10 @@ bane.crawl(url)</p>
 <pre><code class="python">def get_login_form(url, text):
     a = forms_parser_text(url, text)
     for x in a:
-        for i in x["inputs"]:
-            if i["type"].lower().strip() == "password":
+        for i in x[&#34;inputs&#34;]:
+            if i[&#34;type&#34;].lower().strip() == &#34;password&#34;:
                 return x
-    raise Exception("No login form")</code></pre>
+    raise Exception(&#34;No login form&#34;)</code></pre>
 </details>
 </dd>
 <dt id="bane.utils.pager.get_upload_form"><code class="name flex">
@@ -2557,11 +2539,11 @@ bane.crawl(url)</p>
 <pre><code class="python">def get_upload_form(a):
     l=[]
     for x in a:
-        for i in x["inputs"]:
-            if i["type"].lower().strip() == "file":
+        for i in x[&#34;inputs&#34;]:
+            if i[&#34;type&#34;].lower().strip() == &#34;file&#34;:
                 l.append(x)
     if l==[]:
-        raise Exception("No file upload form")
+        raise Exception(&#34;No file upload form&#34;)
     return l</code></pre>
 </details>
 </dd>
@@ -2578,11 +2560,11 @@ bane.crawl(url)</p>
     l=[]
     a = forms_parser_text(url, text)
     for x in a:
-        for i in x["inputs"]:
-            if i["type"].lower().strip() == "file":
+        for i in x[&#34;inputs&#34;]:
+            if i[&#34;type&#34;].lower().strip() == &#34;file&#34;:
                 l.append(x)
     if l==[]:
-        raise Exception("No file upload form")
+        raise Exception(&#34;No file upload form&#34;)
     return l</code></pre>
 </details>
 </dd>
@@ -2624,37 +2606,37 @@ a=bane.inputs(link,value=True)
     proxy=None,
     cookie=None,
 ):
-    """
+    &#34;&#34;&#34;
      this function is to get the names and values of input fields on a given webpage to scan.
 
      it takes 4 arguments:
 
-     u: the page's link (http://...)
-     value: (set by default to: False) to return the value of the fields set it to:True then the field's name and value will be string of 2
-     values sperated by ":"
+     u: the page&#39;s link (http://...)
+     value: (set by default to: False) to return the value of the fields set it to:True then the field&#39;s name and value will be string of 2
+     values sperated by &#34;:&#34;
      timeout: (set by default to: 10) timeout flag for the request
      bypass: (set by default to: False) to bypass anti-crawlers
 
     usage:
 
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;link='http://www.example.com'
+    &gt;&gt;&gt;link=&#39;http://www.example.com&#39;
     &gt;&gt;&gt;bane.inputs(link)
-    ['email','password','rememberme']
+    [&#39;email&#39;,&#39;password&#39;,&#39;rememberme&#39;]
     &gt;&gt;&gt;a=bane.inputs(link,value=True)
-    ['email','password','rememberme:yes','rememberme:no']
+    [&#39;email&#39;,&#39;password&#39;,&#39;rememberme:yes&#39;,&#39;rememberme:no&#39;]
 
-    """
+    &#34;&#34;&#34;
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     if bypass == True:
-        u += "#"
+        u += &#34;#&#34;
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     l = []
     try:
         c = requests.Session().get(
@@ -2662,33 +2644,33 @@ a=bane.inputs(link,value=True)
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        p = soup.find_all("textarea")
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        p = soup.find_all(&#34;textarea&#34;)
         for r in p:
-            if r.has_attr("name"):
-                s = r.get("name")
-                v = r.get("value")
+            if r.has_attr(&#34;name&#34;):
+                s = r.get(&#34;name&#34;)
+                v = r.get(&#34;value&#34;)
                 if v == None:
-                    v = ""
+                    v = &#34;&#34;
             if value == True:
-                y = s + ":" + v
+                y = s + &#34;:&#34; + v
             else:
                 y = s
             if y not in l:
                 l.append(y)
-        p = soup.find_all("input")
+        p = soup.find_all(&#34;input&#34;)
         for r in p:
-            v = ""
-            if r.has_attr("name"):
+            v = &#34;&#34;
+            if r.has_attr(&#34;name&#34;):
                 s = str(r)
-                s = s.split('name="')[1].split(",")[0]
-                s = s.split('"')[0].split(",")[0]
-                if r.has_attr("value") and (value == True):
+                s = s.split(&#39;name=&#34;&#39;)[1].split(&#34;,&#34;)[0]
+                s = s.split(&#39;&#34;&#39;)[0].split(&#34;,&#34;)[0]
+                if r.has_attr(&#34;value&#34;) and (value == True):
                     v = str(r)
-                    v = v.split('value="')[1].split(",")[0]
-                    v = v.split('"')[0].split(",")[0]
+                    v = v.split(&#39;value=&#34;&#39;)[1].split(&#34;,&#34;)[0]
+                    v = v.split(&#39;&#34;&#39;)[0].split(&#34;,&#34;)[0]
             if value == True:
-                y = s + ":" + v
+                y = s + &#34;:&#34; + v
             else:
                 y = s
             if y not in l:
@@ -2702,7 +2684,7 @@ a=bane.inputs(link,value=True)
 <span>def <span class="ident">media</span></span>(<span>u, timeout=10, html_comments=False, user_agent=None, bypass=False, proxy=None, cookie=None, headers={})</span>
 </code></dt>
 <dd>
-<div class="desc"><p>this funtion was made to collect the social media links related to the targeted link (facebook, twitter, instagram…).</p>
+<div class="desc"><p>this funtion was made to collect the social media links related to the targeted link (facebook, twitter, instagram&hellip;).</p>
 <p>the function takes those arguments:</p>
 <p>u: the targeted link
 timeout: (set by default to 10) timeout flag for the request
@@ -2732,56 +2714,56 @@ bane.media(url)</p>
     cookie=None,
     headers={}
 ):
-    """
+    &#34;&#34;&#34;
     this funtion was made to collect the social media links related to the targeted link (facebook, twitter, instagram...).
 
     the function takes those arguments:
 
     u: the targeted link
     timeout: (set by default to 10) timeout flag for the request
-    bypass: (set by default to False) option to bypass anti-crawlers by simply adding "#" to the end of the link :)
+    bypass: (set by default to False) option to bypass anti-crawlers by simply adding &#34;#&#34; to the end of the link :)
 
     usage:
 
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;url='http://www.example.com'
+    &gt;&gt;&gt;url=&#39;http://www.example.com&#39;
     &gt;&gt;&gt;bane.media(url)
 
-    &gt;&gt;&gt;bane.media(url,bypass=True)"""
-    if urlparse(u).path == "":
-        u += "/"
+    &gt;&gt;&gt;bane.media(url,bypass=True)&#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     h = {}
     try:
         if bypass == True:
-            u += "#"
+            u += &#34;#&#34;
         hea.update(headers)
         c = requests.Session().get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        soup = BeautifulSoup(c, "html.parser")
-        ul = u.split("://")[1].split('"')[0]
-        ur = ul.replace("www.", "")
-        for a in soup.findAll("a"):
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        ul = u.split(&#34;://&#34;)[1].split(&#39;&#34;&#39;)[0]
+        ur = ul.replace(&#34;www.&#34;, &#34;&#34;)
+        for a in soup.findAll(&#34;a&#34;):
             try:
                 if (
-                    a.has_attr("href")
-                    and (u not in a["href"])
-                    and (ur not in a["href"])
-                    and (a["href"][:4] == "http")
+                    a.has_attr(&#34;href&#34;)
+                    and (u not in a[&#34;href&#34;])
+                    and (ur not in a[&#34;href&#34;])
+                    and (a[&#34;href&#34;][:4] == &#34;http&#34;)
                 ):
                     txt = a.text
-                    if a["href"] not in h:
-                        h.update({txt: a["href"]})
+                    if a[&#34;href&#34;] not in h:
+                        h.update({txt: a[&#34;href&#34;]})
             except:
                 pass
     except:
@@ -2801,15 +2783,15 @@ bane.media(url)</p>
 <pre><code class="python">def random_date(start_date, end_date):
     if start_date==end_date:
         return start_date
-    start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
-    end_date = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+    start_date = datetime.datetime.strptime(start_date, &#34;%Y-%m-%d&#34;)
+    end_date = datetime.datetime.strptime(end_date, &#34;%Y-%m-%d&#34;)
     
     time_between_dates = end_date - start_date
     days_between_dates = time_between_dates.days
     random_number_of_days = random.randrange(days_between_dates)
     
     random_date = start_date + datetime.timedelta(days=random_number_of_days)
-    return random_date.strftime("%Y-%m-%d")</code></pre>
+    return random_date.strftime(&#34;%Y-%m-%d&#34;)</code></pre>
 </details>
 </dd>
 <dt id="bane.utils.pager.readable_js_code"><code class="name flex">
@@ -2835,7 +2817,7 @@ bane.media(url)</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def remove_html_comments(text):
-    return re.sub(r"&lt;!--(.|\s|\n)*?--&gt;", "", text, flags=re.DOTALL)</code></pre>
+    return re.sub(r&#34;&lt;!--(.|\s|\n)*?--&gt;&#34;, &#34;&#34;, text, flags=re.DOTALL)</code></pre>
 </details>
 </dd>
 <dt id="bane.utils.pager.set_correct_cookies"><code class="name flex">
@@ -2849,9 +2831,9 @@ bane.media(url)</p>
 </summary>
 <pre><code class="python">def set_correct_cookies(new_cookies, cookie=None):
     if not cookie:
-        cookie = ""
+        cookie = &#34;&#34;
     if not new_cookies:
-        new_cookies = ""
+        new_cookies = &#34;&#34;
     if cookie and len(cookie) &gt; 0:
         if new_cookies and len(new_cookies) &gt; 0:
             cookies = update_cookies(new_cookies, cookie)
@@ -2874,18 +2856,18 @@ bane.media(url)</p>
 <pre><code class="python">def set_login_form(url, text, username, password):
     a = get_login_form(url, text)
     d = {}
-    for x in a["inputs"]:
-        if x["type"].lower().strip() == "password":
-            d.update({x["name"]: password})
+    for x in a[&#34;inputs&#34;]:
+        if x[&#34;type&#34;].lower().strip() == &#34;password&#34;:
+            d.update({x[&#34;name&#34;]: password})
         elif (
-            x["type"].lower().strip() == "text"
-            or x["type"].lower().strip() == "email"
-            or x["type"].lower().strip() == "tel"
+            x[&#34;type&#34;].lower().strip() == &#34;text&#34;
+            or x[&#34;type&#34;].lower().strip() == &#34;email&#34;
+            or x[&#34;type&#34;].lower().strip() == &#34;tel&#34;
         ):
-            d.update({x["name"]: username})
+            d.update({x[&#34;name&#34;]: username})
         else:
-            d.update({x["name"]: x["value"]})
-    return [d, a["action"]]</code></pre>
+            d.update({x[&#34;name&#34;]: x[&#34;value&#34;]})
+    return [d, a[&#34;action&#34;]]</code></pre>
 </details>
 </dd>
 <dt id="bane.utils.pager.set_up_injection"><code class="name flex">
@@ -2907,9 +2889,9 @@ bane.media(url)</p>
     proxy,
     timeout,
     auto_fill,
-    file_extension="png",
-    email_extension='@gmail.com',
-    phone_pattern='XXX-XXX-XXXX',
+    file_extension=&#34;png&#34;,
+    email_extension=&#39;@gmail.com&#39;,
+    phone_pattern=&#39;XXX-XXX-XXXX&#39;,
     dont_change={},
     number=(1, 9),
     leave_empty=[],
@@ -2919,9 +2901,9 @@ bane.media(url)</p>
     headers={}
 ):
     cookies = None
-    h = {"User-Agent": user_agent}
+    h = {&#34;User-Agent&#34;: user_agent}
     if cookie:
-        h.update({"Cookie": cookie})
+        h.update({&#34;Cookie&#34;: cookie})
         cookies = cookie
     h.update(headers)
     
@@ -2931,14 +2913,14 @@ bane.media(url)</p>
         return False
     cook = None
     try:
-        cook = r.headers["Set-cookie"]
+        cook = r.headers[&#34;Set-cookie&#34;]
     except:
         pass
     cookies = set_correct_cookies(cook, cookie=cookie)
     form = forms_parser_text(url, r.text)[form_index]
-    h = {"User-Agent": user_agent}
+    h = {&#34;User-Agent&#34;: user_agent}
     if cookies and len(cookies.strip()) &gt; 0:
-        h.update({"Cookie": cookies})
+        h.update({&#34;Cookie&#34;: cookies})
     h.update(headers)
     return (
         form_filler(
@@ -2975,16 +2957,16 @@ bane.media(url)</p>
     a = []
     d = []
     for x in l:
-        if x["type"] not in [u"radio", u"checkbox"]:
+        if x[&#34;type&#34;] not in [u&#34;radio&#34;, u&#34;checkbox&#34;]:
             d.append(x)
-        if x["name"] not in a and (x["type"] == u"radio" or x["type"] == u"checkbox"):
-            a.append(x["name"])
+        if x[&#34;name&#34;] not in a and (x[&#34;type&#34;] == u&#34;radio&#34; or x[&#34;type&#34;] == u&#34;checkbox&#34;):
+            a.append(x[&#34;name&#34;])
     for x in a:
         d.append(
             {
-                "type": [i["type"] for i in l if i["name"] == x][0],
-                "name": x,
-                "value": [i["value"] for i in l if i["name"] == x],
+                &#34;type&#34;: [i[&#34;type&#34;] for i in l if i[&#34;name&#34;] == x][0],
+                &#34;name&#34;: x,
+                &#34;value&#34;: [i[&#34;value&#34;] for i in l if i[&#34;name&#34;] == x],
             }
         )
     return d</code></pre>
@@ -3000,14 +2982,14 @@ bane.media(url)</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def spider_url(base_url, include_id=False,max_pages=50,timeout=15,cookie=None,user_agent=None,proxy=None,headers={}):
-    domain=base_url.split('://')[1].split('/')[0]
+    domain=base_url.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
     h={}
     if cookie:
-        h.update({'Cookie':cookie})
+        h.update({&#39;Cookie&#39;:cookie})
     if user_agent:
-        h.update({'User-Agent':user_agent})
+        h.update({&#39;User-Agent&#39;:user_agent})
     else:
-        h.update({'User-Agent':random.choice(ua)})
+        h.update({&#39;User-Agent&#39;:random.choice(ua)})
     h.update(headers)
     visited_urls = set()
     urls_to_visit = [base_url]
@@ -3021,29 +3003,29 @@ bane.media(url)</p>
             response.raise_for_status()  # Check for any request errors
 
             # Parse the HTML content
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = BeautifulSoup(response.content, &#39;html.parser&#39;)
 
             # Extract all links from the page
-            for anchor_tag in soup.find_all('a', href=True):
-                href = anchor_tag['href']
+            for anchor_tag in soup.find_all(&#39;a&#39;, href=True):
+                href = anchor_tag[&#39;href&#39;]
                 absolute_url = urljoin(url, href)
                 try:
-                    this_domain=absolute_url.split('://')[1].split('/')[0]
+                    this_domain=absolute_url.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0]
                 except:
-                    this_domain=''
+                    this_domain=&#39;&#39;
 
-                if absolute_url not in visited_urls and absolute_url.split('?')[0].split('#')[0] not in root_urls and domain == this_domain:
+                if absolute_url not in visited_urls and absolute_url.split(&#39;?&#39;)[0].split(&#39;#&#39;)[0] not in root_urls and domain == this_domain:
                     visited_urls.add(absolute_url)
                     urls_to_visit.append(absolute_url)
-                    root_urls.append(absolute_url.split('?')[0].split('#')[0])
+                    root_urls.append(absolute_url.split(&#39;?&#39;)[0].split(&#39;#&#39;)[0])
             if include_id==True:
-                collected_urls.add({'url':url,'id':anchor_tag.get('id','')})
+                collected_urls.add({&#39;url&#39;:url,&#39;id&#39;:anchor_tag.get(&#39;id&#39;,&#39;&#39;)})
             else:
                 collected_urls.add(url)
             #print(len(collected_urls))
 
         except requests.exceptions.RequestException as e:
-            print("Error fetching URL: {}".format(e))
+            print(&#34;Error fetching URL: {}&#34;.format(e))
 
     return list(collected_urls)</code></pre>
 </details>
@@ -3082,54 +3064,54 @@ bane.subdomains_extract(url)</p>
     cookie=None,
     headers={}
 ):
-    """
+    &#34;&#34;&#34;
     this function collects the subdomains found on the targeted webpage.
 
     the function takes those arguments:
 
     u: the targeted link
     timeout: (set by default to 10) timeout flag for the request
-    bypass: (set by default to False) option to bypass anti-crawlers by simply adding "#" to the end of the link :)
+    bypass: (set by default to False) option to bypass anti-crawlers by simply adding &#34;#&#34; to the end of the link :)
 
     usage:
 
     &gt;&gt;&gt;import bane
-    &gt;&gt;&gt;url='http://www.example.com'
+    &gt;&gt;&gt;url=&#39;http://www.example.com&#39;
     &gt;&gt;&gt;bane.subdomains_extract(url)
 
-    &gt;&gt;&gt;bane.subdomains_extract(url,bypass=True)"""
-    if urlparse(u).path == "":
-        u += "/"
+    &gt;&gt;&gt;bane.subdomains_extract(url,bypass=True)&#34;&#34;&#34;
+    if urlparse(u).path == &#34;&#34;:
+        u += &#34;/&#34;
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
     h = {}
     if cookie:
-        hea = {"User-Agent": us, "Cookie": cookie}
+        hea = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        hea = {"User-Agent": us}
+        hea = {&#34;User-Agent&#34;: us}
     hea.update(headers)
     try:
         if bypass == True:
-            u += "#"
+            u += &#34;#&#34;
         c = requests.Session().get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
         ).text
         if html_comments == False:
             c = remove_html_comments(c)
-        ul = u.split("://")[1].split("/")[0]
-        soup = BeautifulSoup(c, "html.parser")
-        for a in soup.findAll("a"):
+        ul = u.split(&#34;://&#34;)[1].split(&#34;/&#34;)[0]
+        soup = BeautifulSoup(c, &#34;html.parser&#34;)
+        for a in soup.findAll(&#34;a&#34;):
             if (
-                a.has_attr("href")
-                and (ul.replace("www", "") in a["href"])
-                and (ul not in a["href"])
-                and (a["href"][:4] == "http")
+                a.has_attr(&#34;href&#34;)
+                and (ul.replace(&#34;www&#34;, &#34;&#34;) in a[&#34;href&#34;])
+                and (ul not in a[&#34;href&#34;])
+                and (a[&#34;href&#34;][:4] == &#34;http&#34;)
             ):
                 txt = a.text
                 try:
-                    hr = a["href"].split("://")[1].split("/")[0]
+                    hr = a[&#34;href&#34;].split(&#34;://&#34;)[1].split(&#34;/&#34;)[0]
                     h.update({txt: hr})
                 except Exception as e:
                     pass
@@ -3155,9 +3137,9 @@ bane.subdomains_extract(url)</p>
     if cook:
         c2 = cookies_to_dict(cook)
     c2.update(c1)
-    cookie = ""
+    cookie = &#34;&#34;
     for x in c2:
-        cookie += x + "=" + c2[x] + ";"
+        cookie += x + &#34;=&#34; + c2[x] + &#34;;&#34;
     return cookie</code></pre>
 </details>
 </dd>
@@ -3171,23 +3153,23 @@ bane.subdomains_extract(url)</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def url_to_get_form(u,url_id):
-    #print('&amp;'.join(u.split('?')[1:]).replace('?','&amp;').split('&amp;'))
-    #print(u.split('?')[1].split('&amp;'))
+    #print(&#39;&amp;&#39;.join(u.split(&#39;?&#39;)[1:]).replace(&#39;?&#39;,&#39;&amp;&#39;).split(&#39;&amp;&#39;))
+    #print(u.split(&#39;?&#39;)[1].split(&#39;&amp;&#39;))
     inputs=[]
-    for x in '&amp;'.join(u.split('?')[1:]).replace('?','&amp;').split('&amp;'):
+    for x in &#39;&amp;&#39;.join(u.split(&#39;?&#39;)[1:]).replace(&#39;?&#39;,&#39;&amp;&#39;).split(&#39;&amp;&#39;):
         try:
-            inputs.append({'name':x.split('=')[0],'type':'text','value':x.split('=')[1]})
+            inputs.append({&#39;name&#39;:x.split(&#39;=&#39;)[0],&#39;type&#39;:&#39;text&#39;,&#39;value&#39;:x.split(&#39;=&#39;)[1]})
         except:
-            inputs.append({'name':x.split('=')[0],'type':'text','value':''})
-    #inputs=[ {'name':x.split('=')[0],'type':'text','value':x.split('=')[1]} for x in u.split('?')[1].split('&amp;')]
+            inputs.append({&#39;name&#39;:x.split(&#39;=&#39;)[0],&#39;type&#39;:&#39;text&#39;,&#39;value&#39;:&#39;&#39;})
+    #inputs=[ {&#39;name&#39;:x.split(&#39;=&#39;)[0],&#39;type&#39;:&#39;text&#39;,&#39;value&#39;:x.split(&#39;=&#39;)[1]} for x in u.split(&#39;?&#39;)[1].split(&#39;&amp;&#39;)]
     return {
-                    "inputs": inputs,
-                    "action": u.split('?')[0],
-                    "enctype": 'application/x-www-form-urlencoded',
-                    "method": 'get',
-                    "id":url_id,
-                    "hidden_values": [],
-                    "is_url":True
+                    &#34;inputs&#34;: inputs,
+                    &#34;action&#34;: u.split(&#39;?&#39;)[0],
+                    &#34;enctype&#34;: &#39;application/x-www-form-urlencoded&#39;,
+                    &#34;method&#34;: &#39;get&#39;,
+                    &#34;id&#34;:url_id,
+                    &#34;hidden_values&#34;: [],
+                    &#34;is_url&#34;:True
                 }</code></pre>
 </details>
 </dd>
@@ -3204,43 +3186,43 @@ bane.subdomains_extract(url)</p>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a href="index.md" title="bane.utils">bane.utils</a></code></li>
+<li><code><a title="bane.utils" href="index.md">bane.utils</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a href="#bane.utils.pager.cookies_to_dict" title="bane.utils.pager.cookies_to_dict">cookies_to_dict</a></code></li>
-<li><code><a href="#bane.utils.pager.crawl" title="bane.utils.pager.crawl">crawl</a></code></li>
-<li><code><a href="#bane.utils.pager.crawl_text" title="bane.utils.pager.crawl_text">crawl_text</a></code></li>
-<li><code><a href="#bane.utils.pager.examine_js_code" title="bane.utils.pager.examine_js_code">examine_js_code</a></code></li>
-<li><code><a href="#bane.utils.pager.extract_secrets_from_text" title="bane.utils.pager.extract_secrets_from_text">extract_secrets_from_text</a></code></li>
-<li><code><a href="#bane.utils.pager.extract_urls_from_js" title="bane.utils.pager.extract_urls_from_js">extract_urls_from_js</a></code></li>
-<li><code><a href="#bane.utils.pager.fetch_url" title="bane.utils.pager.fetch_url">fetch_url</a></code></li>
-<li><code><a href="#bane.utils.pager.form_filler" title="bane.utils.pager.form_filler">form_filler</a></code></li>
-<li><code><a href="#bane.utils.pager.forms" title="bane.utils.pager.forms">forms</a></code></li>
-<li><code><a href="#bane.utils.pager.forms_parser" title="bane.utils.pager.forms_parser">forms_parser</a></code></li>
-<li><code><a href="#bane.utils.pager.forms_parser_text" title="bane.utils.pager.forms_parser_text">forms_parser_text</a></code></li>
-<li><code><a href="#bane.utils.pager.generate_human_poc" title="bane.utils.pager.generate_human_poc">generate_human_poc</a></code></li>
-<li><code><a href="#bane.utils.pager.generate_random_html_input_color" title="bane.utils.pager.generate_random_html_input_color">generate_random_html_input_color</a></code></li>
-<li><code><a href="#bane.utils.pager.generate_random_phone_number" title="bane.utils.pager.generate_random_phone_number">generate_random_phone_number</a></code></li>
-<li><code><a href="#bane.utils.pager.generate_random_url" title="bane.utils.pager.generate_random_url">generate_random_url</a></code></li>
-<li><code><a href="#bane.utils.pager.get_links_from_page_source" title="bane.utils.pager.get_links_from_page_source">get_links_from_page_source</a></code></li>
-<li><code><a href="#bane.utils.pager.get_login_form" title="bane.utils.pager.get_login_form">get_login_form</a></code></li>
-<li><code><a href="#bane.utils.pager.get_upload_form" title="bane.utils.pager.get_upload_form">get_upload_form</a></code></li>
-<li><code><a href="#bane.utils.pager.get_upload_form_text" title="bane.utils.pager.get_upload_form_text">get_upload_form_text</a></code></li>
-<li><code><a href="#bane.utils.pager.inputs" title="bane.utils.pager.inputs">inputs</a></code></li>
-<li><code><a href="#bane.utils.pager.media" title="bane.utils.pager.media">media</a></code></li>
-<li><code><a href="#bane.utils.pager.random_date" title="bane.utils.pager.random_date">random_date</a></code></li>
-<li><code><a href="#bane.utils.pager.readable_js_code" title="bane.utils.pager.readable_js_code">readable_js_code</a></code></li>
-<li><code><a href="#bane.utils.pager.remove_html_comments" title="bane.utils.pager.remove_html_comments">remove_html_comments</a></code></li>
-<li><code><a href="#bane.utils.pager.set_correct_cookies" title="bane.utils.pager.set_correct_cookies">set_correct_cookies</a></code></li>
-<li><code><a href="#bane.utils.pager.set_login_form" title="bane.utils.pager.set_login_form">set_login_form</a></code></li>
-<li><code><a href="#bane.utils.pager.set_up_injection" title="bane.utils.pager.set_up_injection">set_up_injection</a></code></li>
-<li><code><a href="#bane.utils.pager.sort_inputs" title="bane.utils.pager.sort_inputs">sort_inputs</a></code></li>
-<li><code><a href="#bane.utils.pager.spider_url" title="bane.utils.pager.spider_url">spider_url</a></code></li>
-<li><code><a href="#bane.utils.pager.subdomains_extract" title="bane.utils.pager.subdomains_extract">subdomains_extract</a></code></li>
-<li><code><a href="#bane.utils.pager.update_cookies" title="bane.utils.pager.update_cookies">update_cookies</a></code></li>
-<li><code><a href="#bane.utils.pager.url_to_get_form" title="bane.utils.pager.url_to_get_form">url_to_get_form</a></code></li>
+<li><code><a title="bane.utils.pager.cookies_to_dict" href="#bane.utils.pager.cookies_to_dict">cookies_to_dict</a></code></li>
+<li><code><a title="bane.utils.pager.crawl" href="#bane.utils.pager.crawl">crawl</a></code></li>
+<li><code><a title="bane.utils.pager.crawl_text" href="#bane.utils.pager.crawl_text">crawl_text</a></code></li>
+<li><code><a title="bane.utils.pager.examine_js_code" href="#bane.utils.pager.examine_js_code">examine_js_code</a></code></li>
+<li><code><a title="bane.utils.pager.extract_secrets_from_text" href="#bane.utils.pager.extract_secrets_from_text">extract_secrets_from_text</a></code></li>
+<li><code><a title="bane.utils.pager.extract_urls_from_js" href="#bane.utils.pager.extract_urls_from_js">extract_urls_from_js</a></code></li>
+<li><code><a title="bane.utils.pager.fetch_url" href="#bane.utils.pager.fetch_url">fetch_url</a></code></li>
+<li><code><a title="bane.utils.pager.form_filler" href="#bane.utils.pager.form_filler">form_filler</a></code></li>
+<li><code><a title="bane.utils.pager.forms" href="#bane.utils.pager.forms">forms</a></code></li>
+<li><code><a title="bane.utils.pager.forms_parser" href="#bane.utils.pager.forms_parser">forms_parser</a></code></li>
+<li><code><a title="bane.utils.pager.forms_parser_text" href="#bane.utils.pager.forms_parser_text">forms_parser_text</a></code></li>
+<li><code><a title="bane.utils.pager.generate_human_poc" href="#bane.utils.pager.generate_human_poc">generate_human_poc</a></code></li>
+<li><code><a title="bane.utils.pager.generate_random_html_input_color" href="#bane.utils.pager.generate_random_html_input_color">generate_random_html_input_color</a></code></li>
+<li><code><a title="bane.utils.pager.generate_random_phone_number" href="#bane.utils.pager.generate_random_phone_number">generate_random_phone_number</a></code></li>
+<li><code><a title="bane.utils.pager.generate_random_url" href="#bane.utils.pager.generate_random_url">generate_random_url</a></code></li>
+<li><code><a title="bane.utils.pager.get_links_from_page_source" href="#bane.utils.pager.get_links_from_page_source">get_links_from_page_source</a></code></li>
+<li><code><a title="bane.utils.pager.get_login_form" href="#bane.utils.pager.get_login_form">get_login_form</a></code></li>
+<li><code><a title="bane.utils.pager.get_upload_form" href="#bane.utils.pager.get_upload_form">get_upload_form</a></code></li>
+<li><code><a title="bane.utils.pager.get_upload_form_text" href="#bane.utils.pager.get_upload_form_text">get_upload_form_text</a></code></li>
+<li><code><a title="bane.utils.pager.inputs" href="#bane.utils.pager.inputs">inputs</a></code></li>
+<li><code><a title="bane.utils.pager.media" href="#bane.utils.pager.media">media</a></code></li>
+<li><code><a title="bane.utils.pager.random_date" href="#bane.utils.pager.random_date">random_date</a></code></li>
+<li><code><a title="bane.utils.pager.readable_js_code" href="#bane.utils.pager.readable_js_code">readable_js_code</a></code></li>
+<li><code><a title="bane.utils.pager.remove_html_comments" href="#bane.utils.pager.remove_html_comments">remove_html_comments</a></code></li>
+<li><code><a title="bane.utils.pager.set_correct_cookies" href="#bane.utils.pager.set_correct_cookies">set_correct_cookies</a></code></li>
+<li><code><a title="bane.utils.pager.set_login_form" href="#bane.utils.pager.set_login_form">set_login_form</a></code></li>
+<li><code><a title="bane.utils.pager.set_up_injection" href="#bane.utils.pager.set_up_injection">set_up_injection</a></code></li>
+<li><code><a title="bane.utils.pager.sort_inputs" href="#bane.utils.pager.sort_inputs">sort_inputs</a></code></li>
+<li><code><a title="bane.utils.pager.spider_url" href="#bane.utils.pager.spider_url">spider_url</a></code></li>
+<li><code><a title="bane.utils.pager.subdomains_extract" href="#bane.utils.pager.subdomains_extract">subdomains_extract</a></code></li>
+<li><code><a title="bane.utils.pager.update_cookies" href="#bane.utils.pager.update_cookies">update_cookies</a></code></li>
+<li><code><a title="bane.utils.pager.url_to_get_form" href="#bane.utils.pager.url_to_get_form">url_to_get_form</a></code></li>
 </ul>
 </li>
 </ul>

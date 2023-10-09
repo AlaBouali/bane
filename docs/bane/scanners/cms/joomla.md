@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport">
-<meta content="pdoc 0.10.0" name="generator"/>
-<title>bane.scanners.cms.joomla API documentation</title>
-<meta content="" name="description"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" rel="preload stylesheet"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" rel="preload stylesheet"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" rel="stylesheet preload"/>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
-<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script crossorigin="" defer="" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
-</meta></head>
 <body>
 <main>
 <article id="content">
@@ -30,80 +12,80 @@
 <pre><code class="python">from bane.scanners.cms.utils import *
 
 def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None):
-    domain=u.split('://')[1].split('/')[0].split(':')[0]
+    domain=u.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0].split(&#39;:&#39;)[0]
     root_domain=extract_root_domain(domain)
-    ip=socket.gethostbyname(domain.split(':')[0])
-    if u[len(u) - 1] == "/":
+    ip=socket.gethostbyname(domain.split(&#39;:&#39;)[0])
+    if u[len(u) - 1] == &#34;/&#34;:
         u = u[0 : len(u) - 1]
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
-    hed = {"User-Agent": us}
+    hed = {&#34;User-Agent&#34;: us}
     if cookie:
-        hed.update({"Cookie": cookie})
+        hed.update({&#34;Cookie&#34;: cookie})
     hed.update(headers)
     try:
-        response = requests.Session().get(u+"/language/en-GB/en-GB.xml", headers=hed, proxies=proxy, timeout=timeout, verify=False)
-        version= response.text.split('&lt;version&gt;')[1].split('&lt;/version&gt;')[0].strip()
+        response = requests.Session().get(u+&#34;/language/en-GB/en-GB.xml&#34;, headers=hed, proxies=proxy, timeout=timeout, verify=False)
+        version= response.text.split(&#39;&lt;version&gt;&#39;)[1].split(&#39;&lt;/version&gt;&#39;)[0].strip()
     except:
-        version= ''
+        version= &#39;&#39;
     try:
         response = requests.Session().get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
     except:
         pass
-    server=response.headers.get('Server','')
+    server=response.headers.get(&#39;Server&#39;,&#39;&#39;)
     try:
-        server_os=[x for x in server.split() if x.startswith('(')==True][0].replace('(','').replace(')','')
+        server_os=[x for x in server.split() if x.startswith(&#39;(&#39;)==True][0].replace(&#39;(&#39;,&#39;&#39;).replace(&#39;)&#39;,&#39;&#39;)
     except:
-        server_os=''
-    backend=response.headers.get('X-Powered-By','')
+        server_os=&#39;&#39;
+    backend=response.headers.get(&#39;X-Powered-By&#39;,&#39;&#39;)
     if logs==True:
-        print("Joomla site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tJoomla version: {}\n".format(u,domain,ip,server,server_os,backend,version))
+        print(&#34;Joomla site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tJoomla version: {}\n&#34;.format(u,domain,ip,server,server_os,backend,version))
     clickj=page_clickjacking(u,request_headers=response.headers)
     if logs==True:
-        print("[i] Looking for subdomains...")
+        print(&#34;[i] Looking for subdomains...&#34;)
     subs=get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=proxy,subdomains_only=subdomains_only)
     if logs==True:
-        print("[i] Cheking if we can sniff some cookies over some links...")
+        print(&#34;[i] Cheking if we can sniff some cookies over some links...&#34;)
         print()
     media_non_ssl=sniffable_links(u,content=response.text,logs=logs,request_headers=response.headers)
     if logs==True:
         print()
     wp_vulns=[]
-    if version!='':
+    if version!=&#39;&#39;:
         if logs==True:
-            print('[i] looking for exploits for version: {}\n'.format(version))
-        wpvulns=vulners_search('joomla',version=version,proxy=proxy,api_key=api_key)
+            print(&#39;[i] looking for exploits for version: {}\n&#39;.format(version))
+        wpvulns=vulners_search(&#39;joomla&#39;,version=version,proxy=proxy,api_key=api_key)
         for x in wpvulns:
-            if 'joomla' in x['title'].lower() or 'joomla' in x['description'].lower():
+            if &#39;joomla&#39; in x[&#39;title&#39;].lower() or &#39;joomla&#39; in x[&#39;description&#39;].lower():
                 wp_vulns.append(x)
         for x in wp_vulns:
-            for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
+            for i in [&#39;cpe&#39;, &#39;cpe23&#39;, &#39;cwe&#39;, &#39;affectedSoftware&#39;]:
                 try:
                     del x[i]
                 except:
                     pass
         if logs==True:
             if len(wp_vulns)==0:
-                print('\t[-] none was found')
+                print(&#39;\t[-] none was found&#39;)
             else:
                 for x in wp_vulns:
-                    print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
+                    print(&#34;\tTitle : {}\n\tDescription: {}\n\tLink: {}&#34;.format(x[&#39;title&#39;],x[&#39;description&#39;],x[&#39;href&#39;]))
                     print()
     backend_technology_exploits={}
-    if backend!='':
+    if backend!=&#39;&#39;:
         bk=[]
         for back in backend.split():
             if logs==True:
-                print('[i] looking for exploits for : {}\n'.format(back))
-            if '/' not in back:
+                print(&#39;[i] looking for exploits for : {}\n&#39;.format(back))
+            if &#39;/&#39; not in back:
                 if logs==True:
-                    print('\t[-] unknown version\n')
+                    print(&#39;\t[-] unknown version\n&#39;)
             else:
-                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=proxy,api_key=api_key)
+                bk=vulners_search(back.split(&#39;/&#39;)[0].lower(),version=back.split(&#39;/&#39;)[1],proxy=proxy,api_key=api_key)
             for x in bk:
-                for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
+                for i in [&#39;cpe&#39;, &#39;cpe23&#39;, &#39;cwe&#39;, &#39;affectedSoftware&#39;]:
                     try:
                         del x[i]
                     except:
@@ -111,25 +93,25 @@ def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=Tr
             backend_technology_exploits.update({back:bk})
             if logs==True:
                 if len(bk)==0:
-                    print('\t[-] none was found')
+                    print(&#39;\t[-] none was found&#39;)
                 else:
                     for x in bk:
-                        print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
+                        print(&#34;\tTitle : {}\n\tDescription: {}\n\tLink: {}&#34;.format(x[&#39;title&#39;],x[&#39;description&#39;],x[&#39;href&#39;]))
                         print()
     server_exploits={}
-    if server!='':
+    if server!=&#39;&#39;:
         for sv in server.split():
-            if sv.startswith('(')==False:
+            if sv.startswith(&#39;(&#39;)==False:
                 sv_e=[]
                 if logs==True:
-                    print('[i] looking for exploits for : {}\n'.format(sv))
-                if '/' in sv:
-                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=proxy,api_key=api_key)
+                    print(&#39;[i] looking for exploits for : {}\n&#39;.format(sv))
+                if &#39;/&#39; in sv:
+                    sv_e=vulners_search(sv.split(&#39;/&#39;)[0].lower(),version=sv.split(&#39;/&#39;)[1],proxy=proxy,api_key=api_key)
                 else:
                     if logs==True:
-                        print('\t[-] unknown version\n')
+                        print(&#39;\t[-] unknown version\n&#39;)
                 for x in sv_e:
-                    for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
+                    for i in [&#39;cpe&#39;, &#39;cpe23&#39;, &#39;cwe&#39;, &#39;affectedSoftware&#39;]:
                         try:
                             del x[i]
                         except:
@@ -137,12 +119,12 @@ def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=Tr
                 server_exploits.update({sv:sv_e})
                 if logs==True:
                     if len(sv_e)==0:
-                        print('\t[-] none was found')
+                        print(&#39;\t[-] none was found&#39;)
                     else:
                         for x in sv_e:
-                            print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
+                            print(&#34;\tTitle : {}\n\tDescription: {}\n\tLink: {}&#34;.format(x[&#39;title&#39;],x[&#39;description&#39;],x[&#39;href&#39;]))
                             print()
-    return {'url':u,'domain':domain,'ip':ip,'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'joomla_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}</code></pre>
+    return {&#39;url&#39;:u,&#39;domain&#39;:domain,&#39;ip&#39;:ip,&#39;root_domain&#39;:root_domain,&#39;sub_domains&#39;:subs,&#39;server&#39;:server,&#39;os&#39;:server_os,&#39;backend_technology&#39;:backend,&#39;joomla_version&#39;:version,&#39;sniffable_links&#39;:media_non_ssl,&#39;clickjackable&#39;:clickj,&#34;exploits&#34;:wp_vulns,&#39;backend_technology_exploits&#39;:backend_technology_exploits,&#39;server_exploits&#39;:server_exploits}</code></pre>
 </details>
 </section>
 <section>
@@ -162,80 +144,80 @@ def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=Tr
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None):
-    domain=u.split('://')[1].split('/')[0].split(':')[0]
+    domain=u.split(&#39;://&#39;)[1].split(&#39;/&#39;)[0].split(&#39;:&#39;)[0]
     root_domain=extract_root_domain(domain)
-    ip=socket.gethostbyname(domain.split(':')[0])
-    if u[len(u) - 1] == "/":
+    ip=socket.gethostbyname(domain.split(&#39;:&#39;)[0])
+    if u[len(u) - 1] == &#34;/&#34;:
         u = u[0 : len(u) - 1]
     if user_agent:
         us = user_agent
     else:
         us = random.choice(ua)
-    hed = {"User-Agent": us}
+    hed = {&#34;User-Agent&#34;: us}
     if cookie:
-        hed.update({"Cookie": cookie})
+        hed.update({&#34;Cookie&#34;: cookie})
     hed.update(headers)
     try:
-        response = requests.Session().get(u+"/language/en-GB/en-GB.xml", headers=hed, proxies=proxy, timeout=timeout, verify=False)
-        version= response.text.split('&lt;version&gt;')[1].split('&lt;/version&gt;')[0].strip()
+        response = requests.Session().get(u+&#34;/language/en-GB/en-GB.xml&#34;, headers=hed, proxies=proxy, timeout=timeout, verify=False)
+        version= response.text.split(&#39;&lt;version&gt;&#39;)[1].split(&#39;&lt;/version&gt;&#39;)[0].strip()
     except:
-        version= ''
+        version= &#39;&#39;
     try:
         response = requests.Session().get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
     except:
         pass
-    server=response.headers.get('Server','')
+    server=response.headers.get(&#39;Server&#39;,&#39;&#39;)
     try:
-        server_os=[x for x in server.split() if x.startswith('(')==True][0].replace('(','').replace(')','')
+        server_os=[x for x in server.split() if x.startswith(&#39;(&#39;)==True][0].replace(&#39;(&#39;,&#39;&#39;).replace(&#39;)&#39;,&#39;&#39;)
     except:
-        server_os=''
-    backend=response.headers.get('X-Powered-By','')
+        server_os=&#39;&#39;
+    backend=response.headers.get(&#39;X-Powered-By&#39;,&#39;&#39;)
     if logs==True:
-        print("Joomla site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tJoomla version: {}\n".format(u,domain,ip,server,server_os,backend,version))
+        print(&#34;Joomla site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tJoomla version: {}\n&#34;.format(u,domain,ip,server,server_os,backend,version))
     clickj=page_clickjacking(u,request_headers=response.headers)
     if logs==True:
-        print("[i] Looking for subdomains...")
+        print(&#34;[i] Looking for subdomains...&#34;)
     subs=get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=proxy,subdomains_only=subdomains_only)
     if logs==True:
-        print("[i] Cheking if we can sniff some cookies over some links...")
+        print(&#34;[i] Cheking if we can sniff some cookies over some links...&#34;)
         print()
     media_non_ssl=sniffable_links(u,content=response.text,logs=logs,request_headers=response.headers)
     if logs==True:
         print()
     wp_vulns=[]
-    if version!='':
+    if version!=&#39;&#39;:
         if logs==True:
-            print('[i] looking for exploits for version: {}\n'.format(version))
-        wpvulns=vulners_search('joomla',version=version,proxy=proxy,api_key=api_key)
+            print(&#39;[i] looking for exploits for version: {}\n&#39;.format(version))
+        wpvulns=vulners_search(&#39;joomla&#39;,version=version,proxy=proxy,api_key=api_key)
         for x in wpvulns:
-            if 'joomla' in x['title'].lower() or 'joomla' in x['description'].lower():
+            if &#39;joomla&#39; in x[&#39;title&#39;].lower() or &#39;joomla&#39; in x[&#39;description&#39;].lower():
                 wp_vulns.append(x)
         for x in wp_vulns:
-            for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
+            for i in [&#39;cpe&#39;, &#39;cpe23&#39;, &#39;cwe&#39;, &#39;affectedSoftware&#39;]:
                 try:
                     del x[i]
                 except:
                     pass
         if logs==True:
             if len(wp_vulns)==0:
-                print('\t[-] none was found')
+                print(&#39;\t[-] none was found&#39;)
             else:
                 for x in wp_vulns:
-                    print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
+                    print(&#34;\tTitle : {}\n\tDescription: {}\n\tLink: {}&#34;.format(x[&#39;title&#39;],x[&#39;description&#39;],x[&#39;href&#39;]))
                     print()
     backend_technology_exploits={}
-    if backend!='':
+    if backend!=&#39;&#39;:
         bk=[]
         for back in backend.split():
             if logs==True:
-                print('[i] looking for exploits for : {}\n'.format(back))
-            if '/' not in back:
+                print(&#39;[i] looking for exploits for : {}\n&#39;.format(back))
+            if &#39;/&#39; not in back:
                 if logs==True:
-                    print('\t[-] unknown version\n')
+                    print(&#39;\t[-] unknown version\n&#39;)
             else:
-                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=proxy,api_key=api_key)
+                bk=vulners_search(back.split(&#39;/&#39;)[0].lower(),version=back.split(&#39;/&#39;)[1],proxy=proxy,api_key=api_key)
             for x in bk:
-                for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
+                for i in [&#39;cpe&#39;, &#39;cpe23&#39;, &#39;cwe&#39;, &#39;affectedSoftware&#39;]:
                     try:
                         del x[i]
                     except:
@@ -243,25 +225,25 @@ def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=Tr
             backend_technology_exploits.update({back:bk})
             if logs==True:
                 if len(bk)==0:
-                    print('\t[-] none was found')
+                    print(&#39;\t[-] none was found&#39;)
                 else:
                     for x in bk:
-                        print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
+                        print(&#34;\tTitle : {}\n\tDescription: {}\n\tLink: {}&#34;.format(x[&#39;title&#39;],x[&#39;description&#39;],x[&#39;href&#39;]))
                         print()
     server_exploits={}
-    if server!='':
+    if server!=&#39;&#39;:
         for sv in server.split():
-            if sv.startswith('(')==False:
+            if sv.startswith(&#39;(&#39;)==False:
                 sv_e=[]
                 if logs==True:
-                    print('[i] looking for exploits for : {}\n'.format(sv))
-                if '/' in sv:
-                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=proxy,api_key=api_key)
+                    print(&#39;[i] looking for exploits for : {}\n&#39;.format(sv))
+                if &#39;/&#39; in sv:
+                    sv_e=vulners_search(sv.split(&#39;/&#39;)[0].lower(),version=sv.split(&#39;/&#39;)[1],proxy=proxy,api_key=api_key)
                 else:
                     if logs==True:
-                        print('\t[-] unknown version\n')
+                        print(&#39;\t[-] unknown version\n&#39;)
                 for x in sv_e:
-                    for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
+                    for i in [&#39;cpe&#39;, &#39;cpe23&#39;, &#39;cwe&#39;, &#39;affectedSoftware&#39;]:
                         try:
                             del x[i]
                         except:
@@ -269,12 +251,12 @@ def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=Tr
                 server_exploits.update({sv:sv_e})
                 if logs==True:
                     if len(sv_e)==0:
-                        print('\t[-] none was found')
+                        print(&#39;\t[-] none was found&#39;)
                     else:
                         for x in sv_e:
-                            print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
+                            print(&#34;\tTitle : {}\n\tDescription: {}\n\tLink: {}&#34;.format(x[&#39;title&#39;],x[&#39;description&#39;],x[&#39;href&#39;]))
                             print()
-    return {'url':u,'domain':domain,'ip':ip,'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'joomla_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}</code></pre>
+    return {&#39;url&#39;:u,&#39;domain&#39;:domain,&#39;ip&#39;:ip,&#39;root_domain&#39;:root_domain,&#39;sub_domains&#39;:subs,&#39;server&#39;:server,&#39;os&#39;:server_os,&#39;backend_technology&#39;:backend,&#39;joomla_version&#39;:version,&#39;sniffable_links&#39;:media_non_ssl,&#39;clickjackable&#39;:clickj,&#34;exploits&#34;:wp_vulns,&#39;backend_technology_exploits&#39;:backend_technology_exploits,&#39;server_exploits&#39;:server_exploits}</code></pre>
 </details>
 </dd>
 </dl>
@@ -290,12 +272,12 @@ def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=Tr
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a href="index.md" title="bane.scanners.cms">bane.scanners.cms</a></code></li>
+<li><code><a title="bane.scanners.cms" href="index.md">bane.scanners.cms</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a href="#bane.scanners.cms.joomla.get_joomla_infos" title="bane.scanners.cms.joomla.get_joomla_infos">get_joomla_infos</a></code></li>
+<li><code><a title="bane.scanners.cms.joomla.get_joomla_infos" href="#bane.scanners.cms.joomla.get_joomla_infos">get_joomla_infos</a></code></li>
 </ul>
 </li>
 </ul>

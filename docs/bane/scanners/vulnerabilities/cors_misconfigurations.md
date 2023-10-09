@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport">
-<meta content="pdoc 0.10.0" name="generator"/>
-<title>bane.scanners.vulnerabilities.cors_misconfigurations API documentation</title>
-<meta content="" name="description"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" rel="preload stylesheet"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" rel="preload stylesheet"/>
-<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" rel="stylesheet preload"/>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
-<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script crossorigin="" defer="" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
-</meta></head>
 <body>
 <main>
 <article id="content">
@@ -36,7 +18,7 @@ def cors_reflection(
     timeout=10,
     user_agent=None,
     cookie=None,
-    origin="www.evil-domain.com",
+    origin=&#34;www.evil-domain.com&#34;,
     debug=False,
     fill=10,
     headers={}
@@ -48,28 +30,28 @@ def cors_reflection(
     else:
         us = random.choice(ua)
     if cookie:
-        heads = {"User-Agent": us, "Cookie": cookie}
+        heads = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        heads = {"User-Agent": us}
-    heads.update({"Origin": origin})
+        heads = {&#34;User-Agent&#34;: us}
+    heads.update({&#34;Origin&#34;: origin})
     heads.update(headers)
     try:
         r = requests.Session().get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
         ).headers
-        a = r.get("Access-Control-Allow-Origin", None)
-        b = r.get("Access-Control-Allow-Credentials", None)
+        a = r.get(&#34;Access-Control-Allow-Origin&#34;, None)
+        b = r.get(&#34;Access-Control-Allow-Credentials&#34;, None)
         if debug == True:
             for x in r:
-                print(x + " : " + r[x])
+                print(x + &#34; : &#34; + r[x])
         if a and b:
-            if a == origin and b == "true":
+            if a == origin and b == &#34;true&#34;:
                 return (
                     True,
                     {
-                        "Access-Control-Allow-Origin": a,
-                        "Access-Control-Allow-Credentials": b,
-                        "Vulnerable": True,
+                        &#34;Access-Control-Allow-Origin&#34;: a,
+                        &#34;Access-Control-Allow-Credentials&#34;: b,
+                        &#34;Vulnerable&#34;: True,
                     },
                 )
     except:
@@ -77,9 +59,9 @@ def cors_reflection(
     return (
         False,
         {
-            "Access-Control-Allow-Origin": a,
-            "Access-Control-Allow-Credentials": b,
-            "Vulnerable": False,
+            &#34;Access-Control-Allow-Origin&#34;: a,
+            &#34;Access-Control-Allow-Credentials&#34;: b,
+            &#34;Vulnerable&#34;: False,
         },
     )
 
@@ -92,28 +74,28 @@ def cors_wildcard(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug
     else:
         us = random.choice(ua)
     if cookie:
-        heads = {"User-Agent": us, "Cookie": cookie}
+        heads = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        heads = {"User-Agent": us}
-    heads.update({"Origin": "*"})
+        heads = {&#34;User-Agent&#34;: us}
+    heads.update({&#34;Origin&#34;: &#34;*&#34;})
     heads.update(headers)
     try:
         r = requests.Session().get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
         ).headers
-        a = r.get("Access-Control-Allow-Origin", None)
-        b = r.get("Access-Control-Allow-Credentials", None)
+        a = r.get(&#34;Access-Control-Allow-Origin&#34;, None)
+        b = r.get(&#34;Access-Control-Allow-Credentials&#34;, None)
         if debug == True:
             for x in r:
-                print(x + " : " + r[x])
+                print(x + &#34; : &#34; + r[x])
         if a and b:
-            if a == "*" and b == "true":
+            if a == &#34;*&#34; and b == &#34;true&#34;:
                 return (
                     True,
                     {
-                        "Access-Control-Allow-Origin": a,
-                        "Access-Control-Allow-Credentials": b,
-                        "Vulnerable": True,
+                        &#34;Access-Control-Allow-Origin&#34;: a,
+                        &#34;Access-Control-Allow-Credentials&#34;: b,
+                        &#34;Vulnerable&#34;: True,
                     },
                 )
     except:
@@ -121,9 +103,9 @@ def cors_wildcard(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug
     return (
         False,
         {
-            "Access-Control-Allow-Origin": a,
-            "Access-Control-Allow-Credentials": b,
-            "Vulnerable": False,
+            &#34;Access-Control-Allow-Origin&#34;: a,
+            &#34;Access-Control-Allow-Credentials&#34;: b,
+            &#34;Vulnerable&#34;: False,
         },
     )
 
@@ -136,28 +118,28 @@ def cors_null(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=Fal
     else:
         us = random.choice(ua)
     if cookie:
-        heads = {"User-Agent": us, "Cookie": cookie}
+        heads = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        heads = {"User-Agent": us}
-    heads.update({"Origin": "null"})
+        heads = {&#34;User-Agent&#34;: us}
+    heads.update({&#34;Origin&#34;: &#34;null&#34;})
     heads.update(headers)
     try:
         r = requests.Session().get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
         ).headers
-        a = r.get("Access-Control-Allow-Origin", None)
-        b = r.get("Access-Control-Allow-Credentials", None)
+        a = r.get(&#34;Access-Control-Allow-Origin&#34;, None)
+        b = r.get(&#34;Access-Control-Allow-Credentials&#34;, None)
         if debug == True:
             for x in r:
-                print(x + " : " + r[x])
+                print(x + &#34; : &#34; + r[x])
         if a and b:
-            if a == "null" and b == "true":
+            if a == &#34;null&#34; and b == &#34;true&#34;:
                 return (
                     True,
                     {
-                        "Access-Control-Allow-Origin": a,
-                        "Access-Control-Allow-Credentials": b,
-                        "Vulnerable": True,
+                        &#34;Access-Control-Allow-Origin&#34;: a,
+                        &#34;Access-Control-Allow-Credentials&#34;: b,
+                        &#34;Vulnerable&#34;: True,
                     },
                 )
     except:
@@ -165,9 +147,9 @@ def cors_null(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=Fal
     return (
         False,
         {
-            "Access-Control-Allow-Origin": a,
-            "Access-Control-Allow-Credentials": b,
-            "Vulnerable": False,
+            &#34;Access-Control-Allow-Origin&#34;: a,
+            &#34;Access-Control-Allow-Credentials&#34;: b,
+            &#34;Vulnerable&#34;: False,
         },
     )
 
@@ -184,7 +166,7 @@ def proxies_select(proxy, proxies):
 
 def cors_misconfigurations_urls(
     u,
-    origin="www.evil-domain.com",
+    origin=&#34;www.evil-domain.com&#34;,
     origin_reflection=True,
     wildcard_origin=True,
     null_origin=True,
@@ -200,7 +182,7 @@ def cors_misconfigurations_urls(
     res = {}
     if origin_reflection == True:
         if logs == True:
-            print("[*] Testing for: Origin Reflection...")
+            print(&#34;[*] Testing for: Origin Reflection...&#34;)
         tes1 = cors_reflection(
             u,
             origin=origin,
@@ -212,16 +194,16 @@ def cors_misconfigurations_urls(
             headers=headers
         )
         if tes1[0] == True:
-            res.update({"cors_reflection": tes1[1],'vulnerable':True})
+            res.update({&#34;cors_reflection&#34;: tes1[1],&#39;vulnerable&#39;:True})
             if logs == True:
-                print("[+] Vulnerable !!")
+                print(&#34;[+] Vulnerable !!&#34;)
         else:
-            res.update({"cors_reflection": tes1[1],'vulnerable':False})
+            res.update({&#34;cors_reflection&#34;: tes1[1],&#39;vulnerable&#39;:False})
             if logs == True:
-                print("[-] Not vulnerable")
+                print(&#34;[-] Not vulnerable&#34;)
     if wildcard_origin == True:
         if logs == True:
-            print("[*] Testing for: Wildcard Origin...")
+            print(&#34;[*] Testing for: Wildcard Origin...&#34;)
         tes2 = cors_wildcard(
             u,
             cookie=cookie,
@@ -232,16 +214,16 @@ def cors_misconfigurations_urls(
             headers=headers
         )
         if tes2[0] == True:
-            res.update({"wildcard_origin": tes2[1],'vulnerable':True})
+            res.update({&#34;wildcard_origin&#34;: tes2[1],&#39;vulnerable&#39;:True})
             if logs == True:
-                print("[+] Vulnerable !!")
+                print(&#34;[+] Vulnerable !!&#34;)
         else:
-            res.update({"wildcard_origin": tes2[1],'vulnerable':False})
+            res.update({&#34;wildcard_origin&#34;: tes2[1],&#39;vulnerable&#39;:False})
             if logs == True:
-                print("[-] Not vulnerable")
+                print(&#34;[-] Not vulnerable&#34;)
     if origin_reflection == True:
         if logs == True:
-            print("[*] Testing for: Null Origin...")
+            print(&#34;[*] Testing for: Null Origin...&#34;)
         tes3 = cors_null(
             u,
             cookie=cookie,
@@ -252,20 +234,20 @@ def cors_misconfigurations_urls(
             headers=headers
         )
         if tes3[0] == True:
-            res.update({"null_origin": tes3[1],'vulnerable':True})
+            res.update({&#34;null_origin&#34;: tes3[1],&#39;vulnerable&#39;:True})
             if logs == True:
-                print("[+] Vulnerable !!")
+                print(&#34;[+] Vulnerable !!&#34;)
         else:
-            res.update({"null_origin": tes3[1],'vulnerable':False})
+            res.update({&#34;null_origin&#34;: tes3[1],&#39;vulnerable&#39;:False})
             if logs == True:
-                print("[-] Not vulnerable")
+                print(&#34;[-] Not vulnerable&#34;)
     return res
 
 
 
 def cors_misconfigurations(
     urls,
-    origin="www.evil-domain.com",
+    origin=&#34;www.evil-domain.com&#34;,
     origin_reflection=True,
     wildcard_origin=True,
     null_origin=True,
@@ -281,7 +263,7 @@ def cors_misconfigurations(
     l=[]
     for x in urls:
         if logs==True:
-            print('\n\nPage: {}\n'.format(x))
+            print(&#39;\n\nPage: {}\n&#39;.format(x))
         result=cors_misconfigurations_urls(x,
                                             origin=origin,
                                             origin_reflection=origin_reflection,
@@ -296,12 +278,12 @@ def cors_misconfigurations(
                                             debug=debug,
                                             headers=headers
                                             )
-        result={'vulnerable':result[0],'status':result[1]}
+        result={&#39;vulnerable&#39;:result[0],&#39;status&#39;:result[1]}
         if logs==True:
             for r in result:
                 print(r)
-        l.append({'page':x,'result':result})
-    return  [x for x in l if x['result']['vulnerable']!=False]</code></pre>
+        l.append({&#39;page&#39;:x,&#39;result&#39;:result})
+    return  [x for x in l if x[&#39;result&#39;][&#39;vulnerable&#39;]!=False]</code></pre>
 </details>
 </section>
 <section>
@@ -322,7 +304,7 @@ def cors_misconfigurations(
 </summary>
 <pre><code class="python">def cors_misconfigurations(
     urls,
-    origin="www.evil-domain.com",
+    origin=&#34;www.evil-domain.com&#34;,
     origin_reflection=True,
     wildcard_origin=True,
     null_origin=True,
@@ -338,7 +320,7 @@ def cors_misconfigurations(
     l=[]
     for x in urls:
         if logs==True:
-            print('\n\nPage: {}\n'.format(x))
+            print(&#39;\n\nPage: {}\n&#39;.format(x))
         result=cors_misconfigurations_urls(x,
                                             origin=origin,
                                             origin_reflection=origin_reflection,
@@ -353,12 +335,12 @@ def cors_misconfigurations(
                                             debug=debug,
                                             headers=headers
                                             )
-        result={'vulnerable':result[0],'status':result[1]}
+        result={&#39;vulnerable&#39;:result[0],&#39;status&#39;:result[1]}
         if logs==True:
             for r in result:
                 print(r)
-        l.append({'page':x,'result':result})
-    return  [x for x in l if x['result']['vulnerable']!=False]</code></pre>
+        l.append({&#39;page&#39;:x,&#39;result&#39;:result})
+    return  [x for x in l if x[&#39;result&#39;][&#39;vulnerable&#39;]!=False]</code></pre>
 </details>
 </dd>
 <dt id="bane.scanners.vulnerabilities.cors_misconfigurations.cors_misconfigurations_urls"><code class="name flex">
@@ -372,7 +354,7 @@ def cors_misconfigurations(
 </summary>
 <pre><code class="python">def cors_misconfigurations_urls(
     u,
-    origin="www.evil-domain.com",
+    origin=&#34;www.evil-domain.com&#34;,
     origin_reflection=True,
     wildcard_origin=True,
     null_origin=True,
@@ -388,7 +370,7 @@ def cors_misconfigurations(
     res = {}
     if origin_reflection == True:
         if logs == True:
-            print("[*] Testing for: Origin Reflection...")
+            print(&#34;[*] Testing for: Origin Reflection...&#34;)
         tes1 = cors_reflection(
             u,
             origin=origin,
@@ -400,16 +382,16 @@ def cors_misconfigurations(
             headers=headers
         )
         if tes1[0] == True:
-            res.update({"cors_reflection": tes1[1],'vulnerable':True})
+            res.update({&#34;cors_reflection&#34;: tes1[1],&#39;vulnerable&#39;:True})
             if logs == True:
-                print("[+] Vulnerable !!")
+                print(&#34;[+] Vulnerable !!&#34;)
         else:
-            res.update({"cors_reflection": tes1[1],'vulnerable':False})
+            res.update({&#34;cors_reflection&#34;: tes1[1],&#39;vulnerable&#39;:False})
             if logs == True:
-                print("[-] Not vulnerable")
+                print(&#34;[-] Not vulnerable&#34;)
     if wildcard_origin == True:
         if logs == True:
-            print("[*] Testing for: Wildcard Origin...")
+            print(&#34;[*] Testing for: Wildcard Origin...&#34;)
         tes2 = cors_wildcard(
             u,
             cookie=cookie,
@@ -420,16 +402,16 @@ def cors_misconfigurations(
             headers=headers
         )
         if tes2[0] == True:
-            res.update({"wildcard_origin": tes2[1],'vulnerable':True})
+            res.update({&#34;wildcard_origin&#34;: tes2[1],&#39;vulnerable&#39;:True})
             if logs == True:
-                print("[+] Vulnerable !!")
+                print(&#34;[+] Vulnerable !!&#34;)
         else:
-            res.update({"wildcard_origin": tes2[1],'vulnerable':False})
+            res.update({&#34;wildcard_origin&#34;: tes2[1],&#39;vulnerable&#39;:False})
             if logs == True:
-                print("[-] Not vulnerable")
+                print(&#34;[-] Not vulnerable&#34;)
     if origin_reflection == True:
         if logs == True:
-            print("[*] Testing for: Null Origin...")
+            print(&#34;[*] Testing for: Null Origin...&#34;)
         tes3 = cors_null(
             u,
             cookie=cookie,
@@ -440,13 +422,13 @@ def cors_misconfigurations(
             headers=headers
         )
         if tes3[0] == True:
-            res.update({"null_origin": tes3[1],'vulnerable':True})
+            res.update({&#34;null_origin&#34;: tes3[1],&#39;vulnerable&#39;:True})
             if logs == True:
-                print("[+] Vulnerable !!")
+                print(&#34;[+] Vulnerable !!&#34;)
         else:
-            res.update({"null_origin": tes3[1],'vulnerable':False})
+            res.update({&#34;null_origin&#34;: tes3[1],&#39;vulnerable&#39;:False})
             if logs == True:
-                print("[-] Not vulnerable")
+                print(&#34;[-] Not vulnerable&#34;)
     return res</code></pre>
 </details>
 </dd>
@@ -467,28 +449,28 @@ def cors_misconfigurations(
     else:
         us = random.choice(ua)
     if cookie:
-        heads = {"User-Agent": us, "Cookie": cookie}
+        heads = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        heads = {"User-Agent": us}
-    heads.update({"Origin": "null"})
+        heads = {&#34;User-Agent&#34;: us}
+    heads.update({&#34;Origin&#34;: &#34;null&#34;})
     heads.update(headers)
     try:
         r = requests.Session().get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
         ).headers
-        a = r.get("Access-Control-Allow-Origin", None)
-        b = r.get("Access-Control-Allow-Credentials", None)
+        a = r.get(&#34;Access-Control-Allow-Origin&#34;, None)
+        b = r.get(&#34;Access-Control-Allow-Credentials&#34;, None)
         if debug == True:
             for x in r:
-                print(x + " : " + r[x])
+                print(x + &#34; : &#34; + r[x])
         if a and b:
-            if a == "null" and b == "true":
+            if a == &#34;null&#34; and b == &#34;true&#34;:
                 return (
                     True,
                     {
-                        "Access-Control-Allow-Origin": a,
-                        "Access-Control-Allow-Credentials": b,
-                        "Vulnerable": True,
+                        &#34;Access-Control-Allow-Origin&#34;: a,
+                        &#34;Access-Control-Allow-Credentials&#34;: b,
+                        &#34;Vulnerable&#34;: True,
                     },
                 )
     except:
@@ -496,9 +478,9 @@ def cors_misconfigurations(
     return (
         False,
         {
-            "Access-Control-Allow-Origin": a,
-            "Access-Control-Allow-Credentials": b,
-            "Vulnerable": False,
+            &#34;Access-Control-Allow-Origin&#34;: a,
+            &#34;Access-Control-Allow-Credentials&#34;: b,
+            &#34;Vulnerable&#34;: False,
         },
     )</code></pre>
 </details>
@@ -518,7 +500,7 @@ def cors_misconfigurations(
     timeout=10,
     user_agent=None,
     cookie=None,
-    origin="www.evil-domain.com",
+    origin=&#34;www.evil-domain.com&#34;,
     debug=False,
     fill=10,
     headers={}
@@ -530,28 +512,28 @@ def cors_misconfigurations(
     else:
         us = random.choice(ua)
     if cookie:
-        heads = {"User-Agent": us, "Cookie": cookie}
+        heads = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        heads = {"User-Agent": us}
-    heads.update({"Origin": origin})
+        heads = {&#34;User-Agent&#34;: us}
+    heads.update({&#34;Origin&#34;: origin})
     heads.update(headers)
     try:
         r = requests.Session().get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
         ).headers
-        a = r.get("Access-Control-Allow-Origin", None)
-        b = r.get("Access-Control-Allow-Credentials", None)
+        a = r.get(&#34;Access-Control-Allow-Origin&#34;, None)
+        b = r.get(&#34;Access-Control-Allow-Credentials&#34;, None)
         if debug == True:
             for x in r:
-                print(x + " : " + r[x])
+                print(x + &#34; : &#34; + r[x])
         if a and b:
-            if a == origin and b == "true":
+            if a == origin and b == &#34;true&#34;:
                 return (
                     True,
                     {
-                        "Access-Control-Allow-Origin": a,
-                        "Access-Control-Allow-Credentials": b,
-                        "Vulnerable": True,
+                        &#34;Access-Control-Allow-Origin&#34;: a,
+                        &#34;Access-Control-Allow-Credentials&#34;: b,
+                        &#34;Vulnerable&#34;: True,
                     },
                 )
     except:
@@ -559,9 +541,9 @@ def cors_misconfigurations(
     return (
         False,
         {
-            "Access-Control-Allow-Origin": a,
-            "Access-Control-Allow-Credentials": b,
-            "Vulnerable": False,
+            &#34;Access-Control-Allow-Origin&#34;: a,
+            &#34;Access-Control-Allow-Credentials&#34;: b,
+            &#34;Vulnerable&#34;: False,
         },
     )</code></pre>
 </details>
@@ -583,28 +565,28 @@ def cors_misconfigurations(
     else:
         us = random.choice(ua)
     if cookie:
-        heads = {"User-Agent": us, "Cookie": cookie}
+        heads = {&#34;User-Agent&#34;: us, &#34;Cookie&#34;: cookie}
     else:
-        heads = {"User-Agent": us}
-    heads.update({"Origin": "*"})
+        heads = {&#34;User-Agent&#34;: us}
+    heads.update({&#34;Origin&#34;: &#34;*&#34;})
     heads.update(headers)
     try:
         r = requests.Session().get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
         ).headers
-        a = r.get("Access-Control-Allow-Origin", None)
-        b = r.get("Access-Control-Allow-Credentials", None)
+        a = r.get(&#34;Access-Control-Allow-Origin&#34;, None)
+        b = r.get(&#34;Access-Control-Allow-Credentials&#34;, None)
         if debug == True:
             for x in r:
-                print(x + " : " + r[x])
+                print(x + &#34; : &#34; + r[x])
         if a and b:
-            if a == "*" and b == "true":
+            if a == &#34;*&#34; and b == &#34;true&#34;:
                 return (
                     True,
                     {
-                        "Access-Control-Allow-Origin": a,
-                        "Access-Control-Allow-Credentials": b,
-                        "Vulnerable": True,
+                        &#34;Access-Control-Allow-Origin&#34;: a,
+                        &#34;Access-Control-Allow-Credentials&#34;: b,
+                        &#34;Vulnerable&#34;: True,
                     },
                 )
     except:
@@ -612,9 +594,9 @@ def cors_misconfigurations(
     return (
         False,
         {
-            "Access-Control-Allow-Origin": a,
-            "Access-Control-Allow-Credentials": b,
-            "Vulnerable": False,
+            &#34;Access-Control-Allow-Origin&#34;: a,
+            &#34;Access-Control-Allow-Credentials&#34;: b,
+            &#34;Vulnerable&#34;: False,
         },
     )</code></pre>
 </details>
@@ -649,17 +631,17 @@ def cors_misconfigurations(
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a href="index.md" title="bane.scanners.vulnerabilities">bane.scanners.vulnerabilities</a></code></li>
+<li><code><a title="bane.scanners.vulnerabilities" href="index.md">bane.scanners.vulnerabilities</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a href="#bane.scanners.vulnerabilities.cors_misconfigurations.cors_misconfigurations" title="bane.scanners.vulnerabilities.cors_misconfigurations.cors_misconfigurations">cors_misconfigurations</a></code></li>
-<li><code><a href="#bane.scanners.vulnerabilities.cors_misconfigurations.cors_misconfigurations_urls" title="bane.scanners.vulnerabilities.cors_misconfigurations.cors_misconfigurations_urls">cors_misconfigurations_urls</a></code></li>
-<li><code><a href="#bane.scanners.vulnerabilities.cors_misconfigurations.cors_null" title="bane.scanners.vulnerabilities.cors_misconfigurations.cors_null">cors_null</a></code></li>
-<li><code><a href="#bane.scanners.vulnerabilities.cors_misconfigurations.cors_reflection" title="bane.scanners.vulnerabilities.cors_misconfigurations.cors_reflection">cors_reflection</a></code></li>
-<li><code><a href="#bane.scanners.vulnerabilities.cors_misconfigurations.cors_wildcard" title="bane.scanners.vulnerabilities.cors_misconfigurations.cors_wildcard">cors_wildcard</a></code></li>
-<li><code><a href="#bane.scanners.vulnerabilities.cors_misconfigurations.proxies_select" title="bane.scanners.vulnerabilities.cors_misconfigurations.proxies_select">proxies_select</a></code></li>
+<li><code><a title="bane.scanners.vulnerabilities.cors_misconfigurations.cors_misconfigurations" href="#bane.scanners.vulnerabilities.cors_misconfigurations.cors_misconfigurations">cors_misconfigurations</a></code></li>
+<li><code><a title="bane.scanners.vulnerabilities.cors_misconfigurations.cors_misconfigurations_urls" href="#bane.scanners.vulnerabilities.cors_misconfigurations.cors_misconfigurations_urls">cors_misconfigurations_urls</a></code></li>
+<li><code><a title="bane.scanners.vulnerabilities.cors_misconfigurations.cors_null" href="#bane.scanners.vulnerabilities.cors_misconfigurations.cors_null">cors_null</a></code></li>
+<li><code><a title="bane.scanners.vulnerabilities.cors_misconfigurations.cors_reflection" href="#bane.scanners.vulnerabilities.cors_misconfigurations.cors_reflection">cors_reflection</a></code></li>
+<li><code><a title="bane.scanners.vulnerabilities.cors_misconfigurations.cors_wildcard" href="#bane.scanners.vulnerabilities.cors_misconfigurations.cors_wildcard">cors_wildcard</a></code></li>
+<li><code><a title="bane.scanners.vulnerabilities.cors_misconfigurations.proxies_select" href="#bane.scanners.vulnerabilities.cors_misconfigurations.proxies_select">proxies_select</a></code></li>
 </ul>
 </li>
 </ul>
