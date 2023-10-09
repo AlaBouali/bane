@@ -1,20 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.10.0" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport">
+<meta content="pdoc 0.10.0" name="generator"/>
 <title>bane.utils.js_fuck API documentation</title>
-<meta name="description" content="" />
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
-<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<meta content="" name="description"/>
+<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" rel="preload stylesheet"/>
+<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" rel="preload stylesheet"/>
+<link as="style" crossorigin="" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" rel="stylesheet preload"/>
 <style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
 <style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script crossorigin="" defer="" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
-</head>
+</meta></head>
 <body>
 <main>
 <article id="content">
@@ -28,11 +29,11 @@
 </summary>
 <pre><code class="python">import re,random,sys
 
-&#34;&#34;&#34;
+"""
 
-I&#39;ve edited this script to be compatible with python2.X/3.X 
+I've edited this script to be compatible with python2.X/3.X 
 
-&#34;&#34;&#34;
+"""
 
 def get_dict(d):
     if  sys.version_info &lt; (3,0):
@@ -41,14 +42,14 @@ def get_dict(d):
         return tuple(d.items())
 
 
-&#34;&#34;&#34;
-P.S: I didn&#39;t write the following class but i find it very useful to encode XSS payloads. I would like to thank the guy who did it, good job bro &lt;3
-&#34;&#34;&#34;
+"""
+P.S: I didn't write the following class but i find it very useful to encode XSS payloads. I would like to thank the guy who did it, good job bro &lt;3
+"""
 
 
 
 class js_fuck(object):
-    &#39;&#39;&#39;
+    '''
     Encodes/Decodes Javascript using JSFuck 0.4.0
     (https://github.com/aemkei/jsfuck)
 
@@ -68,129 +69,129 @@ class js_fuck(object):
 
     MAPPING                -- dictionary of every character to be mapped and decoded
 
-    GLOBAL                  -- string used to replace &#39;GLOBAL&#39; value on final encode
+    GLOBAL                  -- string used to replace 'GLOBAL' value on final encode
 
-    &#39;&#39;&#39;
+    '''
 
-    USE_CHAR_CODE = &#34;USE_CHAR_CODE&#34;
+    USE_CHAR_CODE = "USE_CHAR_CODE"
 
     MIN, MAX = 32, 126
 
     SIMPLE = {
-        &#39;false&#39;:      &#39;![]&#39;,
-        &#39;true&#39;:       &#39;!![]&#39;,
-        &#39;undefined&#39;:  &#39;[][[]]&#39;,
-        &#39;NaN&#39;:        &#39;+[![]]&#39;,
-        &#39;Infinity&#39;:   (&#39;+(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]+[+&#39;
-                       &#39;!+[]]+[+[]]+[+[]]+[+[]])&#39;)  # +&#34;1e1000&#34;
+        'false':      '![]',
+        'true':       '!![]',
+        'undefined':  '[][[]]',
+        'NaN':        '+[![]]',
+        'Infinity':   ('+(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]+[+'
+                       '!+[]]+[+[]]+[+[]]+[+[]])')  # +"1e1000"
     }
 
     CONSTRUCTORS = {
-        &#39;Array&#39;:    &#39;[]&#39;,
-        &#39;Number&#39;:   &#39;(+[])&#39;,
-        &#39;String&#39;:   &#39;([]+[])&#39;,
-        &#39;Boolean&#39;:  &#39;(![])&#39;,
-        &#39;Function&#39;: &#39;[][&#34;fill&#34;]&#39;,
-        &#39;RegExp&#39;:   &#39;Function(&#34;return/&#34;+false+&#34;/&#34;)()&#39;
+        'Array':    '[]',
+        'Number':   '(+[])',
+        'String':   '([]+[])',
+        'Boolean':  '(![])',
+        'Function': '[]["fill"]',
+        'RegExp':   'Function("return/"+false+"/")()'
     }
 
     MAPPING = {
-        &#39;a&#39;:   &#39;(false+&#34;&#34;)[1]&#39;,
-        &#39;b&#39;:   &#39;([][&#34;entries&#34;]()+&#34;&#34;)[2]&#39;,
-        &#39;c&#39;:   &#39;([][&#34;fill&#34;]+&#34;&#34;)[3]&#39;,
-        &#39;d&#39;:   &#39;(undefined+&#34;&#34;)[2]&#39;,
-        &#39;e&#39;:   &#39;(true+&#34;&#34;)[3]&#39;,
-        &#39;f&#39;:   &#39;(false+&#34;&#34;)[0]&#39;,
-        &#39;g&#39;:   &#39;(false+[0]+String)[20]&#39;,
-        &#39;h&#39;:   &#39;(+(101))[&#34;to&#34;+String[&#34;name&#34;]](21)[1]&#39;,
-        &#39;i&#39;:   &#39;([false]+undefined)[10]&#39;,
-        &#39;j&#39;:   &#39;([][&#34;entries&#34;]()+&#34;&#34;)[3]&#39;,
-        &#39;k&#39;:   &#39;(+(20))[&#34;to&#34;+String[&#34;name&#34;]](21)&#39;,
-        &#39;l&#39;:   &#39;(false+&#34;&#34;)[2]&#39;,
-        &#39;m&#39;:   &#39;(Number+&#34;&#34;)[11]&#39;,
-        &#39;n&#39;:   &#39;(undefined+&#34;&#34;)[1]&#39;,
-        &#39;o&#39;:   &#39;(true+[][&#34;fill&#34;])[10]&#39;,
-        &#39;p&#39;:   &#39;(+(211))[&#34;to&#34;+String[&#34;name&#34;]](31)[1]&#39;,
-        &#39;q&#39;:   &#39;(+(212))[&#34;to&#34;+String[&#34;name&#34;]](31)[1]&#39;,
-        &#39;r&#39;:   &#39;(true+&#34;&#34;)[1]&#39;,
-        &#39;s&#39;:   &#39;(false+&#34;&#34;)[3]&#39;,
-        &#39;t&#39;:   &#39;(true+&#34;&#34;)[0]&#39;,
-        &#39;u&#39;:   &#39;(undefined+&#34;&#34;)[0]&#39;,
-        &#39;v&#39;:   &#39;(+(31))[&#34;to&#34;+String[&#34;name&#34;]](32)&#39;,
-        &#39;w&#39;:   &#39;(+(32))[&#34;to&#34;+String[&#34;name&#34;]](33)&#39;,
-        &#39;x&#39;:   &#39;(+(101))[&#34;to&#34;+String[&#34;name&#34;]](34)[1]&#39;,
-        &#39;y&#39;:   &#39;(NaN+[Infinity])[10]&#39;,
-        &#39;z&#39;:   &#39;(+(35))[&#34;to&#34;+String[&#34;name&#34;]](36)&#39;,
+        'a':   '(false+"")[1]',
+        'b':   '([]["entries"]()+"")[2]',
+        'c':   '([]["fill"]+"")[3]',
+        'd':   '(undefined+"")[2]',
+        'e':   '(true+"")[3]',
+        'f':   '(false+"")[0]',
+        'g':   '(false+[0]+String)[20]',
+        'h':   '(+(101))["to"+String["name"]](21)[1]',
+        'i':   '([false]+undefined)[10]',
+        'j':   '([]["entries"]()+"")[3]',
+        'k':   '(+(20))["to"+String["name"]](21)',
+        'l':   '(false+"")[2]',
+        'm':   '(Number+"")[11]',
+        'n':   '(undefined+"")[1]',
+        'o':   '(true+[]["fill"])[10]',
+        'p':   '(+(211))["to"+String["name"]](31)[1]',
+        'q':   '(+(212))["to"+String["name"]](31)[1]',
+        'r':   '(true+"")[1]',
+        's':   '(false+"")[3]',
+        't':   '(true+"")[0]',
+        'u':   '(undefined+"")[0]',
+        'v':   '(+(31))["to"+String["name"]](32)',
+        'w':   '(+(32))["to"+String["name"]](33)',
+        'x':   '(+(101))["to"+String["name"]](34)[1]',
+        'y':   '(NaN+[Infinity])[10]',
+        'z':   '(+(35))["to"+String["name"]](36)',
 
-        &#39;A&#39;:   &#39;(+[]+Array)[10]&#39;,
-        &#39;B&#39;:   &#39;(+[]+Boolean)[10]&#39;,
-        &#39;C&#39;:   &#39;Function(&#34;return escape&#34;)()((&#34;&#34;)[&#34;italics&#34;]())[2]&#39;,
-        &#39;D&#39;:   &#39;Function(&#34;return escape&#34;)()([][&#34;fill&#34;])[&#34;slice&#34;](&#34;-1&#34;)&#39;,
-        &#39;E&#39;:   &#39;(RegExp+&#34;&#34;)[12]&#39;,
-        &#39;F&#39;:   &#39;(+[]+Function)[10]&#39;,
-        &#39;G&#39;:   &#39;(false+Function(&#34;return Date&#34;)()())[30]&#39;,
-        &#39;H&#39;:   USE_CHAR_CODE,
-        &#39;I&#39;:   &#39;(Infinity+&#34;&#34;)[0]&#39;,
-        &#39;J&#39;:   USE_CHAR_CODE,
-        &#39;K&#39;:   USE_CHAR_CODE,
-        &#39;L&#39;:   USE_CHAR_CODE,
-        &#39;M&#39;:   &#39;(true+Function(&#34;return Date&#34;)()())[30]&#39;,
-        &#39;N&#39;:   &#39;(NaN+&#34;&#34;)[0]&#39;,
-        &#39;O&#39;:   &#39;(NaN+Function(&#34;return{}&#34;)())[11]&#39;,
-        &#39;P&#39;:   USE_CHAR_CODE,
-        &#39;Q&#39;:   USE_CHAR_CODE,
-        &#39;R&#39;:   &#39;(+[]+RegExp)[10]&#39;,
-        &#39;S&#39;:   &#39;(+[]+String)[10]&#39;,
-        &#39;T&#39;:   &#39;(NaN+Function(&#34;return Date&#34;)()())[30]&#39;,
-        &#39;U&#39;:   (&#39;(NaN+Function(&#34;return{}&#34;)()[&#34;to&#34;+String&#39;
-                &#39;[&#34;name&#34;]][&#34;call&#34;]())[11]&#39;),
-        &#39;V&#39;:   USE_CHAR_CODE,
-        &#39;W&#39;:   USE_CHAR_CODE,
-        &#39;X&#39;:   USE_CHAR_CODE,
-        &#39;Y&#39;:   USE_CHAR_CODE,
-        &#39;Z&#39;:   USE_CHAR_CODE,
+        'A':   '(+[]+Array)[10]',
+        'B':   '(+[]+Boolean)[10]',
+        'C':   'Function("return escape")()(("")["italics"]())[2]',
+        'D':   'Function("return escape")()([]["fill"])["slice"]("-1")',
+        'E':   '(RegExp+"")[12]',
+        'F':   '(+[]+Function)[10]',
+        'G':   '(false+Function("return Date")()())[30]',
+        'H':   USE_CHAR_CODE,
+        'I':   '(Infinity+"")[0]',
+        'J':   USE_CHAR_CODE,
+        'K':   USE_CHAR_CODE,
+        'L':   USE_CHAR_CODE,
+        'M':   '(true+Function("return Date")()())[30]',
+        'N':   '(NaN+"")[0]',
+        'O':   '(NaN+Function("return{}")())[11]',
+        'P':   USE_CHAR_CODE,
+        'Q':   USE_CHAR_CODE,
+        'R':   '(+[]+RegExp)[10]',
+        'S':   '(+[]+String)[10]',
+        'T':   '(NaN+Function("return Date")()())[30]',
+        'U':   ('(NaN+Function("return{}")()["to"+String'
+                '["name"]]["call"]())[11]'),
+        'V':   USE_CHAR_CODE,
+        'W':   USE_CHAR_CODE,
+        'X':   USE_CHAR_CODE,
+        'Y':   USE_CHAR_CODE,
+        'Z':   USE_CHAR_CODE,
 
-        &#39; &#39;:   &#39;(NaN+[][&#34;fill&#34;])[11]&#39;,
-        &#39;!&#39;:   USE_CHAR_CODE,
-        &#39;&#34;&#39;:   &#39;(&#34;&#34;)[&#34;fontcolor&#34;]()[12]&#39;,
-        &#39;#&#39;:   USE_CHAR_CODE,
-        &#39;$&#39;:   USE_CHAR_CODE,
-        &#39;%&#39;:   &#39;Function(&#34;return escape&#34;)()([][&#34;fill&#34;])[21]&#39;,
-        &#39;&amp;&#39;:   &#39;(&#34;&#34;)[&#34;link&#34;](0+&#34;)[10]&#39;,
-        &#39;\&#39;&#39;:  USE_CHAR_CODE,
-        &#39;(&#39;:   &#39;(undefined+[][&#34;fill&#34;])[22]&#39;,
-        &#39;)&#39;:   &#39;([0]+false+[][&#34;fill&#34;])[20]&#39;,
-        &#39;*&#39;:   USE_CHAR_CODE,
-        &#39;+&#39;:   (&#39;(+(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]&#39;
-                &#39;+[+!+[]]+[+[]]+[+[]])+[])[2]&#39;),
-        &#39;,&#39;:   &#39;([][&#34;slice&#34;][&#34;call&#34;](false+&#34;&#34;)+&#34;&#34;)[1]&#39;,
-        &#39;-&#39;:   &#39;(+(.+[0000000001])+&#34;&#34;)[2]&#39;,
-        &#39;.&#39;:   (&#39;(+(+!+[]+[+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+[!+&#39;
-                &#39;[]+!+[]]+[+[]])+[])[+!+[]]&#39;),
-        &#39;/&#39;:   &#39;(false+[0])[&#34;italics&#34;]()[10]&#39;,
-        &#39;:&#39;:   &#39;(RegExp()+&#34;&#34;)[3]&#39;,
-        &#39;;&#39;:   &#39;(&#34;&#34;)[&#34;link&#34;](&#34;)[14]&#39;,
-        &#39;&lt;&#39;:   &#39;(&#34;&#34;)[&#34;italics&#34;]()[0]&#39;,
-        &#39;=&#39;:   &#39;(&#34;&#34;)[&#34;fontcolor&#34;]()[11]&#39;,
-        &#39;&gt;&#39;:   &#39;(&#34;&#34;)[&#34;italics&#34;]()[2]&#39;,
-        &#39;?&#39;:   &#39;(RegExp()+&#34;&#34;)[2]&#39;,
-        &#39;@&#39;:   USE_CHAR_CODE,
-        &#39;[&#39;:   &#39;([][&#34;entries&#34;]()+&#34;&#34;)[0]&#39;,
-        &#39;\\&#39;:  USE_CHAR_CODE,
-        &#39;]&#39;:   &#39;([][&#34;entries&#34;]()+&#34;&#34;)[22]&#39;,
-        &#39;^&#39;:   USE_CHAR_CODE,
-        &#39;_&#39;:   USE_CHAR_CODE,
-        &#39;`&#39;:   USE_CHAR_CODE,
-        &#39;{&#39;:   &#39;(true+[][&#34;fill&#34;])[20]&#39;,
-        &#39;|&#39;:   USE_CHAR_CODE,
-        &#39;}&#39;:   &#39;([][&#34;fill&#34;]+&#34;&#34;)[&#34;slice&#34;](&#34;-1&#34;)&#39;,
-        &#39;~&#39;:   USE_CHAR_CODE
+        ' ':   '(NaN+[]["fill"])[11]',
+        '!':   USE_CHAR_CODE,
+        '"':   '("")["fontcolor"]()[12]',
+        '#':   USE_CHAR_CODE,
+        '$':   USE_CHAR_CODE,
+        '%':   'Function("return escape")()([]["fill"])[21]',
+        '&amp;':   '("")["link"](0+")[10]',
+        '\'':  USE_CHAR_CODE,
+        '(':   '(undefined+[]["fill"])[22]',
+        ')':   '([0]+false+[]["fill"])[20]',
+        '*':   USE_CHAR_CODE,
+        '+':   ('(+(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]'
+                '+[+!+[]]+[+[]]+[+[]])+[])[2]'),
+        ',':   '([]["slice"]["call"](false+"")+"")[1]',
+        '-':   '(+(.+[0000000001])+"")[2]',
+        '.':   ('(+(+!+[]+[+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+[!+'
+                '[]+!+[]]+[+[]])+[])[+!+[]]'),
+        '/':   '(false+[0])["italics"]()[10]',
+        ':':   '(RegExp()+"")[3]',
+        ';':   '("")["link"](")[14]',
+        '&lt;':   '("")["italics"]()[0]',
+        '=':   '("")["fontcolor"]()[11]',
+        '&gt;':   '("")["italics"]()[2]',
+        '?':   '(RegExp()+"")[2]',
+        '@':   USE_CHAR_CODE,
+        '[':   '([]["entries"]()+"")[0]',
+        '\\':  USE_CHAR_CODE,
+        ']':   '([]["entries"]()+"")[22]',
+        '^':   USE_CHAR_CODE,
+        '_':   USE_CHAR_CODE,
+        '`':   USE_CHAR_CODE,
+        '{':   '(true+[]["fill"])[20]',
+        '|':   USE_CHAR_CODE,
+        '}':   '([]["fill"]+"")["slice"]("-1")',
+        '~':   USE_CHAR_CODE
     }
 
-    GLOBAL = &#39;Function(&#34;return this&#34;)()&#39;
+    GLOBAL = 'Function("return this")()'
 
     def __init__(self, js=None):
-        &#39;&#39;&#39;
+        '''
         Checks if passed some Javascript and if so assigns an instance variable
         to that of the pass Javascript.
 
@@ -200,7 +201,7 @@ class js_fuck(object):
         js -- string containing the encoded Javascript to be
               decoded (defualt None)
 
-        &#39;&#39;&#39;
+        '''
         if js:
             self.js = js
 
@@ -210,8 +211,8 @@ class js_fuck(object):
         self.__replaceStrings()
 
     def decode(self, js=None):
-        &#39;&#39;&#39;
-        Decodes JSFuck&#39;d Javascript
+        '''
+        Decodes JSFuck'd Javascript
 
         Keyword arguments:
         js -- string containing the JSFuck to be decoded (defualt None)
@@ -219,18 +220,18 @@ class js_fuck(object):
         Returns:
         js -- string of decoded Javascript
 
-        &#39;&#39;&#39;
+        '''
         if not js:
             js = self.js
 
         js = self.__mapping(js)
 
         # removes concatenation operators
-        js = re.sub(&#39;\+(?!\+)&#39;, &#39;&#39;, js)
-        js = js.replace(&#39;++&#39;, &#39;+&#39;)
+        js = re.sub('\+(?!\+)', '', js)
+        js = js.replace('++', '+')
 
-        # check to see if source js is eval&#39;d
-        if &#39;[][fill][constructor]&#39; in js:
+        # check to see if source js is eval'd
+        if '[][fill][constructor]' in js:
             js = self.uneval(js)
 
         self.js = js
@@ -238,7 +239,7 @@ class js_fuck(object):
         return js
 
     def encode(self, js=None, wrapWithEval=False, runInParentScope=False):
-        &#39;&#39;&#39;
+        '''
         Encodes vanilla Javascript to JSFuck obfuscated Javascript
 
         Keyword arguments:
@@ -248,28 +249,28 @@ class js_fuck(object):
 
         runInParentScope -- boolean determines whether to run in parents scope
 
-        &#39;&#39;&#39;
+        '''
         output = []
 
         if not js:
             js = self.js
 
             if not js:
-                return &#39;&#39;
+                return ''
 
-        regex = &#39;&#39;
+        regex = ''
 
         for i in self.SIMPLE:
-            regex += i + &#39;|&#39;
+            regex += i + '|'
 
-        regex += &#39;.&#39;
+        regex += '.'
 
         def inputReplacer(c):
             c = c.group()
             replacement = self.SIMPLE[c] if c in self.SIMPLE else False
 
             if replacement:
-                output.append(&#39;[&#39; + replacement + &#39;]+[]&#39;)
+                output.append('[' + replacement + ']+[]')
 
             else:
                 replacement = self.MAPPING[c] if c in self.MAPPING else False
@@ -278,38 +279,38 @@ class js_fuck(object):
                     output.append(replacement)
                 else:
                     replacement = (
-                        &#39;([]+[])[&#39; + self.encode(&#39;constructor&#39;) + &#39;]&#39;
-                        &#39;[&#39; + self.encode(&#39;fromCharCode&#39;) + &#39;]&#39;
-                        &#39;(&#39; + self.encode(str(ord(c[0]))) + &#39;)&#39;)
+                        '([]+[])[' + self.encode('constructor') + ']'
+                        '[' + self.encode('fromCharCode') + ']'
+                        '(' + self.encode(str(ord(c[0]))) + ')')
 
                     output.append(replacement)
                     self.MAPPING[c] = replacement
 
         re.sub(regex, inputReplacer, js)
 
-        output = &#39;+&#39;.join(output)
+        output = '+'.join(output)
 
-        if re.search(r&#39;^\d$&#39;, js):
-            output += &#34;+[]&#34;
+        if re.search(r'^\d$', js):
+            output += "+[]"
 
         if wrapWithEval:
             if runInParentScope:
-                output = (&#39;[][&#39; + self.encode(&#39;fill&#39;) + &#39;]&#39;
-                          &#39;[&#39; + self.encode(&#39;constructor&#39;) + &#39;]&#39;
-                          &#39;(&#39; + self.encode(&#39;return eval&#39;) + &#39;)()&#39;
-                          &#39;(&#39; + output + &#39;)&#39;)
+                output = ('[][' + self.encode('fill') + ']'
+                          '[' + self.encode('constructor') + ']'
+                          '(' + self.encode('return eval') + ')()'
+                          '(' + output + ')')
 
             else:
-                output = (&#39;[][&#39; + self.encode(&#39;fill&#39;) + &#39;]&#39;
-                          &#39;[&#39; + self.encode(&#39;constructor&#39;) + &#39;]&#39;
-                          &#39;(&#39; + output + &#39;)&#39;)
+                output = ('[][' + self.encode('fill') + ']'
+                          '[' + self.encode('constructor') + ']'
+                          '(' + output + ')')
 
         self.js = output
 
         return output
 
     def uneval(self, js):
-        &#39;&#39;&#39;
+        '''
         Unevals a piece of Javascript wrapped with an encoded eval
 
         Keyword arguments:
@@ -318,11 +319,11 @@ class js_fuck(object):
         Returns:
         js -- string with eval removed
 
-        &#39;&#39;&#39;
-        js = js.replace(&#39;[][fill][constructor](&#39;, &#39;&#39;)
+        '''
+        js = js.replace('[][fill][constructor](', '')
         js = js[:-2]
 
-        ev = &#39;return eval)()(&#39;
+        ev = 'return eval)()('
 
         if ev in js:
             js = js[(js.find(ev) + len(ev)):]
@@ -330,7 +331,7 @@ class js_fuck(object):
         return js
 
     def __mapping(self, js):
-        &#39;&#39;&#39;
+        '''
         Iterates over MAPPING and replaces every value found with
         its corresponding key
 
@@ -340,7 +341,7 @@ class js_fuck(object):
         Returns:
         js -- string of decoded Javascript
 
-        &#39;&#39;&#39;
+        '''
         for key, value in sorted(
                 self.MAPPING.items(), key=lambda x: len(x[1]), reverse=True):
             js = js.replace(value, key)
@@ -348,52 +349,52 @@ class js_fuck(object):
         return js
 
     def __fillMissingDigits(self):
-        &#39;&#39;&#39;
-        Calculates 0-9&#39;s encoded value and adds it to MAPPING
+        '''
+        Calculates 0-9's encoded value and adds it to MAPPING
 
-        &#39;&#39;&#39;
+        '''
         for number in range(10):
-            output = &#39;+[]&#39;
+            output = '+[]'
 
             if number &gt; 0:
-                output = &#39;+!&#39; + output
+                output = '+!' + output
 
             for i in range(number - 1):
-                output = &#39;+!+[]&#39; + output
+                output = '+!+[]' + output
 
             if number &gt; 1:
                 output = output[1:]
 
-            self.MAPPING[str(number)] = &#39;[&#39; + output + &#39;]&#39;
+            self.MAPPING[str(number)] = '[' + output + ']'
 
     def __fillMissingChars(self):
-        &#39;&#39;&#39;
+        '''
         Iterates over MAPPING and fills missing character values with a string
         containing their ascii value represented in hex
 
-        &#39;&#39;&#39;
+        '''
         for key in self.MAPPING:
             if self.MAPPING[key] == self.USE_CHAR_CODE:
                 hexidec = hex(ord(key[0]))[2:]
 
-                digit_search = re.findall(r&#39;\d+&#39;, hexidec)
-                letter_search = re.findall(r&#39;[^\d+]&#39;, hexidec)
+                digit_search = re.findall(r'\d+', hexidec)
+                letter_search = re.findall(r'[^\d+]', hexidec)
 
-                digit = digit_search[0] if digit_search else &#39;&#39;
-                letter = letter_search[0] if letter_search else &#39;&#39;
+                digit = digit_search[0] if digit_search else ''
+                letter = letter_search[0] if letter_search else ''
 
-                string = (&#39;Function(&#34;return unescape&#34;)()(&#34;%%&#34;+(%s)+&#34;%s&#34;)&#39;
+                string = ('Function("return unescape")()("%%"+(%s)+"%s")'
                           % (digit, letter))
 
                 self.MAPPING[key] = string
 
     def __replaceMap(self):
-        &#39;&#39;&#39;
+        '''
         Iterates over MAPPING from MIN to MAX and replaces value with values
         found in CONSTRUCTORS and SIMPLE, as well as using digitalReplacer and
         numberReplacer to replace numeric values
 
-        &#39;&#39;&#39;
+        '''
         def replace(pattern, replacement):
             return re.sub(pattern, replacement, value, flags=re.I)
 
@@ -403,26 +404,26 @@ class js_fuck(object):
         def numberReplacer(y):
             values = list(y.group(1))
             head = int(values[0])
-            output = &#39;+[]&#39;
+            output = '+[]'
 
             values.pop(0)
 
             if head &gt; 0:
-                output = &#39;+!&#39; + output
+                output = '+!' + output
 
             for i in range(1, head):
-                output = &#39;+!+[]&#39; + output
+                output = '+!+[]' + output
 
             if head &gt; 1:
                 output = output[1:]
 
-            return re.sub(r&#39;(\d)&#39;, digitReplacer, &#39;+&#39;.join([output] + values))
+            return re.sub(r'(\d)', digitReplacer, '+'.join([output] + values))
 
         for i in range(self.MIN, self.MAX + 1):
             character = chr(i)
             value = self.MAPPING[character]
 
-            original = &#39;&#39;
+            original = ''
 
             if not value:
                 continue
@@ -431,27 +432,27 @@ class js_fuck(object):
                 original = value
 
                 for key, val in get_dict(self.CONSTRUCTORS):
-                    value = replace(r&#39;\b&#39; + key, val + &#39;[&#34;constructor&#34;]&#39;)
+                    value = replace(r'\b' + key, val + '["constructor"]')
 
                 for key, val in get_dict(self.SIMPLE):
                     value = replace(key, val)
 
-            value = replace(r&#39;(\d\d+)&#39;, numberReplacer)
-            value = replace(r&#39;\((\d)\)&#39;, digitReplacer)
-            value = replace(r&#39;\[(\d)\]&#39;, digitReplacer)
+            value = replace(r'(\d\d+)', numberReplacer)
+            value = replace(r'\((\d)\)', digitReplacer)
+            value = replace(r'\[(\d)\]', digitReplacer)
 
-            value = replace(r&#39;GLOBAL&#39;, self.GLOBAL)
-            value = replace(r&#39;\+&#34;&#34;&#39;, &#39;+[]&#39;)
-            value = replace(r&#39;&#34;&#34;&#39;, &#39;[]+[]&#39;)
+            value = replace(r'GLOBAL', self.GLOBAL)
+            value = replace(r'\+""', '+[]')
+            value = replace(r'""', '[]+[]')
 
             self.MAPPING[character] = value
 
     def __replaceStrings(self):
-        &#39;&#39;&#39;
+        '''
         Replaces strings added in __replaceMap with there encoded values
 
-        &#39;&#39;&#39;
-        regex = r&#39;[^\[\]\(\)\!\+]&#39;
+        '''
+        regex = r'[^\[\]\(\)\!\+]'
 
         # determines if there are still characters to replace
         def findMissing():
@@ -467,14 +468,14 @@ class js_fuck(object):
             return done
 
         def mappingReplacer(x):
-            return &#39;+&#39;.join(list(x.group(1)))
+            return '+'.join(list(x.group(1)))
 
         def valueReplacer(x):
             x = x.group()
             return x if x in findMissing.missing else self.MAPPING[x]
 
         for key in self.MAPPING:
-            self.MAPPING[key] = re.sub(r&#39;\&#34;([^\&#34;]+)\&#34;&#39;, mappingReplacer,
+            self.MAPPING[key] = re.sub(r'\"([^\"]+)\"', mappingReplacer,
                                        self.MAPPING[key], flags=re.I)
 
         while findMissing():
@@ -523,34 +524,34 @@ class js_fuck(object):
 (<a href="https://github.com/aemkei/jsfuck">https://github.com/aemkei/jsfuck</a>)</p>
 <p>Class variables:
 USE_CHAR_CODE
-&ndash; string used to indicate which keys in MAPPING will
+– string used to indicate which keys in MAPPING will
 be encoded using their ASCII character code</p>
 <p>MIN
-&ndash; int the position within MAPPING dictionary to start
+– int the position within MAPPING dictionary to start
 iterating from, for the final encoding pass</p>
 <p>MAX
-&ndash; int the maximum value to iterate in MAPPING
+– int the maximum value to iterate in MAPPING
 on the final encode</p>
 <p>SIMPLE
-&ndash; dictionary of built-in Javascript types and values</p>
+– dictionary of built-in Javascript types and values</p>
 <p>CONSTRUCTORS
-&ndash; dictionary of mostly Javascript data types</p>
+– dictionary of mostly Javascript data types</p>
 <p>MAPPING
-&ndash; dictionary of every character to be mapped and decoded</p>
+– dictionary of every character to be mapped and decoded</p>
 <p>GLOBAL
-&ndash; string used to replace 'GLOBAL' value on final encode</p>
+– string used to replace 'GLOBAL' value on final encode</p>
 <p>Checks if passed some Javascript and if so assigns an instance variable
 to that of the pass Javascript.</p>
 <p>Populates MAPPING dictionary with the keys corresponding encoded value.</p>
 <p>Keyword arguments:
-js &ndash; string containing the encoded Javascript to be
+js – string containing the encoded Javascript to be
 decoded (defualt None)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class js_fuck(object):
-    &#39;&#39;&#39;
+    '''
     Encodes/Decodes Javascript using JSFuck 0.4.0
     (https://github.com/aemkei/jsfuck)
 
@@ -570,129 +571,129 @@ decoded (defualt None)</p></div>
 
     MAPPING                -- dictionary of every character to be mapped and decoded
 
-    GLOBAL                  -- string used to replace &#39;GLOBAL&#39; value on final encode
+    GLOBAL                  -- string used to replace 'GLOBAL' value on final encode
 
-    &#39;&#39;&#39;
+    '''
 
-    USE_CHAR_CODE = &#34;USE_CHAR_CODE&#34;
+    USE_CHAR_CODE = "USE_CHAR_CODE"
 
     MIN, MAX = 32, 126
 
     SIMPLE = {
-        &#39;false&#39;:      &#39;![]&#39;,
-        &#39;true&#39;:       &#39;!![]&#39;,
-        &#39;undefined&#39;:  &#39;[][[]]&#39;,
-        &#39;NaN&#39;:        &#39;+[![]]&#39;,
-        &#39;Infinity&#39;:   (&#39;+(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]+[+&#39;
-                       &#39;!+[]]+[+[]]+[+[]]+[+[]])&#39;)  # +&#34;1e1000&#34;
+        'false':      '![]',
+        'true':       '!![]',
+        'undefined':  '[][[]]',
+        'NaN':        '+[![]]',
+        'Infinity':   ('+(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]+[+'
+                       '!+[]]+[+[]]+[+[]]+[+[]])')  # +"1e1000"
     }
 
     CONSTRUCTORS = {
-        &#39;Array&#39;:    &#39;[]&#39;,
-        &#39;Number&#39;:   &#39;(+[])&#39;,
-        &#39;String&#39;:   &#39;([]+[])&#39;,
-        &#39;Boolean&#39;:  &#39;(![])&#39;,
-        &#39;Function&#39;: &#39;[][&#34;fill&#34;]&#39;,
-        &#39;RegExp&#39;:   &#39;Function(&#34;return/&#34;+false+&#34;/&#34;)()&#39;
+        'Array':    '[]',
+        'Number':   '(+[])',
+        'String':   '([]+[])',
+        'Boolean':  '(![])',
+        'Function': '[]["fill"]',
+        'RegExp':   'Function("return/"+false+"/")()'
     }
 
     MAPPING = {
-        &#39;a&#39;:   &#39;(false+&#34;&#34;)[1]&#39;,
-        &#39;b&#39;:   &#39;([][&#34;entries&#34;]()+&#34;&#34;)[2]&#39;,
-        &#39;c&#39;:   &#39;([][&#34;fill&#34;]+&#34;&#34;)[3]&#39;,
-        &#39;d&#39;:   &#39;(undefined+&#34;&#34;)[2]&#39;,
-        &#39;e&#39;:   &#39;(true+&#34;&#34;)[3]&#39;,
-        &#39;f&#39;:   &#39;(false+&#34;&#34;)[0]&#39;,
-        &#39;g&#39;:   &#39;(false+[0]+String)[20]&#39;,
-        &#39;h&#39;:   &#39;(+(101))[&#34;to&#34;+String[&#34;name&#34;]](21)[1]&#39;,
-        &#39;i&#39;:   &#39;([false]+undefined)[10]&#39;,
-        &#39;j&#39;:   &#39;([][&#34;entries&#34;]()+&#34;&#34;)[3]&#39;,
-        &#39;k&#39;:   &#39;(+(20))[&#34;to&#34;+String[&#34;name&#34;]](21)&#39;,
-        &#39;l&#39;:   &#39;(false+&#34;&#34;)[2]&#39;,
-        &#39;m&#39;:   &#39;(Number+&#34;&#34;)[11]&#39;,
-        &#39;n&#39;:   &#39;(undefined+&#34;&#34;)[1]&#39;,
-        &#39;o&#39;:   &#39;(true+[][&#34;fill&#34;])[10]&#39;,
-        &#39;p&#39;:   &#39;(+(211))[&#34;to&#34;+String[&#34;name&#34;]](31)[1]&#39;,
-        &#39;q&#39;:   &#39;(+(212))[&#34;to&#34;+String[&#34;name&#34;]](31)[1]&#39;,
-        &#39;r&#39;:   &#39;(true+&#34;&#34;)[1]&#39;,
-        &#39;s&#39;:   &#39;(false+&#34;&#34;)[3]&#39;,
-        &#39;t&#39;:   &#39;(true+&#34;&#34;)[0]&#39;,
-        &#39;u&#39;:   &#39;(undefined+&#34;&#34;)[0]&#39;,
-        &#39;v&#39;:   &#39;(+(31))[&#34;to&#34;+String[&#34;name&#34;]](32)&#39;,
-        &#39;w&#39;:   &#39;(+(32))[&#34;to&#34;+String[&#34;name&#34;]](33)&#39;,
-        &#39;x&#39;:   &#39;(+(101))[&#34;to&#34;+String[&#34;name&#34;]](34)[1]&#39;,
-        &#39;y&#39;:   &#39;(NaN+[Infinity])[10]&#39;,
-        &#39;z&#39;:   &#39;(+(35))[&#34;to&#34;+String[&#34;name&#34;]](36)&#39;,
+        'a':   '(false+"")[1]',
+        'b':   '([]["entries"]()+"")[2]',
+        'c':   '([]["fill"]+"")[3]',
+        'd':   '(undefined+"")[2]',
+        'e':   '(true+"")[3]',
+        'f':   '(false+"")[0]',
+        'g':   '(false+[0]+String)[20]',
+        'h':   '(+(101))["to"+String["name"]](21)[1]',
+        'i':   '([false]+undefined)[10]',
+        'j':   '([]["entries"]()+"")[3]',
+        'k':   '(+(20))["to"+String["name"]](21)',
+        'l':   '(false+"")[2]',
+        'm':   '(Number+"")[11]',
+        'n':   '(undefined+"")[1]',
+        'o':   '(true+[]["fill"])[10]',
+        'p':   '(+(211))["to"+String["name"]](31)[1]',
+        'q':   '(+(212))["to"+String["name"]](31)[1]',
+        'r':   '(true+"")[1]',
+        's':   '(false+"")[3]',
+        't':   '(true+"")[0]',
+        'u':   '(undefined+"")[0]',
+        'v':   '(+(31))["to"+String["name"]](32)',
+        'w':   '(+(32))["to"+String["name"]](33)',
+        'x':   '(+(101))["to"+String["name"]](34)[1]',
+        'y':   '(NaN+[Infinity])[10]',
+        'z':   '(+(35))["to"+String["name"]](36)',
 
-        &#39;A&#39;:   &#39;(+[]+Array)[10]&#39;,
-        &#39;B&#39;:   &#39;(+[]+Boolean)[10]&#39;,
-        &#39;C&#39;:   &#39;Function(&#34;return escape&#34;)()((&#34;&#34;)[&#34;italics&#34;]())[2]&#39;,
-        &#39;D&#39;:   &#39;Function(&#34;return escape&#34;)()([][&#34;fill&#34;])[&#34;slice&#34;](&#34;-1&#34;)&#39;,
-        &#39;E&#39;:   &#39;(RegExp+&#34;&#34;)[12]&#39;,
-        &#39;F&#39;:   &#39;(+[]+Function)[10]&#39;,
-        &#39;G&#39;:   &#39;(false+Function(&#34;return Date&#34;)()())[30]&#39;,
-        &#39;H&#39;:   USE_CHAR_CODE,
-        &#39;I&#39;:   &#39;(Infinity+&#34;&#34;)[0]&#39;,
-        &#39;J&#39;:   USE_CHAR_CODE,
-        &#39;K&#39;:   USE_CHAR_CODE,
-        &#39;L&#39;:   USE_CHAR_CODE,
-        &#39;M&#39;:   &#39;(true+Function(&#34;return Date&#34;)()())[30]&#39;,
-        &#39;N&#39;:   &#39;(NaN+&#34;&#34;)[0]&#39;,
-        &#39;O&#39;:   &#39;(NaN+Function(&#34;return{}&#34;)())[11]&#39;,
-        &#39;P&#39;:   USE_CHAR_CODE,
-        &#39;Q&#39;:   USE_CHAR_CODE,
-        &#39;R&#39;:   &#39;(+[]+RegExp)[10]&#39;,
-        &#39;S&#39;:   &#39;(+[]+String)[10]&#39;,
-        &#39;T&#39;:   &#39;(NaN+Function(&#34;return Date&#34;)()())[30]&#39;,
-        &#39;U&#39;:   (&#39;(NaN+Function(&#34;return{}&#34;)()[&#34;to&#34;+String&#39;
-                &#39;[&#34;name&#34;]][&#34;call&#34;]())[11]&#39;),
-        &#39;V&#39;:   USE_CHAR_CODE,
-        &#39;W&#39;:   USE_CHAR_CODE,
-        &#39;X&#39;:   USE_CHAR_CODE,
-        &#39;Y&#39;:   USE_CHAR_CODE,
-        &#39;Z&#39;:   USE_CHAR_CODE,
+        'A':   '(+[]+Array)[10]',
+        'B':   '(+[]+Boolean)[10]',
+        'C':   'Function("return escape")()(("")["italics"]())[2]',
+        'D':   'Function("return escape")()([]["fill"])["slice"]("-1")',
+        'E':   '(RegExp+"")[12]',
+        'F':   '(+[]+Function)[10]',
+        'G':   '(false+Function("return Date")()())[30]',
+        'H':   USE_CHAR_CODE,
+        'I':   '(Infinity+"")[0]',
+        'J':   USE_CHAR_CODE,
+        'K':   USE_CHAR_CODE,
+        'L':   USE_CHAR_CODE,
+        'M':   '(true+Function("return Date")()())[30]',
+        'N':   '(NaN+"")[0]',
+        'O':   '(NaN+Function("return{}")())[11]',
+        'P':   USE_CHAR_CODE,
+        'Q':   USE_CHAR_CODE,
+        'R':   '(+[]+RegExp)[10]',
+        'S':   '(+[]+String)[10]',
+        'T':   '(NaN+Function("return Date")()())[30]',
+        'U':   ('(NaN+Function("return{}")()["to"+String'
+                '["name"]]["call"]())[11]'),
+        'V':   USE_CHAR_CODE,
+        'W':   USE_CHAR_CODE,
+        'X':   USE_CHAR_CODE,
+        'Y':   USE_CHAR_CODE,
+        'Z':   USE_CHAR_CODE,
 
-        &#39; &#39;:   &#39;(NaN+[][&#34;fill&#34;])[11]&#39;,
-        &#39;!&#39;:   USE_CHAR_CODE,
-        &#39;&#34;&#39;:   &#39;(&#34;&#34;)[&#34;fontcolor&#34;]()[12]&#39;,
-        &#39;#&#39;:   USE_CHAR_CODE,
-        &#39;$&#39;:   USE_CHAR_CODE,
-        &#39;%&#39;:   &#39;Function(&#34;return escape&#34;)()([][&#34;fill&#34;])[21]&#39;,
-        &#39;&amp;&#39;:   &#39;(&#34;&#34;)[&#34;link&#34;](0+&#34;)[10]&#39;,
-        &#39;\&#39;&#39;:  USE_CHAR_CODE,
-        &#39;(&#39;:   &#39;(undefined+[][&#34;fill&#34;])[22]&#39;,
-        &#39;)&#39;:   &#39;([0]+false+[][&#34;fill&#34;])[20]&#39;,
-        &#39;*&#39;:   USE_CHAR_CODE,
-        &#39;+&#39;:   (&#39;(+(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]&#39;
-                &#39;+[+!+[]]+[+[]]+[+[]])+[])[2]&#39;),
-        &#39;,&#39;:   &#39;([][&#34;slice&#34;][&#34;call&#34;](false+&#34;&#34;)+&#34;&#34;)[1]&#39;,
-        &#39;-&#39;:   &#39;(+(.+[0000000001])+&#34;&#34;)[2]&#39;,
-        &#39;.&#39;:   (&#39;(+(+!+[]+[+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+[!+&#39;
-                &#39;[]+!+[]]+[+[]])+[])[+!+[]]&#39;),
-        &#39;/&#39;:   &#39;(false+[0])[&#34;italics&#34;]()[10]&#39;,
-        &#39;:&#39;:   &#39;(RegExp()+&#34;&#34;)[3]&#39;,
-        &#39;;&#39;:   &#39;(&#34;&#34;)[&#34;link&#34;](&#34;)[14]&#39;,
-        &#39;&lt;&#39;:   &#39;(&#34;&#34;)[&#34;italics&#34;]()[0]&#39;,
-        &#39;=&#39;:   &#39;(&#34;&#34;)[&#34;fontcolor&#34;]()[11]&#39;,
-        &#39;&gt;&#39;:   &#39;(&#34;&#34;)[&#34;italics&#34;]()[2]&#39;,
-        &#39;?&#39;:   &#39;(RegExp()+&#34;&#34;)[2]&#39;,
-        &#39;@&#39;:   USE_CHAR_CODE,
-        &#39;[&#39;:   &#39;([][&#34;entries&#34;]()+&#34;&#34;)[0]&#39;,
-        &#39;\\&#39;:  USE_CHAR_CODE,
-        &#39;]&#39;:   &#39;([][&#34;entries&#34;]()+&#34;&#34;)[22]&#39;,
-        &#39;^&#39;:   USE_CHAR_CODE,
-        &#39;_&#39;:   USE_CHAR_CODE,
-        &#39;`&#39;:   USE_CHAR_CODE,
-        &#39;{&#39;:   &#39;(true+[][&#34;fill&#34;])[20]&#39;,
-        &#39;|&#39;:   USE_CHAR_CODE,
-        &#39;}&#39;:   &#39;([][&#34;fill&#34;]+&#34;&#34;)[&#34;slice&#34;](&#34;-1&#34;)&#39;,
-        &#39;~&#39;:   USE_CHAR_CODE
+        ' ':   '(NaN+[]["fill"])[11]',
+        '!':   USE_CHAR_CODE,
+        '"':   '("")["fontcolor"]()[12]',
+        '#':   USE_CHAR_CODE,
+        '$':   USE_CHAR_CODE,
+        '%':   'Function("return escape")()([]["fill"])[21]',
+        '&amp;':   '("")["link"](0+")[10]',
+        '\'':  USE_CHAR_CODE,
+        '(':   '(undefined+[]["fill"])[22]',
+        ')':   '([0]+false+[]["fill"])[20]',
+        '*':   USE_CHAR_CODE,
+        '+':   ('(+(+!+[]+(!+[]+[])[!+[]+!+[]+!+[]]'
+                '+[+!+[]]+[+[]]+[+[]])+[])[2]'),
+        ',':   '([]["slice"]["call"](false+"")+"")[1]',
+        '-':   '(+(.+[0000000001])+"")[2]',
+        '.':   ('(+(+!+[]+[+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+[!+'
+                '[]+!+[]]+[+[]])+[])[+!+[]]'),
+        '/':   '(false+[0])["italics"]()[10]',
+        ':':   '(RegExp()+"")[3]',
+        ';':   '("")["link"](")[14]',
+        '&lt;':   '("")["italics"]()[0]',
+        '=':   '("")["fontcolor"]()[11]',
+        '&gt;':   '("")["italics"]()[2]',
+        '?':   '(RegExp()+"")[2]',
+        '@':   USE_CHAR_CODE,
+        '[':   '([]["entries"]()+"")[0]',
+        '\\':  USE_CHAR_CODE,
+        ']':   '([]["entries"]()+"")[22]',
+        '^':   USE_CHAR_CODE,
+        '_':   USE_CHAR_CODE,
+        '`':   USE_CHAR_CODE,
+        '{':   '(true+[]["fill"])[20]',
+        '|':   USE_CHAR_CODE,
+        '}':   '([]["fill"]+"")["slice"]("-1")',
+        '~':   USE_CHAR_CODE
     }
 
-    GLOBAL = &#39;Function(&#34;return this&#34;)()&#39;
+    GLOBAL = 'Function("return this")()'
 
     def __init__(self, js=None):
-        &#39;&#39;&#39;
+        '''
         Checks if passed some Javascript and if so assigns an instance variable
         to that of the pass Javascript.
 
@@ -702,7 +703,7 @@ decoded (defualt None)</p></div>
         js -- string containing the encoded Javascript to be
               decoded (defualt None)
 
-        &#39;&#39;&#39;
+        '''
         if js:
             self.js = js
 
@@ -712,8 +713,8 @@ decoded (defualt None)</p></div>
         self.__replaceStrings()
 
     def decode(self, js=None):
-        &#39;&#39;&#39;
-        Decodes JSFuck&#39;d Javascript
+        '''
+        Decodes JSFuck'd Javascript
 
         Keyword arguments:
         js -- string containing the JSFuck to be decoded (defualt None)
@@ -721,18 +722,18 @@ decoded (defualt None)</p></div>
         Returns:
         js -- string of decoded Javascript
 
-        &#39;&#39;&#39;
+        '''
         if not js:
             js = self.js
 
         js = self.__mapping(js)
 
         # removes concatenation operators
-        js = re.sub(&#39;\+(?!\+)&#39;, &#39;&#39;, js)
-        js = js.replace(&#39;++&#39;, &#39;+&#39;)
+        js = re.sub('\+(?!\+)', '', js)
+        js = js.replace('++', '+')
 
-        # check to see if source js is eval&#39;d
-        if &#39;[][fill][constructor]&#39; in js:
+        # check to see if source js is eval'd
+        if '[][fill][constructor]' in js:
             js = self.uneval(js)
 
         self.js = js
@@ -740,7 +741,7 @@ decoded (defualt None)</p></div>
         return js
 
     def encode(self, js=None, wrapWithEval=False, runInParentScope=False):
-        &#39;&#39;&#39;
+        '''
         Encodes vanilla Javascript to JSFuck obfuscated Javascript
 
         Keyword arguments:
@@ -750,28 +751,28 @@ decoded (defualt None)</p></div>
 
         runInParentScope -- boolean determines whether to run in parents scope
 
-        &#39;&#39;&#39;
+        '''
         output = []
 
         if not js:
             js = self.js
 
             if not js:
-                return &#39;&#39;
+                return ''
 
-        regex = &#39;&#39;
+        regex = ''
 
         for i in self.SIMPLE:
-            regex += i + &#39;|&#39;
+            regex += i + '|'
 
-        regex += &#39;.&#39;
+        regex += '.'
 
         def inputReplacer(c):
             c = c.group()
             replacement = self.SIMPLE[c] if c in self.SIMPLE else False
 
             if replacement:
-                output.append(&#39;[&#39; + replacement + &#39;]+[]&#39;)
+                output.append('[' + replacement + ']+[]')
 
             else:
                 replacement = self.MAPPING[c] if c in self.MAPPING else False
@@ -780,38 +781,38 @@ decoded (defualt None)</p></div>
                     output.append(replacement)
                 else:
                     replacement = (
-                        &#39;([]+[])[&#39; + self.encode(&#39;constructor&#39;) + &#39;]&#39;
-                        &#39;[&#39; + self.encode(&#39;fromCharCode&#39;) + &#39;]&#39;
-                        &#39;(&#39; + self.encode(str(ord(c[0]))) + &#39;)&#39;)
+                        '([]+[])[' + self.encode('constructor') + ']'
+                        '[' + self.encode('fromCharCode') + ']'
+                        '(' + self.encode(str(ord(c[0]))) + ')')
 
                     output.append(replacement)
                     self.MAPPING[c] = replacement
 
         re.sub(regex, inputReplacer, js)
 
-        output = &#39;+&#39;.join(output)
+        output = '+'.join(output)
 
-        if re.search(r&#39;^\d$&#39;, js):
-            output += &#34;+[]&#34;
+        if re.search(r'^\d$', js):
+            output += "+[]"
 
         if wrapWithEval:
             if runInParentScope:
-                output = (&#39;[][&#39; + self.encode(&#39;fill&#39;) + &#39;]&#39;
-                          &#39;[&#39; + self.encode(&#39;constructor&#39;) + &#39;]&#39;
-                          &#39;(&#39; + self.encode(&#39;return eval&#39;) + &#39;)()&#39;
-                          &#39;(&#39; + output + &#39;)&#39;)
+                output = ('[][' + self.encode('fill') + ']'
+                          '[' + self.encode('constructor') + ']'
+                          '(' + self.encode('return eval') + ')()'
+                          '(' + output + ')')
 
             else:
-                output = (&#39;[][&#39; + self.encode(&#39;fill&#39;) + &#39;]&#39;
-                          &#39;[&#39; + self.encode(&#39;constructor&#39;) + &#39;]&#39;
-                          &#39;(&#39; + output + &#39;)&#39;)
+                output = ('[][' + self.encode('fill') + ']'
+                          '[' + self.encode('constructor') + ']'
+                          '(' + output + ')')
 
         self.js = output
 
         return output
 
     def uneval(self, js):
-        &#39;&#39;&#39;
+        '''
         Unevals a piece of Javascript wrapped with an encoded eval
 
         Keyword arguments:
@@ -820,11 +821,11 @@ decoded (defualt None)</p></div>
         Returns:
         js -- string with eval removed
 
-        &#39;&#39;&#39;
-        js = js.replace(&#39;[][fill][constructor](&#39;, &#39;&#39;)
+        '''
+        js = js.replace('[][fill][constructor](', '')
         js = js[:-2]
 
-        ev = &#39;return eval)()(&#39;
+        ev = 'return eval)()('
 
         if ev in js:
             js = js[(js.find(ev) + len(ev)):]
@@ -832,7 +833,7 @@ decoded (defualt None)</p></div>
         return js
 
     def __mapping(self, js):
-        &#39;&#39;&#39;
+        '''
         Iterates over MAPPING and replaces every value found with
         its corresponding key
 
@@ -842,7 +843,7 @@ decoded (defualt None)</p></div>
         Returns:
         js -- string of decoded Javascript
 
-        &#39;&#39;&#39;
+        '''
         for key, value in sorted(
                 self.MAPPING.items(), key=lambda x: len(x[1]), reverse=True):
             js = js.replace(value, key)
@@ -850,52 +851,52 @@ decoded (defualt None)</p></div>
         return js
 
     def __fillMissingDigits(self):
-        &#39;&#39;&#39;
-        Calculates 0-9&#39;s encoded value and adds it to MAPPING
+        '''
+        Calculates 0-9's encoded value and adds it to MAPPING
 
-        &#39;&#39;&#39;
+        '''
         for number in range(10):
-            output = &#39;+[]&#39;
+            output = '+[]'
 
             if number &gt; 0:
-                output = &#39;+!&#39; + output
+                output = '+!' + output
 
             for i in range(number - 1):
-                output = &#39;+!+[]&#39; + output
+                output = '+!+[]' + output
 
             if number &gt; 1:
                 output = output[1:]
 
-            self.MAPPING[str(number)] = &#39;[&#39; + output + &#39;]&#39;
+            self.MAPPING[str(number)] = '[' + output + ']'
 
     def __fillMissingChars(self):
-        &#39;&#39;&#39;
+        '''
         Iterates over MAPPING and fills missing character values with a string
         containing their ascii value represented in hex
 
-        &#39;&#39;&#39;
+        '''
         for key in self.MAPPING:
             if self.MAPPING[key] == self.USE_CHAR_CODE:
                 hexidec = hex(ord(key[0]))[2:]
 
-                digit_search = re.findall(r&#39;\d+&#39;, hexidec)
-                letter_search = re.findall(r&#39;[^\d+]&#39;, hexidec)
+                digit_search = re.findall(r'\d+', hexidec)
+                letter_search = re.findall(r'[^\d+]', hexidec)
 
-                digit = digit_search[0] if digit_search else &#39;&#39;
-                letter = letter_search[0] if letter_search else &#39;&#39;
+                digit = digit_search[0] if digit_search else ''
+                letter = letter_search[0] if letter_search else ''
 
-                string = (&#39;Function(&#34;return unescape&#34;)()(&#34;%%&#34;+(%s)+&#34;%s&#34;)&#39;
+                string = ('Function("return unescape")()("%%"+(%s)+"%s")'
                           % (digit, letter))
 
                 self.MAPPING[key] = string
 
     def __replaceMap(self):
-        &#39;&#39;&#39;
+        '''
         Iterates over MAPPING from MIN to MAX and replaces value with values
         found in CONSTRUCTORS and SIMPLE, as well as using digitalReplacer and
         numberReplacer to replace numeric values
 
-        &#39;&#39;&#39;
+        '''
         def replace(pattern, replacement):
             return re.sub(pattern, replacement, value, flags=re.I)
 
@@ -905,26 +906,26 @@ decoded (defualt None)</p></div>
         def numberReplacer(y):
             values = list(y.group(1))
             head = int(values[0])
-            output = &#39;+[]&#39;
+            output = '+[]'
 
             values.pop(0)
 
             if head &gt; 0:
-                output = &#39;+!&#39; + output
+                output = '+!' + output
 
             for i in range(1, head):
-                output = &#39;+!+[]&#39; + output
+                output = '+!+[]' + output
 
             if head &gt; 1:
                 output = output[1:]
 
-            return re.sub(r&#39;(\d)&#39;, digitReplacer, &#39;+&#39;.join([output] + values))
+            return re.sub(r'(\d)', digitReplacer, '+'.join([output] + values))
 
         for i in range(self.MIN, self.MAX + 1):
             character = chr(i)
             value = self.MAPPING[character]
 
-            original = &#39;&#39;
+            original = ''
 
             if not value:
                 continue
@@ -933,27 +934,27 @@ decoded (defualt None)</p></div>
                 original = value
 
                 for key, val in get_dict(self.CONSTRUCTORS):
-                    value = replace(r&#39;\b&#39; + key, val + &#39;[&#34;constructor&#34;]&#39;)
+                    value = replace(r'\b' + key, val + '["constructor"]')
 
                 for key, val in get_dict(self.SIMPLE):
                     value = replace(key, val)
 
-            value = replace(r&#39;(\d\d+)&#39;, numberReplacer)
-            value = replace(r&#39;\((\d)\)&#39;, digitReplacer)
-            value = replace(r&#39;\[(\d)\]&#39;, digitReplacer)
+            value = replace(r'(\d\d+)', numberReplacer)
+            value = replace(r'\((\d)\)', digitReplacer)
+            value = replace(r'\[(\d)\]', digitReplacer)
 
-            value = replace(r&#39;GLOBAL&#39;, self.GLOBAL)
-            value = replace(r&#39;\+&#34;&#34;&#39;, &#39;+[]&#39;)
-            value = replace(r&#39;&#34;&#34;&#39;, &#39;[]+[]&#39;)
+            value = replace(r'GLOBAL', self.GLOBAL)
+            value = replace(r'\+""', '+[]')
+            value = replace(r'""', '[]+[]')
 
             self.MAPPING[character] = value
 
     def __replaceStrings(self):
-        &#39;&#39;&#39;
+        '''
         Replaces strings added in __replaceMap with there encoded values
 
-        &#39;&#39;&#39;
-        regex = r&#39;[^\[\]\(\)\!\+]&#39;
+        '''
+        regex = r'[^\[\]\(\)\!\+]'
 
         # determines if there are still characters to replace
         def findMissing():
@@ -969,14 +970,14 @@ decoded (defualt None)</p></div>
             return done
 
         def mappingReplacer(x):
-            return &#39;+&#39;.join(list(x.group(1)))
+            return '+'.join(list(x.group(1)))
 
         def valueReplacer(x):
             x = x.group()
             return x if x in findMissing.missing else self.MAPPING[x]
 
         for key in self.MAPPING:
-            self.MAPPING[key] = re.sub(r&#39;\&#34;([^\&#34;]+)\&#34;&#39;, mappingReplacer,
+            self.MAPPING[key] = re.sub(r'\"([^\"]+)\"', mappingReplacer,
                                        self.MAPPING[key], flags=re.I)
 
         while findMissing():
@@ -1026,16 +1027,16 @@ decoded (defualt None)</p></div>
 <dd>
 <div class="desc"><p>Decodes JSFuck'd Javascript</p>
 <p>Keyword arguments:
-js &ndash; string containing the JSFuck to be decoded (defualt None)</p>
+js – string containing the JSFuck to be decoded (defualt None)</p>
 <p>Returns:
-js &ndash; string of decoded Javascript</p></div>
+js – string of decoded Javascript</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def decode(self, js=None):
-    &#39;&#39;&#39;
-    Decodes JSFuck&#39;d Javascript
+    '''
+    Decodes JSFuck'd Javascript
 
     Keyword arguments:
     js -- string containing the JSFuck to be decoded (defualt None)
@@ -1043,18 +1044,18 @@ js &ndash; string of decoded Javascript</p></div>
     Returns:
     js -- string of decoded Javascript
 
-    &#39;&#39;&#39;
+    '''
     if not js:
         js = self.js
 
     js = self.__mapping(js)
 
     # removes concatenation operators
-    js = re.sub(&#39;\+(?!\+)&#39;, &#39;&#39;, js)
-    js = js.replace(&#39;++&#39;, &#39;+&#39;)
+    js = re.sub('\+(?!\+)', '', js)
+    js = js.replace('++', '+')
 
-    # check to see if source js is eval&#39;d
-    if &#39;[][fill][constructor]&#39; in js:
+    # check to see if source js is eval'd
+    if '[][fill][constructor]' in js:
         js = self.uneval(js)
 
     self.js = js
@@ -1069,16 +1070,16 @@ js &ndash; string of decoded Javascript</p></div>
 <div class="desc"><p>Encodes vanilla Javascript to JSFuck obfuscated Javascript</p>
 <p>Keyword arguments:
 js
-&ndash; string of unobfuscated Javascript</p>
+– string of unobfuscated Javascript</p>
 <p>wrapWithEval
-&ndash; boolean determines whether to wrap with an eval</p>
-<p>runInParentScope &ndash; boolean determines whether to run in parents scope</p></div>
+– boolean determines whether to wrap with an eval</p>
+<p>runInParentScope – boolean determines whether to run in parents scope</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def encode(self, js=None, wrapWithEval=False, runInParentScope=False):
-    &#39;&#39;&#39;
+    '''
     Encodes vanilla Javascript to JSFuck obfuscated Javascript
 
     Keyword arguments:
@@ -1088,28 +1089,28 @@ js
 
     runInParentScope -- boolean determines whether to run in parents scope
 
-    &#39;&#39;&#39;
+    '''
     output = []
 
     if not js:
         js = self.js
 
         if not js:
-            return &#39;&#39;
+            return ''
 
-    regex = &#39;&#39;
+    regex = ''
 
     for i in self.SIMPLE:
-        regex += i + &#39;|&#39;
+        regex += i + '|'
 
-    regex += &#39;.&#39;
+    regex += '.'
 
     def inputReplacer(c):
         c = c.group()
         replacement = self.SIMPLE[c] if c in self.SIMPLE else False
 
         if replacement:
-            output.append(&#39;[&#39; + replacement + &#39;]+[]&#39;)
+            output.append('[' + replacement + ']+[]')
 
         else:
             replacement = self.MAPPING[c] if c in self.MAPPING else False
@@ -1118,31 +1119,31 @@ js
                 output.append(replacement)
             else:
                 replacement = (
-                    &#39;([]+[])[&#39; + self.encode(&#39;constructor&#39;) + &#39;]&#39;
-                    &#39;[&#39; + self.encode(&#39;fromCharCode&#39;) + &#39;]&#39;
-                    &#39;(&#39; + self.encode(str(ord(c[0]))) + &#39;)&#39;)
+                    '([]+[])[' + self.encode('constructor') + ']'
+                    '[' + self.encode('fromCharCode') + ']'
+                    '(' + self.encode(str(ord(c[0]))) + ')')
 
                 output.append(replacement)
                 self.MAPPING[c] = replacement
 
     re.sub(regex, inputReplacer, js)
 
-    output = &#39;+&#39;.join(output)
+    output = '+'.join(output)
 
-    if re.search(r&#39;^\d$&#39;, js):
-        output += &#34;+[]&#34;
+    if re.search(r'^\d$', js):
+        output += "+[]"
 
     if wrapWithEval:
         if runInParentScope:
-            output = (&#39;[][&#39; + self.encode(&#39;fill&#39;) + &#39;]&#39;
-                      &#39;[&#39; + self.encode(&#39;constructor&#39;) + &#39;]&#39;
-                      &#39;(&#39; + self.encode(&#39;return eval&#39;) + &#39;)()&#39;
-                      &#39;(&#39; + output + &#39;)&#39;)
+            output = ('[][' + self.encode('fill') + ']'
+                      '[' + self.encode('constructor') + ']'
+                      '(' + self.encode('return eval') + ')()'
+                      '(' + output + ')')
 
         else:
-            output = (&#39;[][&#39; + self.encode(&#39;fill&#39;) + &#39;]&#39;
-                      &#39;[&#39; + self.encode(&#39;constructor&#39;) + &#39;]&#39;
-                      &#39;(&#39; + output + &#39;)&#39;)
+            output = ('[][' + self.encode('fill') + ']'
+                      '[' + self.encode('constructor') + ']'
+                      '(' + output + ')')
 
     self.js = output
 
@@ -1155,15 +1156,15 @@ js
 <dd>
 <div class="desc"><p>Unevals a piece of Javascript wrapped with an encoded eval</p>
 <p>Keyword arguments:
-js &ndash; string containing an eval wrapped string of Javascript</p>
+js – string containing an eval wrapped string of Javascript</p>
 <p>Returns:
-js &ndash; string with eval removed</p></div>
+js – string with eval removed</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def uneval(self, js):
-    &#39;&#39;&#39;
+    '''
     Unevals a piece of Javascript wrapped with an encoded eval
 
     Keyword arguments:
@@ -1172,11 +1173,11 @@ js &ndash; string with eval removed</p></div>
     Returns:
     js -- string with eval removed
 
-    &#39;&#39;&#39;
-    js = js.replace(&#39;[][fill][constructor](&#39;, &#39;&#39;)
+    '''
+    js = js.replace('[][fill][constructor](', '')
     js = js[:-2]
 
-    ev = &#39;return eval)()(&#39;
+    ev = 'return eval)()('
 
     if ev in js:
         js = js[(js.find(ev) + len(ev)):]
@@ -1197,29 +1198,29 @@ js &ndash; string with eval removed</p></div>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="bane.utils" href="index.html">bane.utils</a></code></li>
+<li><code><a href="index.md" title="bane.utils">bane.utils</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="bane.utils.js_fuck.get_dict" href="#bane.utils.js_fuck.get_dict">get_dict</a></code></li>
+<li><code><a href="#bane.utils.js_fuck.get_dict" title="bane.utils.js_fuck.get_dict">get_dict</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="bane.utils.js_fuck.js_fuck" href="#bane.utils.js_fuck.js_fuck">js_fuck</a></code></h4>
+<h4><code><a href="#bane.utils.js_fuck.js_fuck" title="bane.utils.js_fuck.js_fuck">js_fuck</a></code></h4>
 <ul class="two-column">
-<li><code><a title="bane.utils.js_fuck.js_fuck.CONSTRUCTORS" href="#bane.utils.js_fuck.js_fuck.CONSTRUCTORS">CONSTRUCTORS</a></code></li>
-<li><code><a title="bane.utils.js_fuck.js_fuck.GLOBAL" href="#bane.utils.js_fuck.js_fuck.GLOBAL">GLOBAL</a></code></li>
-<li><code><a title="bane.utils.js_fuck.js_fuck.MAPPING" href="#bane.utils.js_fuck.js_fuck.MAPPING">MAPPING</a></code></li>
-<li><code><a title="bane.utils.js_fuck.js_fuck.MAX" href="#bane.utils.js_fuck.js_fuck.MAX">MAX</a></code></li>
-<li><code><a title="bane.utils.js_fuck.js_fuck.MIN" href="#bane.utils.js_fuck.js_fuck.MIN">MIN</a></code></li>
-<li><code><a title="bane.utils.js_fuck.js_fuck.SIMPLE" href="#bane.utils.js_fuck.js_fuck.SIMPLE">SIMPLE</a></code></li>
-<li><code><a title="bane.utils.js_fuck.js_fuck.USE_CHAR_CODE" href="#bane.utils.js_fuck.js_fuck.USE_CHAR_CODE">USE_CHAR_CODE</a></code></li>
-<li><code><a title="bane.utils.js_fuck.js_fuck.decode" href="#bane.utils.js_fuck.js_fuck.decode">decode</a></code></li>
-<li><code><a title="bane.utils.js_fuck.js_fuck.encode" href="#bane.utils.js_fuck.js_fuck.encode">encode</a></code></li>
-<li><code><a title="bane.utils.js_fuck.js_fuck.uneval" href="#bane.utils.js_fuck.js_fuck.uneval">uneval</a></code></li>
+<li><code><a href="#bane.utils.js_fuck.js_fuck.CONSTRUCTORS" title="bane.utils.js_fuck.js_fuck.CONSTRUCTORS">CONSTRUCTORS</a></code></li>
+<li><code><a href="#bane.utils.js_fuck.js_fuck.GLOBAL" title="bane.utils.js_fuck.js_fuck.GLOBAL">GLOBAL</a></code></li>
+<li><code><a href="#bane.utils.js_fuck.js_fuck.MAPPING" title="bane.utils.js_fuck.js_fuck.MAPPING">MAPPING</a></code></li>
+<li><code><a href="#bane.utils.js_fuck.js_fuck.MAX" title="bane.utils.js_fuck.js_fuck.MAX">MAX</a></code></li>
+<li><code><a href="#bane.utils.js_fuck.js_fuck.MIN" title="bane.utils.js_fuck.js_fuck.MIN">MIN</a></code></li>
+<li><code><a href="#bane.utils.js_fuck.js_fuck.SIMPLE" title="bane.utils.js_fuck.js_fuck.SIMPLE">SIMPLE</a></code></li>
+<li><code><a href="#bane.utils.js_fuck.js_fuck.USE_CHAR_CODE" title="bane.utils.js_fuck.js_fuck.USE_CHAR_CODE">USE_CHAR_CODE</a></code></li>
+<li><code><a href="#bane.utils.js_fuck.js_fuck.decode" title="bane.utils.js_fuck.js_fuck.decode">decode</a></code></li>
+<li><code><a href="#bane.utils.js_fuck.js_fuck.encode" title="bane.utils.js_fuck.js_fuck.encode">encode</a></code></li>
+<li><code><a href="#bane.utils.js_fuck.js_fuck.uneval" title="bane.utils.js_fuck.js_fuck.uneval">uneval</a></code></li>
 </ul>
 </li>
 </ul>
