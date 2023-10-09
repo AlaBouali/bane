@@ -15,12 +15,12 @@ def get_joomla_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=Tr
         hed.update({"Cookie": cookie})
     hed.update(headers)
     try:
-        response = requests.get(u+"/language/en-GB/en-GB.xml", headers=hed, proxies=proxy, timeout=timeout, verify=False)
+        response = requests.Session().get(u+"/language/en-GB/en-GB.xml", headers=hed, proxies=proxy, timeout=timeout, verify=False)
         version= response.text.split('<version>')[1].split('</version>')[0].strip()
     except:
         version= ''
     try:
-        response = requests.get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
+        response = requests.Session().get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
     except:
         pass
     server=response.headers.get('Server','')

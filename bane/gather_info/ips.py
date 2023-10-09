@@ -9,7 +9,7 @@ def myip(proxy=None, timeout=15):
     >>>bane.myip()
     xxx.xx.xxx.xxx"""
     try:
-        return requests.get(
+        return requests.Session().get(
             "http://ipinfo.io/ip",
             headers={"User-Agent": random.choice(ua)},
             proxies=proxy,
@@ -26,7 +26,7 @@ def geoip(u, timeout=15, proxy=None):
     this function is for getting: geoip informations
     """
     try:
-        r = requests.get(
+        r = requests.Session().get(
             "https://geoip-db.com/jsonp/" + u,
             headers={"User-Agent": random.choice(ua)},
             proxies=proxy,
@@ -47,7 +47,7 @@ def reverse_ip_lookup(u, timeout=10, logs=True, returning=False, proxy=None):
 
     """
     try:
-        r = requests.get(
+        r = requests.Session().get(
             "https://api.hackertarget.com/reverseiplookup/?q=" + u,
             headers={"User-Agent": random.choice(ua)},
             proxies=proxy,

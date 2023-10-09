@@ -57,7 +57,7 @@ def path_traversal_check(
         if null_byte == True:
             l += "%00"
         try:
-            r = requests.get(
+            r = requests.Session().get(
                 u.format(l), headers=heads, proxies=proxy, timeout=timeout, verify=False
             )
             if (

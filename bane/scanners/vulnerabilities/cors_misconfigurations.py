@@ -25,7 +25,7 @@ def cors_reflection(
     heads.update({"Origin": origin})
     heads.update(headers)
     try:
-        r = requests.get(
+        r = requests.Session().get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
         ).headers
         a = r.get("Access-Control-Allow-Origin", None)
@@ -69,7 +69,7 @@ def cors_wildcard(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug
     heads.update({"Origin": "*"})
     heads.update(headers)
     try:
-        r = requests.get(
+        r = requests.Session().get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
         ).headers
         a = r.get("Access-Control-Allow-Origin", None)
@@ -113,7 +113,7 @@ def cors_null(u, proxy=None, timeout=10, user_agent=None, cookie=None, debug=Fal
     heads.update({"Origin": "null"})
     heads.update(headers)
     try:
-        r = requests.get(
+        r = requests.Session().get(
             u, headers=heads, proxies=proxy, timeout=timeout, verify=False
         ).headers
         a = r.get("Access-Control-Allow-Origin", None)

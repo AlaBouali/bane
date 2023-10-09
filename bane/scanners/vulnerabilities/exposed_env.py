@@ -28,7 +28,7 @@ def exposed_env(
                 u += path + "/.env"
             else:
                 u = u.replace(urlparse(u).path, path + "/.env")
-            c = requests.get(
+            c = requests.Session().get(
                 u, headers=hea, proxies=proxy, timeout=timeout, verify=False
             ).text
             if ("APP_KEY=" in c) or ("DB_HOST=" in c):

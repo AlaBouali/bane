@@ -15,7 +15,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
         hed.update({"Cookie": cookie})
     hed.update(headers)
     try:
-        response = requests.get(u+"/magento_version", headers=hed, proxies=proxy, timeout=timeout, verify=False)
+        response = requests.Session().get(u+"/magento_version", headers=hed, proxies=proxy, timeout=timeout, verify=False)
         version= response.text.split('Magento/')[1].split()[0].strip()
     except:
         version= ''
@@ -30,7 +30,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
                 '2009':'1.4.0',
                 '2008':'1.0-1.3'
             }
-            response = requests.get(u+"/skin/frontend/default/default/css/styles.css", headers=hed, proxies=proxy, timeout=timeout, verify=False)
+            response = requests.Session().get(u+"/skin/frontend/default/default/css/styles.css", headers=hed, proxies=proxy, timeout=timeout, verify=False)
             for x in versions:
                 if 'Copyright (c) {}'.format(x) in response.text:
                     version=versions[x]
@@ -38,7 +38,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
         except:
             version= ''
     try:
-        response = requests.get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
+        response = requests.Session().get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
     except:
         pass
     server=response.headers.get('Server','')

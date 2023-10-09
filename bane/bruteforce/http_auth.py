@@ -62,7 +62,7 @@ class http_auth_bruteforce:
         try:
             if self.logs == True:
                 print("[*]Checking Authentication Type:")
-            resp = requests.get(
+            resp = requests.Session().get(
                 u, proxies=prox, headers=hed, verify=False, timeout=timeout
             )
             if "basic" in resp.headers["WWW-Authenticate"].lower():
@@ -110,7 +110,7 @@ class http_auth_bruteforce:
                 hed = {"User-Agent": us}
                 if cookie:
                     hed.update({"Cookie": cookie})
-                r = requests.get(
+                r = requests.Session().get(
                     u,
                     auth=auth_type(username, password),
                     proxies=prox,

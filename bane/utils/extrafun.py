@@ -12,6 +12,9 @@ from bane.utils.pager import crawl
 
 
 
+def set_general_dns_resolver(host,port):
+    socket.setdns()
+
 def get_cf_cookie(domain, user_agent):
     try:
         s = cfscrape.create_scraper()
@@ -46,7 +49,7 @@ def youtube_search(q, proxy=None, timeout=10):
     params = {"search_query": q}
     l = []
     try:
-        r = requests.get(
+        r = requests.Session().get(
             u,
             params,
             headers={"User-Agent": random.choice(ua)},
@@ -333,7 +336,7 @@ def webcams(count=10, by={"country": "us"}, timeout=10):
     while True:
         try:
             soup = BeautifulSoup(
-                requests.get(
+                requests.Session().get(
                     url + str(x),
                     headers={"User-Agent": random.choice(ua)},
                     timeout=timeout,

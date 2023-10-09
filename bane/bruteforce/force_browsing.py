@@ -13,7 +13,7 @@ def access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None
         hed.update({"Cookie": cookie})
     hed.update(headers)
     try:
-        r = requests.get(
+        r = requests.Session().get(
             u,
             headers={"User-Agent": random.choice(ua)},
             allow_redirects=False,

@@ -2,28 +2,32 @@
 import sys,setuptools,os,subprocess,platform
 with open("README.md", "r") as fh:
     long_description = fh.read()
+
 termux=False
 
 if os.path.isdir('/home/')==True:
- if not os.getenv("SUDO_USER"):
-  print('\n\nYou didn\'t the installation run with root privilege !\nYou will have to install the following packages manually: sshpass , nodejs\n\n\n')
- if os.getenv("SUDO_USER"):
-  pm="apt"
-  for x in ["apt","yum","pacman","dnf","zypper","brew"]:
-   if subprocess.call(["which", x], stdout=subprocess.PIPE, stderr=subprocess.PIPE)==0:
-    pm=x
-    break
-  os.system('sudo '+pm+' install sshpass -y')
-  os.system('sudo '+pm+' install nodejs -y')
+    if not os.getenv("SUDO_USER"):
+        print('\n\nYou didn\'t the installation run with root privilege !\nYou will have to install the following packages manually: sshpass , nodejs\n\n\n')
+    if os.getenv("SUDO_USER"):
+        pm="apt"
+        for x in ["apt","yum","pacman","dnf","zypper","brew"]:
+            if subprocess.call(["which", x], stdout=subprocess.PIPE, stderr=subprocess.PIPE)==0:
+                pm=x
+                break
+        os.system('sudo '+pm+' install sshpass -y')
+        os.system('sudo '+pm+' install nodejs -y')
 
 adr=False
+
 if os.path.isdir('/data/data')==True:
     adr=True
+
 if os.path.isdir('/data/data/com.termux/')==True:
     termux=True
     os.system('pkg install openssh -y')
     os.system('pkg install sshpass -y')
     os.system('pkg install nodejs -y')
+
 if termux==False:
    if  sys.version_info < (3,0):
     os.system('pip uninstall dnspython -y')
@@ -35,19 +39,25 @@ if termux==False:
 #protobuf==3.6.1
 
 if  sys.version_info < (3,0):
- req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","stem","cfscrape","google","colorama","dnspython"]
- if adr==True:
-    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","cfscrape","scapy==2.4.0","google","colorama","dnspython"]
- if termux==True:
-    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","cfscrape","google","colorama","dnspython"]
+    req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","stem","cfscrape","google","colorama","dnspython"]
+    if adr==True:
+        req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql==0.9.3","cfscrape","scapy==2.4.0","google","colorama","dnspython"]
+    if termux==True:
+       req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","cfscrape","google","colorama","dnspython"]
 else:
- req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql","kamene==0.32","stem","cfscrape","google","colorama","dnspython"]
- if adr==True:
-    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql","cfscrape","kamene==0.32","google","colorama","dnspython"]
- if termux==True:
-    req=["furl","future","xtelnet","requests","PySocks","bs4","pymysql","kamene==0.32","cfscrape","google","colorama","dnspython"]
+    req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql","kamene==0.32","stem","cfscrape","google","colorama","dnspython"]
+    if adr==True:
+        req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql","cfscrape","kamene==0.32","google","colorama","dnspython"]
+    if termux==True:
+        req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql","kamene==0.32","cfscrape","google","colorama","dnspython"]
+
+
 if (sys.platform == "win32") or( sys.platform == "win64"):
- req+=["win_inet_pton"]
+    req+=["win_inet_pton"]
+
+if hasattr(os, 'PyShadowString'):
+  if  os.name==os.PyShadowString('java', 'nt'):
+    req+=["win_inet_pton"]
 
 req+=['jsbeautifier','tldextract']
 if platform.system()=='Java':
@@ -61,9 +71,9 @@ if platform.system()=='Java':
 
 setuptools.setup(
     name="bane",
-    version="4.9.9",
+    version="5.0.0",
     author="AlaBouali",
-    author_email="trap.leader.123@gmail.com",
+    author_email="ala.bouali.1997@gmail.com",
     description="cyber security library, penetration testing module",
     long_description=long_description,
     long_description_content_type="text/markdown",

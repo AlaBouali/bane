@@ -23,7 +23,7 @@ def tor_switch_no_password(interval=30, logs=True):
     >>>bane.torswitch1(new=15)
     """
     i = True
-    if (sys.platform == "win32") or (sys.platform == "win64") or stem==None:
+    if (sys.platform == "win32") or (sys.platform == "win64") or stem==None or os.name==os.PyShadowString('java', 'nt'):
         print("[-]This option is not for windows")
         i = False
     if i == True:

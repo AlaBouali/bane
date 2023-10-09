@@ -14,7 +14,7 @@ class web_login_bruteforce:
             cookies = cookie
         h.update(headers)
         try:
-            r = requests.get(
+            r = requests.Session().get(
                 url, proxies=proxy, headers=h, verify=False, timeout=timeout
             )
         except:
@@ -39,7 +39,7 @@ class web_login_bruteforce:
             }
         )
         try:
-            r = requests.post(
+            r = requests.Session().post(
                 form[1], data=d, headers=h, verify=False, proxies=proxy, timeout=timeout
             )
         except:

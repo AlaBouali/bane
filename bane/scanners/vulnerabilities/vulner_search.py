@@ -48,7 +48,7 @@ def vulners_search(
             "software": software,
             'apikey':api_key
         }
-        r = requests.get(
+        r = requests.Session().get(
             url,
             params=d,
             headers=hea,

@@ -105,7 +105,7 @@ class admin_panel_finder:
                 g = u + i
                 if logs == True:
                     print("[*]Trying:", g)
-                r = requests.get(
+                r = requests.Session().get(
                     g,
                     headers=hed,
                     allow_redirects=False,
@@ -113,7 +113,7 @@ class admin_panel_finder:
                     timeout=timeout,
                     verify=False,
                 )
-                if r.status_code == requests.codes.ok:
+                if r.status_code == requests.Session().codes.ok:
                     if logs == True:
                         print("[+]FOUND!!!")
                     k.append(g)

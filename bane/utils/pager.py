@@ -86,7 +86,7 @@ def spider_url(base_url, include_id=False,max_pages=50,timeout=15,cookie=None,us
     while urls_to_visit and len(collected_urls) < max_pages:
         url = urls_to_visit.pop(0)
         try:
-            response = requests.get(url,headers=h,timeout=timeout,proxies=proxy,verify=False)
+            response = requests.Session().get(url,headers=h,timeout=timeout,proxies=proxy,verify=False)
             response.raise_for_status()  # Check for any request errors
 
             # Parse the HTML content
@@ -212,7 +212,7 @@ def inputs(
         hea = {"User-Agent": us}
     l = []
     try:
-        c = requests.get(
+        c = requests.Session().get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
         ).text
         if html_comments == False:
@@ -281,7 +281,7 @@ def forms(
     l = []
     fom = []
     try:
-        c = requests.get(
+        c = requests.Session().get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
         ).text
         if html_comments == False:
@@ -395,7 +395,7 @@ def forms_parser(
     l = []
     fom = []
     try:
-        c = requests.get(
+        c = requests.Session().get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
         ).text
         if html_comments == False:
@@ -731,7 +731,7 @@ def set_up_injection(
     h.update(headers)
     
     try:
-        r = requests.get(url, proxies=proxy, headers=h, verify=False, timeout=timeout)
+        r = requests.Session().get(url, proxies=proxy, headers=h, verify=False, timeout=timeout)
     except:
         return False
     cook = None
@@ -954,7 +954,7 @@ def crawl(
         hea = {"User-Agent": us}
     hea.update(headers)
     try:
-        c = requests.get(
+        c = requests.Session().get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
         ).text
         if html_comments == False:
@@ -1122,7 +1122,7 @@ def media(
         if bypass == True:
             u += "#"
         hea.update(headers)
-        c = requests.get(
+        c = requests.Session().get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
         ).text
         if html_comments == False:
@@ -1189,7 +1189,7 @@ def subdomains_extract(
     try:
         if bypass == True:
             u += "#"
-        c = requests.get(
+        c = requests.Session().get(
             u, headers=hea, proxies=proxy, timeout=timeout, verify=False
         ).text
         if html_comments == False:
@@ -1253,7 +1253,7 @@ def fetch_url(
         hea = {"User-Agent": us}
     hea.update(headers)
     try:
-        return requests.get(u,timeout=timeout,proxies=proxy,verify=False,headers=hea).text
+        return requests.Session().get(u,timeout=timeout,proxies=proxy,verify=False,headers=hea).text
     except:
         return ''
 
@@ -1299,7 +1299,7 @@ def examine_js_code(u,
         hea = {"User-Agent": us}
     hea.update(headers)
     try:
-        r= requests.get(u,timeout=timeout,proxies=proxy,verify=False,headers=hea).text
+        r= requests.Session().get(u,timeout=timeout,proxies=proxy,verify=False,headers=hea).text
         soup = BeautifulSoup(r, 'html.parser')
         script_tags = soup.find_all('script')
         code=''

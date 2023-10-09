@@ -16,7 +16,7 @@ def get_drupal_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=Tr
         hed.update({"Cookie": cookie})
     hed.update(headers)
     try:
-        response = requests.get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
+        response = requests.Session().get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
         version=response.text.lower().split('<meta name="generator" content="drupal')[1].split('(')[0].strip()
     except Exception as ex:
         #raise(ex)

@@ -25,7 +25,7 @@ def wp_xmlrpc_methods(
 </methodCall>
 """
     try:
-        r = requests.post(
+        r = requests.Session().post(
             u, data=post, headers=hed, proxies=proxy, timeout=timeout, verify=False
         )
         return [
@@ -59,7 +59,7 @@ def wp_xmlrpc_bruteforce(
 </methodCall>
 """
     try:
-        r = requests.post(
+        r = requests.Session().post(
             u, data=post, headers=hed, proxies=proxy, timeout=timeout, verify=False
         )
         if "wp.getUsersBlogs" in [
@@ -94,7 +94,7 @@ def wp_xmlrpc_mass_bruteforce(
 </methodCall>
 """
     try:
-        r = requests.post(
+        r = requests.Session().post(
             u, data=post, headers=hed, proxies=proxy, timeout=timeout, verify=False
         )
         l = [
@@ -137,7 +137,7 @@ def wp_xmlrpc_pingback(
 </methodCall>
 """
     try:
-        r = requests.post(
+        r = requests.Session().post(
             u, data=post, headers=hed, proxies=proxy, timeout=timeout, verify=False
         )
         l = [
@@ -191,7 +191,7 @@ def wp_xmlrpc_pingback_exploit(
 """
     )
     try:
-        r = requests.post(
+        r = requests.Session().post(
             url, data=post, headers=hed, proxies=proxy, timeout=timeout, verify=False
         )
     except:
@@ -232,7 +232,7 @@ def wpadmin(
         username, password
     )
     try:
-        r = requests.post(
+        r = requests.Session().post(
             u, data=post, headers=hed, proxies=proxy, timeout=timeout, verify=False
         )
         if "isAdmin" in r.text:
@@ -280,7 +280,7 @@ def wpadmin_mass(
 </data></array></value></param></params></methodCall>
  """
     try:
-        r = requests.post(
+        r = requests.Session().post(
             u, data=post, headers=hed, proxies=proxy, timeout=timeout, verify=False
         )
         l = (
@@ -314,7 +314,7 @@ def wp_users(
         u = u[0 : len(u) - 1]
     u += path
     try:
-        r = requests.get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
+        r = requests.Session().get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
         if ('{"id":' in r.text) and ('"name":"' in r.text):
             a = json.loads(r.text)
             users = []
@@ -352,7 +352,7 @@ def wp_user(
     hed.update(headers)
     u += path + str(user)
     try:
-        r = requests.get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
+        r = requests.Session().get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
         if ('{"id":' in r.text) and ('"name":"' in r.text):
             return json.loads(r.text)
     except Exception as e:
@@ -384,7 +384,7 @@ def wp_users_enumeration(
     l = []
     for x in range(start, end + 1):
         try:
-            r = requests.get(
+            r = requests.Session().get(
                 u + path + "?author=" + str(x),
                 headers=hed,
                 proxies=proxy,
@@ -422,7 +422,7 @@ def wp_version(u, timeout=15, user_agent=None, cookie=None, proxy=None,headers={
         hed.update({"Cookie": cookie})
     hed.update(headers)
     try:
-        r = requests.get(
+        r = requests.Session().get(
             u, headers=hed, proxies=proxy, timeout=timeout, verify=False
         ).text
         return (
@@ -496,7 +496,7 @@ def fetch_wp_exploits(s,max_tries=3,proxy=None,user_agent=None,timeout=15,cookie
         if tries==max_tries:
             break
         try:
-            r=requests.get('https://wpscan.com/search?page={}&text={}'.format(i,s['name']),headers=hed,timeout=timeout,proxies=proxy,verify=False).text
+            r=requests.Session().get('https://wpscan.com/search?page={}&text={}'.format(i,s['name']),headers=hed,timeout=timeout,proxies=proxy,verify=False).text
             #print(r)
             data=json.loads(r.split('"pageData":{"props":{"data":')[1].split(',"metadata":{"pageCount":')[0])
             if len(data)==0:
@@ -528,7 +528,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=15,pro
     if cookie:
         hed.update({"Cookie": cookie})
     hed.update(headers)
-    response = requests.get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
+    response = requests.Session().get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
     server=response.headers.get('Server','')
     try:
         server_os=[x for x in server.split() if x.startswith('(')==True][0].replace('(','').replace(')','')

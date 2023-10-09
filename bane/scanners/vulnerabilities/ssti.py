@@ -45,7 +45,7 @@ def ssti_submit(
     c=''
     if parsed[0]["method"] == "get":
         try:
-            c = requests.get(
+            c = requests.Session().get(
                 parsed[0]["action"],
                 params=d,
                 headers=parsed[1],
@@ -59,7 +59,7 @@ def ssti_submit(
             pass
     else:
         try:
-            c = requests.post(
+            c = requests.Session().post(
                 parsed[0]["action"],
                 data=d,
                 files=fi,
@@ -113,7 +113,7 @@ def ssti_forms(
     headers={}
 ):
     """
-    this function is for SSTI test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
+    this function is for SSTI test with both POST and GET requests . it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
     usage:
 
     >>>import bane

@@ -3,7 +3,7 @@ from bane.gather_info.utils import *
 
 def whois(u):
     try:
-        r = requests.post("https://check-host.net/ip-info/whois", data={"host": u})
+        r = requests.Session().post("https://check-host.net/ip-info/whois", data={"host": u})
         a = r.text.split("\n\n")[0]
         b = a.split("\n")
         d = {}
@@ -39,7 +39,7 @@ def info(u, timeout=10, proxy=None, logs=False, returning=True):
     try:
         h = ""
         u = "https://check-host.net/ip-info?host=" + u
-        c = requests.get(
+        c = requests.Session().get(
             u, headers={"User-Agent": random.choice(ua)}, proxies=proxy, timeout=timeout
         ).text
         soup = BeautifulSoup(c, "html.parser")

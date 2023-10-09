@@ -5,7 +5,7 @@ from bane.common.payloads import *
 from bane.utils.pager import crawl
 
 
-def proxyscrape(protocol="http", timeout=10, country="all", ssl="all", anonymity="all"):
+def proxyscrape(protocol="http", timeout=10, country="all", ssl="all", anonymity="all",proxy=None):
     if protocol.lower() not in ("http", "socks4", "socks5", "all"):
         raise Exception(
             'protocol value must be: "http" or "socks4" or "socks5" or "all"'
@@ -16,7 +16,7 @@ def proxyscrape(protocol="http", timeout=10, country="all", ssl="all", anonymity
         raise Exception(
             'protocol value must be: "elite" or "anonymous" or "transparent" or "all"'
         )
-    return requests.get(
+    return requests.Session().get(
         "https://api.proxyscrape.com/v2/?request=getproxies&protocol="
         + protocol
         + "&timeout="
@@ -28,6 +28,7 @@ def proxyscrape(protocol="http", timeout=10, country="all", ssl="all", anonymity
         + "&anonymity="
         + anonymity,
         headers={"User-Agent": random.choice(ua)},
+        proxies=proxy
     ).text.split("\r\n")
 
 
@@ -49,7 +50,7 @@ def proxy_check(ip, p, proto="http",username=None,password=None, timeout=5):
         else:
             proxy={"http": "http://{}:{}@{}:{}".format(username,password,ip,p)}
         try:
-            requests.get(
+            requests.Session().get(
                 "http://ipinfo.io/ip",
                 proxies=proxy,
                 headers={"User-Agent": random.choice(ua)},
@@ -127,9 +128,10 @@ def get_burpsuit_proxy(host=burpsuit_proxy_host,port=burpsuit_proxy_port):
     return proxy
 
 
-def get_socks5_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None):
+def get_socks5_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None,timeout=5):
     try:
         s = socks.socksocket()
+        s.settimeout(timeout)
         s.setproxy( 
                     proxy_type=socks.SOCKS5,
                     addr=proxy_host,
@@ -143,9 +145,10 @@ def get_socks5_proxy_socket(host,port,proxy_host,proxy_port,username=None,passwo
         return
 
 
-def get_socks4_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None):
+def get_socks4_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None,timeout=5):
     try:
         s = socks.socksocket()
+        s.settimeout(timeout)
         s.setproxy( 
                     proxy_type=socks.SOCKS4,
                     addr=proxy_host,
@@ -159,9 +162,36 @@ def get_socks4_proxy_socket(host,port,proxy_host,proxy_port,username=None,passwo
         return
 
 
-def get_http_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None):
+def get_socks_proxy_socket(host,port,proxy_host,proxy_port,proxy_type,username=None,password=None,timeout=5):
     try:
         s = socks.socksocket()
+        s.settimeout(timeout)
+        if proxy_type==4:
+            s.setproxy( 
+                        proxy_type=socks.SOCKS4,
+                        addr=proxy_host,
+                        port=proxy_port,
+                        username=username,
+                        password=password,
+                )
+        elif proxy_type==5:
+            s.setproxy( 
+                        proxy_type=socks.SOCKS5,
+                        addr=proxy_host,
+                        port=proxy_port,
+                        username=username,
+                        password=password,
+                )
+        s.connect((host,port))
+        return s
+    except:
+        return
+
+
+def get_http_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None,timeout=5):
+    try:
+        s = socks.socksocket()
+        s.settimeout(timeout)
         s.setproxy( 
                     proxy_type=socks.HTTP,
                     addr=proxy_host,
@@ -235,7 +265,7 @@ def get_http_proxy(proxy_host,proxy_port,username=None,password=None):
         pass
     for u in l:
         try:
-            a = requests.get(
+            a = requests.Session().get(
                 u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
             )
             ips = re.findall(
@@ -267,7 +297,7 @@ def get_http_proxy(proxy_host,proxy_port,username=None,password=None):
         pass
     for u in l:
         try:
-            a = requests.get(
+            a = requests.Session().get(
                 u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
             )
             ips = re.findall(
@@ -279,7 +309,7 @@ def get_http_proxy(proxy_host,proxy_port,username=None,password=None):
             pass
         u = "http://proxy-daily.com/#"
         try:
-            r = requests.get(
+            r = requests.Session().get(
                 u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
             ).text
             soup = BeautifulSoup(r, "html.parser")
@@ -357,7 +387,7 @@ def massocks4(count=None, timeout=15):
         pass
     for u in l:
         try:
-            a = requests.get(
+            a = requests.Session().get(
                 u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
             )
             ips = re.findall(
@@ -370,7 +400,7 @@ def massocks4(count=None, timeout=15):
     l = []
     u = "http://proxy-daily.com/#"
     try:
-        r = requests.get(
+        r = requests.Session().get(
             u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
         ).text
         soup = BeautifulSoup(r, "html.parser")
@@ -446,7 +476,7 @@ def massocks5(count=None, timeout=15):
         pass
     for u in l:
         try:
-            a = requests.get(
+            a = requests.Session().get(
                 u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
             )
             ips = re.findall(
@@ -460,7 +490,7 @@ def massocks5(count=None, timeout=15):
     l = []
     s5 = []
     try:
-        r = requests.get(
+        r = requests.Session().get(
             u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
         ).text
         soup = BeautifulSoup(r, "html.parser")
@@ -481,7 +511,7 @@ def massocks5(count=None, timeout=15):
         pass
     for u in l:
         try:
-            a = requests.get(
+            a = requests.Session().get(
                 u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
             )
             ips = re.findall(
@@ -523,7 +553,7 @@ def http(logs=True, count=300, timeout=15):
     try:
         if logs == True:
             print("[+]Checking: {}".format(u))
-        c = requests.get(u, timeout=timeout).text
+        c = requests.Session().get(u, timeout=timeout).text
         a = 0
         soup = BeautifulSoup(c, "html.parser")
         y = soup.find_all("tr")
@@ -552,7 +582,7 @@ def http(logs=True, count=300, timeout=15):
    u='https://list.proxylistplus.com/Fresh-HTTP-Proxy-List-'+str(i)
    if logs==True:
     print("[+]Checking: {}".format(u))
-   c=requests.get(u,timeout=timeout).text
+   c=requests.Session().get(u,timeout=timeout).text
    soup = BeautifulSoup(c,"html.parser")
    y= soup.find_all("tr")
    for x in y:
@@ -586,7 +616,7 @@ def http(logs=True, count=300, timeout=15):
             if logs == True:
                 print("[+]Checking: {}".format(u))
             y = []
-            c = requests.get(u, timeout=timeout).text
+            c = requests.Session().get(u, timeout=timeout).text
             soup = BeautifulSoup(c, "html.parser")
             for r in soup.find_all("script"):
                 h = "".join(map(str, r.contents))
@@ -625,7 +655,7 @@ def https(logs=True, count=200, timeout=15):
     try:
         if logs == True:
             print("[+]Checking: {}".format(u))
-        c = requests.get(u, timeout=timeout).text
+        c = requests.Session().get(u, timeout=timeout).text
         soup = BeautifulSoup(c, "html.parser")
         y = soup.find_all("tr")
         a = 0
@@ -661,7 +691,7 @@ def https(logs=True, count=200, timeout=15):
   try:
    if logs==True:
     print("[+]Checking: {}".format(u))
-   c=requests.get(u,timeout=timeout).text
+   c=requests.Session().get(u,timeout=timeout).text
    soup = BeautifulSoup(c,"html.parser")
    y= soup.find_all("tr")
    for x in y:
@@ -712,7 +742,7 @@ def socks5(logs=True, count=100, timeout=15):
     try:
         if logs == True:
             print("[+]Checking: {}".format(u))
-        c = requests.get(u, timeout=timeout).text
+        c = requests.Session().get(u, timeout=timeout).text
         soup = BeautifulSoup(c, "html.parser")
         y = soup.find_all("tr")
         for x in y:
@@ -740,7 +770,7 @@ def socks5(logs=True, count=100, timeout=15):
   try:
    if logs==True:
     print("[+]Checking: {}".format(u))
-   c=requests.get(u,timeout=timeout).text
+   c=requests.Session().get(u,timeout=timeout).text
    s = BeautifulSoup(c,"html.parser")
    y=s.find_all('tr')
    for x in y:
@@ -786,7 +816,7 @@ def socks4(logs=True, count=30, timeout=15):
     try:
         if logs == True:
             print("[+]Checking: {}".format(u))
-        c = requests.get(u, timeout=timeout).text
+        c = requests.Session().get(u, timeout=timeout).text
         soup = BeautifulSoup(c, "html.parser")
         y = soup.find_all("tr")
         for x in y:
@@ -813,7 +843,7 @@ def socks4(logs=True, count=30, timeout=15):
   try:
    if logs==True:
     print("[+]Checking: {}".format(u))
-   c=requests.get(u,timeout=timeout).text
+   c=requests.Session().get(u,timeout=timeout).text
    s = BeautifulSoup(c,"html.parser")
    y=s.find_all('tr')
    for x in y:

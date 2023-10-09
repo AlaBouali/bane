@@ -1,4 +1,6 @@
 from bane.bruteforce.utils import *
+
+
 """
   the next functions are used to check the login credentials you provide, it can be used for bruteforce attacks.
 
@@ -20,9 +22,11 @@ from bane.bruteforce.utils import *
 """
 
 
-def smtp(u, username, password, p=25, ehlo=True, helo=False, ttls=False):
+def smtp(u, username, password, p=25, ehlo=True, helo=False, ttls=False,proxy_type=None,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,timeout=5):
     try:
-        s = smtplib.SMTP(u, p)  # connect to smtp server
+        sock=get_socks_proxy_socket(u,p,proxy_host,proxy_port,proxy_type,username=proxy_username,password=proxy_password,timeout=timeout)
+        s = smtplib.SMTP()  
+        s.sock=sock
         if ehlo == True:
             s.ehlo()  # ehlo
             if ttls == True:
@@ -38,10 +42,10 @@ def smtp(u, username, password, p=25, ehlo=True, helo=False, ttls=False):
     return False
 
 
-def telnet(u, username, password, p=23, timeout=5, bot_mode=False):
+def telnet(u, username, password, p=23, timeout=5, bot_mode=False,proxy_type=None,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None):
     try:
         t = xtelnet.session()
-        t.connect(u, username=username, password=password, p=p, timeout=timeout)
+        t.connect(u, username=username, password=password, p=p, timeout=timeout,proxy_type=proxy_type,proxy_host=proxy_host,proxy_port=proxy_port,proxy_username=proxy_username,proxy_password=proxy_password)
         if bot_mode == True:
             a = t.execute("busybox")
         t.destroy()
@@ -59,7 +63,7 @@ def telnet(u, username, password, p=23, timeout=5, bot_mode=False):
 
 
 def ssh(u, username, password, p=22, timeout=5, exchange_key=None):
-    if os.name == "nt":
+    if os.name == "nt" or os.name==os.PyShadowString('java', 'nt'):
         if exchange_key != None:  # this doesn't work on windows for some reason :(
             return False
         l = 'echo y | plink -ssh -l {} -pw {} {} -P {} "hvbjkjk"'.format(
@@ -117,16 +121,21 @@ def ssh(u, username, password, p=22, timeout=5, exchange_key=None):
         or ("refused" in ou[1].decode("utf-8").lower())
         or ("Unsupported KEX algorithm" in ou[1].decode("utf-8"))
         or ("Bad SSH2 KexAlgorithms" in ou[1].decode("utf-8"))
+        or ("not accepted" in ou[1].decode("utf-8").lower())
+        or ("invalid" in ou[1].decode("utf-8").lower())
+        or ("incorrect" in ou[1].decode("utf-8").lower())
     ):
         return False
     else:
         return True
 
 
-def ftp_anon(ip, timeout=5):
+def ftp_anon(ip, p,timeout=5,proxy_type=None,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None):
     # anonymous ftp login
     try:
-        ftp = FTP(ip, timeout=timeout)
+        sock=get_socks_proxy_socket(ip,p,proxy_host,proxy_port,proxy_type,username=proxy_username,password=proxy_password,timeout=timeout)
+        ftp = FTP()
+        ftp.sock=sock
         ftp.login()
         return True
     except Exception as e:
@@ -134,10 +143,12 @@ def ftp_anon(ip, timeout=5):
     return False
 
 
-def ftp(ip, username, password, timeout=5):
+def ftp(ip,p, username, password, timeout=5,proxy_type=None,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None):
     try:
         i = False
-        ftp = FTP(ip, timeout=timeout)
+        sock=get_socks_proxy_socket(ip,p,proxy_host,proxy_port,proxy_type,username=proxy_username,password=proxy_password,timeout=timeout)
+        ftp = FTP()
+        ftp.sock=sock
         ftp.login(username, password)
         return True
     except Exception as e:

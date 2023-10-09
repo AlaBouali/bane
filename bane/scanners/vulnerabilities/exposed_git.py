@@ -23,7 +23,7 @@ def exposed_git(
             hea = {"User-Agent": us}
     hea.update(headers)
     try:
-        r=requests.get(u,timeout=timeout,verify=False,proxies=proxy,headers=hea)
+        r=requests.Session().get(u,timeout=timeout,verify=False,proxies=proxy,headers=hea)
         if "index of" in r.text.lower() and "/.git" in r.text.lower():
             return True
     except:

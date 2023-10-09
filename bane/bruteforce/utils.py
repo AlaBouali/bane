@@ -4,6 +4,7 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 from ftplib import FTP
 from ..common.payloads import *
+from ..utils.proxer import get_socks_proxy_socket
 
 if os.path.isdir("/data/data") == True:
     adr = True

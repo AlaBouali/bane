@@ -19,7 +19,7 @@ def subdomains_crt(domain,dns_server='8.8.8.8',resolve_timeout=2,resolve_lifetim
     if logs==True:
         print('[*] searching with crt.sh ...\n')
     try:
-        r = requests.get(
+        r = requests.Session().get(
             "https://crt.sh/?output=json&q=%25." + domain,
             headers=hed,
             proxies=proxy,
@@ -39,7 +39,7 @@ def subdomains_crt(domain,dns_server='8.8.8.8',resolve_timeout=2,resolve_lifetim
         for x in l:
             if extract_root_domain(x)==domain:
                 try:
-                    r=requests.get('http://'+x,headers=hed,proxies=proxy,timeout=subdomain_check_timeout,verify=False)
+                    r=requests.Session().get('http://'+x,headers=hed,proxies=proxy,timeout=subdomain_check_timeout,verify=False)
                     if extract_root_domain(r.url.split('://')[1].split('/')[0])==extract_root_domain(x):
                         result.update({x:r.url})
                         if logs==True:
@@ -75,7 +75,7 @@ def subdomains_finder(
     sd = []
     while True:
         try:
-            s = requests.session()
+            s = requests.Session().session()
             r = s.post(
                 "https://scan.penteston.com/scan_system.php",
                 data={
@@ -131,7 +131,7 @@ def get_subdomains_from_wayback(domain,dns_server='8.8.8.8',resolve_timeout=2,re
     if logs==True:
         print('[*] searching with wayback machine ...\n')
     url = "https://web.archive.org/cdx/search/cdx?url=*.{}/*&output=json&fl=original&collapse=urlkey".format(domain)
-    response = requests.get(url,headers=hed,timeout=wayback_timeout,proxies=proxy)
+    response = requests.Session().get(url,headers=hed,timeout=wayback_timeout,proxies=proxy)
     if response.status_code == 200:
         data = response.json()
         for entry in data:
@@ -142,7 +142,7 @@ def get_subdomains_from_wayback(domain,dns_server='8.8.8.8',resolve_timeout=2,re
                 if subdomain not in invalid_subd and extract_root_domain(subdomain)==domain:
                     if subdomain not in urls:
                         try:
-                            r=requests.get(original_url,headers=hed,timeout=subdomain_check_timeout,proxies=proxy)
+                            r=requests.Session().get(original_url,headers=hed,timeout=subdomain_check_timeout,proxies=proxy)
                             if extract_root_domain(r.url.split('://')[1].split('/')[0])==extract_root_domain(subdomain):
                                 urls[subdomain]=set()
                                 urls[subdomain].add(original_url)

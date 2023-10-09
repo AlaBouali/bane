@@ -16,7 +16,7 @@ def norton_rate(u, timeout=30, proxy=None):
     try:
         ur = urllib.quote(u, safe="")
         ul = "https://safeweb.norton.com/report/show?url=" + ur
-        c = requests.get(
+        c = requests.Session().et(
             ul,
             headers={"User-Agent": random.choice(ua)},
             proxies=proxy,

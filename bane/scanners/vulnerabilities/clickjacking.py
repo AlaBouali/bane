@@ -12,7 +12,7 @@ def page_clickjacking(u, proxy=None, timeout=10, user_agent=None, cookie=None, l
     heads.update(headers)
     try:
         if request_headers==None:
-            r = requests.get(
+            r = requests.Session().get(
                 u, headers=heads, proxies=proxy, timeout=timeout, verify=False
             ).headers
         else:

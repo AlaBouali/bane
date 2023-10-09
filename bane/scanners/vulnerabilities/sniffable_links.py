@@ -13,7 +13,7 @@ def sniffable_links(u, proxy=None, timeout=10, user_agent=None, cookie=None,cont
     vul=[]
     try:
         if content==None:
-            r=requests.get(u,headers=heads,timeout=timeout,verify=False,proxies=proxy)
+            r=requests.Session().get(u,headers=heads,timeout=timeout,verify=False,proxies=proxy)
             for x in r.headers:
                     if x.lower().strip() == "strict-transport-security":
                         if logs == True:

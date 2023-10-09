@@ -16,7 +16,7 @@ def scan_backend_technology(u, proxy=None, timeout=10, user_agent=None, cookie=N
     heads.update(headers)
     try:
         if request_headers==None:
-            r = requests.get(
+            r = requests.Session().get(
                 u, headers=heads, proxies=proxy, timeout=timeout, verify=False
             ).headers
         else:

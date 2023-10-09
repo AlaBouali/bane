@@ -65,7 +65,7 @@ def file_upload_forms(
         )
         h.update(headers)
         try:
-            r = requests.post(
+            r = requests.Session().post(
                 fo["action"], data=d, files=f, proxies=proxy, timeout=timeout, headers=h,verify=False,
             )
             if (

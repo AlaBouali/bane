@@ -110,13 +110,13 @@ def csrf_forms(
         for j in f:
             l.append(f[j][0])
         if x["method"] == "get":
-            r = requests.get(
+            r = requests.Session().get(
                 x["action"], params=d, proxies=proxy, timeout=timeout, headers=h,verify=False,
             )
         else:
             if "application/json" in x["enctype"]:
                 d = json.dumps(d)
-            r = requests.post(
+            r = requests.Session().post(
                 x["action"], data=d, files=f, proxies=proxy, timeout=timeout, headers=h,verify=False,
             )
         if all(i in r.text for i in l):

@@ -47,7 +47,7 @@ def rce_submit(
     c=''
     if parsed[0]["method"] == "get":
         try:
-            c = requests.get(
+            c = requests.Session().get(
                 parsed[0]["action"],
                 params=d,
                 headers=parsed[1],
@@ -56,7 +56,7 @@ def rce_submit(
                 verify=False,
             )
             if based_on[0] == "file":
-                c = requests.get(
+                c = requests.Session().get(
                     parsed[0]["action"].replace(
                         parsed[0]["action"].split("/")[-1], based_on[1] + ".txt"
                     ),
@@ -92,7 +92,7 @@ def rce_submit(
                     return (True, {"p_o_c":p_o_c},False,False,False,False)
     else:
         try:
-            c = requests.post(
+            c = requests.Session().post(
                 parsed[0]["action"],
                 data=d,
                 files=fi,
@@ -102,7 +102,7 @@ def rce_submit(
                 verify=False,
             )
             if based_on[0] == "file":
-                c = requests.get(
+                c = requests.Session().get(
                     parsed[0]["action"].replace(
                         parsed[0]["action"].split("/")[-1], based_on[1] + ".txt"
                     ),
@@ -170,7 +170,7 @@ def rce_forms(
     headers={}
 ):
     """
-    this function is for RCE test with both POST and GET requests. it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
+    this function is for RCE test with both POST and GET requests . it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
 
     usage:
 

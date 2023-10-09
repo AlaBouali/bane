@@ -12,7 +12,7 @@ def springboot_actuator(u,user_agent=None,cookie=None,proxy=None,timeout=None,pa
         hed.update({"Cookie": cookie})
     hed.update(headers)
     try:
-        return requests.get(
+        return requests.Session().get(
             u + path,
             headers=hed,
             proxies=proxy,

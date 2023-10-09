@@ -65,7 +65,7 @@ class filemanager_finder:
                 if u[len(u) - 1] == "/":
                     u = u[0 : len(u) - 1]
                 g = u + i
-                r = requests.get(
+                r = requests.Session().get(
                     g,
                     headers=hed,
                     allow_redirects=False,
