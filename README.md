@@ -123,7 +123,7 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 # Vulnerabilities TESTING:
 
 <h4>Automatic XSS scan for page:</h4>
-<h5>xss(
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">xss(
       u,
       max_pages=5,
       pages=[],
@@ -151,7 +151,7 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
       debug=False,
       mime_type=None,
       headers={}
-  )</h5>
+  )</pre></div>
   <p>
     This function is designed to perform XSS testing on one or more web pages. It scans for XSS vulnerabilities in forms and inputs on the pages.
   </p>
@@ -187,7 +187,7 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
     <li><code>headers</code>: Additional headers to include in requests.</li>
   </ul>
 
-  <h2>Return Value:</h2>
+  <h5>Return Value:</h>
   <p>
     The function returns a list of dictionaries, each containing information about XSS testing results on a page.
   </p>
