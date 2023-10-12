@@ -123,6 +123,74 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 # Vulnerabilities TESTING:
 
 <h4>Automatic XSS scan for page:</h4>
+<h5>xss(
+      u,
+      max_pages=5,
+      pages=[],
+      payload=None,
+      email_extension='@gmail.com',
+      phone_pattern='XXX-XXX-XXXX',
+      unicode_random_level=0,
+      number=(1, 9),
+      js_function="alert",
+      dont_change={},
+      predefined_inputs={},
+      replaceble_parameters={"phpvalue": ((".", ""),)},
+      file_extension="png",
+      context_breaker='">',
+      save_to_file=None,
+      logs=True,
+      fill_empty=10,
+      leave_empty=[],
+      dont_send=["btnClear"],
+      proxy=None,
+      proxies=None,
+      timeout=10,
+      user_agent=None,
+      cookie=None,
+      debug=False,
+      mime_type=None,
+      headers={}
+  )</h5>
+  <p>
+    This function is designed to perform XSS testing on one or more web pages. It scans for XSS vulnerabilities in forms and inputs on the pages.
+  </p>
+
+  <strong>Parameters:</strong>
+  <ul>
+    <li><code>u</code>: The target URL to test for XSS vulnerabilities.</li>
+    <li><code>max_pages</code>: Maximum number of pages to scan for XSS (default is 5).</li>
+    <li><code>pages</code>: List of specific pages to scan (if not provided, it's auto-discovered).</li>
+    <li><code>payload</code>: The XSS payload to test.</li>
+    <li><code>email_extension</code>: Email extension for generating email inputs (default is '@gmail.com').</li>
+    <li><code>phone_pattern</code>: Pattern for generating phone inputs (default is 'XXX-XXX-XXXX').</li>
+    <li><code>unicode_random_level</code>: Level of Unicode encoding for payload (default is 0).</li>
+    <li><code>number</code>: Range for generating random numbers (default is between 1 and 9).</li>
+    <li><code>js_function</code>: JavaScript function to inject (default is "alert").</li>
+    <li><code>dont_change</code>: A dictionary of parameters not to change during testing.</li>
+    <li><code>predefined_inputs</code>: A dictionary of predefined inputs for specific parameters.</li>
+    <li><code>replaceble_parameters</code>: Dictionary mapping parameters to their possible replacements.</li>
+    <li><code>file_extension</code>: The file extension to use for file inputs (default is "png").</li>
+    <li><code>context_breaker</code>: Context breaker to insert before payloads (default is '>").</li>
+    <li><code>save_to_file</code>: If provided, the results will be saved to this file.</li>
+    <li><code>logs</code>: Boolean to enable or disable logging (default is True).</li>
+    <li><code>fill_empty</code>: Number of inputs to fill with payload (default is 10).</li>
+    <li><code>leave_empty</code>: List of inputs not to fill with payloads.</li>
+    <li><code>dont_send</code>: List of inputs not to send in the request.</li>
+    <li><code>proxy</code>: A proxy server to use for requests.</li>
+    <li><code>proxies</code>: List of proxy servers to choose from randomly.</li>
+    <li><code>timeout</code>: Request timeout in seconds (default is 10).</li>
+    <li><code>user_agent</code>: User-Agent header to use in requests.</li>
+    <li><code>cookie</code>: Cookies to include in requests.</li>
+    <li><code>debug</code>: Boolean to enable or disable debug mode (default is False).</li>
+    <li><code>mime_type</code>: MIME type for file inputs.</li>
+    <li><code>headers</code>: Additional headers to include in requests.</li>
+  </ul>
+
+  <h2>Return Value:</h2>
+  <p>
+    The function returns a list of dictionaries, each containing information about XSS testing results on a page.
+  </p>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.xss(link , payload="<script>alert(123)</script>" , timeout=15 )
 </pre></div>

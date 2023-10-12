@@ -8,7 +8,7 @@ class tcp_flood(DDoS_Class):
         threads_daemon=True,
         min_size=10,
         max_size=50,
-        threads=256,
+        threads=500,
         timeout=5,
         round_min=1000,
         round_max=10000,

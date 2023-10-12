@@ -1,7 +1,8 @@
 sql_errors=['Warning: mysql_query()','sqlite3.OperationalError','error in your SQL syntax','mysql_fetch', 'num_rows', 'ORA-01756', 'Error Executing Database Query', 'SQLServer JDBC Driver',
 'Microsoft OLE DB Provider for SQL Server', 'Unclosed quotation mark', 'ODBC Microsoft Access Driver', 'Microsoft JET Database', 'Error Occurred While Processing Request',
 'Server Error', 'Microsoft OLE DB Provider for ODBC Drivers error', 'Invalid Querystring', 'OLE DB Provider for ODBC', 'VBScript Runtime', 'ADODB.Field',
-'BOF or EOF', 'ADODB.Command', 'JET Database', 'mysql_fetch_array()', 'Syntax error', 'mysql_numrows()', 'GetArray()', 'FetchRow()', 'Input string was not in a correct format']
+'BOF or EOF', 'ADODB.Command', 'JET Database', 'mysql_fetch_array()', 'Syntax error', 'mysql_numrows()', 'GetArray()', 'FetchRow()', 'Input string was not in a correct format',
+'quoted string not properly terminated','unclosed quotation mark after the character string','you have an error in your']
 
 xml_parser_errors=[
     'org.xml.sax.SAXParseException',

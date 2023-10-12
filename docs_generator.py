@@ -2,10 +2,10 @@ import os,re
 import shutil
 from bs4 import BeautifulSoup
 
-os.system('pdoc --html .')
+#os.system('pdoc --html .')
 
 # Define the directory where you want to start the search
-start_directory = 'html'
+#start_directory = 'html'
 
 # Define the old and new file extensions
 old_extension = '.html'
@@ -20,7 +20,7 @@ def delete_pycache_folders(root_directory):
                 shutil.rmtree(pycache_path)
 
 delete_pycache_folders('bane')
-
+"""
 def rename_and_edit_files(directory):
     # Define the old and new file extensions
     old_extension = '.html'
@@ -55,4 +55,4 @@ def rename_and_edit_files(directory):
                 print(f'Edited: {new_file_path}')
 
 rename_and_edit_files('html')
-os.rename('html', 'docs')
+os.rename('html', 'docs')"""

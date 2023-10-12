@@ -180,17 +180,6 @@ def xss_forms(
     mime_type=None,
     headers={}
 ):
-    """
-    this function is for xss test with both POST and GET requests . it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
-
-    usage:
-
-    >>>import bane
-    >>>bane.xss_forms('http://www.example.com/")
-
-    >>>bane.xss_forms('http://www.example.com/',payload="<script>alert(123);</script>")
-
-    """
     target_page = u
     if proxy:
         proxy = proxy
