@@ -187,7 +187,7 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
     <li><code>headers</code>: Additional headers to include in requests.</li>
   </ul>
 
-  <h5>Return Value:</h>
+  <b>Return Value:</b>
   <p>
     The function returns a list of dictionaries, each containing information about XSS testing results on a page.
   </p>
