@@ -518,7 +518,7 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 </div>
 
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.ssrf(link )
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.ssrf(link )</pre></div>
 <h4>CR/LF Injection Testing Functions</h4>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
@@ -631,8 +631,6 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 </pre></div><h4>Clickjacking:</h4>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.page_clickjacking(link, timeout=15 )
-
-</pre></div>
 
 </pre></div>
 
