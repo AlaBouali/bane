@@ -421,6 +421,54 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 
 
 </pre></div><h4>Path traversal:</h4>
+<h4>Path Traversal Vulnerability Scanner</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">path_traversal(
+      u,
+      max_pages=5,
+      logs=True,
+      null_byte=False,
+      bypass=False,
+      target_os="linux",
+      php_wrapper=None,
+      proxy=None,
+      proxies=None,
+      timeout=10,
+      user_agent=None,
+      cookie=None,
+      pages=[],
+      headers={}
+  )</pre>
+</div>
+
+<p>
+  This function is designed to perform Path Traversal vulnerability testing on one or more web pages. It scans for Path Traversal vulnerabilities in URLs and their associated files on the server.
+</p>
+
+<strong>Parameters:</strong>
+<ul>
+  <li><code>u</code>: The target URL to test for Path Traversal vulnerabilities.</li>
+  <li><code>max_pages</code>: Maximum number of pages to scan for vulnerabilities (default is 5).</li>
+  <li><code>logs</code>: Boolean to enable or disable logging (default is True).</li>
+  <li><code>null_byte</code>: Include null byte (%00) in the path (default is False).</li>
+  <li><code>bypass</code>: Bypass security measures by adding extra slashes (default is False).</li>
+  <li><code>target_os</code>: Target operating system ("linux" or "windows," default is "linux").</li>
+  <li><code>php_wrapper</code>: Prefix to be added before the traversal path (e.g., "file").</li>
+  <li><code>proxy</code>: A proxy server to use for requests.</li>
+  <li><code>proxies</code>: List of proxy servers to choose from randomly.</li>
+  <li><code>timeout</code>: Request timeout in seconds (default is 10).</li>
+  <li><code>user_agent</code>: User-Agent header to use in requests.</li>
+  <li><code>cookie</code>: Cookies to include in requests.</li>
+  <li><code>pages</code>: List of specific pages to scan (if not provided, it's auto-discovered).</li>
+  <li><code>headers</code>: Additional headers to include in requests.</li>
+</ul>
+
+<b>Return Value:</b>
+<p>
+  The function returns a list of dictionaries, each containing information about Path Traversal testing results on a page. Each dictionary includes a Boolean value indicating whether a vulnerability was found and the URL where the vulnerability was detected.
+</p>
+
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.path_traversal(link, timeout=15 )
 
