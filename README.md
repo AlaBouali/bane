@@ -519,6 +519,103 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.ssrf(link )
+<h4>CR/LF Injection Testing Functions</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+  <pre style="margin: 0; line-height: 125%">crlf_unicode_encode(
+    random_level=0,
+    line_feed_only=False,
+    carriage_return_only=False
+  )</pre>
+</div>
+<p>
+  This function is designed to generate CR/LF (Carriage Return / Line Feed) characters for use in HTTP request parameters. CR/LF injection is a web security vulnerability that can lead to various attacks.
+</p>
+
+<strong>Parameters:</strong>
+<ul>
+  <li><code>random_level</code>: An integer representing the level of randomness in character selection (default is 0). 
+    - Level 0: Always returns "%0d%0a".
+    - Level 1: Randomly selects between "%E5%98%8D%0a" and "%0d%E5%98%8A".
+    - Level 2: Always returns "%E5%98%8D%E5%98%8A".
+  </li>
+  <li><code>line_feed_only</code>: A boolean flag indicating whether to return only the line feed character (default is False).</li>
+  <li><code>carriage_return_only</code>: A boolean flag indicating whether to return only the carriage return character (default is False).</li>
+</ul>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+  <pre style="margin: 0; line-height: 125%">crlf_header_injection(
+    u,
+    unicode_random_level=0,
+    carriage_return_only=False,
+    line_feed_only=False,
+    proxy=None,
+    timeout=10,
+    user_agent=None,
+    cookie=None,
+    debug=False,
+    headers={}
+  )</pre>
+</div>
+<p>
+  This function is designed to test for CR/LF injection vulnerabilities in HTTP headers of a given URL.
+</p>
+
+<strong>Parameters:</strong>
+<ul>
+  <li><code>u</code>: The target URL to test for CR/LF injection vulnerabilities.</li>
+  <li><code>unicode_random_level</code>: Level of Unicode encoding for the CR/LF characters (default is 0).</li>
+  <li><code>carriage_return_only</code>: A boolean flag indicating whether to use only carriage return character (default is False).</li>
+  <li><code>line_feed_only</code>: A boolean flag indicating whether to use only line feed character (default is False).</li>
+  <li><code>proxy</code>: A proxy server to use for requests.</li>
+  <li><code>timeout</code>: Request timeout in seconds (default is 10).</li>
+  <li><code>user_agent</code>: User-Agent header to use in requests.</li>
+  <li><code>cookie</code>: Cookies to include in requests.</li>
+  <li><code>debug</code>: Boolean to enable or disable debug mode (default is False).</li>
+  <li><code>headers</code>: Additional headers to include in requests.</li>
+</ul>
+
+<b>Return Value:</b>
+<p>
+  The function returns <code>True</code> if it finds the string "banetest" in the response headers; otherwise, it returns <code>False</code>.
+</p>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+  <pre style="margin: 0; line-height: 125%">crlf_body_injection(
+    u,
+    proxy=None,
+    unicode_random_level=0,
+    carriage_return_only=False,
+    line_feed_only=False,
+    timeout=10,
+    user_agent=None,
+    cookie=None,
+    debug=False,
+    headers={}
+  )</pre>
+</div>
+<p>
+  This function is designed to test for CR/LF injection vulnerabilities in the body of a web page's response.
+</p>
+
+<strong>Parameters:</strong>
+<ul>
+  <li><code>u</code>: The target URL to test for CR/LF injection vulnerabilities.</li>
+  <li><code>proxy</code>: A proxy server to use for requests.</li>
+  <li><code>unicode_random_level</code>: Level of Unicode encoding for the CR/LF characters (default is 0).</li>
+  <li><code>carriage_return_only</code>: A boolean flag indicating whether to use only the carriage return character (default is False).</li>
+  <li><code>line_feed_only</code>: A boolean flag indicating whether to use only the line feed character (default is False).</li>
+  <li><code>timeout</code>: Request timeout in seconds (default is 10).</li>
+  <li><code>user_agent</code>: User-Agent header to use in requests.</li>
+  <li><code>cookie</code>: Cookies to include in requests.</li>
+  <li><code>debug</code>: Boolean to enable or disable debug mode (default is False).</li>
+  <li><code>headers</code>: Additional headers to include in requests.</li>
+</ul>
+
+<b>Return Value:</b>
+<p>
+  The function returns <code>True</code> if it finds the string "banetest;$@*" in the response text; otherwise, it returns <code>False</code>.
+</p>
 
 </pre></div><h4>CRLF header injection:</h4>
 
