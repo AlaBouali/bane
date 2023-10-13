@@ -473,6 +473,50 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.path_traversal(link, timeout=15 )
 
 </pre></div><h4>SSRF:</h4>
+<h4>Server-Side Request Forgery (SSRF) Scanner</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">ssrf(
+      u,
+      max_pages=5,
+      logs=True,
+      null_byte=False,
+      link="http://www.google.com",
+      timeout=120,
+      signature="<title>Google</title>",
+      proxy=None,
+      proxies=None,
+      user_agent=None,
+      cookie=None,
+      pages=[],
+      headers={}
+  )</pre></div>
+  <p>
+    This function is designed to perform Server-Side Request Forgery (SSRF) vulnerability testing on one or more web pages. It scans for SSRF vulnerabilities in the target URL and its parameters.
+  </p>
+
+  <strong>Parameters:</strong>
+  <ul>
+    <li><code>u</code>: The target URL to test for SSRF vulnerabilities.</li>
+    <li><code>max_pages</code>: Maximum number of pages to scan for SSRF (default is 5).</li>
+    <li><code>logs</code>: Boolean to enable or disable logging (default is True).</li>
+    <li><code>null_byte</code>: Boolean to append a null byte character ("%00") to the URL (default is False).</li>
+    <li><code>link</code>: The link to be used in SSRF checks (default is "http://www.google.com").</li>
+    <li><code>timeout</code>: Request timeout in seconds (default is 120).</li>
+    <li><code>signature</code>: The HTML signature to check in the response (default is "<title>Google</title>").</li>
+    <li><code>proxy</code>: A proxy server to use for requests.</li>
+    <li><code>proxies</code>: List of proxy servers to choose from randomly.</li>
+    <li><code>user_agent</code>: User-Agent header to use in requests.</li>
+    <li><code>cookie</code>: Cookies to include in requests.</li>
+    <li><code>pages</code>: List of specific pages to scan (if not provided, it's auto-discovered).</li>
+    <li><code>headers</code>: Additional headers to include in requests.</li>
+  </ul>
+
+  <b>Return Value:</b>
+  <p>
+    The function returns a list of dictionaries, each containing information about SSRF testing results on a page. Each dictionary contains a boolean indicating whether an SSRF vulnerability was found and the URL where it was detected.
+  </p>
+</div>
+
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.ssrf(link )
 
