@@ -16,7 +16,7 @@ def proxyscrape(protocol="http", timeout=10, country="all", ssl="all", anonymity
         raise Exception(
             'protocol value must be: "elite" or "anonymous" or "transparent" or "all"'
         )
-    return requests.Session().get(
+    proxies= requests.Session().get(
         "https://api.proxyscrape.com/v2/?request=getproxies&protocol="
         + protocol
         + "&timeout="
@@ -30,6 +30,21 @@ def proxyscrape(protocol="http", timeout=10, country="all", ssl="all", anonymity
         headers={"User-Agent": random.choice(ua)},
         proxies=proxy
     ).text.split("\r\n")
+    return [ {'proxy_host':x.split(':')[0],'proxy_port':int(x.split(':')[1]),'proxy_username':None,'proxy_password':None,'proxy_type':protocol} for x in proxies]
+
+
+def parse_proxy_string(s,proxy_type):
+    s=s.split(':')
+    if len(s)==2:
+        return {'proxy_host':s[0],'proxy_port':int(s[1]),'proxy_username':None,'proxy_password':None,'proxy_type':proxy_type}
+    if len(s)==3:
+        return {'proxy_host':s[0],'proxy_port':int(s[1]),'proxy_username':s[2],'proxy_password':'','proxy_type':proxy_type}
+    if len(s)==4:
+        return {'proxy_host':s[0],'proxy_port':int(s[1]),'proxy_username':s[2],'proxy_password':s[3],'proxy_type':proxy_type}
+
+
+def parse_proxies_list(l,proxy_type):
+    return [parse_proxy_string(x,proxy_type) for x in l]
 
 
 def proxy_check(ip, p, proto="http",username=None,password=None, timeout=5):
@@ -95,17 +110,11 @@ def proxy_check(ip, p, proto="http",username=None,password=None, timeout=5):
 
 
 def get_tor_socks5_proxy_windows(host=tor_proxy_host,port=tor_proxy_socks5_port_windows):
-    proxy=tor_socks5_proxy.copy()
-    for x in proxy:
-        proxy[x]=proxy[x].format(host,port)
-    return proxy
+    return parse_proxy_string('{}:{}'.format(host,port),'socks5')
 
 
 def get_tor_socks5_proxy_linux(host=tor_proxy_host,port=tor_proxy_socks5_port_linux):
-    proxy=tor_socks5_proxy.copy()
-    for x in proxy:
-        proxy[x]=proxy[x].format(host,port)
-    return proxy
+    return parse_proxy_string('{}:{}'.format(host,port),'socks5')
 
 
 def get_tor_socks5_proxy():
@@ -115,10 +124,9 @@ def get_tor_socks5_proxy():
 
 
 def get_tor_http_proxy(host=tor_proxy_host,port=tor_proxy_http_port):
-    proxy=tor_http_proxy.copy()
-    for x in proxy:
-        proxy[x]=proxy[x].format(host,port)
-    return proxy
+    return parse_proxy_string('{}:{}'.format(host,port),'http')
+
+
 
 
 def get_burpsuit_proxy(host=burpsuit_proxy_host,port=burpsuit_proxy_port):
@@ -128,7 +136,7 @@ def get_burpsuit_proxy(host=burpsuit_proxy_host,port=burpsuit_proxy_port):
     return proxy
 
 
-def get_socks5_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None,timeout=5):
+def get_socks5_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,timeout=5,**kwargs):
     try:
         s = socks.socksocket()
         s.settimeout(timeout)
@@ -136,8 +144,8 @@ def get_socks5_proxy_socket(host,port,proxy_host,proxy_port,username=None,passwo
                     proxy_type=socks.SOCKS5,
                     addr=proxy_host,
                     port=proxy_port,
-                    username=username,
-                    password=password,
+                    username=proxy_username,
+                    password=proxy_password,
             )
         s.connect((host,port))
         return s
@@ -145,7 +153,7 @@ def get_socks5_proxy_socket(host,port,proxy_host,proxy_port,username=None,passwo
         return
 
 
-def get_socks4_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None,timeout=5):
+def get_socks4_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,timeout=5,**kwargs):
     try:
         s = socks.socksocket()
         s.settimeout(timeout)
@@ -153,8 +161,8 @@ def get_socks4_proxy_socket(host,port,proxy_host,proxy_port,username=None,passwo
                     proxy_type=socks.SOCKS4,
                     addr=proxy_host,
                     port=proxy_port,
-                    username=username,
-                    password=password,
+                    username=proxy_username,
+                    password=proxy_password,
             )
         s.connect((host,port))
         return s
@@ -162,25 +170,25 @@ def get_socks4_proxy_socket(host,port,proxy_host,proxy_port,username=None,passwo
         return
 
 
-def get_socks_proxy_socket(host,port,proxy_host,proxy_port,proxy_type,username=None,password=None,timeout=5):
+def get_socks_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_type=None,proxy_username=None,proxy_password=None,timeout=5,**kwargs):
     try:
         s = socks.socksocket()
         s.settimeout(timeout)
-        if proxy_type==4:
+        if proxy_type==4 or proxy_type=='socks4' or proxy_type=='s4':
             s.setproxy( 
                         proxy_type=socks.SOCKS4,
                         addr=proxy_host,
                         port=proxy_port,
-                        username=username,
-                        password=password,
+                        username=proxy_username,
+                        password=proxy_password,
                 )
-        elif proxy_type==5:
+        elif proxy_type==5 or proxy_type=='socks5' or proxy_type=='s5':
             s.setproxy( 
                         proxy_type=socks.SOCKS5,
                         addr=proxy_host,
                         port=proxy_port,
-                        username=username,
-                        password=password,
+                        username=proxy_username,
+                        password=proxy_password,
                 )
         s.connect((host,port))
         return s
@@ -188,7 +196,7 @@ def get_socks_proxy_socket(host,port,proxy_host,proxy_port,proxy_type,username=N
         return
 
 
-def get_http_proxy_socket(host,port,proxy_host,proxy_port,username=None,password=None,timeout=5):
+def get_http_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,timeout=5,**kwargs):
     try:
         s = socks.socksocket()
         s.settimeout(timeout)
@@ -196,8 +204,8 @@ def get_http_proxy_socket(host,port,proxy_host,proxy_port,username=None,password
                     proxy_type=socks.HTTP,
                     addr=proxy_host,
                     port=proxy_port,
-                    username=username,
-                    password=password,
+                    username=proxy_username,
+                    password=proxy_password,
             )
         s.connect((host,port))
         return s
@@ -205,22 +213,80 @@ def get_http_proxy_socket(host,port,proxy_host,proxy_port,username=None,password
         return
 
 
-def get_socks5_proxy(proxy_host,proxy_port,username=None,password=None):
-    if username==None and password==None:
+def get_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_type=None,proxy_username=None,proxy_password=None,timeout=5,**kwargs):
+    try:
+        s = socks.socksocket()
+        s.settimeout(timeout)
+        if proxy_type==4 or proxy_type=='socks4' or proxy_type=='s4':
+            s.setproxy( 
+                        proxy_type=socks.SOCKS4,
+                        addr=proxy_host,
+                        port=proxy_port,
+                        username=proxy_username,
+                        password=proxy_password,
+                )
+        elif proxy_type==5 or proxy_type=='socks5' or proxy_type=='s5':
+            s.setproxy( 
+                        proxy_type=socks.SOCKS5,
+                        addr=proxy_host,
+                        port=proxy_port,
+                        username=proxy_username,
+                        password=proxy_password,
+                )
+        elif proxy_type==3 or proxy_type=='http' or proxy_type=='h':
+            s.setproxy( 
+                        proxy_type=socks.HTTP,
+                        addr=proxy_host,
+                        port=proxy_port,
+                        username=proxy_username,
+                        password=proxy_password,
+                )
+        s.connect((host,port))
+        return s
+    except Exception as ex:
+        return
+
+def get_tor_socks5_socket(ip,port,timeout=5):
+    return get_proxy_socket(ip,port,timeout=timeout,**get_tor_socks5_proxy())
+
+
+def get_tor_http_socket(ip,port,timeout=5):
+    return get_proxy_socket(ip,port,timeout=timeout,**get_tor_http_proxy())
+
+
+
+def get_requests_socks5_proxy(proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,**kwargs):
+    if proxy_username==None:
         return {'http': 'socks5h://{}:{}'.format(proxy_host,proxy_port), 'https': 'socks5h://{}:{}'.format(proxy_host,proxy_port)}
-    return {'http': 'socks5h://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port), 'https': 'socks5h://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port)}
+    if proxy_password==None:
+            proxy_password=''
+    return {'http': 'socks5h://{}:{}@{}:{}'.format(proxy_username,proxy_password,proxy_host,proxy_port), 'https': 'socks5h://{}:{}@{}:{}'.format(proxy_username,proxy_password,proxy_host,proxy_port)}
 
 
-def get_socks4_proxy(proxy_host,proxy_port,username=None,password=None):
-    if username==None and password==None:
+def get_requests_socks4_proxy(proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,**kwargs):
+    if proxy_username==None:
         return {'http': 'socks4h://{}:{}'.format(proxy_host,proxy_port), 'https': 'socks4h://{}:{}'.format(proxy_host,proxy_port)}
-    return {'http': 'socks4h://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port), 'https': 'socks4h://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port)}
+    if proxy_password==None:
+            proxy_password=''
+    return {'http': 'socks4h://{}:{}@{}:{}'.format(proxy_username,proxy_password,proxy_host,proxy_port), 'https': 'socks4h://{}:{}@{}:{}'.format(proxy_username,proxy_password,proxy_host,proxy_port)}
 
 
-def get_http_proxy(proxy_host,proxy_port,username=None,password=None):
-    if username==None and password==None:
+def get_requests_http_proxy(proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,**kwargs):
+    if proxy_username==None:
         return {'http': 'http://{}:{}'.format(proxy_host,proxy_port), 'https': 'http://{}:{}'.format(proxy_host,proxy_port)}
-    return {'http': 'http://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port), 'https': 'http://{}:{}@{}:{}'.format(username,password,proxy_host,proxy_port)}
+    if proxy_password==None:
+            proxy_password=''
+    return {'http': 'http://{}:{}@{}:{}'.format(proxy_username,proxy_password,proxy_host,proxy_port), 'https': 'http://{}:{}@{}:{}'.format(proxy_username,proxy_password,proxy_host,proxy_port)}
+
+
+
+def get_requests_proxy(proxy_type=None,**kwargs):
+    if proxy_type in [3,'http','h']:
+        return get_requests_http_proxy(**kwargs)
+    if proxy_type in [4,'socks4','s4']:
+        return get_requests_socks4_proxy(**kwargs)
+    if proxy_type in [5,'socks5','s5']:
+        return get_requests_socks5_proxy(**kwargs)
 
 
 

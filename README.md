@@ -122,7 +122,7 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 
 # Vulnerabilities TESTING:
 
-<h4>Automatic XSS scan for page:</h4>
+<h4>Automatic XSS scan for website:</h4>
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">xss(
       u,
       max_pages=5,
@@ -196,12 +196,165 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
 </pre></div>
 
 <h4>SSTI:</h4>
+<h4>Automatic SSTI scan for website:</h4>
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+  <pre style="margin: 0; line-height: 125%">ssti(
+      u,
+      max_pages=5,
+      pages=[],
+      email_extension='@gmail.com',
+      phone_pattern='XXX-XXX-XXXX',
+      payload_index=0,
+      values=(9, 123456789),
+      dont_change={},
+      number=(1, 9),
+      payload_keyword="payload",
+      operator="*",
+      save_to_file=None,
+      file_extension="png",
+      replaceble_parameters={"phpvalue": ((".", ""),)},
+      logs=True,
+      fill_empty=10,
+      leave_empty=[],
+      dont_send=["btnClear"],
+      proxy=None,
+      proxies=None,
+      timeout=120,
+      user_agent=None,
+      cookie=None,
+      debug=False,
+      mime_type=None,
+      predefined_inputs={},
+      headers={}
+  )</pre>
+</div>
+<p>
+  This function is designed to perform Server-Side Template Injection (SSTI) testing on one or more web pages. It scans for SSTI vulnerabilities in the templates used on the pages.
+</p>
+
+<strong>Parameters:</strong>
+<ul>
+  <li><code>u</code>: The target URL to test for SSTI vulnerabilities.</li>
+  <li><code>max_pages</code>: Maximum number of pages to scan for SSTI (default is 5).</li>
+  <li><code>pages</code>: List of specific pages to scan (if not provided, it's auto-discovered).</li>
+  <li><code>email_extension</code>: Email extension for generating email inputs (default is '@gmail.com').</li>
+  <li><code>phone_pattern</code>: Pattern for generating phone inputs (default is 'XXX-XXX-XXXX').</li>
+  <li><code>payload_index</code>: Index of the payload value in the input (default is 0).</li>
+  <li><code>values</code>: Range for generating random values (default is between 9 and 123456789).</li>
+  <li><code>dont_change</code>: A dictionary of parameters not to change during testing.</li>
+  <li><code>number</code>: Range for generating random numbers (default is between 1 and 9).</li>
+  <li><code>payload_keyword</code>: The keyword to identify where to inject the payload.</li>
+  <li><code>operator</code>: The operator to use for payload injection (default is "*").</li>
+  <li><code>save_to_file</code>: If provided, the results will be saved to this file.</li>
+  <li><code>file_extension</code>: The file extension to use for file inputs (default is "png").</li>
+  <li><code>replaceble_parameters</code>: Dictionary mapping parameters to their possible replacements.</li>
+  <li><code>logs</code>: Boolean to enable or disable logging (default is True).</li>
+  <li><code>fill_empty</code>: Number of inputs to fill with payload (default is 10).</li>
+  <li><code>leave_empty</code>: List of inputs not to fill with payloads.</li>
+  <li><code>dont_send</code>: List of inputs not to send in the request.</li>
+  <li><code>proxy</code>: A proxy server to use for requests.</li>
+  <li><code>proxies</code>: List of proxy servers to choose from randomly.</li>
+  <li><code>timeout</code>: Request timeout in seconds (default is 120).</li>
+  <li><code>user_agent</code>: User-Agent header to use in requests.</li>
+  <li><code>cookie</code>: Cookies to include in requests.</li>
+  <li><code>debug</code>: Boolean to enable or disable debug mode (default is False).</li>
+  <li><code>mime_type</code>: MIME type for file inputs.</li>
+  <li><code>headers</code>: Additional headers to include in requests.</li>
+</ul>
+
+<b>Return Value:</b>
+<p>
+  The function returns a list of dictionaries, each containing information about SSTI testing results on a page.
+</p>
+
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.ssti(link  , timeout=15 )
 </pre></div>
 
 
 <h4>Remote Command Execution Linux Time-Based:</h4>
+<h4>RCE Testing Function Documentation:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">rce(
+    u,
+    max_pages=5,
+    pages=[],
+    payload_index=0,
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
+    save_to_file=None,
+    dont_change={},
+    number=(1, 9),
+    injection={"code": "php"},
+    code_operator_right="; ",
+    code_operator_left="",
+    command_operator_right="|",
+    command_operator_left="&",
+    sql_operator_right="or '",
+    sql_operator_left="' or ",
+    file_extension="png",
+    replaceble_parameters={"phpvalue": ((".", ""),)},
+    based_on="time",
+    delay=10,
+    logs=True,
+    fill_empty=10,
+    leave_empty=[],
+    dont_send=["btnClear"],
+    proxy=None,
+    proxies=None,
+    timeout=120,
+    user_agent=None,
+    cookie=None,
+    debug=False,
+    mime_type=None,
+    predefined_inputs={},
+    headers={}
+)</pre></div>
+<p>
+    This function is designed for Remote Code Execution (RCE) testing on one or more web pages. It scans for RCE vulnerabilities in forms and inputs on the pages.
+</p>
+
+<strong>Parameters:</strong>
+<ul>
+    <li><code>u</code>: The target URL to test for RCE vulnerabilities.</li>
+    <li><code>max_pages</code>: Maximum number of pages to scan for RCE (default is 5).</li>
+    <li><code>pages</code>: List of specific pages to scan (if not provided, it's auto-discovered).</li>
+    <li><code>payload_index</code>: Index of the payload to use from the payloads dictionary (default is 0).</li>
+    <li><code>email_extension</code>: Email extension for generating email inputs (default is '@gmail.com').</li>
+    <li><code>phone_pattern</code>: Pattern for generating phone inputs (default is 'XXX-XXX-XXXX').</li>
+    <li><code>save_to_file</code>: If provided, the results will be saved to this file.</li>
+    <li><code>dont_change</code>: A dictionary of parameters not to change during testing.</li>
+    <li><code>number</code>: Range for generating random numbers (default is between 1 and 9).</li>
+    <li><code>injection</code>: Dictionary specifying the type of injection and the target language (default is {"code": "php"}).</li>
+    <li><code>code_operator_right</code>: Right operator for code injection (default is "; ").</li>
+    <li><code>code_operator_left</code>: Left operator for code injection (default is an empty string).</li>
+    <li><code>command_operator_right</code>: Right operator for command injection (default is "|").</li>
+    <li><code>command_operator_left</code>: Left operator for command injection (default is "&").</li>
+    <li><code>sql_operator_right</code>: Right operator for SQL injection (default is "or '").</li>
+    <li><code>sql_operator_left</code>: Left operator for SQL injection (default is "' or ").</li>
+    <li><code>file_extension</code>: The file extension to use for file inputs (default is "png").</li>
+    <li><code>replaceble_parameters</code>: Dictionary mapping parameters to their possible replacements.</li>
+    <li><code>based_on</code>: The basis for time-based attacks ("time" or "file") (default is "time").</li>
+    <li><code>delay</code>: Delay in seconds for time-based attacks (default is 10).</li>
+    <li><code>logs</code>: Boolean to enable or disable logging (default is True).</li>
+    <li><code>fill_empty</code>: Number of inputs to fill with payload (default is 10).</li>
+    <li><code>leave_empty</code>: List of inputs not to fill with payloads.</li>
+    <li><code>dont_send</code>: List of inputs not to send in the request.</li>
+    <li><code>proxy</code>: A proxy server to use for requests.</li>
+    <li><code>proxies</code>: List of proxy servers to choose from randomly.</li>
+    <li><code>timeout</code>: Request timeout in seconds (default is 120).</li>
+    <li><code>user_agent</code>: User-Agent header to use in requests.</li>
+    <li><code>cookie</code>: Cookies to include in requests.</li>
+    <li><code>debug</code>: Boolean to enable or disable debug mode (default is False).</li>
+    <li><code>mime_type</code>: MIME type for file inputs.</li>
+    <li><code>predefined_inputs</code>: A dictionary of predefined inputs for specific parameters.</li>
+    <li><code>headers</code>: Additional headers to include in requests.</li>
+</ul>
+
+<b>Return Value:</b>
+<p>
+    The function returns a list of dictionaries, each containing information about RCE testing results on a page.
+</p>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.rce(link ,injection={"command":"linux"},based_on='time', timeout=15 )
 </pre></div>
