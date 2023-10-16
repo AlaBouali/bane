@@ -235,6 +235,9 @@ burpsuit_http_proxy={
     "https": "http://{}:{}",
 }
 
+default_proxies_list=[]
+
+
 tor_proxy_host="127.0.0.1"
 
 tor_proxy_socks5_port_windows=9150

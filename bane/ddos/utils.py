@@ -174,3 +174,18 @@ class DDoS_Class:
         a = self.__dict__["counter"]
         self.reset()  # this will kill any running threads instantly by setting all the attacking information to "None" and cause error which is handled with the "try...except..." around the main while loop
         return a
+
+
+def wrap_socket_with_ssl(sock,target_host):
+    if sock==None:
+        return
+    if hasattr(ssl, 'PROTOCOL_TLS_CLIENT'):
+        # Since Python 3.6
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+    elif hasattr(ssl, 'PROTOCOL_TLS'):
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    else:
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)#ssl.PROTOCOL_TLS)
+    ssl_context.check_hostname = False
+    ssl_context.verify_mode = ssl.CERT_NONE
+    return ssl_context.wrap_socket(sock, server_hostname=target_host)

@@ -1,36 +1,299 @@
-import requests, socks, socket, random, re,os,sys
-import bs4
+import requests, socks, socket, random, re,os,sys,threading
+import bs4,bane
 from bs4 import BeautifulSoup
 from bane.common.payloads import *
 from bane.utils.pager import crawl
+from bane.ddos.utils import wrap_socket_with_ssl
 
 
-def proxyscrape(protocol="http", timeout=10, country="all", ssl="all", anonymity="all",proxy=None):
-    if protocol.lower() not in ("http", "socks4", "socks5", "all"):
-        raise Exception(
-            'protocol value must be: "http" or "socks4" or "socks5" or "all"'
-        )
-    if ssl.lower() not in ("no", "yes", "all"):
-        raise Exception('protocol value must be: "no" or "yes" or "all"')
-    if anonymity.lower() not in ("elite", "anonymous", "transparent", "all"):
-        raise Exception(
-            'protocol value must be: "elite" or "anonymous" or "transparent" or "all"'
-        )
-    proxies= requests.Session().get(
-        "https://api.proxyscrape.com/v2/?request=getproxies&protocol="
-        + protocol
-        + "&timeout="
-        + str(timeout * 1000)
-        + "&country="
-        + country
-        + "&ssl="
-        + ssl
-        + "&anonymity="
-        + anonymity,
-        headers={"User-Agent": random.choice(ua)},
-        proxies=proxy
-    ).text.split("\r\n")
-    return [ {'proxy_host':x.split(':')[0],'proxy_port':int(x.split(':')[1]),'proxy_username':None,'proxy_password':None,'proxy_type':protocol} for x in proxies]
+class ProxyChecker:
+    __slots__=['proxy_list','num_threads','timeout','logs','result','verify_request','is_socket']
+    def __init__(self, proxy_list, threads=250, timeout=10,logs=True,verify_request=False,is_socket=True):
+        self.proxy_list = proxy_list
+        self.num_threads = threads
+        if self.num_threads>len(self.proxy_list):
+            self.num_threads=len(self.proxy_list)
+        self.timeout = timeout
+        self.logs=logs
+        self.result=[]
+        self.verify_request=verify_request
+        self.is_socket=is_socket
+        self.check_proxies()
+
+    def check_proxies(self):
+        chunk_size = len(self.proxy_list) // self.num_threads
+        threads = []
+
+        for i in range(0, len(self.proxy_list), chunk_size):
+            chunk = self.proxy_list[i:i + chunk_size]
+            thread = threading.Thread(target=self._check_chunk, args=(chunk,))
+            threads.append(thread)
+            thread.daemon = True
+            thread.start()
+
+        for thread in threads:
+            thread.join()
+        
+        self.proxy_list = None
+        self.num_threads = None
+        self.timeout = None
+        self.logs=None
+        self.verify_request=None
+
+    def _check_chunk(self, chunk):
+        for proxy in chunk:
+            if self.is_socket==True:
+                if proxy_check_socket(**proxy, timeout=self.timeout,verify_request=self.verify_request)==True:
+                    self.result.append(proxy)
+                    if self.logs==True:
+                        print("Working proxy: {}".format(proxy))
+            else:
+                if proxy_check_requests(**proxy, timeout=self.timeout)==True:
+                    self.result.append(proxy)
+                    if self.logs==True:
+                        print("Working proxy: {}".format(proxy))
+
+
+
+
+def proxygeonode(is_socket=True,verify_request=False,protocols=['http','socks4','socks5'],anonymities=["elite" , "anonymous"],timeout=20,proxy=None,headers={'Referer': 'https://geonode.com/','User-Agent':random.choice(ua)},check_proxies=True,check_timeout=10,logs=False,threads=250):
+    a=[]
+    for x in anonymities:
+        a.append('&anonymityLevel='+x)
+    url='https://proxylist.geonode.com/api/proxy-list?limit=500&page={}&sort_by=lastChecked&sort_type=desc&protocols='+'%2C'.join(protocols)+''.join(a)
+    page=0
+    proxies=[]
+    while True:
+        page+=1
+        try:
+            r=requests.get(url.format(page),headers=headers,proxies=proxy,timeout=timeout).json()
+            if r['data']!=[]:
+                proxies+=r['data']
+            else:
+                break
+        except Exception as ex:
+            break
+    l=[]
+    pr=[]
+    for x in proxies:
+        try:
+            pr.append({'proxy_host':x['ip'],'proxy_port':int(x['port']),'proxy_username':None,'proxy_password':None,'proxy_type':x['protocols'][0]})
+        except:
+            pass
+    for x in pr:
+        if x not in l:
+            l.append(x)
+    if check_proxies==False:
+        return l
+    return ProxyChecker(l,threads=threads,timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket).result
+
+
+
+def proxyscrape(is_socket=True,verify_request=False,protocols=['http','socks4','socks5'],anonymities=["elite" , "anonymous"],timeout=10, country="all",proxy=None,threads=250,check_timeout=10,logs=False,check_proxies=True):
+    l=[]
+    for protocol in protocols:
+        for anonymity in anonymities:
+            proxies= requests.Session().get(
+                "https://api.proxyscrape.com/v2/?request=getproxies&protocol="
+                + protocol
+                + "&timeout="
+                + str(timeout * 1000)
+                + "&country="
+                + country
+                + "&anonymity="
+                + anonymity,
+                timeout=timeout,
+                headers={"User-Agent": random.choice(ua)},
+                proxies=proxy
+            ).text.split("\r\n")
+            for x in proxies:
+                if x.strip()!='':
+                    l.append(x.strip()+':'+protocol) 
+    pr=[]
+    for x in l:
+        try:
+            pr.append({'proxy_host':x.split(':')[0],'proxy_port':int(x.split(':')[1]),'proxy_username':None,'proxy_password':None,'proxy_type':x.split(':')[2]})
+        except:
+            pass
+    l=[]
+    for x in pr:
+        if x not in l:
+            l.append(x)
+    if check_proxies==False:
+        return l
+    return ProxyChecker(l,threads=threads,timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket).result
+
+
+def proxylistdownload(protocols=['socks4','socks5'],check_proxies=True,timeout=15,check_timeout=10,logs=False,verify_request=False,is_socket=True,threads=250,proxy=None):
+    l=[]
+    for protocol in protocols:
+        try:
+            r=requests.get('https://www.proxy-list.download/api/v1/get?type='+protocol,
+                        timeout=timeout,
+                    headers={"User-Agent": random.choice(ua)},
+                    proxies=proxy).text.split('\n')
+            l+=[x.strip()+':'+protocol for x in r if x.strip()!='']
+        except Exception as ex:
+            pass
+    pr=[]
+    for x in l:
+        try:
+            pr.append({'proxy_host':x.split(':')[0],'proxy_port':int(x.split(':')[1]),'proxy_username':None,'proxy_password':None,'proxy_type':x.split(':')[2]})
+        except:
+            pass
+    l=[]
+    for x in pr:
+        if x not in l:
+            l.append(x)
+    if check_proxies==False:
+        return l
+    return ProxyChecker(l,threads=threads,timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket).result
+
+
+
+
+def proxyspace(protocols=['socks4','socks5'],check_proxies=True,timeout=15,check_timeout=10,logs=False,verify_request=False,is_socket=True,threads=250,proxy=None):
+    l=[]
+    for protocol in protocols:
+        try:
+            r=requests.get('https://proxyspace.pro/{}.txt'.format(protocol),
+                        timeout=timeout,
+                    headers={"User-Agent": random.choice(ua)},
+                    proxies=proxy).text.split('\n')
+            l+=[x.strip()+':'+protocol for x in r if x.strip()!='']
+        except Exception as ex:
+            pass
+    pr=[]
+    for x in l:
+        try:
+            pr.append({'proxy_host':x.split(':')[0],'proxy_port':int(x.split(':')[1]),'proxy_username':None,'proxy_password':None,'proxy_type':x.split(':')[2]})
+        except:
+            pass
+    l=[]
+    for x in pr:
+        if x not in l:
+            l.append(x)
+    if check_proxies==False:
+        return l
+    return ProxyChecker(l,threads=threads,timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket).result
+
+
+
+def proxybarcode(protocols=['socks4','socks5'],check_proxies=True,timeout=15,check_timeout=10,logs=False,verify_request=False,is_socket=True,threads=250,proxy=None):
+    l=[]
+    for protocol in protocols:
+        try:
+            r=requests.get('https://raw.githubusercontent.com/B4RC0DE-TM/proxy-list/main/{}.txt'.format(protocol.upper()),
+                        timeout=timeout,
+                    headers={"User-Agent": random.choice(ua)},
+                    proxies=proxy).text.split('\n')
+            l+=[x.strip()+':'+protocol for x in r if x.strip()!='']
+        except Exception as ex:
+            pass
+    pr=[]
+    for x in l:
+        try:
+            pr.append({'proxy_host':x.split(':')[0],'proxy_port':int(x.split(':')[1]),'proxy_username':None,'proxy_password':None,'proxy_type':x.split(':')[2]})
+        except:
+            pass
+    l=[]
+    for x in pr:
+        if x not in l:
+            l.append(x)
+    if check_proxies==False:
+        return l
+    return ProxyChecker(l,threads=threads,timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket).result
+
+
+
+def proxyopenlist(protocols=['socks4','socks5'],check_proxies=True,timeout=15,check_timeout=10,logs=False,verify_request=False,is_socket=True,threads=250,proxy=None):
+    l=[]
+    for protocol in protocols:
+        try:
+            r=requests.get('https://api.openproxylist.xyz/{}.txt'.format(protocol),
+                        timeout=timeout,
+                    headers={"User-Agent": random.choice(ua)},
+                    proxies=proxy).text.split('\n')
+            l+=[x.strip()+':'+protocol for x in r if x.strip()!='']
+        except Exception as ex:
+            pass
+    pr=[]
+    for x in l:
+        try:
+            pr.append({'proxy_host':x.split(':')[0],'proxy_port':int(x.split(':')[1]),'proxy_username':None,'proxy_password':None,'proxy_type':x.split(':')[2]})
+        except:
+            pass
+    l=[]
+    for x in pr:
+        if x not in l:
+            l.append(x)
+    if check_proxies==False:
+        return l
+    return ProxyChecker(l,threads=threads,timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket).result
+
+
+
+def get_valid_proxies(geonode=True,scrape=True,space=True,barcode=True,listdownload=True,openlist=True,update_default_list=True,protocols=['socks4','socks5','http'],check_proxies=True,timeout=15,check_timeout=5,logs=True,verify_request=False,is_socket=True,threads=300,proxy=None):
+    l=[]
+    if logs==True:
+        print('[i] Fetching proxies...')
+    if geonode==True:
+        a=proxygeonode(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+        for x in a:
+            if x not in l:
+                l.append(x)
+        if logs==True:
+            print('[*] Count: {}'.format(len(l)))
+    if scrape==True:
+        a=proxyscrape(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+        for x in a:
+            if x not in l:
+                l.append(x)
+        if logs==True:
+            print('[*] Count: {}'.format(len(l)))
+    if space==True:
+        a=proxyspace(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+        for x in a:
+            if x not in l:
+                l.append(x)
+        if logs==True:
+            print('[*] Count: {}'.format(len(l)))
+    if barcode==True:
+        a=proxybarcode(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+        for x in a:
+            if x not in l:
+                l.append(x)
+        if logs==True:
+            print('[*] Count: {}'.format(len(l)))
+    if listdownload==True:
+        a=proxylistdownload(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+        for x in a:
+            if x not in l:
+                l.append(x)
+        if logs==True:
+            print('[*] Count: {}'.format(len(l)))
+    if openlist==True:
+        a=proxyopenlist(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+        for x in a:
+            if x not in l:
+                l.append(x)
+        if logs==True:
+            print('[*] Count: {}'.format(len(l)))
+    pr=[]
+    for x in l:
+        if x not in pr:
+            pr.append(x)
+    if logs==True:
+            print('[+] Total unique proxies: {}'.format(len(pr)))
+            print('[i] Checking if they are up...')
+    l=ProxyChecker(pr,threads=threads,timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket).result
+    if update_default_list==True:
+        bane.default_proxies_list=l
+    if logs==True:
+            print('[*] Total working proxies: {}'.format(len(l)))
+    return l
+
+
 
 
 def parse_proxy_string(s,proxy_type):
@@ -47,74 +310,13 @@ def parse_proxies_list(l,proxy_type):
     return [parse_proxy_string(x,proxy_type) for x in l]
 
 
-def proxy_check(ip, p, proto="http",username=None,password=None, timeout=5):
-    """
-    this function is to check if the proxy is dead or not.
-
-    it takes the following arguments:
-
-    proto: (set by default to: http) the proxy type: http/https/socks4/socks5
-    ip: proxy's ip
-    p: proxy's port
-    timeout: (set by default to: 5) the connection's timeout
-    """
-    i = False
-    if proto == "http":
-        if username==None and password==None:
-            proxy={"http": "http://{}:{}".format(ip,p)}
-        else:
-            proxy={"http": "http://{}:{}@{}:{}".format(username,password,ip,p)}
-        try:
-            requests.Session().get(
-                "http://ipinfo.io/ip",
-                proxies=proxy,
-                headers={"User-Agent": random.choice(ua)},
-                timeout=timeout,
-            )
-            i = True
-        except:
-            pass
-    elif proto == "socks4":
-        try:
-            s = socks.socksocket()
-            s.setproxy( 
-                    proxy_type=socks.SOCKS4,
-                    addr=ip,
-                    port=p,
-                    username=username,
-                    password=password,
-            )
-            s.settimeout(timeout)
-            s.connect(("www.google.com", 80))
-            s.close()
-            i = True
-        except:
-            pass
-    elif proto == "socks5":
-        try:
-            s = socks.socksocket()
-            s.setproxy( 
-                    proxy_type=socks.SOCKS5,
-                    addr=ip,
-                    port=p,
-                    username=username,
-                    password=password,
-            )
-            s.settimeout(timeout)
-            s.connect(("www.google.com", 80))
-            s.close()
-            i = True
-        except:
-            pass
-    return i
-
 
 def get_tor_socks5_proxy_windows(host=tor_proxy_host,port=tor_proxy_socks5_port_windows):
-    return parse_proxy_string('{}:{}'.format(host,port),'socks5')
+    return get_requests_proxy(**parse_proxy_string('{}:{}'.format(host,port),'socks5'))
 
 
 def get_tor_socks5_proxy_linux(host=tor_proxy_host,port=tor_proxy_socks5_port_linux):
-    return parse_proxy_string('{}:{}'.format(host,port),'socks5')
+    return get_requests_proxy(**parse_proxy_string('{}:{}'.format(host,port),'socks5'))
 
 
 def get_tor_socks5_proxy():
@@ -124,7 +326,7 @@ def get_tor_socks5_proxy():
 
 
 def get_tor_http_proxy(host=tor_proxy_host,port=tor_proxy_http_port):
-    return parse_proxy_string('{}:{}'.format(host,port),'http')
+    return get_requests_proxy(**parse_proxy_string('{}:{}'.format(host,port),'http'))
 
 
 
@@ -136,9 +338,11 @@ def get_burpsuit_proxy(host=burpsuit_proxy_host,port=burpsuit_proxy_port):
     return proxy
 
 
-def get_socks5_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,timeout=5,**kwargs):
+def get_socks5_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,no_delay=False,timeout=5,**kwargs):
     try:
         s = socks.socksocket()
+        if no_delay==True:
+            s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         s.settimeout(timeout)
         s.setproxy( 
                     proxy_type=socks.SOCKS5,
@@ -153,9 +357,11 @@ def get_socks5_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_user
         return
 
 
-def get_socks4_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,timeout=5,**kwargs):
+def get_socks4_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,no_delay=False,timeout=5,**kwargs):
     try:
         s = socks.socksocket()
+        if no_delay==True:
+            s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         s.settimeout(timeout)
         s.setproxy( 
                     proxy_type=socks.SOCKS4,
@@ -170,9 +376,11 @@ def get_socks4_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_user
         return
 
 
-def get_socks_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_type=None,proxy_username=None,proxy_password=None,timeout=5,**kwargs):
+def get_socks_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_type=None,proxy_username=None,proxy_password=None,no_delay=False,timeout=5,**kwargs):
     try:
         s = socks.socksocket()
+        if no_delay==True:
+            s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         s.settimeout(timeout)
         if proxy_type==4 or proxy_type=='socks4' or proxy_type=='s4':
             s.setproxy( 
@@ -196,9 +404,11 @@ def get_socks_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_type=
         return
 
 
-def get_http_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,timeout=5,**kwargs):
+def get_http_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,no_delay=False,timeout=5,**kwargs):
     try:
         s = socks.socksocket()
+        if no_delay==True:
+            s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         s.settimeout(timeout)
         s.setproxy( 
                     proxy_type=socks.HTTP,
@@ -213,9 +423,11 @@ def get_http_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_userna
         return
 
 
-def get_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_type=None,proxy_username=None,proxy_password=None,timeout=5,**kwargs):
+def get_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_type=None,proxy_username=None,proxy_password=None,timeout=5,no_delay=False,**kwargs):
     try:
         s = socks.socksocket()
+        if no_delay==True:
+            s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         s.settimeout(timeout)
         if proxy_type==4 or proxy_type=='socks4' or proxy_type=='s4':
             s.setproxy( 
@@ -244,10 +456,11 @@ def get_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_type=None,p
         s.connect((host,port))
         return s
     except Exception as ex:
-        return
+        raise(ex)
+        
 
-def get_tor_socks5_socket(ip,port,timeout=5):
-    return get_proxy_socket(ip,port,timeout=timeout,**get_tor_socks5_proxy())
+def get_tor_socks5_socket(ip,port,timeout=5,no_delay=False):
+    return get_proxy_socket(ip,port,no_delay=no_delay,timeout=timeout,**get_tor_socks5_proxy())
 
 
 def get_tor_http_socket(ip,port,timeout=5):
@@ -265,10 +478,10 @@ def get_requests_socks5_proxy(proxy_host=None,proxy_port=None,proxy_username=Non
 
 def get_requests_socks4_proxy(proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,**kwargs):
     if proxy_username==None:
-        return {'http': 'socks4h://{}:{}'.format(proxy_host,proxy_port), 'https': 'socks4h://{}:{}'.format(proxy_host,proxy_port)}
+        return {'http': 'socks4://{}:{}'.format(proxy_host,proxy_port), 'https': 'socks4://{}:{}'.format(proxy_host,proxy_port)}
     if proxy_password==None:
             proxy_password=''
-    return {'http': 'socks4h://{}:{}@{}:{}'.format(proxy_username,proxy_password,proxy_host,proxy_port), 'https': 'socks4h://{}:{}@{}:{}'.format(proxy_username,proxy_password,proxy_host,proxy_port)}
+    return {'http': 'socks4://{}:{}@{}:{}'.format(proxy_username,proxy_password,proxy_host,proxy_port), 'https': 'socks4://{}:{}@{}:{}'.format(proxy_username,proxy_password,proxy_host,proxy_port)}
 
 
 def get_requests_http_proxy(proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,**kwargs):
@@ -289,650 +502,34 @@ def get_requests_proxy(proxy_type=None,**kwargs):
         return get_requests_socks5_proxy(**kwargs)
 
 
-
-'''def masshttp(count=None, timeout=15):
-    """
-    this function gather up thousands of HTTP / HTTPS proxies from www.proxyserverlist24.top and proxy-daily.com
-    those proxies are not recommended to be used as reliable ones all the time, i use them here just to distribute my attacks
-    on next functions...
-    if you are willing to use them please check them first!!!
-    the function takes an argument (*args) which is the number of proxies to return, in case of no argument given it will
-    return the whole list.
-    usage:
-    >>>import bane
-    >>>bane.masshttp()
-    >>>bane.masshttp(1500)
-    """
-    if count != None:
-        m = count
-    else:
-        m = 999999
-    u = "http://www.proxyserverlist24.top/#"
-    t = []
-    l = []
-    h = []
-    try:
-        h3tags1 = crawl(u, timeout=timeout)
-        h3tags = []
-        for x in h3tags1.keys():
-            h3tags.append(h3tags1[x][1])
-        for a in h3tags:
-            try:
-                if ("proxy-server" in str(a)) and ("#" not in (str(a))):
-                    try:
-                        if a not in l:
-                            l.append(a)
-                    except Exception as xx:
-                        pass
-            except Exception as ex:
-                pass
-                continue
-    except Exception as e:
-        pass
-    for u in l:
+def proxy_check_socket(verify_request=False,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,proxy_type=None, timeout=5,**kwargs):
+        #proxy=get_requests_proxy(proxy_host=proxy_host,proxy_port=proxy_port,proxy_username=proxy_username,proxy_password=proxy_password,proxy_type=proxy_type)
         try:
-            a = requests.Session().get(
-                u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
-            )
-            ips = re.findall(
-                "(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3}):(?:[\d]{1,5})",
-                a.text,
-            )
-            t += ips
-        except Exception as e:
+            s=wrap_socket_with_ssl(get_proxy_socket("www.google.com",443,timeout=timeout,proxy_host=proxy_host,proxy_port=proxy_port,proxy_username=proxy_username,proxy_password=proxy_password,proxy_type=proxy_type),"www.google.com")
+            if s!=None:
+                #print(str(s))
+                if verify_request==False:
+                    return True
+                else:
+                    http_request = "GET / HTTP/1.1\r\nHost: {}\r\n\r\n".format("www.google.com")
+                    s.send(http_request.encode())
+                    response = s.recv(4094)
+                    s.close()
+                    if 'google.com' not in str(response):
+                        return False
+        except Exception as ex:
+            """if "403: Forbidden" in str(ex):
+                return True"""
             pass
-    l = []
-    u = "https://www.dailyfreeproxy.com/#"
-    try:
-        h3tags1 = crawl(u, timeout=timeout)
-        h3tags = []
-        for x in h3tags1.keys():
-            h3tags.append(h3tags1[x][1])
-        for a in h3tags:
-            try:
-                if ("-http" in str(a)) and ("#" not in (str(a))):
-                    try:
-                        a = str(a)
-                        if a not in l:
-                            l.append(a)
-                    except Exception as xx:
-                        pass
-            except Exception as ex:
-                continue
-    except Exception as e:
-        pass
-    for u in l:
+        return False
+
+
+
+def proxy_check_requests(proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,proxy_type=None, timeout=5,**kwargs):
+        proxy=get_requests_proxy(proxy_host=proxy_host,proxy_port=proxy_port,proxy_username=proxy_username,proxy_password=proxy_password,proxy_type=proxy_type)
         try:
-            a = requests.Session().get(
-                u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
-            )
-            ips = re.findall(
-                "(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3}):(?:[\d]{1,5})",
-                a.text,
-            )
-            t += ips
-        except Exception as e:
-            pass
-        u = "http://proxy-daily.com/#"
-        try:
-            r = requests.Session().get(
-                u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
-            ).text
-            soup = BeautifulSoup(r, "html.parser")
-            l = soup.findAll("div")
-        except:
-            pass
-        p = []
-        ips = []
-        for x in l:
-            try:
-                ips = re.findall(
-                    "(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3}):(?:[\d]{1,5})",
-                    str(x),
-                )
-                if (ips) and (ips not in p):
-                    p.append(ips)
-            except:
-                pass
-    try:
-        t += p[0]
-    except:
-        pass
-    if count != None:
-        while True:
-            o = random.choice(t)
-            h.append(o)
-            if (len(h) == m) or (len(h) == len(t)):
-                break
-    else:
-        h = t
-    return h
-
-
-def massocks4(count=None, timeout=15):
-    """
-    this function gather up thousands of SOCKS4 proxies from www.proxyserverlist24.top and proxy-daily.com
-    those proxies are not recommended to be used as reliable ones all the time, i use them here just to distribute my attacks
-    on next functions...
-    if you are willing to use them please check them first!!!
-    the function takes an argument (*args) which is the number of proxies to return, in case of no argument given it will
-    return the whole list.
-
-    usage:
-
-    >>>import bane
-    >>>bane.massocks4()
-
-    >>>bane.massocks4(100)
-    """
-    if count != None:
-        m = count
-    else:
-        m = 999999
-    s4 = []
-    t = []
-    l = []
-    u = "https://www.dailyfreeproxy.com/#"
-    try:
-        h3tags1 = crawl(u, timeout=timeout)
-        h3tags = []
-        for x in h3tags1.keys():
-            h3tags.append(h3tags1[x][1])
-        for a in h3tags:
-            try:
-                if ("-socks4" in str(a)) and ("#" not in (str(a))):
-                    try:
-                        a = str(a)
-                        if a not in l:
-                            l.append(a)
-                    except Exception as xx:
-                        pass
-            except Exception as ex:
-                continue
-    except Exception as e:
-        pass
-    for u in l:
-        try:
-            a = requests.Session().get(
-                u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
-            )
-            ips = re.findall(
-                "(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3}):(?:[\d]{1,5})",
-                a.text,
-            )
-            t += ips
-        except Exception as e:
-            pass
-    l = []
-    u = "http://proxy-daily.com/#"
-    try:
-        r = requests.Session().get(
-            u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
-        ).text
-        soup = BeautifulSoup(r, "html.parser")
-        l = soup.findAll("div")
-    except Exception as e:
-        pass
-    p = []
-    for x in l:
-        try:
-            ips = re.findall(
-                "(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3}):(?:[\d]{1,5})",
-                str(x),
-            )
-            if (ips) and (ips not in p):
-                p.append(ips)
-        except Exception as x:
-            pass
-    try:
-        t += p[2]
-    except:
-        pass
-    if count != None:
-        while True:
-            o = random.choice(t)
-            s4.append(o)
-            if (len(s4) == m) or (len(s4) == len(t)):
-                break
-    else:
-        s4 = t
-    return s4
-
-
-def massocks5(count=None, timeout=15):
-    """
-    this function gather up thousands of SOCKS5 proxies from www.proxyserverlist24.top and proxy-daily.com
-    those proxies are not recommended to be used as reliable ones all the time, i use them here just to distribute my attacks
-    on next functions...
-    if you are willing to use them please check them first!!!
-    the function takes an argument which is the number of proxies to return (*args) , in case of no argument given it will
-    return the whole list.
-
-    usage:
-
-    >>>import bane
-    >>>bane.massocks5()
-
-    >>>bane.massocks5(500)
-    """
-    if count != None:
-        m = count
-    else:
-        m = 999999
-    l = []
-    t = []
-    u = "https://www.dailyfreeproxy.com/#"
-    try:
-        h3tags1 = crawl(u, timeout=timeout)
-        h3tags = []
-        for x in h3tags1.keys():
-            h3tags.append(h3tags1[x][1])
-        for a in h3tags:
-            try:
-                if ("-socks5" in str(a)) and ("#" not in (str(a))):
-                    try:
-                        a = str(a)
-                        if a not in l:
-                            l.append(a)
-                    except Exception as xx:
-                        pass
-            except Exception as ex:
-                continue
-    except Exception as e:
-        pass
-    for u in l:
-        try:
-            a = requests.Session().get(
-                u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
-            )
-            ips = re.findall(
-                "(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3}):(?:[\d]{1,5})",
-                a.text,
-            )
-            t += ips
-        except Exception as e:
-            pass
-    u = "http://www.live-socks.net/#"
-    l = []
-    s5 = []
-    try:
-        r = requests.Session().get(
-            u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
-        ).text
-        soup = BeautifulSoup(r, "html.parser")
-        h3 = soup.find_all("h3", class_="post-title entry-title")
-        for ha in h3:
-            h3tags = ha.find_all("a")
-            for a in h3tags:
-                try:
-                    a = str(a)
-                    if "socks-5" in a:
-                        a = a.split('href="')[1]
-                        a = a.split('"')[0]
-                        if a not in l:
-                            l.append(a)
-                except Exception as ex:
-                    continue
-    except Exception as e:
-        pass
-    for u in l:
-        try:
-            a = requests.Session().get(
-                u, headers={"User-Agent": random.choice(ua)}, timeout=timeout
-            )
-            ips = re.findall(
-                "(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3}):(?:[\d]{1,5})",
-                a.text,
-            )
-            for x in ips:
-                if x not in t:
-                    t.append(x)
-        except Exception as e:
-            pass
-    if count != None:
-        while True:
-            o = random.choice(t)
-            s5.append(o)
-            if (len(s5) == m) or (len(s5) == len(t)):
-                break
-    else:
-        s5 = t
-    return s5
-
-
-def http(logs=True, count=300, timeout=15):
-    """
-    this function gather up hundreds of HTTP proxies from many sources.
-    those proxies are recommended to be used as reliable ones all the time.
-    the function takes an argument which is the number of proxies to return (*args) , in case of no argument given it will
-    return the whole list,and another argument (logs) which is set by default to True so you can see the process of the function, you can turn
-    off the the typing if you set it to: False.
-
-    usage:
-
-    >>>import bane
-    >>>bane.http()
-
-    >>>bane.http(300)"""
-    hsl = []
-    u = "https://free-proxy-list.net/"
-    try:
-        if logs == True:
-            print("[+]Checking: {}".format(u))
-        c = requests.Session().get(u, timeout=timeout).text
-        a = 0
-        soup = BeautifulSoup(c, "html.parser")
-        y = soup.find_all("tr")
-        for x in y:
-            try:
-                a += 1
-                x = str(x)
-                ip = x.split("<tr><td>")[1].split("=")[0]
-                ip = ip.split("</td>")[0].split("=")[0]
-                p = x.split("</td><td>")[1].split("=")[0]
-                p = p.split("</td>")[0].split("=")[0]
-                pr = ip + ":" + p
-                if pr not in hsl:
-                    hsl.append(pr)
-                    if (a > 300) or (len(hsl) == count):
-                        break
-            except Exception as e:
-                pass
-    except Exception as e:
-        pass
-    """
- for i in range(1,7):
-  if len(hsl)==count:
-    break
-  try:
-   u='https://list.proxylistplus.com/Fresh-HTTP-Proxy-List-'+str(i)
-   if logs==True:
-    print("[+]Checking: {}".format(u))
-   c=requests.Session().get(u,timeout=timeout).text
-   soup = BeautifulSoup(c,"html.parser")
-   y= soup.find_all("tr")
-   for x in y:
-    try:
-     z = x.find_all('td')
-     if "strong" in str(z):
-       pass 
-     else:
-      ip= str(z[1]).split('<td>')[1].split('=')[0]
-      ip=ip.split('</td>')[0].split('=')[0]
-      p= str(z[2]).split('<td>')[1].split('=')[0]
-      p=p.split('</td>')[0].split('=')[0]
-      pr=ip+':'+p
-      if pr not in hsl:
-       hsl.append(pr)
-       if len(hsl)==count:
-         break
-    except Exception as e:
-     pass
-  except Exception as e:
-   pass
- """
-    ur = [
-        "http://www.gatherproxy.com/proxylist/anonymity/?t=Elite",
-        "http://www.gatherproxy.com/proxylist/anonymity/?t=Anonymous",
-    ]
-    for u in ur:
-        if len(hsl) == count:
-            break
-        try:
-            if logs == True:
-                print("[+]Checking: {}".format(u))
-            y = []
-            c = requests.Session().get(u, timeout=timeout).text
-            soup = BeautifulSoup(c, "html.parser")
-            for r in soup.find_all("script"):
-                h = "".join(map(str, r.contents))
-                if "gp.insertPrx" in h:
-                    s = h.split(":")
-                    ip = s[3].split(",")[0].replace('"', "")
-                    p = str(int(s[5].split(",")[0].replace('"', ""), 16))
-                    pr = ip + ":" + p
-                    if pr not in hsl:
-                        hsl.append(pr)
-                        if len(hsl) == count:
-                            break
-        except Exception as e:
-            pass
-    return hsl
-
-
-def https(logs=True, count=200, timeout=15):
-    """
-    this function gather up hundreds of HTTPS proxies from many sources.
-    those proxies are recommended to be used as reliable ones all the time.
-    the function takes an argument which is the number of proxies to return (*args) , in case of no argument given it will
-    return the whole list,and another argument (logs) which is set by default to True so you can see the process of the function, you can turn
-    off the the typing if you set it to: False.
-
-    usage:
-
-    >>>import bane
-    >>>bane.https()
-
-    >>>bane.https(200)
-    """
-    dn = "abcdefghijklmnopqrstuvwxyz"
-    hl = []
-    u = "https://www.sslproxies.org/"
-    try:
-        if logs == True:
-            print("[+]Checking: {}".format(u))
-        c = requests.Session().get(u, timeout=timeout).text
-        soup = BeautifulSoup(c, "html.parser")
-        y = soup.find_all("tr")
-        a = 0
-        for x in y:
-            try:
-                x = str(x)
-                ip = x.split("</td>")[0].split("=")[0]
-                ip = ip.split("<tr><td>")[1].split("=")[0]
-                p = x.split("</td><td>")[1].split("=")[0]
-                p = p.split("</td>")[0].split("=")[0]
-                d = False
-                for o in dn:
-                    if (o in ip.lower()) or (o in p.lower()):
-                        d = True
-                if d == False:
-                    pr = ip + ":" + p
-                    a += 1
-                    if pr not in hl:
-                        hl.append(pr)
-                        if (a == 200) or (len(hl) == count):
-                            a = 0
-                            break
-            except:
-                pass
-    except:
-        pass
-    hl = hl[0 : len(hl) - 4]
-    """
- ur=['https://list.proxylistplus.com/ssl-List-1', 'https://list.proxylistplus.com/ssl-List-2']
- for u in ur:
-  if len(hl)==count:
-    break
-  try:
-   if logs==True:
-    print("[+]Checking: {}".format(u))
-   c=requests.Session().get(u,timeout=timeout).text
-   soup = BeautifulSoup(c,"html.parser")
-   y= soup.find_all("tr")
-   for x in y:
-    try:
-     z = x.find_all('td')
-     if "strong" in str(z):
-      pass 
-     else:
-       ip= str(z[1]).split('<td>')[1].split('=')[0]
-       ip=ip.split('</td>')[0].split('=')[0]
-       p= str(z[2]).split('<td>')[1].split('=')[0]
-       p=p.split('</td>')[0].split('=')[0]
-       d=False
-       for o in dn:
-        if ((o in ip.lower()) or (o in p.lower())):
-         d=True
-       if d==False:
-        pr=ip+':'+p
-        a+=1
-        if pr not in hl:
-         hl.append(pr)
-         if (len(hl)==count):
-          break
-    except Exception as e:
-     pass
-  except Exception as e:
-   pass
- """
-    return hl
-
-
-def socks5(logs=True, count=100, timeout=15):
-    """
-    this function gather up hundreds of SOCKS5 proxies from many sources.
-    those proxies are recommended to be used as reliable ones all the time.
-    the function takes an argument which is the number of proxies to return (*args) , in case of no argument given it will
-    return the whole list,and another argument (logs) which is set by default to True so you can see the process of the function, you can turn
-    off the the typing if you set it to: False.
-
-    usage:
-
-    >>>import bane
-    >>>bane.socks5()
-
-    >>>bane.socks5(50)"""
-    s5l = []
-    u = "https://www.socks-proxy.net/"
-    try:
-        if logs == True:
-            print("[+]Checking: {}".format(u))
-        c = requests.Session().get(u, timeout=timeout).text
-        soup = BeautifulSoup(c, "html.parser")
-        y = soup.find_all("tr")
-        for x in y:
-            if "Socks5" in str(x):
-                try:
-                    x = str(x)
-                    ip = x.split("</td>")[0].split("=")[0]
-                    ip = ip.split("<tr><td>")[1].split("=")[0]
-                    p = x.split("</td><td>")[1].split("=")[0]
-                    p = p.split("</td>")[0].split("=")[0]
-                    pr = ip + ":" + p
-                    if pr not in s5l:
-                        s5l.append(pr)
-                        if len(s5l) == count:
-                            break
-                except:
-                    pass
-    except:
-        pass
-    """
- ur=["https://list.proxylistplus.com/Socks-List-1"," https://list.proxylistplus.com/Socks-List-2"]
- for u in ur:
-  if len(s5l)==count:
-   break
-  try:
-   if logs==True:
-    print("[+]Checking: {}".format(u))
-   c=requests.Session().get(u,timeout=timeout).text
-   s = BeautifulSoup(c,"html.parser")
-   y=s.find_all('tr')
-   for x in y:
-    try:
-     z = x.find_all('td')
-     if "strong" in str(z):
-      pass 
-     else:
-      if "Socks5" in str(x):
-       ip= str(z[1]).split('<td>')[1].split('=')[0]
-       ip=ip.split('</td>')[0].split('=')[0]
-       p= str(z[2]).split('<td>')[1].split('=')[0]
-       p=p.split('</td>')[0].split('=')[0]
-       pr=ip+':'+p
-       if pr not in s5l:
-        s5l.append(pr)
-        if len(s5l)==count:
-          break
-    except Exception as e:
-     pass
-  except Exception as e:
-   pass
- """
-    return s5l
-
-
-def socks4(logs=True, count=30, timeout=15):
-    """
-    this function gather up hundreds of SOCKS4 proxies from many sources.
-    those proxies are recommended to be used as reliable ones all the time.
-    the function takes an argument which is the number of proxies to return (*args) , in case of no argument given it will
-    return the whole list,and another argument (logs) which is set by default to True so you can see the process of the function, you can turn
-    off the the typing if you set it to: False.
-
-    usage:
-
-    >>>import bane
-    >>>bane.socks4()
-
-    >>>bane.socks4(50)"""
-    s4l = []
-    u = "https://www.socks-proxy.net/"
-    try:
-        if logs == True:
-            print("[+]Checking: {}".format(u))
-        c = requests.Session().get(u, timeout=timeout).text
-        soup = BeautifulSoup(c, "html.parser")
-        y = soup.find_all("tr")
-        for x in y:
-            if "Socks4" in str(x):
-                try:
-                    x = str(x)
-                    ip = x.split("</td>")[0].split("=")[0]
-                    ip = ip.split("<tr><td>")[1].split("=")[0]
-                    p = x.split("</td><td>")[1].split("=")[0]
-                    p = p.split("</td>")[0].split("=")[0]
-                    pr = ip + ":" + p
-                    if pr not in s4l:
-                        s4l.append(pr)
-                        if len(s4l) == count:
-                            break
-                except Exception as e:
-                    pass
-    except Exception as e:
-        pass
-    """ur=["https://list.proxylistplus.com/Socks-List-1"," https://list.proxylistplus.com/Socks-List-2"]
- for u in ur:
-  if len(s4l)==count:
-   break
-  try:
-   if logs==True:
-    print("[+]Checking: {}".format(u))
-   c=requests.Session().get(u,timeout=timeout).text
-   s = BeautifulSoup(c,"html.parser")
-   y=s.find_all('tr')
-   for x in y:
-    try:
-     z = x.find_all('td')
-     if "strong" in str(z):
-      pass 
-     else:
-      if "Socks4" in str(x):
-       ip= str(z[1]).split('<td>')[1].split('=')[0]
-       ip=ip.split('</td>')[0].split('=')[0]
-       p= str(z[2]).split('<td>')[1].split('=')[0]
-       p=p.split('</td>')[0].split('=')[0]
-       pr=ip+':'+p
-       if pr not in s4l:
-        s4l.append(pr)
-        if len(s4l)==count:
-          break
-    except Exception as e:
-     pass
-  except Exception as e:
-   pass
- """
-    return s4l
-
-'''
+            response=requests.get('https://www.google.com',headers={'User-Agent':random.choice(ua)},proxies=proxy).text
+            if 'google.com' not in str(response):
+                return True
+        except Exception as ex:
+            return False

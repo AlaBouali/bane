@@ -580,6 +580,12 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
   The function returns <code>True</code> if it finds the string "banetest" in the response headers; otherwise, it returns <code>False</code>.
 </p>
 
+</pre></div><h4>CRLF header injection:</h4>
+
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.crlf_header_injection(link, timeout=15 )
+
+
+</pre></div><h4>CRLF body injection:</h4>
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
   <pre style="margin: 0; line-height: 125%">crlf_body_injection(
     u,
@@ -617,12 +623,6 @@ II-Usage (General usage or read the <a href='https://github.com/AlaBouali/bane/w
   The function returns <code>True</code> if it finds the string "banetest;$@*" in the response text; otherwise, it returns <code>False</code>.
 </p>
 
-</pre></div><h4>CRLF header injection:</h4>
-
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.crlf_header_injection(link, timeout=15 )
-
-
-</pre></div><h4>CRLF body injection:</h4>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bane.crlf_body_injection(link, timeout=15 )
 
