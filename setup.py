@@ -39,17 +39,17 @@ if termux==False:
 #protobuf==3.6.1
 
 if  sys.version_info < (3,0):
-    req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","stem","cfscrape","google","colorama","dnspython"]
+    req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","stem","google","colorama","dnspython"]
     if adr==True:
-        req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql==0.9.3","cfscrape","scapy==2.4.0","google","colorama","dnspython"]
+        req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","google","colorama","dnspython"]
     if termux==True:
-       req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","cfscrape","google","colorama","dnspython"]
+       req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","google","colorama","dnspython"]
 else:
-    req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql","kamene==0.32","stem","cfscrape","google","colorama","dnspython"]
+    req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql","kamene==0.32","stem","google","colorama","dnspython"]
     if adr==True:
-        req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql","cfscrape","kamene==0.32","google","colorama","dnspython"]
+        req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql","kamene==0.32","google","colorama","dnspython"]
     if termux==True:
-        req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql","kamene==0.32","cfscrape","google","colorama","dnspython"]
+        req=["furl","future","xtelnet>=2.1.4","requests","PySocks","bs4","pymysql","kamene==0.32","google","colorama","dnspython"]
 
 
 if (sys.platform == "win32") or( sys.platform == "win64"):

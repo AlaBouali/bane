@@ -10,7 +10,7 @@ def myip(proxy=None, timeout=15):
     xxx.xx.xxx.xxx"""
     try:
         return requests.Session().get(
-            "http://ipinfo.io/ip",
+            "https://api.ipify.org",
             headers={"User-Agent": random.choice(ua)},
             proxies=proxy,
             timeout=timeout,

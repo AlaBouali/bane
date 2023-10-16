@@ -1,4 +1,4 @@
-import requests, cfscrape, socks, os, sys, urllib, socket, random, time, threading, ssl
+import requests, socks, os, sys, urllib, socket, random, time, threading, ssl
 import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)

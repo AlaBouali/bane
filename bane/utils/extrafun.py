@@ -1,4 +1,4 @@
-import cgi, requests, os, random, re, hashlib, urllib, sys, cfscrape, json, gc
+import cgi, requests, os, random, re, hashlib, urllib, sys, json, gc,socket,socks
 from bane.cryptographers import *
 from bane.utils import *
 if sys.version_info < (3, 0):
@@ -12,16 +12,7 @@ from bane.utils.pager import crawl
 
 
 
-def set_general_dns_resolver(host,port):
-    socket.setdns()
 
-def get_cf_cookie(domain, user_agent):
-    try:
-        s = cfscrape.create_scraper()
-        c = s.get_cookie_string("http://" + domain, user_agent=user_agent)
-        return c[0]
-    except:
-        return {}
 
 
 
