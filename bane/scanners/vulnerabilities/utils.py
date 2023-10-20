@@ -1,5 +1,7 @@
 import subprocess, os, xtelnet, sys, cgi, re, json,platform
 from colorama import Fore, Back, Style
+from bane.utils.proxer import load_and_parse_proxies_all,get_requests_proxies_from_parameters
+from bane.utils.handle_files import read_file,write_file,delete_file,clear_file,create_file
 
 if platform.system()=='Java':
         Fore.WHITE = ""
@@ -60,12 +62,9 @@ def setup_to_submit(form):
     return d, f
 
 
-def setup_proxy(pr, prs):
-    if pr:
-        return pr
-    if prs:
-        return random.choice(prs)
-    return None
+def setup_proxy(proxies):
+    return random.choice(proxies)
+
 
 
 def setup_ua(usra):

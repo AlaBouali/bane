@@ -11,24 +11,12 @@ class filemanager_finder:
         user_agent=None,
         cookie=None,
         timeout=10,
-        proxy=None,
-        proxies=None,
-        headers={}
-    ):
-        """
-        u: the link: http://www.example.com
-        logs: (set by default to True) the show the process and requests
-        mapping: (set by default to: False) if it is set to True, it will stop the prcess when it finds the link, else: it continue for more
-        possible links
-        returning: (set by default to: False) if you want it to return a list of possibly accesseble links to be used in your scripts set it to: True
-        timeout: (set by default to 10) timeout flag for the requests
-
-        usage:
-
-        >>>import bane
-        >>>url='http://www.example.com/'
-        >>>bane.filemanager_finder(url)
-        """
+        headers={},
+        http_proxies=None,
+        socks4_proxies=None,
+        socks5_proxies=None
+        ):
+        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         self.logs = logs
         self.stop = False
         self.finish = False
@@ -40,7 +28,6 @@ class filemanager_finder:
                 user_agent,
                 cookie,
                 timeout,
-                proxy,
                 proxies,
                 headers,
             ),
@@ -48,7 +35,7 @@ class filemanager_finder:
         t.daemon = threads_daemon
         t.start()
 
-    def crack(self, u, user_agent, cookie, timeout, proxy, proxies,headers):
+    def crack(self, u, user_agent, cookie, timeout, proxies,headers):
         for i in manager:
             if self.stop == True:
                 self.finish = True
@@ -69,7 +56,7 @@ class filemanager_finder:
                     g,
                     headers=hed,
                     allow_redirects=False,
-                    proxies=proxy,
+                    proxies=setup_proxy(proxies),
                     timeout=timeout,
                     verify=False,
                 )

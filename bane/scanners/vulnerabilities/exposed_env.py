@@ -4,13 +4,15 @@ def exposed_env(
     u,
     user_agent=None,
     cookie=None,
-    proxies=None,
-    proxy=None,
     path="",
     brute_force=True,
     timeout=15,
-    headers={}
-):
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
+    ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     if brute_force == False:
         if user_agent:
             us = user_agent
@@ -29,7 +31,7 @@ def exposed_env(
             else:
                 u = u.replace(urlparse(u).path, path + "/.env")
             c = requests.Session().get(
-                u, headers=hea, proxies=proxy, timeout=timeout, verify=False
+                u, headers=hea, proxies=setup_proxy(proxies), timeout=timeout, verify=False
             ).text
             if ("APP_KEY=" in c) or ("DB_HOST=" in c):
                 return (True, u)
@@ -38,10 +40,7 @@ def exposed_env(
         return (False, "")
     else:
         for x in env_paths:
-            if proxy:
-                proxy = proxy
-            if proxies:
-                proxy = random.choice(proxies)
+            proxy = random.choice(proxies)
             a = exposed_env(
                 u,
                 user_agent=user_agent,

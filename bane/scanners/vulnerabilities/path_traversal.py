@@ -11,7 +11,6 @@ def path_traversal_check(
     bypass=False,
     target_os="linux",
     proxy=None,
-    proxies=None,
     timeout=10,
     user_agent=None,
     cookie=None,
@@ -20,8 +19,6 @@ def path_traversal_check(
     """
     this function is for FI vulnerability test using a link"""
     linux_files = ["{}proc{}version", "{}etc{}passwd"]
-    if proxies:
-        proxy = random.choice(proxies)
     if user_agent:
         us = user_agent
     else:
@@ -98,17 +95,19 @@ def path_traversal_urls(
     bypass=False,
     target_os="linux",
     php_wrapper="file",
-    proxy=None,
-    proxies=None,
     timeout=10,
     user_agent=None,
     cookie=None,
-    headers={}
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
 ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     res = []
     if u.split("?")[0][-1] != "/" and "." not in u.split("?")[0].rsplit("/", 1)[-1]:
         u = u.replace("?", "/?")
-    a = crawl(u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent)
+    a = crawl(u, proxy=setup_proxy(proxies), timeout=timeout, cookie=cookie, user_agent=user_agent)
     l = []
     d = a.values()
     for x in d:
@@ -134,12 +133,11 @@ def path_traversal_urls(
                         linux_file=0,
                         target_os="linux",
                         php_wrapper=php_wrapper,
-                        proxy=proxy,
-                        proxies=proxies,
                         timeout=timeout,
                         cookie=cookie,
                         user_agent=user_agent,
-                        headers=headers
+                        headers=headers,
+                        proxy=setup_proxy(proxies)
                     )
                     if q[0] == True:
                         if q[1] not in res:
@@ -152,12 +150,11 @@ def path_traversal_urls(
                             linux_file=1,
                             target_os="linux",
                             php_wrapper=php_wrapper,
-                            proxy=proxy,
-                            proxies=proxies,
                             timeout=timeout,
                             cookie=cookie,
                             user_agent=user_agent,
-                            headers=headers
+                            headers=headers,
+                            proxy=setup_proxy(proxies)
                         )
                         if q[0] == True:
                             if q[1] not in res:
@@ -168,13 +165,12 @@ def path_traversal_urls(
                                 null_byte=null_byte,
                                 bypass=bypass,
                                 php_wrapper=php_wrapper,
-                                proxy=proxy,
-                                proxies=proxies,
                                 timeout=timeout,
                                 cookie=cookie,
                                 user_agent=user_agent,
                                 target_os="windows",
-                                headers=headers
+                                headers=headers,
+                                proxy=setup_proxy(proxies)
                             )
                             if q[0] == True:
                                 if q[1] not in res:
@@ -189,17 +185,19 @@ def path_traversal(
     bypass=False,
     target_os="linux",
     php_wrapper=None,#"file",
-    proxy=None,
-    proxies=None,
     timeout=10,
     user_agent=None,
     cookie=None,
     pages=[],
-    headers={}
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
 ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     l=[]
     if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=setup_proxy(proxies))
     for x in pages:
         if logs==True:
             print('\n\nPage: {}\n'.format(x))
@@ -208,12 +206,13 @@ def path_traversal(
                             bypass=bypass,
                             target_os=target_os,
                             php_wrapper=php_wrapper,
-                            proxy=proxy,
-                            proxies=proxies,
                             timeout=timeout,
                             user_agent=user_agent,
                             cookie=cookie,
-                            headers=headers)
+                            headers=headers,
+                            http_proxies=http_proxies,
+                            socks4_proxies=socks4_proxies,
+                            socks5_proxies=socks5_proxies)
         if logs==True:
             for r in result:
                 print(r)

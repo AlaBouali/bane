@@ -3,7 +3,6 @@ from bane.scanners.vulnerabilities.utils import *
 
 def file_upload_forms(
     u,
-    proxy=None,
     timeout=10,
     show_warnings=True,
     user_agent=None,
@@ -17,12 +16,16 @@ def file_upload_forms(
     dont_send=[],
     mime_type=None,
     predefined_inputs={},
-    headers={}
-):
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
+    ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     l = []
     result=[]
     x = forms_parser(
-        u, proxy=proxy, timeout=timeout, user_agent=user_agent, cookie=cookie
+        u, proxy=setup_proxy(proxies), timeout=timeout, user_agent=user_agent, cookie=cookie
     )
     fos = get_upload_form(x)
     for fo in fos:
@@ -66,7 +69,7 @@ def file_upload_forms(
         h.update(headers)
         try:
             r = requests.Session().post(
-                fo["action"], data=d, files=f, proxies=proxy, timeout=timeout, headers=h,verify=False,
+                fo["action"], data=d, files=f, proxies=setup_proxy(proxies), timeout=timeout, headers=h,verify=False,
             )
             if (
                 r.status_code == 200
@@ -116,16 +119,19 @@ def file_upload(
     mime_type=None,
     predefined_inputs={},
     pages=[],
-    headers={}
-):
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
+    ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     l=[]
     if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=setup_proxy(proxies))
     for x in pages:
         if logs==True:
             print('\n\nPage: {}\n'.format(x))
         result=file_upload_forms(x,
-                                proxy=proxy,
                                 timeout=timeout,
                                 show_warnings=show_warnings,
                                 user_agent=user_agent,

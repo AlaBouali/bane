@@ -102,23 +102,18 @@ def ssti_forms(
     fill_empty=10,
     leave_empty=[],
     dont_send=["btnClear"],
-    proxy=None,
-    proxies=None,
     timeout=120,
     user_agent=None,
     cookie=None,
     debug=False,
     mime_type=None,
     predefined_inputs={},
-    headers={}
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
 ):
-    """
-    this function is for SSTI test with both POST and GET requests . it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
-    usage:
-
-    >>>import bane
-    >>>bane.ssti_forms('http://phptester.net/")
-    """
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     target_page = u
     xp = ssti_list[payload_index].replace(
         payload_keyword, "{}{}{}".format(values[0], operator, values[1])
@@ -135,7 +130,7 @@ def ssti_forms(
         print(Fore.WHITE + "[~]Getting forms..." + Style.RESET_ALL)
     hu = True
     fom = forms_parser(
-        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True,headers=headers
+        u, proxy=setup_proxy(proxies), timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True,headers=headers
     )
     if len(fom) == 0:
         if logs == True:
@@ -213,7 +208,7 @@ def ssti_forms(
                                     xp,
                                     cookie,
                                     setup_ua(user_agent),
-                                    setup_proxy(proxy, proxies),
+                                    setup_proxy(proxies),
                                     timeout,
                                     fill_empty,
                                     file_extension=file_extension,
@@ -297,19 +292,21 @@ def ssti(
     fill_empty=10,
     leave_empty=[],
     dont_send=["btnClear"],
-    proxy=None,
-    proxies=None,
     timeout=120,
     user_agent=None,
     cookie=None,
     debug=False,
     mime_type=None,
     predefined_inputs={},
-    headers={}
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
 ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     l=[]
     if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy,headers=headers)
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
     for x in pages:
         if logs==True:
             print('\n\nPage: {}\n'.format(x))
@@ -329,15 +326,17 @@ def ssti(
                             fill_empty=fill_empty,
                             leave_empty=leave_empty,
                             dont_send=dont_send,
-                            proxy=proxy,
-                            proxies=proxies,
                             timeout=timeout,
                             user_agent=user_agent,
                             cookie=cookie,
                             debug=debug,
                             mime_type=mime_type,
                             predefined_inputs=predefined_inputs,
-                            headers=headers))
+                            headers=headers,
+                            http_proxies=http_proxies,
+                            socks4_proxies=socks4_proxies,
+                            socks5_proxies=socks5_proxies
+                        ))
     f=[]
     for x in l:
         if x !=None:

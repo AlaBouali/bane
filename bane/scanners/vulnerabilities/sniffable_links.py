@@ -1,6 +1,7 @@
 from bane.scanners.vulnerabilities.utils import *
 
-def sniffable_links(u, proxy=None, timeout=10, user_agent=None, cookie=None,content=None,logs=True,request_headers=None,headers={}):
+def sniffable_links(u, timeout=10,proxy=None, user_agent=None, cookie=None,content=None,logs=True,request_headers=None,headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     if user_agent:
         us = user_agent
     else:
@@ -13,6 +14,8 @@ def sniffable_links(u, proxy=None, timeout=10, user_agent=None, cookie=None,cont
     vul=[]
     try:
         if content==None:
+            if proxy==None:
+                proxy=setup_proxy(proxies)
             r=requests.Session().get(u,headers=heads,timeout=timeout,verify=False,proxies=proxy)
             for x in r.headers:
                     if x.lower().strip() == "strict-transport-security":

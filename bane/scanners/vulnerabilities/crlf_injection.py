@@ -48,13 +48,16 @@ def crlf_header_injection(
     unicode_random_level=0,
     carriage_return_only=False,
     line_feed_only=False,
-    proxy=None,
     timeout=10,
     user_agent=None,
     cookie=None,
     debug=False,
-    headers={}
-):
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
+    ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     if user_agent:
         us = user_agent
     else:
@@ -74,7 +77,7 @@ def crlf_header_injection(
             + "banetest:%20test",
             method="GET",
             headers=heads,
-            proxy=proxy,
+            proxy=setup_proxy(proxies),
             timeout=timeout,
             verify=False,
         )
@@ -86,7 +89,6 @@ def crlf_header_injection(
 
 def crlf_body_injection(
     u,
-    proxy=None,
     unicode_random_level=0,
     carriage_return_only=False,
     line_feed_only=False,
@@ -94,8 +96,13 @@ def crlf_body_injection(
     user_agent=None,
     cookie=None,
     debug=False,
-    headers={}
-):
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
+    ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+    
     if user_agent:
         us = user_agent
     else:
@@ -119,7 +126,7 @@ def crlf_body_injection(
             + "banetest:%20test",
             method="GET",
             headers=heads,
-            proxy=proxy,
+            proxy=setup_proxy(proxies),
             timeout=timeout,
             verify=False,
         )

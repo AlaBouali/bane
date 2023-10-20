@@ -1,5 +1,5 @@
 import requests, socks, os, sys, urllib, socket, random, time, threading, ssl
-import urllib3
+import urllib3,json
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # import the dependencies for each python version
@@ -29,7 +29,8 @@ else:
 from struct import *
 from bane.scanners.botnet.iot import getip
 from bane.common.payloads import *
-from bane.utils.proxer import *
+from bane.utils.proxer import parse_proxies_list,get_proxy_socket,get_tor_socks5_socket,parse_proxy_string,wrap_socket_with_ssl,load_and_parse_proxies,load_and_parse_proxies_all,get_tor_socks5_proxy,get_requests_proxies_from_parameters,get_socket_proxies_from_parameters
+
 
 if os.path.isdir("/data/data") == True:
     adr = True  # the device is an android
@@ -44,6 +45,15 @@ def reorder_headers_randomly(s):
     m = a.split("\r\n")[0]
     c = a.split("\r\n")[1:]
     random.shuffle(c)
+    num=random.randint(1,4)
+    i=[]
+    while len(i)>num:
+        q=random.choice(c)
+        if 'host:' not in q.lower() or 'user-agent:' not in q.lower() or 'content-length' not in q.lower():
+            i.append(q)
+    for x in i:
+        if x in c:
+            c.remove(x)
     return m + "\r\n" + "\r\n".join(c) + "\r\n\r\n" + b
 
 
@@ -176,16 +186,20 @@ class DDoS_Class:
         return a
 
 
-def wrap_socket_with_ssl(sock,target_host):
-    if sock==None:
-        return
-    if hasattr(ssl, 'PROTOCOL_TLS_CLIENT'):
-        # Since Python 3.6
-        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
-    elif hasattr(ssl, 'PROTOCOL_TLS'):
-        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-    else:
-        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)#ssl.PROTOCOL_TLS)
-    ssl_context.check_hostname = False
-    ssl_context.verify_mode = ssl.CERT_NONE
-    return ssl_context.wrap_socket(sock, server_hostname=target_host)
+
+
+
+def get_socket_connection(host,port,timeout=5,no_delay=False,ssl_wrap=False,**kwargs):
+    s=get_proxy_socket(host,port,timeout=timeout,no_delay=no_delay,**kwargs)
+    if ssl_wrap==True:
+        s=wrap_socket_with_ssl(s,host)
+    return s
+
+
+def get_tor_socket_connection(host,port,new_ip=True,ssl_wrap=False,timeout=5,no_delay=False,**kwargs):
+    s=get_tor_socks5_socket(host,port,new_ip=new_ip,timeout=timeout,no_delay=no_delay,**kwargs)
+    if ssl_wrap==True:
+        s=wrap_socket_with_ssl(s,host)
+    return s
+
+

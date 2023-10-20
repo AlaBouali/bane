@@ -1,6 +1,7 @@
 from bane.scanners.cms.utils import *
 
-def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None):
+def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     domain=u.split('://')[1].split('/')[0].split(':')[0]
     root_domain=extract_root_domain(domain)
     ip=socket.gethostbyname(domain.split(':')[0])
@@ -15,7 +16,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
         hed.update({"Cookie": cookie})
     hed.update(headers)
     try:
-        response = requests.Session().get(u+"/magento_version", headers=hed, proxies=proxy, timeout=timeout, verify=False)
+        response = requests.Session().get(u+"/magento_version", headers=hed, proxies=setup_proxy(proxies), timeout=timeout, verify=False)
         version= response.text.split('Magento/')[1].split()[0].strip()
     except:
         version= ''
@@ -30,7 +31,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
                 '2009':'1.4.0',
                 '2008':'1.0-1.3'
             }
-            response = requests.Session().get(u+"/skin/frontend/default/default/css/styles.css", headers=hed, proxies=proxy, timeout=timeout, verify=False)
+            response = requests.Session().get(u+"/skin/frontend/default/default/css/styles.css", headers=hed, proxies=setup_proxy(proxies), timeout=timeout, verify=False)
             for x in versions:
                 if 'Copyright (c) {}'.format(x) in response.text:
                     version=versions[x]
@@ -38,7 +39,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
         except:
             version= ''
     try:
-        response = requests.Session().get(u, headers=hed, proxies=proxy, timeout=timeout, verify=False)
+        response = requests.Session().get(u, headers=hed, proxies=setup_proxy(proxies), timeout=timeout, verify=False)
     except:
         pass
     server=response.headers.get('Server','')
@@ -52,7 +53,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
     clickj=page_clickjacking(u,request_headers=response.headers)
     if logs==True:
         print("[i] Looking for subdomains...")
-    subs=get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=proxy,subdomains_only=subdomains_only)
+    subs=get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=setup_proxy(proxies),subdomains_only=subdomains_only)
     if logs==True:
         print("[i] Cheking if we can sniff some cookies over some links...")
         print()
@@ -63,7 +64,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
     if version!='':
         if logs==True:
             print('[i] looking for exploits for version: {}\n'.format(version))
-        wpvulns=vulners_search('magento',version=version,proxy=proxy,api_key=api_key)
+        wpvulns=vulners_search('magento',version=version,proxy=setup_proxy(proxies),api_key=api_key)
         wp_vulns=[]
         for x in wpvulns:
             if 'magento' in x['title'].lower() or 'magento' in x['description'].lower():
@@ -91,7 +92,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
                 if logs==True:
                     print('\t[-] unknown version\n')
             else:
-                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=proxy,api_key=api_key)
+                bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=setup_proxy(proxies),api_key=api_key)
             for x in bk:
                 for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
                     try:
@@ -114,7 +115,7 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
                 if logs==True:
                     print('[i] looking for exploits for : {}\n'.format(sv))
                 if '/' in sv:
-                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=proxy,api_key=api_key)
+                    sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=setup_proxy(proxies),api_key=api_key)
                 else:
                     if logs==True:
                         print('\t[-] unknown version\n')

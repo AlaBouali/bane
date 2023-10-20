@@ -42,36 +42,12 @@ class force_browsing:
         ext="php",
         user_agent=None,
         cookie=None,
-        proxy=None,
-        proxies=None,
-        headers={}
-    ):
-        """
-        this function is using "Forced Browsing" technique which is aim to access restricted areas without providing any credentials!!!
-        it is used here to gain access to admin control panel by trying different possible combinations of links with the given URL.
-        it's possible to do that and this a proof of concept that unserured cpanels with lack of right sessions configurations can be
-        accessed just by guessing the right links :)
-
-        the function takes those arguments:
-
-        u: the targeted link which should be leading to the control panel, example:
-        http://www.example.com/admin/login.php
-        you have to delete 'login.php' and insert the rest of the link in the function like this:
-
-        >>>import bane
-        >>>bane.force_browsing('http://www.example.com/admin/')
-
-        then the function will try to find possible accesseble links:
-
-        http://www.example.com/admin/edit.php
-        http://www.example.com/admin/news.php
-        http://www.example.com/admin/home.php
-
-        timeout: (set by default to 10) timeout flag for the request
-        logs: (set by default to: True) showing the process of the attack, you can turn it off by setting it to: False
-        returning: (set by default to: False) return a list of the accessible link(s), to make the function return the list, set to: True
-        mapping: (set by default to: True) find all possible links, to make stop if it has found 1 link just set it to: False
-        ext: (set by default to: "php") it helps you to find links with the given extention, cuurentky it supports only 3 extentions: "php", "asp" and "aspx"( any other extention won't be used)."""
+        headers={},
+        http_proxies=None,
+        socks4_proxies=None,
+        socks5_proxies=None
+        ):
+        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         self.stop = False
         self.finish = False
         self.result = {}
@@ -85,7 +61,6 @@ class force_browsing:
                 ext,
                 user_agent,
                 cookie,
-                proxy,
                 proxies,
                 headers,
             ),
@@ -101,7 +76,6 @@ class force_browsing:
         ext="php",
         user_agent=None,
         cookie=None,
-        proxy=None,
         proxies=None,
     ):
         l = []
@@ -114,10 +88,7 @@ class force_browsing:
             if self.logs == True:
                 print("[*]Trying:", g)
             try:
-                if proxy:
-                    proxy = proxy
-                if proxies:
-                    proxy=random.choice(proxies)
+                proxy=random.choice(proxies)
                 if user_agent:
                     us = user_agent
                 else:

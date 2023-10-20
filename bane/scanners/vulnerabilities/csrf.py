@@ -64,15 +64,19 @@ def csrf_forms(
     dont_send=[],
     mime_type=None,
     predefined_inputs={},
-    headers={}
-):
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
+    ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     vu = []
     if not cookie or len(cookie.strip()) == 0:
         raise Exception(
             "This attack requires authentication !! You need to set a Cookie"
         )
     v = csrf_filter_tokens(
-        u, proxy=proxy, timeout=timeout, user_agent=user_agent, cookie=cookie, headers=headers
+        u, proxy=setup_proxy(proxies), timeout=timeout, user_agent=user_agent, cookie=cookie, headers=headers
     )["Vulnerable"]
     if user_agent:
         h = {"User-Agent": user_agent}
@@ -162,16 +166,19 @@ def csrf(
     mime_type=None,
     predefined_inputs={},
     pages=[],
-    headers={}
-):
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
+    ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     l=[]
     if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy)
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=setup_proxy(proxies))
     for x in pages:
         if logs==True:
             print('\n\nPage: {}\n'.format(x))
         result=csrf_forms(x,
-                        proxy=proxy,
                         timeout=timeout,
                         show_warnings=show_warnings,
                         user_agent=user_agent,
@@ -184,7 +191,10 @@ def csrf(
                         dont_send=dont_send,
                         mime_type=mime_type,
                         predefined_inputs=predefined_inputs,
-                        headers=headers)
+                        headers=headers,
+                        http_proxies=http_proxies,
+                        socks4_proxies=socks4_proxies,
+                        socks5_proxies=socks5_proxies)
         if logs==True:
             for r in result:
                 print(r)

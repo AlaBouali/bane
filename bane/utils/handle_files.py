@@ -18,10 +18,12 @@ def write_file(w, fi, encode="utf-8"):
     f.close()
 
 
-def read_file(w):
+def read_file(w,split_lines=True):
     with open(w, "r") as f:
-        l = f.readlines()
+        l = f.read()
     f.close()
+    if split_lines==True:
+        return l.split('\n')
     return l
 
 

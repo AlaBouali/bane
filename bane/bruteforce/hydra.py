@@ -182,16 +182,15 @@ class hydra:
         ehlo=False,
         helo=True,
         ttls=False,
-        proxy=None,
-        proxies=None,
         user_agent=None,
         cookie=None,
-        headers={}
-    ):
-        """
-        this function is similar to hydra tool to bruteforce attacks on different ports.
-
-        protocol: (set by default to: ssh) set the chosen protocol (ftp, ssh, telnet, smtp and mysql) and don't forget to set the port."""
+        headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
+        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        s_proxies=get_socket_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        socket_proxies=[x for x in s_proxies if x['proxy_type'] in ['socks4','socks5','s4','s5']]
+        if socket_proxies==[]:
+            socket_proxies=[{'proxy_host':None,'proxy_port':None,'proxy_username':None,'proxy_password':None,'proxy_type':None}]
+        word_list=load_word_list(word_list)
         self.logs = logs
         self.stop = False
         self.finish = False
@@ -209,8 +208,8 @@ class hydra:
                 ehlo,
                 helo,
                 ttls,
-                proxy,
                 proxies,
+                socket_proxies,
                 user_agent,
                 cookie,
                 headers,
@@ -231,8 +230,8 @@ class hydra:
         ehlo,
         helo,
         ttls,
-        proxy,
         proxies,
+        socket_proxies,
         user_agent,
         cookie,
         headers
@@ -260,30 +259,26 @@ class hydra:
             if protocol == "ssh":
                 r = s(u, user, pwd, timeout=timeout, p=p, exchange_key=exchange_key)
             elif protocol == "telnet":
-                r = s(u, user, pwd, timeout=timeout, p=p)
+                r = s(u, user, pwd, timeout=timeout, p=p,**setup_proxy(socket_proxies))
             elif protocol == "mysql":
-                r = s(u, user, pwd, timeout=timeout, p=p)
+                r = s(u, user, pwd, timeout=timeout, p=p,**setup_proxy(socket_proxies))
             elif protocol == "ftp":
-                r = s(u, user, pwd, timeout=timeout)
+                r = s(u, user, pwd, timeout=timeout,**setup_proxy(socket_proxies))
             elif protocol == "wp":
-                if proxy:
-                    proxy = proxy
-                if proxies:
-                    proxy = random.choice(proxies)
                 r = s(
                     u,
                     user,
                     pwd,
-                    proxy=proxy,
+                    http_proxies=proxies,
                     user_agent=user_agent,
                     cookie=cookie,
                     timeout=timeout,
                     headers=headers
                 )
             elif protocol == "smtp":
-                r = s(u, p, user, pwd, ehlo=ehlo, helo=helo, ttls=ttls)
+                r = s(u, p, user, pwd, ehlo=ehlo, helo=helo, ttls=ttls,**setup_proxy(socket_proxies))
             else:
-                r = s(u, user, pwd, timeout=timeout)
+                r = s(u, user, pwd, timeout=timeout,**setup_proxy(socket_proxies))
             if r == True:
                 if self.logs == True:
                     print("[+]Found!!!")

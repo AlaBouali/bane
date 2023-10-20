@@ -5,10 +5,13 @@ def exposed_git(
     u,
     user_agent=None,
     cookie=None,
-    proxy=None,
     timeout=15,
-    headers={}
-):
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
+    ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     if u.endswith('/')==True:
         u+=+'.git'
     else:
@@ -23,7 +26,7 @@ def exposed_git(
             hea = {"User-Agent": us}
     hea.update(headers)
     try:
-        r=requests.Session().get(u,timeout=timeout,verify=False,proxies=proxy,headers=hea)
+        r=requests.Session().get(u,timeout=timeout,verify=False,proxies=setup_proxy(proxies),headers=hea)
         if "index of" in r.text.lower() and "/.git" in r.text.lower():
             return True
     except:

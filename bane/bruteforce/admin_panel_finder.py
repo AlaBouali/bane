@@ -28,10 +28,12 @@ class admin_panel_finder:
         cookie=None,
         ext="php",
         timeout=10,
-        proxy=None,
-        proxies=None,
-        headers={}
-    ):
+        headers={},
+        http_proxies=None,
+        socks4_proxies=None,
+        socks5_proxies=None
+        ):
+        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         self.logs = logs
         self.stop = False
         self.finish = False
@@ -45,7 +47,6 @@ class admin_panel_finder:
                 ext,
                 user_agent,
                 cookie,
-                proxy,
                 proxies,
                 headers,
             ),
@@ -61,7 +62,6 @@ class admin_panel_finder:
         ext,
         user_agent,
         cookie,
-        proxy,
         proxies,
         headers
     ):
@@ -90,8 +90,7 @@ class admin_panel_finder:
             if self.stop == True:
                 break
             try:
-                if proxies:
-                    proxy = random.choice(proxies)
+                proxy = random.choice(proxies)
                 if user_agent:
                     us = user_agent
                 else:

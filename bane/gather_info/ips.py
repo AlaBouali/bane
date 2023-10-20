@@ -58,3 +58,10 @@ def reverse_ip_lookup(u, timeout=10, logs=True, returning=False, proxy=None):
         pass
     return []
 
+
+def check_ip_via_shodan(ip,proxy=None,timeout=15):
+    ip=socket.gethostbyname(ip)
+    try:
+        return requests.get('https://internetdb.shodan.io/{}'.format(ip),headers={'User-Agent':random.choice(ua)},proxies=proxy,timeout=timeout).json()
+    except:
+        return {}

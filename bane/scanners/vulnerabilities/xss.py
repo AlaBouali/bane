@@ -171,20 +171,18 @@ def xss_forms(
     fill_empty=10,
     leave_empty=[],
     dont_send=["btnClear"],
-    proxy=None,
-    proxies=None,
     timeout=10,
     user_agent=None,
     cookie=None,
     debug=False,
     mime_type=None,
-    headers={}
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
 ):
     target_page = u
-    if proxy:
-        proxy = proxy
-    if proxies:
-        proxy = random.choice(proxies)
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     dic = []
     pre_apyload = True
     if payload:
@@ -198,7 +196,7 @@ def xss_forms(
         print(Fore.WHITE + "[~]Getting forms..." + Style.RESET_ALL)
     hu = True
     fom = forms_parser(
-        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True,headers=headers
+        u, proxy=setup_proxy(proxies), timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True,headers=headers
     )
     if len(fom) == 0:
         if logs == True:
@@ -285,7 +283,7 @@ def xss_forms(
                                 xp,
                                 cookie,
                                 setup_ua(user_agent),
-                                setup_proxy(proxy, proxies),
+                                setup_proxy(proxies),
                                 timeout,
                                 fill_empty,
                                 file_extension=file_extension,
@@ -373,46 +371,57 @@ def xss(
     fill_empty=10,
     leave_empty=[],
     dont_send=["btnClear"],
-    proxy=None,
-    proxies=None,
     timeout=10,
     user_agent=None,
     cookie=None,
     debug=False,
     mime_type=None,
-    headers={}
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
 ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     l=[]
     if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy,headers=headers)
-    for x in pages:
-        if logs==True:
-            print('\n\nPage: {}\n'.format(x))
-        l.append(xss_forms(x,
-                           payload=None,
-                            unicode_random_level=unicode_random_level,
-                            number=number,
-                            js_function=js_function,
-                            dont_change=dont_change,
-                            email_extension=email_extension,
-                            phone_pattern=phone_pattern,
-                            predefined_inputs=predefined_inputs,
-                            replaceble_parameters=replaceble_parameters,
-                            file_extension=file_extension,
-                            context_breaker=context_breaker,
-                            save_to_file=save_to_file,
-                            logs=logs,
-                            fill_empty=fill_empty,
-                            leave_empty=leave_empty,
-                            dont_send=dont_send,
-                            proxy=proxy,
-                            proxies=proxies,
-                            timeout=timeout,
-                            user_agent=user_agent,
-                            cookie=cookie,
-                            debug=debug,
-                            mime_type=mime_type,
-                            headers=headers))
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
+    if type(payload)==str:
+        if payload.endswith('.txt')==True:
+            payloads=read_file(payload)
+        else:
+            payloads=[payload]
+    if type(payload)==list or type(payload)==tuple:
+        payloads=list(payload)
+    for pl in payloads:
+        for x in pages:
+            if logs==True:
+                print('\n\nPage: {}\n'.format(x))
+            l.append(xss_forms(x,
+                            payload=pl,
+                                unicode_random_level=unicode_random_level,
+                                number=number,
+                                js_function=js_function,
+                                dont_change=dont_change,
+                                email_extension=email_extension,
+                                phone_pattern=phone_pattern,
+                                predefined_inputs=predefined_inputs,
+                                replaceble_parameters=replaceble_parameters,
+                                file_extension=file_extension,
+                                context_breaker=context_breaker,
+                                save_to_file=save_to_file,
+                                logs=logs,
+                                fill_empty=fill_empty,
+                                leave_empty=leave_empty,
+                                dont_send=dont_send,
+                                timeout=timeout,
+                                user_agent=user_agent,
+                                cookie=cookie,
+                                debug=debug,
+                                mime_type=mime_type,
+                                headers=headers,
+                                http_proxies=http_proxies,
+                                socks4_proxies=socks4_proxies,
+                                socks5_proxies=socks5_proxies))
     f=[]
     for x in l:
         if x !=None:

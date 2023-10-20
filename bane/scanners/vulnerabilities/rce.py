@@ -138,6 +138,7 @@ def rce_submit(
 
 def rce_forms(
     u,
+    payloads=rce_payloads,
     payload_index=0,
     save_to_file=None,
     dont_change={},
@@ -159,62 +160,19 @@ def rce_forms(
     fill_empty=10,
     leave_empty=[],
     dont_send=["btnClear"],
-    proxy=None,
-    proxies=None,
     timeout=120,
     user_agent=None,
     cookie=None,
     debug=False,
     mime_type=None,
     predefined_inputs={},
-    headers={}
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
 ):
-    """
-    this function is for RCE test with both POST and GET requests . it extracts the input fields names using the "inputs" function then test each input using POST and GET methods.
-
-    usage:
-
-    >>>import bane
-    >>>bane.rce_forms('http://phptester.net/")
-
-    """
-    payloads = {
-        "command": {
-            "linux": {
-                "file": ["touch {}.txt", "`touch {}.txt`", "$(touch {}.txt)"],
-                "time": ["sleep {}", "`sleep {}`", "$(sleep {})"],
-            },
-            "windows": {"file": ["copy nul {}.txt"], "time": ["ping -n {} 127.0.0.1"]},
-        },
-        "code": {
-            "python": {
-                "file": [" open('{}.txt', 'w') "],
-                "time": [" __import__('time').sleep({}) "],
-            },
-            "php": {
-                "file": [" file_put_contents('{}.txt', '') "],
-                "time": [" sleep({}) "],
-            },
-            "ruby": {"file": [' File.new("{}.txt", "w") '], "time": [" sleep({}) "]},
-            "perl": {
-                "file": [' open ( my $fh, ">", "{}.txt") '],
-                "time": [" sleep({}) "],
-            },
-            "js": {
-                "file": [" require('fs').createWriteStream('{}.txt', {flags: 'w'})  "],
-                "time": [
-                    " (function wait(ms){var start = new Date().getTime();var end = start;while(end < start + ms) {end = new Date().getTime();}})({}*1000) ",
-                    " await (function wait(ms){var start = new Date().getTime();var end = start;while(end < start + ms) {end = new Date().getTime();}})({}*1000) ",
-                ],
-            },
-        },
-        "sql": {
-            "mysql": {"time": [" sleep({}) "]},
-            "oracle": {"time": [" dbms_lock.sleep({}) "]},
-            "postgre": {"time": [" pg_sleep({}) "]},
-            "sql_server": {"time": [" WAITFOR DELAY '00:00:{}' "]},
-        },
-    }
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+    payloads = payloads.copy()
     target_page = u
     xp = ""
     based_on_o = based_on
@@ -259,16 +217,12 @@ def rce_forms(
         xp += sql_operator_right
     target_page = u
     form_index = -1
-    if proxy:
-        proxy = proxy
-    if proxies:
-        proxy = random.choice(proxies)
     dic = []
     if logs == True:
         print(Fore.WHITE + "[~]Getting forms..." + Style.RESET_ALL)
     hu = True
     fom = forms_parser(
-        u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True,headers=headers
+        u, proxy=setup_proxy(proxies), timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True,headers=headers
     )
     if len(fom) == 0:
         if logs == True:
@@ -350,7 +304,7 @@ def rce_forms(
                                     xp,
                                     cookie,
                                     setup_ua(user_agent),
-                                    setup_proxy(proxy, proxies),
+                                    setup_proxy(proxies),
                                     timeout,
                                     fill_empty,
                                     file_extension=file_extension,
@@ -439,6 +393,7 @@ def rce(
     u,
     max_pages=5,
     pages=[],
+    payloads=rce_payloads,
     payload_index=0,
     email_extension='@gmail.com',
     phone_pattern='XXX-XXX-XXXX',
@@ -446,11 +401,11 @@ def rce(
     dont_change={},
     number=(1, 9),
     injection={"code": "php"},
-    code_operator_right="; ",
-    code_operator_left="",
-    command_operator_right="|",
-    command_operator_left="&",
-    sql_operator_right="or '",
+    code_operator_right=" ; ",
+    code_operator_left=" ",
+    command_operator_right=" | ",
+    command_operator_left=" & ",
+    sql_operator_right=" or '",
     sql_operator_left="' or ",
     file_extension="png",
     replaceble_parameters={"phpvalue": ((".", ""),)},
@@ -460,24 +415,27 @@ def rce(
     fill_empty=10,
     leave_empty=[],
     dont_send=["btnClear"],
-    proxy=None,
-    proxies=None,
     timeout=120,
     user_agent=None,
     cookie=None,
     debug=False,
     mime_type=None,
     predefined_inputs={},
-    headers={}
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
 ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     l=[]
     if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy,headers=headers)
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
     for x in pages:
         if logs==True:
             print('\n\nPage: {}\n'.format(x))
         l.append(rce_forms(x,
                             payload_index=payload_index,
+                            payloads=payloads,
                             save_to_file=save_to_file,
                             dont_change=dont_change,
                             number=number,
@@ -498,15 +456,16 @@ def rce(
                             fill_empty=fill_empty,
                             leave_empty=leave_empty,
                             dont_send=dont_send,
-                            proxy=proxy,
-                            proxies=proxies,
                             timeout=timeout,
                             user_agent=user_agent,
                             cookie=cookie,
                             debug=debug,
                             mime_type=mime_type,
                             predefined_inputs=predefined_inputs,
-                            headers=headers))
+                            headers=headers,
+                            http_proxies=http_proxies,
+                            socks4_proxies=socks4_proxies,
+                            socks5_proxies=socks5_proxies))
     f=[]
     for x in l:
         if x !=None:

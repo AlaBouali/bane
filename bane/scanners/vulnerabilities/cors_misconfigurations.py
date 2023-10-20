@@ -159,15 +159,17 @@ def cors_misconfigurations_urls(
     origin_reflection=True,
     wildcard_origin=True,
     null_origin=True,
-    proxy=None,
-    proxies=None,
     timeout=10,
     user_agent=None,
     cookie=None,
     logs=True,
     debug=False,
-    headers={}
-):
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None):
+
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     res = {}
     if origin_reflection == True:
         if logs == True:
@@ -178,7 +180,7 @@ def cors_misconfigurations_urls(
             cookie=cookie,
             user_agent=user_agent,
             timeout=timeout,
-            proxy=proxies_select(proxy, proxies),
+            proxy=setup_proxy(proxies),
             debug=debug,
             headers=headers
         )
@@ -198,7 +200,7 @@ def cors_misconfigurations_urls(
             cookie=cookie,
             user_agent=user_agent,
             timeout=timeout,
-            proxy=proxies_select(proxy, proxies),
+            proxy=setup_proxy(proxies),
             debug=debug,
             headers=headers
         )
@@ -218,7 +220,7 @@ def cors_misconfigurations_urls(
             cookie=cookie,
             user_agent=user_agent,
             timeout=timeout,
-            proxy=proxies_select(proxy, proxies),
+            proxy=setup_proxy(proxies),
             debug=debug,
             headers=headers
         )
@@ -247,8 +249,11 @@ def cors_misconfigurations(
     cookie=None,
     logs=True,
     debug=False,
-    headers={}
-):
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
+    ):
     l=[]
     for x in urls:
         if logs==True:
@@ -265,7 +270,10 @@ def cors_misconfigurations(
                                             cookie=cookie,
                                             logs=logs,
                                             debug=debug,
-                                            headers=headers
+                                            headers=headers,
+                                            http_proxies=http_proxies,
+                                            socks4_proxies=socks4_proxies,
+                                            socks5_proxies=socks5_proxies
                                             )
         result={'vulnerable':result[0],'status':result[1]}
         if logs==True:

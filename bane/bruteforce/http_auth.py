@@ -10,13 +10,16 @@ class http_auth_bruteforce:
         threads_daemon=True,
         logs=True,
         domain=None,
-        proxy=None,
-        proxies=None,
         cookie=None,
         user_agent=None,
         timeout=10,
-        headers={}
-    ):
+        headers={},
+        http_proxies=None,
+        socks4_proxies=None,
+        socks5_proxies=None
+        ):
+        word_list=load_word_list(word_list)
+        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         self.stop = False
         self.logs = logs
         self.finish = False
@@ -28,7 +31,6 @@ class http_auth_bruteforce:
                 domain,
                 word_list,
                 logs,
-                proxy,
                 proxies,
                 cookie,
                 user_agent,
@@ -43,7 +45,7 @@ class http_auth_bruteforce:
         return self.finish
 
     def crack(
-        self, u, domain, word_list, logs, proxy, proxies, cookie, user_agent, timeout,headers
+        self, u, domain, word_list, logs, proxies, cookie, user_agent, timeout,headers
     ):
         if user_agent:
             us = user_agent
@@ -53,11 +55,7 @@ class http_auth_bruteforce:
         if cookie:
             hed.update({"Cookie": cookie})
         hed.update(headers)
-        prox = None
-        if proxy:
-            prox = proxy#{"http": "http://" + proxy, "https": "http://" + proxy}
-        if proxies:
-            prox = random.choice(proxies)
+        prox = random.choice(proxies)
             #prox = {"http": "http://" + prox, "https": "http://" + prox}
         try:
             if self.logs == True:

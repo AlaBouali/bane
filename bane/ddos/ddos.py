@@ -15,4 +15,4 @@ from bane.ddos.torshammer  import *
 from bane.ddos.udp  import *
 from bane.ddos.vse  import *
 from bane.ddos.xerxes  import *
-from bane.ddos.tor_killer import *
+from bane.ddos.http_waves import *

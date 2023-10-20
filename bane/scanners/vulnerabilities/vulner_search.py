@@ -11,9 +11,15 @@ def vulners_search(
     user_agent=None,
     cookie=None,
     api_key='',
-    proxy=None,
     timeout=20,
-):
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None,
+    proxy=None
+    ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+    if proxy==None:
+            proxy=setup_proxy(proxies)
     if api_key==None:
         api_key=''
     if not file_name:

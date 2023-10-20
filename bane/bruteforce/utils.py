@@ -12,9 +12,10 @@ if os.path.isdir("/data/data/com.termux/") == True:
     termux = True
 import pymysql
 from ..utils.pager import *
-from ..scanners.cms.wp import wpadmin
+from ..scanners.cms.wp import wpadmin,setup_proxy
 from ..cryptographers.hasher import *
 from ..utils.pager import *
+from bane.utils import get_requests_proxies_from_parameters,get_socket_proxies_from_parameters,read_file
 
 
 
@@ -41,3 +42,8 @@ def process_threaded(a, check_interval=0.1):
                 return a.counter
             except:
                 pass
+
+def load_word_list(l):
+    if type(l)==list:
+        return l
+    return read_file(l)

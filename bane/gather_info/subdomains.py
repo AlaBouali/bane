@@ -131,7 +131,7 @@ def get_subdomains_from_wayback(domain,dns_server='8.8.8.8',resolve_timeout=2,re
     if logs==True:
         print('[*] searching with wayback machine ...\n')
     url = "https://web.archive.org/cdx/search/cdx?url=*.{}/*&output=json&fl=original&collapse=urlkey".format(domain)
-    response = requests.Session().get(url,headers=hed,timeout=wayback_timeout,proxies=proxy)
+    response = requests.Session().get(url,headers=hed,timeout=wayback_timeout,proxies=proxy,verify=False)
     if response.status_code == 200:
         data = response.json()
         for entry in data:
@@ -142,7 +142,7 @@ def get_subdomains_from_wayback(domain,dns_server='8.8.8.8',resolve_timeout=2,re
                 if subdomain not in invalid_subd and extract_root_domain(subdomain)==domain:
                     if subdomain not in urls:
                         try:
-                            r=requests.Session().get(original_url,headers=hed,timeout=subdomain_check_timeout,proxies=proxy)
+                            r=requests.Session().get(original_url,headers=hed,timeout=subdomain_check_timeout,proxies=proxy,verify=False)
                             if extract_root_domain(r.url.split('://')[1].split('/')[0])==extract_root_domain(subdomain):
                                 urls[subdomain]=set()
                                 urls[subdomain].add(original_url)

@@ -7,7 +7,6 @@ def ssrf_check(
     link="http://www.google.com",
     signature="<title>Google</title>",
     proxy=None,
-    proxies=None,
     timeout=25,
     user_agent=None,
     cookie=None,
@@ -16,8 +15,6 @@ def ssrf_check(
     """
     this function is for FI vulnerability test using a link"""
     l = link
-    if proxies:
-        proxy = random.choice(proxies)
     if user_agent:
         us = user_agent
     else:
@@ -55,16 +52,18 @@ def ssrf_urls(
     link="http://www.google.com",
     timeout=120,
     signature="<title>Google</title>",
-    proxy=None,
-    proxies=None,
     user_agent=None,
     cookie=None,
-    headers={}
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
 ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     res = []
     if u.split("?")[0][-1] != "/" and "." not in u.split("?")[0].rsplit("/", 1)[-1]:
         u = u.replace("?", "/?")
-    a = crawl(u, proxy=proxy, timeout=timeout, cookie=cookie, user_agent=user_agent,headers=headers)
+    a = crawl(u, proxy=setup_proxy(proxies), timeout=timeout, cookie=cookie, user_agent=user_agent,headers=headers)
     l = []
     d = a.values()
     for x in d:
@@ -86,10 +85,9 @@ def ssrf_urls(
                     q = ssrf_check(
                         trgt,
                         null_byte=null_byte,
-                        proxy=proxy,
+                        proxy=setup_proxy(proxies),
                         link=link,
                         signature=signature,
-                        proxies=proxies,
                         timeout=timeout,
                         cookie=cookie,
                         user_agent=user_agent,
@@ -110,16 +108,18 @@ def ssrf(
     link="http://www.google.com",
     timeout=120,
     signature="<title>Google</title>",
-    proxy=None,
-    proxies=None,
     user_agent=None,
     cookie=None,
     pages=[],
-    headers={}
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
 ):
+    proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     l=[]
     if pages==[]:
-        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy,headers=headers)
+        pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
     for x in pages:
         if logs==True:
             print('\n\nPage: {}\n'.format(x))
@@ -128,11 +128,10 @@ def ssrf(
                         link=link,
                         timeout=timeout,
                         signature=signature,
-                        proxy=proxy,
-                        proxies=proxies,
                         user_agent=user_agent,
                         cookie=cookie,
-                        headers=headers)
+                        headers=headers
+                        )
         if logs==True:
             for r in result:
                 print(r)

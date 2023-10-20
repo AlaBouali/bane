@@ -56,13 +56,16 @@ class web_login_bruteforce:
         word_list=[],
         threads_daemon=True,
         logs=True,
-        proxy=None,
-        proxies=None,
         cookie=None,
         user_agent=None,
         timeout=10,
-        headers={}
-    ):
+        headers={},
+        http_proxies=None,
+        socks4_proxies=None,
+        socks5_proxies=None
+        ):
+        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        word_list=load_word_list(word_list)
         self.stop = False
         self.finish = False
         self.logs = logs
@@ -73,7 +76,6 @@ class web_login_bruteforce:
                 u,
                 word_list,
                 logs,
-                proxy,
                 proxies,
                 cookie,
                 user_agent,
@@ -87,7 +89,7 @@ class web_login_bruteforce:
     def done(self):
         return self.finish
 
-    def crack(self, u, word_list, logs, proxy, proxies, cookie, user_agent, timeout,headers):
+    def crack(self, u, word_list, logs, proxies, cookie, user_agent, timeout,headers):
         for x in word_list:
             try:
                 if self.stop == True:
@@ -101,11 +103,7 @@ class web_login_bruteforce:
                     us = user_agent
                 else:
                     us = random.choice(ua)
-                prox = None
-                if proxy:
-                    prox = proxy
-                if proxies:
-                    prox = random.choice(proxies)
+                prox = random.choice(proxies)
                 if (
                     self.try_combo(u, username, password, cookie, us, prox, timeout,headers)
                     == True

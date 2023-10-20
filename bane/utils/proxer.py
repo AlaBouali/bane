@@ -1,9 +1,8 @@
-import requests, socks, socket, random, re,os,sys,threading
-import bs4,bane
+import requests, socks, socket, random, re,os,sys,threading,ssl
+import bs4,bane,json
 from bs4 import BeautifulSoup
 from bane.common.payloads import *
 from bane.utils.pager import crawl
-from bane.ddos.utils import wrap_socket_with_ssl
 
 
 class ProxyChecker:
@@ -46,12 +45,12 @@ class ProxyChecker:
                 if proxy_check_socket(**proxy, timeout=self.timeout,verify_request=self.verify_request)==True:
                     self.result.append(proxy)
                     if self.logs==True:
-                        print("Working proxy: {}".format(proxy))
+                        print("Active proxy: {}".format(proxy))
             else:
                 if proxy_check_requests(**proxy, timeout=self.timeout)==True:
                     self.result.append(proxy)
                     if self.logs==True:
-                        print("Working proxy: {}".format(proxy))
+                        print("Active proxy: {}".format(proxy))
 
 
 
@@ -66,7 +65,7 @@ def proxygeonode(is_socket=True,verify_request=False,protocols=['http','socks4',
     while True:
         page+=1
         try:
-            r=requests.get(url.format(page),headers=headers,proxies=proxy,timeout=timeout).json()
+            r=requests.Session().get(url.format(page),headers=headers,proxies=proxy,timeout=timeout).json()
             if r['data']!=[]:
                 proxies+=r['data']
             else:
@@ -128,7 +127,7 @@ def proxylistdownload(protocols=['socks4','socks5'],check_proxies=True,timeout=1
     l=[]
     for protocol in protocols:
         try:
-            r=requests.get('https://www.proxy-list.download/api/v1/get?type='+protocol,
+            r=requests.Session().get('https://www.proxy-list.download/api/v1/get?type='+protocol,
                         timeout=timeout,
                     headers={"User-Agent": random.choice(ua)},
                     proxies=proxy).text.split('\n')
@@ -156,7 +155,7 @@ def proxyspace(protocols=['socks4','socks5'],check_proxies=True,timeout=15,check
     l=[]
     for protocol in protocols:
         try:
-            r=requests.get('https://proxyspace.pro/{}.txt'.format(protocol),
+            r=requests.Session().get('https://proxyspace.pro/{}.txt'.format(protocol),
                         timeout=timeout,
                     headers={"User-Agent": random.choice(ua)},
                     proxies=proxy).text.split('\n')
@@ -183,7 +182,7 @@ def proxybarcode(protocols=['socks4','socks5'],check_proxies=True,timeout=15,che
     l=[]
     for protocol in protocols:
         try:
-            r=requests.get('https://raw.githubusercontent.com/B4RC0DE-TM/proxy-list/main/{}.txt'.format(protocol.upper()),
+            r=requests.Session().get('https://raw.githubusercontent.com/B4RC0DE-TM/proxy-list/main/{}.txt'.format(protocol.upper()),
                         timeout=timeout,
                     headers={"User-Agent": random.choice(ua)},
                     proxies=proxy).text.split('\n')
@@ -210,7 +209,7 @@ def proxyopenlist(protocols=['socks4','socks5'],check_proxies=True,timeout=15,ch
     l=[]
     for protocol in protocols:
         try:
-            r=requests.get('https://api.openproxylist.xyz/{}.txt'.format(protocol),
+            r=requests.Session().get('https://api.openproxylist.xyz/{}.txt'.format(protocol),
                         timeout=timeout,
                     headers={"User-Agent": random.choice(ua)},
                     proxies=proxy).text.split('\n')
@@ -297,7 +296,16 @@ def get_valid_proxies(geonode=True,scrape=True,space=True,barcode=True,listdownl
 
 
 def parse_proxy_string(s,proxy_type):
+    s=s.strip()
     s=s.split(':')
+    try:
+        socket.gethostbyname(s[0])
+    except:
+        return
+    try:
+        int(s[1])
+    except:
+        return
     if len(s)==2:
         return {'proxy_host':s[0],'proxy_port':int(s[1]),'proxy_username':None,'proxy_password':None,'proxy_type':proxy_type}
     if len(s)==3:
@@ -307,28 +315,45 @@ def parse_proxy_string(s,proxy_type):
 
 
 def parse_proxies_list(l,proxy_type):
-    return [parse_proxy_string(x,proxy_type) for x in l]
+    if type(l)==str:
+        if len(l.split('\n'))>1:
+            l=l.split('\n')
+    if type(l)==list or type(l)==tuple:
+        l= [parse_proxy_string(x,proxy_type) for x in l]
+        return [x for x in l if x!=None]
+    else:
+        return [parse_proxy_string(l,proxy_type)]
 
 
 
-def get_tor_socks5_proxy_windows(host=tor_proxy_host,port=tor_proxy_socks5_port_windows):
+def get_tor_socks5_proxy_windows(host=tor_proxy_host,port=tor_proxy_socks5_port_windows,new_ip=True):
+    if new_ip==True:
+        usr=''.join([random.choice(lis) for x in range(10)])
+        pwd=''.join([random.choice(lis) for x in range(10)])
+        return get_requests_proxy(**parse_proxy_string('{}:{}:{}:{}'.format(host,port,usr,pwd),'socks5'))
     return get_requests_proxy(**parse_proxy_string('{}:{}'.format(host,port),'socks5'))
 
 
-def get_tor_socks5_proxy_linux(host=tor_proxy_host,port=tor_proxy_socks5_port_linux):
+def get_tor_socks5_proxy_linux(host=tor_proxy_host,port=tor_proxy_socks5_port_linux,new_ip=True):
+    if new_ip==True:
+        usr=''.join([random.choice(lis) for x in range(10)])
+        pwd=''.join([random.choice(lis) for x in range(10)])
+        return get_requests_proxy(**parse_proxy_string('{}:{}:{}:{}'.format(host,port,usr,pwd),'socks5'))
     return get_requests_proxy(**parse_proxy_string('{}:{}'.format(host,port),'socks5'))
 
 
-def get_tor_socks5_proxy():
+def get_tor_socks5_proxy(new_ip=True):
     if (sys.platform.lower() == "win32") or (sys.platform.lower() == "win64"):
-        return get_tor_socks5_proxy_windows()
-    return get_tor_socks5_proxy_linux()
+        return get_tor_socks5_proxy_windows(new_ip=new_ip)
+    return get_tor_socks5_proxy_linux(new_ip=new_ip)
 
 
-def get_tor_http_proxy(host=tor_proxy_host,port=tor_proxy_http_port):
+def get_tor_http_proxy(host=tor_proxy_host,port=tor_proxy_http_port,new_ip=True):
+    if new_ip==True:
+        usr=''.join([random.choice(lis) for x in range(10)])
+        pwd=''.join([random.choice(lis) for x in range(10)])
+        return get_requests_proxy(**parse_proxy_string('{}:{}:{}:{}'.format(host,port,usr,pwd),'http'))
     return get_requests_proxy(**parse_proxy_string('{}:{}'.format(host,port),'http'))
-
-
 
 
 def get_burpsuit_proxy(host=burpsuit_proxy_host,port=burpsuit_proxy_port):
@@ -459,12 +484,27 @@ def get_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_type=None,p
         raise(ex)
         
 
-def get_tor_socks5_socket(ip,port,timeout=5,no_delay=False):
-    return get_proxy_socket(ip,port,no_delay=no_delay,timeout=timeout,**get_tor_socks5_proxy())
+def get_tor_socks5_socket(ip,port,timeout=5,no_delay=False,new_ip=True):
+    return get_proxy_socket(ip,port,no_delay=no_delay,timeout=timeout,**get_tor_socks5_proxy(new_ip=new_ip))
 
 
-def get_tor_http_socket(ip,port,timeout=5):
-    return get_proxy_socket(ip,port,timeout=timeout,**get_tor_http_proxy())
+def get_tor_http_socket(ip,port,timeout=5,new_ip=True):
+    return get_proxy_socket(ip,port,timeout=timeout,**get_tor_http_proxy(new_ip=new_ip))
+
+
+def wrap_socket_with_ssl(sock,target_host):
+    if sock==None:
+        return
+    if hasattr(ssl, 'PROTOCOL_TLS_CLIENT'):
+        # Since Python 3.6
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+    elif hasattr(ssl, 'PROTOCOL_TLS'):
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    else:
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)#ssl.PROTOCOL_TLS)
+    ssl_context.check_hostname = False
+    ssl_context.verify_mode = ssl.CERT_NONE
+    return ssl_context.wrap_socket(sock, server_hostname=target_host)
 
 
 
@@ -494,12 +534,16 @@ def get_requests_http_proxy(proxy_host=None,proxy_port=None,proxy_username=None,
 
 
 def get_requests_proxy(proxy_type=None,**kwargs):
+    if list(kwargs.keys())==['http','https']:
+        return kwargs
     if proxy_type in [3,'http','h']:
         return get_requests_http_proxy(**kwargs)
     if proxy_type in [4,'socks4','s4']:
         return get_requests_socks4_proxy(**kwargs)
     if proxy_type in [5,'socks5','s5']:
         return get_requests_socks5_proxy(**kwargs)
+    kwargs.update({'proxy_type':proxy_type})
+    raise Exception('invalid proxy settings: {}'.format(kwargs))
 
 
 def proxy_check_socket(verify_request=False,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,proxy_type=None, timeout=5,**kwargs):
@@ -528,8 +572,135 @@ def proxy_check_socket(verify_request=False,proxy_host=None,proxy_port=None,prox
 def proxy_check_requests(proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,proxy_type=None, timeout=5,**kwargs):
         proxy=get_requests_proxy(proxy_host=proxy_host,proxy_port=proxy_port,proxy_username=proxy_username,proxy_password=proxy_password,proxy_type=proxy_type)
         try:
-            response=requests.get('https://www.google.com',headers={'User-Agent':random.choice(ua)},proxies=proxy).text
+            response=requests.Session().get('https://www.google.com',headers={'User-Agent':random.choice(ua)},proxies=proxy).text
             if 'google.com' not in str(response):
                 return True
         except Exception as ex:
             return False
+
+
+def load_and_parse_proxies(source,proxies_type):
+    if source==None:
+        return []
+    elif type(source)==dict:
+        if list(source.keys())==['proxy_host', 'proxy_port', 'proxy_username', 'proxy_password', 'proxy_type']:
+            return [source]
+        else:
+            return []
+    data=[]
+    if type(source)==str:
+        if ':' in source:
+            return [parse_proxy_string(source,proxies_type)]
+        if source.endswith('.json'):
+            with open(source) as f:
+                return load_and_parse_proxies(json.load(f),proxies_type)
+        f=open(source,'r')
+        data=f.readlines()
+        f.close()
+    elif type(source)==list or type(source)==tuple:
+        if len(source)==0:
+            return []
+        if type(source[0])==dict:
+            if list(source[0].keys())==['proxy_host', 'proxy_port', 'proxy_username', 'proxy_password', 'proxy_type']:
+                return source
+        for x in source:
+            if type(x)==str:
+                data.append(x)
+    return parse_proxies_list(data,proxies_type)
+
+
+def load_and_parse_proxies_all(http_proxies=None,socks4_proxies=None,socks5_proxies=None,json_file=None):
+    l=load_and_parse_proxies(http_proxies,'http')
+    l+=load_and_parse_proxies(socks4_proxies,'socks4')
+    l+=load_and_parse_proxies(socks5_proxies,'socks5')
+    l+=load_and_parse_proxies(json_file,None)
+    d=[]
+    for x in l:
+        if x not in d:
+            d.append(x)
+    return d
+
+
+def get_requests_proxies_from_parameter(parameter,proxies_type):
+    if parameter==None:
+        return [None]
+    if type(parameter)==list or type(parameter)==tuple:
+        l=[]
+        for x in parameter:
+            l+=get_requests_proxies_from_parameter(x,proxies_type)
+        return [get_requests_proxy(**x) for x in l]
+    if type(parameter)==dict:
+        if list(parameter.keys())==['proxy_host', 'proxy_port', 'proxy_username', 'proxy_password', 'proxy_type']:
+            return [get_requests_proxy(**parameter)]
+        if list(parameter.keys())==['http','https']:
+            return [parameter]
+        raise Exception('Incorrect dict format')
+    if type(parameter)==str:
+        l=load_and_parse_proxies(parameter,proxies_type)
+        d=[]
+        for x in l:
+            d.append(get_requests_proxy(**x))
+        if len(d)>1:
+            return [x for x in l if x!=None]
+        return d
+
+
+
+def get_requests_proxies_from_parameters(proxies=None,proxy=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None,json_file=None):
+    l=get_requests_proxies_from_parameter(proxy,None)
+    l+=get_requests_proxies_from_parameter(http_proxies,'http')
+    l+=get_requests_proxies_from_parameter(socks4_proxies,'socks4')
+    l+=get_requests_proxies_from_parameter(socks5_proxies,'socks5')
+    a=load_and_parse_proxies(json_file,None)
+    l+=[get_requests_proxy(**x) for x in a]
+    l+=get_requests_proxies_from_parameter(proxies,None)
+    d=[]
+    for x in l:
+        if x not in d:
+            d.append(x)
+    if len(d)>1:
+        return [x for x in l if x!=None]
+    return d
+
+
+def requests_proxy_to_socket_proxy(proxy):
+    p=proxy[list(proxy.keys())[0]]
+    if p.startswith('http'):
+        proxy_type='http'
+    elif p.startswith('socks4'):
+        proxy_type='socks4'
+    else:
+        proxy_type='socks5'
+    pr=p.split('://')[1]
+    if '@' in pr:
+        user=pr.split('@')[0].split(':')[0]
+        pwd=pr.split('@')[0].split(':')[1]
+        ip=pr.split('@')[1].split(':')[0]
+        port=int(pr.split('@')[1].split(':')[1])
+    else:
+        user=None
+        pwd=None
+        ip=pr.split(':')[0]
+        port=int(pr.split(':')[1])
+    return {'proxy_host':ip,'proxy_port':port,'proxy_username':user,'proxy_password':pwd,'proxy_type':proxy_type}
+
+
+
+
+
+
+def get_socket_proxies_from_parameters(proxies=None,proxy=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None,json_file=None):
+    l=get_requests_proxies_from_parameter(proxy,None)
+    l+=get_requests_proxies_from_parameter(http_proxies,'http')
+    l+=get_requests_proxies_from_parameter(socks4_proxies,'socks4')
+    l+=get_requests_proxies_from_parameter(socks5_proxies,'socks5')
+    a=load_and_parse_proxies(json_file,None)
+    l+=[get_requests_proxy(**x) for x in a]
+    l+=get_requests_proxies_from_parameter(proxies,None)
+    d=[]
+    for x in l:
+        if x not in d:
+            d.append(x)
+    return [requests_proxy_to_socket_proxy(x) for x in d if x!=None]
+
+
