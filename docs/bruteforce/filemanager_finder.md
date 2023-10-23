@@ -1,66 +1,64 @@
-<h4>File Manager Finder</h4>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filemanager Finder Documentation</title>
+</head>
+<body>
+    <h1>Filemanager Finder Documentation</h1>
+    <p>This Python code provides a tool for finding potential paths to file managers on web servers. It can be used by security researchers to identify these paths for further analysis and assessment.</p>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-  <pre style="margin: 0; line-height: 125%">
-class filemanager_finder:
-    __slots__ = ["logs", "stop", "finish", "result"]
+    <h2>Class: filemanager_finder</h2>
+    <p>The <code>filemanager_finder</code> class is used to initiate the file manager path discovery process.</p>
 
-    def done(self):
-        return self.finish
+    <h3>Parameters:</h3>
+    <ul>
+        <li><code>u</code>: The base URL where the file manager paths will be appended to.</li>
+        <li><code>logs</code>: A boolean flag to enable or disable logging (default is True).</li>
+        <li><code>threads_daemon</code>: A boolean flag indicating whether threads should run as daemons (default is True).</li>
+        <li><code>user_agent</code>: A custom User-Agent header to be used in HTTP requests (default is None).</li>
+        <li><code>cookie</code>: A custom Cookie header to be used in HTTP requests (default is None).</li>
+        <li><code>timeout</code>: The timeout for HTTP requests in seconds (default is 10).</li>
+        <li><code>headers</code>: A dictionary of custom headers to be included in HTTP requests (default is an empty dictionary).</li>
+        <li><code>http_proxies</code>: A list of HTTP proxies to be used for requests (default is None).</li>
+        <li><code>socks4_proxies</code>: A list of SOCKS4 proxies to be used for requests (default is None).</li>
+        <li><code>socks5_proxies</code>: A list of SOCKS5 proxies to be used for requests (default is None).</li>
+    </ul>
 
-    def __init(
-        self,
-        u,
-        logs=True,
-        threads_daemon=True,
-        user_agent=None,
-        cookie=None,
-        timeout=10,
-        headers={},
-        http_proxies=None,
-        socks4_proxies=None,
-        socks5_proxies=None
-    ):
-        """
-        This class is used for finding potential admin panel URLs on a website.
+    <h3>Methods:</h3>
+    <ul>
+        <li><code>crack</code>: Initiates the process of searching for file manager paths.</li>
+        <li><code>done</code>: Returns a boolean indicating whether the search process has finished.</li>
+    </ul>
 
-        Parameters:
-        - u (str): The target website URL.
-        - logs (bool): Enable or disable logging (default is True).
-        - threads_daemon (bool): Set thread as daemon (default is True).
-        - user_agent (str): Custom User-Agent header for requests.
-        - cookie (str): Custom cookies to include in requests.
-        - timeout (int): Request timeout in seconds (default is 10).
-        - headers (dict): Additional HTTP headers to include.
-        - http_proxies (list): List of HTTP proxies to use.
-        - socks4_proxies (list): List of SOCKS4 proxies to use.
-        - socks5_proxies (list): List of SOCKS5 proxies to use.
-        """
-        # Initialize and start the admin panel finder thread.
+    <p>The <code>crack</code> method runs the discovery process using the specified parameters and updates the result dictionary with any found paths. The process can be stopped by setting the <code>stop</code> attribute to True. The <code>done</code> method can be used to check if the search process has finished.</p>
 
-    def crack(
-        self,
-        u,
-        timeout,
-        logs,
-        user_agent,
-        cookie,
-        proxies,
-        headers
-    ):
-        """
-        Method for finding admin panels on the target website.
+    <h2>Example Usage:</h2>
+    <p>Below is an example of how to use the <code>filemanager_finder</code> class to search for file manager paths:</p>
 
-        Parameters:
-        - u (str): The target website URL.
-        - timeout (int): Request timeout in seconds.
-        - logs (bool): Enable or disable logging.
-        - user_agent (str): Custom User-Agent header for requests.
-        - cookie (str): Custom cookies to include in requests.
-        - proxies (list): List of proxies to use for requests.
-        - headers (dict): Additional HTTP headers to include.
-        """
-        # Search for admin panel URLs.
+    <pre><code>
+from bane.bruteforce.utils import *
 
-  </pre>
-</div>
+# Initialize the filemanager_finder class with appropriate parameters
+f = filemanager_finder(
+    u="http://example.com",
+    logs=True,
+    threads_daemon=True,
+    user_agent="Custom User Agent",
+    cookie="Custom Cookie",
+    timeout=10,
+    headers={"Custom-Header": "Value"},
+    http_proxies=["1.1.11.1:80", "1.1.1.1:8080"],
+    socks4_proxies="2.2.2.2:1080",
+    socks5_proxies=[]
+)
+
+# Check if the search process has finished
+if f.done():
+    # Get the result
+    result = f.result
+    print("File manager paths found:", result)
+</code></pre>
+
+    <p>Ensure that you have the required libraries and a valid base URL for successful path discovery. The <code>logs</code> parameter controls whether logging information is displayed during the process.</p>
+</body>
+</html>
