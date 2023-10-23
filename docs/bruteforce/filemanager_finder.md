@@ -38,7 +38,7 @@
     <pre><code>
 from bane.bruteforce.utils import *
 
-# Initialize the filemanager_finder class with appropriate parameters
+''' Initialize the filemanager_finder class with appropriate parameters '''
 f = filemanager_finder(
     u="http://example.com",
     logs=True,
@@ -52,7 +52,7 @@ f = filemanager_finder(
     socks5_proxies=[]
 )
 
-# Check if the search process has finished
+''' Check if the search process has finished'''
 if f.done():
     # Get the result
     result = f.result
