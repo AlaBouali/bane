@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>HTTP Authentication Brute Force</title>
+    
 </head>
 <body>
     <h4>HTTP Authentication Brute Force</h4>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-        <pre style="margin: 0; line-height: 125%">
+<pre style="margin: 0; line-height: 125%">
 class http_auth_bruteforce:
     __slots__ = ["logs", "stop", "finish", "result"]
 
