@@ -36,7 +36,7 @@
     <p>Below is an example of how to use the <code>filemanager_finder</code> class to search for file manager paths:</p>
 
 <pre><code>
-from bane.bruteforce.utils import *
+from bane.bruteforce import *
 
 #Initialize the filemanager_finder class with appropriate parameters
 f = filemanager_finder(

@@ -31,7 +31,7 @@
 <h2>Example Usage:</h2>
 <p>Below is an example of how to use the <code>force_browsing</code class to search for file manager paths:</p>
 <pre><code>
-from bane.bruteforce.utils import *
+from bane.bruteforce import *
 
 #Initialize the force_browsing class with appropriate parameters
 f = force_browsing(

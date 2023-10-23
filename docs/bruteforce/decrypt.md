@@ -38,7 +38,7 @@
 <p>Below is an example of how to use the <code>decrypt</code> class to crack a hash:</p>
 
 <pre><code>
-from bane.bruteforce.utils import *
+from bane.bruteforce import *
 
 # Initialize the decrypt class with appropriate parameters
 d = decrypt(
