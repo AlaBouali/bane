@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Brute Force Hash Decryptor</title>
 </head>
 <body>
 <h1>Brute Force Hash Decryptor</h1>
