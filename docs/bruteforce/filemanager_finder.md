@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Filemanager Finder Documentation</title>
+    
 </head>
 <body>
     <h1>Filemanager Finder Documentation</h1>
