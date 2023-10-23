@@ -133,4 +133,4 @@ def get_magento_infos(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=T
                         for x in sv_e:
                             print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
                             print()
-    return {'url':u,'domain':domain,'ip':ip,'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'magento_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}
+    return {'url':u,'domain':domain,'ip':ip,'shodan_report':check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'magento_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}

@@ -1,6 +1,7 @@
 from bane.scanners.vulnerabilities.utils import *
 from bane.scanners.vulnerabilities.vulner_search import vulners_search
 
+
 def scan_backend_technology(u, timeout=10, user_agent=None, cookie=None, logs=True,request_headers=None,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
     proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     domain=u.split('://')[1].split('/')[0].split(':')[0]
@@ -83,6 +84,6 @@ def scan_backend_technology(u, timeout=10, user_agent=None, cookie=None, logs=Tr
                                 print()        
     except Exception as e:
         return {}
-    return {'server_exploits':server_exploits,'backend_technology_exploits':backend_technology_exploits}
+    return {'shodan_report':check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=setup_proxy(proxies)),'server_exploits':server_exploits,'backend_technology_exploits':backend_technology_exploits}
 
 

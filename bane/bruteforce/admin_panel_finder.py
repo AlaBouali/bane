@@ -33,6 +33,22 @@ class admin_panel_finder:
         socks4_proxies=None,
         socks5_proxies=None
         ):
+        """
+        This function searches for potential admin panel URLs on a website using a predefined list of extensions.
+        
+        Parameters:
+        - u (str): The target website URL.
+        - logs (bool): Enable or disable logging (default is True).
+        - threads_daemon (bool): Set thread as daemon (default is True).
+        - user_agent (str): Custom User-Agent header for requests.
+        - cookie (str): Custom cookies to include in requests.
+        - ext (str): Extension to use for URLs (default is 'php').
+        - timeout (int): Request timeout in seconds (default is 10).
+        - headers (dict): Additional HTTP headers to include.
+        - http_proxies (list): List of HTTP proxies to use.
+        - socks4_proxies (list): List of SOCKS4 proxies to use.
+        - socks5_proxies (list): List of SOCKS5 proxies to use.
+        """
         proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         self.logs = logs
         self.stop = False

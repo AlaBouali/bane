@@ -68,7 +68,7 @@ def random_date(start_date, end_date):
     return random_date.strftime("%Y-%m-%d")
 
 
-def spider_url(base_url, include_id=False,max_pages=50,timeout=15,cookie=None,user_agent=None,proxy=None,headers={}):
+def spider_url(base_url, include_id=False,max_pages=5,timeout=15,cookie=None,user_agent=None,proxy=None,headers={},parse_forms=False,only_urls=True):
     domain=base_url.split('://')[1].split('/')[0]
     h={}
     if cookie:
@@ -80,7 +80,7 @@ def spider_url(base_url, include_id=False,max_pages=50,timeout=15,cookie=None,us
     h.update(headers)
     visited_urls = set()
     urls_to_visit = [base_url]
-    collected_urls = set()
+    collected_urls = []
     root_urls=[]
 
     while urls_to_visit and len(collected_urls) < max_pages:
@@ -106,15 +106,28 @@ def spider_url(base_url, include_id=False,max_pages=50,timeout=15,cookie=None,us
                     urls_to_visit.append(absolute_url)
                     root_urls.append(absolute_url.split('?')[0].split('#')[0])
             if include_id==True:
-                collected_urls.add({'url':url,'id':anchor_tag.get('id','')})
+                data={'url':url,'id':anchor_tag.get('id','')}
+            if parse_forms==True:
+                data={'url':url,'id':anchor_tag.get('id',''),'forms':forms_parser_text(url,response.text)}
+            if only_urls==True:
+                data=url
+            if type(data)==str:
+                if data not in collected_urls:
+                    collected_urls.append(data)
             else:
-                collected_urls.add(url)
+                safe=True
+                for x in collected_urls:
+                    if x['url']==data['url']:
+                        safe=False
+                if safe==True:
+                    collected_urls.append(data)
+            #print(collected_urls)
             #print(len(collected_urls))
 
         except requests.exceptions.RequestException as e:
             print("Error fetching URL: {}".format(e))
 
-    return list(collected_urls)
+    return collected_urls
 
 
 
@@ -658,7 +671,7 @@ def forms_parser_text(u, text, html_comments=False,include_links=True):
             )
             l = []
     except Exception as e:
-        pass #raise(e)
+        raise(e)
     if include_links==True:
         fom+=get_links_from_page_source(soup,u,'')
     return fom

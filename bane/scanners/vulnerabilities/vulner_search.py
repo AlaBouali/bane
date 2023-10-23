@@ -81,7 +81,7 @@ def vulners_search(
                 i += 1
             return l
         else:
-            return {'error':"couldn't find vulnerabilities for this version"}
+            return []#{'error':"couldn't find vulnerabilities for this version"}
     except:
         pass
     return []

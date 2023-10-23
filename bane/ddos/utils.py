@@ -1,5 +1,6 @@
 import requests, socks, os, sys, urllib, socket, random, time, threading, ssl
 import urllib3,json
+from collections import OrderedDict
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # import the dependencies for each python version
@@ -29,8 +30,9 @@ else:
 from struct import *
 from bane.scanners.botnet.iot import getip
 from bane.common.payloads import *
+from bane.utils.handle_files import read_file
 from bane.utils.proxer import parse_proxies_list,get_proxy_socket,get_tor_socks5_socket,parse_proxy_string,wrap_socket_with_ssl,load_and_parse_proxies,load_and_parse_proxies_all,get_tor_socks5_proxy,get_requests_proxies_from_parameters,get_socket_proxies_from_parameters
-
+from bane.utils.pager import spider_url
 
 if os.path.isdir("/data/data") == True:
     adr = True  # the device is an android
@@ -133,7 +135,7 @@ def setup_http_packet(
         j = ""
         for x in range(random.randint(post_min, post_max)):
             j += random.choice(lis)
-        par = k + "=" + j
+        par = j + "=" + k
         m = "POST {} HTTP/1.1\r\n{}User-Agent: {}\r\nAccept-language: {}\r\nConnection: keep-alive\r\nKeep-Alive: {}\r\nContent-Length: {}\r\nContent-Type: application/x-www-form-urlencoded\r\nReferer: {}\r\nHost: {}\r\n\r\n{}".format(
             pa,
             ck,

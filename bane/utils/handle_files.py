@@ -18,10 +18,13 @@ def write_file(w, fi, encode="utf-8"):
     f.close()
 
 
-def read_file(w,split_lines=True):
+def read_file(w,split_lines=True,remove_empty_lines=True):
     with open(w, "r") as f:
         l = f.read()
     f.close()
+    l=l.split('\n')
+    if remove_empty_lines==True:
+        l='\n'.join([x for x in l if x.strip()!=''])
     if split_lines==True:
         return l.split('\n')
     return l
