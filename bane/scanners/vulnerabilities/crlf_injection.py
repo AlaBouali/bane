@@ -2,7 +2,7 @@ from bane.scanners.vulnerabilities.utils import *
 
 
 def set_requests(
-    u, method="GET", data={}, files={}, params={}, headers={}, proxy={}, timeout=15
+    u, method="GET", data={}, files={}, params={}, headers={}, proxy={}, timeout=15,shuffle_headers=False
 ):
     s = requests.Session()
     req = requests.Request(
@@ -10,6 +10,7 @@ def set_requests(
     )
     prep = req.prepare()
     prep.url = u
+    prep.headers
     return s.send(prep, verify=False, proxies=proxy, timeout=timeout)
 
 

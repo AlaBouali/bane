@@ -68,7 +68,7 @@ def random_date(start_date, end_date):
     return random_date.strftime("%Y-%m-%d")
 
 
-def spider_url(base_url, include_id=False,max_pages=5,timeout=15,cookie=None,user_agent=None,proxy=None,headers={},parse_forms=False,only_urls=True):
+def spider_url(base_url, include_links=False, include_id=False,max_pages=5,timeout=15,cookie=None,user_agent=None,proxy=None,headers={},parse_forms=False,only_urls=True):
     domain=base_url.split('://')[1].split('/')[0]
     h={}
     if cookie:
@@ -108,7 +108,7 @@ def spider_url(base_url, include_id=False,max_pages=5,timeout=15,cookie=None,use
             if include_id==True:
                 data={'url':url,'id':anchor_tag.get('id','')}
             if parse_forms==True:
-                data={'url':url,'id':anchor_tag.get('id',''),'forms':forms_parser_text(url,response.text)}
+                data={'url':url,'id':anchor_tag.get('id',''),'forms':forms_parser_text(url,response.text,include_links=include_links)}
             if only_urls==True:
                 data=url
             if type(data)==str:
@@ -123,10 +123,8 @@ def spider_url(base_url, include_id=False,max_pages=5,timeout=15,cookie=None,use
                     collected_urls.append(data)
             #print(collected_urls)
             #print(len(collected_urls))
-
         except requests.exceptions.RequestException as e:
             print("Error fetching URL: {}".format(e))
-
     return collected_urls
 
 
@@ -157,9 +155,9 @@ def get_links_from_page_source(soup,url,url_id):
         url+='/'
     domain=url.split('/')[0] if url.startswith('http')==False else url.split('://')[1].split('/')[0]
     l=soup.find_all('a')
-    links=[{'url':x['href'].replace('&amp;','&'),'id':x.get('id','')} for x in l if x.has_attr('href')]
+    links=[{'url':x['href'].replace('&amp;','&'),'id':x.get('id',''),'is_url':True} for x in l if x.has_attr('href')]
     media_tags = soup.find_all(['img', 'audio', 'video', 'source','embed'])
-    links+=[{'url':x['src'].replace('&amp;','&'),'id':x.get('id','') } for x in media_tags if x.has_attr('src')]
+    links+=[{'url':x['src'].replace('&amp;','&'),'id':x.get('id',''),'is_url':None } for x in media_tags if x.has_attr('src')]
     links.append({'url':url,'id':url_id})
     #print(links)
     #links_list=[]
