@@ -39,7 +39,7 @@ class http_puncher(DDoS_Class):
             self.urls=read_file(urls)
         if scrape_target==True:
             if tor==True:
-                proxy=get_tor_socks5_proxy
+                proxy=get_tor_socks5_proxy()
             else:
                 proxy=None
             if logs==True:
