@@ -125,6 +125,7 @@ def spider_url(base_url, include_links=False, include_id=False,max_pages=5,timeo
             #print(len(collected_urls))
         except requests.exceptions.RequestException as e:
             print("Error fetching URL: {}".format(e))
+            return collected_urls
     return collected_urls
 
 
