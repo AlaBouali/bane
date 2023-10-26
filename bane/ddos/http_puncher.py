@@ -33,10 +33,6 @@ class http_puncher(DDoS_Class):
         self.duration = duration
         self.timeout = timeout
         self.tor = tor
-        if urls==[] or urls==None:
-            self.urls=[self.target]
-        elif type(urls)==str:
-            self.urls=read_file(urls)
         if scrape_target==True:
             if tor==True:
                 proxy=get_tor_socks5_proxy()
@@ -45,6 +41,10 @@ class http_puncher(DDoS_Class):
             if logs==True:
                 print('[i] Gathering more URLs to avoid detection by requesting the same URL...')
             self.urls=spider_url(self.target,cookie=cookie,proxy=proxy,max_pages=scraped_urls)
+        if urls==[] or urls==None:
+            self.urls=[self.target]
+        elif type(urls)==str:
+            self.urls=read_file(urls)
         for x in range(threads):
             try:
                 t = threading.Thread(target=self.attack)
