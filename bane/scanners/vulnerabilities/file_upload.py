@@ -24,13 +24,13 @@ def file_upload_forms(
     proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     l = []
     result=[]
-    x = forms_parser(
+    x = FORMS_FINDER.forms_parser(
         u, proxy=setup_proxy(proxies), timeout=timeout, user_agent=user_agent, cookie=cookie
     )
-    fos = get_upload_form(x)
+    fos = FORM_FILE_UPLOAD.get_upload_form(x)
     for fo in fos:
         d, f = setup_to_submit(
-            form_filler(
+            FORMS_FILLER.form_filler(
                 fo,
                 "",
                 "",

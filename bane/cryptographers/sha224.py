@@ -1,25 +1,30 @@
 from bane.cryptographers.utils import *
 
-def sha224_string(w, encode=None):
-    if w:
-        if encode:
-            w.encode(encode)
-        """
-   function to return sha256 encrypted string
-  """
-        return hashlib.sha224(w).hexdigest()
+class SHA224:
 
-def sha224_file(f):
-    if f:
-        with open(f, "rb") as f:
-            w = f.read()
-        f.close()
-        return sha224_string(w)
+    @staticmethod
+    def hash(w, encode=None):
+        if w:
+            if encode:
+                w.encode(encode)
+            """
+    function to return sha256 encrypted string
+    """
+            return hashlib.sha224(w).hexdigest()
+
+    @staticmethod
+    def hash_file(f):
+        if f:
+            with open(f, "rb") as f:
+                w = f.read()
+            f.close()
+            return SHA224.hash(w)
 
 
-def dsha224(w, z):
-    if w and z:
-        w = hashlib.sha224(w).hexdigest()
-        if w == z:
-            return True
-        return False
+    @staticmethod
+    def compare_hash(word, hash):
+        if word and hash:
+            word = hashlib.sha224(word).hexdigest()
+            if word == hash:
+                return True
+            return False

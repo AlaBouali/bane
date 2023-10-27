@@ -1,25 +1,30 @@
 from bane.cryptographers.utils import *
 
-def sha384_string(w, encode=None):
-    if w:
-        if encode:
-            w.encode(encode)
-        """
-   function to return sha384 encrypted string
-  """
-        return hashlib.sha384(w).hexdigest()
+class SHA348:
 
-def sha384_file(f):
-    if f:
-        with open(f, "rb") as f:
-            w = f.read()
-        f.close()
-        return sha384_string(w)
+    @staticmethod
+    def hash(w, encode=None):
+        if w:
+            if encode:
+                w.encode(encode)
+            """
+    function to return sha384 encrypted string
+    """
+            return hashlib.sha384(w).hexdigest()
+
+    @staticmethod
+    def hash_file(f):
+        if f:
+            with open(f, "rb") as f:
+                w = f.read()
+            f.close()
+            return SHA348.hash(w)
 
 
-def dsha384(w, z):
-    if w and z:
-        w = hashlib.sha384(w).hexdigest()
-        if w == z:
-            return True
-        return False
+    @staticmethod
+    def compare_hash(word, hash):
+        if word and hash:
+            word = hashlib.sha384(word).hexdigest()
+            if word == hash:
+                return True
+            return False

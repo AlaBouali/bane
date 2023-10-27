@@ -63,50 +63,50 @@ class decrypt:
             if self.stop == True:
                 break
             if md5_hash == True:
-                if dmd5(x, u) == True:
+                if MD5.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: md5")
                     self.result = {u: ["md5:" + x]}
                     break
             if sha1_hash == True:
-                if dsha1(x, u) == True:
+                if SHA1.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: sha1")
                     self.result = {u: ["sha1:" + x]}
                     break
             if sha256_hash == True:
-                if dsha256(x, u) == True:
+                if SHA256.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: sha256")
                     self.result = {u: ["sha256:" + x]}
                     break
             if sha224_hash == True:
-                if dsha224(x, u) == True:
+                if SHA224.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: sha224")
                     self.result = {u: ["sha224:" + x]}
                     break
             if sha384_hash == True:
-                if dsha384(x, u) == True:
+                if SHA348.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: sha384")
                     self.result = {u: ["sha384:" + x]}
                     break
             if sha512_hash == True:
-                if dsha512(x, u) == True:
+                if SHA512.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: sha512")
                     self.result = {u: ["sha512:" + x]}
                     break
             if base64_string == True:
-                if base64_decode(x) == u:
+                if BASE64.decode(x) == u:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: base64")
                     self.result = {u: ["base64:" + x]}
                     break
             if caesar_hash == True:
                 for i in range(1, 27):
-                    if dcaesar(x, i) == True:
+                    if CAESAR.decode(x, i) == True:
                         if self.logs == True:
                             print(
                                 "[+]Hash match found: "

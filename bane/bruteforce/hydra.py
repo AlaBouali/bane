@@ -248,7 +248,7 @@ class hydra:
         if protocol == "mysql":
             s = mysql
         if protocol == "wp":
-            s = wpadmin
+            s = WORDPRESS.admin_login
         for x in word_list:
             if self.stop == True:
                 break

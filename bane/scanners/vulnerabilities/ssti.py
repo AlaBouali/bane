@@ -129,7 +129,7 @@ def ssti_forms(
     if logs == True:
         print(Fore.WHITE + "[~]Getting forms..." + Style.RESET_ALL)
     hu = True
-    fom = forms_parser(
+    fom = FORMS_FINDER.forms_parser(
         u, proxy=setup_proxy(proxies), timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True,headers=headers
     )
     if len(fom) == 0:
@@ -201,7 +201,7 @@ def ssti_forms(
                                 and x["name"] not in dont_change
                             ):  # any input type that accept direct input from keyboard
                                 i = x["name"]
-                                parsed_form = set_up_injection(
+                                parsed_form = FORMS_FILLER.set_up_injection(
                                     target_page,
                                     form_index,
                                     i,

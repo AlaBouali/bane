@@ -1,27 +1,32 @@
 from bane.cryptographers.utils import *
 
-def sha1_string(w, encode=None):
-    if w:
-        if encode:
-            w.encode(encode)
-        """
-   function to return sha1 encrypted string
-  """
-        return hashlib.sha1(w).hexdigest()
+class SHA1:
+    
+    @staticmethod
+    def hash(w, encode=None):
+        if w:
+            if encode:
+                w.encode(encode)
+            """
+    function to return sha1 encrypted string
+    """
+            return hashlib.sha1(w).hexdigest()
 
 
-def sha1_file(f):
-    if f:
-        with open(f, "rb") as f:
-            w = f.read()
-        f.close()
-        return sha1_string(w)
+    @staticmethod
+    def hash_file(f):
+        if f:
+            with open(f, "rb") as f:
+                w = f.read()
+            f.close()
+            return SHA1.hash(w)
 
 
-def dsha1(w, z):
-    if w and z:
-        w = hashlib.sha1(w).hexdigest()
-        if w == z:
-            return True
-        return False
+    @staticmethod
+    def compare_hash(word, hash):
+        if word and hash:
+            word = hashlib.sha1(word).hexdigest()
+            if word == hash:
+                return True
+            return False
 

@@ -41,9 +41,104 @@ from bane.common.payloads import *
 from bane.utils.pager import *
 from bane.utils.js_fuck import js_fuck
 from bane.utils.handle_files import write_file, delete_file
-from bane.gather_info.info_s import extract_root_domain
-from bane.gather_info.ips import check_ip_via_shodan
+from bane.gather_info.info_s import *
+from bane.gather_info.ips import *
 
+
+def crawl(
+    u,
+    timeout=10,
+    html_comments=False,
+    user_agent=None,
+    bypass=False,
+    proxy=None,
+    cookie=None,
+    headers={}
+):
+    """
+    this function is used to crawl any given link and returns a list of all available links on that webpage with ability to bypass anti-crawlers
+
+    the function takes those arguments:
+
+    u: the targeted link
+    timeout: (set by default to 10) timeout flag for the request
+    bypass: (set by default to False) option to bypass anti-crawlers by simply adding "#" to the end of the link :)
+
+    usage:
+
+    >>>import bane
+    >>>url='http://www.example.com'
+    >>>bane.crawl(url)
+
+    >>>bane.crawl(url,bypass=True)"""
+    if urlparse(u).path == "":
+        u += "/"
+    if u.split("?")[0][-1] != "/" and "." not in u.split("?")[0].rsplit("/", 1)[-1]:
+        u = u.replace("?", "/?")
+    if user_agent:
+        us = user_agent
+    else:
+        us = random.choice(Common_Variables.user_agents_list)
+    h = {}
+    if bypass == True:
+        u += "#"
+    if cookie:
+        hea = {"User-Agent": us, "Cookie": cookie}
+    else:
+        hea = {"User-Agent": us}
+    hea.update(headers)
+    try:
+        c = requests.Session().get(
+            u, headers=hea, proxies=proxy, timeout=timeout, verify=False
+        ).text
+        if html_comments == False:
+            c = remove_html_comments(c)
+        soup = BeautifulSoup(c, "html.parser")
+        ur = u.replace(u.split("/")[-1], "")
+        """if ur[-1]=='/':
+   ur=ur[:-1]"""
+        index_link = 0
+        h.update(
+            {
+                -1: (
+                    "Source_url",
+                    u,
+                    urlparse(u).path,
+                    [(x, furl.furl(u).args[x]) for x in furl.furl(u).args],
+                )
+            }
+        )
+        for a in soup.find_all("a"):
+            u = ur
+            if a.has_attr("href"):
+                try:
+                    txt = a.text
+                    a = str(a["href"])
+                    if "://" not in a:
+                        if a[0] == "/":
+                            a = a[1 : len(a)]
+                        a = u + a
+                    if (a not in h.values()) and (u in a):
+                        if (a != u + "/") and (a != u):
+                            h.update(
+                                {
+                                    index_link: (
+                                        txt,
+                                        a,
+                                        urlparse(a).path,
+                                        [
+                                            (x, furl.furl(a).args[x])
+                                            for x in furl.furl(a).args
+                                        ],
+                                    )
+                                }
+                            )
+                            index_link += 1
+                except Exception as e:
+                    pass
+    except Exception as ex:
+        pass
+    return h
 
 def random_string(size):
     s = ""

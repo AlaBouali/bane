@@ -5,7 +5,7 @@ def exposed_env(
     user_agent=None,
     cookie=None,
     path="",
-    brute_force=True,
+    brute_force=False,
     timeout=15,
     headers={},
     http_proxies=None,

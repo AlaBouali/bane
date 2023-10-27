@@ -7,10 +7,10 @@ def csrf_filter_tokens(u, proxy=None, timeout=10, user_agent=None, cookie=None,h
             "This attack requires authentication !! You need to set a Cookie"
         )
     res = {"Vulnerable": [], "Safe": []}
-    f = forms_parser(
+    f = FORMS_FINDER.forms_parser(
         u, timeout=timeout, user_agent=user_agent, cookie=cookie, proxy=proxy, headers=headers
     )
-    f1 = forms_parser(
+    f1 = FORMS_FINDER.forms_parser(
         u, timeout=timeout, user_agent=user_agent, cookie=cookie, proxy=proxy, headers=headers
     )
     coun = -1
@@ -93,7 +93,7 @@ def csrf_forms(
     )
     h.update(headers)
     for x in v:
-        x = form_filler(
+        x = FORMS_FILLER.form_filler(
             x,
             "",
             "",

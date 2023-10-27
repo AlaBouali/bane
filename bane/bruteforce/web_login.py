@@ -25,7 +25,7 @@ class web_login_bruteforce:
         except:
             pass
         cookies = set_correct_cookies(cook, cookie=cookie)
-        form = set_login_form(url, r.text, username, password)
+        form = LOGIN_FORM_FILLER.set_login_form(url, r.text, username, password)
         h = {"User-Agent": user_agent}
         if cookies:
             h.update({"Cookie": cookies})
@@ -45,7 +45,7 @@ class web_login_bruteforce:
         except:
             return False
         try:
-            set_login_form(url, r.text, username, password)
+            LOGIN_FORM_FILLER.set_login_form(url, r.text, username, password)
             return False
         except:
             return True

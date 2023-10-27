@@ -84,6 +84,6 @@ def scan_backend_technology(u, timeout=10, user_agent=None, cookie=None, logs=Tr
                                 print()        
     except Exception as e:
         return {}
-    return {'shodan_report':check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=setup_proxy(proxies)),'server_exploits':server_exploits,'backend_technology_exploits':backend_technology_exploits}
+    return {'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=setup_proxy(proxies)),'server_exploits':server_exploits,'backend_technology_exploits':backend_technology_exploits}
 
 
