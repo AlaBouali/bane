@@ -40,7 +40,7 @@ def info(u, timeout=10, proxy=None, logs=False, returning=True):
         h = ""
         u = "https://check-host.net/ip-info?host=" + u
         c = requests.Session().get(
-            u, headers={"User-Agent": random.choice(ua)}, proxies=proxy, timeout=timeout
+            u, headers={"User-Agent": random.choice(Common_Variables.user_agents_list)}, proxies=proxy, timeout=timeout
         ).text
         soup = BeautifulSoup(c, "html.parser")
         la = soup.find_all("a")

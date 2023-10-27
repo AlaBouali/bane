@@ -55,7 +55,7 @@ class ProxyChecker:
 
 
 
-def proxygeonode(is_socket=True,verify_request=False,protocols=['http','socks4','socks5'],anonymities=["elite" , "anonymous"],timeout=20,proxy=None,headers={'Referer': 'https://geonode.com/','User-Agent':random.choice(ua)},check_proxies=True,check_timeout=10,logs=False,threads=250):
+def proxygeonode(is_socket=True,verify_request=False,protocols=['http','socks4','socks5'],anonymities=["elite" , "anonymous"],timeout=20,proxy=None,headers={'Referer': 'https://geonode.com/','User-Agent':random.choice(Common_Variables.user_agents_list)},check_proxies=True,check_timeout=10,logs=False,threads=250):
     a=[]
     for x in anonymities:
         a.append('&anonymityLevel='+x)
@@ -102,7 +102,7 @@ def proxyscrape(is_socket=True,verify_request=False,protocols=['http','socks4','
                 + "&anonymity="
                 + anonymity,
                 timeout=timeout,
-                headers={"User-Agent": random.choice(ua)},
+                headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
                 proxies=proxy
             ).text.split("\r\n")
             for x in proxies:
@@ -129,7 +129,7 @@ def proxylistdownload(protocols=['socks4','socks5'],check_proxies=True,timeout=1
         try:
             r=requests.Session().get('https://www.proxy-list.download/api/v1/get?type='+protocol,
                         timeout=timeout,
-                    headers={"User-Agent": random.choice(ua)},
+                    headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
                     proxies=proxy).text.split('\n')
             l+=[x.strip()+':'+protocol for x in r if x.strip()!='']
         except Exception as ex:
@@ -157,7 +157,7 @@ def proxyspace(protocols=['socks4','socks5'],check_proxies=True,timeout=15,check
         try:
             r=requests.Session().get('https://proxyspace.pro/{}.txt'.format(protocol),
                         timeout=timeout,
-                    headers={"User-Agent": random.choice(ua)},
+                    headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
                     proxies=proxy).text.split('\n')
             l+=[x.strip()+':'+protocol for x in r if x.strip()!='']
         except Exception as ex:
@@ -184,7 +184,7 @@ def proxybarcode(protocols=['socks4','socks5'],check_proxies=True,timeout=15,che
         try:
             r=requests.Session().get('https://raw.githubusercontent.com/B4RC0DE-TM/proxy-list/main/{}.txt'.format(protocol.upper()),
                         timeout=timeout,
-                    headers={"User-Agent": random.choice(ua)},
+                    headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
                     proxies=proxy).text.split('\n')
             l+=[x.strip()+':'+protocol for x in r if x.strip()!='']
         except Exception as ex:
@@ -211,7 +211,7 @@ def proxyopenlist(protocols=['socks4','socks5'],check_proxies=True,timeout=15,ch
         try:
             r=requests.Session().get('https://api.openproxylist.xyz/{}.txt'.format(protocol),
                         timeout=timeout,
-                    headers={"User-Agent": random.choice(ua)},
+                    headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
                     proxies=proxy).text.split('\n')
             l+=[x.strip()+':'+protocol for x in r if x.strip()!='']
         except Exception as ex:
@@ -326,18 +326,18 @@ def parse_proxies_list(l,proxy_type):
 
 
 
-def get_tor_socks5_proxy_windows(host=tor_proxy_host,port=tor_proxy_socks5_port_windows,new_ip=True):
+def get_tor_socks5_proxy_windows(host=Common_Variables.tor_proxy_host,port=Common_Variables.tor_proxy_socks5_port_windows,new_ip=True):
     if new_ip==True:
-        usr=''.join([random.choice(lis) for x in range(10)])
-        pwd=''.join([random.choice(lis) for x in range(10)])
+        usr=''.join([random.choice(Common_Variables.source_string) for x in range(10)])
+        pwd=''.join([random.choice(Common_Variables.source_string) for x in range(10)])
         return get_requests_proxy(**parse_proxy_string('{}:{}:{}:{}'.format(host,port,usr,pwd),'socks5'))
     return get_requests_proxy(**parse_proxy_string('{}:{}'.format(host,port),'socks5'))
 
 
-def get_tor_socks5_proxy_linux(host=tor_proxy_host,port=tor_proxy_socks5_port_linux,new_ip=True):
+def get_tor_socks5_proxy_linux(host=Common_Variables.tor_proxy_host,port=Common_Variables.tor_proxy_socks5_port_linux,new_ip=True):
     if new_ip==True:
-        usr=''.join([random.choice(lis) for x in range(10)])
-        pwd=''.join([random.choice(lis) for x in range(10)])
+        usr=''.join([random.choice(Common_Variables.source_string) for x in range(10)])
+        pwd=''.join([random.choice(Common_Variables.source_string) for x in range(10)])
         return get_requests_proxy(**parse_proxy_string('{}:{}:{}:{}'.format(host,port,usr,pwd),'socks5'))
     return get_requests_proxy(**parse_proxy_string('{}:{}'.format(host,port),'socks5'))
 
@@ -348,16 +348,16 @@ def get_tor_socks5_proxy(new_ip=True):
     return get_tor_socks5_proxy_linux(new_ip=new_ip)
 
 
-def get_tor_http_proxy(host=tor_proxy_host,port=tor_proxy_http_port,new_ip=True):
+def get_tor_http_proxy(host=Common_Variables.tor_proxy_host,port=Common_Variables.tor_proxy_http_port,new_ip=True):
     if new_ip==True:
-        usr=''.join([random.choice(lis) for x in range(10)])
-        pwd=''.join([random.choice(lis) for x in range(10)])
+        usr=''.join([random.choice(Common_Variables.source_string) for x in range(10)])
+        pwd=''.join([random.choice(Common_Variables.source_string) for x in range(10)])
         return get_requests_proxy(**parse_proxy_string('{}:{}:{}:{}'.format(host,port,usr,pwd),'http'))
     return get_requests_proxy(**parse_proxy_string('{}:{}'.format(host,port),'http'))
 
 
-def get_burpsuit_proxy(host=burpsuit_proxy_host,port=burpsuit_proxy_port):
-    proxy=burpsuit_http_proxy.copy()
+def get_burpsuit_proxy(host=Common_Variables.burpsuit_proxy_host,port=Common_Variables.burpsuit_proxy_port):
+    proxy=Common_Variables.burpsuit_http_proxy.copy()
     for x in proxy:
         proxy[x]=proxy[x].format(host,port)
     return proxy
@@ -572,7 +572,7 @@ def proxy_check_socket(verify_request=False,proxy_host=None,proxy_port=None,prox
 def proxy_check_requests(proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,proxy_type=None, timeout=5,**kwargs):
         proxy=get_requests_proxy(proxy_host=proxy_host,proxy_port=proxy_port,proxy_username=proxy_username,proxy_password=proxy_password,proxy_type=proxy_type)
         try:
-            response=requests.Session().get('https://www.google.com',headers={'User-Agent':random.choice(ua)},proxies=proxy).text
+            response=requests.Session().get('https://www.google.com',headers={'User-Agent':random.choice(Common_Variables.user_agents_list)},proxies=proxy).text
             if 'google.com' not in str(response):
                 return True
         except Exception as ex:

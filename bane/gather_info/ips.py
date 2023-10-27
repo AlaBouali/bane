@@ -11,7 +11,7 @@ def myip(proxy=None, timeout=15):
     try:
         return requests.Session().get(
             "https://api.ipify.org",
-            headers={"User-Agent": random.choice(ua)},
+            headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
             proxies=proxy,
             timeout=timeout,
         ).text.strip()
@@ -28,7 +28,7 @@ def geoip(u, timeout=15, proxy=None):
     try:
         r = requests.Session().get(
             "https://geoip-db.com/jsonp/" + u,
-            headers={"User-Agent": random.choice(ua)},
+            headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
             proxies=proxy,
             timeout=timeout,
         ).text
@@ -49,7 +49,7 @@ def reverse_ip_lookup(u, timeout=10, logs=True, returning=False, proxy=None):
     try:
         r = requests.Session().get(
             "https://api.hackertarget.com/reverseiplookup/?q=" + u,
-            headers={"User-Agent": random.choice(ua)},
+            headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
             proxies=proxy,
             timeout=timeout,
         ).text
@@ -64,7 +64,7 @@ def check_ip_via_shodan(ip,proxy=None,timeout=15,logs=False):
     if logs==True:
         print('[i] IP scan via Shodan  ( in some cases they are outdated, so please verify them manually before submitting them ) :')
     try:
-        d= requests.Session().get('https://internetdb.shodan.io/{}'.format(ip),headers={'User-Agent':random.choice(ua)},proxies=proxy,timeout=timeout).json()
+        d= requests.Session().get('https://internetdb.shodan.io/{}'.format(ip),headers={'User-Agent':random.choice(Common_Variables.user_agents_list)},proxies=proxy,timeout=timeout).json()
         v={}
         for x in d['vulns']:
             v.update({x:['https://www.cve.org/CVERecord?id='+x,'https://nvd.nist.gov/vuln/detail/'+x,'https://cve.mitre.org/cgi-bin/cvename.cgi?name='+x]})

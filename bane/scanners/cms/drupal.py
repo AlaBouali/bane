@@ -11,7 +11,7 @@ def get_drupal_infos(u,user_agent=None,cookie=None,timeout=10,logs=True,crt_time
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})

@@ -54,7 +54,7 @@ def ssti_submit(
                 verify=False,
             ).text
             if "{}".format(eval_value) in c:
-                return (True, {"p_o_c":p_o_c,"payload":payload, "result":"{}".format(eval_value)},any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
+                return (True, {"p_o_c":p_o_c,"payload":payload, "result":"{}".format(eval_value)},any(s in c for s in Common_Variables.sql_errors),any(s in c for s in Common_Variables.xml_parser_errors),any(s in c for s in Common_Variables.fetch_url_errors),any(s in c for s in Common_Variables.open_file_errors),p_o_c)
         except Exception as e:
             pass
     else:
@@ -69,10 +69,10 @@ def ssti_submit(
                 verify=False,
             ).text
             if "{}".format(eval_value) in c:
-                return (True, {"p_o_c":p_o_c,"payload":payload, "result":"{}".format(eval_value)},any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
+                return (True, {"p_o_c":p_o_c,"payload":payload, "result":"{}".format(eval_value)},any(s in c for s in Common_Variables.sql_errors),any(s in c for s in Common_Variables.xml_parser_errors),any(s in c for s in Common_Variables.fetch_url_errors),any(s in c for s in Common_Variables.open_file_errors),p_o_c)
         except Exception as e:
             pass
-    return (False, "",any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
+    return (False, "",any(s in c for s in Common_Variables.sql_errors),any(s in c for s in Common_Variables.xml_parser_errors),any(s in c for s in Common_Variables.fetch_url_errors),any(s in c for s in Common_Variables.open_file_errors),p_o_c)
 
 
 def safe_eval(a, o, b):
@@ -115,7 +115,7 @@ def ssti_forms(
 ):
     proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
     target_page = u
-    xp = ssti_list[payload_index].replace(
+    xp = Common_Variables.ssti_list[payload_index].replace(
         payload_keyword, "{}{}{}".format(values[0], operator, values[1])
     )
     xp_eval = safe_eval("{}".format(values[0]), operator, "{}".format(values[1]))

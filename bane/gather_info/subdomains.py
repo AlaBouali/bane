@@ -8,7 +8,7 @@ def subdomains_crt(domain,dns_server='8.8.8.8',resolve_timeout=2,resolve_lifetim
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -121,7 +121,7 @@ def get_subdomains_from_wayback(domain,dns_server='8.8.8.8',resolve_timeout=2,re
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})

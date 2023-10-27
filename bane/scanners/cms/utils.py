@@ -4,7 +4,7 @@ from bane.scanners.vulnerabilities.vulns import vulners_search,sniffable_links,p
 from bane.gather_info.info_s import get_subdomains,extract_root_domain
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-from bane.common.payloads import ua
+from bane.common.payloads import *
 
 if sys.version_info < (3, 0):
     from urlparse import urlparse

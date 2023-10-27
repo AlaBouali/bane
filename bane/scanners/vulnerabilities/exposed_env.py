@@ -17,7 +17,7 @@ def exposed_env(
         if user_agent:
             us = user_agent
         else:
-            us = random.choice(ua)
+            us = random.choice(Common_Variables.user_agents_list)
         if cookie:
             hea = {"User-Agent": us, "Cookie": cookie}
         else:
@@ -39,7 +39,7 @@ def exposed_env(
             pass
         return (False, "")
     else:
-        for x in env_paths:
+        for x in Common_Variables.env_paths:
             proxy = random.choice(proxies)
             a = exposed_env(
                 u,

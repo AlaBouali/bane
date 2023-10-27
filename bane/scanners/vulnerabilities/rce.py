@@ -73,18 +73,18 @@ def rce_submit(
                             parsed[0]["action"].split("/")[-1], based_on[1]
                         )
                         + ".txt","p_o_c":p_o_c},
-                        any(s in c.text for s in sql_errors),
-                        any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c
+                        any(s in c.text for s in Common_Variables.sql_errors),
+                        any(s in c.text for s in Common_Variables.xml_parser_errors),any(s in c.text for s in Common_Variables.fetch_url_errors),any(s in c.text for s in Common_Variables.open_file_errors),p_o_c
                     )
             if based_on[0] == "time":
                 if type_injection == "command":
                     if (int(time.time() - t) >= based_on[1] - 2) or (
                         c.status_code == 504
                     ):
-                        return (True, {"p_o_c":p_o_c},any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
+                        return (True, {"p_o_c":p_o_c},any(s in c.text for s in Common_Variables.sql_errors),any(s in c.text for s in Common_Variables.xml_parser_errors),any(s in c.text for s in Common_Variables.fetch_url_errors),any(s in c.text for s in Common_Variables.open_file_errors),p_o_c)
                 else:
                     if (int(time.time() - t) >= based_on[1]) or (c.status_code == 504):
-                        return (True, {"p_o_c":p_o_c},any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
+                        return (True, {"p_o_c":p_o_c},any(s in c.text for s in Common_Variables.sql_errors),any(s in c.text for s in Common_Variables.xml_parser_errors),any(s in c.text for s in Common_Variables.fetch_url_errors),any(s in c.text for s in Common_Variables.open_file_errors),p_o_c)
         except Exception as e:
             #print(str(e))
             if "Read timed out" in str(e):
@@ -119,26 +119,26 @@ def rce_submit(
                             parsed[0]["action"].split("/")[-1], based_on[1]
                         )
                         + ".txt","p_o_c":p_o_c},
-                        any(s in c.text for s in sql_errors),
-                        any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c
+                        any(s in c.text for s in Common_Variables.sql_errors),
+                        any(s in c.text for s in Common_Variables.xml_parser_errors),any(s in c.text for s in Common_Variables.fetch_url_errors),any(s in c.text for s in Common_Variables.open_file_errors),p_o_c
                     )
             if based_on[0] == "time":
                 if (int(time.time() - t) >= based_on[1] - 2) or (c.status_code == 504):
-                    return (True, {"p_o_c":p_o_c},any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
+                    return (True, {"p_o_c":p_o_c},any(s in c.text for s in Common_Variables.sql_errors),any(s in c.text for s in Common_Variables.xml_parser_errors),any(s in c.text for s in Common_Variables.fetch_url_errors),any(s in c.text for s in Common_Variables.open_file_errors),p_o_c)
                 else:
                     if (int(time.time() - t) >= based_on[1]) or (c.status_code == 504):
-                        return (True, {"p_o_c":p_o_c},any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
+                        return (True, {"p_o_c":p_o_c},any(s in c.text for s in Common_Variables.sql_errors),any(s in c.text for s in Common_Variables.xml_parser_errors),any(s in c.text for s in Common_Variables.fetch_url_errors),any(s in c.text for s in Common_Variables.open_file_errors),p_o_c)
         except Exception as e:
             #print(str(e))
             if "Read timed out" in str(e):
                 #if based_on[0] == "time":
-                    return (True, {"p_o_c":p_o_c},any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
-    return (False, "",any(s in c.text for s in sql_errors),any(s in c.text for s in xml_parser_errors),any(s in c.text for s in fetch_url_errors),any(s in c.text for s in open_file_errors),p_o_c)
+                    return (True, {"p_o_c":p_o_c},any(s in c.text for s in Common_Variables.sql_errors),any(s in c.text for s in Common_Variables.xml_parser_errors),any(s in c.text for s in Common_Variables.fetch_url_errors),any(s in c.text for s in Common_Variables.open_file_errors),p_o_c)
+    return (False, "",any(s in c.text for s in Common_Variables.sql_errors),any(s in c.text for s in Common_Variables.xml_parser_errors),any(s in c.text for s in Common_Variables.fetch_url_errors),any(s in c.text for s in Common_Variables.open_file_errors),p_o_c)
 
 
 def rce_forms(
     u,
-    payloads=rce_payloads,
+    payloads=Common_Variables.rce_payloads,
     payload_index=0,
     save_to_file=None,
     dont_change={},
@@ -393,7 +393,7 @@ def rce(
     u,
     max_pages=5,
     pages=[],
-    payloads=rce_payloads,
+    payloads=Common_Variables.rce_payloads,
     payload_index=0,
     email_extension='@gmail.com',
     phone_pattern='XXX-XXX-XXXX',

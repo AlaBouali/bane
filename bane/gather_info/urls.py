@@ -18,7 +18,7 @@ def norton_rate(u, timeout=30, proxy=None):
         ul = "https://safeweb.norton.com/report/show?url=" + ur
         c = requests.Session().et(
             ul,
-            headers={"User-Agent": random.choice(ua)},
+            headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
             proxies=proxy,
             timeout=timeout,
         ).text
@@ -48,7 +48,7 @@ def http_options(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     if cookie:
         heads = {"User-Agent": us, "Cookie": cookie}
     else:
@@ -81,7 +81,7 @@ def headers(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     if cookie:
         heads = {"User-Agent": us, "Cookie": cookie}
     else:

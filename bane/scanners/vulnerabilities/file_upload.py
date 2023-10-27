@@ -54,7 +54,7 @@ def file_upload_forms(
         if user_agent:
             h = {"User-Agent": user_agent}
         else:
-            h = {"User-Agent": random.choice(ua)}
+            h = {"User-Agent": random.choice(Common_Variables.user_agents_list)}
         if "application/json" in fo["enctype"]:
             d = json.dumps(d)
         h.update({"cookie": cookie})

@@ -7,7 +7,7 @@ def access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -15,7 +15,7 @@ def access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None
     try:
         r = requests.Session().get(
             u,
-            headers={"User-Agent": random.choice(ua)},
+            headers=hed,
             allow_redirects=False,
             proxies=proxy,
             timeout=timeout,
@@ -81,7 +81,7 @@ class force_browsing:
         l = []
         if u[len(u) - 1] == "/":
             u = u[0 : len(u) - 1]
-        for x in innerl:
+        for x in Common_Variables.inner_urls_list:
             if self.stop == True:
                 break
             g = u + x + "." + ext
@@ -92,7 +92,7 @@ class force_browsing:
                 if user_agent:
                     us = user_agent
                 else:
-                    us = random.choice(ua)
+                    us = random.choice(Common_Variables.user_agents_list)
                 h = access(g, user_agent=us, cookie=cookie, proxy=proxy)
             except KeyboardInterrupt:
                 break

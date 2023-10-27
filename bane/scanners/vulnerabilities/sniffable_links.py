@@ -5,7 +5,7 @@ def sniffable_links(u, timeout=10,proxy=None, user_agent=None, cookie=None,conte
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     if cookie:
         heads = {"User-Agent": us, "Cookie": cookie}
     else:

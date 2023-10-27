@@ -24,7 +24,7 @@ def csrf_filter_tokens(u, proxy=None, timeout=10, user_agent=None, cookie=None,h
             if y["type"].lower() == "hidden":
                 hd_v = True
             if y["type"].lower() == "hidden" and any(
-                ele in y["name"].lower() for ele in csrf_strings
+                ele in y["name"].lower() for ele in Common_Variables.csrf_strings
             ):  # and y["value"]==f1f["inputs"][con]["value"]:
                 vuln = False
         if vuln == True:
@@ -81,7 +81,7 @@ def csrf_forms(
     if user_agent:
         h = {"User-Agent": user_agent}
     else:
-        h = {"User-Agent": random.choice(ua)}
+        h = {"User-Agent": random.choice(Common_Variables.user_agents_list)}
     h.update({"cookie": cookie})
     h.update(
         {

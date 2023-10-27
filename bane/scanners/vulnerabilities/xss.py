@@ -131,7 +131,7 @@ def xss_submit(
                 verify=False,
             ).text
             if payload in c:
-                return (True, {"reflection":find_xss_context(c, payload),"p_o_c":p_o_c},any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
+                return (True, {"reflection":find_xss_context(c, payload),"p_o_c":p_o_c},any(s in c for s in Common_Variables.sql_errors),any(s in c for s in Common_Variables.xml_parser_errors),any(s in c for s in Common_Variables.fetch_url_errors),any(s in c for s in Common_Variables.open_file_errors),p_o_c)
         except Exception as e:
             pass
     else:
@@ -146,10 +146,10 @@ def xss_submit(
                 verify=False,
             ).text
             if payload in c:
-                return (True, {"reflection":find_xss_context(c, payload),"p_o_c":p_o_c},any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
+                return (True, {"reflection":find_xss_context(c, payload),"p_o_c":p_o_c},any(s in c for s in Common_Variables.sql_errors),any(s in c for s in Common_Variables.xml_parser_errors),any(s in c for s in Common_Variables.fetch_url_errors),any(s in c for s in Common_Variables.open_file_errors),p_o_c)
         except Exception as e:
             pass
-    return (False, "",any(s in c for s in sql_errors),any(s in c for s in xml_parser_errors),any(s in c for s in fetch_url_errors),any(s in c for s in open_file_errors),p_o_c)
+    return (False, "",any(s in c for s in Common_Variables.sql_errors),any(s in c for s in Common_Variables.xml_parser_errors),any(s in c for s in Common_Variables.fetch_url_errors),any(s in c for s in Common_Variables.open_file_errors),p_o_c)
 
 
 

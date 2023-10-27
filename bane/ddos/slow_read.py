@@ -42,7 +42,7 @@ class slow_read(DDoS_Class):
         self.cookie = cookie
         self.user_agents = user_agents
         if not self.user_agents or len(self.user_agents) == 0:
-            self.user_agents = ua
+            self.user_agents = Common_Variables.user_agents_list
         self.stop = False
         self.target = u
         self.port = p

@@ -62,7 +62,7 @@ def crlf_header_injection(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     if cookie:
         heads = {"User-Agent": us, "Cookie": cookie}
     else:
@@ -107,7 +107,7 @@ def crlf_body_injection(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     if cookie:
         heads = {"User-Agent": us, "Cookie": cookie}
     else:

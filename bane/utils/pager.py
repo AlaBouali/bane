@@ -29,7 +29,7 @@ from bane.gather_info.info_s import extract_root_domain
 def generate_random_url():
     protocols = ["http", "https"]
     protocol = random.choice(protocols)
-    domain = random.choice(domainl)
+    domain = random.choice(Common_Variables.domains_list)
     return "{}://{}/".format(protocol,domain)
 
 
@@ -76,7 +76,7 @@ def spider_url(base_url, include_links=False, include_id=False,max_pages=5,timeo
     if user_agent:
         h.update({'User-Agent':user_agent})
     else:
-        h.update({'User-Agent':random.choice(ua)})
+        h.update({'User-Agent':random.choice(Common_Variables.user_agents_list)})
     h.update(headers)
     visited_urls = set()
     urls_to_visit = [base_url]
@@ -215,7 +215,7 @@ def inputs(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     if bypass == True:
         u += "#"
     if cookie:
@@ -283,7 +283,7 @@ def forms(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     if bypass == True:
         u += "#"
     if cookie:
@@ -396,7 +396,7 @@ def forms_parser(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     if bypass == True:
         u += "#"
     if cookie:
@@ -809,12 +809,12 @@ def form_filler(
                             if not mime_type:
                                 x["value"] = (
                                     payload + "." + file_extension,
-                                    files_upload[file_extension],
+                                    Common_Variables.files_upload[file_extension],
                                 )
                             else:
                                 x["value"] = (
                                     payload + "." + file_extension,
-                                    files_upload[file_extension],
+                                    Common_Variables.files_upload[file_extension],
                                     mime_type,
                                 )
                         else:
@@ -831,7 +831,7 @@ def form_filler(
                                             + str(random.randint(100000, 999999))
                                             + "."
                                             + file_extension,
-                                            files_upload[file_extension],
+                                            Common_Variables.files_upload[file_extension],
                                         )
                                     else:
                                         x["value"] = (
@@ -839,7 +839,7 @@ def form_filler(
                                             + str(random.randint(100000, 999999))
                                             + "."
                                             + file_extension,
-                                            files_upload[file_extension],
+                                            Common_Variables.files_upload[file_extension],
                                             mime_type,
                                         )
                                 else:
@@ -849,7 +849,7 @@ def form_filler(
                                         elif x['type'] in ['text','password','search','textarea']:
                                             leng=random.randint(int(float(x.get('min',1))), int(float(x.get('max',64)))+1)
                                             for i in range(leng):
-                                                x["value"] += random.choice(lis)
+                                                x["value"] += random.choice(Common_Variables.source_string)
                                         elif x['type']=='email':
                                             leng=random.randint(int(float(x.get('min',1))), int(float(x.get('max',15)))-len(email_extension)+1)
                                             for i in range(leng):
@@ -867,7 +867,7 @@ def form_filler(
                                 if len(x["value"]) == 0 or x["value"] == "":
                                     x["value"] = ""
                                     for i in range(auto_fill):
-                                        x["value"] += random.choice(lis)
+                                        x["value"] += random.choice(Common_Variables.source_string)
                                 else:
                                     x["value"] = random.choice(x["value"])
     #print(form)
@@ -956,7 +956,7 @@ def crawl(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     h = {}
     if bypass == True:
         u += "#"
@@ -1124,7 +1124,7 @@ def media(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     if cookie:
         hea = {"User-Agent": us, "Cookie": cookie}
     else:
@@ -1191,7 +1191,7 @@ def subdomains_extract(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     h = {}
     if cookie:
         hea = {"User-Agent": us, "Cookie": cookie}
@@ -1258,7 +1258,7 @@ def fetch_url(
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     if cookie:
         hea = {"User-Agent": us, "Cookie": cookie}
     else:
@@ -1304,7 +1304,7 @@ def examine_js_code(u,
     if user_agent:
         us = user_agent
     else:
-        us = random.choice(ua)
+        us = random.choice(Common_Variables.user_agents_list)
     if cookie:
         hea = {"User-Agent": us, "Cookie": cookie}
     else:
@@ -1340,7 +1340,7 @@ def examine_js_code(u,
 
 def extract_secrets_from_text(js_content):
     tokens_dict = {}
-    for key, pattern in js_exposed_secrets_regexs.items():
+    for key, pattern in Common_Variables.js_exposed_secrets_regexs.items():
         #for pattern in x:
             l=[]
             try:
@@ -1365,7 +1365,7 @@ def extract_secrets_from_text(js_content):
                     if matches:
                         l=[]
                         for match in matches:
-                            if any(item in str(match).lower() for item in json_configs_signatures)==True and match not in l:
+                            if any(item in str(match).lower() for item in Common_Variables.json_configs_signatures)==True and match not in l:
                                 l.append(match)
                         if len(l)>0:
                             tokens_dict[key] = l

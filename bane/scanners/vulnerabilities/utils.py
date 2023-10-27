@@ -48,7 +48,7 @@ from bane.gather_info.ips import check_ip_via_shodan
 def random_string(size):
     s = ""
     for x in range(size):
-        s += random.choice(lis)
+        s += random.choice(Common_Variables.source_string)
     return s
 
 
@@ -71,7 +71,7 @@ def setup_proxy(proxies):
 def setup_ua(usra):
     if usra:
         return usra
-    return random.choice(ua)
+    return random.choice(Common_Variables.user_agents_list)
 
 
 def valid_parameter(parm):

@@ -36,7 +36,7 @@ class http_spam(DDoS_Class):
         self.cookie = cookie
         self.user_agents = user_agents
         if not self.user_agents or len(self.user_agents) == 0:
-            self.user_agents = ua
+            self.user_agents = Common_Variables.user_agents_list
         self.method = method
         self.stop = False
         self.counter = 0
@@ -114,7 +114,7 @@ class http_spam(DDoS_Class):
                                 # print("Request: {} | Type: {} | Bytes: {}".format(http_counter,req,len(m)))
                             time.sleep(self.interval)
                         except Exception as ex:
-                            print(ex)
+                            #print(ex)
                             break
                         time.sleep(self.interval)
                     s.close()

@@ -84,23 +84,23 @@ class admin_panel_finder:
         links = []
         ext = ext.strip()
         if ext.lower() == "php":
-            links = phpl
+            links = Common_Variables.php_urls_list
         elif ext.lower() == "asp":
-            links = aspl
+            links = Common_Variables.asp_urls_list
         elif ext.lower() == "aspx":
-            links = aspxl
+            links = Common_Variables.aspx_urls_list
         elif ext.lower() == "js":
-            links = jsl
+            links = Common_Variables.js_urls_list
         elif ext == "/":
-            links = slashl
+            links = Common_Variables.slash_urls_list
         elif ext.lower() == "cfm":
-            links = cfml
+            links = Common_Variables.cfm_urls_list
         elif ext.lower() == "cgi":
-            links = cgil
+            links = Common_Variables.cgi_urls_list
         elif ext.lower() == "brf":
-            links = brfl
+            links = Common_Variables.brf_urls_list
         elif ext.lower() == "html":
-            links = htmll
+            links = Common_Variables.html_urls_list
         k = []
         for i in links:
             if self.stop == True:
@@ -110,7 +110,7 @@ class admin_panel_finder:
                 if user_agent:
                     us = user_agent
                 else:
-                    us = random.choice(ua)
+                    us = random.choice(Common_Variables.user_agents_list)
                 hed = {"User-Agent": us}
                 if cookie:
                     hed.update({"Cookie": cookie})

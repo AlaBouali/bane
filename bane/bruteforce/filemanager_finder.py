@@ -36,14 +36,14 @@ class filemanager_finder:
         t.start()
 
     def crack(self, u, user_agent, cookie, timeout, proxies,headers):
-        for i in manager:
+        for i in Common_Variables.manager_urls_list:
             if self.stop == True:
                 self.finish = True
                 break
             if user_agent:
                 us = user_agent
             else:
-                us = random.choice(ua)
+                us = random.choice(Common_Variables.user_agents_list)
             hed = {"User-Agent": us}
             if cookie:
                 hed.update({"Cookie": cookie})
@@ -70,7 +70,7 @@ class filemanager_finder:
                         if self.logs == True:
                             sys.stdout.write(
                                 "\rStats: {}/{} | Found: {}  ".format(
-                                    manager.index(g), len(manager), self.finish
+                                    Common_Variables.manager_urls_list.index(g), len(Common_Variables.manager_urls_list), self.finish
                                 )
                             )
                             sys.stdout.flush()
@@ -80,7 +80,7 @@ class filemanager_finder:
                         if self.logs == True:
                             sys.stdout.write(
                                 "\rStats: {}/{} | Found: {}  ".format(
-                                    manager.index(g), len(manager), self.finish
+                                    Common_Variables.manager_urls_list.index(g), len(Common_Variables.manager_urls_list), self.finish
                                 )
                             )
                             sys.stdout.flush()
@@ -88,7 +88,7 @@ class filemanager_finder:
                     if self.logs == True:
                         sys.stdout.write(
                             "\rStats: {}/{} | Found: {}  ".format(
-                                manager.index(g), len(manager), self.finish
+                                Common_Variables.manager_urls_list.index(g), len(Common_Variables.manager_urls_list), self.finish
                             )
                         )
                         sys.stdout.flush()

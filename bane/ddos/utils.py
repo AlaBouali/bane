@@ -64,7 +64,7 @@ def random_param():
     if a == 1:
         return str(random.randint(1, 1000))
     else:
-        return random.choice(lis)
+        return random.choice(Common_Variables.source_string)
 
 
 def setup_http_packet(
@@ -92,19 +92,19 @@ def setup_http_packet(
     pa += jo + q + "=" + p
     # setting random headers
     for l in range(random.randint(1, 5)):
-        ed = random.choice(ec)
+        ed = random.choice(Common_Variables.accept_encoding_list)
         oi = random.randint(1, 3)
         if oi == 2:
             gy = 0
             while gy < 1:
-                df = random.choice(ec)
+                df = random.choice(Common_Variables.accept_encoding_list)
                 if df != ed:
                     gy += 1
             ed += ", "
             ed += df
-    l = random.choice(al)
+    l = random.choice(Common_Variables.accept_language_list)
     for n in range(random.randint(0, 5)):
-        l += ";q={},".format(round(random.uniform(0.1, 1), 1)) + random.choice(al)
+        l += ";q={},".format(round(random.uniform(0.1, 1), 1)) + random.choice(Common_Variables.accept_language_list)
     kl = random.randint(1, 2)
     ck = ""
     if cookie:
@@ -114,27 +114,27 @@ def setup_http_packet(
             pa,
             ck,
             random.choice(user_agents),
-            random.choice(a),
+            random.choice(Common_Variables.accept_list),
             l,
             ed,
-            random.choice(ac),
+            random.choice(Common_Variables.accept_charset_list),
             random.randint(100, 1000),
-            random.choice(cc),
+            random.choice(Common_Variables.cache_control_list),
             (
-                random.choice(referers)
-                + random.choice(lis)
+                random.choice(Common_Variables.referers_list)
+                + random.choice(Common_Variables.source_string)
                 + str(random.randint(0, 100000000))
-                + random.choice(lis)
+                + random.choice(Common_Variables.source_string)
             ),
             target,
         )
     else:
         k = ""
         for _ in range(random.randint(post_field_min, post_field_max)):
-            k += random.choice(lis)
+            k += random.choice(Common_Variables.source_string)
         j = ""
         for x in range(random.randint(post_min, post_max)):
-            j += random.choice(lis)
+            j += random.choice(Common_Variables.source_string)
         par = j + "=" + k
         m = "POST {} HTTP/1.1\r\n{}User-Agent: {}\r\nAccept-language: {}\r\nConnection: keep-alive\r\nKeep-Alive: {}\r\nContent-Length: {}\r\nContent-Type: application/x-www-form-urlencoded\r\nReferer: {}\r\nHost: {}\r\n\r\n{}".format(
             pa,
@@ -144,10 +144,10 @@ def setup_http_packet(
             random.randint(300, 1000),
             len(par),
             (
-                random.choice(referers)
-                + random.choice(lis)
+                random.choice(Common_Variables.referers_list)
+                + random.choice(Common_Variables.source_string)
                 + str(random.randint(0, 100000000))
-                + random.choice(lis)
+                + random.choice(Common_Variables.source_string)
             ),
             target,
             par,

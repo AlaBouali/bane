@@ -50,7 +50,7 @@ class http_auth_bruteforce:
         if user_agent:
             us = user_agent
         else:
-            us = random.choice(ua)
+            us = random.choice(Common_Variables.user_agents_list)
         hed = {"User-Agent": us}
         if cookie:
             hed.update({"Cookie": cookie})
@@ -104,7 +104,7 @@ class http_auth_bruteforce:
                 if user_agent:
                     us = user_agent
                 else:
-                    us = random.choice(ua)
+                    us = random.choice(Common_Variables.user_agents_list)
                 hed = {"User-Agent": us}
                 if cookie:
                     hed.update({"Cookie": cookie})

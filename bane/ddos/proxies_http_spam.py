@@ -6,7 +6,7 @@ class prox_http_spam(DDoS_Class):
         u,
         p=80,
         cookie=None,
-        user_agents=ua,
+        user_agents=Common_Variables.user_agents_list,
         method=3,
         threads_daemon=True,
         scraping_timeout=15,
@@ -36,7 +36,7 @@ class prox_http_spam(DDoS_Class):
         self.cookie = cookie
         self.user_agents = user_agents
         if not self.user_agents or len(self.user_agents) == 0:
-            self.user_agents = ua
+            self.user_agents = Common_Variables.user_agents_list
         self.method = method
         self.stop = False
         self.counter = 0
@@ -45,7 +45,6 @@ class prox_http_spam(DDoS_Class):
         self.duration = duration
         self.port = p
         self.timeout = timeout
-        self.tor = tor
         self.interval = interval
         self.round_min = round_min
         self.round_max = round_max
@@ -98,7 +97,7 @@ class prox_http_spam(DDoS_Class):
                             self.user_agents,
                         )
                         try:
-                            if stop == True:
+                            if self.stop == True:
                                 break
                             s.send(m.encode("utf-8"))
                             self.counter += 1
