@@ -5,11 +5,41 @@ from .proxies_checker import *
 from .proxies_getter import *
 from .proxies_checker import *
 
+def load_and_parse_proxies(source,proxies_type):
+    if source==None:
+        return []
+    elif type(source)==dict:
+        if list(source.keys())==['proxy_host', 'proxy_port', 'proxy_username', 'proxy_password', 'proxy_type']:
+            return [source]
+        else:
+            return []
+    data=[]
+    if type(source)==str:
+        if ':' in source:
+            return [Proxies_Parser.parse_proxy_string(source,proxies_type)]
+        if source.endswith('.json'):
+            with open(source) as f:
+                return load_and_parse_proxies(json.load(f),proxies_type)
+        f=open(source,'r')
+        data=f.readlines()
+        f.close()
+    elif type(source)==list or type(source)==tuple:
+        if len(source)==0:
+            return []
+        if type(source[0])==dict:
+            if list(source[0].keys())==['proxy_host', 'proxy_port', 'proxy_username', 'proxy_password', 'proxy_type']:
+                return source
+        for x in source:
+            if type(x)==str:
+                data.append(x)
+    return Proxies_Parser.parse_proxies_list(data,proxies_type)
+
+
 def load_and_parse_proxies_all(http_proxies=None,socks4_proxies=None,socks5_proxies=None,json_file=None):
-    l=Proxies_Parser.load_and_parse_proxies(http_proxies,'http')
-    l+=Proxies_Parser.load_and_parse_proxies(socks4_proxies,'socks4')
-    l+=Proxies_Parser.load_and_parse_proxies(socks5_proxies,'socks5')
-    l+=Proxies_Parser.load_and_parse_proxies(json_file,None)
+    l=load_and_parse_proxies(http_proxies,'http')
+    l+=load_and_parse_proxies(socks4_proxies,'socks4')
+    l+=load_and_parse_proxies(socks5_proxies,'socks5')
+    l+=load_and_parse_proxies(json_file,None)
     d=[]
     for x in l:
         if x not in d:
@@ -32,7 +62,7 @@ def get_requests_proxies_from_parameter(parameter,proxies_type):
             return [parameter]
         raise Exception('Incorrect dict format')
     if type(parameter)==str:
-        l=Proxies_Parser.load_and_parse_proxies(parameter,proxies_type)
+        l=load_and_parse_proxies(parameter,proxies_type)
         d=[]
         for x in l:
             d.append(Proxies_Getter.get_requests_proxy(**x))
@@ -47,7 +77,7 @@ def get_requests_proxies_from_parameters(proxies=None,proxy=None,http_proxies=No
     l+=get_requests_proxies_from_parameter(http_proxies,'http')
     l+=get_requests_proxies_from_parameter(socks4_proxies,'socks4')
     l+=get_requests_proxies_from_parameter(socks5_proxies,'socks5')
-    a=Proxies_Parser.load_and_parse_proxies(json_file,None)
+    a=load_and_parse_proxies(json_file,None)
     l+=[Proxies_Getter.get_requests_proxy(**x) for x in a]
     l+=get_requests_proxies_from_parameter(proxies,None)
     d=[]
@@ -90,7 +120,7 @@ def get_socket_proxies_from_parameters(proxies=None,proxy=None,http_proxies=None
     l+=get_requests_proxies_from_parameter(http_proxies,'http')
     l+=get_requests_proxies_from_parameter(socks4_proxies,'socks4')
     l+=get_requests_proxies_from_parameter(socks5_proxies,'socks5')
-    a=Proxies_Parser.load_and_parse_proxies(json_file,None)
+    a=load_and_parse_proxies(json_file,None)
     l+=[Proxies_Getter.get_requests_proxy(**x) for x in a]
     l+=get_requests_proxies_from_parameter(proxies,None)
     d=[]
