@@ -15,7 +15,7 @@ if os.path.isdir('/home/')==True:
                 pm=x
                 break
         os.system('sudo '+pm+' install sshpass -y')
-        #os.system('sudo '+pm+' install nodejs -y')
+        os.system('sudo '+pm+' install tor -y')
 
 adr=False
 
@@ -26,7 +26,7 @@ if os.path.isdir('/data/data/com.termux/')==True:
     termux=True
     os.system('pkg install openssh -y')
     os.system('pkg install sshpass -y')
-    #os.system('pkg install nodejs -y')
+    os.system('pkg install tor -y')
 
 if termux==False:
    if  sys.version_info < (3,0):
