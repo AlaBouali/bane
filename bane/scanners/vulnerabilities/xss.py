@@ -392,6 +392,8 @@ def xss(
             payloads=[payload]
     if type(payload)==list or type(payload)==tuple:
         payloads=list(payload)
+    if payload==None:
+        payloads=[None]
     for pl in payloads:
         for x in pages:
             if logs==True:

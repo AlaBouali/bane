@@ -17,7 +17,7 @@ import urllib3
 
 
 
-from bane.cryptographers.hasher import base64_decode
+#from bane.cryptographers.hasher import base64_decode
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import bs4
 from bs4 import BeautifulSoup

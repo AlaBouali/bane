@@ -1,5 +1,5 @@
 from bane.gather_info.utils import *
-from bane.gather_info.domains import resolve
+from bane.gather_info.domains import *
 
 class SUBDOMAINS:
 
@@ -49,7 +49,7 @@ class SUBDOMAINS:
                                 print('\t[+] {}'.format(x))
                     except:
                         try:
-                            result.update({x:resolve(x,server=dns_server,timeout=resolve_timeout,lifetime=resolve_lifetime)})
+                            result.update({x:DOMAINS.resolve(x,server=dns_server,timeout=resolve_timeout,lifetime=resolve_lifetime)})
                         except:
                             pass
             if logs==True:
@@ -157,7 +157,7 @@ class SUBDOMAINS:
                                 break
                             except:
                                 try:
-                                    urls[subdomain].add(resolve(x.split(':')[0],server=dns_server,timeout=resolve_timeout,lifetime=resolve_lifetime))
+                                    urls[subdomain].add(DOMAINS.resolve(x.split(':')[0],server=dns_server,timeout=resolve_timeout,lifetime=resolve_lifetime))
                                     if logs==True:
                                         print('\t[+] {}'.format(subdomain))
                                 except:

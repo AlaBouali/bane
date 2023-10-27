@@ -6,16 +6,18 @@ with open("README.md", "r") as fh:
 termux=False
 
 if os.path.isdir('/home/')==True:
-    if not os.getenv("SUDO_USER"):
-        print('\n\nYou didn\'t the installation run with root privilege !\nYou will have to install the following packages manually: sshpass , nodejs\n\n\n')
-    if os.getenv("SUDO_USER"):
-        pm="apt"
-        for x in ["apt","yum","pacman","dnf","zypper","brew"]:
-            if subprocess.call(["which", x], stdout=subprocess.PIPE, stderr=subprocess.PIPE)==0:
-                pm=x
-                break
-        os.system('sudo '+pm+' install sshpass -y')
-        os.system('sudo '+pm+' install tor -y')
+    if os.geteuid() == 0:
+        #if not os.getenv("SUDO_USER"):
+        if os.getenv("SUDO_USER"):
+            pm="apt"
+            for x in ["apt","yum","pacman","dnf","zypper","brew"]:
+                if subprocess.call(["which", x], stdout=subprocess.PIPE, stderr=subprocess.PIPE)==0:
+                    pm=x
+                    break
+            os.system('sudo '+pm+' install sshpass -y')
+            os.system('sudo '+pm+' install tor -y')
+    else:
+       print('\n\nYou didn\'t the installation run with root privilege !\nYou will have to install the following packages manually: sshpass , tor\n\n\n')
 
 adr=False
 

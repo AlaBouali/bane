@@ -21,17 +21,10 @@ class http_spam(DDoS_Class):
         interval=0.001,
         duration=60,
         tor=False,
-        http_proxies=None,
-        socks4_proxies=None,
-        socks5_proxies=None,
         ssl_on=False,
         logs=True,
     ):
         self.ssl_on=ssl_on
-        self.proxies=get_socket_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
-        self.proxies=[x for x in self.proxies if x['proxy_type'] in ['socks4','socks5','s4','s5']]
-        if self.proxies==[]:
-            self.proxies=[{'proxy_host':None,'proxy_port':None,'proxy_username':None,'proxy_password':None,'proxy_type':None}]
         self.logs = logs
         self.cookie = cookie
         self.user_agents = user_agents

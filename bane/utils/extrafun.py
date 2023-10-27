@@ -8,7 +8,7 @@ else:
 import bs4
 from bs4 import BeautifulSoup
 from bane.common import *
-from bane.utils.pager import crawl
+from bane.scanners.vulnerabilities.path_traversal import crawl
 
 
 

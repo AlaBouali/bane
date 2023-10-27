@@ -24,7 +24,7 @@ from bane.bruteforce.utils import *
 
 def smtp(u, username, password, p=25, ehlo=True, helo=False, ttls=False,proxy_type=None,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,timeout=5):
     try:
-        sock=get_socks_proxy_socket(u,p,proxy_host,proxy_port,proxy_type,username=proxy_username,password=proxy_password,timeout=timeout)
+        sock=Proxies_Getter.get_socks_proxy_socket(u,p,proxy_host,proxy_port,proxy_type,username=proxy_username,password=proxy_password,timeout=timeout)
         s = smtplib.SMTP()  
         s.sock=sock
         if ehlo == True:
@@ -133,7 +133,7 @@ def ssh(u, username, password, p=22, timeout=5, exchange_key=None):
 def ftp_anon(ip, p,timeout=5,proxy_type=None,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None):
     # anonymous ftp login
     try:
-        sock=get_socks_proxy_socket(ip,p,proxy_host,proxy_port,proxy_type,username=proxy_username,password=proxy_password,timeout=timeout)
+        sock=Proxies_Getter.get_socks_proxy_socket(ip,p,proxy_host,proxy_port,proxy_type,username=proxy_username,password=proxy_password,timeout=timeout)
         ftp = FTP()
         ftp.sock=sock
         ftp.login()
@@ -146,7 +146,7 @@ def ftp_anon(ip, p,timeout=5,proxy_type=None,proxy_host=None,proxy_port=None,pro
 def ftp(ip,p, username, password, timeout=5,proxy_type=None,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None):
     try:
         i = False
-        sock=get_socks_proxy_socket(ip,p,proxy_host,proxy_port,proxy_type,username=proxy_username,password=proxy_password,timeout=timeout)
+        sock=Proxies_Getter.get_socks_proxy_socket(ip,p,proxy_host,proxy_port,proxy_type,username=proxy_username,password=proxy_password,timeout=timeout)
         ftp = FTP()
         ftp.sock=sock
         ftp.login(username, password)

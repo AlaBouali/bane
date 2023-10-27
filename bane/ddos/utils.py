@@ -31,8 +31,10 @@ from struct import *
 from bane.scanners.botnet.iot import getip
 from bane.common.payloads import *
 from bane.utils.handle_files import read_file
-from bane.utils.proxer import parse_proxies_list,get_proxy_socket,get_tor_socks5_socket,parse_proxy_string,wrap_socket_with_ssl,load_and_parse_proxies,load_and_parse_proxies_all,get_tor_socks5_proxy,get_requests_proxies_from_parameters,get_socket_proxies_from_parameters
+from bane.utils.proxer import *
 from bane.utils.pager import spider_url
+termux=False
+adr=False
 
 if os.path.isdir("/data/data") == True:
     adr = True  # the device is an android
@@ -192,14 +194,14 @@ class DDoS_Class:
 
 
 def get_socket_connection(host,port,timeout=5,no_delay=False,ssl_wrap=False,**kwargs):
-    s=get_proxy_socket(host,port,timeout=timeout,no_delay=no_delay,**kwargs)
+    s=Proxies_Getter.get_proxy_socket(host,port,timeout=timeout,no_delay=no_delay,**kwargs)
     if ssl_wrap==True:
         s=wrap_socket_with_ssl(s,host)
     return s
 
 
 def get_tor_socket_connection(host,port,new_ip=True,ssl_wrap=False,timeout=5,no_delay=False,**kwargs):
-    s=get_tor_socks5_socket(host,port,new_ip=new_ip,timeout=timeout,no_delay=no_delay,**kwargs)
+    s=Proxies_Getter.get_tor_socks5_socket(host,port,new_ip=new_ip,timeout=timeout,no_delay=no_delay,**kwargs)
     if ssl_wrap==True:
         s=wrap_socket_with_ssl(s,host)
     return s
