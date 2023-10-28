@@ -1,7 +1,7 @@
 from bane.gather_info.utils import *
 
 
-class URLS:
+class URL_Info:
     
     @staticmethod
     def norton_rate(u, timeout=30, proxy=None):

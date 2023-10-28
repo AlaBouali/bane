@@ -1,6 +1,6 @@
 from bane.gather_info.utils import *
 
-class NETWORk:
+class Network_Info:
 
     @staticmethod
     def get_local_ip():
@@ -53,11 +53,11 @@ class NETWORk:
             connection=s.connect_ex((ip,port))
             s.close()
             if connection==0:
-                NETWORk.close_socket(s)
+                Network_Info.close_socket(s)
                 return True
         except:
             pass
-        NETWORk.close_socket(s)
+        Network_Info.close_socket(s)
         return False
         """syn = IP(dst=ip) / TCP(dport=port, flags="S")
         ans, unans = sr(syn, timeout=timeout, retry=retry, verbose=0)
@@ -79,7 +79,7 @@ class port_scan:
         __slots__ = ["result"]
 
         def scan(self,target,port,check_open,timeout,retry):
-            a = NETWORk.tcp_scan(
+            a = Network_Info.tcp_scan(
                 target,
                 port=int(port),
                 check_open=check_open,

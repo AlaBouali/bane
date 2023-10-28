@@ -1,7 +1,7 @@
 from bane.gather_info.utils import *
 from bane.gather_info.domains import *
 
-class SUBDOMAINS:
+class Subdomain_Info:
 
     @staticmethod
     def subdomains_crt(domain,dns_server='8.8.8.8',resolve_timeout=2,resolve_lifetime=1,logs=True,subdomain_check_timeout=10, crt_timeout=120,cookie=None, user_agent=None, proxy=None,subdomains_only=False):
@@ -49,7 +49,7 @@ class SUBDOMAINS:
                                 print('\t[+] {}'.format(x))
                     except:
                         try:
-                            result.update({x:DOMAINS.resolve(x,server=dns_server,timeout=resolve_timeout,lifetime=resolve_lifetime)})
+                            result.update({x:Domain_Info.resolve(x,server=dns_server,timeout=resolve_timeout,lifetime=resolve_lifetime)})
                         except:
                             pass
             if logs==True:
@@ -157,7 +157,7 @@ class SUBDOMAINS:
                                 break
                             except:
                                 try:
-                                    urls[subdomain].add(DOMAINS.resolve(x.split(':')[0],server=dns_server,timeout=resolve_timeout,lifetime=resolve_lifetime))
+                                    urls[subdomain].add(Domain_Info.resolve(x.split(':')[0],server=dns_server,timeout=resolve_timeout,lifetime=resolve_lifetime))
                                     if logs==True:
                                         print('\t[+] {}'.format(subdomain))
                                 except:
@@ -182,8 +182,8 @@ class SUBDOMAINS:
     @staticmethod
     def get_subdomains(domain,dns_server='8.8.8.8',resolve_timeout=2,resolve_lifetime=1,logs=True, crt_timeout=120,user_agent=None,cookie=None,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,proxy=None,subdomains_only=False):
         domain=extract_root_domain(domain)
-        subs=SUBDOMAINS.get_subdomains_from_wayback(domain,dns_server=dns_server,resolve_timeout=resolve_timeout,resolve_lifetime=resolve_lifetime,logs=logs,cookie=cookie,wayback_timeout=wayback_timeout,user_agent=user_agent,subdomain_check_timeout=subdomain_check_timeout,max_urls=max_wayback_urls,subdomains_only=subdomains_only,proxy=proxy)
-        l=SUBDOMAINS.subdomains_crt(domain,dns_server=dns_server,resolve_timeout=resolve_timeout,resolve_lifetime=resolve_lifetime,logs=logs,subdomain_check_timeout=subdomain_check_timeout, crt_timeout=crt_timeout,cookie=cookie, user_agent=user_agent, proxy=proxy,subdomains_only=subdomains_only)
+        subs=Subdomain_Info.get_subdomains_from_wayback(domain,dns_server=dns_server,resolve_timeout=resolve_timeout,resolve_lifetime=resolve_lifetime,logs=logs,cookie=cookie,wayback_timeout=wayback_timeout,user_agent=user_agent,subdomain_check_timeout=subdomain_check_timeout,max_urls=max_wayback_urls,subdomains_only=subdomains_only,proxy=proxy)
+        l=Subdomain_Info.subdomains_crt(domain,dns_server=dns_server,resolve_timeout=resolve_timeout,resolve_lifetime=resolve_lifetime,logs=logs,subdomain_check_timeout=subdomain_check_timeout, crt_timeout=crt_timeout,cookie=cookie, user_agent=user_agent, proxy=proxy,subdomains_only=subdomains_only)
         if type(subs)==list:
             for x in l:
                 if x not in subs:

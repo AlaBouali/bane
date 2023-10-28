@@ -1,7 +1,7 @@
 from bane.scanners.cms.utils import *
 
 
-class WORDPRESS:
+class WordPress_Info:
 
     @staticmethod
     def get_xmlrpc_methods(
@@ -517,10 +517,10 @@ class WORDPRESS:
             if version=='':
                 version=software_version
             if '-' not in version:
-                if eval('{}{}{}'.format(WORDPRESS.version_string_to_list(software_version),comparison,WORDPRESS.version_string_to_list(version)))==True:
+                if eval('{}{}{}'.format(WordPress_Info.version_string_to_list(software_version),comparison,WordPress_Info.version_string_to_list(version)))==True:
                     results.append(cve)
             else:
-                if eval('{}>{} and {}<{}'.format(WORDPRESS.version_string_to_list(software_version),WORDPRESS.version_string_to_list(version.split('-')[0].strip()),WORDPRESS.version_string_to_list(software_version),WORDPRESS.version_string_to_list(version.split('-')[1].strip())))==True:
+                if eval('{}>{} and {}<{}'.format(WordPress_Info.version_string_to_list(software_version),WordPress_Info.version_string_to_list(version.split('-')[0].strip()),WordPress_Info.version_string_to_list(software_version),WordPress_Info.version_string_to_list(version.split('-')[1].strip())))==True:
                     results.append(cve)
         return results
 
@@ -547,7 +547,7 @@ class WORDPRESS:
         tries=0
         soup = BeautifulSoup('', 'html.parser')
         try:
-                r=requests.Session().get('https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=wordpress {} {}'.format(search_type,s['name']),headers=hed,timeout=timeout,proxies=proxy,verify=False).text
+                r=requests.Session().get('https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=WordPress_Info {} {}'.format(search_type,s['name']),headers=hed,timeout=timeout,proxies=proxy,verify=False).text
                 soup = BeautifulSoup(r, 'html.parser')
         except Exception as ex:
                 pass
@@ -600,17 +600,17 @@ class WORDPRESS:
         plugins = []
         try:
             #print(response.split('<meta name="generator" content="')[1].split('"')[0])
-            wp_version=response.text.lower().split('<meta name="generator" content="wordpress')[1].split('"')[0].strip()
+            wp_version=response.text.lower().split('<meta name="generator" content="WordPress_Info')[1].split('"')[0].strip()
         except Exception as ex:
             #raise(ex)
             wp_version=''
         # Extract themes
         if logs==True:
-            print("WordPress site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tWordPress version: {}\n".format(u,domain,ip,server,server_os,backend,wp_version))
+            print("WordPress_Info site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tWordPress_Info version: {}\n".format(u,domain,ip,server,server_os,backend,wp_version))
         clickj=page_clickjacking(u,request_headers=response.headers)
         if logs==True:
             print("[i] Looking for subdomains...")
-        subs=SUBDOMAINS.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=setup_proxy(proxies),subdomains_only=subdomains_only)
+        subs=Subdomain_Info.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=setup_proxy(proxies),subdomains_only=subdomains_only)
         if logs==True:
             print("[i] Cheking if we can sniff some cookies over some links...")
             print()
@@ -649,7 +649,7 @@ class WORDPRESS:
         json_path=u+'/wp-json/wp/v2/users'
         if logs==True:
             print('[i] Fetching users from: {}'.format(json_path))
-        json_users=WORDPRESS.json_users(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
+        json_users=WordPress_Info.json_users(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
         if logs==True:
             for x in json_users:
                 print('\t[+] id: {} | name: {} | slug: {}'.format(x['id'],x['name'],x['slug']))
@@ -659,7 +659,7 @@ class WORDPRESS:
         can_enumerate_users=True
         if logs==True:
             print('[i] Trying enumerating the authors...')
-        enumerated_users= WORDPRESS.users_enumeration(u,logs=logs,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),start=user_enum_start,end=user_enum_end,headers=headers)
+        enumerated_users= WordPress_Info.users_enumeration(u,logs=logs,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),start=user_enum_start,end=user_enum_end,headers=headers)
         if enumerated_users==[]:
             can_enumerate_users=False
         else:
@@ -670,7 +670,7 @@ class WORDPRESS:
         if logs==True:
             print()
             print('[i] Checking if XMLRPC is enabled from: {}'.format(u+'/xmlrpc.php'))
-        xmlrpcs=WORDPRESS.xmlrpc_methods(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
+        xmlrpcs=WordPress_Info.xmlrpc_methods(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
         can_b_u=("wp.getUsersBlogs" in xmlrpcs) and ("system.multicall" in xmlrpcs)
         can_pb="pingback.ping" in xmlrpcs
         if logs==True:
@@ -687,9 +687,9 @@ class WORDPRESS:
         if wp_version!='':
             if logs==True:
                 print('[i] looking for exploits for version: {}\n'.format(wp_version))
-            wpvulns=vulners_search('wordpress',version=wp_version,proxy=setup_proxy(proxies),api_key=api_key)
+            wpvulns=vulners_search('WordPress_Info',version=wp_version,proxy=setup_proxy(proxies),api_key=api_key)
             for x in wpvulns:
-                if 'wordpress' in x['title'].lower() or 'wordpress' in x['description'].lower():
+                if 'WordPress_Info' in x['title'].lower() or 'WordPress_Info' in x['description'].lower():
                     wp_vulns.append(x)
             for x in wp_vulns:
                 for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
@@ -761,7 +761,7 @@ class WORDPRESS:
         for x in themes:
             if logs==True:
                 print('[i] Theme: {} | Version: {}\n'.format(x['name'],x['version']))
-            x['exploits']=WORDPRESS.fetch_exploits(x,search_type='theme',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
+            x['exploits']=WordPress_Info.fetch_exploits(x,search_type='theme',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
             if logs==True:
                 for i in x['exploits']:
                     print("\tTitle: {}\n\tLink: {}".format(i['title'],i['exploit_url']))
@@ -773,9 +773,9 @@ class WORDPRESS:
         for x in plugins:
             if logs==True:
                 print('[i] Plugin: {} | Version: {}\n'.format(x['name'],x['version']))
-            x['exploits']=WORDPRESS.fetch_exploits(x,search_type='plugin',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
+            x['exploits']=WordPress_Info.fetch_exploits(x,search_type='plugin',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
             if logs==True:
                 for i in x['exploits']:
                     print("\tTitle: {}\n\tLink: {}".format(i['title'],i['exploit_url']))
                     print()
-        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'wordpress_version':wp_version,'sniffable_links':media_non_ssl,'clickjackable':clickj,'themes':themes,'plugins':plugins,'users_json_exposed':users_json_exposed,'exopsed_json_users':{'users':json_users,'path':json_path},'can_enumerate_users':can_enumerate_users,'enumerated_users':enumerated_users,'enabled_xmlrpc_methods':xmlrpcs,"xmlrpc_bruteforce_users":can_b_u,"pingback_enabled":can_pb,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}
+        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'WordPress_Info_version':wp_version,'sniffable_links':media_non_ssl,'clickjackable':clickj,'themes':themes,'plugins':plugins,'users_json_exposed':users_json_exposed,'exopsed_json_users':{'users':json_users,'path':json_path},'can_enumerate_users':can_enumerate_users,'enumerated_users':enumerated_users,'enabled_xmlrpc_methods':xmlrpcs,"xmlrpc_bruteforce_users":can_b_u,"pingback_enabled":can_pb,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}

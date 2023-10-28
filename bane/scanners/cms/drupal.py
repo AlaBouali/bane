@@ -35,7 +35,7 @@ class DRUPAL:
         clickj=page_clickjacking(u,request_headers=response.headers)
         if logs==True:
             print("[i] Looking for subdomains...")
-        subs=SUBDOMAINS.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=setup_proxy(proxies),subdomains_only=subdomains_only)
+        subs=Subdomain_Info.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=setup_proxy(proxies),subdomains_only=subdomains_only)
         if logs==True:
             print("[i] Cheking if we can sniff some cookies over some links...")
             print()

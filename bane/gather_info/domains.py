@@ -1,6 +1,6 @@
 from bane.gather_info.utils import *
 
-class DOMAINS:
+class Domain_Info:
 
     @staticmethod
     def whois(u):
