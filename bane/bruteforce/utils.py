@@ -12,7 +12,7 @@ if os.path.isdir("/data/data/com.termux/") == True:
     termux = True
 import pymysql
 from ..utils.pager import *
-from ..scanners.cms.wp import WORDPRESS,setup_proxy
+from ..scanners.cms.wp import WordPress_Info,setup_proxy
 from ..cryptographers.hasher import *
 from ..utils.pager import *
 from bane.utils import get_requests_proxies_from_parameters,get_socket_proxies_from_parameters,read_file
