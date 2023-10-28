@@ -172,8 +172,8 @@ class http_puncher(DDoS_Class):
                                 )
                                 sys.stdout.flush()
                 except Exception as ex:
-                    pass#raise(ex)
+                    raise(ex)
                 time.sleep(0.1)
             self.kill()
         except Exception as e:
-            pass#raise(e)
+            raise(e)
