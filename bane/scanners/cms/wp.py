@@ -1,12 +1,12 @@
 from bane.scanners.cms.utils import *
 
 
-class WordPress_Info:
+class WordPress_Scanner:
 
     @staticmethod
     def get_xmlrpc_methods(
         u, user_agent=None, cookie=None, path="/xmlrpc.php",proxy=None, timeout=10,headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if u[len(u) - 1] == "/":
             u = u[0 : len(u) - 1]
         if user_agent:
@@ -42,7 +42,7 @@ class WordPress_Info:
     @staticmethod
     def xmlrpc_bruteforce(
         u, user_agent=None,proxy=None, cookie=None, path="/xmlrpc.php", timeout=10, headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if u[len(u) - 1] == "/":
             u = u[0 : len(u) - 1]
         if user_agent:
@@ -80,7 +80,7 @@ class WordPress_Info:
     @staticmethod
     def xmlrpc_mass_bruteforce(
         u, user_agent=None, cookie=None, path="/xmlrpc.php", timeout=10, proxy=None, headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if u[len(u) - 1] == "/":
             u = u[0 : len(u) - 1]
         if user_agent:
@@ -130,7 +130,7 @@ class WordPress_Info:
         socks5_proxies=None,
         proxy=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
                 proxy=setup_proxy(proxies)
         if u[len(u) - 1] == "/":
@@ -180,7 +180,7 @@ class WordPress_Info:
         socks5_proxies=None,
         proxy=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
                 proxy=setup_proxy(proxies)
         url = u.split("://")[0] + "://" + urlparse(u).netloc
@@ -235,7 +235,7 @@ class WordPress_Info:
         socks5_proxies=None,
         proxy=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
                 proxy=setup_proxy(proxies)
         if u[len(u) - 1] == "/":
@@ -283,7 +283,7 @@ class WordPress_Info:
         socks5_proxies=None,
         proxy=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
                 proxy=setup_proxy(proxies)
         if u[len(u) - 1] == "/":
@@ -332,7 +332,7 @@ class WordPress_Info:
     @staticmethod
     def json_users(
         u, path="/wp-json/wp/v2/users", timeout=10, user_agent=None, cookie=None, proxy=None, headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         
         if proxy==None:
                 proxy=setup_proxy(proxies)
@@ -376,7 +376,7 @@ class WordPress_Info:
         socks5_proxies=None,
         proxy=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         
         if proxy==None:
                 proxy=setup_proxy(proxies)
@@ -415,7 +415,7 @@ class WordPress_Info:
         socks5_proxies=None,
         proxy=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
                 proxy=setup_proxy(proxies)    
         if user_agent:
@@ -461,7 +461,7 @@ class WordPress_Info:
 
     @staticmethod
     def get_version(u, timeout=15, user_agent=None, cookie=None, proxy=None,headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
                 proxy=setup_proxy(proxies)
         if user_agent:
@@ -517,10 +517,10 @@ class WordPress_Info:
             if version=='':
                 version=software_version
             if '-' not in version:
-                if eval('{}{}{}'.format(WordPress_Info.version_string_to_list(software_version),comparison,WordPress_Info.version_string_to_list(version)))==True:
+                if eval('{}{}{}'.format(WordPress_Scanner.version_string_to_list(software_version),comparison,WordPress_Scanner.version_string_to_list(version)))==True:
                     results.append(cve)
             else:
-                if eval('{}>{} and {}<{}'.format(WordPress_Info.version_string_to_list(software_version),WordPress_Info.version_string_to_list(version.split('-')[0].strip()),WordPress_Info.version_string_to_list(software_version),WordPress_Info.version_string_to_list(version.split('-')[1].strip())))==True:
+                if eval('{}>{} and {}<{}'.format(WordPress_Scanner.version_string_to_list(software_version),WordPress_Scanner.version_string_to_list(version.split('-')[0].strip()),WordPress_Scanner.version_string_to_list(software_version),WordPress_Scanner.version_string_to_list(version.split('-')[1].strip())))==True:
                     results.append(cve)
         return results
 
@@ -529,7 +529,7 @@ class WordPress_Info:
 
     @staticmethod
     def fetch_exploits(s,search_type='',max_tries=3,proxy=None,user_agent=None,timeout=40,cookie=None,sleep_time_min=10,sleep_time_max=20,when_blocked_sleep=30,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
                 proxy=setup_proxy(proxies)
         if s['version'].strip()=='':
@@ -568,10 +568,10 @@ class WordPress_Info:
 
 
     @staticmethod
-    def get_infos(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=20,proxy=None,user_enum_start=1,user_enum_end=20,wpscan_cookie=None,sleep_time_min=10,sleep_time_max=20,when_blocked_sleep=30,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+    def scan(u,max_wpscan_tries=3,cookie=None,user_agent=None,timeout=20,proxy=None,user_enum_start=1,user_enum_end=20,wpscan_cookie=None,sleep_time_min=10,sleep_time_max=20,when_blocked_sleep=30,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         domain=u.split('://')[1].split('/')[0].split(':')[0]
-        root_domain=extract_root_domain(domain)
+        root_domain=Subdomain_Info.extract_root_domain(domain)
         ip=socket.gethostbyname(domain.split(':')[0])
         if u[len(u) - 1] == "/":
             u = u[0 : len(u) - 1]
@@ -607,14 +607,14 @@ class WordPress_Info:
         # Extract themes
         if logs==True:
             print("WordPress_Info site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tWordPress_Info version: {}\n".format(u,domain,ip,server,server_os,backend,wp_version))
-        clickj=page_clickjacking(u,request_headers=response.headers)
+        clickj=ClickJacking_Scanner.scan(u,request_headers=response.headers)
         if logs==True:
             print("[i] Looking for subdomains...")
         subs=Subdomain_Info.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=setup_proxy(proxies),subdomains_only=subdomains_only)
         if logs==True:
             print("[i] Cheking if we can sniff some cookies over some links...")
             print()
-        media_non_ssl=sniffable_links(u,content=response.text,logs=logs,request_headers=response.headers)
+        media_non_ssl=Mixed_Content_Scanner.scan(u,content=response.text,logs=logs,request_headers=response.headers)
         if logs==True:
             print()
         theme_links = soup.find_all('link', rel='stylesheet')
@@ -649,7 +649,7 @@ class WordPress_Info:
         json_path=u+'/wp-json/wp/v2/users'
         if logs==True:
             print('[i] Fetching users from: {}'.format(json_path))
-        json_users=WordPress_Info.json_users(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
+        json_users=WordPress_Scanner.json_users(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
         if logs==True:
             for x in json_users:
                 print('\t[+] id: {} | name: {} | slug: {}'.format(x['id'],x['name'],x['slug']))
@@ -659,7 +659,7 @@ class WordPress_Info:
         can_enumerate_users=True
         if logs==True:
             print('[i] Trying enumerating the authors...')
-        enumerated_users= WordPress_Info.users_enumeration(u,logs=logs,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),start=user_enum_start,end=user_enum_end,headers=headers)
+        enumerated_users= WordPress_Scanner.users_enumeration(u,logs=logs,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),start=user_enum_start,end=user_enum_end,headers=headers)
         if enumerated_users==[]:
             can_enumerate_users=False
         else:
@@ -670,7 +670,7 @@ class WordPress_Info:
         if logs==True:
             print()
             print('[i] Checking if XMLRPC is enabled from: {}'.format(u+'/xmlrpc.php'))
-        xmlrpcs=WordPress_Info.xmlrpc_methods(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
+        xmlrpcs=WordPress_Scanner.xmlrpc_methods(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
         can_b_u=("wp.getUsersBlogs" in xmlrpcs) and ("system.multicall" in xmlrpcs)
         can_pb="pingback.ping" in xmlrpcs
         if logs==True:
@@ -761,7 +761,7 @@ class WordPress_Info:
         for x in themes:
             if logs==True:
                 print('[i] Theme: {} | Version: {}\n'.format(x['name'],x['version']))
-            x['exploits']=WordPress_Info.fetch_exploits(x,search_type='theme',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
+            x['exploits']=WordPress_Scanner.fetch_exploits(x,search_type='theme',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
             if logs==True:
                 for i in x['exploits']:
                     print("\tTitle: {}\n\tLink: {}".format(i['title'],i['exploit_url']))
@@ -773,7 +773,7 @@ class WordPress_Info:
         for x in plugins:
             if logs==True:
                 print('[i] Plugin: {} | Version: {}\n'.format(x['name'],x['version']))
-            x['exploits']=WordPress_Info.fetch_exploits(x,search_type='plugin',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
+            x['exploits']=WordPress_Scanner.fetch_exploits(x,search_type='plugin',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
             if logs==True:
                 for i in x['exploits']:
                     print("\tTitle: {}\n\tLink: {}".format(i['title'],i['exploit_url']))

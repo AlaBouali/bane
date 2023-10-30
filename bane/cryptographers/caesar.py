@@ -21,20 +21,6 @@ class CAESAR:
         return c
 
 
-    """
-    function to do simple caesar decryption lol.
-    
-    it takes 2 arguments:
-
-    the first one is the string to decrypt and the second is the second is the decryption key (integer between: 1 and 26)
-
-    example:
-
-    >>> bane.dcaesar('fqf',5)
-    'ala'
-    """
-
-
     @staticmethod
     def decode(w, k):
         if (type(k) is not int) or (k not in range(1, 27)):

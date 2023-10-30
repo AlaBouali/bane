@@ -187,62 +187,63 @@ class Proxies_Collector:
 
 
 
-def get_valid_proxies(geonode=True,scrape=True,space=True,barcode=True,listdownload=True,openlist=True,update_default_list=True,protocols=['socks4','socks5','http'],check_proxies=True,timeout=15,check_timeout=5,logs=True,verify_request=False,is_socket=True,threads=300,proxy=None):
-    l=[]
-    if logs==True:
-        print('[i] Fetching proxies...')
-    if geonode==True:
-        a=Proxies_Collector.proxygeonode(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
-        for x in a:
-            if x not in l:
-                l.append(x)
+    @staticmethod
+    def get_valid_proxies(geonode=True,scrape=True,space=True,barcode=True,listdownload=True,openlist=True,update_default_list=True,protocols=['socks4','socks5','http'],check_proxies=True,timeout=15,check_timeout=5,logs=True,verify_request=False,is_socket=True,threads=300,proxy=None):
+        l=[]
         if logs==True:
-            print('[*] Count: {}'.format(len(l)))
-    if scrape==True:
-        a=Proxies_Collector.proxyscrape(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
-        for x in a:
-            if x not in l:
-                l.append(x)
+            print('[i] Fetching proxies...')
+        if geonode==True:
+            a=Proxies_Collector.proxygeonode(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+            for x in a:
+                if x not in l:
+                    l.append(x)
+            if logs==True:
+                print('[*] Count: {}'.format(len(l)))
+        if scrape==True:
+            a=Proxies_Collector.proxyscrape(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+            for x in a:
+                if x not in l:
+                    l.append(x)
+            if logs==True:
+                print('[*] Count: {}'.format(len(l)))
+        if space==True:
+            a=Proxies_Collector.proxyspace(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+            for x in a:
+                if x not in l:
+                    l.append(x)
+            if logs==True:
+                print('[*] Count: {}'.format(len(l)))
+        if barcode==True:
+            a=Proxies_Collector.proxybarcode(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+            for x in a:
+                if x not in l:
+                    l.append(x)
+            if logs==True:
+                print('[*] Count: {}'.format(len(l)))
+        if listdownload==True:
+            a=Proxies_Collector.proxylistdownload(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+            for x in a:
+                if x not in l:
+                    l.append(x)
+            if logs==True:
+                print('[*] Count: {}'.format(len(l)))
+        if openlist==True:
+            a=Proxies_Collector.proxyopenlist(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
+            for x in a:
+                if x not in l:
+                    l.append(x)
+            if logs==True:
+                print('[*] Count: {}'.format(len(l)))
+        pr=[]
+        for x in l:
+            if x not in pr:
+                pr.append(x)
         if logs==True:
-            print('[*] Count: {}'.format(len(l)))
-    if space==True:
-        a=Proxies_Collector.proxyspace(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
-        for x in a:
-            if x not in l:
-                l.append(x)
+                print('[+] Total unique proxies: {}'.format(len(pr)))
+                print('[i] Checking if they are up...')
+        l=ProxyChecker(pr,threads=threads,timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket).result
+        if update_default_list==True:
+            bane.default_proxies_list=l
         if logs==True:
-            print('[*] Count: {}'.format(len(l)))
-    if barcode==True:
-        a=Proxies_Collector.proxybarcode(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
-        for x in a:
-            if x not in l:
-                l.append(x)
-        if logs==True:
-            print('[*] Count: {}'.format(len(l)))
-    if listdownload==True:
-        a=Proxies_Collector.proxylistdownload(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
-        for x in a:
-            if x not in l:
-                l.append(x)
-        if logs==True:
-            print('[*] Count: {}'.format(len(l)))
-    if openlist==True:
-        a=Proxies_Collector.proxyopenlist(check_proxies=False,protocols=protocols,timeout=timeout,check_timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket,threads=threads,proxy=proxy)
-        for x in a:
-            if x not in l:
-                l.append(x)
-        if logs==True:
-            print('[*] Count: {}'.format(len(l)))
-    pr=[]
-    for x in l:
-        if x not in pr:
-            pr.append(x)
-    if logs==True:
-            print('[+] Total unique proxies: {}'.format(len(pr)))
-            print('[i] Checking if they are up...')
-    l=ProxyChecker(pr,threads=threads,timeout=check_timeout,logs=logs,verify_request=verify_request,is_socket=is_socket).result
-    if update_default_list==True:
-        bane.default_proxies_list=l
-    if logs==True:
-            print('[*] Total working proxies: {}'.format(len(l)))
-    return l
+                print('[*] Total working proxies: {}'.format(len(l)))
+        return l

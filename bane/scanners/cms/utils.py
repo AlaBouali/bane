@@ -1,6 +1,6 @@
 import requests, random, json, sys,socket
 import urllib3,time
-from bane.scanners.vulnerabilities.vulns import vulners_search,sniffable_links,page_clickjacking,setup_proxy,scan_backend_technology
+from bane.scanners.vulnerabilities.vulns import vulners_search,Mixed_Content_Scanner,ClickJacking_Scanner,setup_proxy
 from bane.gather_info.info_s import *
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -12,5 +12,5 @@ else:
     from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup
-from bane.utils.proxer import get_requests_proxies_from_parameters
+from bane.utils.proxer import *
 from bane.gather_info.ips import *

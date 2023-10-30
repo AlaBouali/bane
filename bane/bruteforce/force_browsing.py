@@ -47,7 +47,7 @@ class force_browsing:
         socks4_proxies=None,
         socks5_proxies=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         self.stop = False
         self.finish = False
         self.result = {}

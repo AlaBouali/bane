@@ -6,18 +6,6 @@ class admin_panel_finder:
     def done(self):
         return self.finish
 
-    """
-   this function use a list of possible admin panel links with different extensions: php, asp, aspx, js, /, cfm, cgi, brf and html.
-   
-   ext: (set by default to: 'php') to define the link's extention.
-
-   usage:
-
-  >>>import bane
-  >>>bane.admin_panel_finder('http://www.example.com',ext='php',timeout=7)
-
-  >>>bane.admin_panel_finder('http://www.example.com',ext='aspx',timeout=5)
- """
 
     def __init__(
         self,
@@ -49,7 +37,7 @@ class admin_panel_finder:
         - socks4_proxies (list): List of SOCKS4 proxies to use.
         - socks5_proxies (list): List of SOCKS5 proxies to use.
         """
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         self.logs = logs
         self.stop = False
         self.finish = False

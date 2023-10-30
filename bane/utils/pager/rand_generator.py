@@ -3,6 +3,41 @@ from .utils import *
 class RANDOM_GENERATOR:
 
     @staticmethod
+    def get_random_ip():
+        """
+        this function was inspired by the scanning file in mirai's source code to returns a safe IP to bruteforce."""
+        while True:
+            ip=ip = ".".join(str(random.randint(0, 255)) for _ in range(4))
+            ip_obj = ipaddress.IPv4Address(ip)
+
+            # Check if the generated IP address is not in any of the specified ranges
+            is_valid = True
+            for network in Common_Variables.private_ip_ranges:
+                if ip_obj in network:
+                    is_valid = False
+                    break
+
+            if is_valid:
+                return str(ip)
+
+    @staticmethod
+    def get_safe_random_ip():
+        while True:
+            ip=ip = ".".join(str(random.randint(0, 255)) for _ in range(4))
+            ip_obj = ipaddress.IPv4Address(ip)
+
+            # Check if the generated IP address is not in any of the specified ranges
+            is_valid = True
+            for network in Common_Variables.excluded_ip_ranges:
+                if ip_obj in network:
+                    is_valid = False
+                    break
+
+            if is_valid:
+                return str(ip)
+
+
+    @staticmethod
     def generate_random_url():
         protocols = ["http", "https"]
         protocol = random.choice(protocols)

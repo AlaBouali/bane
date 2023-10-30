@@ -24,7 +24,7 @@ class web_login_bruteforce:
             cook = r.headers["Set-cookie"]
         except:
             pass
-        cookies = set_correct_cookies(cook, cookie=cookie)
+        cookies = Cookies_Manager.set_correct_cookies(cook, cookie=cookie)
         form = LOGIN_FORM_FILLER.set_login_form(url, r.text, username, password)
         h = {"User-Agent": user_agent}
         if cookies:
@@ -64,8 +64,8 @@ class web_login_bruteforce:
         socks4_proxies=None,
         socks5_proxies=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
-        word_list=load_word_list(word_list)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        word_list=Userful_Utilities.load_word_list(word_list)
         self.stop = False
         self.finish = False
         self.logs = logs

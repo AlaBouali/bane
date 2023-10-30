@@ -1,6 +1,6 @@
 from .utils import *
 
-class BurpSuite:
+class BurpSuite_Getter:
 
     @staticmethod
     def get_proxy(host=Common_Variables.burpsuit_proxy_host,port=Common_Variables.burpsuit_proxy_port):

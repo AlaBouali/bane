@@ -28,6 +28,7 @@ class http_puncher(DDoS_Class):
         self.send_files=send_files
         self.stop = False
         self.counter = 0
+        self.fails=0
         self.start = time.time()
         self.target = u
         self.duration = duration
@@ -44,7 +45,7 @@ class http_puncher(DDoS_Class):
         if urls==[] or urls==None:
             self.urls=[self.target]
         elif type(urls)==str:
-            self.urls=read_file(urls)
+            self.urls=Files_Interface.read_file(urls)
         for x in range(threads):
             try:
                 t = threading.Thread(target=self.attack)
@@ -172,7 +173,8 @@ class http_puncher(DDoS_Class):
                                 )
                                 sys.stdout.flush()
                 except Exception as ex:
-                    pass#raise(ex)
+                    #pass#raise(ex)
+                    self.fails+=1
                 time.sleep(0.1)
             self.kill()
         except Exception as e:

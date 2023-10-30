@@ -20,7 +20,7 @@ class decrypt:
         logs=False,
     ):
         self.logs = logs
-        word_list=load_word_list(word_list)
+        word_list=Userful_Utilities.load_word_list(word_list)
         self.stop = False
         self.finish = False
         self.result = {}

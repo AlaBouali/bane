@@ -1,5 +1,6 @@
 from .utils import *
 from .proxies_getter import *
+from ..socket_connection import *
 
 
 class ProxyChecker:
@@ -53,7 +54,7 @@ class ProxyChecker:
     def proxy_check_socket(self,verify_request=False,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,proxy_type=None, timeout=5,**kwargs):
             #proxy=get_requests_proxy(proxy_host=proxy_host,proxy_port=proxy_port,proxy_username=proxy_username,proxy_password=proxy_password,proxy_type=proxy_type)
             try:
-                s=wrap_socket_with_ssl(Proxies_Getter.get_proxy_socket("www.google.com",443,timeout=timeout,proxy_host=proxy_host,proxy_port=proxy_port,proxy_username=proxy_username,proxy_password=proxy_password,proxy_type=proxy_type),"www.google.com")
+                s=Socket_Connection.wrap_socket_with_ssl(Proxies_Getter.get_proxy_socket("www.google.com",443,timeout=timeout,proxy_host=proxy_host,proxy_port=proxy_port,proxy_username=proxy_username,proxy_password=proxy_password,proxy_type=proxy_type),"www.google.com")
                 if s!=None:
                     #print(str(s))
                     if verify_request==False:

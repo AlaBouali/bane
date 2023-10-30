@@ -5,7 +5,7 @@ __version__='5.0.0'
 
 __author__="Ala Bouali"
 
-__author_nicknames__=["Merlin", "Chaotic Mind", "Ala", "Mr. Ego"]
+__author_nicknames__=["Merlin", "Chaotic Mind", "Ala", "Mr. Ego","Smirky"]
 
 __author_email__="ala.bouali.1997@gmail.com"
 

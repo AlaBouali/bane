@@ -2,7 +2,7 @@ from .utils import *
 from .burpsuit import *
 from .proxies_parser import *
 
-class Proxies_Getter:
+class Proxies_Getter(BurpSuite_Getter):
 
     @staticmethod
     def get_socks5_proxy_socket(host,port,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None,no_delay=False,timeout=5,**kwargs):

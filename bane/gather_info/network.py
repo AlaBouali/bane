@@ -46,9 +46,33 @@ class Network_Info:
             pass
 
     @staticmethod
-    def tcp_scan(ip, port=1, timeout=2, retry=1, check_open=False):
-        s=socket.socket()
+    def tcp_scan(ip, port=1, timeout=2, proxy_type=None,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None):
+        s = socks.socksocket()
         s.settimeout(timeout)
+        if proxy_type==4 or proxy_type=='socks4' or proxy_type=='s4':
+                s.setproxy( 
+                            proxy_type=socks.SOCKS4,
+                            addr=proxy_host,
+                            port=proxy_port,
+                            username=proxy_username,
+                            password=proxy_password,
+                    )
+        elif proxy_type==5 or proxy_type=='socks5' or proxy_type=='s5':
+                s.setproxy( 
+                            proxy_type=socks.SOCKS5,
+                            addr=proxy_host,
+                            port=proxy_port,
+                            username=proxy_username,
+                            password=proxy_password,
+                    )
+        elif proxy_type==3 or proxy_type=='http' or proxy_type=='h':
+                s.setproxy( 
+                            proxy_type=socks.HTTP,
+                            addr=proxy_host,
+                            port=proxy_port,
+                            username=proxy_username,
+                            password=proxy_password,
+                    )
         try:
             connection=s.connect_ex((ip,port))
             s.close()
@@ -71,48 +95,12 @@ class Network_Info:
                 '''if received[TCP].flags == "RA" or received[TCP].flags == "SA":
                 return True'''
         return False"""
+    
+    @staticmethod
+    def get_banner(u, p=23, timeout=3, payload=None,**kwargs):
+        try:
+            return xtelnet.get_banner(u, p=p, timeout=timeout, payload=payload,**kwargs)
+        except:
+            return None
 
-
-
-
-class port_scan:
-        __slots__ = ["result"]
-
-        def scan(self,target,port,check_open,timeout,retry):
-            a = Network_Info.tcp_scan(
-                target,
-                port=int(port),
-                check_open=check_open,
-                timeout=timeout,
-                retry=retry,
-            )
-            if a == True:
-                self.result.update({str(port): "open"})
-            else:
-                self.result.update({str(port): "closed"})
-
-        def __init__(
-            self,
-            u,
-            ports=[21, 22, 23, 25, 43, 53, 80, 443, 2082, 3306],
-            threads_daemon=True,
-            timeout=3,
-            retry=0,
-            check_open=True,
-        ):
-                self.result={}
-            #try:
-                for x in ports:
-                    t = threading.Thread(target=self.scan,args=(u,x,check_open,timeout,retry))#,kwargs={"port": self.por[x]})
-                    t.daemon = threads_daemon
-                    t.start()
-                    #thr.append(t)
-                    time.sleep(0.001)
-                while len(self.result) != len(ports):
-                    time.sleep(0.1)
-            #except:
-            #   pass
-                """for x in self.__dict__:
-                if x != "result":
-                    self.__dict__[x] = None"""
 

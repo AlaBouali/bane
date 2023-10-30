@@ -16,33 +16,12 @@ try:
         from kamene.all import IP,TCP,sr
 except:
     pass
+
+from bane.utils.extrafun import *
 if os.path.isdir("/data/data/com.termux/") == False:
     import dns.resolver
 
 
-def extract_root_domain(subdomain):
-    extracted = tldextract.extract(subdomain)
-    if extracted.suffix.count('.') > 1:
-        root_domain = "{}.{}".format(extracted.domain,extracted.suffix)
-    else:
-        root_domain = extracted.registered_domain
-    return root_domain
-
-
-
-
-def remove_html_tags(text):
-    """Remove html tags from a string"""
-    clean = re.compile("<.*?>")
-    return re.sub(clean, "", text)
-
-
-
-def get_banner(u, p=23, timeout=3, payload=None):
-    try:
-        return xtelnet.get_banner(u, p=p, timeout=timeout, payload=payload)
-    except:
-        return None
 
 
 

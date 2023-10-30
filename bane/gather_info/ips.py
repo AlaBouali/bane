@@ -24,7 +24,7 @@ class IP_info:
 
 
     @staticmethod
-    def geoip(u, timeout=15, proxy=None):
+    def geo_ip(u, timeout=15, proxy=None):
         """
         this function is for getting: geoip informations
         """
@@ -42,12 +42,11 @@ class IP_info:
 
 
     @staticmethod
-    def reverse_ip_lookup(u, timeout=10, logs=True, returning=False, proxy=None):
+    def reverse_ip_lookup(u, timeout=10, proxy=None):
         """
         this function is for: reverse ip look up
         if you've used it 100 times in 24 hours, your IP will be banned by "api.hackertarget.com" so i highly recommand you to use the "proxy" option by adding a http(s) proxy:
 
-        bane.reverse_ip_lookup('XXX.XXX.XXX.XXX',proxy='IP:PORT')
 
         """
         try:
@@ -107,3 +106,12 @@ class IP_info:
             return d
         except:
             return {}
+
+
+    @staticmethod
+    def get_IP_info(ip,timeout=15,proxy=None):
+        d={}
+        d.update({'geo_ip_location':IP_info.geo_ip(ip,timeout=timeout,proxy=proxy)})
+        d.update({'reverse_ip_lookup':IP_info.reverse_ip_lookup(ip,timeout=timeout,proxy=proxy)})
+        d.update({'shodan_report':IP_info.check_ip_via_shodan(ip,timeout=timeout,proxy=proxy)})
+        return d

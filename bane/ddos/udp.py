@@ -26,6 +26,7 @@ class udp_flood(DDoS_Class):
         self.logs = logs
         self.stop = False
         self.counter = 0
+        self.fails=0
         self.start = time.time()
         for x in range(threads):
             try:
@@ -71,6 +72,7 @@ class udp_flood(DDoS_Class):
                     if self.limiting == True:
                         time.sleep(self.interval)
                 except:
+                    self.fails+=1
                     try:
                         time.sleep(self.interval)
                     except:

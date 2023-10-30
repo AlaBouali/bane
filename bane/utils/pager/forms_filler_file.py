@@ -42,7 +42,7 @@ class FORMS_FILLER:
             cook = r.headers["Set-cookie"]
         except:
             pass
-        cookies = set_correct_cookies(cook, cookie=cookie)
+        cookies = Cookies_Manager.set_correct_cookies(cook, cookie=cookie)
         form = FORMS_FINDER.forms_parser_text(url, r.text)[form_index]
         h = {"User-Agent": user_agent}
         if cookies and len(cookies.strip()) > 0:

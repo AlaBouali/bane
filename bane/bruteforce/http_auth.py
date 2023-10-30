@@ -18,8 +18,8 @@ class http_auth_bruteforce:
         socks4_proxies=None,
         socks5_proxies=None
         ):
-        word_list=load_word_list(word_list)
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        word_list=Userful_Utilities.load_word_list(word_list)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         self.stop = False
         self.logs = logs
         self.finish = False

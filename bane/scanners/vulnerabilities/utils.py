@@ -1,7 +1,7 @@
 import subprocess, os, xtelnet, sys, cgi, re, json,platform
 from colorama import Fore, Back, Style
 from bane.utils.proxer import load_and_parse_proxies_all,get_requests_proxies_from_parameters
-from bane.utils.handle_files import read_file,write_file,delete_file,clear_file,create_file
+from bane.utils.handle_files import *
 
 if platform.system()=='Java':
         Fore.WHITE = ""
@@ -40,7 +40,7 @@ from bs4 import BeautifulSoup
 from bane.common.payloads import *
 from bane.utils.pager import *
 from bane.utils.js_fuck import js_fuck
-from bane.utils.handle_files import write_file, delete_file
+from bane.utils.handle_files import *
 from bane.gather_info.info_s import *
 from bane.gather_info.ips import *
 

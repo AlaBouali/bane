@@ -1,12 +1,12 @@
 from bane.scanners.cms.utils import *
 
-class DRUPAL:
+class Drupal_Scanner:
 
     @staticmethod
-    def get_infos(u,user_agent=None,cookie=None,timeout=10,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+    def scan(u,user_agent=None,cookie=None,timeout=10,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         domain=u.split('://')[1].split('/')[0].split(':')[0]
-        root_domain=extract_root_domain(domain)
+        root_domain=Subdomain_Info.extract_root_domain(domain)
         ip=socket.gethostbyname(domain.split(':')[0])
         if u[len(u) - 1] == "/":
             u = u[0 : len(u) - 1]
@@ -32,14 +32,14 @@ class DRUPAL:
         backend=response.headers.get('X-Powered-By','')
         if logs==True:
             print("Joomla site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tDrupal version: {}\n".format(u,domain,ip,server,server_os,backend,version))
-        clickj=page_clickjacking(u,request_headers=response.headers)
+        clickj=ClickJacking_Scanner.scan(u,request_headers=response.headers)
         if logs==True:
             print("[i] Looking for subdomains...")
         subs=Subdomain_Info.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=setup_proxy(proxies),subdomains_only=subdomains_only)
         if logs==True:
             print("[i] Cheking if we can sniff some cookies over some links...")
             print()
-        media_non_ssl=sniffable_links(u,content=response.text,logs=logs,request_headers=response.headers)
+        media_non_ssl=Mixed_Content_Scanner.scan(u,content=response.text,logs=logs,request_headers=response.headers)
         if logs==True:
             print()
         wp_vulns=[]

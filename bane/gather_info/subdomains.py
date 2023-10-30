@@ -3,9 +3,19 @@ from bane.gather_info.domains import *
 
 class Subdomain_Info:
 
+    @staticmethod 
+    def extract_root_domain(subdomain):
+        extracted = tldextract.extract(subdomain)
+        if extracted.suffix.count('.') > 1:
+            root_domain = "{}.{}".format(extracted.domain,extracted.suffix)
+        else:
+            root_domain = extracted.registered_domain
+        return root_domain
+
+
     @staticmethod
     def subdomains_crt(domain,dns_server='8.8.8.8',resolve_timeout=2,resolve_lifetime=1,logs=True,subdomain_check_timeout=10, crt_timeout=120,cookie=None, user_agent=None, proxy=None,subdomains_only=False):
-        domain=extract_root_domain(domain)
+        domain=Subdomain_Info.extract_root_domain(domain)
         if logs==True:
             print()
         if user_agent:
@@ -40,10 +50,10 @@ class Subdomain_Info:
             l= list(dict.fromkeys(l))
             result={}
             for x in l:
-                if extract_root_domain(x)==domain:
+                if Subdomain_Info.extract_root_domain(x)==domain:
                     try:
                         r=requests.Session().get('http://'+x,headers=hed,proxies=proxy,timeout=subdomain_check_timeout,verify=False)
-                        if extract_root_domain(r.url.split('://')[1].split('/')[0])==extract_root_domain(x):
+                        if Subdomain_Info.extract_root_domain(r.url.split('://')[1].split('/')[0])==Subdomain_Info.extract_root_domain(x):
                             result.update({x:r.url})
                             if logs==True:
                                 print('\t[+] {}'.format(x))
@@ -119,7 +129,7 @@ class Subdomain_Info:
 
     @staticmethod
     def get_subdomains_from_wayback(domain,dns_server='8.8.8.8',resolve_timeout=2,resolve_lifetime=1,logs=True,user_agent=None,cookie=None,wayback_timeout=50,subdomain_check_timeout=10,max_urls=10,subdomains_only=False,proxy=None):
-        domain=extract_root_domain(domain)
+        domain=Subdomain_Info.extract_root_domain(domain)
         if logs==True:
             print()
         if user_agent:
@@ -143,11 +153,11 @@ class Subdomain_Info:
                 match = re.match(r"https?://([^/]*)", original_url.split('?')[0])
                 if match:
                     subdomain = match.group(1)
-                    if subdomain not in invalid_subd and extract_root_domain(subdomain)==domain:
+                    if subdomain not in invalid_subd and Subdomain_Info.extract_root_domain(subdomain)==domain:
                         if subdomain not in urls:
                             try:
                                 r=requests.Session().get(original_url,headers=hed,timeout=subdomain_check_timeout,proxies=proxy,verify=False)
-                                if extract_root_domain(r.url.split('://')[1].split('/')[0])==extract_root_domain(subdomain):
+                                if Subdomain_Info.extract_root_domain(r.url.split('://')[1].split('/')[0])==Subdomain_Info.extract_root_domain(subdomain):
                                     urls[subdomain]=set()
                                     urls[subdomain].add(original_url)
                                     if logs==True:
@@ -181,7 +191,7 @@ class Subdomain_Info:
 
     @staticmethod
     def get_subdomains(domain,dns_server='8.8.8.8',resolve_timeout=2,resolve_lifetime=1,logs=True, crt_timeout=120,user_agent=None,cookie=None,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,proxy=None,subdomains_only=False):
-        domain=extract_root_domain(domain)
+        domain=Subdomain_Info.extract_root_domain(domain)
         subs=Subdomain_Info.get_subdomains_from_wayback(domain,dns_server=dns_server,resolve_timeout=resolve_timeout,resolve_lifetime=resolve_lifetime,logs=logs,cookie=cookie,wayback_timeout=wayback_timeout,user_agent=user_agent,subdomain_check_timeout=subdomain_check_timeout,max_urls=max_wayback_urls,subdomains_only=subdomains_only,proxy=proxy)
         l=Subdomain_Info.subdomains_crt(domain,dns_server=dns_server,resolve_timeout=resolve_timeout,resolve_lifetime=resolve_lifetime,logs=logs,subdomain_check_timeout=subdomain_check_timeout, crt_timeout=crt_timeout,cookie=cookie, user_agent=user_agent, proxy=proxy,subdomains_only=subdomains_only)
         if type(subs)==list:
