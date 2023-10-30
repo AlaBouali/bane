@@ -23,15 +23,15 @@ class File_Upload_Scanner:
         socks4_proxies=None,
         socks5_proxies=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         l = []
         result=[]
         x = FORMS_FINDER.forms_parser(
-            u, proxy=setup_proxy(proxies), timeout=timeout, user_agent=user_agent, cookie=cookie
+            u, proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, user_agent=user_agent, cookie=cookie
         )
         fos = FORM_FILE_UPLOAD.get_upload_form(x)
         for fo in fos:
-            d, f = setup_to_submit(
+            d, f = Vulnerability_Scanner_Utilities.setup_to_submit(
                 FORMS_FILLER.form_filler(
                     fo,
                     "",
@@ -71,7 +71,7 @@ class File_Upload_Scanner:
             h.update(headers)
             try:
                 r = requests.Session().post(
-                    fo["action"], data=d, files=f, proxies=setup_proxy(proxies), timeout=timeout, headers=h,verify=False,
+                    fo["action"], data=d, files=f, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, headers=h,verify=False,
                 )
                 if (
                     r.status_code == 200
@@ -126,10 +126,10 @@ class File_Upload_Scanner:
         socks4_proxies=None,
         socks5_proxies=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         l=[]
         if pages==[]:
-            pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=setup_proxy(proxies))
+            pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies))
         for x in pages:
             if logs==True:
                 print('\n\nPage: {}\n'.format(x))

@@ -63,7 +63,7 @@ class CRLF_Injection_Scanner:
         socks4_proxies=None,
         socks5_proxies=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if user_agent:
             us = user_agent
         else:
@@ -84,7 +84,7 @@ class CRLF_Injection_Scanner:
                 + "banetest:%20test",
                 method="GET",
                 headers=heads,
-                proxy=setup_proxy(proxies),
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),
                 timeout=timeout,
                 verify=False,
             )
@@ -109,7 +109,7 @@ class CRLF_Injection_Scanner:
         socks4_proxies=None,
         socks5_proxies=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         
         if user_agent:
             us = user_agent
@@ -136,7 +136,7 @@ class CRLF_Injection_Scanner:
                 + "banetest:%20test",
                 method="GET",
                 headers=heads,
-                proxy=setup_proxy(proxies),
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),
                 timeout=timeout,
                 verify=False,
             )

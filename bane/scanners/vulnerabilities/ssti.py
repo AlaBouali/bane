@@ -13,7 +13,7 @@ class SSTI_Scanner:
     ):
         """"""
         p_o_c=parsed[0].copy()
-        d, fi = setup_to_submit(parsed[0])
+        d, fi = Vulnerability_Scanner_Utilities.setup_to_submit(parsed[0])
         for x in d:
             for y in replaceble_parameters:
                 if x == y:
@@ -118,7 +118,7 @@ class SSTI_Scanner:
         socks4_proxies=None,
         socks5_proxies=None
     ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         target_page = u
         xp = Common_Variables.ssti_list[payload_index].replace(
             payload_keyword, "{}{}{}".format(values[0], operator, values[1])
@@ -135,7 +135,7 @@ class SSTI_Scanner:
             print(Fore.WHITE + "[~]Getting forms..." + Style.RESET_ALL)
         hu = True
         fom = FORMS_FINDER.forms_parser(
-            u, proxy=setup_proxy(proxies), timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True,headers=headers
+            u, proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, cookie=cookie, user_agent=user_agent,include_links=True,headers=headers
         )
         if len(fom) == 0:
             if logs == True:
@@ -212,8 +212,8 @@ class SSTI_Scanner:
                                         i,
                                         xp,
                                         cookie,
-                                        setup_ua(user_agent),
-                                        setup_proxy(proxies),
+                                        Vulnerability_Scanner_Utilities.setup_ua(user_agent),
+                                        Vulnerability_Scanner_Utilities.setup_proxy(proxies),
                                         timeout,
                                         fill_empty,
                                         file_extension=file_extension,
@@ -310,10 +310,10 @@ class SSTI_Scanner:
         socks4_proxies=None,
         socks5_proxies=None
     ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         l=[]
         if pages==[]:
-            pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
+            pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),headers=headers)
         for x in pages:
             if logs==True:
                 print('\n\nPage: {}\n'.format(x))

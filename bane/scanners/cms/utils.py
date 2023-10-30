@@ -1,6 +1,6 @@
 import requests, random, json, sys,socket
 import urllib3,time
-from bane.scanners.vulnerabilities.vulns import vulners_search,Mixed_Content_Scanner,ClickJacking_Scanner,setup_proxy
+from bane.scanners.vulnerabilities.vulns import Vulners_Search_Scanner,Mixed_Content_Scanner,ClickJacking_Scanner,Vulnerability_Scanner_Utilities
 from bane.gather_info.info_s import *
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)

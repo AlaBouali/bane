@@ -13,6 +13,18 @@ from bane.common import *
 class Userful_Utilities:
 
     @staticmethod
+    def get_public_dns(timeout=15):
+        try:
+            return (
+                requests.get(
+                    "https://public-dns.info/nameservers.txt", timeout=timeout
+                ).text
+            ).split("\n")
+        except:
+            return []
+
+
+    @staticmethod
     def load_word_list(l):
         if type(l)==list:
             return l
@@ -27,7 +39,9 @@ class Userful_Utilities:
 
 
 
-
+    @staticmethod
+    def remove_html_comments(text):
+        return re.sub(r"<!--(.|\s|\n)*?-->", "", text, flags=re.DOTALL)
 
 
 

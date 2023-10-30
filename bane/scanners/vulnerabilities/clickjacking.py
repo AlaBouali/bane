@@ -4,7 +4,7 @@ class ClickJacking_Scanner:
 
     @staticmethod
     def scan(u, proxy=None, timeout=10, user_agent=None, cookie=None, logs=False,request_headers=None,headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if user_agent:
             us = user_agent
         else:
@@ -17,7 +17,7 @@ class ClickJacking_Scanner:
         try:
             if request_headers==None:
                 r = requests.Session().get(
-                    u, headers=heads, proxies=setup_proxy(proxies), timeout=timeout, verify=False
+                    u, headers=heads, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False
                 ).headers
             else:
                 r=request_headers

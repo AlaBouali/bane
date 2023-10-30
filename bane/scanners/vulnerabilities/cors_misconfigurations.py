@@ -176,7 +176,7 @@ class CORS_Misconfiguration_Scanner:
         socks4_proxies=None,
         socks5_proxies=None):
 
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         res = {}
         if origin_reflection == True:
             if logs == True:
@@ -187,7 +187,7 @@ class CORS_Misconfiguration_Scanner:
                 cookie=cookie,
                 user_agent=user_agent,
                 timeout=timeout,
-                proxy=setup_proxy(proxies),
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),
                 debug=debug,
                 headers=headers
             )
@@ -207,7 +207,7 @@ class CORS_Misconfiguration_Scanner:
                 cookie=cookie,
                 user_agent=user_agent,
                 timeout=timeout,
-                proxy=setup_proxy(proxies),
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),
                 debug=debug,
                 headers=headers
             )
@@ -227,7 +227,7 @@ class CORS_Misconfiguration_Scanner:
                 cookie=cookie,
                 user_agent=user_agent,
                 timeout=timeout,
-                proxy=setup_proxy(proxies),
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),
                 debug=debug,
                 headers=headers
             )

@@ -27,7 +27,7 @@ class WordPress_Scanner:
     """
         try:
             if proxy==None:
-                proxy=setup_proxy(proxies)
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
             r = requests.Session().post(
                 u, data=post, headers=hed, proxies=proxy, timeout=timeout, verify=False
             )
@@ -63,7 +63,7 @@ class WordPress_Scanner:
     """
         try:
             if proxy==None:
-                proxy=setup_proxy(proxies)
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
             r = requests.Session().post(
                 u, data=post, headers=hed, proxies=proxy, timeout=timeout, verify=False
             )
@@ -101,7 +101,7 @@ class WordPress_Scanner:
     """
         try:
             if proxy==None:
-                proxy=setup_proxy(proxies)
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
             r = requests.Session().post(
                 u, data=post, headers=hed, proxies=proxy, timeout=timeout, verify=False
             )
@@ -132,7 +132,7 @@ class WordPress_Scanner:
         ):
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
-                proxy=setup_proxy(proxies)
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
         if u[len(u) - 1] == "/":
             u = u[0 : len(u) - 1]
         if user_agent:
@@ -182,7 +182,7 @@ class WordPress_Scanner:
         ):
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
-                proxy=setup_proxy(proxies)
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
         url = u.split("://")[0] + "://" + urlparse(u).netloc
         if user_agent:
             us = user_agent
@@ -237,7 +237,7 @@ class WordPress_Scanner:
         ):
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
-                proxy=setup_proxy(proxies)
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
         if u[len(u) - 1] == "/":
             u = u[0 : len(u) - 1]
         if user_agent:
@@ -285,7 +285,7 @@ class WordPress_Scanner:
         ):
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
-                proxy=setup_proxy(proxies)
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
         if u[len(u) - 1] == "/":
             u = u[0 : len(u) - 1]
         if user_agent:
@@ -335,7 +335,7 @@ class WordPress_Scanner:
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         
         if proxy==None:
-                proxy=setup_proxy(proxies)
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
         if user_agent:
             us = user_agent
         else:
@@ -379,7 +379,7 @@ class WordPress_Scanner:
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         
         if proxy==None:
-                proxy=setup_proxy(proxies)
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
         if user_agent:
             us = user_agent
         else:
@@ -417,7 +417,7 @@ class WordPress_Scanner:
         ):
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
-                proxy=setup_proxy(proxies)    
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)    
         if user_agent:
             us = user_agent
         else:
@@ -463,7 +463,7 @@ class WordPress_Scanner:
     def get_version(u, timeout=15, user_agent=None, cookie=None, proxy=None,headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
-                proxy=setup_proxy(proxies)
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
         if user_agent:
             us = user_agent
         else:
@@ -531,7 +531,7 @@ class WordPress_Scanner:
     def fetch_exploits(s,search_type='',max_tries=3,proxy=None,user_agent=None,timeout=40,cookie=None,sleep_time_min=10,sleep_time_max=20,when_blocked_sleep=30,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
-                proxy=setup_proxy(proxies)
+                proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
         if s['version'].strip()=='':
             return []
         if user_agent:
@@ -583,7 +583,7 @@ class WordPress_Scanner:
         if cookie:
             hed.update({"Cookie": cookie})
         hed.update(headers)
-        response = requests.Session().get(u, headers=hed, proxies=setup_proxy(proxies), timeout=timeout, verify=False)
+        response = requests.Session().get(u, headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
         server=response.headers.get('Server','')
         try:
             server_os=[x for x in server.split() if x.startswith('(')==True][0].replace('(','').replace(')','')
@@ -610,7 +610,7 @@ class WordPress_Scanner:
         clickj=ClickJacking_Scanner.scan(u,request_headers=response.headers)
         if logs==True:
             print("[i] Looking for subdomains...")
-        subs=Subdomain_Info.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=setup_proxy(proxies),subdomains_only=subdomains_only)
+        subs=Subdomain_Info.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),subdomains_only=subdomains_only)
         if logs==True:
             print("[i] Cheking if we can sniff some cookies over some links...")
             print()
@@ -649,7 +649,7 @@ class WordPress_Scanner:
         json_path=u+'/wp-json/wp/v2/users'
         if logs==True:
             print('[i] Fetching users from: {}'.format(json_path))
-        json_users=WordPress_Scanner.json_users(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
+        json_users=WordPress_Scanner.json_users(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),headers=headers)
         if logs==True:
             for x in json_users:
                 print('\t[+] id: {} | name: {} | slug: {}'.format(x['id'],x['name'],x['slug']))
@@ -659,7 +659,7 @@ class WordPress_Scanner:
         can_enumerate_users=True
         if logs==True:
             print('[i] Trying enumerating the authors...')
-        enumerated_users= WordPress_Scanner.users_enumeration(u,logs=logs,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),start=user_enum_start,end=user_enum_end,headers=headers)
+        enumerated_users= WordPress_Scanner.users_enumeration(u,logs=logs,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),start=user_enum_start,end=user_enum_end,headers=headers)
         if enumerated_users==[]:
             can_enumerate_users=False
         else:
@@ -670,7 +670,7 @@ class WordPress_Scanner:
         if logs==True:
             print()
             print('[i] Checking if XMLRPC is enabled from: {}'.format(u+'/xmlrpc.php'))
-        xmlrpcs=WordPress_Scanner.xmlrpc_methods(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
+        xmlrpcs=WordPress_Scanner.xmlrpc_methods(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),headers=headers)
         can_b_u=("wp.getUsersBlogs" in xmlrpcs) and ("system.multicall" in xmlrpcs)
         can_pb="pingback.ping" in xmlrpcs
         if logs==True:
@@ -687,7 +687,7 @@ class WordPress_Scanner:
         if wp_version!='':
             if logs==True:
                 print('[i] looking for exploits for version: {}\n'.format(wp_version))
-            wpvulns=vulners_search('WordPress_Info',version=wp_version,proxy=setup_proxy(proxies),api_key=api_key)
+            wpvulns=Vulners_Search_Scanner.scan('WordPress_Info',version=wp_version,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
             for x in wpvulns:
                 if 'WordPress_Info' in x['title'].lower() or 'WordPress_Info' in x['description'].lower():
                     wp_vulns.append(x)
@@ -714,7 +714,7 @@ class WordPress_Scanner:
                     if logs==True:
                         print('\t[-] unknown version\n')
                 else:
-                    bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=setup_proxy(proxies),api_key=api_key)
+                    bk=Vulners_Search_Scanner.scan(back.split('/')[0].lower(),version=back.split('/')[1],proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
                 for x in bk:
                     for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
                         try:
@@ -737,7 +737,7 @@ class WordPress_Scanner:
                     if logs==True:
                         print('[i] looking for exploits for : {}\n'.format(sv))
                     if '/' in sv:
-                        sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=setup_proxy(proxies),api_key=api_key)
+                        sv_e=Vulners_Search_Scanner.scan(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
                     else:
                         if logs==True:
                             print('\t[-] unknown version\n')
@@ -778,4 +778,4 @@ class WordPress_Scanner:
                 for i in x['exploits']:
                     print("\tTitle: {}\n\tLink: {}".format(i['title'],i['exploit_url']))
                     print()
-        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'WordPress_Info_version':wp_version,'sniffable_links':media_non_ssl,'clickjackable':clickj,'themes':themes,'plugins':plugins,'users_json_exposed':users_json_exposed,'exopsed_json_users':{'users':json_users,'path':json_path},'can_enumerate_users':can_enumerate_users,'enumerated_users':enumerated_users,'enabled_xmlrpc_methods':xmlrpcs,"xmlrpc_bruteforce_users":can_b_u,"pingback_enabled":can_pb,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}
+        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'WordPress_Info_version':wp_version,'sniffable_links':media_non_ssl,'clickjackable':clickj,'themes':themes,'plugins':plugins,'users_json_exposed':users_json_exposed,'exopsed_json_users':{'users':json_users,'path':json_path},'can_enumerate_users':can_enumerate_users,'enumerated_users':enumerated_users,'enabled_xmlrpc_methods':xmlrpcs,"xmlrpc_bruteforce_users":can_b_u,"pingback_enabled":can_pb,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}

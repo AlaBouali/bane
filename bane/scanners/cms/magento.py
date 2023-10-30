@@ -19,7 +19,7 @@ class Magento_Scanner:
             hed.update({"Cookie": cookie})
         hed.update(headers)
         try:
-            response = requests.Session().get(u+"/magento_version", headers=hed, proxies=setup_proxy(proxies), timeout=timeout, verify=False)
+            response = requests.Session().get(u+"/magento_version", headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
             version= response.text.split('Magento/')[1].split()[0].strip()
         except:
             version= ''
@@ -34,7 +34,7 @@ class Magento_Scanner:
                     '2009':'1.4.0',
                     '2008':'1.0-1.3'
                 }
-                response = requests.Session().get(u+"/skin/frontend/default/default/css/styles.css", headers=hed, proxies=setup_proxy(proxies), timeout=timeout, verify=False)
+                response = requests.Session().get(u+"/skin/frontend/default/default/css/styles.css", headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
                 for x in versions:
                     if 'Copyright (c) {}'.format(x) in response.text:
                         version=versions[x]
@@ -42,7 +42,7 @@ class Magento_Scanner:
             except:
                 version= ''
         try:
-            response = requests.Session().get(u, headers=hed, proxies=setup_proxy(proxies), timeout=timeout, verify=False)
+            response = requests.Session().get(u, headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
         except:
             pass
         server=response.headers.get('Server','')
@@ -56,7 +56,7 @@ class Magento_Scanner:
         clickj=ClickJacking_Scanner.scan(u,request_headers=response.headers)
         if logs==True:
             print("[i] Looking for subdomains...")
-        subs=Subdomain_Info.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=setup_proxy(proxies),subdomains_only=subdomains_only)
+        subs=Subdomain_Info.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),subdomains_only=subdomains_only)
         if logs==True:
             print("[i] Cheking if we can sniff some cookies over some links...")
             print()
@@ -67,7 +67,7 @@ class Magento_Scanner:
         if version!='':
             if logs==True:
                 print('[i] looking for exploits for version: {}\n'.format(version))
-            wpvulns=vulners_search('magento',version=version,proxy=setup_proxy(proxies),api_key=api_key)
+            wpvulns=Vulners_Search_Scanner.scan('magento',version=version,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
             wp_vulns=[]
             for x in wpvulns:
                 if 'magento' in x['title'].lower() or 'magento' in x['description'].lower():
@@ -95,7 +95,7 @@ class Magento_Scanner:
                     if logs==True:
                         print('\t[-] unknown version\n')
                 else:
-                    bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=setup_proxy(proxies),api_key=api_key)
+                    bk=Vulners_Search_Scanner.scan(back.split('/')[0].lower(),version=back.split('/')[1],proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
                 for x in bk:
                     for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
                         try:
@@ -118,7 +118,7 @@ class Magento_Scanner:
                     if logs==True:
                         print('[i] looking for exploits for : {}\n'.format(sv))
                     if '/' in sv:
-                        sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=setup_proxy(proxies),api_key=api_key)
+                        sv_e=Vulners_Search_Scanner.scan(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
                     else:
                         if logs==True:
                             print('\t[-] unknown version\n')
@@ -136,4 +136,4 @@ class Magento_Scanner:
                             for x in sv_e:
                                 print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
                                 print()
-        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'magento_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}
+        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'magento_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}

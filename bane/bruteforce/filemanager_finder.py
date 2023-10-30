@@ -56,7 +56,7 @@ class filemanager_finder:
                     g,
                     headers=hed,
                     allow_redirects=False,
-                    proxies=setup_proxy(proxies),
+                    proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies),
                     timeout=timeout,
                     verify=False,
                 )

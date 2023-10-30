@@ -1,14 +1,14 @@
 from bane.scanners.vulnerabilities.utils import *
-from bane.scanners.vulnerabilities.vulner_search import vulners_search
+from bane.scanners.vulnerabilities.vulner_search import Vulners_Search_Scanner
 
 
 class Backend_Technologies_Scanner:
 
     @staticmethod
     def scan(u, timeout=10, user_agent=None, cookie=None, logs=True,request_headers=None,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         domain=u.split('://')[1].split('/')[0].split(':')[0]
-        root_domain=extract_root_domain(domain)
+        root_domain=Subdomain_Info.extract_root_domain(domain)
         ip=socket.gethostbyname(domain.split(':')[0])
         if user_agent:
             us = user_agent
@@ -22,7 +22,7 @@ class Backend_Technologies_Scanner:
         try:
             if request_headers==None:
                 r = requests.Session().get(
-                    u, headers=heads, proxies=setup_proxy(proxies), timeout=timeout, verify=False
+                    u, headers=heads, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False
                 ).headers
             else:
                 r=request_headers
@@ -44,7 +44,7 @@ class Backend_Technologies_Scanner:
                         if logs==True:
                             print('\t[-] unknown version\n')
                     else:
-                        bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=setup_proxy(proxies),api_key=api_key)
+                        bk=Vulners_Search_Scanner.scan(back.split('/')[0].lower(),version=back.split('/')[1],proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
                     for x in bk:
                         for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
                             try:
@@ -67,7 +67,7 @@ class Backend_Technologies_Scanner:
                         if logs==True:
                             print('[i] looking for exploits for : {}\n'.format(sv))
                         if '/' in sv:
-                            sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=setup_proxy(proxies),api_key=api_key)
+                            sv_e=Vulners_Search_Scanner.scan(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
                         else:
                             if logs==True:
                                 print('\t[-] unknown version\n')
@@ -87,6 +87,6 @@ class Backend_Technologies_Scanner:
                                     print()        
         except Exception as e:
             return {}
-        return {'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=setup_proxy(proxies)),'server_exploits':server_exploits,'backend_technology_exploits':backend_technology_exploits}
+        return {'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'server_exploits':server_exploits,'backend_technology_exploits':backend_technology_exploits}
 
 

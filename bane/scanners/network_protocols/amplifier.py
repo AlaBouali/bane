@@ -5,6 +5,7 @@ from bane.scanners.network_protocols.memcache import *
 from bane.scanners.network_protocols.ntp import *
 from bane.scanners.network_protocols.snmp import *
 from bane.scanners.network_protocols.ssdp import *
+from bane.scanners.network_protocols.port_scanner import *
 
 
 """

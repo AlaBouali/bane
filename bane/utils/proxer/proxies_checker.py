@@ -1,5 +1,4 @@
 from .utils import *
-from .proxies_getter import *
 from ..socket_connection import *
 
 

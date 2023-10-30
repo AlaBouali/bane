@@ -1,5 +1,5 @@
 import socks,socket,ssl,random
-from .proxer import Proxies_Getter
+from .proxer.proxies_getter import Proxies_Getter
 from bane.common.payloads import *
 
 class Socket_Connection:

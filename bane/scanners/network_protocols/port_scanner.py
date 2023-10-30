@@ -1,8 +1,9 @@
 from bane.gather_info.network import *
+from bane.utils.proxer import *
 
 
 class Ports_Scanner:
-        __slots__ = ["result"]
+        __slots__ = ["result","proxies"]
 
         def scan(self,target,port,check_open,timeout,retry):
             a = Network_Info.tcp_scan(
@@ -11,7 +12,7 @@ class Ports_Scanner:
                 check_open=check_open,
                 timeout=timeout,
                 retry=retry,
-                proxy=None
+                **random.choice(self.proxies)
             )
             if a == True:
                 self.result.update({str(port): "open"})
@@ -25,8 +26,14 @@ class Ports_Scanner:
             threads_daemon=True,
             timeout=3,
             retry=0,
-            check_open=True,
-        ):
+            check_open=True,http_proxies=None,
+            socks4_proxies=None,
+            socks5_proxies=None,
+            ):
+                self.proxies=Proxies_Interface.get_socket_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+                self.proxies=[x for x in self.proxies if x['proxy_type'] in ['socks4','socks5','s4','s5']]
+                if self.proxies==[]:
+                    self.proxies=[{'proxy_host':None,'proxy_port':None,'proxy_username':None,'proxy_password':None,'proxy_type':None}]
                 self.result={}
             #try:
                 for x in ports:

@@ -4,7 +4,7 @@ class Mixed_Content_Scanner:
 
     @staticmethod
     def scan_url(u, timeout=10,proxy=None, user_agent=None, cookie=None,content=None,logs=True,request_headers=None,headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if user_agent:
             us = user_agent
         else:
@@ -18,7 +18,7 @@ class Mixed_Content_Scanner:
         try:
             if content==None:
                 if proxy==None:
-                    proxy=setup_proxy(proxies)
+                    proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)
                 r=requests.Session().get(u,headers=heads,timeout=timeout,verify=False,proxies=proxy)
                 for x in r.headers:
                         if x.lower().strip() == "strict-transport-security":
@@ -71,11 +71,15 @@ class Mixed_Content_Scanner:
         content=None,
         logs=True,
         pages=[],
-        headers={}
+        headers={},
+        http_proxies=None,
+        socks4_proxies=None,
+        socks5_proxies=None
     ):
         l=[]
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if pages==[]:
-            pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=proxy,headers={})
+            pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=random.choice(proxies),headers={})
         for x in pages:
             if logs==True:
                 print('\n\nPage: {}\n'.format(x))
@@ -86,7 +90,10 @@ class Mixed_Content_Scanner:
                             cookie=cookie,
                             content=content,
                             logs=logs,
-                            headers=headers
+                            headers=headers,
+                            http_proxies=http_proxies,
+                            socks4_proxies=socks4_proxies,
+                            socks5_proxies=socks5_proxies
                             )
             if logs==True:
                 for r in result:

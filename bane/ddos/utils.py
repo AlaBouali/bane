@@ -44,15 +44,6 @@ if os.path.isdir("/data/data/com.termux/") == True:
 if (termux == False) or (adr == False):
     from bane.utils.swtch import *
 
-def get_public_dns(timeout=15):
-    try:
-        return (
-            requests.get(
-                "https://public-dns.info/nameservers.txt", timeout=timeout
-            ).text
-        ).split("\n")
-    except:
-        return []
 
 
 class DDoS_Class:

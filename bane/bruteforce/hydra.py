@@ -237,13 +237,13 @@ class hydra:
             if self.logs == True:
                 print("[*]Trying ==> {}:{}".format(user, pwd))
             if protocol == "ssh":
-                r = s(u, user, pwd, timeout=timeout, p=p, exchange_key=exchange_key,**setup_proxy(socket_proxies))
+                r = s(u, user, pwd, timeout=timeout, p=p, exchange_key=exchange_key,**Vulnerability_Scanner_Utilities.setup_proxy(socket_proxies))
             elif protocol == "telnet":
-                r = s(u, user, pwd, timeout=timeout, p=p,**setup_proxy(socket_proxies))
+                r = s(u, user, pwd, timeout=timeout, p=p,**Vulnerability_Scanner_Utilities.setup_proxy(socket_proxies))
             elif protocol == "mysql":
-                r = s(u, user, pwd, timeout=timeout, p=p,**setup_proxy(socket_proxies))
+                r = s(u, user, pwd, timeout=timeout, p=p,**Vulnerability_Scanner_Utilities.setup_proxy(socket_proxies))
             elif protocol == "ftp":
-                r = s(u, user, pwd, timeout=timeout,**setup_proxy(socket_proxies))
+                r = s(u, user, pwd, timeout=timeout,**Vulnerability_Scanner_Utilities.setup_proxy(socket_proxies))
             elif protocol == "wp":
                 r = s(
                     u,
@@ -256,9 +256,9 @@ class hydra:
                     headers=headers
                 )
             elif protocol == "smtp":
-                r = s(u, p, user, pwd, ehlo=ehlo, helo=helo, ttls=ttls,**setup_proxy(socket_proxies))
+                r = s(u, p, user, pwd, ehlo=ehlo, helo=helo, ttls=ttls,**Vulnerability_Scanner_Utilities.setup_proxy(socket_proxies))
             else:
-                r = s(u, user, pwd, timeout=timeout,**setup_proxy(socket_proxies))
+                r = s(u, user, pwd, timeout=timeout,**Vulnerability_Scanner_Utilities.setup_proxy(socket_proxies))
             if r == True:
                 if self.logs == True:
                     print("[+]Found!!!")

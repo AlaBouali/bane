@@ -19,12 +19,12 @@ class Joomla_Scanner:
             hed.update({"Cookie": cookie})
         hed.update(headers)
         try:
-            response = requests.Session().get(u+"/language/en-GB/en-GB.xml", headers=hed, proxies=setup_proxy(proxies), timeout=timeout, verify=False)
+            response = requests.Session().get(u+"/language/en-GB/en-GB.xml", headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
             version= response.text.split('<version>')[1].split('</version>')[0].strip()
         except:
             version= ''
         try:
-            response = requests.Session().get(u, headers=hed, proxies=setup_proxy(proxies), timeout=timeout, verify=False)
+            response = requests.Session().get(u, headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
         except:
             pass
         server=response.headers.get('Server','')
@@ -38,7 +38,7 @@ class Joomla_Scanner:
         clickj=ClickJacking_Scanner.scan(u,request_headers=response.headers)
         if logs==True:
             print("[i] Looking for subdomains...")
-        subs=Subdomain_Info.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=setup_proxy(proxies),subdomains_only=subdomains_only)
+        subs=Subdomain_Info.get_subdomains(root_domain,logs=logs, crt_timeout=crt_timeout,user_agent=user_agent,cookie=cookie,wayback_timeout=wayback_timeout,subdomain_check_timeout=subdomain_check_timeout,max_wayback_urls=max_wayback_urls,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),subdomains_only=subdomains_only)
         if logs==True:
             print("[i] Cheking if we can sniff some cookies over some links...")
             print()
@@ -49,7 +49,7 @@ class Joomla_Scanner:
         if version!='':
             if logs==True:
                 print('[i] looking for exploits for version: {}\n'.format(version))
-            wpvulns=vulners_search('joomla',version=version,proxy=setup_proxy(proxies),api_key=api_key)
+            wpvulns=Vulners_Search_Scanner.scan('joomla',version=version,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
             for x in wpvulns:
                 if 'joomla' in x['title'].lower() or 'joomla' in x['description'].lower():
                     wp_vulns.append(x)
@@ -76,7 +76,7 @@ class Joomla_Scanner:
                     if logs==True:
                         print('\t[-] unknown version\n')
                 else:
-                    bk=vulners_search(back.split('/')[0].lower(),version=back.split('/')[1],proxy=setup_proxy(proxies),api_key=api_key)
+                    bk=Vulners_Search_Scanner.scan(back.split('/')[0].lower(),version=back.split('/')[1],proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
                 for x in bk:
                     for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
                         try:
@@ -99,7 +99,7 @@ class Joomla_Scanner:
                     if logs==True:
                         print('[i] looking for exploits for : {}\n'.format(sv))
                     if '/' in sv:
-                        sv_e=vulners_search(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=setup_proxy(proxies),api_key=api_key)
+                        sv_e=Vulners_Search_Scanner.scan(sv.split('/')[0].lower(),version=sv.split('/')[1],proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
                     else:
                         if logs==True:
                             print('\t[-] unknown version\n')
@@ -117,4 +117,4 @@ class Joomla_Scanner:
                             for x in sv_e:
                                 print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
                                 print()
-        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'joomla_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}
+        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'joomla_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}

@@ -62,11 +62,11 @@ class SSRF_Scanner:
         socks4_proxies=None,
         socks5_proxies=None
     ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         res = []
         if u.split("?")[0][-1] != "/" and "." not in u.split("?")[0].rsplit("/", 1)[-1]:
             u = u.replace("?", "/?")
-        a = crawl(u, proxy=setup_proxy(proxies), timeout=timeout, cookie=cookie, user_agent=user_agent,headers=headers)
+        a = Vulnerability_Scanner_Utilities.crawl(u, proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, cookie=cookie, user_agent=user_agent,headers=headers)
         l = []
         d = a.values()
         for x in d:
@@ -83,12 +83,12 @@ class SSRF_Scanner:
                 ):
                     ur = ur.replace("?", "/?")
                 for y in x[3]:
-                    if valid_parameter(y[1]) == True:
+                    if Vulnerability_Scanner_Utilities.valid_parameter(y[1]) == True:
                         trgt = ur.replace(y[0] + "=" + y[1], y[0] + "={}")
                         q = SSRF_Scanner.ssrf_check(
                             trgt,
                             null_byte=null_byte,
-                            proxy=setup_proxy(proxies),
+                            proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),
                             link=link,
                             signature=signature,
                             timeout=timeout,
@@ -120,10 +120,10 @@ class SSRF_Scanner:
         socks4_proxies=None,
         socks5_proxies=None
     ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         l=[]
         if pages==[]:
-            pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=setup_proxy(proxies),headers=headers)
+            pages=spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),headers=headers)
         for x in pages:
             if logs==True:
                 print('\n\nPage: {}\n'.format(x))

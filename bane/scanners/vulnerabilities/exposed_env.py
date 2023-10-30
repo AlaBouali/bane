@@ -16,7 +16,7 @@ class Exposed_ENV_Scanner:
         socks4_proxies=None,
         socks5_proxies=None
         ):
-        proxies=get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
+        proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if brute_force == False:
             if user_agent:
                 us = user_agent
@@ -35,7 +35,7 @@ class Exposed_ENV_Scanner:
                 else:
                     u = u.replace(urlparse(u).path, path + "/.env")
                 c = requests.Session().get(
-                    u, headers=hea, proxies=setup_proxy(proxies), timeout=timeout, verify=False
+                    u, headers=hea, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False
                 ).text
                 if ("APP_KEY=" in c) or ("DB_HOST=" in c):
                     return (True, u)

@@ -173,7 +173,7 @@ def examine_js_code(u,
             if script.has_attr('src'):
                 url=urljoin(u,script['src'])
                 url_domain=url.split('://')[1].split('/')[0]
-                if extract_root_domain(url_domain)==extract_root_domain(domain):
+                if Subdomain_Info.extract_root_domain(url_domain)==Subdomain_Info.extract_root_domain(domain):
                     #print(url_domain)
                     code=fetch_url(url,user_agent=user_agent,timeout=timeout,proxy=proxy,cookie=cookie,headers=headers)
                     secrets.append({'url':url,'secrets':extract_secrets_from_text(code)})#,'endpoints':extract_urls_from_js(code,url)})

@@ -98,7 +98,7 @@ class Botnet_Scanner:
                         break
                     if i == True:
                         if self.protocol == "adb":
-                            q = ADB_Exploit_Scanner.scan(ip, timeout=self.timeout, p=self.port)
+                            q = ADB_Exploit_Scanner.scan(ip, timeout=self.timeout, p=self.port,**random.choice(self.proxies))
                             if q == True:
                                 res = "adb:{}:{}::".format(ip, self.port)
                                 Files_Interface.write_file(res, self.file_name)
@@ -157,7 +157,7 @@ class Botnet_Scanner:
                                             print(res)
                                         break
                                 except Exception as exx:
-                                    if 'timeout' in str(exx).lower() or 'a telnet service' in str(exx).lower() or 'timed out'  in str(exx).lower() or "connect"  in str(exx).lower():
+                                    if 'timeout' in str(exx).lower() or 'not a telnet service' in str(exx).lower() or 'timed out'  in str(exx).lower() or "connect"  in str(exx).lower():
                                         break
                 except:
                     pass

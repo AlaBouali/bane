@@ -59,7 +59,7 @@ class FORMS_FINDER:
                 u, headers=hea, proxies=proxy, timeout=timeout, verify=False
             ).text
             if html_comments == False:
-                c = remove_html_comments(c)
+                c = Userful_Utilities.remove_html_comments(c)
             soup = BeautifulSoup(c, "html.parser")
             i = soup.find_all("form")
             for f in i:
@@ -198,7 +198,7 @@ class FORMS_FINDER:
         try:
             c = text
             if html_comments == False:
-                c = remove_html_comments(c)
+                c = Userful_Utilities.remove_html_comments(c)
             soup = BeautifulSoup(c, "html.parser")
             i = soup.find_all("form")
             for f in i:
