@@ -33,7 +33,7 @@ from bane.utils.pager.rand_generator import *
 from bane.common.payloads import *
 from bane.utils.handle_files import *
 from bane.utils.proxer import *
-from bane.utils.pager import spider_url
+from bane.utils.pager import *
 termux=False
 adr=False
 
