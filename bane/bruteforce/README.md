@@ -293,3 +293,174 @@ if is_accessible:
 else:
     print("{} is not accessible.".format(url_to_access))
 </code></pre>
+
+<h1>HTTP_Auth_Bruteforce Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>HTTP_Auth_Bruteforce</code> class is part of the "bane" module and is used to perform HTTP authentication bruteforce attacks on a website.</p>
+
+<h2>Class Constructor</h2>
+<pre><code>class HTTP_Auth_Bruteforce(u, word_list=[], threads_daemon=True, logs=True, domain=None, cookie=None, user_agent=None, timeout=10, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></pre>
+<p>This constructor initializes an instance of the <code>HTTP_Auth_Bruteforce</code> class with the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The target website URL where the HTTP authentication bruteforce is to be performed.</li>
+    <li><code>word_list</code> (list): A list of usernames and passwords for the bruteforce attack (default is an empty list).</li>
+    <li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
+    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+    <li><code>domain</code> (str): The domain for NTLM authentication (default is None).</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+    <li><code>http_proxies</code> (list): List of HTTP proxies to use (default is None).</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use (default is None).</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use (default is None).</li>
+</ul>
+
+<h2>Methods</h2>
+<h3><code>crack(self, u, domain, word_list, logs, proxies, cookie, user_agent, timeout, headers)</code></h3>
+<p>This method performs the HTTP authentication bruteforce operation with the specified parameters. It takes the following parameters:</p>
+<ul>
+    <li><code>u</code> (str): The target website URL where the bruteforce attack is to be performed.</li>
+    <li><code>domain</code> (str): The domain for NTLM authentication.</li>
+    <li><code>word_list</code> (list): A list of usernames and passwords for the bruteforce attack.</li>
+    <li><code>logs</code> (bool): Enable or disable logging.</li>
+    <li><code>proxies</code> (list): List of proxies to use for requests.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds.</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+</ul>
+
+<h3><code>done(self)</code></h3>
+<p>This method returns the value of the <code>finish</code attribute, indicating whether the operation is done or not.</p>
+
+<h2>Example Usage</h2>
+<p>To use the <code>HTTP_Auth_Bruteforce</code> class, create an instance of it by providing the required parameters, and it will start performing an HTTP authentication bruteforce attack in a separate thread. Here's an example:</p>
+
+<pre><code>
+import time
+from bane.bruteforce import HTTP_Auth_Bruteforce
+
+# Create an instance of HTTP_Auth_Bruteforce
+auth_bruteforce = HTTP_Auth_Bruteforce(
+    u="https://example.com",
+    word_list=["username1:password1", "username2:password2"],
+    threads_daemon=True,
+    logs=True,
+    domain=None,
+    cookie="CustomCookie=ghjhhjkjhjk",
+    user_agent="CustomUserAgent",
+    timeout=10,
+    headers={"Custom-Header": "Value"},
+    http_proxies=["1.1.1.1:8080", "2.2.2.2:80"],
+    socks4_proxies=None,
+    socks5_proxies=None
+)
+
+# HTTP authentication bruteforce attack is performed in the background
+# You can check the status with auth_bruteforce.done()
+while not auth_bruteforce.done():
+    time.sleep(1)
+
+# Access the result
+result = auth_bruteforce.result
+print("auth_bruteforce Result:", result)
+</code></pre>
+
+<h1>Services_Login Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>Services_Login</code> class provides a set of methods for performing various login/authentication attempts for different services, such as SMTP, Telnet, SSH, FTP, and MySQL. These methods check for successful login using the provided credentials and options.</p>
+
+<h2>SMTP Login</h2>
+<h3><code>smtp(u, username, password, p=25, ehlo=True, helo=False, ttls=False, proxy_type=None, proxy_host=None, proxy_port=None, proxy_username=None, proxy_password=None, timeout=5)</code></h3>
+<p>This method attempts to log in to an SMTP server with the provided credentials and options. It returns <code>True</code> if the login is successful and <code>False</code> otherwise.</p>
+
+<h2>Telnet Login</h2>
+<h3><code>telnet(u, username, password, p=23, timeout=5, bot_mode=False, proxy_type=None, proxy_host=None, proxy_port=None, proxy_username=None, proxy_password=None)</code></h3>
+<p>This method attempts to log in to a Telnet server with the provided credentials and options. It returns <code>True</code> if the login is successful and <code>False</code> otherwise. It also supports bot mode, where additional checks are performed to detect certain commands.</p>
+
+<h2>SSH Login</h2>
+<h3><code>ssh(u, username, password, p=22, timeout=5, exchange_key=None, proxy_type=None, proxy_host=None, proxy_port=None, proxy_username=None, proxy_password=None)</code></h3>
+<p>This method attempts to log in to an SSH server with the provided credentials and options. It returns <code>True</code> if the login is successful and <code>False</code> otherwise. It supports the use of an exchange key for added security.</p>
+
+<h2>FTP Login</h2>
+<h3><code>ftp_anon(ip, p, timeout=5, proxy_type=None, proxy_host=None, proxy_port=None, proxy_username=None, proxy_password=None)</code></h3>
+<p>This method attempts an anonymous FTP login to the specified IP and port. It returns <code>True</code> if the login is successful and <code>False</code> otherwise.</p>
+
+<h3><code>ftp(ip, p, username, password, timeout=5, proxy_type=None, proxy_host=None, proxy_port=None, proxy_username=None, proxy_password=None)</code></h3>
+<p>This method attempts to log in to an FTP server with the provided credentials and options. It returns <code>True</code> if the login is successful and <code>False</code> otherwise.</p>
+
+<h2>MySQL Login</h2>
+<h3><code>mysql(u, username, password, timeout=5, p=3306, proxy_type=None, proxy_host=None, proxy_port=None, proxy_username=None, proxy_password=None)</code></h3>
+<p>This method attempts to log in to a MySQL database server with the provided credentials and options. It returns <code>True</code> if the login is successful and <code>False</code> otherwise.</p>
+
+<h2>Parameters</h2>
+<p>Many of the methods accept various parameters, including server address (<code>u</code>), username (<code>username</code>), password (<code>password</code>), port (<code>p</code>), and optional proxy settings. These parameters are used to customize the login attempts based on the specific service.</p>
+
+<h1>Hydra Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>Hydra</code> class is used for performing brute-force login attempts on various services, including SSH, Telnet, FTP, SMTP, MySQL, and WordPress. It takes a list of username-password combinations and tries to log in using different protocols. It reports success or failure for each combination.</p>
+
+<h2>Class Constructor</h2>
+<pre><code>class Hydra(u, p=22, protocol="ssh", word_list=[], threads_daemon=True, logs=True, exchange_key=None, timeout=5, ehlo=False, helo=True, ttls=False, user_agent=None, cookie=None, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)
+</code></pre>
+<p>This constructor initializes an instance of the <code>Hydra</code> class with the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The target server or website URL.</li>
+    <li><code>p</code> (int): The port to use for the protocol (default is 22).</li>
+    <li><code>protocol</code> (str): The protocol to use for brute-forcing (e.g., "ssh", "telnet", "ftp", "smtp", "mysql", "wp").</li>
+    <li><code>word_list</code> (list): List of username-password combinations to try.</li>
+    <li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
+    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+    <li><code>exchange_key</code> (str): The exchange key to use for SSH login (default is None).</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 5).</li>
+    <li><code>ehlo</code> (bool): Enable EHLO for SMTP (default is False).</li>
+    <li><code>helo</code> (bool): Enable HELO for SMTP (default is True).</li>
+    <li><code>ttls</code> (bool): Enable TTLS for SMTP (default is False).</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+</ul>
+
+<h2>Methods</h2>
+<h3><code>crack(self, u, p, protocol, word_list, logs, exchange_key, timeout, ehlo, helo, ttls, proxies, socket_proxies, user_agent, cookie, headers)</code></h3>
+<p>This method performs brute-force login attempts with the specified parameters. It tries different combinations from the provided word list and checks for successful logins. The specific service is determined by the <code>protocol</code> parameter.</p>
+
+<h3><code>done(self)</code></h3>
+<p>This method returns <code>True</code> if the brute-force operation is finished and <code>False</code> otherwise.</p>
+
+<h2>Example Usage</h2>
+<p>To use the <code>Hydra</code> class, create an instance of it by providing the required parameters, and it will start brute-forcing logins for the specified protocol. Here's an example:</p>
+
+<pre><code>
+import time
+from bane.bruteforce import Hydra
+
+# Create an instance of Hydra for SSH login
+hydra_ssh = Hydra(
+    u="ssh.example.com",
+    p=22,
+    protocol="ssh",
+    word_list=["user1:pass1", "user2:pass2"],
+    logs=True,
+    exchange_key=None,
+    timeout=5
+)
+
+# Wait for the brute-force operation to finish
+while not hydra_ssh.done():
+    time.sleep(1)
+
+# Access the result
+result = hydra_ssh.result
+print("Successful SSH login:", result)
+</code></pre>
+</p>

@@ -1,6 +1,6 @@
 from bane.bruteforce.utils import *
 
-class http_auth_bruteforce:
+class HTTP_Auth_Bruteforce:
     __slots__ = ["logs", "stop", "finish", "result"]
 
     def __init__(
