@@ -52,7 +52,7 @@ admin_finder = Admin_Panel_Finder(
     logs=True,
     threads_daemon=True,
     user_agent="CustomUserAgent",
-    cookie="CustomCookie",
+    cookie="CustomCookie=yuioiuyuioihyujiop",
     ext="php",
     timeout=10,
     headers={"Custom-Header": "Value"},
@@ -179,7 +179,7 @@ print("Decryption Result:", result)
 <p>To use the <code>Files_Manager_Finder</code> class, create an instance of it by providing the required parameters, and it will start searching for the file or resource in a separate thread. Here's an example:</p>
 
 <pre><code>
-from bane.bruteforce.utils import Files_Manager_Finder
+from bane.bruteforce import Files_Manager_Finder
 import time
 
 # Create an instance of Files_Manager_Finder
@@ -188,7 +188,7 @@ finder = Files_Manager_Finder(
     logs=True,
     threads_daemon=True,
     user_agent="CustomUserAgent",
-    cookie="CustomCookie",
+    cookie="CustomCookie=ghjuiko",
     timeout=10,
     headers={"Custom-Header": "Value"},
     http_proxies=["1.1.1.1:8080", "2.2.2.2:80"],
@@ -204,4 +204,110 @@ while not finder.done():
 # Access the result
 result = finder.result
 print("File/Resource Found:", result)
+</code></pre>
+<h1>Force_Browsing Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>Force_Browsing</code> class is part of the "bane" module and is used to perform force browsing on a website by attempting to access various URLs with different extensions.</p>
+
+<h2>Class Constructor</h2>
+<pre><code>class Force_Browsing(u, timeout=10, threads_daemon=True, logs=True, ext="php", user_agent=None, cookie=None, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></pre>
+<p>This constructor initializes an instance of the <code>Force_Browsing</code> class with the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The target website URL where force browsing is to be performed.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+    <li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
+    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+    <li><code>ext</code> (str): Default extension to use for URLs (default is 'php').</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+</ul>
+
+<h2>Methods</h2>
+<h3><code>crack(self, u, timeout, logs, ext, user_agent, cookie, proxies)</code></h3>
+<p>This method performs the force browsing operation with the specified parameters. It takes the following parameters:</p>
+<ul>
+    <li><code>u</code> (str): The target website URL where force browsing is to be performed.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds.</li>
+    <li><code>logs</code> (bool): Enable or disable logging.</li>
+    <li><code>ext</code> (str): Default extension to use for URLs.</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>proxies</code> (list): List of proxies to use for requests.</li>
+</ul>
+
+<h3><code>done(self)</code></h3>
+<p>This method returns the value of the <code>finish</code attribute, indicating whether the operation is done or not.</p>
+
+<h1>access Function</h1>
+
+<h2>Function Overview</h2>
+<p>The <code>access</code> function is part of the "bane" module and is used to access a specified URL with customizable parameters and check if it is accessible.</p>
+
+<h3>Function Signature</h3>
+<pre><code>access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None, headers={})</code></pre>
+<p>This function takes the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The URL to be accessed and checked.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>bypass</code> (bool): Enable or disable bypassing (default is False).</li>
+    <li><code>proxy</code> (str): The proxy to use for requests.</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>To use the <code>Force_Browsing</code> class and the <code>access</code> function, you can create an instance of the class and call its methods or use the function as shown below:</p>
+
+<pre><code>
+import time
+from bane.bruteforce.utils import *
+
+# Create an instance of Force_Browsing
+browsing = Force_Browsing(
+    u="https://example.com",
+    timeout=10,
+    threads_daemon=True,
+    logs=True,
+    ext="php",
+    user_agent="CustomUserAgent",
+    cookie="CustomCookie=fgtyhuio",
+    headers={"Custom-Header": "Value"},
+    http_proxies=["1.1.1.1:8080", "2.2.2.2:80"],
+    socks4_proxies=["3.3.3.3:1080"],
+    socks5_proxies=None
+)
+
+# Force browsing is performed in the background
+# You can check the status with browsing.done()
+while not browsing.done():
+    time.sleep(1)
+
+# Access the result
+result = browsing.result
+print("Browsing Result:", result)
+
+# Using the access function
+url_to_access = "https://example.com/page"
+is_accessible = access(
+    u=url_to_access,
+    timeout=10,
+    user_agent="CustomUserAgent",
+    cookie="CustomCookie=fghjkjhghujikjhujik",
+    bypass=False,
+    proxy={"http":"http://1.1.1.1:8080","https":"http://1.1.1.1:8080"},
+    headers={"Custom-Header": "Value"}
+)
+
+if is_accessible:
+    print("{} is accessible.".format(url_to_access))
+else:
+    print("{} is not accessible.".format(url_to_access))
 </code></pre>

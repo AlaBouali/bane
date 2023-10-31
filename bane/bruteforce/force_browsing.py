@@ -30,7 +30,7 @@ def access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None
 
 
 
-class force_browsing:
+class Force_Browsing:
     __slots__ = ["stop", "finish", "result", "logs"]
 
     def __init__(
