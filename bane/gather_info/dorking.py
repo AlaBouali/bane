@@ -1,4 +1,4 @@
-from googlesearch import search
+import googlesearch
 
 class Dorking_Info:
 
@@ -13,14 +13,14 @@ class Dorking_Info:
         pause=2,
     ):
         j = []
-        j += search(
+        j += googlesearch.search(
             q,
             num=max_results,
             lang=language,
             start=start_from,
             stop=stop_on,
-            tld="com",
-            pause=2,
+            tld=top_level_domain,
+            pause=pause,
         )
         l = []
         for x in j:
