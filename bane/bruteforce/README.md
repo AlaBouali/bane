@@ -244,31 +244,13 @@ print("File/Resource Found:", result)
 <h3><code>done(self)</code></h3>
 <p>This method returns the value of the <code>finish</code attribute, indicating whether the operation is done or not.</p>
 
-<h1>access Function</h1>
-
-<h2>Function Overview</h2>
-<p>The <code>access</code> function is part of the "bane" module and is used to access a specified URL with customizable parameters and check if it is accessible.</p>
-
-<h3>Function Signature</h3>
-<pre><code>access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None, headers={})</code></pre>
-<p>This function takes the following parameters:</p>
-
-<ul>
-    <li><code>u</code> (str): The URL to be accessed and checked.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>bypass</code> (bool): Enable or disable bypassing (default is False).</li>
-    <li><code>proxy</code> (str): The proxy to use for requests.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-</ul>
 
 <h2>Example Usage</h2>
-<p>To use the <code>Force_Browsing</code> class and the <code>access</code> function, you can create an instance of the class and call its methods or use the function as shown below:</p>
+<p>To use the <code>Force_Browsing</code> class , you can create an instance of the class and call its methods or use the function as shown below:</p>
 
 <pre><code>
 import time
-from bane.bruteforce.utils import *
+from bane.bruteforce import Force_Browsing
 
 # Create an instance of Force_Browsing
 browsing = Force_Browsing(
