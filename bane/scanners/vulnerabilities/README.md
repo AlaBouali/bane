@@ -421,7 +421,7 @@ result_body = CRLF_Injection_Scanner.scan_body(
 </ul>
 
 <h2>Example Usage</h2>
-
+<pre>
 <code>
 from bane.scanners.vulnerabilities import CSRF_Scanner
 
@@ -441,7 +441,7 @@ for page in vulnerable_pages:
         print(f"Form: {form['action']}")
         print(f"Vulnerability Status: {status}")
 </code>
-</p>
+</pre>
 <h1>Exposed_ENV_Scanner Class</h1>
 
 <h2>Class Overview</h2>
@@ -465,7 +465,7 @@ for page in vulnerable_pages:
 </ul>
 
 <h2>Example Usage</h2>
-
+<pre>
 <code>
 from bane.scanners.vulnerabilities import Exposed_ENV_Scanner
 
@@ -481,7 +481,7 @@ if result:
 else:
     print("No exposed environment file found.")
 </code>
-</p>
+</pre>
 <h1>Exposed_Git_Scanner Class</h1>
 
 <h2>Class Overview</h2>
@@ -503,7 +503,7 @@ else:
 </ul>
 
 <h2>Example Usage</h2>
-
+<pre>
 <code>
 from bane.scanners.vulnerabilities import Exposed_Git_Scanner
 
@@ -519,7 +519,7 @@ if result:
 else:
     print("No exposed Git repository found.")
 </code>
-</p>
+</pre>
 
 <h1>Exposed_Telent_Scanner Class</h1>
 
@@ -538,7 +538,7 @@ else:
 </ul>
 
 <h2>Example Usage</h2>
-
+<pre>
 <code>
 from bane.scanners.vulnerabilities import Exposed_Telent_Scanner
 
@@ -555,7 +555,7 @@ if result:
 else:
     print("Telnet service is not exposed on the host.")
 </code>
-</p>
+</pre>
 
 <h1>File_Upload_Scanner Class</h1>
 
@@ -614,7 +614,7 @@ else:
 </ul>
 
 <h2>Example Usage</h2>
-
+<pre>
 <code>
 from bane.scanners.vulnerabilities import File_Upload_Scanner
 
@@ -632,7 +632,7 @@ for result in results:
         print("Vulnerable:", form_result['vulnerable'])
         print("Status:", form_result['status'])
 </code>
-</p>
+</pre>
 <h1>Open_Redirect_Scanner Class</h1>
 
 <h2>Class Overview</h2>
@@ -723,7 +723,7 @@ for result in results:
 
 <p>Here's an example of how to use the <code>Open_Redirect_Scanner</code> class to scan for open redirect vulnerabilities in web forms:</p>
 
-<p><code>
+<pre><code>
 from bane.scanners.vulnerabilities import Open_Redirect_Scanner
 
 #Specify the target URL to scan
@@ -761,7 +761,7 @@ for result in results:
         #Add handling for other detected security issues (xml_parsing_errors, fetching_url_errors, reading_file_errors)
         print()
 </code>
-</p>
+</pre>
 
 <h1>Path_Traversal_Scanner Class</h1>
 
@@ -828,7 +828,7 @@ for result in results:
 
 <h2>Example Usage</h2>
 <p>Here's an example of how to use the <code>Path_Traversal_Scanner</code> class to scan for Path Traversal vulnerabilities in web applications:</p>
-```python
+<pre><code>
 from bane.scanners.vulnerabilities import Path_Traversal_Scanner
 
 #Specify the target URL to scan
@@ -850,6 +850,7 @@ for result in results:
     print("Page:", result["page"])
     for url_result in result["result"]:
         print("Vulnerable URL:", url_result)
+</code></pre>
 <h1>PHP_Unit_Exploit_Scanner Class</h1>
 
 <h2>Class Overview</h2>
