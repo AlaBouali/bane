@@ -850,3 +850,153 @@ for result in results:
     print("Page:", result["page"])
     for url_result in result["result"]:
         print("Vulnerable URL:", url_result)
+<h1>PHP_Unit_Exploit_Scanner Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>PHP_Unit_Exploit_Scanner</code> class is part of the "bane" module and is used to detect vulnerabilities related to the PHP Unit exploit on a specified website URL.</p>
+
+<h2>Method</h2>
+<h3><code>scan(u, path="/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php", user_agent=None, cookie=None, timeout=10, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
+<p>This method performs the scanning operation to check for the PHP Unit exploit on the provided URL. It takes the following parameters:</p>
+<ul>
+    <li><code>u</code> (str): The target website URL.</li>
+    <li><code>path</code> (str): Path to the PHP Unit exploit file (default is "/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php").</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>To use the <code>PHP_Unit_Exploit_Scanner</code> class, call the <code>scan</code> method by providing the required parameters. Here's an example:</p>
+
+<pre><code>
+from bane.scanners.vulnerabilities import PHP_Unit_Exploit_Scanner
+
+#Example usage of the PHP_Unit_Exploit_Scanner class
+result = PHP_Unit_Exploit_Scanner.scan(
+    u="https://example.com",
+    user_agent="CustomUserAgent",
+    cookie="CustomCookie",
+    timeout=10,
+    headers={"Custom-Header": "Value"},
+    http_proxies={"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"},
+    socks4_proxies=["5.6.7.8:1080"],
+    socks5_proxies=["9.10.11.12:1080"]
+)
+
+#Check the result
+if result:
+    print("The website is vulnerable to PHP Unit exploit.")
+else:
+    print("The website is not vulnerable to PHP Unit exploit.")
+</code></pre>
+<h1>RCE_Scanner Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>RCE_Scanner</code> class is part of the "bane" module and is used for scanning web forms for Remote Code Execution (RCE) vulnerabilities using various payload injections.</p>
+
+<h2>Method: `scan`</h2>
+
+<h3>Method Overview</h3>
+<p>The `scan` method is used to scan a website for RCE vulnerabilities by searching and testing forms with potential payloads. It takes multiple parameters to configure the scan operation.</p>
+
+<h3>Parameters</h3>
+<ul>
+    <li><code>u</code> (str): The target website URL to start the scan.</li>
+    <li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
+    <li><code>pages</code> (list): List of specific pages to scan (overrides max_pages).</li>
+    <li><code>payloads</code> (dict): A dictionary of RCE payloads to use in the scan.</li>
+    <li><code>payload_index</code> (int): The index of the payload to use from the payloads dictionary.</li>
+    <li><code>email_extension</code> (str): Email extension to use for email payloads (default is '@gmail.com').</li>
+    <li><code>phone_pattern</code> (str): Phone number pattern for phone payloads (default is 'XXX-XXX-XXXX').</li>
+    <li><code>save_to_file</code> (str): Save the scan result to a JSON file (default is None).</li>
+    <li><code>dont_change</code> (dict): Dictionary of parameters that should not be changed during the scan.</li>
+    <li><code>number</code> (tuple): Range of numbers to use for numeric payloads (default is (1, 9)).</li>
+    <li><code>injection</code> (dict): Injection type and target parameter for payloads.</li>
+    <li><code>code_operator_right</code> (str): Operator to use on the right side of code payloads (default is ' ; ').</li>
+    <li><code>code_operator_left</code> (str): Operator to use on the left side of code payloads (default is ' ').</li>
+    <li><code>command_operator_right</code> (str): Operator to use on the right side of command payloads (default is ' | ').</li>
+    <li><code>command_operator_left</code> (str): Operator to use on the left side of command payloads (default is ' & ').</li>
+    <li><code>sql_operator_right</code> (str): Operator to use on the right side of SQL payloads (default is ' or ').</li>
+    <li><code>sql_operator_left</code> (str): Operator to use on the left side of SQL payloads (default is ' or ').</li>
+    <li><code>file_extension</code> (str): File extension to use for file payloads (default is 'png').</li>
+    <li><code>replaceble_parameters</code> (dict): Dictionary of parameters with replacement values for payloads.</li>
+    <li><code>based_on</code> (str): The basis for the payload timing, either 'time' or 'file'.</li>
+    <li><code>delay</code> (int): Delay in seconds for payload timing (default is 10).</li>
+    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+    <li><code>fill_empty</code> (int): The number of empty spaces to fill in input parameters (default is 10).</li>
+    <li><code>leave_empty</code> (list): List of parameters to leave empty during the scan.</li>
+    <li><code>dont_send</code> (list): List of parameters not to send during the scan.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 120).</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>debug</code> (bool): Enable or disable debug output (default is False).</li>
+    <li><code>mime_type</code> (str): Mime type for file payloads (default is None).</li>
+    <li><code>predefined_inputs</code> (dict): Dictionary of predefined inputs to use in payloads.</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include in requests.</li>
+    <li><code>http_proxies</code> (list or dict): List of HTTP proxies to use for requests or a dictionary of proxy types (e.g., {"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"}).</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests.</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests.</li>
+</ul>
+
+<h3>Example Usage</h3>
+<p>Here's an example of how to use the <code>RCE_Scanner</code> class and the <code>scan</code> method:</p>
+
+<pre><code>
+from bane.scanners.vulnerabilities.rce_scanner import RCE_Scanner
+
+#Define scan parameters
+scan_parameters = {
+    "u": "https://example.com",
+    "max_pages": 5,
+    "email_extension": "@gmail.com",
+    "phone_pattern": "XXX-XXX-XXXX",
+    "save_to_file": "rce_scan_result.json",
+    "dont_change": {"param1": "value1"},
+    "injection": {"code": "php"},
+    "code_operator_right": " ; ",
+    "code_operator_left": " ",
+    "command_operator_right": " | ",
+    "command_operator_left": " & ",
+    "sql_operator_right": " or '",
+    "sql_operator_left": "' or ",
+    "file_extension": "png",
+    "replaceble_parameters": {"phpvalue": [(".", "")]},
+    "based_on": "time",
+    "delay": 10,
+    "logs": True,
+    "fill_empty": 10,
+    "leave_empty": [],
+    "dont_send": ["btnClear"],
+    "timeout": 120,
+    "user_agent": "CustomUserAgent",
+
+
+    "cookie": "CustomCookie",
+    "debug": False,
+    "mime_type": None,
+    "predefined_inputs": {"param2": "value2"},
+    "headers": {"Custom-Header": "Value"},
+    "http_proxies": {"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"},
+    "socks4_proxies": ["5.6.7.8:1080"],
+    "socks5_proxies": ["9.10.11.12:1080"]
+}
+
+#Perform the RCE scan
+scan_result = RCE_Scanner.scan(**scan_parameters)
+
+#Access and process the scan result
+for result in scan_result:
+    print("Scan Result for Page:", result['page'])
+    for form in result['result']:
+        print("Form Action:", form['action'])
+        print("Method:", form['method'])
+        for vuln in form['vulnerable']:
+            print("Vulnerable Parameter:", vuln['parameter'])
+            print("Context:", vuln['context'])
+</code></pre>
+</p>
