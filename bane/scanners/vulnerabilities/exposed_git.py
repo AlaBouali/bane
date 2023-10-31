@@ -3,7 +3,7 @@ from bane.scanners.vulnerabilities.utils import *
 class Exposed_Git_Scanner:
 
         @staticmethod
-        def exposed_git(u,user_agent=None,cookie=None,timeout=15,headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
+        def scan(u,user_agent=None,cookie=None,timeout=15,headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
                 proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
                 if u.endswith('/')==True:
                         u+=+'.git'
