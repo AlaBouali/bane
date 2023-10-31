@@ -452,7 +452,10 @@ hydra_ssh = Hydra(
     word_list=["user1:pass1", "user2:pass2"],
     logs=True,
     exchange_key=None,
-    timeout=5
+    timeout=5,
+    http_proxies=["1.1.1.1:8080", "2.2.2.2:80"],
+    socks4_proxies=None,
+    socks5_proxies=None
 )
 
 # Wait for the brute-force operation to finish
@@ -512,9 +515,9 @@ web_bruteforce = Web_Login_Bruteforce(
     user_agent="Custom User-Agent",
     timeout=10,
     headers={"Custom-Header": "Value"},
-    http_proxies=["http://proxy1.com", "http://proxy2.com"],
-    socks4_proxies=["socks4://socks4_proxy1", "socks4://socks4_proxy2"],
-    socks5_proxies=["socks5://socks5_proxy1", "socks5://socks5_proxy2"]
+    http_proxies=["1.1.1.1:8080", "2.2.2.2:80"],
+    socks4_proxies=None,
+    socks5_proxies=None
 )
 
 # Wait for the brute-force operation to finish
