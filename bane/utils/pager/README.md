@@ -576,3 +576,60 @@ form_data, form_action = LOGIN_FORM_FILLER.set_login_form(
 print("Form Data:", form_data)
 print("Form Action:", form_action)
 </code></pre>
+
+<h1>URLS_Parser Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>URLS_Parser</code> class is part of the "bane" module and provides methods for parsing and extracting information from URLs and web page sources. It includes methods for converting URLs to form data and extracting links from the page source.</p>
+
+<h2>Methods</h2>
+
+<h3><code>url_to_get_form(u, url_id)</code></h3>
+<p>This method converts a URL into a form data structure. It extracts query parameters from the URL and creates input fields with their names and values. It returns a dictionary representing the form data. It takes the following parameters:</p>
+<ul>
+    <li><code>u</code> (str): The URL to convert into form data.</li>
+    <li><code>url_id</code> (str): The unique identifier for the URL.</li>
+</ul>
+
+<h3><code>get_links_from_page_source(soup, url, url_id)</code></h3>
+<p>This method extracts links from a web page source using BeautifulSoup. It searches for anchor tags (a), as well as media tags (img, audio, video, source, embed) and creates a list of link data. It returns a list of form data structures for URLs found on the page. It takes the following parameters:</p>
+<ul>
+    <li><code>soup</code> (BeautifulSoup): The BeautifulSoup object representing the page source.</li>
+    <li><code>url</code> (str): The URL of the web page.</li>
+    <li><code>url_id</code> (str): The unique identifier for the URL.</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>Here's an example of how to use the <code>URLS_Parser</code> class methods:</p>
+
+<pre><code>
+from bane import URLS_Parser
+from bs4 import BeautifulSoup
+
+#Sample web page source
+web_page_source = """
+&lt;html&gt;
+    &lt;a href=&quot;https://example.com/page1&quot;&gt;Page 1&lt;/a&gt;
+    &lt;a href=&quot;https://example.com/page2&quot;&gt;Page 2&lt;/a&gt;
+    &lt;img src=&quot;https://example.com/image.jpg&quot;&gt;
+    &lt;video src=&quot;https://example.com/video.mp4&quot;&gt;&lt;/video&gt;
+&lt;/html&gt;
+"""
+
+#Create a BeautifulSoup object from the web page source
+soup = BeautifulSoup(web_page_source, "html.parser")
+
+#Get links and forms from the web page source
+web_page_url = "https://example.com/"
+url_id = "page1"
+forms_data = URLS_Parser.get_links_from_page_source(soup, web_page_url, url_id)
+
+#Convert a URL to form data
+url_to_convert = "https://example.com/page3?param1=value1&param2=value2"
+url_id_to_convert = "page3"
+form_data = URLS_Parser.url_to_get_form(url_to_convert, url_id_to_convert)
+
+#Now you can use the forms_data and form_data as needed
+print("Forms Data:", forms_data)
+print("URL to Form Data:", form_data)
+</code></pre>
