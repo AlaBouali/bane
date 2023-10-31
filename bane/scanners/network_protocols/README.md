@@ -30,10 +30,10 @@
 <pre><code>
 from bane.scanners.network_protocols import Chargen_Amplification_Scanner
 
-# Scan a Chargen server
+#Scan a Chargen server
 result = Chargen_Amplification_Scanner.scan(u="192.168.1.1", timeout=5, q='A')
 
-# Access the result
+#Access the result
 print("Chargen Amplification Scan Result:")
 print("Protocol:", result['protocol'])
 print("IP:", result['ip'])
@@ -72,10 +72,10 @@ print("Amplification Factor:", result['amplification_factor'])
 <pre><code>
 from bane.scanners.network_protocols import DNS_Amplification_Scanner
 
-# Scan a DNS server for amplification factor
+#Scan a DNS server for amplification factor
 result = DNS_Amplification_Scanner.scan(u="8.8.8.8", timeout=5, q="example.com", t="A")
 
-# Access the result
+#Access the result
 print("DNS Amplification Scan Result:")
 print("Protocol:", result['protocol'])
 print("IP:", result['ip'])
@@ -113,10 +113,10 @@ print("Amplification Factor:", result['amplification_factor'])
 <pre><code>
 from bane.scanners.network_protocols import Echo_Amplification_Scanner
 
-# Scan an Echo server for amplification factor
+#Scan an Echo server for amplification factor
 result = Echo_Amplification_Scanner.scan(u="8.8.8.8", q="Hello, Echo!", timeout=5)
 
-# Access the result
+#Access the result
 print("Echo Amplification Scan Result:")
 print("Protocol:", result['protocol'])
 print("IP:", result['ip'])
@@ -153,10 +153,10 @@ print("Amplification Factor:", result['amplification_factor'])
 <pre><code>
 from bane.scanners.network_protocols import Memcache_Amplification_Scanner
 
-# Scan a Memcache server for amplification factor
+#Scan a Memcache server for amplification factor
 result = Memcache_Amplification_Scanner.scan(u="127.0.0.1", timeout=5)
 
-# Access the result
+#Access the result
 print("Memcache Amplification Scan Result:")
 print("Protocol:", result['protocol'])
 print("IP:", result['ip'])
@@ -193,10 +193,10 @@ print("Amplification Factor:", result['amplification_factor'])
 <pre><code>
 from bane.scanners.network_protocols import NTP_Amplification_Scanner
 
-# Scan an NTP server for amplification factor
+#Scan an NTP server for amplification factor
 result = NTP_Amplification_Scanner.scan(u="time.example.com", timeout=5)
 
-# Access the result
+#Access the result
 print("NTP Amplification Scan Result:")
 print("Protocol:", result['protocol'])
 print("IP:", result['ip'])
@@ -242,7 +242,7 @@ print("Amplification Factor:", result['amplification_factor'])
 <pre><code>
 from bane.gather_info.network_protocols import Ports_Scanner
 
-# Create an instance of Ports_Scanner
+#Create an instance of Ports_Scanner
 port_scanner = Ports_Scanner(
     u="192.168.1.1",
     ports=[80, 443, 22],
@@ -254,12 +254,12 @@ port_scanner = Ports_Scanner(
     socks5_proxies=["9.10.11.12:1080"]
 )
 
-# Start port scanning
-# The results will be available in port_scanner.result
+#Start port scanning
+#The results will be available in port_scanner.result
 while len(port_scanner.result) != len(port_scanner.ports):
     pass
 
-# Access the results
+#Access the results
 print("Port Scanning Results:")
 for port, status in port_scanner.result.items():
     print(f"Port {port}: {status}")
@@ -293,10 +293,10 @@ for port, status in port_scanner.result.items():
 <pre><code>
 from bane.scanners.network_protocols import SNMP_Amplification_Scanner
 
-# Scan an SNMP server for amplification factor
+#Scan an SNMP server for amplification factor
 result = SNMP_Amplification_Scanner.scan(u="192.168.1.1", timeout=5)
 
-# Access the result
+#Access the result
 print("SNMP Amplification Scan Result:")
 print("Protocol:", result['protocol'])
 print("IP:", result['ip'])
@@ -333,10 +333,10 @@ print("Amplification Factor:", result['amplification_factor'])
 <pre><code>
 from bane.scanners.network_protocols import SSDP_Amplification_Scanner
 
-# Scan an SSDP server for amplification factor
+#Scan an SSDP server for amplification factor
 result = SSDP_Amplification_Scanner.scan(u="239.255.255.250", timeout=5)
 
-# Access the result
+#Access the result
 print("SSDP Amplification Scan Result:")
 print("Protocol:", result['protocol'])
 print("IP:", result['ip'])

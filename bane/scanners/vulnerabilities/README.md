@@ -762,3 +762,91 @@ for result in results:
         print()
 </code>
 </p>
+
+<h1>Path_Traversal_Scanner Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>Path_Traversal_Scanner</code> class is used to scan web applications for Path Traversal vulnerabilities. It provides methods to check for directory traversal and file inclusion vulnerabilities in web pages.</p>
+
+<h2>Methods</h2>
+
+<h3><code>path_traversal_check(u, php_wrapper, linux_file, null_byte, bypass, target_os, proxy, timeout, user_agent, cookie, headers)</code></h3>
+<p>This method performs a Path Traversal vulnerability test using a link. It sends an HTTP request to the specified URL and checks for Path Traversal vulnerabilities. It supports different parameters and options to customize the test.</p>
+<ul>
+    <li><code>u</code> (str): The URL to test for Path Traversal vulnerabilities.</li>
+    <li><code>php_wrapper</code> (str): The PHP wrapper to use for the request (e.g., "file").</li>
+    <li><code>linux_file</code> (int): The Linux file to test (0 or 1).</li>
+    <li><code>null_byte</code> (bool): Whether to include a null byte ("%00") in the request (default is False).</li>
+    <li><code>bypass</code> (bool): Whether to use bypass techniques (default is False).</li>
+    <li><code>target_os</code> (str): The target OS to test (e.g., "linux" or "windows").</li>
+    <li><code>proxy</code> (str): The proxy to use for the request (optional).</li>
+    <li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
+    <li><code>user_agent</code> (str): The user-agent string to use for the request (optional).</li>
+    <li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
+    <li><strong>Returns:</strong> A tuple containing whether the Path Traversal vulnerability is detected and the URL of the vulnerability (if found).</li>
+</ul>
+
+<h3><code>path_traversal_urls(u, null_byte, bypass, target_os, php_wrapper, timeout, user_agent, cookie, headers, http_proxies, socks4_proxies, socks5_proxies)</code></h3>
+<p>This method scans a URL and checks for Path Traversal vulnerabilities. It tests different URLs based on the provided parameters and options, and returns a list of URLs that exhibit Path Traversal vulnerabilities.</p>
+<ul>
+    <li><code>u</code> (str): The URL to test for Path Traversal vulnerabilities.</li>
+    <li><code>null_byte</code> (bool): Whether to include a null byte ("%00") in the request (default is False).</li>
+    <li><code>bypass</code> (bool): Whether to use bypass techniques (default is False).</li>
+    <li><code>target_os</code> (str): The target OS to test (e.g., "linux" or "windows").</li>
+    <li><code>php_wrapper</code> (str): The PHP wrapper to use for the request (e.g., "file").</li>
+    <li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
+    <li><code>user_agent</code> (str): The user-agent string to use for the request (optional).</li>
+    <li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
+    <li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
+    <li><strong>Returns:</strong> A list of URLs that exhibit Path Traversal vulnerabilities.</li>
+</ul>
+
+<h3><code>scan(u, max_pages, logs, null_byte, bypass, target_os, php_wrapper, timeout, user_agent, cookie, pages, headers, http_proxies, socks4_proxies, socks5_proxies)</code></h3>
+<p>This method scans a URL and its linked pages for Path Traversal vulnerabilities. It allows for a comprehensive scan across multiple pages, checks for Path Traversal issues, and returns a list of URLs that exhibit Path Traversal vulnerabilities.</p>
+<ul>
+    <li><code>u</code> (str): The URL to scan for Path Traversal vulnerabilities.</li>
+    <li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
+    <li><code>logs</code> (bool): Whether to show scan logs (default is True).</li>
+    <li><code>null_byte</code> (bool): Whether to include a null byte ("%00") in the request (default is False).</li>
+    <li><code>bypass</code> (bool): Whether to use bypass techniques (default is False).</li>
+    <li><code>target_os</code> (str): The target OS to test (e.g., "linux" or "windows").</li>
+    <li><code>php_wrapper</code> (str): The PHP wrapper to use for the request (e.g., "file").</li>
+    <li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
+    <li><code>user_agent</code> (str): The user-agent string to use for the request (optional).</li>
+    <li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
+    <li><code>pages</code> (list): List of specific pages to scan (optional).</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
+    <li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
+    <li><strong>Returns:</strong> A list of dictionaries containing scan results for each page scanned, including URLs that exhibit Path Traversal vulnerabilities.</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>Here's an example of how to use the <code>Path_Traversal_Scanner</code> class to scan for Path Traversal vulnerabilities in web applications:</p>
+```python
+from bane.scanners.vulnerabilities import Path_Traversal_Scanner
+
+#Specify the target URL to scan
+target_url = "http://example.com"
+
+#Set other parameters as needed
+max_pages = 5  #Maximum number of pages to scan
+logs = True  #Whether to show scan logs
+
+#Perform the Path Traversal vulnerability scan
+results = Path_Traversal_Scanner.scan(
+    u=target_url,
+    max_pages=max_pages,
+    logs=logs,
+)
+
+#Display the scan results
+for result in results:
+    print("Page:", result["page"])
+    for url_result in result["result"]:
+        print("Vulnerable URL:", url_result)

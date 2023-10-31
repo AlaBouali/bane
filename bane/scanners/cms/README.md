@@ -31,10 +31,10 @@
 <pre><code>
 from bane.scanners.cms import Drupal_Scanner
 
-# Target website URL
+#Target website URL
 target_url = "https://example.com"
 
-# Call the scan method
+#Call the scan method
 result = Drupal_Scanner.scan(
     target_url,
     user_agent="CustomUserAgent",
@@ -53,7 +53,7 @@ result = Drupal_Scanner.scan(
     socks5_proxies=["9.10.11.12:1080"]
 )
 
-# Access the result
+#Access the result
 print(result)
 </code></pre>
 <h1>Joomla_Scanner Class</h1>
@@ -90,10 +90,10 @@ print(result)
 <pre><code>
 from bane.scanners.cms import Joomla_Scanner
 
-# Target website URL
+#Target website URL
 target_url = "https://example.com"
 
-# Call the scan method
+#Call the scan method
 result = Joomla_Scanner.scan(
     target_url,
     user_agent="CustomUserAgent",
@@ -113,7 +113,7 @@ result = Joomla_Scanner.scan(
     socks5_proxies=["9.10.11.12:1080"]
 )
 
-# Access the result
+#Access the result
 print(result)
 </code></pre>
 <h1>Magento_Scanner Class</h1>
@@ -150,10 +150,10 @@ print(result)
 <pre><code>
 from bane.scanners.cms import Magento_Scanner
 
-# Target website URL
+#Target website URL
 target_url = "https://example.com"
 
-# Call the scan method
+#Call the scan method
 result = Magento_Scanner.scan(
     u=target_url,
     user_agent="CustomUserAgent",
@@ -173,7 +173,7 @@ result = Magento_Scanner.scan(
     socks5_proxies=["9.10.11.12:1080"]
 )
 
-# Access the result
+#Access the result
 print(result)
 </code></pre>
 <h1>WordPress_Scanner Class</h1>
@@ -217,10 +217,10 @@ print(result)
 <pre><code>
 from bane.scanners.cms import WordPress_Scanner
 
-# Target website URL
+#Target website URL
 target_url = "https://example.com"
 
-# Call the scan method
+#Call the scan method
 result = WordPress_Scanner.scan(
     u=target_url,
     max_wpscan_tries=3,
@@ -247,6 +247,6 @@ result = WordPress_Scanner.scan(
     socks5_proxies=["9.10.11.12:1080"]
 )
 
-# Access the result
+#Access the result
 print(result)
 </code></pre>

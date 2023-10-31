@@ -46,7 +46,7 @@
 import time
 from bane.bruteforce import Admin_Panel_Finder
 
-# Create an instance of Admin_Panel_Finder
+#Create an instance of Admin_Panel_Finder
 admin_finder = Admin_Panel_Finder(
     target="https://example.com",
     logs=True,
@@ -61,12 +61,12 @@ admin_finder = Admin_Panel_Finder(
     socks5_proxies=None
 )
 
-# Admin panel search is performed in the background
-# You can check the status with admin_finder.done()
+#Admin panel search is performed in the background
+#You can check the status with admin_finder.done()
 while not admin_finder.done():
     time.sleep(1)
 
-# Access the result
+#Access the result
 result = admin_finder.result
 print("Admin Panel URLs:", result)
 </code></pre>
@@ -123,17 +123,17 @@ print("Admin Panel URLs:", result)
 import time
 from bane.bruteforce import Decryptor
 
-# Create an instance of Decryptor
-u = "5f4dcc3b5aa765d61d8327deb882cf99"  # Example MD5 hash
+#Create an instance of Decryptor
+u = "5f4dcc3b5aa765d61d8327deb882cf99"  #Example MD5 hash
 word_list = ["password", "admin", "secret"]
 decrypt_instance = Decryptor(u, word_list=word_list, md5_hash=True, logs=True)
 
-# Hash decryption is performed in the background
-# You can check the status with decrypt_instance.done()
+#Hash decryption is performed in the background
+#You can check the status with decrypt_instance.done()
 while not decrypt_instance.done():
     time.sleep(1)
 
-# Access the result
+#Access the result
 result = decrypt_instance.result
 print("Decryption Result:", result)
 </code></pre>
@@ -182,7 +182,7 @@ print("Decryption Result:", result)
 from bane.bruteforce import Files_Manager_Finder
 import time
 
-# Create an instance of Files_Manager_Finder
+#Create an instance of Files_Manager_Finder
 finder = Files_Manager_Finder(
     u="https://example.com",
     logs=True,
@@ -196,12 +196,12 @@ finder = Files_Manager_Finder(
     socks5_proxies=None
 )
 
-# File/resource search is performed in the background
-# You can check the status with finder.done()
+#File/resource search is performed in the background
+#You can check the status with finder.done()
 while not finder.done():
     time.sleep(1)
 
-# Access the result
+#Access the result
 result = finder.result
 print("File/Resource Found:", result)
 </code></pre>
@@ -252,7 +252,7 @@ print("File/Resource Found:", result)
 import time
 from bane.bruteforce import Force_Browsing
 
-# Create an instance of Force_Browsing
+#Create an instance of Force_Browsing
 browsing = Force_Browsing(
     u="https://example.com",
     timeout=10,
@@ -267,16 +267,16 @@ browsing = Force_Browsing(
     socks5_proxies=None
 )
 
-# Force browsing is performed in the background
-# You can check the status with browsing.done()
+#Force browsing is performed in the background
+#You can check the status with browsing.done()
 while not browsing.done():
     time.sleep(1)
 
-# Access the result
+#Access the result
 result = browsing.result
 print("Browsing Result:", result)
 
-# Using the access function
+#Using the access function
 url_to_access = "https://example.com/page"
 is_accessible = Force_Browsing.access(
     u=url_to_access,
@@ -343,7 +343,7 @@ else:
 import time
 from bane.bruteforce import HTTP_Auth_Bruteforce
 
-# Create an instance of HTTP_Auth_Bruteforce
+#Create an instance of HTTP_Auth_Bruteforce
 auth_bruteforce = HTTP_Auth_Bruteforce(
     u="https://example.com",
     word_list=["username1:password1", "username2:password2"],
@@ -359,12 +359,12 @@ auth_bruteforce = HTTP_Auth_Bruteforce(
     socks5_proxies=None
 )
 
-# HTTP authentication bruteforce attack is performed in the background
-# You can check the status with auth_bruteforce.done()
+#HTTP authentication bruteforce attack is performed in the background
+#You can check the status with auth_bruteforce.done()
 while not auth_bruteforce.done():
     time.sleep(1)
 
-# Access the result
+#Access the result
 result = auth_bruteforce.result
 print("auth_bruteforce Result:", result)
 </code></pre>
@@ -444,7 +444,7 @@ print("auth_bruteforce Result:", result)
 import time
 from bane.bruteforce import Hydra
 
-# Create an instance of Hydra for SSH login
+#Create an instance of Hydra for SSH login
 hydra_ssh = Hydra(
     u="ssh.example.com",
     p=22,
@@ -458,11 +458,11 @@ hydra_ssh = Hydra(
     socks5_proxies=None
 )
 
-# Wait for the brute-force operation to finish
+#Wait for the brute-force operation to finish
 while not hydra_ssh.done():
     time.sleep(1)
 
-# Access the result
+#Access the result
 result = hydra_ssh.result
 print("Successful SSH login:", result)
 </code></pre>
@@ -506,7 +506,7 @@ print("Successful SSH login:", result)
 import time
 from bane.bruteforce import Web_Login_Bruteforce
 
-# Create an instance of Web_Login_Bruteforce
+#Create an instance of Web_Login_Bruteforce
 web_bruteforce = Web_Login_Bruteforce(
     u="https://example.com/login",
     word_list=["user1:pass1", "user2:pass2"],
@@ -520,11 +520,11 @@ web_bruteforce = Web_Login_Bruteforce(
     socks5_proxies=None
 )
 
-# Wait for the brute-force operation to finish
+#Wait for the brute-force operation to finish
 while not web_bruteforce.done():
     time.sleep(1)
 
-# Access the result
+#Access the result
 result = web_bruteforce.result
 print("Successful login:", result)
 </code></pre>

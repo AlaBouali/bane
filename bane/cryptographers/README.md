@@ -41,21 +41,21 @@
 <pre><code>
 from bane.cryptographers import BASE64
 
-# Encoding a string
+#Encoding a string
 data = "Hello, World!"
 encoded_data = BASE64.encode(data)
 print("Encoded Data:", encoded_data)
 
-# Decoding the encoded string
+#Decoding the encoded string
 decoded_data = BASE64.decode(encoded_data)
 print("Decoded Data:", decoded_data)
 
-# Encoding and decoding a file
+#Encoding and decoding a file
 file_path = "example.txt"
 encoded_file = BASE64.encode_file(file_path)
 decoded_file = BASE64.decode_file(file_path)
 
-# You can now work with the encoded_file and decoded_file as needed.
+#You can now work with the encoded_file and decoded_file as needed.
 </code></pre>
 
 <h1>CAESAR Class</h1>
@@ -87,13 +87,13 @@ decoded_file = BASE64.decode_file(file_path)
 <pre><code>
 from bane.cryptographers import CAESAR
 
-# Encoding a text with a Caesar cipher
+#Encoding a text with a Caesar cipher
 original_text = "Hello, World!"
 key = 3
 encoded_text = CAESAR.encode(original_text, key)
 print("Encoded Text:", encoded_text)
 
-# Decoding the encoded text with the same key
+#Decoding the encoded text with the same key
 decoded_text = CAESAR.decode(encoded_text, key)
 print("Decoded Text:", decoded_text)
 </code></pre>
@@ -133,17 +133,17 @@ print("Decoded Text:", decoded_text)
 <pre><code>
 from bane.cryptographers import SHA1
 
-# Generating a SHA-1 hash for a string
+#Generating a SHA-1 hash for a string
 data = "Hello, World!"
 hash_value = SHA1.hash(data)
 print("SHA-1 Hash:", hash_value)
 
-# Generating a SHA-1 hash for the contents of a file
+#Generating a SHA-1 hash for the contents of a file
 file_path = "example.txt"
 file_hash = SHA1.hash_file(file_path)
 print("File SHA-1 Hash:", file_hash)
 
-# Comparing a word with a SHA-1 hash
+#Comparing a word with a SHA-1 hash
 word_to_compare = "OpenAI"
 given_hash = "2d3ac8bc1b411156957c5733bb7c4b69f9e7780d"
 is_matched = SHA1.compare_hash(word_to_compare, given_hash)
@@ -186,17 +186,17 @@ print("Matched:", is_matched)
 <pre><code>
 from bane.cryptographers import SHA224
 
-# Generating a SHA-224 hash for a string
+#Generating a SHA-224 hash for a string
 data = "Hello, World!"
 hash_value = SHA224.hash(data)
 print("SHA-224 Hash:", hash_value)
 
-# Generating a SHA-224 hash for the contents of a file
+#Generating a SHA-224 hash for the contents of a file
 file_path = "example.txt"
 file_hash = SHA224.hash_file(file_path)
 print("File SHA-224 Hash:", file_hash)
 
-# Comparing a word with a SHA-224 hash
+#Comparing a word with a SHA-224 hash
 word_to_compare = "OpenAI"
 given_hash = "6d3549a83a1c75e1b29229ab5dd9b8ab02986f465bf48cf2a1bf8ebd"
 is_matched = SHA224.compare_hash(word_to_compare, given_hash)
@@ -240,17 +240,17 @@ print("Matched:", is_matched)
 <pre><code>
 from bane.cryptographers import SHA256
 
-# Generating a SHA-256 hash for a string
+#Generating a SHA-256 hash for a string
 data = "Hello, World!"
 hash_value = SHA256.hash(data)
 print("SHA-256 Hash:", hash_value)
 
-# Generating a SHA-256 hash for the contents of a file
+#Generating a SHA-256 hash for the contents of a file
 file_path = "example.txt"
 file_hash = SHA256.hash_file(file_path)
 print("File SHA-256 Hash:", file_hash)
 
-# Comparing a word with a SHA-256 hash
+#Comparing a word with a SHA-256 hash
 word_to_compare = "OpenAI"
 given_hash = "6d3549a83a1c75e1b29229ab5dd9b8ab02986f465bf48cf2a1bf8ebd"
 is_matched = SHA256.compare_hash(word_to_compare, given_hash)
@@ -294,17 +294,17 @@ print("Matched:", is_matched)
 <pre><code>
 from bane.cryptographers import SHA384
 
-# Generating a SHA-384 hash for a string
+#Generating a SHA-384 hash for a string
 data = "Hello, World!"
 hash_value = SHA384.hash(data)
 print("SHA-384 Hash:", hash_value)
 
-# Generating a SHA-384 hash for the contents of a file
+#Generating a SHA-384 hash for the contents of a file
 file_path = "example.txt"
 file_hash = SHA384.hash_file(file_path)
 print("File SHA-384 Hash:", file_hash)
 
-# Comparing a word with a SHA-384 hash
+#Comparing a word with a SHA-384 hash
 word_to_compare = "OpenAI"
 given_hash = "6d3549a83a1c75e1b29229ab5dd9b8ab02986f465bf48cf2a1bf8ebd"
 is_matched = SHA384.compare_hash(word_to_compare, given_hash)
@@ -348,17 +348,17 @@ print("Matched:", is_matched)
 <pre><code>
 from bane.cryptographers import SHA512
 
-# Generating a SHA-512 hash for a string
+#Generating a SHA-512 hash for a string
 data = "Hello, World!"
 hash_value = SHA512.hash(data)
 print("SHA-512 Hash:", hash_value)
 0
-# Generating a SHA-512 hash for the contents of a file
+#Generating a SHA-512 hash for the contents of a file
 file_path = "example.txt"
 file_hash = SHA256.hash_file(file_path)
 print("File SHA-512 Hash:", file_hash)
 
-# Comparing a word with a SHA-512 hash
+#Comparing a word with a SHA-512 hash
 word_to_compare = "OpenAI"
 given_hash = "6d3549a83a1c75e1b29229ab5dd9b8ab02986f465bf48cf2a1bf8ebd"
 is_matched = SHA512.compare_hash(word_to_compare, given_hash)
@@ -393,13 +393,13 @@ print("Matched:", is_matched)
 <pre><code>
 from bane.cryptographers import XOR
 
-# Encrypting a string using XOR encryption
+#Encrypting a string using XOR encryption
 data = "Hello, World!"
 key = "SecretKey"
 encrypted_data = XOR.encrypt(data, key)
 print("XOR Encrypted Data:", encrypted_data)
 
-# Encrypting the contents of a file using XOR encryption
+#Encrypting the contents of a file using XOR encryption
 file_path = "example.txt"
 file_key = "AnotherSecretKey"
 encrypted_file = XOR.encrypt_file(file_path, file_key)

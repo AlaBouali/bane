@@ -64,10 +64,10 @@
 <pre><code>
 from bane.gather_info import Domain_Info
 
-# Example domain for information gathering
+#Example domain for information gathering
 domain = "example.com"
 
-# Gather domain information
+#Gather domain information
 info = Domain_Info.get_domain_info(
     domain,
     headers={"Custom-Header": "Value"},
@@ -80,7 +80,7 @@ info = Domain_Info.get_domain_info(
     resolve_lifetime=1
 )
 
-# Access the gathered information
+#Access the gathered information
 print("Resolved Hosts:", info["resolved_host"])
 print("Domain Information:", info["info"])
 print("WHOIS Information:", info["whois"])
@@ -112,7 +112,7 @@ print("WHOIS Information:", info["whois"])
 <pre><code>
 from bane.gather_info import Dorking_Info
 
-# Perform a Google dork search for a specific query
+#Perform a Google dork search for a specific query
 query = "example query"
 results = Dorking_Info.google(
     q=query,
@@ -124,7 +124,7 @@ results = Dorking_Info.google(
     pause=2
 )
 
-# Access the list of URLs related to the query
+#Access the list of URLs related to the query
 for result in results:
     print(result)
 </code></pre>
@@ -191,17 +191,17 @@ for result in results:
 <pre><code>
 from bane.gather_info import IP_info
 
-# Example IP address for information gathering
+#Example IP address for information gathering
 ip_address = "192.168.1.1"
 
-# Gather IP information
+#Gather IP information
 info = IP_info.get_IP_info(
     ip=ip_address,
     timeout=15,
     proxy={"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"}
 )
 
-# Access the gathered information
+#Access the gathered information
 print("Geolocation Information:", info["geo_ip_location"])
 print("Reverse IP Lookup:", info["reverse_ip_lookup"])
 print("Shodan Report:", info["shodan_report"])
@@ -265,22 +265,22 @@ print("Shodan Report:", info["shodan_report"])
 <pre><code>
 from bane.gather_info import Network_Info
 
-# Retrieve local IP address
+#Retrieve local IP address
 local_ip = Network_Info.get_local_ip()
 print("Local IP Address:", local_ip)
 
-# Check if a host is alive
+#Check if a host is alive
 target_host = "example.com"
 is_alive = Network_Info.host_alive(target_host)
 print("Host Is Alive:", is_alive)
 
-# Perform TCP port scanning
+#Perform TCP port scanning
 ip_to_scan = "192.168.1.1"
 port_to_scan = 80
 is_port_open = Network_Info.tcp_scan(ip_to_scan, port=port_to_scan)
 print(f"Port {port_to_scan} Is Open:", is_port_open)
 
-# Get a banner from a network service
+#Get a banner from a network service
 target_host = "example.com"
 port_to_connect = 23
 banner = Network_Info.get_banner(target_host, p=port_to_connect)
@@ -364,16 +364,16 @@ print("Service Banner:", banner)
 <pre><code>
 from bane.gather_info import Subdomain_Info
 
-# Fetch subdomains from CRT.sh
+#Fetch subdomains from CRT.sh
 target_domain = "example.com"
 subdomains_crt = Subdomain_Info.subdomains_crt(target_domain)
 print("Subdomains from CRT.sh:", subdomains_crt)
 
-# Fetch subdomains from the Wayback Machine
+#Fetch subdomains from the Wayback Machine
 subdomains_wayback = Subdomain_Info.get_subdomains_from_wayback(target_domain)
 print("Subdomains from Wayback Machine:", subdomains_wayback)
 
-# Combine subdomains from CRT.sh and Wayback Machine
+#Combine subdomains from CRT.sh and Wayback Machine
 subdomains_combined = Subdomain_Info.get_subdomains(target_domain)
 print("Combined Subdomains:", subdomains_combined)
 </code></pre>
@@ -443,20 +443,20 @@ print("Combined Subdomains:", subdomains_combined)
 <pre><code>
 from bane.gather_info import URL_Info
 
-# Perform a security check on a URL
+#Perform a security check on a URL
 url = "https://example.com"
 security_report = URL_Info.security_check(url)
 print("Security Check:", security_report)
 
-# Perform a deep inspection on a URL
+#Perform a deep inspection on a URL
 deep_inspection = URL_Info.deep_inspect(url)
 print("Deep Inspection:", deep_inspection)
 
-# Perform an HTTP OPTIONS request on a URL
+#Perform an HTTP OPTIONS request on a URL
 options_headers = URL_Info.http_options(url)
 print("HTTP OPTIONS Headers:", options_headers)
 
-# Retrieve response headers from a URL
+#Retrieve response headers from a URL
 response_headers = URL_Info.headers(url)
 print("Response Headers:", response_headers)
 </code></pre>
