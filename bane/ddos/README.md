@@ -1,12 +1,12 @@
-<h1>http_puncher Class</h1>
+<h1>HTTP_Puncher Class</h1>
 
 <h2>Class Overview</h2>
-<p>The <code>http_puncher</code> class is part of the "bane" module and is used for launching HTTP-based DDoS attacks on a target URL.</p>
+<p>The <code>HTTP_Puncher</code> class is part of the "bane" module and is used for launching HTTP-based DDoS attacks on a target URL.</p>
 
 <h2>Class Constructor</h2>
-<pre><code>class http_puncher(DDoS_Class)
+<pre><code>class HTTP_Puncher(DDoS_Class)
 </code></pre>
-<p>This constructor initializes an instance of the <code>http_puncher</code> class with the following parameters:</p>
+<p>This constructor initializes an instance of the <code>HTTP_Puncher</code> class with the following parameters:</p>
 
 <ul>
     <li><code>u</code> (str): The target URL for the DDoS attack.</li>
@@ -30,13 +30,13 @@
 <p>This method initiates the DDoS attack by sending HTTP requests to the target URL with random headers and data. It operates in a separate thread.</p>
 
 <h2>Example Usage</h2>
-<p>To use the <code>http_puncher</code> class, create an instance of it by providing the required parameters, and it will start launching DDoS attacks in the background. Here's an example:</p>
+<p>To use the <code>HTTP_Puncher</code> class, create an instance of it by providing the required parameters, and it will start launching DDoS attacks in the background. Here's an example:</p>
 
 <pre><code>
-from bane.ddos.utils import http_puncher
+from bane.ddos import HTTP_Puncher
 
-# Create an instance of http_puncher
-ddos_attack = http_puncher(
+# Create an instance of HTTP_Puncher
+ddos_attack = HTTP_Puncher(
     u="https://example.com",
     send_files=True,
     cookie="CustomCookie",
