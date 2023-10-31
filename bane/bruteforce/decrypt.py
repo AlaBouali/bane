@@ -1,7 +1,7 @@
 from bane.bruteforce.utils import *
 
 
-class decrypt:
+class Decryptor:
     __slots__ = ["stop", "finish", "result", "logs"]
 
     def __init__(
