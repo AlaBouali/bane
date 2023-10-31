@@ -1,6 +1,6 @@
 from bane.bruteforce.utils import *
 
-class admin_panel_finder:
+class Admin_Panel_Finder:
     __slots__ = ["stop", "finish", "result", "logs"]
 
     def done(self):
@@ -9,23 +9,23 @@ class admin_panel_finder:
 
     def __init__(
         self,
-        u,
-        logs=True, 
-        threads_daemon=True,
-        user_agent=None,
-        cookie=None,
-        ext="php",
-        timeout=10,
-        headers={},
-        http_proxies=None,
-        socks4_proxies=None,
-        socks5_proxies=None
-        ):
+        target,  # (str) The target website URL
+        logs=True,  # (bool) Enable or disable logging (default is True)
+        threads_daemon=True,  # (bool) Set thread as daemon (default is True)
+        user_agent=None,  # (str) Custom User-Agent header for requests
+        cookie=None,  # (str) Custom cookies to include in requests
+        ext="php",  # (str) Extension to use for URLs (default is 'php')
+        timeout=10,  # (int) Request timeout in seconds (default is 10)
+        headers={},  # (dict) Additional HTTP headers to include
+        http_proxies=None,  # (list) List of HTTP proxies to use
+        socks4_proxies=None,  # (list) List of SOCKS4 proxies to use
+        socks5_proxies=None  # (list) List of SOCKS5 proxies to use
+    ):
         """
         This function searches for potential admin panel URLs on a website using a predefined list of extensions.
-        
+
         Parameters:
-        - u (str): The target website URL.
+        - target (str): The target website URL.
         - logs (bool): Enable or disable logging (default is True).
         - threads_daemon (bool): Set thread as daemon (default is True).
         - user_agent (str): Custom User-Agent header for requests.
@@ -45,7 +45,7 @@ class admin_panel_finder:
         t = threading.Thread(
             target=self.crack,
             args=(
-                u,
+                target,
                 timeout,
                 logs,
                 ext,
@@ -60,7 +60,7 @@ class admin_panel_finder:
 
     def crack(
         self,
-        u,
+        target,
         timeout,
         logs,
         ext,
@@ -69,6 +69,7 @@ class admin_panel_finder:
         proxies,
         headers
     ):
+        u=target
         links = []
         ext = ext.strip()
         if ext.lower() == "php":
@@ -116,7 +117,7 @@ class admin_panel_finder:
                     timeout=timeout,
                     verify=False,
                 )
-                if r.status_code == requests.Session().codes.ok:
+                if r.status_code == requests.codes.ok:
                     if logs == True:
                         print("[+]FOUND!!!")
                     k.append(g)
