@@ -25,11 +25,11 @@
 <pre><code>
 from bane.scanners.vulnerabilities import ADB_Exploit_Scanner
 
-# Create an instance of ADB_Exploit_Scanner and perform the scan
+#Create an instance of ADB_Exploit_Scanner and perform the scan
 target_device = "192.168.1.100"
 scan_result = ADB_Exploit_Scanner.scan(target_device, timeout=10, p=5555, proxy_host="proxy.example.com", proxy_port=8080, proxy_type="socks5")
 
-# Check the result of the scan
+#Check the result of the scan
 if scan_result:
     print(f"ADB exploit vulnerability found on {}.".format(target_device))
 else:
@@ -74,10 +74,10 @@ else:
 <pre><code>
 from bane.scanners.vulnerabilities import Backend_Technologies_Scanner
 
-# Define the target URL
+#Define the target URL
 target_url = "https://example.com"
 
-# Create an instance of Backend_Technologies_Scanner and perform the scan
+#Create an instance of Backend_Technologies_Scanner and perform the scan
 scan_result = Backend_Technologies_Scanner.scan(
     u=target_url,
     timeout=10,
@@ -92,12 +92,12 @@ scan_result = Backend_Technologies_Scanner.scan(
     socks5_proxies=["9.10.11.12:1080"]
 )
 
-# Access the scan results
+#Access the scan results
 shodan_report = scan_result['shodan_report']
 server_exploits = scan_result['server_exploits']
 backend_technology_exploits = scan_result['backend_technology_exploits']
 
-# Print or process the results as needed
+#Print or process the results as needed
 print("Shodan Report:", shodan_report)
 print("Server Exploits:", server_exploits)
 print("Backend Technology Exploits:", backend_technology_exploits)
@@ -135,10 +135,10 @@ print("Backend Technology Exploits:", backend_technology_exploits)
 <pre><code>
 from bane.scanners.vulnerabilities import ClickJacking_Scanner
 
-# Define the target URL
+#Define the target URL
 target_url = "https://example.com"
 
-# Create an instance of ClickJacking_Scanner and perform the scan
+#Create an instance of ClickJacking_Scanner and perform the scan
 clickjacking_possible = ClickJacking_Scanner.scan(
     u=target_url,
     proxy=None,
@@ -153,7 +153,7 @@ clickjacking_possible = ClickJacking_Scanner.scan(
     socks5_proxies=["9.10.11.12:1080"]
 )
 
-# Check if Clickjacking is possible
+#Check if Clickjacking is possible
 if clickjacking_possible:
     print("Clickjacking may be possible on", target_url)
 else:
@@ -216,10 +216,10 @@ else:
 <pre><code>
 from bane.scanners.vulnerabilities import CORS_Misconfiguration_Scanner
 
-# List of URLs to scan
+#List of URLs to scan
 urls_to_scan = ["https://example.com/page1", "https://example.com/page2"]
 
-# Scan for CORS misconfigurations
+#Scan for CORS misconfigurations
 results = CORS_Misconfiguration_Scanner.scan(
     urls=urls_to_scan,
     origin="www.evil-domain.com",
@@ -238,7 +238,7 @@ results = CORS_Misconfiguration_Scanner.scan(
     headers={"Custom-Header": "Value"}
 )
 
-# Display vulnerable URLs
+#Display vulnerable URLs
 for result in results:
     print("Vulnerable URL:", result['page'])
 </code></pre>
@@ -319,7 +319,7 @@ for result in results:
 <pre><code>
 from bane.scanners.vulnerabilities import CRLF_Injection_Scanner
 
-# Example usage of scan_header method
+#Example usage of scan_header method
 result_header = CRLF_Injection_Scanner.scan_header(
     u="https://example.com",
     unicode_random_level=1,
@@ -335,7 +335,7 @@ result_header = CRLF_Injection_Scanner.scan_header(
     socks5_proxies=["9.10.11.12:1080"]
 )
 
-# Example usage of scan_body method
+#Example usage of scan_body method
 result_body = CRLF_Injection_Scanner.scan_body(
     u="https://example.com",
     unicode_random_level=1,
@@ -425,14 +425,14 @@ result_body = CRLF_Injection_Scanner.scan_body(
 <code>
 from bane.scanners.vulnerabilities import CSRF_Scanner
 
-# Specify the URL and cookies for authentication
+#Specify the URL and cookies for authentication
 url = "https://example.com"
 cookie = "your_auth_cookie_here"
 
-# Scan the website for CSRF vulnerabilities
+#Scan the website for CSRF vulnerabilities
 vulnerable_pages = CSRF_Scanner.scan(url, cookie=cookie)
 
-# Print the results
+#Print the results
 for page in vulnerable_pages:
     print(f"Vulnerable Page: {page['page']}")
     for result in page['result']:
@@ -469,13 +469,13 @@ for page in vulnerable_pages:
 <code>
 from bane.scanners.vulnerabilities import Exposed_ENV_Scanner
 
-# Specify the URL to scan for exposed environment files
+#Specify the URL to scan for exposed environment files
 url = "https://example.com"
 
-# Scan the URL for exposed environment files
+#Scan the URL for exposed environment files
 result, exposed_url = Exposed_ENV_Scanner.scan(url)
 
-# Check the result
+#Check the result
 if result:
     print(f"Exposed environment file found at: {exposed_url}")
 else:
@@ -507,13 +507,13 @@ else:
 <code>
 from bane.scanners.vulnerabilities import Exposed_Git_Scanner
 
-# Specify the URL to scan for exposed Git repositories
+#Specify the URL to scan for exposed Git repositories
 url = "https://example.com/repo"
 
-# Scan the URL for exposed Git repositories
+#Scan the URL for exposed Git repositories
 result = Exposed_Git_Scanner.scan(url)
 
-# Check the result
+#Check the result
 if result:
     print("Exposed Git repository found.")
 else:
@@ -542,14 +542,14 @@ else:
 <code>
 from bane.scanners.vulnerabilities import Exposed_Telent_Scanner
 
-# Specify the host and port for Telnet scanning
+#Specify the host and port for Telnet scanning
 host = "example.com"
 port = 23
 
-# Attempt to establish a Telnet connection
+#Attempt to establish a Telnet connection
 result = Exposed_Telent_Scanner.scan(host, port)
 
-# Check the result
+#Check the result
 if result:
     print("Telnet service is exposed on the host.")
 else:
@@ -618,13 +618,13 @@ else:
 <code>
 from bane.scanners.vulnerabilities import File_Upload_Scanner
 
-# Specify the target URL to scan
+#Specify the target URL to scan
 target_url = "http://example.com"
 
-# Perform a scan for file upload vulnerabilities
+#Perform a scan for file upload vulnerabilities
 results = File_Upload_Scanner.scan(target_url)
 
-# Display the scan results
+#Display the scan results
 for result in results:
     print("Page:", result['page'])
     for form_result in result['result']:
@@ -726,15 +726,15 @@ for result in results:
 <p><code>
 from bane.scanners.vulnerabilities import Open_Redirect_Scanner
 
-# Specify the target URL to scan
+#Specify the target URL to scan
 target_url = "http://example.com"
 
-# Set other parameters as needed
-payload = "http://www.google.com"  # Open redirect payload
-max_pages = 5  # Maximum number of pages to scan
-logs = True  # Whether to show scan logs
+#Set other parameters as needed
+payload = "http://www.google.com"  #Open redirect payload
+max_pages = 5  #Maximum number of pages to scan
+logs = True  #Whether to show scan logs
 
-# Perform the open redirect scan
+#Perform the open redirect scan
 results = Open_Redirect_Scanner.scan(
     u=target_url,
     max_pages=max_pages,
@@ -742,7 +742,7 @@ results = Open_Redirect_Scanner.scan(
     logs=logs,
 )
 
-# Display the scan results
+#Display the scan results
 for result in results:
     print("Page:", result["page"])
     for form_result in result["result"]:
@@ -758,7 +758,7 @@ for result in results:
             for sql_err in form_result["sql_errors"]:
                 print("Parameter:", sql_err["parameter"])
                 print("P.O.C.:", sql_err["p_o_c"])
-        # Add handling for other detected security issues (xml_parsing_errors, fetching_url_errors, reading_file_errors)
+        #Add handling for other detected security issues (xml_parsing_errors, fetching_url_errors, reading_file_errors)
         print()
 </code>
 </p>
