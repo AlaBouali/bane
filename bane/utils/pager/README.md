@@ -340,3 +340,239 @@ form_data = FORMS_FINDER.forms_parser_text(html_text, html_comments, include_lin
 #The form_data list now contains detailed information about forms in the HTML text.
 </code></pre>
 </p>
+
+<h1>Pager_Interface Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>Pager_Interface</code> class is part of the "bane" module and provides various methods for web scraping and JavaScript code analysis.</p>
+
+<h2>Methods</h2>
+
+<h3><code>spider_url(base_url, include_links=False, include_id=False, max_pages=5, timeout=15, cookie=None, user_agent=None, proxy=None, headers={}, parse_forms=False, only_urls=True)</code></h3>
+<p>This method scrapes web pages, starting from a base URL, and collects URLs. It supports the following parameters:</p>
+<ul>
+    <li><code>base_url</code> (str): The starting URL for web scraping.</li>
+    <li><code>include_links</code> (bool): Include links in the collected data (default is False).</li>
+    <li><code>include_id</code> (bool): Include HTML element IDs in the collected data (default is False).</li>
+    <li><code>max_pages</code> (int): Maximum number of pages to scrape (default is 5).</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 15).</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>proxy</code> (dict): Dictionary of HTTP proxies, e.g., {"http":"http://1.2.3.4:80", "https":"http://1.2.3.4:80"}</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+    <li><code>parse_forms</code> (bool): Parse HTML forms on the web pages (default is False).</li>
+    <li><code>only_urls</code> (bool): Collect only URLs (default is True).</li>
+</ul>
+
+<h3><code>extract_urls_from_js(js_content, base_url)</code></h3>
+<p>This method extracts URLs from JavaScript code. It takes the following parameters:</p>
+<ul>
+    <li><code>js_content</code> (str): JavaScript code to extract URLs from.</li>
+    <li><code>base_url</code> (str): The base URL to resolve relative URLs.</li>
+</ul>
+
+<h3><code>fetch_url(u, user_agent=None, timeout=10, proxy=None, cookie=None, headers={})</code></h3>
+<p>This method fetches the content of a URL. It supports the following parameters:</p>
+<ul>
+    <li><code>u</code> (str): The URL to fetch.</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for the request.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+    <li><code>proxy</code> (dict): Dictionary of HTTP proxies for the request.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in the request.</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+</ul>
+
+<h3><code>readable_js_code(code)</code></h3>
+<p>This method beautifies JavaScript code for better readability. It takes the following parameter:</p>
+<ul>
+    <li><code>code</code> (str): JavaScript code to beautify.</li>
+</ul>
+
+<h3><code>examine_js_code(u, user_agent=None, timeout=10, proxy=None, cookie=None, headers={})</code></h3>
+<p>This method examines JavaScript code on a web page, searching for secrets. It supports the following parameters:</p>
+<ul>
+    <li><code>u</code> (str): The URL of the web page to examine.</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+    <li><code>proxy</code> (dict): Dictionary of HTTP proxies for the request.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in the request.</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+</ul>
+
+<h3><code>extract_secrets_from_text(js_content)</code></h3>
+<p>This method extracts secrets from JavaScript code. It takes the following parameter:</p>
+<ul>
+    <li><code>js_content</code> (str): JavaScript code to extract secrets from.</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>Here's an example of how to use the <code>Pager_Interface</code> class:</p>
+
+<pre><code>
+from bane import Pager_Interface
+
+
+#Scrape web pages and collect URLs
+base_url = "https://example.com"
+collected_urls = Pager_Interface.spider_url(
+    base_url,
+    include_links=True,
+    include_id=True,
+    max_pages=5,
+    timeout=15,
+    cookie="custom_cookie",
+    user_agent="custom_user_agent",
+    proxy={"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"},
+    headers={"Custom-Header": "Value"},
+    parse_forms=True,
+    only_urls=True
+)
+
+#Extract URLs from JavaScript code
+js_content = "Your JavaScript code here"
+base_url = "https://example.com"
+js_urls = Pager_Interface.extract_urls_from_js(js_content, base_url)
+
+#Fetch the content of a URL
+url_to_fetch = "https://example.com/page"
+fetched_content = Pager_Interface.fetch_url(
+    url_to_fetch,
+    user_agent="custom_user_agent",
+    timeout=10,
+    proxy={"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"},
+    cookie="custom_cookie",
+    headers={"Custom-Header": "Value"}
+)
+
+#Beautify JavaScript code
+beautified_code = Pager_Interface.readable_js_code(js_content)
+
+#Examine JavaScript code for secrets
+url_to_examine = "https://example.com/page"
+secrets = Pager_Interface.examine_js_code(
+    url_to_examine,
+    user_agent="custom_user_agent",
+    timeout=10,
+    proxy={"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"},
+    cookie="custom_cookie",
+    headers={"Custom-Header": "Value"}
+)
+
+#Extract secrets from JavaScript code
+js_code = "Your JavaScript code here"
+secrets = Pager_Interface.extract_secrets_from_text(js_code)
+</code></pre>
+<h1>RANDOM_GENERATOR Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>RANDOM_GENERATOR</code> class provides various static methods for generating random data, such as IP addresses, URLs, phone numbers, HTML input colors, and random dates.</p>
+
+<h2>Methods</h2>
+
+<h3><code>get_random_ip()</code></h3>
+<p>This method generates a random IPv4 address that is not in any of the specified private IP address ranges. It has no parameters and returns a safe IP address for brute force.</p>
+
+<h3><code>get_safe_random_ip()</code></h3>
+<p>This method generates a random IPv4 address that is not in any of the specified excluded IP address ranges. It has no parameters and returns a safe IP address.</p>
+
+<h3><code>generate_random_url()</code></h3>
+<p>This method generates a random URL with a random protocol (http or https) and a random domain from a predefined list. It has no parameters and returns the generated URL.</p>
+
+<h3><code>generate_random_phone_number(pattern)</code></h3>
+<p>This method generates a random phone number based on a given pattern. The pattern should contain 'X' characters, which will be replaced with random digits. It takes the following parameter:</p>
+<ul>
+    <li><code>pattern</code> (str): The pattern for the phone number, e.g., "XXX-XXX-XXXX".</li>
+</ul>
+
+<h3><code>generate_random_html_input_color()</code></h3>
+<p>This method generates a random HTML input color in hexadecimal format (e.g., #RRGGBB). It has no parameters and returns the generated color.</p>
+
+<h3><code>random_date(start_date, end_date)</code></h3>
+<p>This method generates a random date between the specified start and end dates. It takes the following parameters:</p>
+<ul>
+    <li><code>start_date</code> (str): The start date in the format "YYYY-MM-DD".</li>
+    <li><code>end_date</code> (str): The end date in the format "YYYY-MM-DD".</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>Here's an example of how to use the <code>RANDOM_GENERATOR</code> class methods:</p>
+
+<pre><code>
+from bane import RANDOM_GENERATOR
+
+#Generate a random IP address
+random_ip = RANDOM_GENERATOR.get_random_ip()
+
+#Generate a safe random IP address
+safe_random_ip = RANDOM_GENERATOR.get_safe_random_ip()
+
+#Generate a random URL
+random_url = RANDOM_GENERATOR.generate_random_url()
+
+#Generate a random phone number with a pattern
+phone_pattern = "XXX-XXX-XXXX"
+random_phone_number = RANDOM_GENERATOR.generate_random_phone_number(phone_pattern)
+
+#Generate a random HTML input color
+random_color = RANDOM_GENERATOR.generate_random_html_input_color()
+
+#Generate a random date between two dates
+start_date = "2023-01-01"
+end_date = "2023-12-31"
+random_date = RANDOM_GENERATOR.random_date(start_date, end_date)
+</code></pre>
+<h1>LOGIN_FORM_FILLER Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>LOGIN_FORM_FILLER</code> class is part of the "bane" module and provides methods for working with login forms in web pages. It includes methods for getting a login form and setting its values for username and password.</p>
+
+<h2>Methods</h2>
+
+<h3><code>get_login_form(url, text)</code></h3>
+<p>This method retrieves the login form from a web page based on the URL and the HTML content. It searches for a form that contains an input field with the type "password" and returns the form data. It takes the following parameters:</p>
+<ul>
+    <li><code>url</code> (str): The URL of the web page containing the login form.</li>
+    <li><code>text</code> (str): The HTML content of the web page.</li>
+</ul>
+
+<h3><code>set_login_form(url, text, username, password)</code></h3>
+<p>This method sets the values for the login form's username and password fields. It uses the information obtained from the <code>get_login_form</code> method to identify the form and its input fields. It returns a list containing a dictionary of input names and their values, along with the form's action URL. It takes the following parameters:</p>
+<ul>
+    <li><code>url</code> (str): The URL of the web page containing the login form.</li>
+    <li><code>text</code> (str): The HTML content of the web page.</li>
+    <li><code>username</code> (str): The username to be filled in the login form.</li>
+    <li><code>password</code> (str): The password to be filled in the login form.</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>Here's an example of how to use the <code>LOGIN_FORM_FILLER</code> class methods:</p>
+
+<pre><code>
+from bane import LOGIN_FORM_FILLER
+
+#URL and HTML content of the web page
+web_page_url = "https://example.com/login"
+web_page_html = """
+<html>
+    <form action="/login" method="post">
+        <input type="text" name="username" value="">
+        <input type="password" name="password" value="">
+        <input type="submit" value="Login">
+    </form>
+</html>
+"""
+
+#Get the login form from the web page
+login_form_data = LOGIN_FORM_FILLER.get_login_form(web_page_url, web_page_html)
+
+#Set the login form values for username and password
+username_value = "your_username"
+password_value = "your_password"
+form_data, form_action = LOGIN_FORM_FILLER.set_login_form(
+    web_page_url, web_page_html, username_value, password_value
+)
+
+#Now you can use the form_data and form_action to submit the login form
+print("Form Data:", form_data)
+print("Form Action:", form_action)
+</code></pre>
