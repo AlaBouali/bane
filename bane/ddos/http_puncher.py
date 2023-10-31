@@ -1,6 +1,6 @@
 from bane.ddos.utils import *
 
-class http_puncher(DDoS_Class):
+class HTTP_Puncher(DDoS_Class):
     def __init__(
         self,
         u,

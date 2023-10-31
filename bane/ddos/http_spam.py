@@ -1,6 +1,6 @@
 from bane.ddos.utils import *
 
-class http_spam(DDoS_Class):
+class HTTP_Spam(DDoS_Class):
     def __init__(
         self,
         u,
