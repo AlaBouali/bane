@@ -137,3 +137,71 @@ while not decrypt_instance.done():
 result = decrypt_instance.result
 print("Decryption Result:", result)
 </code></pre>
+
+<h1>Files_Manager_Finder Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>Files_Manager_Finder</code> class is part of the "bane" module and is used to search for a specific file or resource on a website.</p>
+
+<h2>Class Constructor</h2>
+<pre><code>class Files_Manager_Finder(u, logs=True, threads_daemon=True, user_agent=None, cookie=None, timeout=10, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></pre>
+<p>This constructor initializes an instance of the <code>Files_Manager_Finder</code> class with the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The target URL or website where the file or resource is being searched.</li>
+    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+    <li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+</ul>
+
+<h2>Methods</h2>
+<h3><code>crack(self, u, user_agent, cookie, timeout, proxies, headers)</code></h3>
+<p>This method performs the file or resource search operation with the specified parameters. It takes the following parameters:</p>
+<ul>
+    <li><code>u</code> (str): The target URL or website where the file or resource is being searched.</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds.</li>
+    <li><code>proxies</code> (list): List of proxies to use for requests.</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+</ul>
+
+<h3><code>done(self)</code></h3>
+<p>This method returns the value of the <code>finish</code> attribute, indicating whether the operation is done or not.</p>
+
+<h2>Example Usage</h2>
+<p>To use the <code>Files_Manager_Finder</code> class, create an instance of it by providing the required parameters, and it will start searching for the file or resource in a separate thread. Here's an example:</p>
+
+<pre><code>
+from bane.bruteforce.utils import Files_Manager_Finder
+import time
+
+# Create an instance of Files_Manager_Finder
+finder = Files_Manager_Finder(
+    u="https://example.com",
+    logs=True,
+    threads_daemon=True,
+    user_agent="CustomUserAgent",
+    cookie="CustomCookie",
+    timeout=10,
+    headers={"Custom-Header": "Value"},
+    http_proxies=["1.1.1.1:8080", "2.2.2.2:80"],
+    socks4_proxies=["3.3.3.3:1080"],
+    socks5_proxies=None
+)
+
+# File/resource search is performed in the background
+# You can check the status with finder.done()
+while not finder.done():
+    time.sleep(1)
+
+# Access the result
+result = finder.result
+print("File/Resource Found:", result)
+</code></pre>

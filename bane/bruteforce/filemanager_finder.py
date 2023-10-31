@@ -1,6 +1,6 @@
 from bane.bruteforce.utils import *
 
-class filemanager_finder:
+class Files_Manager_Finder:
     __slots__ = ["logs", "stop", "finish", "result"]
 
     def __init__(
