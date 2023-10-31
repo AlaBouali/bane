@@ -43,7 +43,8 @@
 <p>To use the <code>Admin_Panel_Finder</code> class, create an instance of it by providing the required parameters, and it will start searching for admin panel URLs in a separate thread. Here's an example:</p>
 
 <pre><code>
-from bane.bruteforce import *
+import time
+from bane.bruteforce import Admin_Panel_Finder
 
 # Create an instance of Admin_Panel_Finder
 admin_finder = Admin_Panel_Finder(
@@ -119,6 +120,7 @@ print("Admin Panel URLs:", result)
 <p>To use the <code>Decryptor</code> class, create an instance of it by providing the required parameters, and it will start performing hash decryption attempts in a separate thread. Here's an example:</p>
 
 <pre><code>
+import time
 from bane.bruteforce import Decryptor
 
 # Create an instance of Decryptor

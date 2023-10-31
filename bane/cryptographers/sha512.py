@@ -4,13 +4,15 @@ class SHA512:
 
     @staticmethod
     def hash(w, encode=None):
-        if w:
+        if type(w)==str:
             if encode:
-                w.encode(encode)
+                w=w.encode(encode)
+            else:
+                w=w.encode()
             """
     function to return sha512 encrypted string
     """
-            return hashlib.sha512(w).hexdigest()
+        return hashlib.sha512(w).hexdigest()
 
 
     @staticmethod
@@ -25,7 +27,7 @@ class SHA512:
     @staticmethod
     def compare_hash(word, hash):
         if word and hash:
-            word = hashlib.sha512(word).hexdigest()
+            word = SHA512.hash(word)
             if word == hash:
                 return True
             return False

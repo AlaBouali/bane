@@ -7,6 +7,8 @@ class BASE64:
         if w:
             if encode:
                 w.encode(encode)
+            else:
+                w.encode()
             """
     function to return base64 encoded string
     """
@@ -18,6 +20,8 @@ class BASE64:
         if w:
             if encode:
                 w.encode(encode)
+            else:
+                w.encode()
             """
     function to return base64 decoded string
     """

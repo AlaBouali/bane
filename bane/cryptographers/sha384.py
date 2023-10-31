@@ -4,13 +4,15 @@ class SHA348:
 
     @staticmethod
     def hash(w, encode=None):
-        if w:
+        if type(w)==str:
             if encode:
-                w.encode(encode)
+                w=w.encode(encode)
+            else:
+                w=w.encode()
             """
     function to return sha384 encrypted string
     """
-            return hashlib.sha384(w).hexdigest()
+        return hashlib.sha384(w).hexdigest()
 
     @staticmethod
     def hash_file(f):
@@ -24,7 +26,7 @@ class SHA348:
     @staticmethod
     def compare_hash(word, hash):
         if word and hash:
-            word = hashlib.sha384(word).hexdigest()
+            word = SHA348.hash(word)
             if word == hash:
                 return True
             return False
