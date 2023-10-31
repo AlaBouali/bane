@@ -1,6 +1,6 @@
 from bane.ddos.utils import *
 
-class prox_hammer(DDoS_Class):
+class Proxies_Hammer(DDoS_Class):
     def __init__(
         self,
         u,
