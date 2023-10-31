@@ -9,14 +9,14 @@
 <p>This method performs an ADB exploit scan with the specified parameters. It takes the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The target device's IP address or hostname.</li>
-    <li><code>timeout</code> (int): Connection timeout in seconds (default is 5).</li>
-    <li><code>p</code> (int): Port for the ADB service (default is 5555).</li>
-    <li><code>proxy_host</code> (str): Hostname or IP address of the proxy server (default is None).</li>
-    <li><code>proxy_port</code> (int): Port of the proxy server (default is None).</li>
-    <li><code>proxy_username</code> (str): Username for proxy authentication (default is None).</li>
-    <li><code>proxy_password</code> (str): Password for proxy authentication (default is None).</li>
-    <li><code>proxy_type</code> (str): Type of proxy (either 'socks4', 's4', 'socks5', 's5', or None).</li>
+<li><code>u</code> (str): The target device's IP address or hostname.</li>
+<li><code>timeout</code> (int): Connection timeout in seconds (default is 5).</li>
+<li><code>p</code> (int): Port for the ADB service (default is 5555).</li>
+<li><code>proxy_host</code> (str): Hostname or IP address of the proxy server (default is None).</li>
+<li><code>proxy_port</code> (int): Port of the proxy server (default is None).</li>
+<li><code>proxy_username</code> (str): Username for proxy authentication (default is None).</li>
+<li><code>proxy_password</code> (str): Password for proxy authentication (default is None).</li>
+<li><code>proxy_type</code> (str): Type of proxy (either 'socks4', 's4', 'socks5', 's5', or None).</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -46,26 +46,26 @@ else:
 <p>This method performs a backend technology scan on the target URL with the specified parameters. It takes the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The target URL to scan.</li>
-    <li><code>timeout</code> (int): Connection timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>request_headers</code> (dict): Custom request headers to include.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>api_key</code> (str): API key for vulnerability scanning (default is None).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>u</code> (str): The target URL to scan.</li>
+<li><code>timeout</code> (int): Connection timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>request_headers</code> (dict): Custom request headers to include.</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>api_key</code> (str): API key for vulnerability scanning (default is None).</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h2>Method Description</h2>
 <p>The <code>scan</code> method retrieves information about the target URL's server and backend technologies. It also searches for known vulnerabilities related to these technologies. The results are returned as a dictionary containing the following information:</p>
 
 <ul>
-    <li><code>shodan_report</code> (dict): Shodan report for the target IP address, obtained via the Shodan API.</li>
-    <li><code>server_exploits</code> (dict): Exploits associated with the server software used by the target.</li>
-    <li><code>backend_technology_exploits</code> (dict): Exploits associated with the backend technology used by the target.</li>
+<li><code>shodan_report</code> (dict): Shodan report for the target IP address, obtained via the Shodan API.</li>
+<li><code>server_exploits</code> (dict): Exploits associated with the server software used by the target.</li>
+<li><code>backend_technology_exploits</code> (dict): Exploits associated with the backend technology used by the target.</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -113,17 +113,17 @@ print("Backend Technology Exploits:", backend_technology_exploits)
 <p>This method performs a Clickjacking scan on the target URL with the specified parameters. It takes the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The target URL to scan for Clickjacking protection headers.</li>
-    <li><code>proxy</code> (dict): Proxy settings (default is None).</li>
-    <li><code>timeout</code> (int): Connection timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is False).</li>
-    <li><code>request_headers</code> (dict): Custom request headers to include.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>u</code> (str): The target URL to scan for Clickjacking protection headers.</li>
+<li><code>proxy</code> (dict): Proxy settings (default is None).</li>
+<li><code>timeout</code> (int): Connection timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is False).</li>
+<li><code>request_headers</code> (dict): Custom request headers to include.</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h2>Method Description</h2>
@@ -171,20 +171,20 @@ else:
 
 <h4>Parameters</h4>
 <ul>
-    <li><code>u</code> (str): The URL to test for CORS misconfigurations.</li>
-    <li><code>origin</code> (str): The origin domain (default is 'www.evil-domain.com').</li>
-    <li><code>origin_reflection</code> (bool): Test for CORS origin reflection (default is True).</li>
-    <li><code>wildcard_origin</code> (bool): Test for CORS wildcard origin (default is True).</li>
-    <li><code>null_origin</code> (bool): Test for CORS null origin (default is True).</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>debug</code> (bool): Enable or disable debug mode (default is False).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>u</code> (str): The URL to test for CORS misconfigurations.</li>
+<li><code>origin</code> (str): The origin domain (default is 'www.evil-domain.com').</li>
+<li><code>origin_reflection</code> (bool): Test for CORS origin reflection (default is True).</li>
+<li><code>wildcard_origin</code> (bool): Test for CORS wildcard origin (default is True).</li>
+<li><code>null_origin</code> (bool): Test for CORS null origin (default is True).</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>debug</code> (bool): Enable or disable debug mode (default is False).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h3><code>scan()</code></h3>
@@ -192,22 +192,22 @@ else:
 
 <h4>Parameters</h4>
 <ul>
-    <li><code>urls</code> (list): List of URLs to scan for CORS misconfigurations.</li>
-    <li><code>origin</code> (str): The origin domain (default is 'www.evil-domain.com').</li>
-    <li><code>origin_reflection</code> (bool): Test for CORS origin reflection (default is True).</li>
-    <li><code>wildcard_origin</code> (bool): Test for CORS wildcard origin (default is True).</li>
-    <li><code>null_origin</code> (bool): Test for CORS null origin (default is True).</li>
-    <li><code>proxy</code> (dict): Proxy settings (HTTP/HTTPS).</li>
-    <li><code>proxies</code> (list): List of proxies to use for requests.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>debug</code> (bool): Enable or disable debug mode (default is False).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>urls</code> (list): List of URLs to scan for CORS misconfigurations.</li>
+<li><code>origin</code> (str): The origin domain (default is 'www.evil-domain.com').</li>
+<li><code>origin_reflection</code> (bool): Test for CORS origin reflection (default is True).</li>
+<li><code>wildcard_origin</code> (bool): Test for CORS wildcard origin (default is True).</li>
+<li><code>null_origin</code> (bool): Test for CORS null origin (default is True).</li>
+<li><code>proxy</code> (dict): Proxy settings (HTTP/HTTPS).</li>
+<li><code>proxies</code> (list): List of proxies to use for requests.</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>debug</code> (bool): Enable or disable debug mode (default is False).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -254,15 +254,15 @@ for result in results:
 
 <h4>Parameters</h4>
 <ul>
-    <li><code>u</code> (str): URL for the HTTP request.</li>
-    <li><code>method</code> (str): HTTP method for the request (default is 'GET').</li>
-    <li><code>data</code> (dict): Data to be sent in the request.</li>
-    <li><code>files</code> (dict): Files to be sent in the request.</li>
-    <li><code>params</code> (dict): URL parameters.</li>
-    <li><code>headers</code> (dict): HTTP headers.</li>
-    <li><code>proxy</code> (dict): Proxy settings.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 15).</li>
-    <li><code>shuffle_headers</code> (bool): Shuffle headers (default is False).</li>
+<li><code>u</code> (str): URL for the HTTP request.</li>
+<li><code>method</code> (str): HTTP method for the request (default is 'GET').</li>
+<li><code>data</code> (dict): Data to be sent in the request.</li>
+<li><code>files</code> (dict): Files to be sent in the request.</li>
+<li><code>params</code> (dict): URL parameters.</li>
+<li><code>headers</code> (dict): HTTP headers.</li>
+<li><code>proxy</code> (dict): Proxy settings.</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 15).</li>
+<li><code>shuffle_headers</code> (bool): Shuffle headers (default is False).</li>
 </ul>
 
 <h3><code>crlf_unicode_encode()</code></h3>
@@ -270,9 +270,9 @@ for result in results:
 
 <h4>Parameters</h4>
 <ul>
-    <li><code>random_level</code> (int): Level of randomness for encoding.</li>
-    <li><code>line_feed_only</code> (bool): Use only Line Feed character.</li>
-    <li><code>carriage_return_only</code> (bool): Use only Carriage Return character.</li>
+<li><code>random_level</code> (int): Level of randomness for encoding.</li>
+<li><code>line_feed_only</code> (bool): Use only Line Feed character.</li>
+<li><code>carriage_return_only</code> (bool): Use only Carriage Return character.</li>
 </ul>
 
 <h3><code>scan_header()</code></h3>
@@ -280,18 +280,18 @@ for result in results:
 
 <h4>Parameters</h4>
 <ul>
-    <li><code>u</code> (str): URL to scan for CRLF injection.</li>
-    <li><code>unicode_random_level</code> (int): Level of randomness for Unicode encoding.</li>
-    <li><code>carriage_return_only</code> (bool): Use only Carriage Return character.</li>
-    <li><code>line_feed_only</code> (bool): Use only Line Feed character.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>debug</code> (bool): Enable or disable debug mode.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>u</code> (str): URL to scan for CRLF injection.</li>
+<li><code>unicode_random_level</code> (int): Level of randomness for Unicode encoding.</li>
+<li><code>carriage_return_only</code> (bool): Use only Carriage Return character.</li>
+<li><code>line_feed_only</code> (bool): Use only Line Feed character.</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>debug</code> (bool): Enable or disable debug mode.</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h3><code>scan_body()</code></h3>
@@ -299,18 +299,18 @@ for result in results:
 
 <h4>Parameters</h4>
 <ul>
-    <li><code>u</code> (str): URL to scan for CRLF injection.</li>
-    <li><code>unicode_random_level</code> (int): Level of randomness for Unicode encoding.</li>
-    <li><code>carriage_return_only</code> (bool): Use only Carriage Return character.</li>
-    <li><code>line_feed_only</code> (bool): Use only Line Feed character.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>debug</code> (bool): Enable or disable debug mode.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>u</code> (str): URL to scan for CRLF injection.</li>
+<li><code>unicode_random_level</code> (int): Level of randomness for Unicode encoding.</li>
+<li><code>carriage_return_only</code> (bool): Use only Carriage Return character.</li>
+<li><code>line_feed_only</code> (bool): Use only Line Feed character.</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>debug</code> (bool): Enable or disable debug mode.</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -363,61 +363,61 @@ result_body = CRLF_Injection_Scanner.scan_body(
 <h3><code>csrf_filter_tokens(u, proxy=None, timeout=10, user_agent=None, cookie=None, headers={})</code></h3>
 <p>This method filters forms on a web page to check for CSRF tokens. It returns a dictionary with vulnerable and safe forms.</p>
 <ul>
-    <li><code>u</code> (str): The URL of the web page to scan.</li>
-    <li><code>proxy</code> (dict): Dictionary of proxy settings (default is None).</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests (required for authentication).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in requests (default is an empty dictionary).</li>
+<li><code>u</code> (str): The URL of the web page to scan.</li>
+<li><code>proxy</code> (dict): Dictionary of proxy settings (default is None).</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests (required for authentication).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in requests (default is an empty dictionary).</li>
 </ul>
 
 <h3><code>csrf_forms(u, proxy=None, timeout=10, show_warnings=True, user_agent=None, cookie=None, replaceable_parameters={}, file_extension="png", fill_empty=10, referer="http://www.evil.com", leave_empty=[], dont_send=[], mime_type=None, predefined_inputs={}, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
 <p>This method scans forms for CSRF vulnerabilities and performs tests on them. It returns a list of dictionaries, each containing information about the form and its vulnerability status.</p>
 <ul>
-    <li><code>u</code> (str): The URL of the web page to scan.</li>
-    <li><code>proxy</code> (dict): Dictionary of proxy settings (default is None).</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>show_warnings</code> (bool): Enable or disable showing warnings (default is True).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests (required for authentication).</li>
-    <li><code>replaceable_parameters</code> (dict): Dictionary of parameters to replace in form submissions (default is an empty dictionary).</li>
-    <li><code>file_extension</code> (str): File extension to use for file uploads (default is "png").</li>
-    <li><code>fill_empty</code> (int): Number of empty fields to fill in forms (default is 10).</li>
-    <li><code>referer</code> (str): Referer URL to include in the headers (default is "http://www.evil.com").</li>
-    <li><code>leave_empty</code> (list): List of field names to leave empty (default is an empty list).</li>
-    <li><code>dont_send</code> (list): List of fields not to send in form submissions (default is an empty list).</li>
-    <li><code>mime_type</code> (str): MIME type for file uploads (default is None).</li>
-    <li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (default is an empty dictionary).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in requests (default is an empty dictionary).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use for requests (default is None).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests (default is None).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests (default is None).</li>
+<li><code>u</code> (str): The URL of the web page to scan.</li>
+<li><code>proxy</code> (dict): Dictionary of proxy settings (default is None).</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>show_warnings</code> (bool): Enable or disable showing warnings (default is True).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests (required for authentication).</li>
+<li><code>replaceable_parameters</code> (dict): Dictionary of parameters to replace in form submissions (default is an empty dictionary).</li>
+<li><code>file_extension</code> (str): File extension to use for file uploads (default is "png").</li>
+<li><code>fill_empty</code> (int): Number of empty fields to fill in forms (default is 10).</li>
+<li><code>referer</code> (str): Referer URL to include in the headers (default is "http://www.evil.com").</li>
+<li><code>leave_empty</code> (list): List of field names to leave empty (default is an empty list).</li>
+<li><code>dont_send</code> (list): List of fields not to send in form submissions (default is an empty list).</li>
+<li><code>mime_type</code> (str): MIME type for file uploads (default is None).</li>
+<li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (default is an empty dictionary).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in requests (default is an empty dictionary).</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use for requests (default is None).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests (default is None).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests (default is None).</li>
 </ul>
 
 <h3><code>scan(u, max_pages=5, logs=True, proxy=None, timeout=10, show_warnings=True, user_agent=None, cookie=None, replaceable_parameters={}, file_extension="png", fill_empty=10, referer="http://www.evil.com", leave_empty=[], dont_send=[], mime_type=None, predefined_inputs={}, pages=[], headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
 <p>This method scans a website for CSRF vulnerabilities on multiple pages. It returns a list of dictionaries, each containing information about the page and its CSRF vulnerability status.</p>
 <ul>
-    <li><code>u</code> (str): The URL of the website to scan.</li>
-    <li><code>max_pages</code> (int): Maximum number of pages to scan (default is 5).</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>proxy</code> (dict): Dictionary of proxy settings (default is None).</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>show_warnings</code> (bool): Enable or disable showing warnings (default is True).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests (required for authentication).</li>
-    <li><code>replaceable_parameters</code> (dict): Dictionary of parameters to replace in form submissions (default is an empty dictionary).</li>
-    <li><code>file_extension</code> (str): File extension to use for file uploads (default is "png").</li>
-    <li><code>fill_empty</code> (int): Number of empty fields to fill in forms (default is 10).</li>
-    <li><code>referer</code> (str): Referer URL to include in the headers (default is "http://www.evil.com").</li>
-    <li><code>leave_empty</code> (list): List of field names to leave empty (default is an empty list).</li>
-    <li><code>dont_send</code> (list): List of fields not to send in form submissions (default is an empty list).</li>
-    <li><code>mime_type</code> (str): MIME type for file uploads (default is None).</li>
-    <li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (default is an empty dictionary).</li>
-    <li><code>pages</code> (list): List of specific pages to scan (default is an empty list).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in requests (default is an empty dictionary).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use for requests (default is None).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests (default is None).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests (default is None).</li>
+<li><code>u</code> (str): The URL of the website to scan.</li>
+<li><code>max_pages</code> (int): Maximum number of pages to scan (default is 5).</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>proxy</code> (dict): Dictionary of proxy settings (default is None).</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>show_warnings</code> (bool): Enable or disable showing warnings (default is True).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests (required for authentication).</li>
+<li><code>replaceable_parameters</code> (dict): Dictionary of parameters to replace in form submissions (default is an empty dictionary).</li>
+<li><code>file_extension</code> (str): File extension to use for file uploads (default is "png").</li>
+<li><code>fill_empty</code> (int): Number of empty fields to fill in forms (default is 10).</li>
+<li><code>referer</code> (str): Referer URL to include in the headers (default is "http://www.evil.com").</li>
+<li><code>leave_empty</code> (list): List of field names to leave empty (default is an empty list).</li>
+<li><code>dont_send</code> (list): List of fields not to send in form submissions (default is an empty list).</li>
+<li><code>mime_type</code> (str): MIME type for file uploads (default is None).</li>
+<li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (default is an empty dictionary).</li>
+<li><code>pages</code> (list): List of specific pages to scan (default is an empty list).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in requests (default is an empty dictionary).</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use for requests (default is None).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests (default is None).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests (default is None).</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -452,16 +452,16 @@ for page in vulnerable_pages:
 <h3><code>scan(u, user_agent=None, cookie=None, path="", brute_force=False, timeout=15, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
 <p>This method scans a URL for exposed environment files. It returns a tuple containing a boolean indicating whether an exposed environment file was found and the URL of the found file if applicable.</p>
 <ul>
-    <li><code>u</code> (str): The URL to scan for exposed environment files.</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests (default is None).</li>
-    <li><code>path</code> (str): The path to the environment file (default is an empty string).</li>
-    <li><code>brute_force</code> (bool): Enable brute force mode to try common paths (default is False).</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 15).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in requests (default is an empty dictionary).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use for requests (default is None).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests (default is None).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests (default is None).</li>
+<li><code>u</code> (str): The URL to scan for exposed environment files.</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests (default is None).</li>
+<li><code>path</code> (str): The path to the environment file (default is an empty string).</li>
+<li><code>brute_force</code> (bool): Enable brute force mode to try common paths (default is False).</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 15).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in requests (default is an empty dictionary).</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use for requests (default is None).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests (default is None).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests (default is None).</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -492,14 +492,14 @@ else:
 <h3><code>scan(u, user_agent=None, cookie=None, timeout=15, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
 <p>This method scans a URL to check if it is an exposed Git repository. It returns a boolean indicating whether the URL is an exposed Git repository or not.</p>
 <ul>
-    <li><code>u</code> (str): The URL to scan for exposed Git repositories.</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests (default is None).</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 15).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in requests (default is an empty dictionary).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use for requests (default is None).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests (default is None).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests (default is None).</li>
+<li><code>u</code> (str): The URL to scan for exposed Git repositories.</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests (default is None).</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 15).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in requests (default is an empty dictionary).</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use for requests (default is None).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests (default is None).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests (default is None).</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -531,10 +531,10 @@ else:
 <h3><code>scan(u, p=23, timeout=5, **kwargs)</code></h3>
 <p>This method attempts to establish a Telnet connection to a remote host using the specified parameters and returns a boolean value indicating the success of the connection.</p>
 <ul>
-    <li><code>u</code> (str): The target host or IP address to connect to via Telnet.</li>
-    <li><code>p</code> (int): The port to use for the Telnet connection (default is 23).</li>
-    <li><code>timeout</code> (int): Connection timeout in seconds (default is 5).</li>
-    <li><code>**kwargs</code>: Additional keyword arguments to pass to the Telnet session (optional).</li>
+<li><code>u</code> (str): The target host or IP address to connect to via Telnet.</li>
+<li><code>p</code> (int): The port to use for the Telnet connection (default is 23).</li>
+<li><code>timeout</code> (int): Connection timeout in seconds (default is 5).</li>
+<li><code>**kwargs</code>: Additional keyword arguments to pass to the Telnet session (optional).</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -567,50 +567,50 @@ else:
 <h3><code>file_upload_forms(u, timeout=10, show_warnings=True, user_agent=None, cookie=None, replaceble_parameters={"phpvalue": ((".", ""),)}, file_extension="png", fill_empty=10, dont_change=[], referer=None, leave_empty=[], dont_send=[], mime_type=None, predefined_inputs={}, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
 <p>This method scans web forms on a specified URL for file upload vulnerabilities and returns a list of results. It checks whether the forms accept specific file extensions and reports potential issues such as unacceptable extensions or missing submitted data. The method can handle multiple forms on the same page and returns information about each form's status.</p>
 <ul>
-    <li><code>u</code> (str): The target URL to scan for file upload forms.</li>
-    <li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
-    <li><code>show_warnings</code> (bool): Whether to show warning messages (default is True).</li>
-    <li><code>user_agent</code> (str): The user-agent string to use for the HTTP request (optional).</li>
-    <li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
-    <li><code>replaceble_parameters</code> (dict): Dictionary of parameters and their replacement values (optional).</li>
-    <li><code>file_extension</code> (str): The file extension to use for testing (default is "png").</li>
-    <li><code>fill_empty</code> (int): The number of empty fields to fill in the form (default is 10).</li>
-    <li><code>dont_change</code> (list): List of form fields not to change (optional).</li>
-    <li><code>referer</code> (str): The referer value for the request (optional).</li>
-    <li><code>leave_empty</code> (list): List of form fields to leave empty (optional).</li>
-    <li><code>dont_send</code> (list): List of form fields not to send (optional).</li>
-    <li><code>mime_type</code> (str): The MIME type to use for the file upload (optional).</li>
-    <li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (optional).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
+<li><code>u</code> (str): The target URL to scan for file upload forms.</li>
+<li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
+<li><code>show_warnings</code> (bool): Whether to show warning messages (default is True).</li>
+<li><code>user_agent</code> (str): The user-agent string to use for the HTTP request (optional).</li>
+<li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
+<li><code>replaceble_parameters</code> (dict): Dictionary of parameters and their replacement values (optional).</li>
+<li><code>file_extension</code> (str): The file extension to use for testing (default is "png").</li>
+<li><code>fill_empty</code> (int): The number of empty fields to fill in the form (default is 10).</li>
+<li><code>dont_change</code> (list): List of form fields not to change (optional).</li>
+<li><code>referer</code> (str): The referer value for the request (optional).</li>
+<li><code>leave_empty</code> (list): List of form fields to leave empty (optional).</li>
+<li><code>dont_send</code> (list): List of form fields not to send (optional).</li>
+<li><code>mime_type</code> (str): The MIME type to use for the file upload (optional).</li>
+<li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (optional).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
 </ul>
 
 <h3><code>scan(u, max_pages=5, logs=True, proxy=None, timeout=10, show_warnings=True, user_agent=None, cookie=None, replaceble_parameters={"phpvalue": ((".", ""),)}, file_extension="png", fill_empty=10, referer=None, leave_empty=[], dont_send=[], mime_type=None, predefined_inputs={}, pages=[], headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
 <p>This method scans a specified URL and its linked pages for file upload forms. It allows you to perform a comprehensive scan for file upload vulnerabilities across multiple pages. The method returns a list of results, including information about each page and its associated form vulnerabilities.</p>
 <ul>
-    <li><code>u</code> (str): The target URL to scan for file upload forms.</li>
-    <li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
-    <li><code>logs</code> (bool): Whether to display scan logs (default is True).</li>
-    <li><code>proxy</code> (str): The proxy server to use for the scan (optional).</li>
-    <li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
-    <li><code>show_warnings</code> (bool): Whether to show warning messages (default is True).</li>
-    <li><code>user_agent</code> (str): The user-agent string to use for the HTTP request (optional).</li>
-    <li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
-    <li><code>replaceble_parameters</code> (dict): Dictionary of parameters and their replacement values (optional).</li>
-    <li><code>file_extension</code> (str): The file extension to use for testing (default is "png").</li>
-    <li><code>fill_empty</code> (int): The number of empty fields to fill in the form (default is 10).</li>
-    <li><code>referer</code> (str): The referer value for the request (optional).</li>
-    <li><code>leave_empty</code> (list): List of form fields to leave empty (optional).</li>
-    <li><code>dont_send</code> (list): List of form fields not to send (optional).</li>
-    <li><code>mime_type</code> (str): The MIME type to use for the file upload (optional).</li>
-    <li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (optional).</li>
-    <li><code>pages</code> (list): List of specific pages to scan (optional).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
+<li><code>u</code> (str): The target URL to scan for file upload forms.</li>
+<li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
+<li><code>logs</code> (bool): Whether to display scan logs (default is True).</li>
+<li><code>proxy</code> (str): The proxy server to use for the scan (optional).</li>
+<li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
+<li><code>show_warnings</code> (bool): Whether to show warning messages (default is True).</li>
+<li><code>user_agent</code> (str): The user-agent string to use for the HTTP request (optional).</li>
+<li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
+<li><code>replaceble_parameters</code> (dict): Dictionary of parameters and their replacement values (optional).</li>
+<li><code>file_extension</code> (str): The file extension to use for testing (default is "png").</li>
+<li><code>fill_empty</code> (int): The number of empty fields to fill in the form (default is 10).</li>
+<li><code>referer</code> (str): The referer value for the request (optional).</li>
+<li><code>leave_empty</code> (list): List of form fields to leave empty (optional).</li>
+<li><code>dont_send</code> (list): List of form fields not to send (optional).</li>
+<li><code>mime_type</code> (str): The MIME type to use for the file upload (optional).</li>
+<li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (optional).</li>
+<li><code>pages</code> (list): List of specific pages to scan (optional).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -643,80 +643,80 @@ for result in results:
 <h3><code>is_valid_open_redirect(req, payload)</code></h3>
 <p>This method checks if a given HTTP request contains a valid open redirect vulnerability based on the payload used. It compares the payload's URL-decoded value to the "Location" header in the HTTP request to determine if it's a valid open redirect.</p>
 <ul>
-    <li><code>req</code> (requests.Response): The HTTP request to check for open redirect vulnerability.</li>
-    <li><code>payload</code> (str): The payload used to test open redirect.</li>
-    <li><strong>Returns:</strong> <code>True</code> if the open redirect is valid; otherwise, <code>False</code>.</li>
+<li><code>req</code> (requests.Response): The HTTP request to check for open redirect vulnerability.</li>
+<li><code>payload</code> (str): The payload used to test open redirect.</li>
+<li><strong>Returns:</strong> <code>True</code> if the open redirect is valid; otherwise, <code>False</code>.</li>
 </ul>
 
 <h3><code>open_redirect_submit(parsed, payload, replaceble_parameters, debug=False, enctype="application/x-www-form-urlencoded")</code></h3>
 <p>This method submits a payload to a parsed web form to test for open redirect vulnerabilities. It checks if the response contains a valid open redirect issue and also detects potential security issues such as SQL errors, XML parsing errors, fetching URL errors (potential SSRF), and reading file errors (potential path traversal).</p>
 <ul>
-    <li><code>parsed</code> (list): A parsed web form consisting of three elements (form data, headers, proxies, and timeout).</li>
-    <li><code>payload</code> (str): The payload to submit for open redirect testing.</li>
-    <li><code>replaceble_parameters</code> (dict): Dictionary of parameters and their replacement values (optional).</li>
-    <li><code>debug</code> (bool): Whether to enable debug mode (default is False).</li>
-    <li><code>enctype</code> (str): The enctype type to use for the request (default is "application/x-www-form-urlencoded").</li>
-    <li><strong>Returns:</strong> A tuple containing whether the open redirect is valid, a dictionary with the original parsed form data, and flags for various security issues.</li>
+<li><code>parsed</code> (list): A parsed web form consisting of three elements (form data, headers, proxies, and timeout).</li>
+<li><code>payload</code> (str): The payload to submit for open redirect testing.</li>
+<li><code>replaceble_parameters</code> (dict): Dictionary of parameters and their replacement values (optional).</li>
+<li><code>debug</code> (bool): Whether to enable debug mode (default is False).</li>
+<li><code>enctype</code> (str): The enctype type to use for the request (default is "application/x-www-form-urlencoded").</li>
+<li><strong>Returns:</strong> A tuple containing whether the open redirect is valid, a dictionary with the original parsed form data, and flags for various security issues.</li>
 </ul>
 
 <h3><code>open_redirect_forms(u, payload, number, email_extension, phone_pattern, dont_change, predefined_inputs, replaceble_parameters, file_extension, save_to_file, logs, fill_empty, leave_empty, dont_send, timeout, user_agent, cookie, debug, mime_type, headers, http_proxies, socks4_proxies, socks5_proxies)</code></h3>
 <p>This method scans web forms on a specified URL for open redirect vulnerabilities. It submits payloads to forms to detect open redirect issues and reports other potential security problems. The results are structured and can be saved to a file.</p>
 <ul>
-    <li><code>u</code> (str): The target URL to scan for open redirect forms.</li>
-    <li><code>payload</code> (str): The payload to submit for open redirect testing.</li>
-    <li><code>number</code> (tuple): A range for generating numbers (default is (1, 9)).</li>
-    <li><code>email_extension</code> (str): The email extension to use (default is "@gmail.com").</li>
-    <li><code>phone_pattern</code> (str): The phone pattern (default is "XXX-XXX-XXXX").</li>
-    <li><code>dont_change</code> (dict): Dictionary of form fields not to change (optional).</li>
-    <li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (optional).</li>
-    <li><code>replaceble_parameters</code> (dict): Dictionary of parameters and their replacement values (optional).</li>
-    <li><code>file_extension</code> (str): The file extension to use for testing (default is "png").</li>
-    <li><code>save_to_file</code> (str): The path to save results to a file (optional).</li>
-    <li><code>logs</code> (bool): Whether to show scan logs (default is True).</li>
-    <li><code>fill_empty</code> (int): The number of empty fields to fill in the form (default is 10).</li>
-    <li><code>leave_empty</code> (list): List of form fields to leave empty (optional).</li>
-    <li><code>dont_send</code> (list): List of form fields not to send (optional).</li>
-    <li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): The user-agent string to use for the HTTP request (optional).</li>
-    <li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
-    <li><code>debug</code> (bool): Whether to enable debug mode (default is False).</li>
-    <li><code>mime_type</code> (str): The MIME type to use for the file upload (optional).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
-    <li><strong>Returns:</strong> A dictionary containing scan results, including open redirect vulnerabilities and potential security issues.</li>
+<li><code>u</code> (str): The target URL to scan for open redirect forms.</li>
+<li><code>payload</code> (str): The payload to submit for open redirect testing.</li>
+<li><code>number</code> (tuple): A range for generating numbers (default is (1, 9)).</li>
+<li><code>email_extension</code> (str): The email extension to use (default is "@gmail.com").</li>
+<li><code>phone_pattern</code> (str): The phone pattern (default is "XXX-XXX-XXXX").</li>
+<li><code>dont_change</code> (dict): Dictionary of form fields not to change (optional).</li>
+<li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (optional).</li>
+<li><code>replaceble_parameters</code> (dict): Dictionary of parameters and their replacement values (optional).</li>
+<li><code>file_extension</code> (str): The file extension to use for testing (default is "png").</li>
+<li><code>save_to_file</code> (str): The path to save results to a file (optional).</li>
+<li><code>logs</code> (bool): Whether to show scan logs (default is True).</li>
+<li><code>fill_empty</code> (int): The number of empty fields to fill in the form (default is 10).</li>
+<li><code>leave_empty</code> (list): List of form fields to leave empty (optional).</li>
+<li><code>dont_send</code> (list): List of form fields not to send (optional).</li>
+<li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): The user-agent string to use for the HTTP request (optional).</li>
+<li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
+<li><code>debug</code> (bool): Whether to enable debug mode (default is False).</li>
+<li><code>mime_type</code> (str): The MIME type to use for the file upload (optional).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
+<li><strong>Returns:</strong> A dictionary containing scan results, including open redirect vulnerabilities and potential security issues.</li>
 </ul>
 
 <h3><code>scan(u, max_pages, pages, payload, number, email_extension, phone_pattern, dont_change, predefined_inputs, replaceble_parameters, file_extension, save_to_file, logs, fill_empty, leave_empty, dont_send, timeout, user_agent, cookie, debug, mime_type, headers, http_proxies, socks4_proxies, socks5_proxies)</code></h3>
 <p>This method scans a specified URL and its linked pages for open redirect forms. It allows you to perform a comprehensive scan for open redirect vulnerabilities across multiple pages. The method returns structured results that include open redirect issues and potential security problems.</p>
 <ul>
-    <li><code>u</code> (str): The target URL to scan for open redirect forms.</li>
-    <li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
-    <li><code>pages</code> (list): List of specific pages to scan (optional).</li>
-    <li><code>payload</code> (str): The payload to submit for open redirect testing.</li>
-    <li><code>number</code> (tuple): A range for generating numbers (default is (1, 9)).</li>
-    <li><code>email_extension</code> (str): The email extension to use (default is "@gmail.com").</li>
-    <li><code>phone_pattern</code> (str): The phone pattern (default is "XXX-XXX-XXXX").</li>
-    <li><code>dont_change</code> (dict): Dictionary of form fields not to change (optional).</li>
-    <li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (optional).</li>
-    <li><code>replaceble_parameters</code> (dict): Dictionary of parameters and their replacement values (optional).</li>
-    <li><code>file_extension</code> (str): The file extension to use for testing (default is "png").</li>
-    <li><code>save_to_file</code> (str): The path to save results to a file (optional).</li>
-    <li><code>logs</code> (bool): Whether to show scan logs (default is True).</li>
-    <li><code>fill_empty</code> (int): The number of empty fields to fill in the form (default is 10).</li>
-    <li><code>leave_empty</code> (list): List of form fields to leave empty (optional).</li>
-    <li><code>dont_send</code> (list): List of form fields not to send (optional).</li>
-    <li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): The user-agent string to use for the HTTP request (optional).</li>
-    <li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
-    <li><code>debug</code> (bool): Whether to enable debug mode (default is False).</li>
-    <li><code>mime_type</code> (str): The MIME type to use for the file upload (optional).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
-    <li><strong>Returns:</strong> A list of dictionaries containing scan results for each page scanned, including open redirect vulnerabilities and potential security issues.</li>
+<li><code>u</code> (str): The target URL to scan for open redirect forms.</li>
+<li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
+<li><code>pages</code> (list): List of specific pages to scan (optional).</li>
+<li><code>payload</code> (str): The payload to submit for open redirect testing.</li>
+<li><code>number</code> (tuple): A range for generating numbers (default is (1, 9)).</li>
+<li><code>email_extension</code> (str): The email extension to use (default is "@gmail.com").</li>
+<li><code>phone_pattern</code> (str): The phone pattern (default is "XXX-XXX-XXXX").</li>
+<li><code>dont_change</code> (dict): Dictionary of form fields not to change (optional).</li>
+<li><code>predefined_inputs</code> (dict): Dictionary of predefined input values (optional).</li>
+<li><code>replaceble_parameters</code> (dict): Dictionary of parameters and their replacement values (optional).</li>
+<li><code>file_extension</code> (str): The file extension to use for testing (default is "png").</li>
+<li><code>save_to_file</code> (str): The path to save results to a file (optional).</li>
+<li><code>logs</code> (bool): Whether to show scan logs (default is True).</li>
+<li><code>fill_empty</code> (int): The number of empty fields to fill in the form (default is 10).</li>
+<li><code>leave_empty</code> (list): List of form fields to leave empty (optional).</li>
+<li><code>dont_send</code> (list): List of form fields not to send (optional).</li>
+<li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): The user-agent string to use for the HTTP request (optional).</li>
+<li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
+<li><code>debug</code> (bool): Whether to enable debug mode (default is False).</li>
+<li><code>mime_type</code> (str): The MIME type to use for the file upload (optional).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
+<li><strong>Returns:</strong> A list of dictionaries containing scan results for each page scanned, including open redirect vulnerabilities and potential security issues.</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -773,57 +773,57 @@ for result in results:
 <h3><code>path_traversal_check(u, php_wrapper, linux_file, null_byte, bypass, target_os, proxy, timeout, user_agent, cookie, headers)</code></h3>
 <p>This method performs a Path Traversal vulnerability test using a link. It sends an HTTP request to the specified URL and checks for Path Traversal vulnerabilities. It supports different parameters and options to customize the test.</p>
 <ul>
-    <li><code>u</code> (str): The URL to test for Path Traversal vulnerabilities.</li>
-    <li><code>php_wrapper</code> (str): The PHP wrapper to use for the request (e.g., "file").</li>
-    <li><code>linux_file</code> (int): The Linux file to test (0 or 1).</li>
-    <li><code>null_byte</code> (bool): Whether to include a null byte ("%00") in the request (default is False).</li>
-    <li><code>bypass</code> (bool): Whether to use bypass techniques (default is False).</li>
-    <li><code>target_os</code> (str): The target OS to test (e.g., "linux" or "windows").</li>
-    <li><code>proxy</code> (str): The proxy to use for the request (optional).</li>
-    <li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): The user-agent string to use for the request (optional).</li>
-    <li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
-    <li><strong>Returns:</strong> A tuple containing whether the Path Traversal vulnerability is detected and the URL of the vulnerability (if found).</li>
+<li><code>u</code> (str): The URL to test for Path Traversal vulnerabilities.</li>
+<li><code>php_wrapper</code> (str): The PHP wrapper to use for the request (e.g., "file").</li>
+<li><code>linux_file</code> (int): The Linux file to test (0 or 1).</li>
+<li><code>null_byte</code> (bool): Whether to include a null byte ("%00") in the request (default is False).</li>
+<li><code>bypass</code> (bool): Whether to use bypass techniques (default is False).</li>
+<li><code>target_os</code> (str): The target OS to test (e.g., "linux" or "windows").</li>
+<li><code>proxy</code> (str): The proxy to use for the request (optional).</li>
+<li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): The user-agent string to use for the request (optional).</li>
+<li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
+<li><strong>Returns:</strong> A tuple containing whether the Path Traversal vulnerability is detected and the URL of the vulnerability (if found).</li>
 </ul>
 
 <h3><code>path_traversal_urls(u, null_byte, bypass, target_os, php_wrapper, timeout, user_agent, cookie, headers, http_proxies, socks4_proxies, socks5_proxies)</code></h3>
 <p>This method scans a URL and checks for Path Traversal vulnerabilities. It tests different URLs based on the provided parameters and options, and returns a list of URLs that exhibit Path Traversal vulnerabilities.</p>
 <ul>
-    <li><code>u</code> (str): The URL to test for Path Traversal vulnerabilities.</li>
-    <li><code>null_byte</code> (bool): Whether to include a null byte ("%00") in the request (default is False).</li>
-    <li><code>bypass</code> (bool): Whether to use bypass techniques (default is False).</li>
-    <li><code>target_os</code> (str): The target OS to test (e.g., "linux" or "windows").</li>
-    <li><code>php_wrapper</code> (str): The PHP wrapper to use for the request (e.g., "file").</li>
-    <li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): The user-agent string to use for the request (optional).</li>
-    <li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
-    <li><strong>Returns:</strong> A list of URLs that exhibit Path Traversal vulnerabilities.</li>
+<li><code>u</code> (str): The URL to test for Path Traversal vulnerabilities.</li>
+<li><code>null_byte</code> (bool): Whether to include a null byte ("%00") in the request (default is False).</li>
+<li><code>bypass</code> (bool): Whether to use bypass techniques (default is False).</li>
+<li><code>target_os</code> (str): The target OS to test (e.g., "linux" or "windows").</li>
+<li><code>php_wrapper</code> (str): The PHP wrapper to use for the request (e.g., "file").</li>
+<li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): The user-agent string to use for the request (optional).</li>
+<li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
+<li><strong>Returns:</strong> A list of URLs that exhibit Path Traversal vulnerabilities.</li>
 </ul>
 
 <h3><code>scan(u, max_pages, logs, null_byte, bypass, target_os, php_wrapper, timeout, user_agent, cookie, pages, headers, http_proxies, socks4_proxies, socks5_proxies)</code></h3>
 <p>This method scans a URL and its linked pages for Path Traversal vulnerabilities. It allows for a comprehensive scan across multiple pages, checks for Path Traversal issues, and returns a list of URLs that exhibit Path Traversal vulnerabilities.</p>
 <ul>
-    <li><code>u</code> (str): The URL to scan for Path Traversal vulnerabilities.</li>
-    <li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
-    <li><code>logs</code> (bool): Whether to show scan logs (default is True).</li>
-    <li><code>null_byte</code> (bool): Whether to include a null byte ("%00") in the request (default is False).</li>
-    <li><code>bypass</code> (bool): Whether to use bypass techniques (default is False).</li>
-    <li><code>target_os</code> (str): The target OS to test (e.g., "linux" or "windows").</li>
-    <li><code>php_wrapper</code> (str): The PHP wrapper to use for the request (e.g., "file").</li>
-    <li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str): The user-agent string to use for the request (optional).</li>
-    <li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
-    <li><code>pages</code> (list): List of specific pages to scan (optional).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
-    <li><strong>Returns:</strong> A list of dictionaries containing scan results for each page scanned, including URLs that exhibit Path Traversal vulnerabilities.</li>
+<li><code>u</code> (str): The URL to scan for Path Traversal vulnerabilities.</li>
+<li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
+<li><code>logs</code> (bool): Whether to show scan logs (default is True).</li>
+<li><code>null_byte</code> (bool): Whether to include a null byte ("%00") in the request (default is False).</li>
+<li><code>bypass</code> (bool): Whether to use bypass techniques (default is False).</li>
+<li><code>target_os</code> (str): The target OS to test (e.g., "linux" or "windows").</li>
+<li><code>php_wrapper</code> (str): The PHP wrapper to use for the request (e.g., "file").</li>
+<li><code>timeout</code> (int): The request timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str): The user-agent string to use for the request (optional).</li>
+<li><code>cookie</code> (str): The cookie value to include in the request (optional).</li>
+<li><code>pages</code> (list): List of specific pages to scan (optional).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in the request (optional).</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use for the request (optional).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for the request (optional).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for the request (optional).</li>
+<li><strong>Returns:</strong> A list of dictionaries containing scan results for each page scanned, including URLs that exhibit Path Traversal vulnerabilities.</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -859,15 +859,15 @@ for result in results:
 <h3><code>scan(u, path="/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php", user_agent=None, cookie=None, timeout=10, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
 <p>This method performs the scanning operation to check for the PHP Unit exploit on the provided URL. It takes the following parameters:</p>
 <ul>
-    <li><code>u</code> (str): The target website URL.</li>
-    <li><code>path</code> (str): Path to the PHP Unit exploit file (default is "/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php").</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>u</code> (str): The target website URL.</li>
+<li><code>path</code> (str): Path to the PHP Unit exploit file (default is "/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php").</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -906,41 +906,41 @@ else:
 
 <h3>Parameters</h3>
 <ul>
-    <li><code>u</code> (str): The target website URL to start the scan.</li>
-    <li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
-    <li><code>pages</code> (list): List of specific pages to scan (overrides max_pages).</li>
-    <li><code>payloads</code> (dict): A dictionary of RCE payloads to use in the scan.</li>
-    <li><code>payload_index</code> (int): The index of the payload to use from the payloads dictionary.</li>
-    <li><code>email_extension</code> (str): Email extension to use for email payloads (default is '@gmail.com').</li>
-    <li><code>phone_pattern</code> (str): Phone number pattern for phone payloads (default is 'XXX-XXX-XXXX').</li>
-    <li><code>save_to_file</code> (str): Save the scan result to a JSON file (default is None).</li>
-    <li><code>dont_change</code> (dict): Dictionary of parameters that should not be changed during the scan.</li>
-    <li><code>number</code> (tuple): Range of numbers to use for numeric payloads (default is (1, 9)).</li>
-    <li><code>injection</code> (dict): Injection type and target parameter for payloads.</li>
-    <li><code>code_operator_right</code> (str): Operator to use on the right side of code payloads (default is ' ; ').</li>
-    <li><code>code_operator_left</code> (str): Operator to use on the left side of code payloads (default is ' ').</li>
-    <li><code>command_operator_right</code> (str): Operator to use on the right side of command payloads (default is ' | ').</li>
-    <li><code>command_operator_left</code> (str): Operator to use on the left side of command payloads (default is ' & ').</li>
-    <li><code>sql_operator_right</code> (str): Operator to use on the right side of SQL payloads (default is ' or ').</li>
-    <li><code>sql_operator_left</code> (str): Operator to use on the left side of SQL payloads (default is ' or ').</li>
-    <li><code>file_extension</code> (str): File extension to use for file payloads (default is 'png').</li>
-    <li><code>replaceble_parameters</code> (dict): Dictionary of parameters with replacement values for payloads.</li>
-    <li><code>based_on</code> (str): The basis for the payload timing, either 'time' or 'file'.</li>
-    <li><code>delay</code> (int): Delay in seconds for payload timing (default is 10).</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>fill_empty</code> (int): The number of empty spaces to fill in input parameters (default is 10).</li>
-    <li><code>leave_empty</code> (list): List of parameters to leave empty during the scan.</li>
-    <li><code>dont_send</code> (list): List of parameters not to send during the scan.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 120).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>debug</code> (bool): Enable or disable debug output (default is False).</li>
-    <li><code>mime_type</code> (str): Mime type for file payloads (default is None).</li>
-    <li><code>predefined_inputs</code> (dict): Dictionary of predefined inputs to use in payloads.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in requests.</li>
-    <li><code>http_proxies</code> (list or dict): List of HTTP proxies to use for requests or a dictionary of proxy types (e.g., {"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"}).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests.</li>
+<li><code>u</code> (str): The target website URL to start the scan.</li>
+<li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
+<li><code>pages</code> (list): List of specific pages to scan (overrides max_pages).</li>
+<li><code>payloads</code> (dict): A dictionary of RCE payloads to use in the scan.</li>
+<li><code>payload_index</code> (int): The index of the payload to use from the payloads dictionary.</li>
+<li><code>email_extension</code> (str): Email extension to use for email payloads (default is '@gmail.com').</li>
+<li><code>phone_pattern</code> (str): Phone number pattern for phone payloads (default is 'XXX-XXX-XXXX').</li>
+<li><code>save_to_file</code> (str): Save the scan result to a JSON file (default is None).</li>
+<li><code>dont_change</code> (dict): Dictionary of parameters that should not be changed during the scan.</li>
+<li><code>number</code> (tuple): Range of numbers to use for numeric payloads (default is (1, 9)).</li>
+<li><code>injection</code> (dict): Injection type and target parameter for payloads.</li>
+<li><code>code_operator_right</code> (str): Operator to use on the right side of code payloads (default is ' ; ').</li>
+<li><code>code_operator_left</code> (str): Operator to use on the left side of code payloads (default is ' ').</li>
+<li><code>command_operator_right</code> (str): Operator to use on the right side of command payloads (default is ' | ').</li>
+<li><code>command_operator_left</code> (str): Operator to use on the left side of command payloads (default is ' & ').</li>
+<li><code>sql_operator_right</code> (str): Operator to use on the right side of SQL payloads (default is ' or ').</li>
+<li><code>sql_operator_left</code> (str): Operator to use on the left side of SQL payloads (default is ' or ').</li>
+<li><code>file_extension</code> (str): File extension to use for file payloads (default is 'png').</li>
+<li><code>replaceble_parameters</code> (dict): Dictionary of parameters with replacement values for payloads.</li>
+<li><code>based_on</code> (str): The basis for the payload timing, either 'time' or 'file'.</li>
+<li><code>delay</code> (int): Delay in seconds for payload timing (default is 10).</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>fill_empty</code> (int): The number of empty spaces to fill in input parameters (default is 10).</li>
+<li><code>leave_empty</code> (list): List of parameters to leave empty during the scan.</li>
+<li><code>dont_send</code> (list): List of parameters not to send during the scan.</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 120).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>debug</code> (bool): Enable or disable debug output (default is False).</li>
+<li><code>mime_type</code> (str): Mime type for file payloads (default is None).</li>
+<li><code>predefined_inputs</code> (dict): Dictionary of predefined inputs to use in payloads.</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in requests.</li>
+<li><code>http_proxies</code> (list or dict): List of HTTP proxies to use for requests or a dictionary of proxy types (e.g., {"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"}).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests.</li>
 </ul>
 
 <h3>Example Usage</h3>
@@ -1011,24 +1011,24 @@ for result in scan_result:
 
 <h3>Parameters</h3>
 <ul>
-    <li><code>ip</code> (str): The IP address to be queried.</li>
-    <li><code>api_key</code> (str): Shodan API key used for authentication.</li>
-    <li><code>file_name</code> (str): File name for saving the Shodan report (default is "shodan_report").</li>
-    <li><code>save_to_file</code> (bool): Determines whether the result should be saved to a file (default is <code>False</code>).</li>
-    <li><code>proxy</code> (Not used in the method. Potentially unused parameter left over from previous development iterations).</li>
-    <li><code>http_proxies</code> (list or dict): List of HTTP proxies to use for requests or a dictionary of proxy types.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests.</li>
+<li><code>ip</code> (str): The IP address to be queried.</li>
+<li><code>api_key</code> (str): Shodan API key used for authentication.</li>
+<li><code>file_name</code> (str): File name for saving the Shodan report (default is "shodan_report").</li>
+<li><code>save_to_file</code> (bool): Determines whether the result should be saved to a file (default is <code>False</code>).</li>
+<li><code>proxy</code> (Not used in the method. Potentially unused parameter left over from previous development iterations).</li>
+<li><code>http_proxies</code> (list or dict): List of HTTP proxies to use for requests or a dictionary of proxy types.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests.</li>
 </ul>
 
 <h3>Functionality</h3>
 <p>The <code>scan</code> method performs the following steps:</p>
 <ol>
-    <li>Constructs the Shodan API URL based on the provided IP and API key.</li>
-    <li>Performs a GET request to the constructed URL.</li>
-    <li>Uses a specified user agent for the request.</li>
-    <li>Supports saving the obtained JSON response to a file if <code>save_to_file</code> is set to <code>True</code>.</li>
-    <li>Handles exceptions and returns an empty dictionary in case of any errors.</li>
+<li>Constructs the Shodan API URL based on the provided IP and API key.</li>
+<li>Performs a GET request to the constructed URL.</li>
+<li>Uses a specified user agent for the request.</li>
+<li>Supports saving the obtained JSON response to a file if <code>save_to_file</code> is set to <code>True</code>.</li>
+<li>Handles exceptions and returns an empty dictionary in case of any errors.</li>
 </ol>
 
 <h2>Example Usage</h2>
@@ -1059,19 +1059,19 @@ print(result)
 <p>The <code>scan</code> method scans a web page and its linked pages for mixed content vulnerabilities. It takes the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The URL of the web page to scan.</li>
-    <li><code>max_pages</code> (int, optional): The maximum number of linked pages to scan (default is 5).</li>
-    <li><code>proxy</code> (str, optional): Proxy settings for the scan (e.g., {"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"}).</li>
-    <li><code>timeout</code> (int, optional): Request timeout in seconds (default is 10).</li>
-    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
-    <li><code>content</code> (str, optional): Custom HTML content to scan instead of making a request.</li>
-    <li><code>logs</code> (bool, optional): Enable or disable logging (default is True).</li>
-    <li><code>pages</code> (list, optional): Predefined list of pages to scan.</li>
-    <li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
-    <li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests (e.g., ["1.2.3.4:80"]).</li>
-    <li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests (e.g., ["5.6.7.8:1080"]).</li>
-    <li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests (e.g., ["9.10.11.12:1080"]).</li>
+<li><code>u</code> (str): The URL of the web page to scan.</li>
+<li><code>max_pages</code> (int, optional): The maximum number of linked pages to scan (default is 5).</li>
+<li><code>proxy</code> (str, optional): Proxy settings for the scan (e.g., {"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"}).</li>
+<li><code>timeout</code> (int, optional): Request timeout in seconds (default is 10).</li>
+<li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+<li><code>content</code> (str, optional): Custom HTML content to scan instead of making a request.</li>
+<li><code>logs</code> (bool, optional): Enable or disable logging (default is True).</li>
+<li><code>pages</code> (list, optional): Predefined list of pages to scan.</li>
+<li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
+<li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests (e.g., ["1.2.3.4:80"]).</li>
+<li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests (e.g., ["5.6.7.8:1080"]).</li>
+<li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests (e.g., ["9.10.11.12:1080"]).</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -1113,15 +1113,15 @@ for url in scan_result:
 <p>The <code>scan</code> method scans a Spring Boot application for vulnerabilities in the Actuator endpoints. It takes the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The base URL of the Spring Boot application.</li>
-    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests. If not provided, a random User-Agent is selected.</li>
-    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
-    <li><code>timeout</code> (int, optional): Request timeout in seconds. If not provided, the default timeout is used.</li>
-    <li><code>path</code> (str, optional): The path of the Actuator endpoint to scan (default is '/actuator').</li>
-    <li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
-    <li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
-    <li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
-    <li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
+<li><code>u</code> (str): The base URL of the Spring Boot application.</li>
+<li><code>user_agent</code> (str, optional): Custom User-Agent header for requests. If not provided, a random User-Agent is selected.</li>
+<li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+<li><code>timeout</code> (int, optional): Request timeout in seconds. If not provided, the default timeout is used.</li>
+<li><code>path</code> (str, optional): The path of the Actuator endpoint to scan (default is '/actuator').</li>
+<li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
+<li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
+<li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
+<li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -1158,52 +1158,52 @@ print("Actuator Endpoint Info:", scan_result)
 <p>The <code>ssrf_check</code> method is used to check for SSRF vulnerabilities by testing a given URL. It takes the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The URL to test for SSRF vulnerabilities.</li>
-    <li><code>null_byte</code> (bool, optional): Add a null byte character to the URL to bypass security filters (default is False).</li>
-    <li><code>link</code> (str, optional): The link to fetch content from (default is "http://www.google.com").</li>
-    <li><code>signature</code> (str, optional): The expected signature in the response content (default is "<title>Google</title>").</li>
-    <li><code>proxy</code> (str, optional): Proxy settings for the request.</li>
-    <li><code>timeout</code> (int, optional): Request timeout in seconds (default is 25).</li>
-    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
-    <li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
+<li><code>u</code> (str): The URL to test for SSRF vulnerabilities.</li>
+<li><code>null_byte</code> (bool, optional): Add a null byte character to the URL to bypass security filters (default is False).</li>
+<li><code>link</code> (str, optional): The link to fetch content from (default is "http://www.google.com").</li>
+<li><code>signature</code> (str, optional): The expected signature in the response content (default is "<title>Google</title>").</li>
+<li><code>proxy</code> (str, optional): Proxy settings for the request.</li>
+<li><code>timeout</code> (int, optional): Request timeout in seconds (default is 25).</li>
+<li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+<li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
 </ul>
 
 <h3><code>ssrf_urls(self, u, null_byte=False, link="http://www.google.com", timeout=120, signature="<title>Google</title>", user_agent=None, cookie=None, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
 <p>The <code>ssrf_urls</code> method scans a list of URLs for SSRF vulnerabilities. It takes the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The base URL for scanning.</li>
-    <li><code>null_byte</code> (bool, optional): Add a null byte character to the URL to bypass security filters (default is False).</li>
-    <li><code>link</code> (str, optional): The link to fetch content from (default is "http://www.google.com").</li>
-    <li><code>timeout</code> (int, optional): Request timeout in seconds (default is 120).</li>
-    <li><code>signature</code> (str, optional): The expected signature in the response content (default is "<title>Google</title>").</li>
-    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
-    <li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
-    <li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
-    <li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
-    <li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
+<li><code>u</code> (str): The base URL for scanning.</li>
+<li><code>null_byte</code> (bool, optional): Add a null byte character to the URL to bypass security filters (default is False).</li>
+<li><code>link</code> (str, optional): The link to fetch content from (default is "http://www.google.com").</li>
+<li><code>timeout</code> (int, optional): Request timeout in seconds (default is 120).</li>
+<li><code>signature</code> (str, optional): The expected signature in the response content (default is "<title>Google</title>").</li>
+<li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+<li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
+<li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
+<li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
+<li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
 </ul>
 
 <h3><code>scan(self, u, max_pages=5, logs=True, null_byte=False, link="http://www.google.com", timeout=120, signature="<title>Google</title>", user_agent=None, cookie=None, pages=[], headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
 <p>The <code>scan</code> method initiates SSRF scanning on a list of web pages. It takes the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The base URL to start scanning from.</li>
-    <li><code>max_pages</code> (int, optional): The maximum number of pages to scan (default is 5).</li>
-    <li><code>logs</code> (bool, optional): Enable or disable logging (default is True).</li>
-    <li><code>null_byte</code> (bool, optional): Add a null byte character to the URL to bypass security filters (default is False).</li>
-    <li><code>link</code> (str, optional): The link to fetch content from (default is "http://www.google.com").</li>
-    <li><code>timeout</code> (int, optional): Request timeout in seconds (default is 120).</li>
-    <li><code>signature</code> (str, optional): The expected signature in the response content (default is "<title>Google</title>").</li>
-    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
-    <li><code>pages</code> (list, optional): Predefined list of pages to scan.</li>
-    <li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
-    <li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
-    <li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
-    <li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
+<li><code>u</code> (str): The base URL to start scanning from.</li>
+<li><code>max_pages</code> (int, optional): The maximum number of pages to scan (default is 5).</li>
+<li><code>logs</code> (bool, optional): Enable or disable logging (default is True).</li>
+<li><code>null_byte</code> (bool, optional): Add a null byte character to the URL to bypass security filters (default is False).</li>
+<li><code>link</code> (str, optional): The link to fetch content from (default is "http://www.google.com").</li>
+<li><code>timeout</code> (int, optional): Request timeout in seconds (default is 120).</li>
+<li><code>signature</code> (str, optional): The expected signature in the response content (default is "<title>Google</title>").</li>
+<li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+<li><code>pages</code> (list, optional): Predefined list of pages to scan.</li>
+<li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
+<li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
+<li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
+<li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -1247,21 +1247,21 @@ for page in scan_result:
 <p>The <code>scan</code> method searches for vulnerabilities in software using the Vulners API. It takes the following parameters:</p>
 
 <ul>
-    <li><code>software</code> (str): The name of the software to search for vulnerabilities.</li>
-    <li><code>url</code> (str, optional): The API endpoint URL (default is "https://vulners.com/api/v3/burp/software/").</li>
-    <li><code>file_name</code> (str, optional): The name of the file to save the search results (default is generated based on software and version).</li>
-    <li><code>save_to_file</code> (bool, optional): Whether to save the search results to a file (default is False).</li>
-    <li><code>max_vulnerabilities</code> (int, optional): The maximum number of vulnerabilities to retrieve (default is 100).</li>
-    <li><code>version</code> (str, optional): The version of the software for more specific results.</li>
-    <li><code>software_type</code> (str, optional): The type of software ("software" or "cpe") (default is "software").</li>
-    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
-    <li><code>api_key</code> (str, optional): Vulners API key for authenticated access (default is '').</li>
-    <li><code>timeout</code> (int, optional): Request timeout in seconds (default is 20).</li>
-    <li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
-    <li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
-    <li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
-    <li><code>proxy</code> (str, optional): Specific proxy settings for the request (overrides http_proxies, socks4_proxies, and socks5_proxies).</li>
+<li><code>software</code> (str): The name of the software to search for vulnerabilities.</li>
+<li><code>url</code> (str, optional): The API endpoint URL (default is "https://vulners.com/api/v3/burp/software/").</li>
+<li><code>file_name</code> (str, optional): The name of the file to save the search results (default is generated based on software and version).</li>
+<li><code>save_to_file</code> (bool, optional): Whether to save the search results to a file (default is False).</li>
+<li><code>max_vulnerabilities</code> (int, optional): The maximum number of vulnerabilities to retrieve (default is 100).</li>
+<li><code>version</code> (str, optional): The version of the software for more specific results.</li>
+<li><code>software_type</code> (str, optional): The type of software ("software" or "cpe") (default is "software").</li>
+<li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+<li><code>api_key</code> (str, optional): Vulners API key for authenticated access (default is '').</li>
+<li><code>timeout</code> (int, optional): Request timeout in seconds (default is 20).</li>
+<li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
+<li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
+<li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
+<li><code>proxy</code> (str, optional): Specific proxy settings for the request (overrides http_proxies, socks4_proxies, and socks5_proxies).</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -1316,34 +1316,34 @@ print(search_result)
 </code></pre>
 <h3>Parameters</h3>
 <ul>
-    <li><code>u</code> (str): The target website URL.</li>
-    <li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
-    <li><code>pages</code> (list): A list of specific pages to scan (if provided, it overrides <code>max_pages</code>).</li>
-    <li><code>email_extension</code> (str): The email extension to be used in payloads (default is '@gmail.com').</li>
-    <li><code>phone_pattern</code> (str): The phone number pattern for payloads (default is 'XXX-XXX-XXXX').</li>
-    <li><code>payload_index</code> (int): The index of the payload to use (default is 0).</li>
-    <li><code>values</code> (tuple): Values to be used in payloads (default is (9, 123456789)).</li>
-    <li><code>dont_change</code> (dict): Parameters that should not be modified in payloads.</li>
-    <li><code>number</code> (tuple): Numeric range for payloads (default is (1, 9)).</li>
-    <li><code>payload_keyword</code> (str): The keyword to replace with payload values (default is "payload").</li>
-    <li><code>operator</code> (str): The operator to be used in payloads (default is "*").</li>
-    <li><code>save_to_file</code> (str): A file to save scan results (default is None).</li>
-    <li><code>file_extension</code> (str): The file extension for payloads (default is "png").</li>
-    <li><code>replaceble_parameters</code> (dict): Parameters and their replacement values for payloads.</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>fill_empty</code> (int): Number of empty values to try in payloads (default is 10).</li>
-    <li><code>leave_empty</code> (list): Parameters to leave empty in payloads.</li>
-    <li><code>dont_send</code> (list): Parameters not to send in payloads.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 120).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>debug</code> (bool): Enable or disable debugging information (default is False).</li>
-    <li><code>mime_type</code> (str): MIME type to use in payloads.</li>
-    <li><code>predefined_inputs</code> (dict): Predefined input values for parameters.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include in requests.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use (e.g., ["http":"http://1.2.3.4:80"]).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use (e.g., ["5.6.7.8:1080"]).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use (e.g., ["9.10.11.12:1080"]).</li>
+<li><code>u</code> (str): The target website URL.</li>
+<li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
+<li><code>pages</code> (list): A list of specific pages to scan (if provided, it overrides <code>max_pages</code>).</li>
+<li><code>email_extension</code> (str): The email extension to be used in payloads (default is '@gmail.com').</li>
+<li><code>phone_pattern</code> (str): The phone number pattern for payloads (default is 'XXX-XXX-XXXX').</li>
+<li><code>payload_index</code> (int): The index of the payload to use (default is 0).</li>
+<li><code>values</code> (tuple): Values to be used in payloads (default is (9, 123456789)).</li>
+<li><code>dont_change</code> (dict): Parameters that should not be modified in payloads.</li>
+<li><code>number</code> (tuple): Numeric range for payloads (default is (1, 9)).</li>
+<li><code>payload_keyword</code> (str): The keyword to replace with payload values (default is "payload").</li>
+<li><code>operator</code> (str): The operator to be used in payloads (default is "*").</li>
+<li><code>save_to_file</code> (str): A file to save scan results (default is None).</li>
+<li><code>file_extension</code> (str): The file extension for payloads (default is "png").</li>
+<li><code>replaceble_parameters</code> (dict): Parameters and their replacement values for payloads.</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>fill_empty</code> (int): Number of empty values to try in payloads (default is 10).</li>
+<li><code>leave_empty</code> (list): Parameters to leave empty in payloads.</li>
+<li><code>dont_send</code> (list): Parameters not to send in payloads.</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 120).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>debug</code> (bool): Enable or disable debugging information (default is False).</li>
+<li><code>mime_type</code> (str): MIME type to use in payloads.</li>
+<li><code>predefined_inputs</code> (dict): Predefined input values for parameters.</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include in requests.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use (e.g., ["http":"http://1.2.3.4:80"]).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use (e.g., ["5.6.7.8:1080"]).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use (e.g., ["9.10.11.12:1080"]).</li>
 </ul>
 <h3>Return Value</h3>
 <p>The <code>scan</code> method returns a list of results, where each result is a dictionary containing information about the scanned pages, vulnerabilities, and errors detected. An empty list is returned if no vulnerabilities or errors are found.</p>
@@ -1377,3 +1377,89 @@ results = SSTI_Scanner.scan(
 for result in results:
     print("Scan Result:", result)
 </code></pre>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>XSS_Scanner Class - scan Method</title>
+</head>
+<body>
+<h1>XSS_Scanner Class - scan Method</h1>
+
+<h2>Description</h2>
+<p>
+        The `scan` method is a part of the `XSS_Scanner` class in Python, designed for systematically identifying and testing Cross-Site Scripting (XSS) vulnerabilities in web applications. This method allows users to spider through web pages, identify forms, and test them for XSS vulnerabilities. It provides flexibility to test multiple pages and payloads.
+</p>
+
+<h2>Method Signature</h2>
+<pre>
+<code>
+    def scan(
+        u,
+        max_pages=5,
+        pages=[],
+        payload=None,
+        email_extension='@gmail.com',
+        phone_pattern='XXX-XXX-XXXX',
+        unicode_random_level=0,
+        number=(1, 9),
+        js_function="alert",
+        dont_change={},
+        predefined_inputs={},
+        replaceble_parameters={"phpvalue": ((".", ""),)},
+        file_extension="png",
+        context_breaker='&lt;/form&gt;',
+        save_to_file=None,
+        logs=True,
+        fill_empty=10,
+        leave_empty=[],
+        dont_send=["btnClear"],
+        timeout=10,
+        user_agent=None,
+        cookie=None,
+        debug=False,
+        mime_type=None,
+        headers={},
+        http_proxies=None,
+        socks4_proxies=None,
+        socks5_proxies=None
+    )
+</code>
+</pre>
+
+<h2>Parameters</h2>
+<ul>
+    <li><strong>u</strong> (str): The target URL to scan for XSS vulnerabilities.</li>
+    <li><strong>max_pages</strong> (int, optional): The maximum number of pages to crawl (default is 5).</li>
+    <li><strong>pages</strong> (list, optional): A list of specific pages to scan instead of crawling. If provided, `max_pages` will be ignored.</li>
+    <li><strong>payload</strong> (str, list, or None, optional): The XSS payload to inject or a list of payloads. If not specified, a default payload is used.</li>
+    <!-- Include descriptions of other parameters here -->
+</ul>
+
+<h2>Return Value</h2>
+<p>
+        The `scan` method returns a list of dictionaries, each containing information about the tested pages and their XSS vulnerability status. It provides detailed results about the vulnerabilities detected, making it easier to analyze the security of the target web application.
+</p>
+
+<h2>Example</h2>
+<p>
+        Below is an example of how to use the `scan` method to test a target URL for XSS vulnerabilities.
+</p>
+<pre>
+<code>
+from bane.scanners.vulnerabilities import XSS_Scanner
+
+#Specify the target URL
+target_url = "https://example.com"
+
+#Perform an XSS scan with default settings
+results = XSS_Scanner.scan(target_url)
+
+#Print the scan results
+for result in results:
+        print("Form: " + result["form"])
+        print("Method: " + result["method"])
+        print("Vulnerable Fields: " + str(result["vulnerable"]))
+        print("\n")
+</code>
+</pre>
