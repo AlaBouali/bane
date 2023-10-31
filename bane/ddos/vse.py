@@ -1,6 +1,6 @@
 from bane.ddos.utils import *
 
-class vse_flood(DDoS_Class):
+class VSE_Flood(DDoS_Class):
     def __init__(
         self,
         u,

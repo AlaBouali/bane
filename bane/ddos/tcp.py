@@ -1,6 +1,6 @@
 from bane.ddos.utils import *
 
-class tcp_flood(DDoS_Class):
+class TCP_Flood(DDoS_Class):
     def __init__(
         self,
         u,

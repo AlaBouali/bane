@@ -1,6 +1,6 @@
 from bane.ddos.utils import *
 
-class torshammer(DDoS_Class):
+class Tor_Hammer(DDoS_Class):
     def __init__(
         self,
         u,

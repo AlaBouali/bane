@@ -1,6 +1,6 @@
 from bane.ddos.utils import *
 
-class prox_http_spam(DDoS_Class):
+class Proxies_HTTP_Spam(DDoS_Class):
     def __init__(
         self,
         u,

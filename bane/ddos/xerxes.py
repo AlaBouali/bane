@@ -1,6 +1,6 @@
 from bane.ddos.utils import *
 
-class xerxes(DDoS_Class):
+class Xerxes(DDoS_Class):
     def __init__(
         self,
         u,

@@ -2,22 +2,10 @@ from bane.ddos.utils import *
 """
    this tool is to perform slow reading attack. i read about this type of attacks on: https://blog.qualys.com/tag/slow-http-attack and tried to do the same thing in python (but in a better way though :p ). on this attack, the attacker is sending a full legitimate HTTP request but reading it slowly to keep the connection open as long as possible. here im doing it a bit different of the original attack with slowhttptest, im sending a normal HTTP request on each thread then read a small part of it (between 1 to 3 bytes randomly sized) then it sleeps for few seconds (3 to 5 seconds randomly sized too), then it sends another request and keep doing the same and keeping the connection open forever.
 
-   it takes the following parameters:
-
-   u: target ip or domain
-   p: (set by default to: 80)
-   threads: (set by default to: 500) number of connections
-   timeout: (set by default to: 5) connection timeout flag 
-
-   example:
-
-   >>>import bane
-   >>>bane.slow_read_attack('www.google.com',p=443,threads=300,timeout=7)
-
 """
 
 
-class slow_read(DDoS_Class):
+class Slow_Read(DDoS_Class):
     def __init__(
         self,
         u,
