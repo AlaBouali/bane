@@ -4,28 +4,28 @@ class BASE64:
 
     @staticmethod
     def encode(w, encode=None):
-        if w:
+        if type(w)==str:
             if encode:
-                w.encode(encode)
+                w=w.encode(encode)
             else:
-                w.encode()
+                w=w.encode()
             """
     function to return base64 encoded string
     """
-            return base64.b64encode(w)
+        return base64.b64encode(w)
 
 
     @staticmethod
     def decode(w, encode=None):
-        if w:
+        if type(w)==str:
             if encode:
-                w.encode(encode)
+                w=w.encode(encode)
             else:
-                w.encode()
+                w=w.encode()
             """
     function to return base64 decoded string
     """
-            return base64.b64decode(w)
+        return base64.b64decode(w)
 
 
 

@@ -2,7 +2,7 @@ from bane.bruteforce.utils import *
 
 
 
-class web_login_bruteforce:
+class Web_Login_Bruteforce:
     __slots__ = ["stop", "finish", "result", "logs"]
 
     def try_combo(self, url, username, password, cookie, user_agent, proxy, timeout,headers):

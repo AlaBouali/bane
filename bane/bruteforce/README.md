@@ -464,3 +464,65 @@ result = hydra_ssh.result
 print("Successful SSH login:", result)
 </code></pre>
 </p>
+
+<h1>Web_Login_Bruteforce Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>Web_Login_Bruteforce</code> class is used for performing brute-force login attempts on web-based login forms. It takes a list of username-password combinations and tries to log in by filling out the login form. It reports success or failure for each combination.</p>
+
+<h2>Class Constructor</h2>
+<pre><code>class Web_Login_Bruteforce(u, word_list=[], threads_daemon=True, logs=True, cookie=None, user_agent=None, timeout=10, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)
+</code></pre>
+<p>This constructor initializes an instance of the <code>Web_Login_Bruteforce</code> class with the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The URL of the login page.</li>
+    <li><code>word_list</code> (list): List of username-password combinations to try.</li>
+    <li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
+    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+</ul>
+
+<h2>Methods</h2>
+<h3><code>crack(self, u, word_list, logs, proxies, cookie, user_agent, timeout, headers)</code></h3>
+<p>This method performs brute-force login attempts with the specified parameters. It tries different combinations from the provided word list and checks for successful logins by filling out the login form.</p>
+
+<h3><code>done(self)</code></h3>
+<p>This method returns <code>True</code> if the brute-force operation is finished and <code>False</code> otherwise.</p>
+
+<h2>Example Usage</h2>
+<p>To use the <code>Web_Login_Bruteforce</code> class, create an instance of it by providing the required parameters, and it will start brute-forcing logins on the specified web-based login form. Here's an example:</p>
+
+<pre><code>
+import time
+from bane.bruteforce import Web_Login_Bruteforce
+
+# Create an instance of Web_Login_Bruteforce
+web_bruteforce = Web_Login_Bruteforce(
+    u="https://example.com/login",
+    word_list=["user1:pass1", "user2:pass2"],
+    logs=True,
+    cookie=None,
+    user_agent="Custom User-Agent",
+    timeout=10,
+    headers={"Custom-Header": "Value"},
+    http_proxies=["http://proxy1.com", "http://proxy2.com"],
+    socks4_proxies=["socks4://socks4_proxy1", "socks4://socks4_proxy2"],
+    socks5_proxies=["socks5://socks5_proxy1", "socks5://socks5_proxy2"]
+)
+
+# Wait for the brute-force operation to finish
+while not web_bruteforce.done():
+    time.sleep(1)
+
+# Access the result
+result = web_bruteforce.result
+print("Successful login:", result)
+</code></pre>
+</p>
