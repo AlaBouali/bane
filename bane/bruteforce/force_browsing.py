@@ -1,37 +1,40 @@
 from bane.bruteforce.utils import *
 
 
-def access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None,headers={}):
-    if bypass == True:
-        u += "#"
-    if user_agent:
-        us = user_agent
-    else:
-        us = random.choice(Common_Variables.user_agents_list)
-    hed = {"User-Agent": us}
-    if cookie:
-        hed.update({"Cookie": cookie})
-    hed.update(headers)
-    try:
-        r = requests.Session().get(
-            u,
-            headers=hed,
-            allow_redirects=False,
-            proxies=proxy,
-            timeout=timeout,
-            verify=False,
-        )
-        if r.status_code == requests.codes.ok:
-            if ("Uncaught exception" not in r.text) or ("404 Not Found" not in r.text):
-                return True
-    except Exception as e:
-        pass
-    return False
-
 
 
 class Force_Browsing:
     __slots__ = ["stop", "finish", "result", "logs"]
+
+    @staticmethod
+    def access(u, timeout=10, user_agent=None, cookie=None, bypass=False, proxy=None,headers={}):
+        if bypass == True:
+            u += "#"
+        if user_agent:
+            us = user_agent
+        else:
+            us = random.choice(Common_Variables.user_agents_list)
+        hed = {"User-Agent": us}
+        if cookie:
+            hed.update({"Cookie": cookie})
+        hed.update(headers)
+        try:
+            r = requests.Session().get(
+                u,
+                headers=hed,
+                allow_redirects=False,
+                proxies=proxy,
+                timeout=timeout,
+                verify=False,
+            )
+            if r.status_code == requests.codes.ok:
+                if ("Uncaught exception" not in r.text) or ("404 Not Found" not in r.text):
+                    return True
+        except Exception as e:
+            pass
+        return False
+
+
 
     def __init__(
         self,
@@ -93,7 +96,7 @@ class Force_Browsing:
                     us = user_agent
                 else:
                     us = random.choice(Common_Variables.user_agents_list)
-                h = access(g, user_agent=us, cookie=cookie, proxy=proxy)
+                h = Force_Browsing.access(g, user_agent=us, cookie=cookie, proxy=proxy)
             except KeyboardInterrupt:
                 break
             if h == True:

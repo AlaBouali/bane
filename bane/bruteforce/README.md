@@ -278,7 +278,7 @@ print("Browsing Result:", result)
 
 # Using the access function
 url_to_access = "https://example.com/page"
-is_accessible = access(
+is_accessible = Force_Browsing.access(
     u=url_to_access,
     timeout=10,
     user_agent="CustomUserAgent",
