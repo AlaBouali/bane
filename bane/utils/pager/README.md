@@ -553,13 +553,13 @@ from bane import LOGIN_FORM_FILLER
 #URL and HTML content of the web page
 web_page_url = "https://example.com/login"
 web_page_html = """
-<html>
-    <form action="/login" method="post">
-        <input type="text" name="username" value="">
-        <input type="password" name="password" value="">
-        <input type="submit" value="Login">
-    </form>
-</html>
+&lt;html&gt;
+    &lt;form action=&quot;/login&quot; method=&quot;post&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;&quot;&gt;
+        &lt;input type=&quot;password&quot; name=&quot;password&quot; value=&quot;&quot;&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Login&quot;&gt;
+    &lt;/form&gt;
+&lt;/html&gt;
 """
 
 #Get the login form from the web page
