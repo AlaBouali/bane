@@ -1000,3 +1000,380 @@ for result in scan_result:
             print("Context:", vuln['context'])
 </code></pre>
 </p>
+<h1>Shodan_Scanner Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>Shodan_Scanner</code> class is designed to interact with the Shodan API and retrieve information about a specific IP address.</p>
+
+<h2>Method: <code>scan</code></h2>
+<pre><code>Shodan_Scanner.scan(ip, api_key, file_name="shodan_report", save_to_file=False, proxy=None, http_proxies=None, socks4_proxies=None, socks5_proxies=None)
+</code></pre>
+
+<h3>Parameters</h3>
+<ul>
+    <li><code>ip</code> (str): The IP address to be queried.</li>
+    <li><code>api_key</code> (str): Shodan API key used for authentication.</li>
+    <li><code>file_name</code> (str): File name for saving the Shodan report (default is "shodan_report").</li>
+    <li><code>save_to_file</code> (bool): Determines whether the result should be saved to a file (default is <code>False</code>).</li>
+    <li><code>proxy</code> (Not used in the method. Potentially unused parameter left over from previous development iterations).</li>
+    <li><code>http_proxies</code> (list or dict): List of HTTP proxies to use for requests or a dictionary of proxy types.</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use for requests.</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use for requests.</li>
+</ul>
+
+<h3>Functionality</h3>
+<p>The <code>scan</code> method performs the following steps:</p>
+<ol>
+    <li>Constructs the Shodan API URL based on the provided IP and API key.</li>
+    <li>Performs a GET request to the constructed URL.</li>
+    <li>Uses a specified user agent for the request.</li>
+    <li>Supports saving the obtained JSON response to a file if <code>save_to_file</code> is set to <code>True</code>.</li>
+    <li>Handles exceptions and returns an empty dictionary in case of any errors.</li>
+</ol>
+
+<h2>Example Usage</h2>
+<p>An example of using the <code>Shodan_Scanner</code> class and its <code>scan</code> method:</p>
+
+<pre><code>
+from bane.scanners.vulnerabilities import Shodan_Scanner
+
+#Specify the target IP address and Shodan API key
+ip_address = "123.456.789.0"
+api_key = "your_shodan_api_key"
+
+#Create an instance of Shodan_Scanner and perform the scan
+result = Shodan_Scanner.scan(ip_address, api_key, save_to_file=True)
+
+#Access and process the scan result
+print("Shodan Report for IP", ip_address)
+print(result)
+</code></pre>
+</p>
+<h1>Mixed_Content_Scanner Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>Mixed_Content_Scanner</code> class is part of the "bane" module and is used to scan web pages for mixed content vulnerabilities, where HTTP content is loaded on an HTTPS page.</p>
+
+<h2>Method</h2>
+<h3><code>scan(self, u, max_pages=5, proxy=None, timeout=10, user_agent=None, cookie=None, content=None, logs=True, pages=[], headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
+<p>The <code>scan</code> method scans a web page and its linked pages for mixed content vulnerabilities. It takes the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The URL of the web page to scan.</li>
+    <li><code>max_pages</code> (int, optional): The maximum number of linked pages to scan (default is 5).</li>
+    <li><code>proxy</code> (str, optional): Proxy settings for the scan (e.g., {"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"}).</li>
+    <li><code>timeout</code> (int, optional): Request timeout in seconds (default is 10).</li>
+    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+    <li><code>content</code> (str, optional): Custom HTML content to scan instead of making a request.</li>
+    <li><code>logs</code> (bool, optional): Enable or disable logging (default is True).</li>
+    <li><code>pages</code> (list, optional): Predefined list of pages to scan.</li>
+    <li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
+    <li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests (e.g., ["1.2.3.4:80"]).</li>
+    <li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests (e.g., ["5.6.7.8:1080"]).</li>
+    <li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests (e.g., ["9.10.11.12:1080"]).</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>To use the <code>scan</code> method of the <code>Mixed_Content_Scanner</code> class, create an instance of the class and call the method with the desired parameters. Here's an example:</p>
+
+<pre><code>
+from bane.scanners.vulnerabilities import Mixed_Content_Scanner
+
+#Create an instance of Mixed_Content_Scanner
+
+#Scan a web page for mixed content vulnerabilities
+scan_result = Mixed_Content_Scanner.scan(
+    u="https://example.com",
+    max_pages=5,
+    proxy={"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"},
+    timeout=10,
+    user_agent="CustomUserAgent",
+    cookie="CustomCookie",
+    content=None,
+    logs=True,
+    pages=[],
+    headers={"Custom-Header": "Value"},
+    http_proxies=["1.2.3.4:80"],
+    socks4_proxies=["5.6.7.8:1080"],
+    socks5_proxies=["9.10.11.12:1080"]
+)
+
+#Access the scan result, which contains vulnerable URLs
+for url in scan_result:
+    print("Vulnerable URL:", url)
+</code></pre>
+<h1>SpringBoot_Actuator_Exploit_Scanner Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>SpringBoot_Actuator_Exploit_Scanner</code> class is part of the "bane" module and is used to scan a Spring Boot application for vulnerabilities in the Actuator endpoints.</p>
+
+<h2>Method</h2>
+<h3><code>scan(self, u, user_agent=None, cookie=None, timeout=None, path='/actuator', headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
+<p>The <code>scan</code> method scans a Spring Boot application for vulnerabilities in the Actuator endpoints. It takes the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The base URL of the Spring Boot application.</li>
+    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests. If not provided, a random User-Agent is selected.</li>
+    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+    <li><code>timeout</code> (int, optional): Request timeout in seconds. If not provided, the default timeout is used.</li>
+    <li><code>path</code> (str, optional): The path of the Actuator endpoint to scan (default is '/actuator').</li>
+    <li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
+    <li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
+    <li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
+    <li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>To use the <code>scan</code> method of the <code>SpringBoot_Actuator_Exploit_Scanner</code> class, create an instance of the class and call the method with the desired parameters. Here's an example:</p>
+
+<pre><code>
+from bane.scanners.vulnerabilities import SpringBoot_Actuator_Exploit_Scanner
+
+
+#Scan a Spring Boot application for Actuator vulnerabilities
+scan_result = SpringBoot_Actuator_Exploit_Scanner.scan(
+    u="https://example.com/springbootapp",
+    user_agent="CustomUserAgent",
+    cookie="CustomCookie",
+    timeout=10,
+    path='/actuator',
+    headers={"Custom-Header": "Value"},
+    http_proxies=["1.2.3.4:80"],
+    socks4_proxies=["5.6.7.8:1080"],
+    socks5_proxies=["9.10.11.12:1080"]
+)
+
+#Access the scan result, which contains information about Actuator endpoints
+print("Actuator Endpoint Info:", scan_result)
+</code></pre>
+<h1>SSRF_Scanner Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>SSRF_Scanner</code> class is part of the "bane" module and is used for scanning web pages for Server-Side Request Forgery (SSRF) vulnerabilities.</p>
+
+<h2>Methods</h2>
+
+<h3><code>ssrf_check(self, u, null_byte=False, link="http://www.google.com", signature="<title>Google</title>", proxy=None, timeout=25, user_agent=None, cookie=None, headers={})</code></h3>
+<p>The <code>ssrf_check</code> method is used to check for SSRF vulnerabilities by testing a given URL. It takes the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The URL to test for SSRF vulnerabilities.</li>
+    <li><code>null_byte</code> (bool, optional): Add a null byte character to the URL to bypass security filters (default is False).</li>
+    <li><code>link</code> (str, optional): The link to fetch content from (default is "http://www.google.com").</li>
+    <li><code>signature</code> (str, optional): The expected signature in the response content (default is "<title>Google</title>").</li>
+    <li><code>proxy</code> (str, optional): Proxy settings for the request.</li>
+    <li><code>timeout</code> (int, optional): Request timeout in seconds (default is 25).</li>
+    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+    <li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
+</ul>
+
+<h3><code>ssrf_urls(self, u, null_byte=False, link="http://www.google.com", timeout=120, signature="<title>Google</title>", user_agent=None, cookie=None, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
+<p>The <code>ssrf_urls</code> method scans a list of URLs for SSRF vulnerabilities. It takes the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The base URL for scanning.</li>
+    <li><code>null_byte</code> (bool, optional): Add a null byte character to the URL to bypass security filters (default is False).</li>
+    <li><code>link</code> (str, optional): The link to fetch content from (default is "http://www.google.com").</li>
+    <li><code>timeout</code> (int, optional): Request timeout in seconds (default is 120).</li>
+    <li><code>signature</code> (str, optional): The expected signature in the response content (default is "<title>Google</title>").</li>
+    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+    <li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
+    <li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
+    <li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
+    <li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
+</ul>
+
+<h3><code>scan(self, u, max_pages=5, logs=True, null_byte=False, link="http://www.google.com", timeout=120, signature="<title>Google</title>", user_agent=None, cookie=None, pages=[], headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
+<p>The <code>scan</code> method initiates SSRF scanning on a list of web pages. It takes the following parameters:</p>
+
+<ul>
+    <li><code>u</code> (str): The base URL to start scanning from.</li>
+    <li><code>max_pages</code> (int, optional): The maximum number of pages to scan (default is 5).</li>
+    <li><code>logs</code> (bool, optional): Enable or disable logging (default is True).</li>
+    <li><code>null_byte</code> (bool, optional): Add a null byte character to the URL to bypass security filters (default is False).</li>
+    <li><code>link</code> (str, optional): The link to fetch content from (default is "http://www.google.com").</li>
+    <li><code>timeout</code> (int, optional): Request timeout in seconds (default is 120).</li>
+    <li><code>signature</code> (str, optional): The expected signature in the response content (default is "<title>Google</title>").</li>
+    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+    <li><code>pages</code> (list, optional): Predefined list of pages to scan.</li>
+    <li><code>headers</code> (dict, optional): Additional HTTP headers to include in requests.</li>
+    <li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
+    <li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
+    <li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>To use the <code>SSRF_Scanner</code> class, create an instance of it and call the <code>scan</code> method with the desired parameters. Here's an example:</p>
+
+<pre><code>
+from bane.scanners.vulnerabilities import SSRF_Scanner
+
+
+#Scan web pages for SSRF vulnerabilities
+scan_result = SSRF_Scanner.scan(
+    u="https://example.com",
+    max_pages=5,
+    logs=True,
+    null_byte=False,
+    link="http://www.google.com",
+    timeout=120,
+    signature="<title>Google</title>",
+    user_agent="CustomUserAgent",
+    cookie="CustomCookie",
+    pages=[],
+    headers={"Custom-Header": "Value"},
+    http_proxies=["1.2.3.4:80"],
+    socks4_proxies=["5.6.7.8:1080"],
+    socks5_proxies=["9.10.11.12:1080"]
+)
+
+#Access the scan results
+for page in scan_result:
+    print(f"Scanning page: {page['page']}")
+    for vulnerable_url in page['result']:
+        print(f"Vulnerable URL: {vulnerable_url}")
+</code></pre>
+<h1>Vulners_Search_Scanner Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>Vulners_Search_Scanner</code> class is part of the "bane" module and is used to search for vulnerabilities in software using the Vulners API.</p>
+
+<h2>Method</h2>
+<h3><code>scan(self, software, url="https://vulners.com/api/v3/burp/software/", file_name="", save_to_file=False, max_vulnerabilities=100, version="", software_type="software", user_agent=None, cookie=None, api_key='', timeout=20, http_proxies=None, socks4_proxies=None, socks5_proxies=None, proxy=None)</code></h3>
+<p>The <code>scan</code> method searches for vulnerabilities in software using the Vulners API. It takes the following parameters:</p>
+
+<ul>
+    <li><code>software</code> (str): The name of the software to search for vulnerabilities.</li>
+    <li><code>url</code> (str, optional): The API endpoint URL (default is "https://vulners.com/api/v3/burp/software/").</li>
+    <li><code>file_name</code> (str, optional): The name of the file to save the search results (default is generated based on software and version).</li>
+    <li><code>save_to_file</code> (bool, optional): Whether to save the search results to a file (default is False).</li>
+    <li><code>max_vulnerabilities</code> (int, optional): The maximum number of vulnerabilities to retrieve (default is 100).</li>
+    <li><code>version</code> (str, optional): The version of the software for more specific results.</li>
+    <li><code>software_type</code> (str, optional): The type of software ("software" or "cpe") (default is "software").</li>
+    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+    <li><code>api_key</code> (str, optional): Vulners API key for authenticated access (default is '').</li>
+    <li><code>timeout</code> (int, optional): Request timeout in seconds (default is 20).</li>
+    <li><code>http_proxies</code> (list, optional): List of HTTP proxies to use for requests.</li>
+    <li><code>socks4_proxies</code> (list, optional): List of SOCKS4 proxies to use for requests.</li>
+    <li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
+    <li><code>proxy</code> (str, optional): Specific proxy settings for the request (overrides http_proxies, socks4_proxies, and socks5_proxies).</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>To use the <code>Vulners_Search_Scanner</code> class, create an instance of it and call the <code>scan</code> method with the desired parameters. Here's an example:</p>
+
+<pre><code>
+from bane.scanners.vulnerabilities import Vulners_Search_Scanner
+
+
+#Search for vulnerabilities in a software
+search_result = Vulners_Search_Scanner.scan(
+    software="ExampleSoftware")
+
+print(search_result)
+</code></pre>
+
+<h1>SSTI_Scanner Class</h1>
+<h2>Class Overview</h2>
+<p>The <code>SSTI_Scanner</code> class is part of the "bane" module and is used for scanning websites for Server-Side Template Injection (SSTI) vulnerabilities.</p>
+<h2>Method: <code>scan</code></h2>
+<p>The <code>scan</code> method is used to perform SSTI vulnerability scans on a target website. It scans multiple pages of the website for SSTI vulnerabilities using predefined payloads and parameters. It can scan multiple pages in parallel and returns a list of results for each page.</p>
+<pre><code>scan(
+    u,
+    max_pages=5,
+    pages=[],
+    email_extension='@gmail.com',
+    phone_pattern='XXX-XXX-XXXX',
+    payload_index=0,
+    values=(9, 123456789),
+    dont_change={},
+    number=(1, 9),
+    payload_keyword="payload",
+    operator="*",
+    save_to_file=None,
+    file_extension="png",
+    replaceble_parameters={"phpvalue": ((".", ""),)},
+    logs=True,
+    fill_empty=10,
+    leave_empty=[],
+    dont_send=["btnClear"],
+    timeout=120,
+    user_agent=None,
+    cookie=None,
+    debug=False,
+    mime_type=None,
+    predefined_inputs={},
+    headers={},
+    http_proxies=None,
+    socks4_proxies=None,
+    socks5_proxies=None
+)
+</code></pre>
+<h3>Parameters</h3>
+<ul>
+    <li><code>u</code> (str): The target website URL.</li>
+    <li><code>max_pages</code> (int): The maximum number of pages to scan (default is 5).</li>
+    <li><code>pages</code> (list): A list of specific pages to scan (if provided, it overrides <code>max_pages</code>).</li>
+    <li><code>email_extension</code> (str): The email extension to be used in payloads (default is '@gmail.com').</li>
+    <li><code>phone_pattern</code> (str): The phone number pattern for payloads (default is 'XXX-XXX-XXXX').</li>
+    <li><code>payload_index</code> (int): The index of the payload to use (default is 0).</li>
+    <li><code>values</code> (tuple): Values to be used in payloads (default is (9, 123456789)).</li>
+    <li><code>dont_change</code> (dict): Parameters that should not be modified in payloads.</li>
+    <li><code>number</code> (tuple): Numeric range for payloads (default is (1, 9)).</li>
+    <li><code>payload_keyword</code> (str): The keyword to replace with payload values (default is "payload").</li>
+    <li><code>operator</code> (str): The operator to be used in payloads (default is "*").</li>
+    <li><code>save_to_file</code> (str): A file to save scan results (default is None).</li>
+    <li><code>file_extension</code> (str): The file extension for payloads (default is "png").</li>
+    <li><code>replaceble_parameters</code> (dict): Parameters and their replacement values for payloads.</li>
+    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+    <li><code>fill_empty</code> (int): Number of empty values to try in payloads (default is 10).</li>
+    <li><code>leave_empty</code> (list): Parameters to leave empty in payloads.</li>
+    <li><code>dont_send</code> (list): Parameters not to send in payloads.</li>
+    <li><code>timeout</code> (int): Request timeout in seconds (default is 120).</li>
+    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+    <li><code>debug</code> (bool): Enable or disable debugging information (default is False).</li>
+    <li><code>mime_type</code> (str): MIME type to use in payloads.</li>
+    <li><code>predefined_inputs</code> (dict): Predefined input values for parameters.</li>
+    <li><code>headers</code> (dict): Additional HTTP headers to include in requests.</li>
+    <li><code>http_proxies</code> (list): List of HTTP proxies to use (e.g., ["http":"http://1.2.3.4:80"]).</li>
+    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use (e.g., ["5.6.7.8:1080"]).</li>
+    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use (e.g., ["9.10.11.12:1080"]).</li>
+</ul>
+<h3>Return Value</h3>
+<p>The <code>scan</code> method returns a list of results, where each result is a dictionary containing information about the scanned pages, vulnerabilities, and errors detected. An empty list is returned if no vulnerabilities or errors are found.</p>
+<h2>Example Usage</h2>
+<p>Here's an example of how to use the <code>scan</code> method to scan a target website for SSTI vulnerabilities:</p>
+<pre><code>
+from bane.scanners.vulnerabilities import SSTI_Scanner
+
+#Define the target URL and other parameters
+target_url = "https://example.com"
+payload_index = 0
+values = (9, 123456789)
+replaceble_parameters = {"phpvalue": ((".", ""),)}
+http_proxies = ["http://1.2.3.4:80"]
+socks4_proxies = ["5.6.7.8:1080"]
+socks5_proxies = ["9.10.11.12:1080"]
+
+
+#Perform the SSTI vulnerability scan
+results = SSTI_Scanner.scan(
+    u=target_url,
+    payload_index=payload_index,
+    values=values,
+    replaceble_parameters=replaceble_parameters,
+    http_proxies=http_proxies,
+    socks4_proxies=socks4_proxies,
+    socks5_proxies=socks5_proxies
+)
+
+#Display the scan results
+for result in results:
+    print("Scan Result:", result)
+</code></pre>
