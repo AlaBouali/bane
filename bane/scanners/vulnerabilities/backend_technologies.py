@@ -87,6 +87,6 @@ class Backend_Technologies_Scanner:
                                     print()        
         except Exception as e:
             return {}
-        return {'shodan_report':IP_info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'server_exploits':server_exploits,'backend_technology_exploits':backend_technology_exploits}
+        return {'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'server_exploits':server_exploits,'backend_technology_exploits':backend_technology_exploits}
 
 

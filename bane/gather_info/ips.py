@@ -1,6 +1,6 @@
 from bane.gather_info.utils import *
 
-class IP_info:
+class IP_Info:
 
     @staticmethod
     def my_ip(proxy=None, timeout=15):
@@ -69,6 +69,11 @@ class IP_info:
 
     @staticmethod
     def check_ip_via_shodan(ip,proxy=None,timeout=15,logs=False):
+        if type(ip) in [tuple,list]:
+            l=[]
+            for x in ip:
+                l.append(IP_Info.check_ip_via_shodan(x,proxy=proxy,timeout=timeout,logs=logs))
+            return l
         ip=socket.gethostbyname(ip)
         if logs==True:
             print('[i] IP scan via Shodan  ( in some cases they are outdated, so please verify them manually before submitting them ) :')
@@ -116,8 +121,8 @@ class IP_info:
     @staticmethod
     def get_IP_info(ip,timeout=15,proxy=None):
         d={}
-        d.update({'host_name':IP_info.get_host_name(ip)})
-        d.update({'geo_ip_location':IP_info.geo_ip(ip,timeout=timeout,proxy=proxy)})
-        d.update({'reverse_ip_lookup':IP_info.reverse_ip_lookup(ip,timeout=timeout,proxy=proxy)})
-        d.update({'shodan_report':IP_info.check_ip_via_shodan(ip,timeout=timeout,proxy=proxy)})
+        d.update({'host_name':IP_Info.get_host_name(ip)})
+        d.update({'geo_ip_location':IP_Info.geo_ip(ip,timeout=timeout,proxy=proxy)})
+        d.update({'reverse_ip_lookup':IP_Info.reverse_ip_lookup(ip,timeout=timeout,proxy=proxy)})
+        d.update({'shodan_report':IP_Info.check_ip_via_shodan(ip,timeout=timeout,proxy=proxy)})
         return d
