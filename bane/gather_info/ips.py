@@ -1,4 +1,5 @@
 from bane.gather_info.utils import *
+from.domains import Domain_Info
 
 class IP_Info:
 
@@ -69,6 +70,12 @@ class IP_Info:
 
     @staticmethod
     def check_ip_via_shodan(ip,proxy=None,timeout=15,logs=False):
+        resolved=socket.gethostbyname(ip)
+        if resolved!=ip:
+            try:
+                ip=Domain_Info.resolve(ip)
+            except:
+                pass
         if type(ip) in [tuple,list]:
             l=[]
             for x in ip:
