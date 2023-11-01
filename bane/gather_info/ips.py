@@ -22,6 +22,12 @@ class IP_info:
         return ""
 
 
+    @staticmethod
+    def get_host_name(ip):
+        try:
+            return socket.gethostbyaddr(ip)[0]
+        except:
+            return 
 
     @staticmethod
     def geo_ip(u, timeout=15, proxy=None):
@@ -29,14 +35,13 @@ class IP_info:
         this function is for getting: geoip informations
         """
         try:
-            r = requests.Session().get(
-                "https://geoip-db.com/jsonp/" + u,
+            return requests.Session().get(
+                "https://api.db-ip.com/v2/free/" + u,
                 headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
                 proxies=proxy,
                 timeout=timeout,
-            ).text
-            return json.loads(r.split("(")[1].split(")")[0])
-        except:
+            ).json()
+        except Exception as ex:
             pass
         return {}
 
@@ -111,6 +116,7 @@ class IP_info:
     @staticmethod
     def get_IP_info(ip,timeout=15,proxy=None):
         d={}
+        d.update({'host_name':IP_info.get_host_name(ip)})
         d.update({'geo_ip_location':IP_info.geo_ip(ip,timeout=timeout,proxy=proxy)})
         d.update({'reverse_ip_lookup':IP_info.reverse_ip_lookup(ip,timeout=timeout,proxy=proxy)})
         d.update({'shodan_report':IP_info.check_ip_via_shodan(ip,timeout=timeout,proxy=proxy)})

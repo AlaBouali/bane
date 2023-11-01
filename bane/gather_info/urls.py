@@ -9,12 +9,13 @@ class URL_Info:
         pr=url.split('://')[0]
         dm=url.split('://')[1]
         report_url='https://sitecheck.sucuri.net/results/{}/{}'.format(pr,dm)
-        h.update({'Referer': report_url})
-        h.update({'Accept': 'application/json'})
-        h.update({'Sec-Fetch-Dest': 'empty'})
-        h.update({'Sec-Fetch-Mode': 'cors'})
-        h.update({'Sec-Fetch-Site': 'same-origin'})
-        h.update({'Te': 'trailers'})
+        if headers not in [{},None]:
+            h.update({'Referer': report_url})
+            h.update({'Accept': 'application/json'})
+            h.update({'Sec-Fetch-Dest': 'empty'})
+            h.update({'Sec-Fetch-Mode': 'cors'})
+            h.update({'Sec-Fetch-Site': 'same-origin'})
+            h.update({'Te': 'trailers'})
         if user_agent:
             h.update({"User-Agent": user_agent})
         else:

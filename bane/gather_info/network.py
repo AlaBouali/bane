@@ -5,7 +5,7 @@ class Network_Info:
     @staticmethod
     def get_local_ip():
         try:
-            return [
+            ips= [
                 l
                 for l in (
                     [
@@ -21,7 +21,8 @@ class Network_Info:
                     ],
                 )
                 if l
-            ][0][0]
+            ]
+            return [x[0] for x in ips]
         except:
             return "127.0.0.1"
 

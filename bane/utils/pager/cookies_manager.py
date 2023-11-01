@@ -2,6 +2,8 @@ class Cookies_Manager:
 
     @staticmethod
     def cookies_to_dict(cookies):
+        if cookies==None or cookies.strip()=='':
+            return {}
         d = {}
         a = cookies.split(";")
         for x in a:

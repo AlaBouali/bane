@@ -20,9 +20,9 @@ class Domain_Info:
             for x in b:
                 d.update(
                     {
-                        x.split(":")[0]
-                        .strip(): x.replace(x.split(":")[0].strip(), "")
-                        .strip()[1:]
+                        x.split(":")[0].replace('&gt;&gt;&gt;','').replace('&lt;&lt;&lt;','')
+                        .strip(): x.replace(x.split(":")[0].strip().replace('&gt;&gt;&gt;','').replace('&lt;&lt;&lt;',''), "")
+                        .strip()[1:].replace('&gt;&gt;&gt;','').replace('&lt;&lt;&lt;','').replace('gt;&gt;&gt;:','')
                         .strip()
                     }
                 )
@@ -53,12 +53,8 @@ class Domain_Info:
             la = soup.find_all("a")
             l = []
             for i in la:
-                if "#ip_info-dbip" in str(i):
-                    l.append(Userful_Utilities.remove_html_tags(str(i)).strip().replace("\n", " "))
-                if "#ip_info-ip2location" in str(i):
-                    l.append(Userful_Utilities.remove_html_tags(str(i)).strip().replace("\n", " "))
-                if "#ip_info-geolite2" in str(i):
-                    l.append(Userful_Utilities.remove_html_tags(str(i)).strip().replace("\n", " "))
+                if "#ip_info-" in i.get('href'):
+                    l.append(Userful_Utilities.remove_html_tags(str(i)).strip().replace("\n", " ").split('(')[0].strip().replace(' ','_').replace('-','_').replace('.','_'))
             p = soup.find_all("table")
             o = 0
             di = {}
@@ -69,19 +65,25 @@ class Domain_Info:
                     for w in y:
                         a = w.find_all("td")
                         try:
-                            c = str(a[0]).split("<td>")[1].split("</td>")[0].strip()
-                            d = str(a[1]).split("<td>")[1].split("</td>")[0].strip()
+                            if "<strong" in str(a[1]):
+                                c = a[0].find('strong').get_text().lower().replace(' ','_').replace('-','_').replace('.','_')
+                            else:
+                                c = a[0].get_text().lower().replace(' ','_').replace('-','_').replace('.','_')
+                            if "<strong" in str(a[1]):
+                                d = a[1].find('strong').get_text()
+                            else:
+                                 d = a[1].get_text()
                             d = Userful_Utilities.remove_html_tags(d).strip().replace("\n", " ")
                             do.update({c: d})
-                        except:
+                        except Exception as ex:
                             pass
                     di.update({l[o]: do})
                     o += 1
-                except:
-                    pass
+                except Exception as exx:
+                            pass
             return di
-        except:
-            return None
+        except Exception as exxx:
+                            pass
 
 
     @staticmethod
