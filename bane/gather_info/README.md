@@ -128,10 +128,10 @@ results = Dorking_Info.google(
 for result in results:
     print(result)
 </code></pre>
-<h1>IP_info Class</h1>
+<h1>IP_Info Class</h1>
 
 <h2>Class Overview</h2>
-<p>The <code>IP_info</code> class in the "bane" module provides methods for gathering information related to IP addresses, including obtaining your own IP, geolocation information, reverse IP lookup, and Shodan reports.</p>
+<p>The <code>IP_Info</code> class in the "bane" module provides methods for gathering information related to IP addresses, including obtaining your own IP, geolocation information, reverse IP lookup, and Shodan reports.</p>
 
 <h2>Class Methods</h2>
 
@@ -175,7 +175,7 @@ for result in results:
     <li><code>logs</code> (bool, optional): Enable or disable logging (default is False).</li>
 </ul>
 
-<h3><code>get_IP_info(ip, timeout=15, proxy=None)</code></h3>
+<h3><code>get_IP_Info(ip, timeout=15, proxy=None)</code></h3>
 <p>This method combines the results of geolocation information, reverse IP lookup, and Shodan reports for a given IP address into a dictionary.</p>
 
 <p>Parameters:</p>
@@ -186,16 +186,16 @@ for result in results:
 </ul>
 
 <h2>Example Usage</h2>
-<p>To use the <code>IP_info</code> class, call its methods to gather information about IP addresses. Here's an example:</p>
+<p>To use the <code>IP_Info</code> class, call its methods to gather information about IP addresses. Here's an example:</p>
 
 <pre><code>
-from bane.gather_info import IP_info
+from bane.gather_info import IP_Info
 
 #Example IP address for information gathering
 ip_address = "192.168.1.1"
 
 #Gather IP information
-info = IP_info.get_IP_info(
+info = IP_Info.get_IP_info(
     ip=ip_address,
     timeout=15,
     proxy={"http": "http://1.2.3.4:80", "https": "http://1.2.3.4:80"}
