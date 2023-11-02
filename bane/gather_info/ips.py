@@ -4,6 +4,14 @@ from.domains import Domain_Info
 class IP_Info:
 
     @staticmethod
+    def parse_IP(ip):
+        if '://' in ip:
+            ip=ip.split('://')[1].split('/')[0]
+        if ':' in ip:
+            ip=ip.split(':')[0]
+        return ip
+
+    @staticmethod
     def my_ip(proxy=None, timeout=15):
         """
         this function is for getting your ip using: ipinfo.io
@@ -35,6 +43,7 @@ class IP_Info:
         """
         this function is for getting: geoip informations
         """
+        ip=IP_Info.parse_IP(ip)
         try:
             return requests.Session().get(
                 "https://api.db-ip.com/v2/free/" + u,
@@ -55,6 +64,7 @@ class IP_Info:
 
 
         """
+        ip=IP_Info.parse_IP(ip)
         try:
             r = requests.Session().get(
                 "https://api.hackertarget.com/reverseiplookup/?q=" + u,
@@ -70,7 +80,26 @@ class IP_Info:
 
     @staticmethod
     def check_ip_via_shodan(ip,proxy=None,timeout=15,logs=False):
-        resolved=socket.gethostbyname(ip)
+        inp=ip
+        if type(ip)==dict:
+            l=[]
+            for x in list(ip.keys()):
+                data=IP_Info.check_ip_via_shodan(x,proxy=proxy,timeout=timeout,logs=logs)
+                if data not in l and data!={}:
+                 l.append(data)
+            return l
+        if type(ip) in [tuple,list]:
+            l=[]
+            for x in ip:
+                data=IP_Info.check_ip_via_shodan(x,proxy=proxy,timeout=timeout,logs=logs)
+                if data not in l and data!={}:
+                 l.append(data)
+            return l
+        ip=IP_Info.parse_IP(ip)
+        try:
+            resolved=socket.gethostbyname(ip.split(':')[0])
+        except:
+            return {}
         if resolved!=ip:
             try:
                 ip=Domain_Info.resolve(ip)
@@ -79,7 +108,9 @@ class IP_Info:
         if type(ip) in [tuple,list]:
             l=[]
             for x in ip:
-                l.append(IP_Info.check_ip_via_shodan(x,proxy=proxy,timeout=timeout,logs=logs))
+                data=IP_Info.check_ip_via_shodan(x,proxy=proxy,timeout=timeout,logs=logs)
+                if data not in l and data!={}:
+                 l.append(data)
             return l
         ip=socket.gethostbyname(ip)
         if logs==True:
@@ -91,6 +122,7 @@ class IP_Info:
                 v.update({x:['https://www.cve.org/CVERecord?id='+x,'https://nvd.nist.gov/vuln/detail/'+x,'https://cve.mitre.org/cgi-bin/cvename.cgi?name='+x]})
             del d['vulns']
             d['exploits']=v
+            d['input']=inp
             if logs==True:
                 print()
                 print('[+] CPEs:')
@@ -119,7 +151,6 @@ class IP_Info:
                     for i in d['exploits'][x]:
                         print(i)
                 print() 
-                        
             return d
         except:
             return {}
@@ -128,6 +159,7 @@ class IP_Info:
     @staticmethod
     def get_IP_info(ip,timeout=15,proxy=None):
         d={}
+        ip=IP_Info.parse_IP(ip)
         d.update({'host_name':IP_Info.get_host_name(ip)})
         d.update({'geo_ip_location':IP_Info.geo_ip(ip,timeout=timeout,proxy=proxy)})
         d.update({'reverse_ip_lookup':IP_Info.reverse_ip_lookup(ip,timeout=timeout,proxy=proxy)})

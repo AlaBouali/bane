@@ -600,7 +600,7 @@ class WordPress_Scanner:
         plugins = []
         try:
             #print(response.split('<meta name="generator" content="')[1].split('"')[0])
-            wp_version=response.text.lower().split('<meta name="generator" content="WordPress_Info')[1].split('"')[0].strip()
+            wp_version=response.text.lower().split('<meta name="generator" content="WordPress')[1].split('"')[0].strip()
         except Exception as ex:
             #raise(ex)
             wp_version=''
@@ -614,7 +614,7 @@ class WordPress_Scanner:
         if logs==True:
             print("[i] Cheking if we can sniff some cookies over some links...")
             print()
-        media_non_ssl=Mixed_Content_Scanner.scan(u,content=response.text,logs=logs,request_headers=response.headers)
+        media_non_ssl=Mixed_Content_Scanner.scan_url(u,content=response.text,logs=logs,request_headers=response.headers)
         if logs==True:
             print()
         theme_links = soup.find_all('link', rel='stylesheet')
@@ -670,7 +670,7 @@ class WordPress_Scanner:
         if logs==True:
             print()
             print('[i] Checking if XMLRPC is enabled from: {}'.format(u+'/xmlrpc.php'))
-        xmlrpcs=WordPress_Scanner.xmlrpc_methods(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),headers=headers)
+        xmlrpcs=WordPress_Scanner.get_xmlrpc_methods(u,timeout=timeout,cookie=cookie,user_agent=user_agent,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),headers=headers)
         can_b_u=("wp.getUsersBlogs" in xmlrpcs) and ("system.multicall" in xmlrpcs)
         can_pb="pingback.ping" in xmlrpcs
         if logs==True:
@@ -778,4 +778,9 @@ class WordPress_Scanner:
                 for i in x['exploits']:
                     print("\tTitle: {}\n\tLink: {}".format(i['title'],i['exploit_url']))
                     print()
-        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'WordPress_Info_version':wp_version,'sniffable_links':media_non_ssl,'clickjackable':clickj,'themes':themes,'plugins':plugins,'users_json_exposed':users_json_exposed,'exopsed_json_users':{'users':json_users,'path':json_path},'can_enumerate_users':can_enumerate_users,'enumerated_users':enumerated_users,'enabled_xmlrpc_methods':xmlrpcs,"xmlrpc_bruteforce_users":can_b_u,"pingback_enabled":can_pb,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}
+        if type(subs)==dict:
+            domains_list=list(subs.keys())
+        else:
+            domains_list=subs
+        domains_list_report=IP_Info.check_ip_via_shodan(domains_list,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies))
+        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,"subdomains_ips_report_shodan":domains_list_report,'server':server,'os':server_os,'backend_technology':backend,'WordPress_Info_version':wp_version,'sniffable_links':media_non_ssl,'clickjackable':clickj,'themes':themes,'plugins':plugins,'users_json_exposed':users_json_exposed,'exopsed_json_users':{'users':json_users,'path':json_path},'can_enumerate_users':can_enumerate_users,'enumerated_users':enumerated_users,'enabled_xmlrpc_methods':xmlrpcs,"xmlrpc_bruteforce_users":can_b_u,"pingback_enabled":can_pb,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}

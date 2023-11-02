@@ -1,5 +1,6 @@
 from bane.gather_info.utils import *
-from bane.gather_info.domains import *
+from bane.gather_info.domains import Domain_Info
+from bane.gather_info.ips import IP_Info
 
 class Subdomain_Info:
 

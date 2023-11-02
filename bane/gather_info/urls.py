@@ -1,4 +1,5 @@
 from bane.gather_info.utils import *
+from bane.cryptographers.base64 import BASE64
 
 
 class URL_Info:
@@ -30,6 +31,20 @@ class URL_Info:
         except:
             return {}
 
+    @staticmethod
+    def safety_check(url,timeout=25,proxy=None,user_agent=None,cookie=None,headers={"Accept-Ianguage": "en-US,en;q=0.9,es;q=0.8","X-Tool": "vt-ui-main","X-App-Version": "v1x225x1","X-Vt-Anti-Abuse-Header": BASE64.encode('17026761156-ZG9udCBiZSBldmls-{}'.format(float(time.time())))}):
+        h={}
+        if user_agent:
+            h.update({"User-Agent": user_agent})
+        else:
+            h.update({"User-Agent": random.choice(Common_Variables.user_agents_list)})
+        if cookie:
+            h.update({"Cookie": cookie})
+        h.update(headers)
+        try:
+            return requests.Session().get('https://www.virustotal.com/ui/search?limit=300&relationships%5Bcomment%5D=author%2Citem%2Cnetwork_location%2Clast_serving_ip_address%2Cowner%2Cviewers%2Ceditors&query='+url,headers=h,proxies=proxy,timeout=timeout).json()
+        except:
+            return {}
 
     @staticmethod
     def deep_inspect(url,timeout=25,proxy=None,user_agent=None,cookie=None,headers={}):

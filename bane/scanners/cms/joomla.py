@@ -42,7 +42,7 @@ class Joomla_Scanner:
         if logs==True:
             print("[i] Cheking if we can sniff some cookies over some links...")
             print()
-        media_non_ssl=Mixed_Content_Scanner.scan(u,content=response.text,logs=logs,request_headers=response.headers)
+        media_non_ssl=Mixed_Content_Scanner.scan_url(u,content=response.text,logs=logs,request_headers=response.headers)
         if logs==True:
             print()
         wp_vulns=[]
@@ -117,4 +117,7 @@ class Joomla_Scanner:
                             for x in sv_e:
                                 print("\tTitle : {}\n\tDescription: {}\n\tLink: {}".format(x['title'],x['description'],x['href']))
                                 print()
-        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,'server':server,'os':server_os,'backend_technology':backend,'joomla_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}
+        if type(subs)==dict:
+            domains_list=list(subs.keys())
+        domains_list_report=IP_Info.check_ip_via_shodan(domains_list,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies))
+        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,"subdomains_ips_report_shodan":domains_list_report,'server':server,'os':server_os,'backend_technology':backend,'joomla_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits}
