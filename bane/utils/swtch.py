@@ -7,7 +7,7 @@ try:
 except:
     stem=None
 
-class Tor_Switch_Interface:
+class Tor_Switch_Interface(object):
 
     @staticmethod
     def no_password(interval=30, logs=True):

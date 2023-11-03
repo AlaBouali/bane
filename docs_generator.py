@@ -19,6 +19,19 @@ def delete_pycache_folders(root_directory):
                 print(f"Deleting {pycache_path}")
                 shutil.rmtree(pycache_path)
 
+def remove_pyc_files(directory):
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith('.pyc'):
+                file_path = os.path.join(root, file)
+                os.remove(file_path)
+                #print("Removed {}".format(file_path))
+
+# Specify the directory from which you want to remove .pyc files
+directory_to_search = 'bane'
+
+remove_pyc_files(directory_to_search)
+
 delete_pycache_folders('bane')
 """
 def rename_and_edit_files(directory):

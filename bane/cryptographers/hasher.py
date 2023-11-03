@@ -1,4 +1,4 @@
-from bane.cryptographers.base64 import *
+from bane.cryptographers.Base64 import *
 from bane.cryptographers.caesar import *
 from bane.cryptographers.md5 import *
 from bane.cryptographers.sha1 import *

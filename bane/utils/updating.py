@@ -1,7 +1,7 @@
 import os, sys
 
 
-class Update_Module_Interface:
+class Update_Module_Interface(object):
 
     @staticmethod
     def update_py2(version=None):

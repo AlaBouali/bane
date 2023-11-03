@@ -7,7 +7,8 @@ class RANDOM_GENERATOR:
         """
         this function was inspired by the scanning file in mirai's source code to returns a safe IP to bruteforce."""
         while True:
-            ip=ip = ".".join(str(random.randint(0, 255)) for _ in range(4))
+            ip = ".".join(str(random.randint(0, 255)) for _ in range(4))
+            ip=u'{}'.format(ip)
             ip_obj = ipaddress.IPv4Address(ip)
 
             # Check if the generated IP address is not in any of the specified ranges
@@ -18,12 +19,13 @@ class RANDOM_GENERATOR:
                     break
 
             if is_valid:
-                return str(ip)
+                return str(ip_obj)
 
     @staticmethod
     def get_safe_random_ip():
         while True:
             ip=ip = ".".join(str(random.randint(0, 255)) for _ in range(4))
+            ip=u'{}'.format(ip)
             ip_obj = ipaddress.IPv4Address(ip)
 
             # Check if the generated IP address is not in any of the specified ranges
@@ -34,7 +36,7 @@ class RANDOM_GENERATOR:
                     break
 
             if is_valid:
-                return str(ip)
+                return str(ip_obj)
 
 
     @staticmethod

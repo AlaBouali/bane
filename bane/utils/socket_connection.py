@@ -19,6 +19,7 @@ class Socket_Connection:
         ssl_context.verify_mode = ssl.CERT_NONE
         return ssl_context.wrap_socket(sock, server_hostname=target_host)
 
+    @staticmethod
     def reorder_headers_randomly(s):
         b = s.split("\r\n\r\n")[1]
         a = s.split("\r\n\r\n")[0]
@@ -37,6 +38,7 @@ class Socket_Connection:
         return m + "\r\n" + "\r\n".join(c) + "\r\n\r\n" + b
 
 
+    @staticmethod
     def random_param():
         a = random.randint(1, 2)
         if a == 1:
@@ -45,6 +47,7 @@ class Socket_Connection:
             return random.choice(Common_Variables.source_string)
 
 
+    @staticmethod
     def setup_http_packet(
         target,
         ty,
@@ -135,6 +138,7 @@ class Socket_Connection:
 
 
 
+    @staticmethod
     def get_socket_connection(host,port,timeout=5,no_delay=False,ssl_wrap=False,**kwargs):
         s=Proxies_Getter.get_proxy_socket(host,port,timeout=timeout,no_delay=no_delay,**kwargs)
         if ssl_wrap==True:
@@ -142,6 +146,7 @@ class Socket_Connection:
         return s
 
 
+    @staticmethod
     def get_tor_socket_connection(host,port,new_ip=True,ssl_wrap=False,timeout=5,no_delay=False,**kwargs):
         s=Proxies_Getter.get_tor_socks5_socket(host,port,new_ip=new_ip,timeout=timeout,no_delay=no_delay,**kwargs)
         if ssl_wrap==True:

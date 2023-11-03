@@ -39,12 +39,12 @@ class ProxyChecker:
     def _check_chunk(self, chunk):
         for proxy in chunk:
             if self.is_socket==True:
-                if self.proxy_check_socket(**proxy, timeout=self.timeout,verify_request=self.verify_request)==True:
+                if self.proxy_check_socket( timeout=self.timeout,verify_request=self.verify_request,**proxy)==True:
                     self.result.append(proxy)
                     if self.logs==True:
                         print("Active proxy: {}".format(proxy))
             else:
-                if self.proxy_check_requests(**proxy, timeout=self.timeout)==True:
+                if self.proxy_check_requests( timeout=self.timeout,**proxy)==True:
                     self.result.append(proxy)
                     if self.logs==True:
                         print("Active proxy: {}".format(proxy))
