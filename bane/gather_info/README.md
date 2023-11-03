@@ -397,6 +397,18 @@ print("Combined Subdomains:", subdomains_combined)
     <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
     <li><code>headers</code> (dict, optional): Custom headers to include in the request.</li>
 </ul>
+<h3><code>safety_check(url, timeout=25, proxy=None, user_agent=None, cookie=None, headers={"Accept-Ianguage": "en-US,en;q=0.9,es;q=0.8","X-Tool": "vt-ui-main","X-App-Version": "v1x225x1","X-Vt-Anti-Abuse-Header": BASE64.encode('17026761156-ZG9udCBiZSBldmls-{}'.format(float(time.time())))})</code></h3>
+<p>This method performs a safety check on a given URL using VirusTotal's free API service.</p>
+
+<p>Parameters:</p>
+<ul>
+    <li><code>url</code> (str): The URL to perform a security check on.</li>
+    <li><code>timeout</code> (int, optional): Request timeout in seconds (default is 25).</li>
+    <li><code>proxy</code> (dict, optional): HTTP/HTTPS proxy settings.</li>
+    <li><code>user_agent</code> (str, optional): Custom User-Agent header for requests.</li>
+    <li><code>cookie</code> (str, optional): Custom cookies to include in requests.</li>
+    <li><code>headers</code> (dict, optional): Custom headers to include in the request.</li>
+</ul>
 
 <h3><code>deep_inspect(url, timeout=25, proxy=None, user_agent=None, cookie=None, headers={})</code></h3>
 <p>This method performs a deep inspection of a URL using Cloudflare Radar's scanning service.</p>
