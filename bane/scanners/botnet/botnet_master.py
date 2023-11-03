@@ -1,11 +1,4 @@
-import socket,os,sys,pwinput
-from bane.utils.socket_connection import *
-from bane.cryptographers.xor import XOR
-
-if sys.version_info < (3, 0):
-    user_input=raw_input
-else:
-    user_input=input
+from .utils import *
 
 
 class Botnet_Master:
