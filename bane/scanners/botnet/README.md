@@ -289,7 +289,7 @@ malware_server.run()
 <h1>Botnet_Reporting_Server Class</h1>
 
 <h2>Class Overview</h2>
-<p>The <code>Botnet_Reporting_Server</code> class is used for creating a server for reporting and retrieving data from a specified folder.</p>
+<p>The <code>Botnet_Reporting_Server</code> class is used for creating a server to receive reports from the bots and store them in the database.</p>
 
 <h2>Class Methods</h2>
 
@@ -340,7 +340,7 @@ reporting_server.run()
 <h1>Botnet_Web_Interface_Server Class</h1>
 
 <h2>Class Overview</h2>
-<p>The <code>Botnet_Web_Interface_Server</code> class is used for creating a web interface server for managing data from a specified folder.</p>
+<p>The <code>Botnet_Web_Interface_Server</code> class is used for creating a web interface server for managing the botnet.</p>
 
 <h2>Class Methods</h2>
 
