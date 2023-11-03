@@ -22,14 +22,27 @@ class Services_Login:
         return False
 
 
-    def telnet(u, username, password, p=23,commands=[], timeout=5, bot_mode=False,proxy_type=None,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None):
+    def telnet(u, username, password,validation_command=['busybox'],validation_output=['nc','wget','curl'], p=23,commands=[], timeout=5, bot_mode=False,proxy_type=None,proxy_host=None,proxy_port=None,proxy_username=None,proxy_password=None):
+        if type(validation_command)==str:
+            validation_command=[validation_command]
+        if type(validation_output)==str:
+            validation_output=[validation_output]
+        if commands not in [[],None]:
+            bot_mode=True
         try:
             t = xtelnet.session()
             t.connect(u, username=username, password=password, p=p, timeout=timeout,proxy_type=proxy_type,proxy_host=proxy_host,proxy_port=proxy_port,proxy_username=proxy_username,proxy_password=proxy_password)
+            a=''
             if bot_mode == True:
-                a = t.execute("busybox")
+                for i in validation_command:
+                    a+= str(t.execute(i)) 
             if bot_mode == True:
-                if "wget" in a or "nc" in a:
+                valid=False
+                for x in validation_output:
+                    if x in a:
+                        valid=True
+                        break
+                if valid==True:
                     for x in commands:
                         t.execute(x)
                     t.destroy()
