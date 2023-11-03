@@ -337,7 +337,7 @@ reporting_server = Botnet_Reporting_Server()
 
 #Start the reporting server
 reporting_server.run()
-</code>
+</code></pre>
 
 <h1>Botnet_Web_Interface_Server Class</h1>
 
