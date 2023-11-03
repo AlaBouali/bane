@@ -296,10 +296,9 @@ malware_server.run()
 <h3><code>get_server(self)</code></h3>
 <p>Retrieves the Flask server instance used in the reporting server.</p>
 
-<h3><code>__init__(self, malwares_folder, host='0.0.0.0', port=11111, debug=True)</code></h3>
+<h3><code>__init__(self, host='0.0.0.0', port=11111, debug=True)</code></h3>
 <p>Class constructor to initialize the reporting server with the following parameters:</p>
 <ul>
-<li><code>malwares_folder</code> (str): The folder where data is stored.</li>
 <li><code>host</code> (str): Host for the server. Default is '0.0.0.0'.</li>
 <li><code>port</code> (int): Port for the server. Default is 11111.</li>
 <li><code>debug</code> (bool): Enable or disable debugging. Default is True.</li>
@@ -317,7 +316,6 @@ malware_server.run()
 <li><code>host</code> (str): Host for the server.</li>
 <li><code>port</code> (int): Port for the server.</li>
 <li><code>debug</code> (bool): Enable or disable debugging.</li>
-<li><code>malwares_folder</code> (str): The folder where data is stored.</li>
 <li><code>args</code> (tuple): Positional arguments for setting custom routes.</li>
 <li><code>kwargs</code> (dict): Keyword arguments for setting custom routes.</li>
 </ul>
@@ -349,10 +347,9 @@ reporting_server.run()
 <h3><code>get_server(self)</code></h3>
 <p>Retrieves the Flask server instance used in the web interface server.</p>
 
-<h3><code>__init__(self, data_folder, host='0.0.0.0', port=33333, debug=True)</code></h3>
+<h3><code>__init__(self, host='0.0.0.0', port=33333, debug=True)</code></h3>
 <p>Class constructor to initialize the web interface server with the following parameters:</p>
 <ul>
-    <li><code>data_folder</code> (str): The folder where data is managed.</li>
     <li><code>host</code> (str): Host for the server. Default is '0.0.0.0'.</li>
     <li><code>port</code> (int): Port for the server. Default is 33333.</li>
     <li><code>debug</code> (bool): Enable or disable debugging. Default is True.</li>
@@ -370,7 +367,6 @@ reporting_server.run()
     <li><code>host</code> (str): Host for the server.</li>
     <li><code>port</code> (int): Port for the server.</li>
     <li><code>debug</code> (bool): Enable or disable debugging.</li>
-    <li><code>data_folder</code> (str): The folder where data is managed.</li>
     <li><code>args</code> (tuple): Positional arguments for setting custom routes.</li>
     <li><code>kwargs</code> (dict): Keyword arguments for setting custom routes.</li>
 </ul>
