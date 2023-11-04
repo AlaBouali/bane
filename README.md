@@ -201,29 +201,28 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <br>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms"><b>CMS's Vulnerability Scanner :</b></a> </li>
  <br> <ul>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms#Drupal_Scanner-class">Drupal_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms#Joomla_Scanner-class">Joomla_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms#Magento_Scanner-class">Magento_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms#WordPress_Scanner-class">WordPress_Scanner :</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms#Drupal_Scanner-class">Drupal_Scanner :</a> used to scan a website for Drupal-related information and vulnerabilities. It checks the target URL for Drupal version, server information, subdomains, and possible vulnerabilities.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms#Joomla_Scanner-class">Joomla_Scanner :</a> used to scan a website for Joomla-related information and vulnerabilities. It checks the target URL for Joomla version, server information, subdomains, and possible vulnerabilities.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms#Magento_Scanner-class">Magento_Scanner :</a> used to scan a website for Magento-related information and vulnerabilities. It checks the target URL for Magento version, server information, subdomains, and possible vulnerabilities.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms#WordPress_Scanner-class">WordPress_Scanner :</a> used to scan a website for WordPress-related information and vulnerabilities. It checks the target URL for WordPress version, server information, subdomains, themes, plugins, and possible vulnerabilities.</li>
 </ul>
 <br>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols"><b>Network Discovery and Scanning:</b></a> </li>
   <br><ul>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#Chargen_Amplification_Scanner-class">Chargen_Amplification_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#DNS_Amplification_Scanner-class">DNS_Amplification_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#Echo_Amplification_Scanner-class">Echo_Amplification_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#Memcache_Amplification_Scanner-class">Memcache_Amplification_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#NTP_Amplification_Scanner-class">NTP_Amplification_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#Ports_Scanner-class">Ports_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners#SNMP_Amplification_Scanner-class">SNMP_Amplification_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners#SNMP_Amplification_Scanner-class">SNMP_Amplification_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners#SSDP_Amplification_Scanner-class">SSDP_Amplification_Scanner :</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#Chargen_Amplification_Scanner-class">Chargen_Amplification_Scanner :</a> used to calculate the amplification factor for a given Chargen server.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#DNS_Amplification_Scanner-class">DNS_Amplification_Scanner :</a> used to calculate the amplification factor for a given DNS server.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#Echo_Amplification_Scanner-class">Echo_Amplification_Scanner :</a> used to calculate the amplification factor for a given Echo server.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#Memcache_Amplification_Scanner-class">Memcache_Amplification_Scanner :</a> used to calculate the amplification factor for a given Memcache server.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#NTP_Amplification_Scanner-class">NTP_Amplification_Scanner :</a> used to calculate the amplification factor for a given NTP (Network Time Protocol) server.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#Ports_Scanner-class">Ports_Scanner :</a> used to scan a range of ports on a target IP address to check if they are open or closed.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners#SNMP_Amplification_Scanner-class">SNMP_Amplification_Scanner :</a> used to calculate the amplification factor for a given SNMP (Simple Network Management Protocol) server.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners#SSDP_Amplification_Scanner-class">SSDP_Amplification_Scanner :</a> used to calculate the amplification factor for a given SSDP (Simple Service Discovery Protocol) server.</li>
 <br>
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities"><b>Vulnerability Scanners:</b></a> </li>
   <br><ul>
 
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#ADB_Exploit_Scanner-class">ADB_Exploit_Scanner :</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#ADB_Exploit_Scanner-class">ADB_Exploit_Scanner :</a> used to scan for Android Debug Bridge (ADB) vulnerabilities on a target device.</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Backend_Technologies_Scanner-class">Backend_Technologies_Scanner :</a> </li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#ClickJacking_Scanner-class">ClickJacking_Scanner :</a> </li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#CORS_Misconfiguration_Scanner-class">CORS_Misconfiguration_Scanner :</a> </li>
