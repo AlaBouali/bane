@@ -129,14 +129,14 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b></a></li>
   <br>
   <ul>
-  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Admin_Panel_Finder-class">Admin_Panel_Finder</a></li>
-  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Decryptor-class">Decryptor</a></li>
-  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Files_Manager_Finder-class">Files_Manager_Finder</a></li>
-  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Force_Browsing-class">Force_Browsing</a></li>
-  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#HTTP_Auth_Bruteforce-class">HTTP_Auth_Bruteforce</a></li>
-  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Hydra-class">Hydra</a></li>
-  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Services_Login-class">Services_Login</a></li>
-  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Web_Login_Bruteforce-class">Web_Login_Bruteforce</a></li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Admin_Panel_Finder-class">Admin_Panel_Finder:</a>used to search for potential admin panel URLs on a website using a predefined list of extensions.</li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Decryptor-class">Decryptor:</a>used for performing various cryptographic hash decryption attempts.</li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Files_Manager_Finder-class">Files_Manager_Finder:</a>used to search for a filemanager on a website.</li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Force_Browsing-class">Force_Browsing:</a>used to perform force browsing on a website by attempting to access various URLs with different extensions.</li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#HTTP_Auth_Bruteforce-class">HTTP_Auth_Bruteforce:</a>used to perform HTTP authentication bruteforce attacks on a website.</li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Hydra-class">Hydra:</a>used for performing brute-force login attempts on various services, including SSH, Telnet, FTP, SMTP, MySQL, and WordPress. It takes a list of username-password combinations and tries to log in using different protocols. It reports success or failure for each combination.</li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Services_Login-class">Services_Login:</a>class provides a set of methods for performing various login/authentication attempts for different services, such as SMTP, Telnet, SSH, FTP, and MySQL. These methods check for successful login using the provided credentials and options.</li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Web_Login_Bruteforce-class">Web_Login_Bruteforce:</a>used for performing brute-force login attempts on web-based login forms. It takes a list of username-password combinations and tries to log in by filling out the login form. It reports success or failure for each combination.</li>
   </ul>
 <br>
 <!-- common Directory -->
