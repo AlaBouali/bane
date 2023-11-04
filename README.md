@@ -185,10 +185,6 @@ if you are using "jython" , please go to the location of the jython "site-packag
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
   <ul>
-  </ul>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
-  <ul>
-
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_master-class">Botnet_Master</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#Botnet_Scanner-class">Botnet_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_c_c_server-class">Botnet_C_C_Server</a></li>
@@ -198,7 +194,6 @@ if you are using "jython" , please go to the location of the jython "site-packag
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
   <ul>
-
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#Drupal_Scanner-class">Drupal_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#Joomla_Scanner-class">Joomla_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#Magento_Scanner-class">Magento_Scanner</a></li>
@@ -215,10 +210,10 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/README.md#SNMP_Amplification_Scanner-class">SNMP_Amplification_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/README.md#SNMP_Amplification_Scanner-class">SNMP_Amplification_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/README.md#SSDP_Amplification_Scanner-class">SSDP_Amplification_Scanner</a></li>
+
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
   <ul>
-
 
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#ADB_Exploit_Scanner-class">ADB_Exploit_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#Backend_Technologies_Scanner-class">Backend_Technologies_Scanner</a></li>
@@ -242,7 +237,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#Vulnerability_Scanner_Utilities-class">Vulnerability_Scanner_Utilities</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#Vulners_Search_Scanner-class">Vulners_Search_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#XSS_Scanner-class">XSS_Scanner</a></li>
-</ul>
+
 <!-- Utils Directory -->
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
@@ -254,6 +249,9 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/README.md#Socket_Connection-class">Socket_Connection</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/README.md#Tor_Switch_Interface-class">Tor_Switch_Interface</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/README.md#Update_Module_Interface-class">Update_Module_Interface</a></li>
+</ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
+  <ul>
 
 <!-- Utils/pager Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager/README.md#Cookies_Manager-class">Cookies_Manager</a></li>
@@ -264,6 +262,9 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager/README.md#RANDOM_GENERATOR-class">RANDOM_GENERATOR</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager/README.md#LOGIN_FORM_FILLER-class">LOGIN_FORM_FILLER</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager/README.md#URLS_Parser-class">URLS_Parser</a></li>
+</ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
+  <ul>
 
 <!-- Utils/proxer Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer/README.md#BurpSuite_Getter-class">BurpSuite_Getter</a></li>
@@ -273,4 +274,3 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer/README.md#Proxies_Getter-class">Proxies_Getter</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer/README.md#Proxies_Parser-class">Proxies_Parser</a></li>
 </ul>
-</ui>
