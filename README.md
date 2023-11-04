@@ -223,27 +223,26 @@ if you are using "jython" , please go to the location of the jython "site-packag
   <br><ul>
 
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#ADB_Exploit_Scanner-class">ADB_Exploit_Scanner :</a> used to scan for Android Debug Bridge (ADB) vulnerabilities on a target device.</li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Backend_Technologies_Scanner-class">Backend_Technologies_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#ClickJacking_Scanner-class">ClickJacking_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#CORS_Misconfiguration_Scanner-class">CORS_Misconfiguration_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#CRLF_Injection_Scanner-class">CRLF_Injection_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#CSRF_Scanner-class">CSRF_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Exposed_ENV_Scanner-class">Exposed_ENV_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Exposed_Git_Scanner-class">Exposed_Git_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Exposed_Telnet_Scanner-class">Exposed_Telnet_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#File_Upload_Scanner-class">File_Upload_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Open_Redirect_Scanner-class">Open_Redirect_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Path_Traversal_Scanner-class">Path_Traversal_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#PHP_Unit_Exploit_Scanner-class">PHP_Unit_Exploit_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#RCE_Scanner-class">RCE_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Shodan_Scanner-class">Shodan_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Mixed_Content_Scanner-class">Mixed_Content_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#SpringBoot_Actuator_Exploit_Scanner-class">SpringBoot_Actuator_Exploit_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#SSRF_Scanner-class">SSRF_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#SSTI_Scanner-class">SSTI_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Vulnerability_Scanner_Utilities-class">Vulnerability_Scanner_Utilities :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Vulners_Search_Scanner-class">Vulners_Search_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#XSS_Scanner-class">XSS_Scanner :</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Backend_Technologies_Scanner-class">Backend_Technologies_Scanner :</a> used to scan web applications for information about the backend technologies and potential vulnerabilities associated with them.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#ClickJacking_Scanner-class">ClickJacking_Scanner :</a> used to scan a web page for Clickjacking protection headers and determine if Clickjacking is possible.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#CORS_Misconfiguration_Scanner-class">CORS_Misconfiguration_Scanner :</a> used to detect Cross-Origin Resource Sharing (CORS) misconfigurations in web applications.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#CRLF_Injection_Scanner-class">CRLF_Injection_Scanner :</a> used to detect potential CRLF (Carriage Return Line Feed) injection vulnerabilities in web applications.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#CSRF_Scanner-class">CSRF_Scanner :</a> used for scanning and detecting Cross-Site Request Forgery (CSRF) vulnerabilities on web pages. It provides methods to identify vulnerable forms and perform tests to check for CSRF vulnerabilities.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Exposed_ENV_Scanner-class">Exposed_ENV_Scanner :</a> used for scanning and detecting exposed environment (".env") files on web servers. It provides methods to check if a specific path or multiple common paths lead to an exposed environment file.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Exposed_Git_Scanner-class">Exposed_Git_Scanner :</a> used to scan for exposed Git repositories on web servers. It checks if a specific URL is an exposed Git repository and returns a boolean result.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Exposed_Telnet_Scanner-class">Exposed_Telnet_Scanner :</a> used to scan for exposed an unauthenticated Telnet services on a remote host. It attempts to establish a Telnet connection to a specified host and port and returns a boolean result indicating whether the connection was successful or not.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#File_Upload_Scanner-class">File_Upload_Scanner :</a> used to scan web forms for potential file upload vulnerabilities. It searches for forms that allow file uploads, tests the file upload functionality, and reports potential issues such as unacceptable file extensions.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Open_Redirect_Scanner-class">Open_Redirect_Scanner :</a> used to scan web forms for potential open redirect vulnerabilities. It detects and reports open redirect issues in web applications, helping security professionals identify and mitigate these risks.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Path_Traversal_Scanner-class">Path_Traversal_Scanner :</a> used to scan web applications for Path Traversal vulnerabilities. It provides methods to check for directory traversal and file inclusion vulnerabilities in web pages.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#PHP_Unit_Exploit_Scanner-class">PHP_Unit_Exploit_Scanner :</a> used to detect vulnerabilities related to the PHP Unit exploit on a specified website URL.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#RCE_Scanner-class">RCE_Scanner :</a> used for scanning web forms for Remote Code / Command Execution (RCE) vulnerabilities using various payload injections.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Shodan_Scanner-class">Shodan_Scanner :</a> designed to interact with the Shodan API and retrieve information about a specific IP address.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Mixed_Content_Scanner-class">Mixed_Content_Scanner :</a> used to scan web pages for mixed content vulnerabilities, where HTTP content is loaded on an HTTPS page.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#SpringBoot_Actuator_Exploit_Scanner-class">SpringBoot_Actuator_Exploit_Scanner :</a> used to scan a Spring Boot application for vulnerabilities in the Actuator endpoints.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#SSRF_Scanner-class">SSRF_Scanner :</a> used for scanning web pages for Server-Side Request Forgery (SSRF) vulnerabilities.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#SSTI_Scanner-class">SSTI_Scanner :</a> used for scanning websites for Server-Side Template Injection (SSTI) vulnerabilities.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#Vulners_Search_Scanner-class">Vulners_Search_Scanner :</a> used to search for vulnerabilities in software using the Vulners API.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities#XSS_Scanner-class">XSS_Scanner :</a> designed for systematically identifying and testing Cross-Site Scripting (XSS) vulnerabilities in web applications. This method allows users to spider through web pages, identify forms, and test them for XSS vulnerabilities. It provides flexibility to test multiple pages and payloads.</li>
 <br>
 <!-- Utils Directory -->
 </ul>
