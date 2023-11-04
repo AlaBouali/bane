@@ -145,8 +145,8 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <!-- cryptographers Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md"><b>Cryptographers:</b></a> </li>
  <br> <ul>
- <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#BASE64-class">BASE64 :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#CAESAR-class">CAESAR :</a> </li>
+ <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#BASE64-class">BASE64 :</a> provides methods for encoding and decoding data using Base64 encoding.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#CAESAR-class">CAESAR :</a> provides methods for encoding and decoding text using the Caesar cipher ( just for fun )</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#MD5-class">MD5 :</a> </li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA1-class">SHA1 :</a> </li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA224-class">SHA224 :</a> </li>

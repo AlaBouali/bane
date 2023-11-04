@@ -97,6 +97,59 @@ print("Encoded Text:", encoded_text)
 decoded_text = CAESAR.decode(encoded_text, key)
 print("Decoded Text:", decoded_text)
 </code></pre>
+<h1>MD5 Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>MD5</code> class is part of the "bane" module and provides methods for generating and comparing MD-5 hash values for text and files.</p>
+
+<h2>Methods</h2>
+
+<h3><code>hash(w, encode=None)</code></h3>
+<p>This method generates a MD-5 hash value for the provided string or bytes-like object.</p>
+<ul>
+    <li><code>w</code> (str or bytes): The data for which the MD-5 hash will be generated.</li>
+    <li><code>encode</code> (str, optional): The encoding type to use (e.g., 'utf-8'). If not specified, the default encoding is used.</li>
+</ul>
+<p>Returns the MD-5 hash value as a hexadecimal string.
+
+<h3><code>hash_file(f)</code></h3>
+<p>This method generates a MD-5 hash value for the contents of a file.</p>
+<ul>
+    <li><code>f</code> (str): The path to the file for which the MD-5 hash will be generated.</li>
+</ul>
+<p>Returns the MD-5 hash value of the file's contents as a hexadecimal string.
+
+<h3><code>compare_hash(word, hash)</code></h3>
+<p>This method compares a given word with a MD-5 hash value to check if they match.</p>
+<ul>
+    <li><code>word</code> (str): The word or data to be hashed and compared.</li>
+    <li><code>hash</code> (str): The MD-5 hash value to compare with the hashed <code>word</code>.</li>
+</ul>
+<p>Returns <code>True</code> if the hashed <code>word</code> matches the provided <code>hash</code>; otherwise, it returns <code>False</code>.
+
+<h2>Example Usage</h2>
+<p>To use the <code>MD5</code> class, you can generate MD-5 hash values for data and compare them as follows:</p>
+
+<pre><code>
+from bane.cryptographers import MD5
+
+#Generating a MD-5 hash for a string
+data = "Hello, World!"
+hash_value = MD5.hash(data)
+print("MD-5 Hash:", hash_value)
+
+#Generating a MD-5 hash for the contents of a file
+file_path = "example.txt"
+file_hash = MD5.hash_file(file_path)
+print("File MD-5 Hash:", file_hash)
+
+#Comparing a word with a MD-5 hash
+word_to_compare = "OpenAI"
+given_hash = "2d3ac8bc1b411156957c5733bb7c4b69f9e7780d"
+is_matched = MD5.compare_hash(word_to_compare, given_hash)
+print("Matched:", is_matched)
+</code></pre>
+
 <h1>SHA1 Class</h1>
 
 <h2>Class Overview</h2>
