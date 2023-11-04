@@ -104,7 +104,7 @@ now let's start some tutorials, shall we?
 <p>If you are on Linux, run the following command with 'sudo' to ensure that required packages, 'sshpass' and 'tor,' are installed:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-    <pre style="margin: 0; line-height: 125%">pip install bane</pre>
+    <pre style="margin: 0; line-height: 125%">sudo pip install bane</pre>
 </div>
 
 <!--
