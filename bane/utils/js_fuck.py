@@ -6,15 +6,11 @@ I've edited this script to be compatible with python2.X/3.X
 
 I don't claim any copy rights for this script and I lost the original's URL.
 So if you know the original author or you are the original author,
-please contact me to give you credits or I can remove it if you don't want me to use it.
+please contact me to give you credits or I can remove it if you don't want me
+to use it since I'm just using it to encode the XSS payloads, nothing more , nothing less.
 
 """
 
-def get_dict(d):
-    if  sys.version_info < (3,0):
-        return d.iteritems()
-    else:
-        return tuple(d.items())
 
 
 """
@@ -163,7 +159,14 @@ class js_fuck(object):
         '~':   USE_CHAR_CODE
     }
 
-    GLOBAL = 'Function("return this")()'
+    GLOBAL = 'Function("return this")()'    
+
+    def get_dict(self,d):
+        if  sys.version_info < (3,0):
+            return d.iteritems()
+        else:
+            return tuple(d.items())
+
 
     def __init__(self, js=None):
         '''
@@ -406,10 +409,10 @@ class js_fuck(object):
             while value != original:
                 original = value
 
-                for key, val in get_dict(self.CONSTRUCTORS):
+                for key, val in self.get_dict(self.CONSTRUCTORS):
                     value = replace(r'\b' + key, val + '["constructor"]')
 
-                for key, val in get_dict(self.SIMPLE):
+                for key, val in self.get_dict(self.SIMPLE):
                     value = replace(key, val)
 
             value = replace(r'(\d\d+)', numberReplacer)
@@ -435,7 +438,7 @@ class js_fuck(object):
             # python 2 workaround for nonlocal
             findMissing.missing = {}
 
-            for key, value in get_dict(self.MAPPING):
+            for key, value in self.get_dict(self.MAPPING):
                 if re.findall(regex, value):
                     findMissing.missing[key] = value
                     done = True
