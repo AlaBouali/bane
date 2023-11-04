@@ -116,6 +116,8 @@ then import it and start using it as in the tutorials below:
 </pre></div>
 if you are using "jython" , please go to the location of the jython "site-packages" example: "C:\jython\Lib\site-packages" , open "dns" folder, open the file "resolver.py" and comment the line "1149" : <b>socket.SOCK_DGRAM: [socket.SOL_UDP],</b> by putting "#" in front of it.<br>
 
+
 ---------------------------------------------------------------------------------------------------------------------------
-Capabilities (General explanation, read the <a href='https://github.com/AlaBouali/bane/tree/master/bane'>documentation</a> for details ):
+                                                      CAPABILITIES
 ---------------------------------------------------------------------------------------------------------------------------
+
