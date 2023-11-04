@@ -98,12 +98,12 @@ or
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">pip3 install bane</pre></div>
 
 
-<br>or you can clone the project's link then run setup.py<br>
+<!--<br>or you can clone the project's link then run setup.py<br>
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">git clone https://github.com/AlaBouali/bane
 <br>cd bane
 <br>python setup.py install
-</pre></div>
+</pre></div>-->
 
 <br>To use it, you have to open the python interpreter from your terminal/cmd (bane can be used only inside the interpreter only after importing it):
 
