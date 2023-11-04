@@ -90,7 +90,7 @@ now let's start some tutorials, shall we?
 I-INSTALLING THE LIBRARY AND IMPORTING:
 ---------------------------------------------------------------------------------------------------------------------------
 if you are using windows , please, first download and install  <a href="https://npcap.com/#download">npcap</a> and <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY</a>, then restart your computer after that. then install bane.<br>
-you can use pip to install bane ( if you are on linux you must run it with "sudo" so it will install required packages: sshpass and tor ) :
+you can use pip to install bane ( if you are on linux you must run it with "sudo" so it will install required packages: <b>sshpass</b> and <b>tor</b> ) :
 
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">pip install bane</pre></div>
@@ -125,7 +125,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <!-- Root Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#Admin_Panel_Finder-class">Home</a></li>
 <!-- bruteforce Directory -->
-<li>Bruteforce:</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
   <ul>
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Admin_Panel_Finder-class">Admin_Panel_Finder</a></li>
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Decryptor-class">Decryptor</a></li>
