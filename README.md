@@ -185,16 +185,27 @@ if you are using "jython" , please go to the location of the jython "site-packag
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
   <ul>
+  </ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
+  <ul>
+
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_master-class">Botnet_Master</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#Botnet_Scanner-class">Botnet_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_c_c_server-class">Botnet_C_C_Server</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_malware_download_server-class">Botnet_Malware_Download_Server</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_reporting_server-class">Botnet_Reporting_Server</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_web_interface_server-class">Botnet_Web_Interface_Server</a></li>
+</ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
+  <ul>
+
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#Drupal_Scanner-class">Drupal_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#Joomla_Scanner-class">Joomla_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#Magento_Scanner-class">Magento_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#WordPress_Scanner-class">WordPress_Scanner</a></li>
+</ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
+  <ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols/README.md#Chargen_Amplification_Scanner-class">Chargen_Amplification_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols/README.md#DNS_Amplification_Scanner-class">DNS_Amplification_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols/README.md#Echo_Amplification_Scanner-class">Echo_Amplification_Scanner</a></li>
@@ -204,6 +215,9 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/README.md#SNMP_Amplification_Scanner-class">SNMP_Amplification_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/README.md#SNMP_Amplification_Scanner-class">SNMP_Amplification_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/README.md#SSDP_Amplification_Scanner-class">SSDP_Amplification_Scanner</a></li>
+</ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
+  <ul>
 
 
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#ADB_Exploit_Scanner-class">ADB_Exploit_Scanner</a></li>
@@ -228,7 +242,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#Vulnerability_Scanner_Utilities-class">Vulnerability_Scanner_Utilities</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#Vulners_Search_Scanner-class">Vulners_Search_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#XSS_Scanner-class">XSS_Scanner</a></li>
-
+</ul>
 <!-- Utils Directory -->
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
