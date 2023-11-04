@@ -246,39 +246,38 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <br>
 <!-- Utils Directory -->
 </ul>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils"><b>Additional Useful Modules:</b></a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils"><b>Additional Useful Modules :</b></a></li>
   <br><ul>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Userful_Utilities-class">Userful_Utilities :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Files_Interface-class">Files_Interface :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Bane_Instances_Interface-class">Bane_Instances_Interface :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#js_fuck-class">js_fuck :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Socket_Connection-class">Socket_Connection :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Tor_Switch_Interface-class">Tor_Switch_Interface :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Update_Module_Interface-class">Update_Module_Interface :</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Userful_Utilities-class">Userful_Utilities :</a> provides various utility methods for common tasks and operations.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Files_Interface-class">Files_Interface :</a> provides utility methods for working with files, including clearing, deleting, writing, and reading files. It also includes methods for creating and reading JSON files.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Bane_Instances_Interface-class">Bane_Instances_Interface :</a> provides utility methods for working with instances of other classes, especially those created for parallel processing.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Socket_Connection-class">Socket_Connection :</a> provides methods for creating and configuring socket connections.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Tor_Switch_Interface-class">Tor_Switch_Interface :</a> provides methods for switching IP addresses when using the Tor network. It allows for automatic IP switching with or without a password, depending on the Tor configuration and platform.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Update_Module_Interface-class">Update_Module_Interface :</a> provides methods for updating the "bane" module to a specified version or the latest version available.</li>
 </ul>
 <br>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager"><b>Web Pages Analyzers:</b></a> </li>
   <br><ul>
 
 <!-- Utils/pager Directory -->
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#Cookies_Manager-class">Cookies_Manager :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORMS_FILLER-class">FORMS_FILLER :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORMS_FINDER-class">FORMS_FINDER :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORM_FILE_UPLOAD-class">FORM_FILE_UPLOAD :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#Pager_Interface-class">Pager_Interface :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#RANDOM_GENERATOR-class">RANDOM_GENERATOR :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#LOGIN_FORM_FILLER-class">LOGIN_FORM_FILLER :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#URLS_Parser-class">URLS_Parser :</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#Cookies_Manager-class">Cookies_Manager :</a> provides methods for managing HTTP cookies.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORMS_FILLER-class">FORMS_FILLER :</a> used for extracting and identifying file upload forms from HTML documents. It provides methods to retrieve these forms both from a list of dictionaries and from a URL with HTML content.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORMS_FINDER-class">FORMS_FINDER :</a> provides methods for filling HTML forms with data, including injecting payloads into form parameters.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORM_FILE_UPLOAD-class">FORM_FILE_UPLOAD :</a> provides methods for extracting and parsing HTML forms from web pages. It offers methods for sorting inputs in forms and parsing forms from web pages.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#Pager_Interface-class">Pager_Interface :</a> provides various methods for web scraping and JavaScript code analysis.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#RANDOM_GENERATOR-class">RANDOM_GENERATOR :</a> provides various static methods for generating random data, such as IP addresses, URLs, phone numbers, HTML input colors, and random dates.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#LOGIN_FORM_FILLER-class">LOGIN_FORM_FILLER :</a> provides methods for working with login forms in web pages. It includes methods for getting a login form and setting its values for username and password.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#URLS_Parser-class">URLS_Parser :</a> provides methods for parsing and extracting information from URLs and web page sources. It includes methods for converting URLs to form data and extracting links from the page source.</li>
 </ul>
 <br>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer"><b>Useful Proxing Utilities:</b></a> </li>
   <br><ul>
 
 <!-- Utils/proxer Directory -->
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#BurpSuite_Getter-class">BurpSuite_Getter :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Collector-class">Proxies_Collector :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Interface-class">Proxies_Interface :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#ProxyChecker-class">ProxyChecker :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Getter-class">Proxies_Getter :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Parser-class">Proxies_Parser :</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#BurpSuite_Getter-class">BurpSuite_Getter :</a> provides a method for obtaining a Burp Suite proxy configuration. It includes a method for getting the Burp Suite proxy settings with optional host and port parameters.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Collector-class">Proxies_Collector :</a> used to collect and verify proxy information from various sources.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Interface-class">Proxies_Interface :</a> provides methods for loading, parsing, and converting proxy data for use in various applications.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#ProxyChecker-class">ProxyChecker :</a> responsible for checking the validity and functionality of proxy servers in a list. It can perform proxy checks using either socket-level connections or HTTP requests, depending on the configuration.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Getter-class">Proxies_Getter :</a> used to retrieve proxy sockets and proxy settings for various protocols.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Parser-class">Proxies_Parser :</a> used to parse and handle proxy configurations and settings.</li>
 </ul>
