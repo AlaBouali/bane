@@ -131,7 +131,7 @@ now let's start some tutorials, shall we?
     <pre style="margin: 0; line-height: 125%">python3</pre>
 </div>
 
-<p>After that, import 'bane' and start using it as explained in the tutorials below:</p>
+<p>After that, import 'bane' and start using it as explained in the URLs below:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
     <pre style="margin: 0; line-height: 125%">import bane</pre>
@@ -143,6 +143,15 @@ now let's start some tutorials, shall we?
     <pre style="margin: 0; line-height: 125%"><b>socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
 </div>
 to:
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%"><b>#socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
+</div>
+That should fix the error that you might encounter when importing "bane" the first time.
+
+<b>Note :</b> you might encounter such messages when importing this library:
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%"><b>WARNING: can't import layer ipsec: cannot import name 'gcd' from 'fractions' (C:\...</b></pre>
+</div>
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
     <pre style="margin: 0; line-height: 125%"><b>#socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
 </div>
