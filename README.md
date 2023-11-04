@@ -142,6 +142,10 @@ now let's start some tutorials, shall we?
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
     <pre style="margin: 0; line-height: 125%"><b>socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
 </div>
+to:
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%"><b>#socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
+</div>
 
 
 ---------------------------------------------------------------------------------------------------------------------------
