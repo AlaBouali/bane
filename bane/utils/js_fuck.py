@@ -4,6 +4,10 @@ import re,random,sys
 
 I've edited this script to be compatible with python2.X/3.X 
 
+I don't claim any copy rights for this script and I lost the original's URL.
+So if you know the original author or you are the original author,
+please contact me to give you credits or I can remove it if you don't want me to use it.
+
 """
 
 def get_dict(d):
