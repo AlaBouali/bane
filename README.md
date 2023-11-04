@@ -86,7 +86,7 @@ This is dedicated to my mentor: Zachary Barker ( https://www.facebook.com/zachar
 now let's start some tutorials, shall we?
 
 ---------------------------------------------------------------------------------------------------------------------------
-                                                      INSTALLATION/
+                                                      INSTALLATION:
 ---------------------------------------------------------------------------------------------------------------------------
 
 <p>If you are using Windows, please follow these steps:</p>
