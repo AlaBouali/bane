@@ -88,34 +88,62 @@ now let's start some tutorials, shall we?
 ---------------------------------------------------------------------------------------------------------------------------
                                                       TUTORIALS:
 ---------------------------------------------------------------------------------------------------------------------------
-I-INSTALLING THE LIBRARY AND IMPORTING:
----------------------------------------------------------------------------------------------------------------------------
-if you are using windows , please, first download and install  <a href="https://npcap.com/#download">npcap</a>  and <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY</a> , then restart your computer after that. then install bane.<br>
-you can use pip to install bane ( if you are on linux you must run it with "sudo" so it will install required packages: <b>sshpass</b> and <b>tor</b> ) :
+<h1>I- INSTALLING THE LIBRARY AND IMPORTING</h1>
+<hr>
 
+<p>If you are using Windows, please follow these steps:</p>
+<ol>
+    <li>Download and install <a href="https://npcap.com/#download">Npcap</a>.</li>
+    <li>Download and install <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY</a>.</li>
+    <li>Restart your computer after the installations are complete.</li>
+    <li>Then, install 'bane' using pip:</li>
+</ol>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">pip install bane</pre></div>
-or
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">pip3 install bane</pre></div>
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%">pip install bane</pre>
+</div>
 
+<p>If you are on Linux, run the following command with 'sudo' to ensure that required packages, 'sshpass' and 'tor,' are installed:</p>
 
-<!--<br>or you can clone the project's link then run setup.py<br>
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%">pip install bane</pre>
+</div>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">git clone https://github.com/AlaBouali/bane
-<br>cd bane
-<br>python setup.py install
-</pre></div>-->
+<!--
+<p>Alternatively, you can clone the project from the link and run setup.py:</p>
 
-<br>To use it, you have to open the python interpreter from your terminal/cmd (bane can be used only inside the interpreter only after importing it):
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%">
+            git clone https://github.com/AlaBouali/bane
+            cd bane
+            python setup.py install
+    </pre>
+</div>
+    -->
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">python</pre></div>
-or
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">python3</pre></div>
-then import it and start using it as in the tutorials below:
+<p>To use 'bane,' you need to open the Python interpreter from your terminal/cmd, as 'bane' can be used only within the interpreter after importing it:</p>
 
-<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">import bane
-</pre></div>
-if you are using "jython" , please go to the location of the jython "site-packages" example: "C:\jython\Lib\site-packages" , open "dns" folder, open the file "resolver.py" and comment the line "1149" :<b>socket.SOCK_DGRAM: [socket.SOL_UDP],</b> by putting "#" in front of it.<br>
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%">python</pre>
+</div>
+
+<p>or</p>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%">python3</pre>
+</div>
+
+<p>After that, import 'bane' and start using it as explained in the tutorials below:</p>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%">import bane</pre>
+</div>
+
+<p>If you are using "jython," please navigate to the "site-packages" directory (e.g., "C:\jython\Lib\site-packages"). Open the "dns" folder, and within the "resolver.py" file, comment out line "1149" by placing a "#" in front of it:</p>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%"><b>socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
+</div>
 
 
 ---------------------------------------------------------------------------------------------------------------------------
