@@ -34,24 +34,28 @@ if termux==False:
    if  sys.version_info < (3,0):
     os.system('pip uninstall dnspython -y')
     os.system('pip install dnspython')
+    os.system('pip uninstall xtelnet -y')
+    os.system('pip install xtelnet>=2.1.6')
    else:
     os.system('pip3 uninstall dnspython -y')
     os.system('pip3 install dnspython')
+    os.system('pip3 uninstall xtelnet -y')
+    os.system('pip3 install xtelnet>=2.1.6')
 
 #protobuf==3.6.1
 
 if  sys.version_info < (3,0):
-    req=["furl","future","xtelnet>=2.1.6","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","stem","google","colorama","dnspython"]
+    req=["furl","future","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","stem","google","colorama","dnspython"]
     if adr==True:
-        req=["furl","future","xtelnet>=2.1.6","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","google","colorama","dnspython"]
+        req=["furl","future","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","google","colorama","dnspython"]
     if termux==True:
-       req=["furl","future","xtelnet>=2.1.6","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","google","colorama","dnspython"]
+       req=["furl","future","requests","PySocks","bs4","pymysql==0.9.3","scapy==2.4.0","google","colorama","dnspython"]
 else:
-    req=["furl","future","xtelnet>=2.1.6","requests","PySocks","bs4","pymysql","kamene==0.32","stem","google","colorama","dnspython"]
+    req=["furl","future","requests","PySocks","bs4","pymysql","kamene==0.32","stem","google","colorama","dnspython"]
     if adr==True:
-        req=["furl","future","xtelnet>=2.1.6","requests","PySocks","bs4","pymysql","kamene==0.32","google","colorama","dnspython"]
+        req=["furl","future","requests","PySocks","bs4","pymysql","kamene==0.32","google","colorama","dnspython"]
     if termux==True:
-        req=["furl","future","xtelnet>=2.1.6","requests","PySocks","bs4","pymysql","kamene==0.32","google","colorama","dnspython"]
+        req=["furl","future","requests","PySocks","bs4","pymysql","kamene==0.32","google","colorama","dnspython"]
 
 
 if (sys.platform == "win32") or( sys.platform == "win64"):
