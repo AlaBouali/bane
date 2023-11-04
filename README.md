@@ -134,6 +134,10 @@ if you are using "jython" , please go to the location of the jython "site-packag
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#Files_Manager_Finder-class">Files_Manager_Finder :</a> used to search for a filemanager on a website.</li>
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#Force_Browsing-class">Force_Browsing :</a> used to perform force browsing on a website by attempting to access various URLs with different extensions.</li>
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#HTTP_Auth_Bruteforce-class">HTTP_Auth_Bruteforce :</a> used to perform HTTP authentication bruteforce attacks on a website.</li>
+
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#jwt_manager-class">JWT_Manager :</a> used for analyzing, encoding, decoding, and guessing secret keys for JSON Web Tokens (JWT).</li>
+
+
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#Hydra-class">Hydra :</a> used for performing brute-force login attempts on various services, including SSH, Telnet, FTP, SMTP, MySQL, and WordPress. It takes a list of username-password combinations and tries to log in using different protocols. It reports success or failure for each combination.</li>
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#Services_Login-class">Services_Login :</a> class provides a set of methods for performing various login/authentication attempts for different services, such as SMTP, Telnet, SSH, FTP, and MySQL. These methods check for successful login using the provided credentials and options.</li>
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#Web_Login_Bruteforce-class">Web_Login_Bruteforce :</a> used for performing brute-force login attempts on web-based login forms. It takes a list of username-password combinations and tries to log in by filling out the login form. It reports success or failure for each combination.</li>
