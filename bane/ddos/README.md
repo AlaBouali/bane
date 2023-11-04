@@ -63,7 +63,7 @@ ddos_attack = HTTP_Puncher(
 <h1>HTTP_Spam Class</h1>
 
 <h2>Class Overview</h2>
-<p>The <code>HTTP_Spam</code> class is part of the "bane" module and is used for performing HTTP spamming attacks on a target URL.</p>
+<p>The <code>HTTP_Spam</code> class is part of the "bane" module and is used for launching HTTP-based DDoS attacks on a target URL by spamming each connection with a stream of requests unlike the previous one.</p>
 
 <h2>Class Constructor</h2>
 <pre><code>class HTTP_Spam(DDoS_Class)
@@ -138,7 +138,7 @@ http_spam = HTTP_Spam(
 <h1>Proxies_Hammer Class</h1>
 
 <h2>Class Overview</h2>
-<p>The <code>Proxies_Hammer</code> class is part of the "bane" module and is used for launching HTTP POST requests through a list of proxy servers to a target URL.</p>
+<p>The <code>Proxies_Hammer</code> class is part of the "bane" module and is used for launching low-rate HTTP POST requests through a list of proxy servers to a target URL.</p>
 
 <h2>Class Constructor</h2>
 <pre><code>class Proxies_Hammer(DDoS_Class)

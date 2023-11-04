@@ -147,31 +147,30 @@ if you are using "jython" , please go to the location of the jython "site-packag
  <br> <ul>
  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#BASE64-class">BASE64 :</a> provides methods for encoding and decoding data using Base64 encoding.</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#CAESAR-class">CAESAR :</a> provides methods for encoding and decoding text using the Caesar cipher ( just for fun )</li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#MD5-class">MD5 :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA1-class">SHA1 :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA224-class">SHA224 :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA256-class">SHA256 :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA348-class">SHA384 :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA512-class">SHA512 :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#XOR-class">XOR :</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#MD5-class">MD5 :</a> provides methods for generating and comparing MD-5 hash values for text and files.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA1-class">SHA1 :</a> provides methods for generating and comparing SHA-1 hash values for text and files.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA224-class">SHA224 :</a> provides methods for generating and comparing SHA-224 hash values for text and files.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA256-class">SHA256 :</a> provides methods for generating and comparing SHA-256 hash values for text and files.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA348-class">SHA384 :</a> provides methods for generating and comparing SHA-384 hash values for text and files.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA512-class">SHA512 :</a> provides methods for generating and comparing SHA-512 hash values for text and files.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#XOR-class">XOR :</a> provides methods for generating and comparing XOR hash values for text and files.</li>
 </ul>
 <br>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md"><b>DDoS ( Distributed Denial-of-Service  ) :</b></a> </li>
   <br><ul>
  
 <!-- ddos Directory -->
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#HTTP_Puncher-class">HTTP_Puncher :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#HTTP_Spam-class">HTTP_Spam :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Proxies_Hammer-class">Proxies_Hammer :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Proxies_HTTP_Spam-class">Proxies_HTTP_Spam :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Proxies_Xerxes-class">Proxies_Xerxes :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Slow_Read-class">Slow_Read :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#TCP_Flood-class">TCP_Flood :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Tor_Hammer-class">Tor_Hammer :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#UDP_Flood-class">UDP_Flood :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#DDoS_Class-class">DDoS_Class :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#VSE_Flood-class">VSE_Flood :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Xerxes-class">Xerxes :</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#HTTP_Puncher-class">HTTP_Puncher :</a> used for launching HTTP-based DDoS attacks on a target URL.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#HTTP_Spam-class">HTTP_Spam :</a> used for launching HTTP-based DDoS attacks on a target URL by spamming each connection with a stream of requests unlike the previous one.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Proxies_Hammer-class">Proxies_Hammer :</a> used for launching low-rate HTTP POST requests through a list of proxy servers to a target URL.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Proxies_HTTP_Spam-class">Proxies_HTTP_Spam :</a> used for launching HTTP-based DDoS attacks on a target URL by spamming each connection with a stream of requests through proxies.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Proxies_Xerxes-class">Proxies_Xerxes :</a> used for performing a simple DDoS attack by sending NULL characters through a list of proxy servers.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Slow_Read-class">Slow_Read :</a> used to perform a slow reading attack on a target server. This attack sends normal HTTP requests but reads them slowly to keep the connection open for an extended period of time.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#TCP_Flood-class">TCP_Flood :</a> used to perform a TCP flooding attack on a target server. This attack floods the target with a large number of TCP packets to overwhelm the server and disrupt its normal operations.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Tor_Hammer-class">Tor_Hammer :</a> used for launching low-rate HTTP POST requests through TOR to a target URL.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#UDP_Flood-class">UDP_Flood :</a> used to perform a DDoS attack by flooding a target server with UDP (User Datagram Protocol) packets. UDP is a connectionless protocol, and this attack generates a large volume of UDP packets to overwhelm the target.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#VSE_Flood-class">VSE_Flood :</a> used to perform a DDoS attack known as the Valve Source Engine Query (VSE) flood attack. The attack sends spoofed queries to Source Engine servers in an attempt to overwhelm them with traffic. This attack is often used in the gaming community to disrupt online game servers.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Xerxes-class">Xerxes :</a> used to perform a DDoS attack using the Xerxes tool. This attack sends NULL characters to a target server to flood it with traffic. The tool is named after the ancient Persian king Xerxes I, known for his invasion of Greece.</li>
 <br>
 <!-- gather_info Directory -->
 </ul>
