@@ -124,6 +124,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <ul>
 <!-- Root Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#Admin_Panel_Finder-class">Home</a></li>
+<br>
 <!-- bruteforce Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
   <ul>
@@ -136,10 +137,10 @@ if you are using "jython" , please go to the location of the jython "site-packag
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Services_Login-class">Services_Login</a></li>
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Web_Login_Bruteforce-class">Web_Login_Bruteforce</a></li>
   </ul>
-
+<br>
 <!-- common Directory -->
 <li><a href="https://github.com/AlaBouali/bane/blob/master/bane/common/README.md">Common_Variables</a></li>
-
+<br>
 <!-- cryptographers Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Cryptographers:</b</a</li>
   <ul>
@@ -153,6 +154,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA512-class">SHA512</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#XOR-class">XOR</a></li>
 </ul>
+<br>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>DDoS ( Distributed Denial-of-Service  ):</b</a</li>
   <ul>
  
@@ -169,7 +171,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#DDoS_Class-class">DDoS_Class</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#VSE_Flood-class">VSE_Flood</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Xerxes-class">Xerxes</a></li>
-
+<br>
 <!-- gather_info Directory -->
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Information Gathering:</b</a</li>
@@ -180,7 +182,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info/README.md#Network_Info-class">Network_Info</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info/README.md#Subdomain_Info-class">Subdomain_Info</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info/README.md#URL_Info-class">URL_Info</a></li>
-
+<br>
 <!-- scanners Directory -->
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Botnet: Creation , management and a scalable infrastructure :</b</a</li>
@@ -192,6 +194,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_reporting_server-class">Botnet_Reporting_Server</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_web_interface_server-class">Botnet_Web_Interface_Server</a></li>
 </ul>
+<br>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>CMS's Vulnerability Scanner :</b</a</li>
   <ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#Drupal_Scanner-class">Drupal_Scanner</a></li>
@@ -199,6 +202,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#Magento_Scanner-class">Magento_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#WordPress_Scanner-class">WordPress_Scanner</a></li>
 </ul>
+<br>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Network Discovery and Scanning:</b</a</li>
   <ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols/README.md#Chargen_Amplification_Scanner-class">Chargen_Amplification_Scanner</a></li>
@@ -210,7 +214,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/README.md#SNMP_Amplification_Scanner-class">SNMP_Amplification_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/README.md#SNMP_Amplification_Scanner-class">SNMP_Amplification_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/README.md#SSDP_Amplification_Scanner-class">SSDP_Amplification_Scanner</a></li>
-
+<br>
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Vulnerability Scanners:</b</a</li>
   <ul>
@@ -237,7 +241,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#Vulnerability_Scanner_Utilities-class">Vulnerability_Scanner_Utilities</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#Vulners_Search_Scanner-class">Vulners_Search_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#XSS_Scanner-class">XSS_Scanner</a></li>
-
+<br>
 <!-- Utils Directory -->
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Additional Useful Modules:</b</a</li>
@@ -250,6 +254,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/README.md#Tor_Switch_Interface-class">Tor_Switch_Interface</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/README.md#Update_Module_Interface-class">Update_Module_Interface</a></li>
 </ul>
+<br>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Web Pages Scanners:</b</a</li>
   <ul>
 
@@ -263,6 +268,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager/README.md#LOGIN_FORM_FILLER-class">LOGIN_FORM_FILLER</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager/README.md#URLS_Parser-class">URLS_Parser</a></li>
 </ul>
+<br>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Useful Proxing Utilities:</b</a</li>
   <ul>
 
