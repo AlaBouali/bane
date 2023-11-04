@@ -144,7 +144,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
   </ul>
 <br>
 <!-- common Directory -->
-<li><a href="https://github.com/AlaBouali/bane/blob/master/bane/common">Common_Variables</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/blob/master/bane/common">Common_Variables :</a> used to store internal and necessary variables for bane to run.</li>
 <br>
 <!-- cryptographers Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers"><b>Cryptographers:</b></a> </li>
@@ -180,23 +180,23 @@ if you are using "jython" , please go to the location of the jython "site-packag
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info"><b>Information Gathering:</b></a> </li>
   <br><ul>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#Domain_Info-class">Domain_Info :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#Dorking_Info-class">Dorking_Info :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#IP_Info-class">IP_Info :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#Network_Info-class">Network_Info :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#Subdomain_Info-class">Subdomain_Info :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#URL_Info-class">URL_Info :</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#Domain_Info-class">Domain_Info :</a> provides methods for gathering information about a domain, including WHOIS data, domain information, and DNS resolution.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#Dorking_Info-class">Dorking_Info :</a> provides a method for performing Google dork searches to find URLs related to a specific query.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#IP_Info-class">IP_Info :</a> provides methods for gathering information related to IP addresses, including obtaining your own IP, geolocation information, reverse IP lookup, and Shodan reports.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#Network_Info-class">Network_Info :</a> provides methods for network-related tasks, including retrieving local IP addresses, checking if a host is alive, performing TCP port scanning, and obtaining banners from network services.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#Subdomain_Info-class">Subdomain_Info :</a> provides methods for extracting and analyzing subdomains associated with a given domain. It can fetch subdomains from sources like crt.sh and the Wayback Machine, allowing you to discover subdomains for a target domain.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info#URL_Info-class">URL_Info :</a> provides methods for performing security checks, deep inspection, and HTTP OPTIONS requests on a given URL. You can use these methods to analyze and gather information about a specific URL, such as its security status, response headers, and more.</li>
 <br>
 <!-- scanners Directory -->
 </ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet"><b>Botnet: Creation , management and a scalable infrastructure :</b></a> </li>
  <br> <ul>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#botnet_master-class">Botnet_Master :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#Botnet_Scanner-class">Botnet_Scanner :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#botnet_c_c_server-class">Botnet_C_C_Server :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#botnet_malware_download_server-class">Botnet_Malware_Download_Server :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#botnet_reporting_server-class">Botnet_Reporting_Server :</a> </li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#botnet_web_interface_server-class">Botnet_Web_Interface_Server :</a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#botnet_master-class">Botnet_Master :</a> used for managing botnet operations.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#Botnet_Scanner-class">Botnet_Scanner :</a> used for scanning safe IPs all over the internet with a word list to bruteforce various login protocols, including FTP, SSH, Telnet, SMTP, and MySQL. The scan results are saved to text files in the same directory.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#botnet_c_c_server-class">Botnet_C_C_Server :</a> used for managing a Command and Control (C&C) server for a botnet.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#botnet_malware_download_server-class">Botnet_Malware_Download_Server :</a> used for creating a server to download malware files from a specified folder while preventing path traversal vulnerabilities.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#botnet_reporting_server-class">Botnet_Reporting_Server :</a> used for creating a server to receive reports from the bots and store them in the database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#botnet_web_interface_server-class">Botnet_Web_Interface_Server :</a> used for creating a web interface server for managing the botnet.</li>
 </ul>
 <br>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms"><b>CMS's Vulnerability Scanner :</b></a> </li>
