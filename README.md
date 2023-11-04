@@ -123,6 +123,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 
 <ul>
 <!-- Root Directory -->
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#Admin_Panel_Finder-class">Home</a></li>
 <!-- bruteforce Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Admin_Panel_Finder-class">Admin_Panel_Finder</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Decryptor-class">Decryptor</a></li>
