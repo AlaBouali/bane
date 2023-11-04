@@ -9,17 +9,17 @@
 <p>This constructor initializes an instance of the <code>Admin_Panel_Finder</code> class with the following parameters:</p>
 
 <ul>
-    <li><code>target</code> (str): The target website URL.</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>ext</code> (str): Extension to use for URLs (default is 'php').</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>target</code> (str): The target website URL.</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>ext</code> (str): Extension to use for URLs (default is 'php').</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h2>Methods</h2>
@@ -29,14 +29,14 @@
 <h3><code>crack(self, target, timeout, logs, ext, user_agent, cookie, proxies, headers)</code></h3>
 <p>This method performs the admin panel URL search operation with the specified parameters. It takes the following parameters:</p>
 <ul>
-    <li><code>target</code> (str): The target website URL.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds.</li>
-    <li><code>logs</code> (bool): Enable or disable logging.</li>
-    <li><code>ext</code> (str): Extension to use for URLs.</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>proxies</code> (list): List of proxies to use for requests.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>target</code> (str): The target website URL.</li>
+<li><code>timeout</code> (int): Request timeout in seconds.</li>
+<li><code>logs</code> (bool): Enable or disable logging.</li>
+<li><code>ext</code> (str): Extension to use for URLs.</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>proxies</code> (list): List of proxies to use for requests.</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
 </ul>
 
 <h2>Example Usage</h2>
@@ -84,18 +84,18 @@ print("Admin Panel URLs:", result)
 <p>This constructor initializes an instance of the <code>decrypt</code> class with the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The target hash to decrypt.</li>
-    <li><code>word_list</code> (list): List of words to use for decryption attempts (default is an empty list).</li>
-    <li><code>threads_daemon</code> (bool): Set the thread as daemon (default is True).</li>
-    <li><code>md5_hash</code> (bool): Enable MD5 hash decryption attempt (default is False).</li>
-    <li><code>sha1_hash</code> (bool): Enable SHA-1 hash decryption attempt (default is False).</li>
-    <li><code>sha256_hash</code> (bool): Enable SHA-256 hash decryption attempt (default is False).</li>
-    <li><code>sha224_hash</code> (bool): Enable SHA-224 hash decryption attempt (default is False).</li>
-    <li><code>sha384_hash</code> (bool): Enable SHA-384 hash decryption attempt (default is False).</li>
-    <li><code>sha512_hash</code> (bool): Enable SHA-512 hash decryption attempt (default is False).</li>
-    <li><code>base64_string</code> (bool): Enable Base64 string decryption attempt (default is False).</li>
-    <li><code>caesar_hash</code> (bool): Enable Caesar cipher decryption attempt (default is False).</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is False).</li>
+<li><code>u</code> (str): The target hash to decrypt.</li>
+<li><code>word_list</code> (list): List of words to use for decryption attempts (default is an empty list).</li>
+<li><code>threads_daemon</code> (bool): Set the thread as daemon (default is True).</li>
+<li><code>md5_hash</code> (bool): Enable MD5 hash decryption attempt (default is False).</li>
+<li><code>sha1_hash</code> (bool): Enable SHA-1 hash decryption attempt (default is False).</li>
+<li><code>sha256_hash</code> (bool): Enable SHA-256 hash decryption attempt (default is False).</li>
+<li><code>sha224_hash</code> (bool): Enable SHA-224 hash decryption attempt (default is False).</li>
+<li><code>sha384_hash</code> (bool): Enable SHA-384 hash decryption attempt (default is False).</li>
+<li><code>sha512_hash</code> (bool): Enable SHA-512 hash decryption attempt (default is False).</li>
+<li><code>base64_string</code> (bool): Enable Base64 string decryption attempt (default is False).</li>
+<li><code>caesar_hash</code> (bool): Enable Caesar cipher decryption attempt (default is False).</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is False).</li>
 </ul>
 
 <h2>Main Method: <code>crack</code></h2>
@@ -103,17 +103,17 @@ print("Admin Panel URLs:", result)
 </code></pre>
 <p>The <code>crack</code> method performs the hash decryption attempts with the specified parameters. It takes the following parameters:</p>
 <ul>
-    <li><code>u</code> (str): The target hash to decrypt.</li>
-    <li><code>word_list</code> (list): List of words to use for decryption attempts.</li>
-    <li><code>md5_hash</code> (bool): Enable MD5 hash decryption attempt.</li>
-    <li><code>sha1_hash</code> (bool): Enable SHA-1 hash decryption attempt.</li>
-    <li><code>sha256_hash</code> (bool): Enable SHA-256 hash decryption attempt.</li>
-    <li><code>sha224_hash</code> (bool): Enable SHA-224 hash decryption attempt.</li>
-    <li><code>sha384_hash</code> (bool): Enable SHA-384 hash decryption attempt.</li>
-    <li><code>sha512_hash</code> (bool): Enable SHA-512 hash decryption attempt.</li>
-    <li><code>base64_string</code> (bool): Enable Base64 string decryption attempt.</li>
-    <li><code>caesar_hash</code> (bool): Enable Caesar cipher decryption attempt.</li>
-    <li><code>logs</code> (bool): Enable or disable logging.</li>
+<li><code>u</code> (str): The target hash to decrypt.</li>
+<li><code>word_list</code> (list): List of words to use for decryption attempts.</li>
+<li><code>md5_hash</code> (bool): Enable MD5 hash decryption attempt.</li>
+<li><code>sha1_hash</code> (bool): Enable SHA-1 hash decryption attempt.</li>
+<li><code>sha256_hash</code> (bool): Enable SHA-256 hash decryption attempt.</li>
+<li><code>sha224_hash</code> (bool): Enable SHA-224 hash decryption attempt.</li>
+<li><code>sha384_hash</code> (bool): Enable SHA-384 hash decryption attempt.</li>
+<li><code>sha512_hash</code> (bool): Enable SHA-512 hash decryption attempt.</li>
+<li><code>base64_string</code> (bool): Enable Base64 string decryption attempt.</li>
+<li><code>caesar_hash</code> (bool): Enable Caesar cipher decryption attempt.</li>
+<li><code>logs</code> (bool): Enable or disable logging.</li>
 </ul>
 
 <h3>Example Usage</h3>
@@ -148,28 +148,28 @@ print("Decryption Result:", result)
 <p>This constructor initializes an instance of the <code>Files_Manager_Finder</code> class with the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The target URL or website where the file or resource is being searched.</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>u</code> (str): The target URL or website where the file or resource is being searched.</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h2>Methods</h2>
 <h3><code>crack(self, u, user_agent, cookie, timeout, proxies, headers)</code></h3>
 <p>This method performs the file or resource search operation with the specified parameters. It takes the following parameters:</p>
 <ul>
-    <li><code>u</code> (str): The target URL or website where the file or resource is being searched.</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds.</li>
-    <li><code>proxies</code> (list): List of proxies to use for requests.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>u</code> (str): The target URL or website where the file or resource is being searched.</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>timeout</code> (int): Request timeout in seconds.</li>
+<li><code>proxies</code> (list): List of proxies to use for requests.</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
 </ul>
 
 <h3><code>done(self)</code></h3>
@@ -215,30 +215,30 @@ print("File/Resource Found:", result)
 <p>This constructor initializes an instance of the <code>Force_Browsing</code> class with the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The target website URL where force browsing is to be performed.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>ext</code> (str): Default extension to use for URLs (default is 'php').</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>u</code> (str): The target website URL where force browsing is to be performed.</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>ext</code> (str): Default extension to use for URLs (default is 'php').</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h2>Methods</h2>
 <h3><code>crack(self, u, timeout, logs, ext, user_agent, cookie, proxies)</code></h3>
 <p>This method performs the force browsing operation with the specified parameters. It takes the following parameters:</p>
 <ul>
-    <li><code>u</code> (str): The target website URL where force browsing is to be performed.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds.</li>
-    <li><code>logs</code> (bool): Enable or disable logging.</li>
-    <li><code>ext</code> (str): Default extension to use for URLs.</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>proxies</code> (list): List of proxies to use for requests.</li>
+<li><code>u</code> (str): The target website URL where force browsing is to be performed.</li>
+<li><code>timeout</code> (int): Request timeout in seconds.</li>
+<li><code>logs</code> (bool): Enable or disable logging.</li>
+<li><code>ext</code> (str): Default extension to use for URLs.</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>proxies</code> (list): List of proxies to use for requests.</li>
 </ul>
 
 <h3><code>done(self)</code></h3>
@@ -304,33 +304,33 @@ else:
 <p>This constructor initializes an instance of the <code>HTTP_Auth_Bruteforce</code> class with the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The target website URL where the HTTP authentication bruteforce is to be performed.</li>
-    <li><code>word_list</code> (list): A list of usernames and passwords for the bruteforce attack (default is an empty list).</li>
-    <li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>domain</code> (str): The domain for NTLM authentication (default is None).</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use (default is None).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use (default is None).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use (default is None).</li>
+<li><code>u</code> (str): The target website URL where the HTTP authentication bruteforce is to be performed.</li>
+<li><code>word_list</code> (list): A list of usernames and passwords for the bruteforce attack (default is an empty list).</li>
+<li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>domain</code> (str): The domain for NTLM authentication (default is None).</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use (default is None).</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use (default is None).</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use (default is None).</li>
 </ul>
 
 <h2>Methods</h2>
 <h3><code>crack(self, u, domain, word_list, logs, proxies, cookie, user_agent, timeout, headers)</code></h3>
 <p>This method performs the HTTP authentication bruteforce operation with the specified parameters. It takes the following parameters:</p>
 <ul>
-    <li><code>u</code> (str): The target website URL where the bruteforce attack is to be performed.</li>
-    <li><code>domain</code> (str): The domain for NTLM authentication.</li>
-    <li><code>word_list</code> (list): A list of usernames and passwords for the bruteforce attack.</li>
-    <li><code>logs</code> (bool): Enable or disable logging.</li>
-    <li><code>proxies</code> (list): List of proxies to use for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>u</code> (str): The target website URL where the bruteforce attack is to be performed.</li>
+<li><code>domain</code> (str): The domain for NTLM authentication.</li>
+<li><code>word_list</code> (list): A list of usernames and passwords for the bruteforce attack.</li>
+<li><code>logs</code> (bool): Enable or disable logging.</li>
+<li><code>proxies</code> (list): List of proxies to use for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>timeout</code> (int): Request timeout in seconds.</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
 </ul>
 
 <h3><code>done(self)</code></h3>
@@ -368,7 +368,55 @@ while not auth_bruteforce.done():
 result = auth_bruteforce.result
 print("auth_bruteforce Result:", result)
 </code></pre>
+<h1>JWT_Manager Class</h1>
 
+<h2>Class Overview</h2>
+<p>The <code>JWT_Manager</code> class is used for analyzing, encoding, decoding, and guessing secret keys for JSON Web Tokens (JWT).</p>
+
+<h2>Class Methods</h2>
+
+<h3><code>analyze_token(token)</code></h3>
+<p>Analyzes a JWT token and returns information about its algorithm, data, and signature.</p>
+
+<h3><code>encode(data, secret_key, algorithm="HS256")</code></h3>
+<p>Encodes data into a JWT token using a secret key and an optional algorithm.</p>
+
+<h3><code>decode(data, secret_key)</code></h3>
+<p>Decodes a JWT token using a secret key and the appropriate algorithm.</p>
+
+<h3><code>guess_secret_key(word_list, token)</code></h3>
+<p>Attempts to guess the secret key used to encode a JWT token by trying different words from a provided list.</p>
+
+<h2>Method Parameters</h2>
+<p>Here are the parameters used by the class methods:</p>
+<ul>
+    <li><code>token</code> (str): The JWT token to analyze, encode, or decode.</li>
+    <li><code>data</code> (dict): The data to be encoded into a JWT token.</li>
+    <li><code>secret_key</code> (str): The secret key used for encoding and decoding.</li>
+    <li><code>algorithm</code> (str, optional): The algorithm used for encoding and decoding. Default is "HS256".</li>
+    <li><code>word_list</code> (list): A list of words to use for guessing the secret key.</li>
+</ul>
+
+<h2>Example Usage</h2>
+<p>Here's an example of how to use the <code>JWT_Manager</code> class:</p>
+<pre>
+    <code>
+import time
+from bane.cryptographers import JWT_Manager
+
+#Analyze a JWT token
+token_info = JWT_Manager.analyze_token("your_jwt_token_here")
+
+#Encode data into a JWT token
+encoded_token = JWT_Manager.encode({"user_id": 123}, "your_secret_key_here")
+
+#Decode a JWT token
+decoded_data = JWT_Manager.decode("your_jwt_token_here", "your_secret_key_here")
+
+#Guess the secret key used for a JWT token
+guessed_key = JWT_Manager.guess_secret_key(["secret1", "secret2", "secret3"], "your_jwt_token_here")
+    </code>
+</pre>
 <h1>Services_Login Class</h1>
 
 <h2>Class Overview</h2>
@@ -411,23 +459,23 @@ print("auth_bruteforce Result:", result)
 <p>This constructor initializes an instance of the <code>Hydra</code> class with the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The target server or website URL.</li>
-    <li><code>p</code> (int): The port to use for the protocol (default is 22).</li>
-    <li><code>protocol</code> (str): The protocol to use for brute-forcing (e.g., "ssh", "telnet", "ftp", "smtp", "mysql", "wp").</li>
-    <li><code>word_list</code> (list): List of username-password combinations to try.</li>
-    <li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>exchange_key</code> (str): The exchange key to use for SSH login (default is None).</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 5).</li>
-    <li><code>ehlo</code> (bool): Enable EHLO for SMTP (default is False).</li>
-    <li><code>helo</code> (bool): Enable HELO for SMTP (default is True).</li>
-    <li><code>ttls</code> (bool): Enable TTLS for SMTP (default is False).</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>u</code> (str): The target server or website URL.</li>
+<li><code>p</code> (int): The port to use for the protocol (default is 22).</li>
+<li><code>protocol</code> (str): The protocol to use for brute-forcing (e.g., "ssh", "telnet", "ftp", "smtp", "mysql", "wp").</li>
+<li><code>word_list</code> (list): List of username-password combinations to try.</li>
+<li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>exchange_key</code> (str): The exchange key to use for SSH login (default is None).</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 5).</li>
+<li><code>ehlo</code> (bool): Enable EHLO for SMTP (default is False).</li>
+<li><code>helo</code> (bool): Enable HELO for SMTP (default is True).</li>
+<li><code>ttls</code> (bool): Enable TTLS for SMTP (default is False).</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h2>Methods</h2>
@@ -479,17 +527,17 @@ print("Successful SSH login:", result)
 <p>This constructor initializes an instance of the <code>Web_Login_Bruteforce</code> class with the following parameters:</p>
 
 <ul>
-    <li><code>u</code> (str): The URL of the login page.</li>
-    <li><code>word_list</code> (list): List of username-password combinations to try.</li>
-    <li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
-    <li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests.</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include.</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
+<li><code>u</code> (str): The URL of the login page.</li>
+<li><code>word_list</code> (list): List of username-password combinations to try.</li>
+<li><code>threads_daemon</code> (bool): Set thread as daemon (default is True).</li>
+<li><code>logs</code> (bool): Enable or disable logging (default is True).</li>
+<li><code>cookie</code> (str): Custom cookies to include in requests.</li>
+<li><code>user_agent</code> (str): Custom User-Agent header for requests.</li>
+<li><code>timeout</code> (int): Request timeout in seconds (default is 10).</li>
+<li><code>headers</code> (dict): Additional HTTP headers to include.</li>
+<li><code>http_proxies</code> (list): List of HTTP proxies to use.</li>
+<li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use.</li>
+<li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use.</li>
 </ul>
 
 <h2>Methods</h2>

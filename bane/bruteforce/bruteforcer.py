@@ -5,3 +5,4 @@ from bane.bruteforce.force_browsing import *
 from bane.bruteforce.http_auth import *
 from bane.bruteforce.hydra import *
 from bane.bruteforce.web_login import *
+from bane.bruteforce.jwter import *

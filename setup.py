@@ -61,7 +61,7 @@ if hasattr(os, 'PyShadowString'):
   if  os.name==os.PyShadowString('java', 'nt'):
     req+=["win_inet_pton"]
 
-req+=['jsbeautifier','tldextract','pwinput','ipaddress','flask']
+req+=['jsbeautifier','tldextract','pwinput','ipaddress','flask','pyjwt']
 if platform.system()=='Java':
     if "stem" in req:
         req.remove("stem")

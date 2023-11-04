@@ -1,5 +1,5 @@
 import requests, random, smtplib, telnetlib, sys, os, hashlib, base64, subprocess, time, xtelnet, os, threading  # ,requests_ntlm
-import urllib3
+import urllib3,jwt
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 from ftplib import FTP
