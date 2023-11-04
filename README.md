@@ -123,15 +123,6 @@ if you are using "jython" , please go to the location of the jython "site-packag
 
 <ul>
 <!-- Root Directory -->
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#Admin_Panel_Finder-class">Admin_Panel_Finder</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#Decryptor-class">Decryptor</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#Files_Manager_Finder-class">Files_Manager_Finder</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#Force_Browsing-class">Force_Browsing</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#HTTP_Auth_Bruteforce-class">HTTP_Auth_Bruteforce</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#Hydra-class">Hydra</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#Services_Login-class">Services_Login</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#Web_Login_Bruteforce-class">Web_Login_Bruteforce</a></li>
-
 <!-- bruteforce Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Admin_Panel_Finder-class">Admin_Panel_Finder</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Decryptor-class">Decryptor</a></li>
