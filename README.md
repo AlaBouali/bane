@@ -89,7 +89,7 @@ now let's start some tutorials, shall we?
 ---------------------------------------------------------------------------------------------------------------------------
 I-INSTALLING THE LIBRARY AND IMPORTING:
 ---------------------------------------------------------------------------------------------------------------------------
-if you are using windows , please, first download and install "npcap" from <a href="https://npcap.com/#download">here</a> and restart your computer after that. then install bane.<br>
+if you are using windows , please, first download and install  <a href="https://npcap.com/#download">npcap</a> and <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY</a>, then restart your computer after that. then install bane.<br>
 you can use pip to install bane ( if you are on linux you must run it with "sudo" ) :
 
 
