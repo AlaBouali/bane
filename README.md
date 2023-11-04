@@ -141,7 +141,9 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/blob/master/bane/common/README.md">Common_Variables</a></li>
 
 <!-- cryptographers Directory -->
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#BASE64-class">BASE64</a></li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
+  <ul>
+ <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#BASE64-class">BASE64</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#CAESAR-class">CAESAR</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#MD5-class">MD5</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA1-class">SHA1</a></li>
@@ -150,7 +152,10 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA348-class">SHA384</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#SHA512-class">SHA512</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#XOR-class">XOR</a></li>
-
+</ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
+  <ul>
+ 
 <!-- ddos Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#HTTP_Puncher-class">HTTP_Puncher</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#HTTP_Spam-class">HTTP_Spam</a></li>
@@ -166,6 +171,9 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/ddos/README.md#Xerxes-class">Xerxes</a></li>
 
 <!-- gather_info Directory -->
+</ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
+  <ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info/README.md#Domain_Info-class">Domain_Info</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info/README.md#Dorking_Info-class">Dorking_Info</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info/README.md#IP_Info-class">IP_Info</a></li>
@@ -174,6 +182,9 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info/README.md#URL_Info-class">URL_Info</a></li>
 
 <!-- scanners Directory -->
+</ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
+  <ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_master-class">Botnet_Master</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#Botnet_Scanner-class">Botnet_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_c_c_server-class">Botnet_C_C_Server</a></li>
@@ -219,6 +230,9 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities/README.md#XSS_Scanner-class">XSS_Scanner</a></li>
 
 <!-- Utils Directory -->
+</ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md"><b>Bruteforce:</b</a</li>
+  <ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/README.md#Userful_Utilities-class">Userful_Utilities</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/README.md#Files_Interface-class">Files_Interface</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/README.md#Bane_Instances_Interface-class">Bane_Instances_Interface</a></li>
@@ -245,3 +259,4 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer/README.md#Proxies_Getter-class">Proxies_Getter</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer/README.md#Proxies_Parser-class">Proxies_Parser</a></li>
 </ul>
+</ui>
