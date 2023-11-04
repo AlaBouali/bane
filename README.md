@@ -171,11 +171,12 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/gather_info/README.md#URL_Info-class">URL_Info</a></li>
 
 <!-- scanners Directory -->
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_master-class">Botnet_Master</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#Botnet_Scanner-class">Botnet_Scanner</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#Botnet_Scanner-class">Botnet_Scanner</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#Botnet_Scanner-class">Botnet_Scanner</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#Botnet_Scanner-class">Botnet_Scanner</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#Botnet_Scanner-class">Botnet_Scanner</a></li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_c_c_server-class">Botnet_C_C_Server</a></li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_malware_download_server-class">Botnet_Malware_Download_Server</a></li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_reporting_server-class">Botnet_Reporting_Server</a></li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet/README.md#botnet_web_interface_server-class">Botnet_Web_Interface_Server</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#Drupal_Scanner-class">Drupal_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#Joomla_Scanner-class">Joomla_Scanner</a></li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms/README.md#Magento_Scanner-class">Magento_Scanner</a></li>
