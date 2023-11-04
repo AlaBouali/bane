@@ -90,7 +90,7 @@ now let's start some tutorials, shall we?
 I-INSTALLING THE LIBRARY AND IMPORTING:
 ---------------------------------------------------------------------------------------------------------------------------
 if you are using windows , please, first download and install  <a href="https://npcap.com/#download">npcap</a> and <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY</a>, then restart your computer after that. then install bane.<br>
-you can use pip to install bane ( if you are on linux you must run it with "sudo" ) :
+you can use pip to install bane ( if you are on linux you must run it with "sudo" so it will install required packages: sshpass and tor ) :
 
 
 <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">pip install bane</pre></div>
@@ -125,14 +125,17 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <!-- Root Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/README.md#Admin_Panel_Finder-class">Home</a></li>
 <!-- bruteforce Directory -->
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Admin_Panel_Finder-class">Admin_Panel_Finder</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Decryptor-class">Decryptor</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Files_Manager_Finder-class">Files_Manager_Finder</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Force_Browsing-class">Force_Browsing</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#HTTP_Auth_Bruteforce-class">HTTP_Auth_Bruteforce</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Hydra-class">Hydra</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Services_Login-class">Services_Login</a></li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Web_Login_Bruteforce-class">Web_Login_Bruteforce</a></li>
+<li>Bruteforce:</li>
+  <ul>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Admin_Panel_Finder-class">Admin_Panel_Finder</a></li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Decryptor-class">Decryptor</a></li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Files_Manager_Finder-class">Files_Manager_Finder</a></li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Force_Browsing-class">Force_Browsing</a></li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#HTTP_Auth_Bruteforce-class">HTTP_Auth_Bruteforce</a></li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Hydra-class">Hydra</a></li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Services_Login-class">Services_Login</a></li>
+  <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Web_Login_Bruteforce-class">Web_Login_Bruteforce</a></li>
+  </ul>
 
 <!-- common Directory -->
 <li><a href="https://github.com/AlaBouali/bane/blob/master/bane/common/README.md">Common_Variables</a></li>
