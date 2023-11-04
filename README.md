@@ -135,7 +135,7 @@ if you are using "jython" , please go to the location of the jython "site-packag
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce/README.md#Web_Login_Bruteforce-class">Web_Login_Bruteforce</a></li>
 
 <!-- common Directory -->
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/common/README.md#Common_Variables-class">Common_Variables</a></li>
+<li><a href="https://github.com/AlaBouali/bane/blob/master/bane/common/README.md">Common_Variables</a></li>
 
 <!-- cryptographers Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers/README.md#BASE64-class">BASE64</a></li>
