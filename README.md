@@ -177,7 +177,7 @@ Please, ignore them since they are not related to the performance or classified 
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#Force_Browsing-class">Force_Browsing :</a> used to perform force browsing on a website by attempting to access various URLs with different extensions.</li>
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#HTTP_Auth_Bruteforce-class">HTTP_Auth_Bruteforce :</a> used to perform HTTP authentication bruteforce attacks on a website.</li>
 
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#jwt_manager-class">JWT_Manager :</a> used for analyzing, encoding, decoding, and guessing secret keys for JSON Web Tokens (JWT).</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#jwt_manager-class">JWT_Manager :</a> provides functionality for analyzing, encoding, decoding, and guessing secret keys for JSON Web Tokens (JWT). JWTs are widely used in web applications for secure data exchange and authentication.</li>
 
 
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#Hydra-class">Hydra :</a> used for performing brute-force login attempts on various services, including SSH, Telnet, FTP, SMTP, MySQL, and WordPress. It takes a list of username-password combinations and tries to log in using different protocols. It reports success or failure for each combination.</li>

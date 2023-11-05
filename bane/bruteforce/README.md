@@ -371,21 +371,21 @@ print("auth_bruteforce Result:", result)
 <h1>JWT_Manager Class</h1>
 
 <h2>Class Overview</h2>
-<p>The <code>JWT_Manager</code> class is used for analyzing, encoding, decoding, and guessing secret keys for JSON Web Tokens (JWT).</p>
+<p>The <code>JWT_Manager</code> class provides functionality for analyzing, encoding, decoding, and guessing secret keys for JSON Web Tokens (JWT). JWTs are widely used in web applications for secure data exchange and authentication.</p>
 
 <h2>Class Methods</h2>
 
 <h3><code>analyze_token(token)</code></h3>
-<p>Analyzes a JWT token and returns information about its algorithm, data, and signature.</p>
+<p>Analyzes a JWT token and returns information about its algorithm, data, and signature. Returns an object with details about the token.</p>
 
 <h3><code>encode(data, secret_key, algorithm="HS256")</code></h3>
-<p>Encodes data into a JWT token using a secret key and an optional algorithm.</p>
+<p>Encodes data into a JWT token using a secret key and an optional algorithm. Returns the JWT token as a string.</p>
 
-<h3><code>decode(data, secret_key)</code></h3>
-<p>Decodes a JWT token using a secret key and the appropriate algorithm.</p>
+<h3><code>decode(token, secret_key)</code></h3>
+<p>Decodes a JWT token using a secret key and the appropriate algorithm. Returns the decoded data as a dictionary.</p>
 
 <h3><code>guess_secret_key(word_list, token)</code></h3>
-<p>Attempts to guess the secret key used to encode a JWT token by trying different words from a provided list.</p>
+<p>Attempts to guess the secret key used to encode a JWT token by trying different words from a provided list. Returns the guessed secret key as a string, if successful.</p>
 
 <h2>Method Parameters</h2>
 <p>Here are the parameters used by the class methods:</p>
@@ -401,8 +401,7 @@ print("auth_bruteforce Result:", result)
 <p>Here's an example of how to use the <code>JWT_Manager</code> class:</p>
 <pre>
     <code>
-import time
-from bane.cryptographers import JWT_Manager
+from bane import JWT_Manager
 
 #Analyze a JWT token
 token_info = JWT_Manager.analyze_token("your_jwt_token_here")
