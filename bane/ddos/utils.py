@@ -2,7 +2,13 @@ import requests, socks, os, sys, urllib, socket, random, time, threading, ssl
 import urllib3,json
 from collections import OrderedDict
 from ..utils.socket_connection import *
-
+try:
+    if sys.version_info < (3, 0):
+        from scapy.all import UDP,IP,DNS,DNSQR,Raw
+    else:
+        from kamene.all import UDP,IP,DNS,DNSQR,Raw
+except:
+    pass
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # import the dependencies for each python version
 if sys.version_info < (3, 0):
@@ -13,7 +19,7 @@ if sys.version_info < (3, 0):
         from scapy.config import conf
 
         conf.ipv6_enabled = False
-        from scapy.all import *
+        from scapy.all import UDP,IP,DNS,DNSQR,Raw
     except:
         pass
 else:
@@ -24,10 +30,13 @@ else:
     import urllib.request
 
     urllib2 = urllib.request
-    from kamene.config import conf
+    try:
+        from kamene.config import conf
 
-    conf.ipv6_enabled = False
-    from kamene.all import *
+        conf.ipv6_enabled = False
+        from kamene.all import UDP,IP,DNS,DNSQR,Raw
+    except:
+        pass
 from struct import *
 from ..utils.pager.rand_generator import *
 from ..common.payloads import *

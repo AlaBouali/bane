@@ -6,12 +6,10 @@ import tldextract
 try:
     if sys.version_info < (3, 0):
         from scapy.config import conf
-
         conf.ipv6_enabled = False
-        from scapy.all import *
+        from scapy.all import IP,TCP,sr
     else:
         from kamene.config import conf
-
         conf.ipv6_enabled = False
         from kamene.all import IP,TCP,sr
 except:

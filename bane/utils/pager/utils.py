@@ -1,4 +1,4 @@
-import requests, random, re, time, furl, sys, datetime , string,json,ast
+import requests, random, re, time, sys, datetime , string,json,ast
 
 try:
     import jsbeautifier

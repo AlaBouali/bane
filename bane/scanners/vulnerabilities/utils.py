@@ -47,6 +47,18 @@ from ...gather_info.ips import *
 class Vulnerability_Scanner_Utilities:
 
     @staticmethod
+    def get_params_from_url(url):
+        d=[]
+        if '#' in url:
+            url=url.split('#')[0]
+        if '?' not in url:
+            return []
+        params=url.split('?')[1]
+        for x in params.split("&"):
+            d.append((x.split('=')[0],x.split('=')[1]))
+        return d
+
+    @staticmethod
     def crawl(
         u,
         timeout=10,
@@ -106,7 +118,7 @@ class Vulnerability_Scanner_Utilities:
                         "Source_url",
                         u,
                         urlparse(u).path,
-                        [(x, furl.furl(u).args[x]) for x in furl.furl(u).args],
+                        Vulnerability_Scanner_Utilities.get_params_from_url(u),
                     )
                 }
             )
@@ -128,10 +140,7 @@ class Vulnerability_Scanner_Utilities:
                                             txt,
                                             a,
                                             urlparse(a).path,
-                                            [
-                                                (x, furl.furl(a).args[x])
-                                                for x in furl.furl(a).args
-                                            ],
+                                            Vulnerability_Scanner_Utilities.get_params_from_url(a),
                                         )
                                     }
                                 )
