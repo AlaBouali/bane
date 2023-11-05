@@ -69,7 +69,7 @@
 <li><a href="#special-speech">Special Speech</a></li>
 <li><a href="#installation">Installation</a></li>
 <li><a href="#documentation">Documentation</a></li>
-<li><a href="#introduction">Why you should use "bane"</a></li>
+<li><a href="#why-you-should-use-bane">Why you should use "bane"</a></li>
 </ul>
 
 
@@ -326,4 +326,4 @@ Please, ignore them since they are not related to the performance or classified 
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Getter-class">Proxies_Getter :</a> used to retrieve proxy sockets and proxy settings for various protocols.</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Parser-class">Proxies_Parser :</a> used to parse and handle proxy configurations and settings.</li>
 </ul>
-<h1 id="">Why you should use "bane"</h1>
+<h1 id="why-you-should-use-bane">Why you should use "bane"</h1>
