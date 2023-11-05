@@ -73,10 +73,10 @@ if platform.system()=='Java':
 
 # to allow people to install it via 'python setup.py install' after cloning the repo, else some error might occur
 
-if  sys.version_info < (3,0):
+"""if  sys.version_info < (3,0):
     os.system('pip install '+' '.join(req))
 else:
-    os.system('pip3 install '+' '.join(req))
+    os.system('pip3 install '+' '.join(req))"""
 
 
 setuptools.setup(
