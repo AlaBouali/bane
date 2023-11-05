@@ -1,5 +1,5 @@
 from bane.gather_info.utils import *
-from bane.cryptographers.Base64 import BASE64
+from bane.cryptographers._base64 import BASE64
 
 
 class URL_Info:

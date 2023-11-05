@@ -1,4 +1,4 @@
-from .Base64 import *
+from ._base64 import *
 from .caesar import *
 from .md5 import *
 from .sha1 import *

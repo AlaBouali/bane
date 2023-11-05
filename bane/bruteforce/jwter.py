@@ -1,5 +1,5 @@
 from .utils import *
-from ..cryptographers.Base64 import BASE64
+from ..cryptographers._base64 import BASE64
 
 class JWT_Manager:
 
