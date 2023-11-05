@@ -96,70 +96,70 @@ Thank you all:
 
 <p>If you are using Windows, please follow these steps:</p>
 <ol>
-    <li>Download and install <a href="https://npcap.com/#download">Npcap</a>.</li>
-    <li>Download and install <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY</a>.</li>
-    <li>Restart your computer after the installations are complete.</li>
-    <li>Then, install 'bane' using pip:</li>
+<li>Download and install <a href="https://npcap.com/#download">Npcap</a>.</li>
+<li>Download and install <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY</a>.</li>
+<li>Restart your computer after the installations are complete.</li>
+<li>Then, install 'bane' using pip:</li>
 </ol>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-    <pre style="margin: 0; line-height: 125%">pip install bane</pre>
+<pre style="margin: 0; line-height: 125%">pip install bane</pre>
 </div>
 
 <p>If you are on Linux, run the following command with 'sudo' to ensure that required packages, 'sshpass' and 'tor,' are installed:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-    <pre style="margin: 0; line-height: 125%">sudo pip install bane</pre>
+<pre style="margin: 0; line-height: 125%">sudo pip install bane</pre>
 </div>
 
 <!--
 <p>Alternatively, you can clone the project from the link and run setup.py:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-    <pre style="margin: 0; line-height: 125%">
+<pre style="margin: 0; line-height: 125%">
             git clone https://github.com/AlaBouali/bane
             cd bane
             python setup.py install
-    </pre>
+</pre>
 </div>
     -->
 
 <p>To use 'bane,' you need to open the Python interpreter from your terminal/cmd, as 'bane' can be used only within the interpreter after importing it:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-    <pre style="margin: 0; line-height: 125%">python</pre>
+<pre style="margin: 0; line-height: 125%">python</pre>
 </div>
 
 <p>or</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-    <pre style="margin: 0; line-height: 125%">python3</pre>
+<pre style="margin: 0; line-height: 125%">python3</pre>
 </div>
 
 <p>After that, import 'bane' and start using it as explained in the URLs below:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-    <pre style="margin: 0; line-height: 125%">import bane</pre>
+<pre style="margin: 0; line-height: 125%">import bane</pre>
 </div>
 
 <p>If you are using "jython," please navigate to the "site-packages" directory (e.g., "C:\jython\Lib\site-packages"). Open the "dns" folder, and within the "resolver.py" file, comment out line "1149" by placing a "#" in front of it:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-    <pre style="margin: 0; line-height: 125%"><b>socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
+<pre style="margin: 0; line-height: 125%"><b>socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
 </div>
 to:
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-    <pre style="margin: 0; line-height: 125%"><b>#socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
+<pre style="margin: 0; line-height: 125%"><b>#socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
 </div>
 That should fix the error that you might encounter when importing "bane" the first time.
 
 <b>Note :</b> you might encounter such messages when importing this library:
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-    <pre style="margin: 0; line-height: 125%"><b>WARNING: can't import layer ipsec: cannot import name 'gcd' from 'fractions' (C:\...</b></pre>
+<pre style="margin: 0; line-height: 125%"><b>WARNING: can't import layer ipsec: cannot import name 'gcd' from 'fractions' (C:\...</b></pre>
 </div>
 or
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-    <pre style="margin: 0; line-height: 125%"><b>WARNING: Failed to execute tcpdump. Check it is installed and in the PATH
+<pre style="margin: 0; line-height: 125%"><b>WARNING: Failed to execute tcpdump. Check it is installed and in the PATH
 WARNING: can't import layer ipsec: cannot import name 'gcd' from 'fractions' (/usr/lib/python3.9/fractions.py)</b></pre>
 </div> 
 Please, ignore them since they are not related to the performance or classified as "importing issue" for "bane" library.
@@ -327,3 +327,50 @@ Please, ignore them since they are not related to the performance or classified 
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Parser-class">Proxies_Parser :</a> used to parse and handle proxy configurations and settings.</li>
 </ul>
 <h1 id="why-you-should-use-bane">Why you should use "bane"</h1>
+<h1>Reasons to Use the Library</h1>
+<ul>
+    <li>
+        <h2>Bruteforce Tools</h2>
+        <p>Tools for performing brute-force attacks on various services, such as admin panel finding, cryptographic hash decryption, and login attempts.</p>
+    </li>
+    <li>
+        <h2>JWT Manager</h2>
+        <p>Functionality for analyzing, encoding, decoding, and guessing secret keys for JSON Web Tokens (JWT).</p>
+    </li>
+    <li>
+        <h2>DDoS Tools</h2>
+        <p>Tools for launching different types of Distributed Denial-of-Service (DDoS) attacks for assessing server and network infrastructure resilience.</p>
+    </li>
+    <li>
+        <h2>Information Gathering</h2>
+        <p>Tools for gathering domain, IP, network, and subdomain information, useful for reconnaissance and vulnerability assessment.</p>
+    </li>
+    <li>
+        <h2>Botnet Creation and Management</h2>
+        <p>Features for creating, managing, and scaling a botnet infrastructure, valuable for studying botnets and their operations.</p>
+    </li>
+    <li>
+        <h2>CMS Vulnerability Scanners</h2>
+        <p>Specific scanners for popular Content Management Systems (CMS) like Drupal, Joomla, Magento, and WordPress, for identifying vulnerabilities in websites using these platforms.</p>
+    </li>
+    <li>
+        <h2>Network Discovery and Scanning</h2>
+        <p>Scanners for port scanning, amplification factor calculation, and network-related vulnerability assessment.</p>
+    </li>
+    <li>
+        <h2>Vulnerability Scanners</h2>
+        <p>Various vulnerability scanners for detecting different types of web application vulnerabilities, including CSRF, XSS, RCE, and more.</p>
+    </li>
+    <li>
+        <h2>Additional Useful Modules</h2>
+        <p>Utility modules for common tasks and operations, such as working with files, managing cookies, and updating the library.</p>
+    </li>
+    <li>
+        <h2>Web Page Analyzers</h2>
+        <p>Tools for analyzing web pages, filling forms, generating random data, and parsing URLs, useful for web scraping and data analysis.</p>
+    </li>
+    <li>
+        <h2>Proxying Utilities</h2>
+        <p>Utilities for handling proxy configurations and checking the validity of proxy servers, beneficial for tasks that require anonymity and security.</p>
+    </li>
+</ul>
