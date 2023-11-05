@@ -327,7 +327,6 @@ Please, ignore them since they are not related to the performance or classified 
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Parser-class">Proxies_Parser :</a> used to parse and handle proxy configurations and settings.</li>
 </ul>
 <h1 id="why-you-should-use-bane">Why you should use "bane"</h1>
-<h1>Reasons to Use the Library</h1>
 <ul>
     <li>
         <h2>Bruteforce Tools</h2>
@@ -374,7 +373,7 @@ Please, ignore them since they are not related to the performance or classified 
         <p>Utilities for handling proxy configurations and checking the validity of proxy servers, beneficial for tasks that require anonymity and security.</p>
     </li>
     <li>
-            <h2>Proxies and TOR Support in Almost All Components ( including the Botnet's )</h2>
+            <h2>Proxies and TOR Support in Almost All Components ( including the Botnet's master and scanner )</h2>
             <p>The "bane" library offers comprehensive support for a wide range of proxies across the majority of its functionalities. Notably, it includes support for TOR in various components, enhancing anonymity and security. The only exceptions are SSH and database connections, which fall outside the project's control.</p>
         </li>
         <li>
