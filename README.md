@@ -74,17 +74,16 @@ This library is intended exclusively for educational purposes and ethical use wi
 ---------------------------------------------------------------------------------------------------------------------------
                                                       SPECIAL SPEECH:
 ---------------------------------------------------------------------------------------------------------------------------
+Since embarking on this journey in late October 2016, my professional growth has been remarkable. I have had invaluable experiences and interactions that have not only rescued me but also nurtured my personal development. This transformative journey led me to transition from being a blackhat hacker to a highly skilled security researcher, penetration tester, and software engineer. Through the years, my project has evolved from a simple public proxies grabber and user agent scraper to its present state. This transformation has been a result of a gradual integration of new functionalities, rigorous testing, bug fixing, and continuous development efforts. While I have largely driven this project forward independently, I must acknowledge the mentors and supporters who guided me during my initial steps and believed in my potential. With immense gratitude, I dedicate this project to the community as a means of giving back and sharing the tools I've developed over the years. My goal is to simplify the complexities of code and empower others to create their own tools and solutions.
 
-This is dedicated to my mentor: Zachary Barker ( https://www.facebook.com/zachary.barker.5439 ), he was my leader and teacher through my journey in and advantures in this crazy underground world, we have been through a lot together and were close but now he is dead in a hit-and-run :( . he was one of my true cyber bros:
-<br>-S0u1 ( https://twitter.com/YourAnonS0u1 ) : programmer and blackhat.
-<br>-Vince ( https://www.facebook.com/vincelinux ) : Linux and hardware expert, social engeneering and programmer.
-<br>-Zachary Barker (lulz zombie) : teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat.
-<br>-Lulztigre (https://www.twitter.com/lulztigre) : Bug Bounty Hunter, Penetration Tester And Python Programmer.
-<br>-Jen Hill.
-<br>in the honor of all my people and the memory of my brother zach im sharing all my personal hacking tools with public. plz use them wisely :)
-
-now let's start some tutorials, shall we?
-
+Thank you all:
+<ul>
+<li><a href="https://twitter.com/YourAnonS0u1">S0u1 :</a> programmer and blackhat.</li>
+<li><a href="https://www.facebook.com/vincelinux">Vince :</a> Linux and hardware expert, social engeneering and programmer.</li>
+<li><a href="https://www.facebook.com/zachary.barker.5439">Zachary Barker (lulz zombie) :</a> teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat ( R.I.P ) .</li>
+<li><a href="https://www.twitter.com/lulztigre">Lulztigre :</a> Bug Bounty Hunter, Penetration Tester And Python Programmer.</li>
+<li>Jen Hill.</li>
+</ul>
 ---------------------------------------------------------------------------------------------------------------------------
                                                       INSTALLATION:
 ---------------------------------------------------------------------------------------------------------------------------
