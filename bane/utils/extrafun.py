@@ -1,13 +1,13 @@
 import cgi, requests, os, random, re, hashlib, urllib, sys, json, gc,socket,socks
-from bane.cryptographers import *
-from bane.utils.handle_files import *
+from ..cryptographers import *
+from ..utils.handle_files import *
 if sys.version_info < (3, 0):
     import HTMLParser
 else:
     import html.parser as HTMLParser
 import bs4
 from bs4 import BeautifulSoup
-from bane.common import *
+from ..common import *
 
 
 class Userful_Utilities:

@@ -1,7 +1,7 @@
 import subprocess, os, xtelnet, sys, cgi, re, json,platform
 from colorama import Fore, Back, Style
-from bane.utils.proxer import *
-from bane.utils.handle_files import *
+from ...utils.proxer import *
+from ...utils.handle_files import *
 
 if platform.system()=='Java':
         Fore.WHITE = ""
@@ -37,12 +37,12 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import bs4,socks
 from bs4 import BeautifulSoup
-from bane.common.payloads import *
-from bane.utils.pager import *
-from bane.utils.js_fuck import js_fuck
-from bane.utils.handle_files import *
-from bane.gather_info.info_s import *
-from bane.gather_info.ips import *
+from ...common.payloads import *
+from ...utils.pager import *
+from ...utils.js_fuck import js_fuck
+from ...utils.handle_files import *
+from ...gather_info.info_s import *
+from ...gather_info.ips import *
 
 class Vulnerability_Scanner_Utilities:
 

@@ -16,6 +16,6 @@ from ..utils.pager import *
 from ..scanners.cms.wp import WordPress_Scanner,Vulnerability_Scanner_Utilities
 from ..cryptographers.hasher import *
 from ..utils.pager import *
-from bane.utils import *
+from ..utils import *
 
 

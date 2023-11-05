@@ -1,7 +1,7 @@
 import requests, urllib, socket, random, time, re, threading, sys, json, os, xtelnet
 import bs4
 from bs4 import BeautifulSoup
-from bane.common.payloads import *
+from ..common.payloads import *
 import tldextract
 try:
     if sys.version_info < (3, 0):
@@ -17,7 +17,7 @@ try:
 except:
     pass
 
-from bane.utils.extrafun import *
+from ..utils.extrafun import *
 if os.path.isdir("/data/data/com.termux/") == False:
     import dns.resolver
 

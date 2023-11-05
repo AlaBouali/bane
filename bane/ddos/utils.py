@@ -1,7 +1,7 @@
 import requests, socks, os, sys, urllib, socket, random, time, threading, ssl
 import urllib3,json
 from collections import OrderedDict
-from bane.utils.socket_connection import *
+from ..utils.socket_connection import *
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # import the dependencies for each python version
@@ -29,11 +29,11 @@ else:
     conf.ipv6_enabled = False
     from kamene.all import *
 from struct import *
-from bane.utils.pager.rand_generator import *
-from bane.common.payloads import *
-from bane.utils.handle_files import *
-from bane.utils.proxer import *
-from bane.utils.pager import *
+from ..utils.pager.rand_generator import *
+from ..common.payloads import *
+from ..utils.handle_files import *
+from ..utils.proxer import *
+from ..utils.pager import *
 termux=False
 adr=False
 

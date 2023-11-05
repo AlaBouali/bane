@@ -21,6 +21,6 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import bs4
 from bs4 import BeautifulSoup
-from bane.common.payloads import *
-from bane.gather_info.info_s import *
+from ...common.payloads import *
+from ...gather_info.info_s import *
 from .cookies_manager import *
