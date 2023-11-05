@@ -111,6 +111,14 @@ Thank you all:
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">sudo pip install bane</pre>
 </div>
+<p>Otherwise if you wish to install the current version on github:</p>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">git clone https://github.com/AlaBouali/bane</pre>
+<pre style="margin: 0; line-height: 125%">cd bane</pre>
+
+<pre style="margin: 0; line-height: 125%">pip install .</pre>
+</div>
 
 <!--
 <p>Alternatively, you can clone the project from the link and run setup.py:</p>
