@@ -73,13 +73,13 @@
 </ul>
 
 
-<h1>Introduction:</h1>
+<h1 id="introduction">Introduction:</h1>
 
 The "bane" Python library offers a comprehensive set of tools for various cybersecurity and networking tasks. Its functionalities encompass diverse capabilities such as bruteforce attacks, cryptographic methods, DDoS attacks, information gathering, botnet creation and management, CMS vulnerability scanning, network discovery, vulnerability scanning, useful modules for common tasks, web page analyzers, and proxy utilities. With features ranging from brute-forcing login credentials to analyzing web pages for vulnerabilities and managing botnets, "bane" serves as a powerful toolkit for cybersecurity professionals and network administrators. Its diverse range of modules includes tools for encryption, security testing, network scanning, and utility functions, providing a wide array of options for cybersecurity and network-related operations. This library is written in pure Python and is fully compatible with both Python 2 and 3, as well as Jython. It is entirely self-contained and does not depend on external tools or dependencies used in this field. Authored from the ground up by the sole developer, this library has been consistently maintained since April 2018 and continues to evolve.
 
 This library is intended exclusively for educational purposes and ethical use with the explicit permission from the people who this tool is used against. The author of this code expressly disclaims any responsibility for any misuse or improper application of this library. It is imperative to emphasize that the user, and the user alone, bears full accountability for their actions when utilizing this library. Any legal ramifications stemming from the misuse of this library are solely the responsibility of the user, and the author shall not be held liable for any such consequences. By utilizing this library, users are acknowledging their understanding and acceptance of these terms and conditions.
 
-<h1>Special Speech:</h1>
+<h1 id="special-speech">Special Speech:</h1>
 
 Since embarking on this journey in late October 2016, my professional growth has been remarkable. I have had invaluable experiences and interactions that have not only rescued me but also nurtured my personal development. This transformative journey led me to transition from being a blackhat hacker to a highly skilled security researcher, penetration tester, and software engineer. Through the years, my project has evolved from a simple public proxies grabber and user agent scraper to its present state. This transformation has been a result of a gradual integration of new functionalities, rigorous testing, bug fixing, and continuous development efforts. While I have largely driven this project forward independently, I must acknowledge the mentors and supporters who guided me during my initial steps and believed in my potential. With immense gratitude, I dedicate this project to the community as a means of giving back and sharing the tools I've developed over the years. My goal is to simplify the complexities of code and empower others to create their own tools and solutions.
 
@@ -92,7 +92,7 @@ Thank you all:
 <li>Jen Hill.</li>
 </ul>
 
-<h1>Installation:</h1>
+<h1 id="installation">Installation:</h1>
 
 <p>If you are using Windows, please follow these steps:</p>
 <ol>
@@ -164,7 +164,7 @@ WARNING: can't import layer ipsec: cannot import name 'gcd' from 'fractions' (/u
 </div> 
 Please, ignore them since they are not related to the performance or classified as "importing issue" for "bane" library.
 
-<h1>Documentation:</h1>
+<h1 id="Documentation">Documentation:</h1>
 
 <ul>
 <!-- Root Directory -->
