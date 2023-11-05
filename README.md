@@ -373,4 +373,21 @@ Please, ignore them since they are not related to the performance or classified 
         <h2>Proxying Utilities</h2>
         <p>Utilities for handling proxy configurations and checking the validity of proxy servers, beneficial for tasks that require anonymity and security.</p>
     </li>
+    <li>
+            <h2>Proxies and TOR Support in Almost All Components ( including the Botnet's )</h2>
+            <p>The "bane" library offers comprehensive support for a wide range of proxies across the majority of its functionalities. Notably, it includes support for TOR in various components, enhancing anonymity and security. The only exceptions are SSH and database connections, which fall outside the project's control.</p>
+        </li>
+        <li>
+            <h2>No DNS Leakage with TOR</h2>
+            <p>Thanks to its advanced capabilities, "bane" ensures that TOR users remain anonymous and free from any DNS leakage, reinforcing privacy and security for users seeking anonymity.</p>
+        </li>
+        <li>
+            <h2>Request Routing via Random IPs in TOR</h2>
+            <p>"bane" has implemented a feature that enables each request to exit through a different TOR node without the need to obtain a new identity or restart TOR's service. This innovation adds an extra layer of sophistication to the project, further enhancing user experience.</p>
+        </li>
+        <li>
+            <h2>Dynamic Manipulation of HTTP Headers in DDoS Attacks</h2>
+            <p>For added challenge and effectiveness in HTTP-based DDoS attacks, "bane" generates HTTP requests with headers featuring random but legitimate values, courtesy of its extensive list of 10,000 user-agents and header values. Subsequently, it rearranges these headers into a random order and selectively removes certain headers (with caution to retain critical ones) before sending the request, ensuring a multifaceted and impactful approach to DDoS attacks.</p>
+        </li>
+    
 </ul>
