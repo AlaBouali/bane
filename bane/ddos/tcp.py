@@ -77,7 +77,7 @@ class TCP_Flood(DDoS_Class):
                         try:
                             if self.stop == True:
                                 break
-                            if type(m)==str:
+                            if type(m)==str and running_on_python_2==False:
                                 m=m.encode()
                             s.send(m)
                             self.counter += 1

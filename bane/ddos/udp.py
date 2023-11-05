@@ -55,7 +55,7 @@ class UDP_Flood(DDoS_Class):
                     msg = os.urandom(random.randint(self.min_size, self.max_size))
                     """for x in range(random.randint(self.min_size, self.max_size)):
                         msg += random.choice(Common_Variables.source_string)"""
-                    if type(msg)==str:
+                    if type(msg)==str  and running_on_python_2==False:
                          msg=msg.encode()
                     if len(msg) > 1400:
                         msg = msg[
