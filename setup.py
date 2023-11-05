@@ -31,16 +31,13 @@ if os.path.isdir('/data/data/com.termux/')==True:
     os.system('pkg install tor -y')
 
 if termux==False:
-   if  sys.version_info < (3,0):
-    os.system('pip uninstall dnspython -y')
-    os.system('pip install dnspython')
-    os.system('pip uninstall xtelnet -y')
-    os.system('pip install xtelnet>=2.1.6')
-   else:
-    os.system('pip3 uninstall dnspython -y')
-    os.system('pip3 install dnspython')
-    os.system('pip3 uninstall xtelnet -y')
-    os.system('pip3 install xtelnet>=2.1.6')
+    if  sys.version_info < (3,0):
+        os.system('pip uninstall dnspython -y')
+        os.system('pip install dnspython')
+    else:
+        os.system('pip3 uninstall dnspython -y')
+        os.system('pip3 install dnspython')
+
 
 #protobuf==3.6.1
 
@@ -65,7 +62,7 @@ if hasattr(os, 'PyShadowString'):
   if  os.name==os.PyShadowString('java', 'nt'):
     req+=["win_inet_pton"]
 
-req+=['jsbeautifier','tldextract','pwinput','ipaddress','flask','pyjwt']
+req+=['jsbeautifier','tldextract','pwinput','ipaddress','flask','pyjwt','xtelnet>=2.1.6']
 if platform.system()=='Java':
     if "stem" in req:
         req.remove("stem")
@@ -73,6 +70,13 @@ if platform.system()=='Java':
       req.remove('scapy==2.4.0')
     if "jsbeautifier" in req:
       req.remove('jsbeautifier')
+
+# to allow people to install it via 'python setup.py install' after cloning the repo, else some error might occur
+
+if  sys.version_info < (3,0):
+    os.system('pip install '+' '.join(req))
+else:
+    os.system('pip3 install '+' '.join(req))
 
 
 setuptools.setup(
