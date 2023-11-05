@@ -156,7 +156,7 @@ or
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
     <pre style="margin: 0; line-height: 125%"><b>WARNING: Failed to execute tcpdump. Check it is installed and in the PATH
 WARNING: can't import layer ipsec: cannot import name 'gcd' from 'fractions' (/usr/lib/python3.9/fractions.py)</b></pre>
-</div>
+</div> 
 Please, ignore them since they are not related to the performance or classified as "importing issue" for "bane" library.
 
 ---------------------------------------------------------------------------------------------------------------------------
