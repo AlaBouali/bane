@@ -114,10 +114,9 @@ Thank you all:
 <p>Otherwise if you wish to install the current version on github:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">git clone https://github.com/AlaBouali/bane</pre>
-<pre style="margin: 0; line-height: 125%">cd bane</pre>
-
-<pre style="margin: 0; line-height: 125%">pip install .</pre>
+<pre style="margin: 0; line-height: 125%">git clone https://github.com/AlaBouali/bane
+cd bane
+pip install .</pre>
 </div>
 
 <!--
