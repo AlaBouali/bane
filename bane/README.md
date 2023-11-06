@@ -1,6 +1,8 @@
 # Please open each folder to find its own documentation.
 
 <ul>
+<li><a href="https://github.com/AlaBouali/bane#installation">Installation</a></li>
+<br>
 <!-- Root Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane">Home</a> </li>
 <br>
@@ -14,7 +16,7 @@
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#Force_Browsing-class">Force_Browsing :</a> used to perform force browsing on a website by attempting to access various URLs with different extensions.</li>
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#HTTP_Auth_Bruteforce-class">HTTP_Auth_Bruteforce :</a> used to perform HTTP authentication bruteforce attacks on a website.</li>
 
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#jwt_manager-class">JWT_Manager :</a> used for analyzing, encoding, decoding, and guessing secret keys for JSON Web Tokens (JWT).</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#jwt_manager-class">JWT_Manager :</a> provides functionality for analyzing, encoding, decoding, and guessing secret keys for JSON Web Tokens (JWT). JWTs are widely used in web applications for secure data exchange and authentication.</li>
 
 
   <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/bruteforce#Hydra-class">Hydra :</a> used for performing brute-force login attempts on various services, including SSH, Telnet, FTP, SMTP, MySQL, and WordPress. It takes a list of username-password combinations and tries to log in using different protocols. It reports success or failure for each combination.</li>
@@ -140,9 +142,9 @@
 
 <!-- Utils/pager Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#Cookies_Manager-class">Cookies_Manager :</a> provides methods for managing HTTP cookies.</li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORMS_FILLER-class">FORMS_FILLER :</a> used for extracting and identifying file upload forms from HTML documents. It provides methods to retrieve these forms both from a list of dictionaries and from a URL with HTML content.</li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORMS_FINDER-class">FORMS_FINDER :</a> provides methods for filling HTML forms with data, including injecting payloads into form parameters.</li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORM_FILE_UPLOAD-class">FORM_FILE_UPLOAD :</a> provides methods for extracting and parsing HTML forms from web pages. It offers methods for sorting inputs in forms and parsing forms from web pages.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORMS_FILLER-class">FORMS_FILLER :</a> provides methods for filling HTML forms with data, including injecting payloads into form parameters.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORMS_FINDER-class">FORMS_FINDER :</a> provides methods for extracting and parsing HTML forms from web pages. It offers methods for sorting inputs in forms and parsing forms from web pages. </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#FORM_FILE_UPLOAD-class">FORM_FILE_UPLOAD :</a> used for extracting and identifying file upload forms from HTML documents. It provides methods to retrieve these forms both from a list of dictionaries and from a URL with HTML content.</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#Pager_Interface-class">Pager_Interface :</a> provides various methods for web scraping and JavaScript code analysis.</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#RANDOM_GENERATOR-class">RANDOM_GENERATOR :</a> provides various static methods for generating random data, such as IP addresses, URLs, phone numbers, HTML input colors, and random dates.</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager#LOGIN_FORM_FILLER-class">LOGIN_FORM_FILLER :</a> provides methods for working with login forms in web pages. It includes methods for getting a login form and setting its values for username and password.</li>
