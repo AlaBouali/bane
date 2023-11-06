@@ -349,7 +349,7 @@ pip install .</pre>
 </div>
     -->
 
-<p>To use 'bane,' you need to open the Python interpreter from your terminal/cmd, as 'bane' can be used only within the interpreter after importing it:</p>
+<p>To use <code>bane</code> you need to open the Python interpreter from your terminal/cmd, as <code>bane</code> can be used only within the interpreter after importing it or as a part of a script:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">python</pre>
