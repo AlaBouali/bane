@@ -1,4 +1,5 @@
-import googlesearch
+import googlesearch,random
+from ..common.payloads import *
 
 class Dorking_Info:
 
@@ -11,7 +12,11 @@ class Dorking_Info:
         stop_on=None,
         top_level_domain="com",
         pause=2,
+        user_agent=None,
+        **kwargs
     ):
+        if user_agent==None:
+            user_agent=random.choice(Common_Variables.user_agents_list)
         j = []
         j += googlesearch.search(
             q,
@@ -21,6 +26,8 @@ class Dorking_Info:
             stop=stop_on,
             tld=top_level_domain,
             pause=pause,
+            user_agent=user_agent,
+            **kwargs
         )
         l = []
         for x in j:
