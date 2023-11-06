@@ -367,7 +367,7 @@ pip install .</pre>
 <pre style="margin: 0; line-height: 125%">import bane</pre>
 </div>
 
-<p>If you are using "jython," please navigate to the "site-packages" directory (e.g., "C:\jython\Lib\site-packages"). Open the "dns" folder, and within the "resolver.py" file, comment out line "1149" by placing a "#" in front of it:</p>
+<p>If you are using <code>jython</code> , please navigate to the <code>site-packages</code> directory (e.g., <code>C:\jython\Lib\site-packages</code>). Open the <code>dns</code> folder, and within the <code>resolver.py</code> file, comment out line <code>1149</code> by placing a <code>#</code> in front of it:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%"><b>socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
