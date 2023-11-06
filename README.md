@@ -153,7 +153,7 @@ This library is intended exclusively for educational purposes and ethical use wi
 <br>
 <!-- scanners Directory -->
 </ul>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet"><b>Botnet: Creation , management and a scalable infrastructure :</b></a> </li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet"><b>Botnet: creation , control and management with a scalable infrastructure :</b></a> </li>
  <br> <ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#botnet_master-class">Botnet_Master :</a> used for managing botnet operations.</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/botnet#Botnet_Scanner-class">Botnet_Scanner :</a> used for scanning safe IPs all over the internet with a word list to bruteforce various login protocols, including FTP, SSH, Telnet, SMTP, and MySQL. The scan results are saved to text files in the same directory.</li>
