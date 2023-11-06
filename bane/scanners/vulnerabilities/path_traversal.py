@@ -219,7 +219,7 @@ class Path_Traversal_Scanner:
                                 socks5_proxies=socks5_proxies)
             if logs==True:
                 for r in result:
-                    print(r)
+                    print("Vulnerable URL: {}".format(r))
             l.append({'page':x,'result':result})
         return  [x for x in l if x['result']!=[]]
 

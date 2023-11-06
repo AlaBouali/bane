@@ -138,7 +138,7 @@ class SSRF_Scanner:
                             )
             if logs==True:
                 for r in result:
-                    print(r)
+                    print("Vulnerable URL: {}".format(r))#print(r)
             l.append({'page':x,'result':result})
         return  [x for x in l if x['result']!=[]]
 
