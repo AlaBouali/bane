@@ -66,10 +66,12 @@
 <h1>Table of contents</h1>
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#special-speech">Special Speech</a></li>
-<li><a href="#installation">Installation</a></li>
 <li><a href="#documentation">Documentation</a></li>
 <li><a href="#why-you-should-use-bane">Why you should use "bane"</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#special-speech">Special Speech</a></li>
+
+
 </ul>
 
 
@@ -78,98 +80,6 @@
 The "bane" Python library offers a comprehensive set of tools for various cybersecurity and networking tasks. Its functionalities encompass diverse capabilities such as bruteforce attacks, cryptographic methods, DDoS attacks, information gathering, botnet creation and management, CMS vulnerability scanning, network discovery, vulnerability scanning, useful modules for common tasks, web page analyzers, and proxy utilities. With features ranging from brute-forcing login credentials to analyzing web pages for vulnerabilities and managing botnets, "bane" serves as a powerful toolkit for cybersecurity professionals and network administrators. Its diverse range of modules includes tools for encryption, security testing, network scanning, and utility functions, providing a wide array of options for cybersecurity and network-related operations. This library is written in pure Python and is fully compatible with both Python 2 and 3, as well as Jython. It is entirely self-contained and does not depend on external tools or dependencies used in this field. Authored from the ground up by the sole developer, this library has been consistently maintained since April 2018 and continues to evolve.
 
 This library is intended exclusively for educational purposes and ethical use with the explicit permission from the people who this tool is used against. The author of this code expressly disclaims any responsibility for any misuse or improper application of this library. It is imperative to emphasize that the user, and the user alone, bears full accountability for their actions when utilizing this library. Any legal ramifications stemming from the misuse of this library are solely the responsibility of the user, and the author shall not be held liable for any such consequences. By utilizing this library, users are acknowledging their understanding and acceptance of these terms and conditions.
-
-<h1 id="special-speech">Special Speech:</h1>
-
-Since embarking on this journey in late October 2016, my professional growth has been remarkable. I have had invaluable experiences and interactions that have not only rescued me but also nurtured my personal development. This transformative journey led me to transition from being a blackhat hacker to a highly skilled security researcher, penetration tester, and software engineer. Through the years, my project has evolved from a simple public proxies grabber and user agent scraper to its present state. This transformation has been a result of a gradual integration of new functionalities, rigorous testing, bug fixing, and continuous development efforts. While I have largely driven this project forward independently, I must acknowledge the mentors and supporters who guided me during my initial steps and believed in my potential. With immense gratitude, I dedicate this project to the community as a means of giving back and sharing the tools I've developed over the years. My goal is to simplify the complexities of code and empower others to create their own tools and solutions.
-
-Thank you all:
-<ul>
-<li><a href="https://twitter.com/YourAnonS0u1">S0u1 :</a> programmer and blackhat.</li>
-<li><a href="https://www.facebook.com/vincelinux">Vince :</a> Linux and hardware expert, social engeneering and programmer.</li>
-<li><a href="https://www.facebook.com/zachary.barker.5439">Zachary Barker (lulz zombie) :</a> teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat ( R.I.P ) .</li>
-<li><a href="https://www.twitter.com/lulztigre">Lulztigre :</a> Bug Bounty Hunter, Penetration Tester And Python Programmer.</li>
-<li>Jen Hill.</li>
-</ul>
-
-<h1 id="installation">Installation:</h1>
-
-<p>If you are using Windows, please follow these steps:</p>
-<ol>
-<li>Download and install <a href="https://npcap.com/#download">Npcap</a>.</li>
-<li>Download and install <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY</a>.</li>
-<li>Restart your computer after the installations are complete.</li>
-<li>Then, install 'bane' using pip:</li>
-</ol>
-
-<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">pip install bane</pre>
-</div>
-
-<p>If you are on Linux, run the following command with 'sudo' to ensure that required packages, 'sshpass' and 'tor,' are installed:</p>
-
-<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">sudo pip install bane</pre>
-</div>
-<p>Otherwise if you wish to install the current version on github:</p>
-
-<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">git clone https://github.com/AlaBouali/bane
-cd bane
-pip install .</pre>
-</div>
-
-<!--
-<p>Alternatively, you can clone the project from the link and run setup.py:</p>
-
-<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">
-            git clone https://github.com/AlaBouali/bane
-            cd bane
-            python setup.py install
-</pre>
-</div>
-    -->
-
-<p>To use 'bane,' you need to open the Python interpreter from your terminal/cmd, as 'bane' can be used only within the interpreter after importing it:</p>
-
-<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">python</pre>
-</div>
-
-<p>or</p>
-
-<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">python3</pre>
-</div>
-
-<p>After that, import 'bane' and start using it as explained in the URLs below:</p>
-
-<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%">import bane</pre>
-</div>
-
-<p>If you are using "jython," please navigate to the "site-packages" directory (e.g., "C:\jython\Lib\site-packages"). Open the "dns" folder, and within the "resolver.py" file, comment out line "1149" by placing a "#" in front of it:</p>
-
-<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%"><b>socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
-</div>
-to:
-<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%"><b>#socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
-</div>
-That should fix the error that you might encounter when importing "bane" the first time.
-
-<b>Note :</b> you might encounter such messages when importing this library:
-<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%"><b>WARNING: can't import layer ipsec: cannot import name 'gcd' from 'fractions' (C:\...</b></pre>
-</div>
-or
-<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
-<pre style="margin: 0; line-height: 125%"><b>WARNING: Failed to execute tcpdump. Check it is installed and in the PATH
-WARNING: can't import layer ipsec: cannot import name 'gcd' from 'fractions' (/usr/lib/python3.9/fractions.py)</b></pre>
-</div> 
-Please, ignore them since they are not related to the performance or classified as "importing issue" for "bane" library.
 
 <h1 id="Documentation">Documentation:</h1>
 
@@ -396,4 +306,96 @@ Please, ignore them since they are not related to the performance or classified 
             <p>For added challenge and effectiveness in HTTP-based DDoS attacks, "bane" generates HTTP requests with headers featuring random but legitimate values, courtesy of its extensive list of 10,000 user-agents and header values. Subsequently, it rearranges these headers into a random order and selectively removes certain headers (with caution to retain critical ones) before sending the request, ensuring a multifaceted and impactful approach to DDoS attacks.</p>
         </li>
     
+</ul>
+
+<h1 id="installation">Installation:</h1>
+
+<p>If you are using Windows, please follow these steps:</p>
+<ol>
+<li>Download and install <a href="https://npcap.com/#download">Npcap</a>.</li>
+<li>Download and install <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY</a>.</li>
+<li>Restart your computer after the installations are complete.</li>
+<li>Then, install 'bane' using pip:</li>
+</ol>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">pip install bane</pre>
+</div>
+
+<p>If you are on Linux, run the following command with 'sudo' to ensure that required packages, 'sshpass' and 'tor,' are installed:</p>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">sudo pip install bane</pre>
+</div>
+<p>Otherwise if you wish to install the current version on github:</p>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">git clone https://github.com/AlaBouali/bane
+cd bane
+pip install .</pre>
+</div>
+
+<!--
+<p>Alternatively, you can clone the project from the link and run setup.py:</p>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">
+            git clone https://github.com/AlaBouali/bane
+            cd bane
+            python setup.py install
+</pre>
+</div>
+    -->
+
+<p>To use 'bane,' you need to open the Python interpreter from your terminal/cmd, as 'bane' can be used only within the interpreter after importing it:</p>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">python</pre>
+</div>
+
+<p>or</p>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">python3</pre>
+</div>
+
+<p>After that, import 'bane' and start using it as explained in the URLs below:</p>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%">import bane</pre>
+</div>
+
+<p>If you are using "jython," please navigate to the "site-packages" directory (e.g., "C:\jython\Lib\site-packages"). Open the "dns" folder, and within the "resolver.py" file, comment out line "1149" by placing a "#" in front of it:</p>
+
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%"><b>socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
+</div>
+to:
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%"><b>#socket.SOCK_DGRAM: [socket.SOL_UDP],</b></pre>
+</div>
+That should fix the error that you might encounter when importing "bane" the first time.
+
+<b>Note :</b> you might encounter such messages when importing this library:
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%"><b>WARNING: can't import layer ipsec: cannot import name 'gcd' from 'fractions' (C:\...</b></pre>
+</div>
+or
+<div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%"><b>WARNING: Failed to execute tcpdump. Check it is installed and in the PATH
+WARNING: can't import layer ipsec: cannot import name 'gcd' from 'fractions' (/usr/lib/python3.9/fractions.py)</b></pre>
+</div> 
+Please, ignore them since they are not related to the performance or classified as "importing issue" for "bane" library.
+
+<h1 id="special-speech">Special Speech:</h1>
+
+Since embarking on this journey in late October 2016, my professional growth has been remarkable. I have had invaluable experiences and interactions that have not only rescued me but also nurtured my personal development. This transformative journey led me to transition from being a blackhat hacker to a highly skilled security researcher, penetration tester, and software engineer. Through the years, my project has evolved from a simple public proxies grabber and user agent scraper to its present state. This transformation has been a result of a gradual integration of new functionalities, rigorous testing, bug fixing, and continuous development efforts. While I have largely driven this project forward independently, I must acknowledge the mentors and supporters who guided me during my initial steps and believed in my potential. With immense gratitude, I dedicate this project to the community as a means of giving back and sharing the tools I've developed over the years. My goal is to simplify the complexities of code and empower others to create their own tools and solutions.
+
+Thank you all:
+<ul>
+<li><a href="https://twitter.com/YourAnonS0u1">S0u1 :</a> programmer and blackhat.</li>
+<li><a href="https://www.facebook.com/vincelinux">Vince :</a> Linux and hardware expert, social engeneering and programmer.</li>
+<li><a href="https://www.facebook.com/zachary.barker.5439">Zachary Barker (lulz zombie) :</a> teams leader, anarkist, ops organizer, progammer, cyber security expert and blackhat ( R.I.P ) .</li>
+<li><a href="https://www.twitter.com/lulztigre">Lulztigre :</a> Bug Bounty Hunter, Penetration Tester And Python Programmer.</li>
+<li>Jen Hill.</li>
 </ul>
