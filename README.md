@@ -108,7 +108,7 @@ This library is intended exclusively for educational purposes and ethical use wi
   </ul>
 <br>
 <!-- common Directory -->
-<li><a href="https://github.com/AlaBouali/bane/blob/master/bane/common">Common_Variables :</a> used to store internal and necessary variables for bane to run.</li>
+<li><a href="https://github.com/AlaBouali/bane/blob/master/bane/common">Common_Variables :</a> used to store internal and necessary variables for bane to run including: more than 10k user-agents, valid lists legit values for many HTTP headers to choose from, various file types ( png , jpg , docx , pptx , html , php ... ) used to fill the forms and test of file upload vulnerabilities , ...</li>
 <br>
 <!-- cryptographers Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers"><b>Cryptographers:</b></a> </li>
@@ -311,6 +311,9 @@ This library is intended exclusively for educational purposes and ethical use wi
             <h2>Enhanced Security Measures:</h2>
             <p><code>bane</code> offers an added layer of security by incorporating a hardcoded list of U.S. government and military IP ranges for several countries. This feature ensures that when generating random IP addresses for its botnet scanner, the tool will steer clear of these specified IP ranges. By doing so, <code>bane</code> mitigates the risk of unintentional interference with government or military infrastructure, thus safeguarding the user from any inadvertent involvement with such sensitive networks. This proactive approach not only protects users from legal complications but also underscores <code>bane</code>'s commitment to responsible and ethical usage in the realm of cybersecurity.</p>
         </li>
+        <li>
+            <h2>Efficiency:</h2>
+            <p><code>Bane</code> offers a streamlined and efficient process for security testing. It autonomously parses all available URLs, media sources (videos, images, etc.), and HTML forms, eliminating the need for manual intervention. This automation allows Bane to systematically test each element one at a time while respecting the form's input types. It intelligently fills each parameter with the appropriate values, optimizing the testing process for comprehensive security assessments.</p></li>
     
 </ul>
 
