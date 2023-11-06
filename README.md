@@ -85,6 +85,7 @@ This library is intended exclusively for educational purposes and ethical use wi
 
 <ul>
 <li><a href="https://github.com/AlaBouali/bane#installation">Installation</a></li>
+<br>
 <!-- Root Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane">Home</a> </li>
 <br>
