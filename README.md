@@ -84,6 +84,7 @@ This library is intended exclusively for educational purposes and ethical use wi
 <h1 id="Documentation">Documentation:</h1>
 
 <ul>
+<li><a href="#installation">Installation</a></li>
 <!-- Root Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane">Home</a> </li>
 <br>
