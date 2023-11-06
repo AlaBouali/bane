@@ -324,7 +324,7 @@ This library is intended exclusively for educational purposes and ethical use wi
 <pre style="margin: 0; line-height: 125%">pip install bane</pre>
 </div>
 
-<p>If you are on Linux, run the following command with 'sudo' to ensure that required packages, 'sshpass' and 'tor,' are installed:</p>
+<p>If you are on Linux, run the following command with <code>sudo</code> to ensure that required packages, <code>sshpass</code> and <code>tor</code> are installed:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">sudo pip install bane</pre>
