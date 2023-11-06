@@ -248,64 +248,68 @@ This library is intended exclusively for educational purposes and ethical use wi
 <h1 id="why-you-should-use-bane">Why you should use "bane"</h1>
 <ul>
     <li>
-        <h2>Bruteforce Tools</h2>
+        <h2>Bruteforce Tools:</h2>
         <p>Tools for performing brute-force attacks on various services, such as admin panel finding, cryptographic hash decryption, and login attempts.</p>
     </li>
     <li>
-        <h2>JWT Manager</h2>
+        <h2>JWT Manager:</h2>
         <p>Functionality for analyzing, encoding, decoding, and guessing secret keys for JSON Web Tokens (JWT).</p>
     </li>
     <li>
-        <h2>DDoS Tools</h2>
+        <h2>DDoS Tools:</h2>
         <p>Tools for launching different types of Distributed Denial-of-Service (DDoS) attacks for assessing server and network infrastructure resilience.</p>
     </li>
     <li>
-        <h2>Information Gathering</h2>
+        <h2>Information Gathering:</h2>
         <p>Tools for gathering domain, IP, network, and subdomain information, useful for reconnaissance and vulnerability assessment.</p>
     </li>
     <li>
-        <h2>Botnet Creation and Management</h2>
+        <h2>Botnet Creation and Management:</h2>
         <p>Features for creating, managing, and scaling a botnet infrastructure, valuable for studying botnets and their operations.</p>
     </li>
     <li>
-        <h2>CMS Vulnerability Scanners</h2>
+        <h2>CMS Vulnerability Scanners:</h2>
         <p>Specific scanners for popular Content Management Systems (CMS) like Drupal, Joomla, Magento, and WordPress, for identifying vulnerabilities in websites using these platforms.</p>
     </li>
     <li>
-        <h2>Network Discovery and Scanning</h2>
+        <h2>Network Discovery and Scanning:</h2>
         <p>Scanners for port scanning, amplification factor calculation, and network-related vulnerability assessment.</p>
     </li>
     <li>
-        <h2>Vulnerability Scanners</h2>
+        <h2>Vulnerability Scanners:</h2>
         <p>Various vulnerability scanners for detecting different types of web application vulnerabilities, including CSRF, XSS, RCE, and more.</p>
     </li>
     <li>
-        <h2>Additional Useful Modules</h2>
+        <h2>Additional Useful Modules:</h2>
         <p>Utility modules for common tasks and operations, such as working with files, managing cookies, and updating the library.</p>
     </li>
     <li>
-        <h2>Web Page Analyzers</h2>
+        <h2>Web Page Analyzers:</h2>
         <p>Tools for analyzing web pages, filling forms, generating random data, and parsing URLs, useful for web scraping and data analysis.</p>
     </li>
     <li>
-        <h2>Proxying Utilities</h2>
+        <h2>Proxying Utilities:</h2>
         <p>Utilities for handling proxy configurations and checking the validity of proxy servers, beneficial for tasks that require anonymity and security.</p>
     </li>
     <li>
-            <h2>Proxies and TOR Support in Almost All Components ( including the Botnet's master and scanner )</h2>
+            <h2>Proxies and TOR Support in Almost All Components ( including the Botnet's master and scanner ) :</h2>
             <p>The "bane" library offers comprehensive support for a wide range of proxies across the majority of its functionalities. Notably, it includes support for TOR in various components, enhancing anonymity and security. The only exceptions are SSH and database connections, which fall outside the project's control.</p>
         </li>
         <li>
-            <h2>No DNS Leakage with TOR</h2>
+            <h2>No DNS Leakage with TOR:</h2>
             <p>Thanks to its advanced capabilities, "bane" ensures that TOR users remain anonymous and free from any DNS leakage, reinforcing privacy and security for users seeking anonymity.</p>
         </li>
         <li>
-            <h2>Request Routing via Random IPs in TOR</h2>
+            <h2>Request Routing via Random IPs in TOR:</h2>
             <p>"bane" has implemented a feature that enables each request to exit through a different TOR node without the need to obtain a new identity or restart TOR's service. This innovation adds an extra layer of sophistication to the project, further enhancing user experience.</p>
         </li>
         <li>
-            <h2>Dynamic Manipulation of HTTP Headers in DDoS Attacks</h2>
+            <h2>Dynamic Manipulation of HTTP Headers in DDoS Attacks:</h2>
             <p>For added challenge and effectiveness in HTTP-based DDoS attacks, "bane" generates HTTP requests with headers featuring random but legitimate values, courtesy of its extensive list of 10,000 user-agents and header values. Subsequently, it rearranges these headers into a random order and selectively removes certain headers (with caution to retain critical ones) before sending the request, ensuring a multifaceted and impactful approach to DDoS attacks.</p>
+        </li>
+        <li>
+            <h2>Enhanced Security Measures:</h2>
+            <p><code>bane</code> offers an added layer of security by incorporating a hardcoded list of U.S. government and military IP ranges for several countries. This feature ensures that when generating random IP addresses for its botnet scanner, the tool will steer clear of these specified IP ranges. By doing so, <code>bane</code> mitigates the risk of unintentional interference with government or military infrastructure, thus safeguarding the user from any inadvertent involvement with such sensitive networks. This proactive approach not only protects users from legal complications but also underscores <code>bane</code>'s commitment to responsible and ethical usage in the realm of cybersecurity.</p>
         </li>
     
 </ul>
