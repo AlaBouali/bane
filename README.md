@@ -361,7 +361,7 @@ pip install .</pre>
 <pre style="margin: 0; line-height: 125%">python3</pre>
 </div>
 
-<p>After that, import <code>bane</code> and start using it as explained in the URLs above:</p>
+<p>After that, import <code>bane</code> and start using it as explained in the documentation above:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">import bane</pre>
