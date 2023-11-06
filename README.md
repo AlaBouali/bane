@@ -317,7 +317,7 @@ This library is intended exclusively for educational purposes and ethical use wi
 <li>Download and install <a href="https://npcap.com/#download">Npcap</a>.</li>
 <li>Download and install <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY</a>.</li>
 <li>Restart your computer after the installations are complete.</li>
-<li>Then, install 'bane' using pip:</li>
+<li>Then, install <code>bane</code> using pip:</li>
 </ol>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
@@ -349,7 +349,7 @@ pip install .</pre>
 </div>
     -->
 
-<p>To use <code>bane</code> you need to open the Python interpreter from your terminal/cmd, as <code>bane</code> can be used only within the interpreter after importing it or as a part of a script:</p>
+<p>To use <code>bane</code> you need to open the Python interpreter from your terminal / cmd, as <code>bane</code> can be used only within the interpreter after importing it or as a part of a script:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">python</pre>
@@ -361,7 +361,7 @@ pip install .</pre>
 <pre style="margin: 0; line-height: 125%">python3</pre>
 </div>
 
-<p>After that, import 'bane' and start using it as explained in the URLs below:</p>
+<p>After that, import <code>bane</code> and start using it as explained in the URLs above:</p>
 
 <div style="background: #f8f8f8; overflow:auto; width:auto; border:solid gray; border-width:.1em .1em .1em .8em; padding:.2em .6em;">
 <pre style="margin: 0; line-height: 125%">import bane</pre>
