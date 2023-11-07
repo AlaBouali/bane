@@ -313,7 +313,7 @@ This library is intended exclusively for educational purposes and ethical use wi
         </li>
         <li>
             <h2>Efficiency:</h2>
-            <p><code>Bane</code> offers a streamlined and efficient process for security testing. It autonomously parses all available URLs, media sources (videos, images, etc.), and HTML forms, eliminating the need for manual intervention. This automation allows Bane to systematically test each element one at a time while respecting the form's input types. It intelligently fills each parameter with the appropriate values, optimizing the testing process for comprehensive security assessments.</p></li>
+            <p><code>Bane</code> offers a streamlined and efficient process for security testing. It autonomously parses all available URLs, media sources (videos, images, etc.), and HTML forms, eliminating the need for manual intervention. This automation allows <code>bane</code> to systematically test each element one at a time while respecting the form's input types. It intelligently fills each parameter with the appropriate values, optimizing the testing process for comprehensive security assessments.</p></li>
     
 </ul>
 
