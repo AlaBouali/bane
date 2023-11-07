@@ -18,11 +18,11 @@ class Common_Variables:
         ipaddress.IPv4Network(u"100.64.0.0/10", strict=False)
     ]
     military_ip_ranges = [ipaddress.IPv4Network(x,strict=False) for x in [
-                                u"3.0.0.0/8"
+                                u"3.0.0.0/8",
                                 u"6.0.0.0/8",
                                 u"7.0.0.0/8",
                                 u"11.0.0.0/8",
-                                u"15.0.0.0/8"
+                                u"15.0.0.0/8",
                                 u"21.0.0.0/8",
                                 u"22.0.0.0/8",
                                 u"24.198.0.0/16",
