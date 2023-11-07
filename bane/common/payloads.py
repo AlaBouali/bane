@@ -472,6 +472,7 @@ class Common_Variables:
                                 u"169.0.0.0/16",
                                 u"194.0.0.0/8",
                                 u"195.10.0.0/16",
+                                u"198.18.0.0/15",
                                 u"199.121.4.0/22",
                                 u"203.59.0.0/16",
                                 u"204.34.0.0/16",
@@ -495,7 +496,6 @@ class Common_Variables:
                                 u"216.247.0.0/16",
                                 u"216.248.0.0/16",
                                 u"224.0.0.0/8",
-                                u"198.18.0.0/15",
 
     ]]
     excluded_ip_ranges=military_ip_ranges+private_ip_ranges
