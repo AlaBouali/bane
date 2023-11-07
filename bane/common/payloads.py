@@ -9,6 +9,7 @@ class Common_Variables:
     # https://edbellmcse.wordpress.com/ip-address-ranges/
     # Define private IP address ranges
     private_ip_ranges = [
+        ipaddress.IPv4Network(u"0.0.0.0/8", strict=False),
         ipaddress.IPv4Network(u"10.0.0.0/8", strict=False),
         ipaddress.IPv4Network(u"172.16.0.0/12", strict=False),
         ipaddress.IPv4Network(u"192.168.0.0/16", strict=False),
@@ -17,9 +18,11 @@ class Common_Variables:
         ipaddress.IPv4Network(u"100.64.0.0/10", strict=False)
     ]
     military_ip_ranges = [ipaddress.IPv4Network(x,strict=False) for x in [
+                                u"3.0.0.0/8"
                                 u"6.0.0.0/8",
                                 u"7.0.0.0/8",
                                 u"11.0.0.0/8",
+                                u"15.0.0.0/8"
                                 u"21.0.0.0/8",
                                 u"22.0.0.0/8",
                                 u"24.198.0.0/16",
@@ -31,6 +34,7 @@ class Common_Variables:
                                 u"50.0.0.0/8",
                                 u"55.0.0.0/8",
                                 u"55.0.0.0/8",
+                                u"56.0.0.0/8",
                                 u"62.0.0.0/11",
                                 u"64.70.0.0/16",
                                 u"64.224.0.0/11",
@@ -489,7 +493,10 @@ class Common_Variables:
                                 u"216.25.0.0/16",
                                 u"216.94.0.0/16",
                                 u"216.247.0.0/16",
-                                u"216.248.0.0/16"
+                                u"216.248.0.0/16",
+                                u"224.0.0.0/8",
+                                u"198.18.0.0/15",
+
     ]]
     excluded_ip_ranges=military_ip_ranges+private_ip_ranges
     sql_errors=['Warning: mysql_query()','sqlite3.OperationalError','error in your SQL syntax','mysql_fetch', 'num_rows', 'ORA-01756', 'Error Executing Database Query', 'SQLServer JDBC Driver',
