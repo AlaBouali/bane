@@ -14,6 +14,8 @@ class WP_Vulnerability_Search:
     def is_valid_exploit(exploit,software_version):
             if software_version in [None,'']:
                 return False
+            if software_version.count('.')==0:
+                return False
             if 'compare' not in exploit:
                 return False
             if exploit['compare']=="=":
@@ -29,6 +31,8 @@ class WP_Vulnerability_Search:
     def filter_exploits(exploits,software_version):
         if software_version in [None,'']:
             return []
+        if software_version.count('.')==0:
+                return []
         l=[]
         for x in exploits:
             if WP_Vulnerability_Search.is_valid_exploit(x,software_version)==True:
@@ -68,6 +72,8 @@ class WP_Vulnerability_Search:
     def search(software_slug,version,**kwargs):
         if version in [None,'']:
             return []
+        if version.count('.')==0:
+                return []
         params=kwargs
         params.update({"search":'software-slug:"{}"'.format(software_slug)})
         args='&'.join([x+'='+params[x] for x in params])
@@ -774,9 +780,9 @@ class WordPress_Scanner:
         if wp_version!='':
             if logs==True:
                 print('[i] looking for exploits for version: {}\n'.format(wp_version))
-            wpvulns=Vulners_Search_Scanner.scan('WordPress_Info',version=wp_version,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
+            wpvulns=Vulners_Search_Scanner.scan('wordpress',version=wp_version,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
             for x in wpvulns:
-                if 'WordPress_Info' in x['title'].lower() or 'WordPress_Info' in x['description'].lower():
+                if 'wordpress' in x['title'].lower() or 'wordpress' in x['description'].lower():
                     wp_vulns.append(x)
             for x in wp_vulns:
                 for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
