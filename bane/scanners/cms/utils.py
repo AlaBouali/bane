@@ -13,4 +13,5 @@ else:
 
 from bs4 import BeautifulSoup
 from ...utils.proxer import *
+from ...utils.pager import Pager_Interface
 from ...gather_info.ips import *

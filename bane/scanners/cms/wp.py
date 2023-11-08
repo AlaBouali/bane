@@ -1,5 +1,86 @@
 from bane.scanners.cms.utils import *
 
+class WP_Vulnerability_Search:
+
+    @staticmethod
+    def get_versions(text,compare):
+        if compare!='-':
+            return text.split(compare)[1].strip().split()[0],''
+        a=text.split('-')
+        return a[1].strip() , a[0].split()[-1]
+        
+
+    @staticmethod
+    def is_valid_exploit(exploit,software_version):
+            if 'compare' not in exploit:
+                return False
+            if exploit['compare']=="=":
+                return tuple([int(x) for x in software_version.split('.')])==tuple([int(x) for x in exploit['max_version'].split('.')])
+            if exploit['compare']=="<":
+                return tuple([int(x) for x in software_version.split('.')])<tuple([int(x) for x in exploit['max_version'].split('.')])
+            if exploit['compare']=="<=":
+                return tuple([int(x) for x in software_version.split('.')])<=tuple([int(x) for x in exploit['max_version'].split('.')])
+            if exploit['compare']=="-":
+                return tuple([int(x) for x in software_version.split('.')])<=tuple([int(x) for x in exploit['max_version'].split('.')]) and tuple([int(x) for x in software_version.split('.')])>=tuple([int(x) for x in exploit['min_version'].split('.')])
+
+    @staticmethod
+    def filter_exploits(exploits,software_version):
+        l=[]
+        for x in exploits:
+            if WP_Vulnerability_Search.is_valid_exploit(x,software_version)==True:
+                l.append(x)
+        return l
+
+    @staticmethod
+    def find_exploits(text):
+        soup = BeautifulSoup(str(text), "html.parser")
+        table_body=soup.find_all('table')[0].find('tbody')
+        l=[]
+        for x in table_body.find_all('tr'):
+                tds=x.find_all('td')
+                d={}
+                d.update({"url":tds[0].find('a')["href"]})
+                d.update({"desciption":tds[0].find('a').text})
+                d.update({"score":tds[2].find('span').text})
+                d.update({"date":tds[4].text})
+                if '<=' in d["desciption"]:
+                    d.update({'compare':'<='})
+                elif '=' in d["desciption"]:
+                    d.update({'compare':'='})
+                elif '<' in d["desciption"]:
+                    d.update({'compare':'<'})
+                elif d["desciption"].count('-')==2:
+                    d.update({'compare':'-'})
+                if 'compare' in d:
+                     max_v,min_v=WP_Vulnerability_Search.get_versions(d["desciption"],d['compare'])
+                     d.update({'max_version':max_v,'min_version':min_v})
+                l.append(d)
+        return l
+
+
+
+
+    @staticmethod
+    def search(software_slug,version,**kwargs):
+        params=kwargs
+        params.update({"search":'software-slug:"{}"'.format(software_slug)})
+        args='&'.join([x+'='+params[x] for x in params])
+        args+="&page={}"
+        slug_exploits=[]
+        i=0
+        while True:
+            i+=1
+            try:
+                l=WP_Vulnerability_Search.find_exploits(Pager_Interface.fetch_url('https://www.wordfence.com/threat-intel/vulnerabilities/search?'+args.format(i)))
+                if len(l)==0:
+                    break
+                slug_exploits+=l
+            except:
+                break
+        l=WP_Vulnerability_Search.filter_exploits(slug_exploits,version)
+        return l
+        
+
 
 class WordPress_Scanner:
 
@@ -600,7 +681,7 @@ class WordPress_Scanner:
         plugins = []
         try:
             #print(response.split('<meta name="generator" content="')[1].split('"')[0])
-            wp_version=response.text.lower().split('<meta name="generator" content="WordPress')[1].split('"')[0].strip()
+            wp_version=response.text.split('<meta name="generator" content="WordPress')[1].split('"')[0].strip()
         except Exception as ex:
             #raise(ex)
             wp_version=''
@@ -761,10 +842,10 @@ class WordPress_Scanner:
         for x in themes:
             if logs==True:
                 print('[i] Theme: {} | Version: {}\n'.format(x['name'],x['version']))
-            x['exploits']=WordPress_Scanner.fetch_exploits(x,search_type='theme',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
+            x['exploits']=WP_Vulnerability_Search.search(x['name'],x['version'])#,search_type='theme',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
             if logs==True:
                 for i in x['exploits']:
-                    print("\tTitle: {}\n\tLink: {}".format(i['title'],i['exploit_url']))
+                    print("\tDesciption: {}\n\tLink: {}".format(i['desciption'],i['url']))
                     print()
         if len(plugins)>0:
             if logs==True:
@@ -773,10 +854,10 @@ class WordPress_Scanner:
         for x in plugins:
             if logs==True:
                 print('[i] Plugin: {} | Version: {}\n'.format(x['name'],x['version']))
-            x['exploits']=WordPress_Scanner.fetch_exploits(x,search_type='plugin',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
+            x['exploits']=WP_Vulnerability_Search.search(x['name'],x['version'])#search_type='plugin',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
             if logs==True:
                 for i in x['exploits']:
-                    print("\tTitle: {}\n\tLink: {}".format(i['title'],i['exploit_url']))
+                    print("\tDesciption: {}\n\tLink: {}".format(i['desciption'],i['url']))
                     print()
         if type(subs)==dict:
             domains_list=list(subs.keys())
