@@ -12,6 +12,8 @@ class WP_Vulnerability_Search:
 
     @staticmethod
     def is_valid_exploit(exploit,software_version):
+            if software_version in [None,'']:
+                return False
             if 'compare' not in exploit:
                 return False
             if exploit['compare']=="=":
@@ -25,6 +27,8 @@ class WP_Vulnerability_Search:
 
     @staticmethod
     def filter_exploits(exploits,software_version):
+        if software_version in [None,'']:
+            return []
         l=[]
         for x in exploits:
             if WP_Vulnerability_Search.is_valid_exploit(x,software_version)==True:
@@ -62,6 +66,8 @@ class WP_Vulnerability_Search:
 
     @staticmethod
     def search(software_slug,version,**kwargs):
+        if version in [None,'']:
+            return []
         params=kwargs
         params.update({"search":'software-slug:"{}"'.format(software_slug)})
         args='&'.join([x+'='+params[x] for x in params])

@@ -146,6 +146,7 @@ class Subdomain_Info:
         if logs==True:
             print('[*] searching with wayback machine ...\n')
         url = "https://web.archive.org/cdx/search/cdx?url=*.{}/*&output=json&fl=original&collapse=urlkey".format(domain)
+        #print(url)
         response = requests.Session().get(url,headers=hed,timeout=wayback_timeout,proxies=proxy,verify=False)
         if response.status_code == 200:
             data = response.json()
@@ -178,7 +179,8 @@ class Subdomain_Info:
                                 urls[subdomain].add(original_url)
                             subdomains.add(subdomain)
         else:
-            raise("Error fetching data from Wayback Machine")
+            if logs==True:
+                print("Error fetching data from Wayback Machine")
         if logs==True:
             print()
         if subdomains_only==True:

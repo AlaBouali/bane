@@ -83,17 +83,35 @@ class IP_Info:
         inp=ip
         if type(ip)==dict:
             l=[]
+            ips=[]
             for x in list(ip.keys()):
-                data=IP_Info.check_ip_via_shodan(x,proxy=proxy,timeout=timeout,logs=logs)
-                if data not in l and data!={}:
-                 l.append(data)
+                a=socket.gethostbyname(x.split(':')[0])
+                if a not in ips:
+                    data=IP_Info.check_ip_via_shodan(a,proxy=proxy,timeout=timeout,logs=logs)
+                    if type(data)==list:
+                            for v in data:
+                                if v not in l and v!={}:
+                                    l+=data
+                    else:
+                            if data not in l and data!={}:
+                                l.append(data)
+                    ips.append(a)
             return l
         if type(ip) in [tuple,list]:
             l=[]
+            ips=[]
             for x in ip:
-                data=IP_Info.check_ip_via_shodan(x,proxy=proxy,timeout=timeout,logs=logs)
-                if data not in l and data!={}:
-                 l.append(data)
+                a=socket.gethostbyname(x.split(':')[0])
+                if a not in ips:
+                    data=IP_Info.check_ip_via_shodan(a,proxy=proxy,timeout=timeout,logs=logs)
+                    if type(data)==list:
+                            for v in data:
+                                if v not in l and v!={}:
+                                    l+=data
+                    else:
+                            if data not in l and data!={}:
+                                l.append(data)
+                    ips.append(a)
             return l
         ip=IP_Info.parse_IP(ip)
         try:
@@ -109,12 +127,18 @@ class IP_Info:
             l=[]
             for x in ip:
                 data=IP_Info.check_ip_via_shodan(x,proxy=proxy,timeout=timeout,logs=logs)
-                if data not in l and data!={}:
-                 l.append(data)
+                if type(data)==list:
+                            for v in data:
+                                if v not in l and v!={}:
+                                    l+=data
+                else:
+                            if data not in l and data!={}:
+                                l.append(data)
             return l
         ip=socket.gethostbyname(ip)
         if logs==True:
             print('[i] IP scan via Shodan  ( in some cases they are outdated, so please verify them manually before submitting them ) :')
+            print('[+] Target: '+ip)
         try:
             d= requests.Session().get('https://internetdb.shodan.io/{}'.format(ip),headers={'User-Agent':random.choice(Common_Variables.user_agents_list)},proxies=proxy,timeout=timeout).json()
             v={}
