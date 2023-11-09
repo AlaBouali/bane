@@ -33,10 +33,10 @@ if os.path.isdir('/data/data/com.termux/')==True:
 if termux==False:
     if  sys.version_info < (3,0):
         os.system('pip uninstall dnspython -y')
-        os.system('pip install dnspython')
+        os.system('pip install --ignore-installed dnspython==2.4.2')
     else:
         os.system('pip3 uninstall dnspython -y')
-        os.system('pip3 install dnspython')
+        os.system('pip3 install --ignore-installed dnspython==2.4.2')
 
 
 #protobuf==3.6.1
@@ -81,7 +81,7 @@ else:
 
 setuptools.setup(
     name="bane",
-    version="5.0.4",
+    version="5.0.5",
     author="AlaBouali",
     author_email="ala.bouali.1997@gmail.com",
     description='This Python library offers a comprehensive set of tools for various cybersecurity and networking tasks. Its functionalities encompass diverse capabilities such as bruteforce attacks, cryptographic methods, DDoS attacks, information gathering, botnet creation and management, CMS vulnerability scanning, network discovery, vulnerability scanning, useful modules for common tasks, web page analyzers, and proxy utilities making it a powerful toolkit for cybersecurity professionals and network administrators.',
