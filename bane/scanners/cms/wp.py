@@ -3,6 +3,52 @@ from bane.scanners.cms.utils import *
 class WP_Vulnerability_Search:
 
     @staticmethod
+    def wpvulnerability_report(software,software_type,version):
+        try:
+            data=json.loads(Pager_Interface.fetch_url('https://www.wpvulnerability.net/{}/{}'.format(software_type,software)))['data']['vulnerability']
+            if data==None:
+                return []
+            if version==None:
+                return data
+            if version.strip()=='':
+                return []
+            if version.count('.')==0:
+                return []
+            l=[]
+            version=tuple(version.split('.'))
+            for x in data:
+                is_valid=False
+                max_v=tuple(x['operator']['max_version'].split('.'))
+                if version<max_v:
+                    is_valid=True
+                min_v=x['operator']['min_version']
+                if min_v!=None:
+                    if tuple(x['operator']['min_version'].split('.'))>version:
+                        is_valid=False
+                if is_valid==True:
+                    l.append(x)
+            return l
+        except:
+            return []
+
+    @staticmethod
+    def scan_plugin(name,version):
+        d=[]
+        l= WP_Vulnerability_Search.wpvulnerability_report(name,'plugin',version)
+        for x in l:
+            d.append({'description':x['source'][0]['description'],'url':x['source'][0]['link'],"details":x})
+        return d
+
+    @staticmethod
+    def scan_theme(name,version):
+        d=[]
+        l= WP_Vulnerability_Search.wpvulnerability_report(name,'theme',version)
+        for x in l:
+            d.append({'description':x['source'][0]['description'],'url':x['source'][0]['link'],"details":x})
+        return d
+
+
+    @staticmethod
     def get_versions(text,compare):
         if compare!='-':
             return text.split(compare)[1].strip().split()[0],''
@@ -48,19 +94,19 @@ class WP_Vulnerability_Search:
                 tds=x.find_all('td')
                 d={}
                 d.update({"url":tds[0].find('a')["href"]})
-                d.update({"desciption":tds[0].find('a').text})
+                d.update({"description":tds[0].find('a').text})
                 d.update({"score":tds[2].find('span').text})
                 d.update({"date":tds[4].text})
-                if '<=' in d["desciption"]:
+                if '<=' in d["description"]:
                     d.update({'compare':'<='})
-                elif '=' in d["desciption"]:
+                elif '=' in d["description"]:
                     d.update({'compare':'='})
-                elif '<' in d["desciption"]:
+                elif '<' in d["description"]:
                     d.update({'compare':'<'})
-                elif d["desciption"].count('-')==2:
+                elif d["description"].count('-')==2:
                     d.update({'compare':'-'})
                 if 'compare' in d:
-                     max_v,min_v=WP_Vulnerability_Search.get_versions(d["desciption"],d['compare'])
+                     max_v,min_v=WP_Vulnerability_Search.get_versions(d["description"],d['compare'])
                      d.update({'max_version':max_v,'min_version':min_v})
                 l.append(d)
         return l
@@ -854,10 +900,10 @@ class WordPress_Scanner:
         for x in themes:
             if logs==True:
                 print('[i] Theme: {} | Version: {}\n'.format(x['name'],x['version']))
-            x['exploits']=WP_Vulnerability_Search.search(x['name'],x['version'])#,search_type='theme',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
+            x['exploits']=WP_Vulnerability_Search.scan_theme(x['name'],x['version'])#,search_type='theme',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
             if logs==True:
                 for i in x['exploits']:
-                    print("\tDesciption: {}\n\tLink: {}".format(i['desciption'],i['url']))
+                    print("\tDesciption: {}\n\tLink: {}".format(i['description'],i['url']))
                     print()
         if len(plugins)>0:
             if logs==True:
@@ -866,10 +912,10 @@ class WordPress_Scanner:
         for x in plugins:
             if logs==True:
                 print('[i] Plugin: {} | Version: {}\n'.format(x['name'],x['version']))
-            x['exploits']=WP_Vulnerability_Search.search(x['name'],x['version'])#search_type='plugin',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
+            x['exploits']=WP_Vulnerability_Search.scan_plugin(x['name'],x['version'])#search_type='plugin',max_tries=max_wpscan_tries,http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies,user_agent=user_agent,timeout=timeout,cookie=wpscan_cookie,sleep_time_min=sleep_time_min,sleep_time_max=sleep_time_max,when_blocked_sleep=when_blocked_sleep)
             if logs==True:
                 for i in x['exploits']:
-                    print("\tDesciption: {}\n\tLink: {}".format(i['desciption'],i['url']))
+                    print("\tDesciption: {}\n\tLink: {}".format(i['description'],i['url']))
                     print()
         if type(subs)==dict:
             domains_list=list(subs.keys())
