@@ -120,6 +120,7 @@ class SSRF_Scanner:
         socks4_proxies=None,
         socks5_proxies=None
     ):
+        started_at=time.time()
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         l=[]
         if pages==[]:
@@ -140,5 +141,5 @@ class SSRF_Scanner:
                 for r in result:
                     print("Vulnerable URL: {}".format(r))#print(r)
             l.append({'page':x,'result':result})
-        return  [x for x in l if x['result']!=[]]
+        return  {'result':[x for x in l if x['result']!=[]],'start_date':started_at,'end_date':time.time()}
 

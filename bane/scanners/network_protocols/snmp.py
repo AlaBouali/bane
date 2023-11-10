@@ -7,6 +7,7 @@ class SNMP_Amplification_Scanner:
         """
     calculate the amplification factor for any given snmp server
     """
+        started_at=time.time()
 
         req = IP(dst=u) / UDP(sport=random.randint(1025, 65500), dport=161) \
             / Raw(load='\x30\x26\x02\x01\x01\x04\x06\x70\x75\x62\x6c\x69\x63\xa5\x19\x02\x04\x71\xb4\xb5\x68\x02\x01\x00\x02\x01\x7F\x30\x0b\x30\x09\x06\x05\x2b\x06\x01\x02\x01\x05\x00'
@@ -39,4 +40,6 @@ class SNMP_Amplification_Scanner:
             'sent': a,
             'received': b,
             'amplification_factor': c,
+            'start_date':started_at,
+            'end_date':time.time()
             }

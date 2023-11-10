@@ -183,9 +183,11 @@ class IP_Info:
     @staticmethod
     def get_IP_info(ip,timeout=15,proxy=None):
         d={}
+        started_at=time.time()
         ip=IP_Info.parse_IP(ip)
         d.update({'host_name':IP_Info.get_host_name(ip)})
         d.update({'geo_ip_location':IP_Info.geo_ip(ip,timeout=timeout,proxy=proxy)})
         d.update({'reverse_ip_lookup':IP_Info.reverse_ip_lookup(ip,timeout=timeout,proxy=proxy)})
         d.update({'shodan_report':IP_Info.check_ip_via_shodan(ip,timeout=timeout,proxy=proxy)})
+        d.update({'start_date':started_at,'end_date':time.time()})
         return d

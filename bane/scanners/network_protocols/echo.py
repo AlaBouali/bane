@@ -8,6 +8,7 @@ class Echo_Amplification_Scanner:
         """
     calculate the amplification factor for any given echo server
     """
+        started_at=time.time()
 
         req = IP(dst=u) / UDP(sport=random.randint(1025, 65500), dport=7) \
             / Raw(load=q)
@@ -39,4 +40,6 @@ class Echo_Amplification_Scanner:
             'sent': a,
             'received': b,
             'amplification_factor': c,
+            'start_date':started_at,
+            'end_date':time.time()
             }

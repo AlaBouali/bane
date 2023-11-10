@@ -7,6 +7,7 @@ class NTP_Amplification_Scanner:
         """
     calculate the amplification factor for any given ntp server
     """
+        started_at=time.time()
 
         req = IP(dst=u) / UDP(sport=random.randint(1025, 65500), dport=123) \
             / Raw(load='\x17\x00\x02\x2a' + '\x00' * 4)
@@ -38,4 +39,6 @@ class NTP_Amplification_Scanner:
             'sent': a,
             'received': b,
             'amplification_factor': c,
+            'start_date':started_at,
+            'end_date':time.time()
             }

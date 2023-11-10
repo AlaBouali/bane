@@ -12,6 +12,6 @@ try:
         from kamene.all import UDP,IP,DNS,DNSQR,Raw
 except:
     pass
-import random
+import random,time
 import socket
 import requests

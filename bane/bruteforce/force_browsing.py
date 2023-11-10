@@ -81,6 +81,7 @@ class Force_Browsing:
         cookie=None,
         proxies=None,
     ):
+        started_at=time.time()
         l = []
         if u[len(u) - 1] == "/":
             u = u[0 : len(u) - 1]
@@ -100,13 +101,13 @@ class Force_Browsing:
             except KeyboardInterrupt:
                 break
             if h == True:
-                l.append(g)
+                l.append({'url':g,'date':time.time()})
                 if self.logs == True:
                     print("[+]FOUND!!!")
             else:
                 if self.logs == True:
                     print("[-]Failed")
-        self.result = {u: l}
+        self.result = self.result.update({'input':u,'start_date':started_at,'end_date':time.time(),'result': l})
         self.finish = True
 
     def done(self):

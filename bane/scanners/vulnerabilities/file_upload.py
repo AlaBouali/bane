@@ -128,6 +128,7 @@ class File_Upload_Scanner:
         ):
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         l=[]
+        started_at=time.time()
         if pages==[]:
             pages=Pager_Interface.spider_url(u,cookie=cookie,max_pages=max_pages,timeout=timeout,user_agent=user_agent,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies))
         for x in pages:
@@ -153,4 +154,4 @@ class File_Upload_Scanner:
                     print(r)
             if result!=[]:
                 l.append({'page':x,'result':result})
-        return  l#[x for x in l if x['result']['vulnerable']!=False]
+        return  {'result':l,'start_date':started_at,'end_date':time.time()}#[x for x in l if x['result']['vulnerable']!=False]

@@ -36,6 +36,7 @@ class Ports_Scanner:
                     self.proxies=[{'proxy_host':None,'proxy_port':None,'proxy_username':None,'proxy_password':None,'proxy_type':None}]
                 self.result={}
             #try:
+                started_at=time.time()
                 for x in ports:
                     t = threading.Thread(target=self.scan,args=(u,x,check_open,timeout,retry))#,kwargs={"port": self.por[x]})
                     t.daemon = threads_daemon
@@ -44,6 +45,7 @@ class Ports_Scanner:
                     time.sleep(0.001)
                 while len(self.result) != len(ports):
                     time.sleep(0.1)
+                self.result={'result':self.result.copy(),'start_date':started_at,'end_date':time.time()}
             #except:
             #   pass
                 """for x in self.__dict__:

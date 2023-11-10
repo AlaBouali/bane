@@ -9,6 +9,7 @@ class DNS_Amplification_Scanner:
         q='google.com',
         t='ANY',
         ):
+        started_at=time.time()
         """
     calculate the amplification factor for any given dns server
     """
@@ -46,5 +47,7 @@ class DNS_Amplification_Scanner:
             'sent': a,
             'received': b,
             'amplification_factor': c,
+            'start_date':started_at,
+            'end_date':time.time()
             }
 

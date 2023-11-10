@@ -69,6 +69,7 @@ class Admin_Panel_Finder:
         proxies,
         headers
     ):
+        started_at=time.time()
         u=target
         links = []
         ext = ext.strip()
@@ -120,7 +121,7 @@ class Admin_Panel_Finder:
                 if r.status_code == requests.codes.ok:
                     if logs == True:
                         print("[+]FOUND!!!")
-                    k.append(g)
+                    k.append({'url':g,'date':time.time()})
                 else:
                     if logs == True:
                         print("[-]failed")
@@ -129,6 +130,6 @@ class Admin_Panel_Finder:
             except Exception as e:
                 if logs == True:
                     print("[-]Failed")
-        self.result = {u: k}
+        self.result = {'result': k,'started_at':started_at,'finished_at':time.time()}
         self.finish = True
 

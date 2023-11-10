@@ -28,9 +28,10 @@ class JWT_Manager:
 
     @staticmethod
     def guess_secret_key(word_list,token):
+        started_at=time.time()
         d=JWT_Manager.analyze_token(token)
         algo=d['algorithm']
         data=d['data']
         for x in word_list:
             if JWT_Manager.encode(data,x,algorithm=algo)==token:
-                return x
+                {'input':token,'start_date':started_at,'end_date':time.time(),'secret_key':x}

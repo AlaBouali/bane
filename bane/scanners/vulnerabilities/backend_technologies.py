@@ -6,6 +6,7 @@ class Backend_Technologies_Scanner:
 
     @staticmethod
     def scan(u, timeout=10, user_agent=None, cookie=None, logs=True,request_headers=None,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
+        started_at=time.time()
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         domain=u.split('://')[1].split('/')[0].split(':')[0]
         root_domain=Subdomain_Info.extract_root_domain(domain)
@@ -87,6 +88,6 @@ class Backend_Technologies_Scanner:
                                     print()        
         except Exception as e:
             return {}
-        return {'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'server_exploits':server_exploits,'backend_technology_exploits':backend_technology_exploits}
+        return {'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'server_exploits':server_exploits,'backend_technology_exploits':backend_technology_exploits,'start_date':started_at,'end_date':time.time()}
 
 

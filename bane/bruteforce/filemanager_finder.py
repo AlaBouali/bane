@@ -36,6 +36,7 @@ class Files_Manager_Finder:
         t.start()
 
     def crack(self, u, user_agent, cookie, timeout, proxies,headers):
+        started_at=time.time()
         for i in Common_Variables.manager_urls_list:
             if self.stop == True:
                 self.finish = True
@@ -74,7 +75,7 @@ class Files_Manager_Finder:
                                 )
                             )
                             sys.stdout.flush()
-                        self.result.update({u: g})
+                        self.result.update({'input':u,'start_date':started_at,'end_date':time.time(),'url': g})
                         break
                     else:
                         if self.logs == True:

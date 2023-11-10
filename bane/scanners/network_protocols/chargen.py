@@ -4,6 +4,7 @@ class Chargen_Amplification_Scanner:
 
     @staticmethod
     def scan(u, timeout=3, q='0'):
+        started_at=time.time()
         """
     calculate the amplification factor for any given chargen server
     """
@@ -40,4 +41,6 @@ class Chargen_Amplification_Scanner:
             'sent': a,
             'received': b,
             'amplification_factor': c,
+            'start_date':started_at,
+            'end_date':time.time()
             }

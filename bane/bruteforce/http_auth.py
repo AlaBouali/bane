@@ -47,6 +47,7 @@ class HTTP_Auth_Bruteforce:
     def crack(
         self, u, domain, word_list, logs, proxies, cookie, user_agent, timeout,headers
     ):
+        started_at=time.time()
         if user_agent:
             us = user_agent
         else:
@@ -126,7 +127,7 @@ class HTTP_Auth_Bruteforce:
                 ):
                     if self.logs == True:
                         print("[+]Success")
-                    self.result = {u: username + ":" + password}
+                    self.result = {'input':u,'start_date':started_at,'end_date':time.time(),'credentials': {'username':username,'password':password}}
                     self.finish = True
                     break
                 else:

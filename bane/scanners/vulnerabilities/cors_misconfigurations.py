@@ -262,6 +262,7 @@ class CORS_Misconfiguration_Scanner:
         socks5_proxies=None
         ):
         l=[]
+        started_at=time.time()
         for x in urls:
             if logs==True:
                 print('\n\nPage: {}\n'.format(x))
@@ -287,7 +288,7 @@ class CORS_Misconfiguration_Scanner:
                 for r in result:
                     print(r)
             l.append({'page':x,'result':result})
-        return  [x for x in l if x['result']['vulnerable']!=False]
+        return  {'result':[x for x in l if x['result']['vulnerable']!=False],'start_date':started_at,'end_date':time.time()}
 
 
 

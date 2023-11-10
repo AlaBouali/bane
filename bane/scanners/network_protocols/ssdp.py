@@ -7,7 +7,7 @@ class SSDP_Amplification_Scanner:
         """
     calculate the amplification factor for any given ssdp server
     """
-
+        started_at=time.time()
         req = IP(dst=u) / UDP(sport=random.randint(1025, 65500),
                             dport=1900) \
             / Raw(load='''M-SEARCH * HTTP/1.1\r
@@ -45,4 +45,6 @@ class SSDP_Amplification_Scanner:
             'sent': a,
             'received': b,
             'amplification_factor': c,
+            'start_date':started_at,
+            'end_date':time.time()
             }

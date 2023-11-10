@@ -1,4 +1,4 @@
-import googlesearch,random
+import googlesearch,random,time
 from ..common.payloads import *
 
 class Dorking_Info:
@@ -15,6 +15,7 @@ class Dorking_Info:
         user_agent=None,
         **kwargs
     ):
+        started_at=time.time()
         if user_agent==None:
             user_agent=random.choice(Common_Variables.user_agents_list)
         j = []
@@ -33,5 +34,5 @@ class Dorking_Info:
         for x in j:
             if x not in l:
                 l.append(x)
-        return l
+        return {'result':l,'start_date':started_at,'end_date':time.time()}
 

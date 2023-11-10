@@ -71,6 +71,7 @@ class Hydra:
         cookie,
         headers
     ):
+        started_at=time.time()
         o = ""
         if protocol == "telnet":
             s = Services_Login.telnet
@@ -122,7 +123,7 @@ class Hydra:
             else:
                 if self.logs == True:
                     print("[-]Failed")
-        self.result = {u: o}
+        self.result = {'input':u,'start_date':started_at,'end_date':time.time(),'credentials': {'username':o.split(':')[0],'password':o.split(':')[1]}}
         self.finish = True
 
 

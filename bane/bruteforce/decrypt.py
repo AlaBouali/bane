@@ -57,6 +57,7 @@ class Decryptor:
         caesar_hash,
         logs,
     ):
+        started_at=time.time()
         if self.logs == True:
             print("[!]hash: " + u + "\nbruteforcing has started!!!\n")
         for x in word_list:
@@ -66,43 +67,43 @@ class Decryptor:
                 if MD5.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: md5")
-                    self.result = {u: ["md5:" + x]}
+                    self.result = {"input":u, "type":'md5',"value": x,"start_date":started_at,"end_date":time.time()}
                     break
             if sha1_hash == True:
                 if SHA1.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: sha1")
-                    self.result = {u: ["sha1:" + x]}
+                    self.result = {"input":u, "type":'sha1',"value": x,"start_date":started_at,"end_date":time.time()}
                     break
             if sha256_hash == True:
                 if SHA256.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: sha256")
-                    self.result = {u: ["sha256:" + x]}
+                    self.result = {"input":u, "type":'sha256',"value": x,"start_date":started_at,"end_date":time.time()}
                     break
             if sha224_hash == True:
                 if SHA224.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: sha224")
-                    self.result = {u: ["sha224:" + x]}
+                    self.result = {"input":u, "type":'sha224',"value": x,"start_date":started_at,"end_date":time.time()}
                     break
             if sha384_hash == True:
                 if SHA348.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: sha384")
-                    self.result = {u: ["sha384:" + x]}
+                    self.result = {"input":u, "type":'sha348',"value": x,"start_date":started_at,"end_date":time.time()}
                     break
             if sha512_hash == True:
                 if SHA512.compare_hash(x, u) == True:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: sha512")
-                    self.result = {u: ["sha512:" + x]}
+                    self.result = {"input":u, "type":'sha512',"value": x,"start_date":started_at,"end_date":time.time()}
                     break
             if base64_string == True:
                 if BASE64.decode(x) == u:
                     if self.logs == True:
                         print("[+]Hash match found: " + x + " | Type: base64")
-                    self.result = {u: ["base64:" + x]}
+                    self.result = {"input":u, "type":'base64',"value": x,"start_date":started_at,"end_date":time.time()}
                     break
             if caesar_hash == True:
                 for i in range(1, 27):
@@ -114,7 +115,7 @@ class Decryptor:
                                 + " | Type: caesar | Key: "
                                 + str(i)
                             )
-                        self.result = {u: ["caesar" + str(i) + ":" + x]}
+                        self.result = {"input":u, "type":'caesar',"value": x,"start_date":started_at,"end_date":time.time()}
                         break
         if self.result == {}:
             if self.logs == True:

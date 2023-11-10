@@ -100,7 +100,9 @@ class Domain_Info:
 
     @staticmethod
     def get_domain_info(domain,headers={},timeout=10,proxy=None,user_agent=None,cookie=None,resolve_server='8.8.8.8',resolve_timeout=1,resolve_lifetime=1):
+        started_at=time.time()
         d={'resolved_host':Domain_Info.resolve(domain,server=resolve_server,timeout=resolve_timeout,lifetime=resolve_lifetime)}
         d.update({'info':Domain_Info.info(domain,headers=headers,proxy=proxy,timeout=timeout,user_agent=user_agent,cookie=cookie)})
         d.update({'whois':Domain_Info.whois(domain,headers=headers,proxy=proxy,timeout=timeout,user_agent=user_agent,cookie=cookie)})
+        d.update({'start_date':started_at,'end_date':time.time()})
         return d
