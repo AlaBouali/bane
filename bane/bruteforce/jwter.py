@@ -9,9 +9,12 @@ class JWT_Manager:
         algorith=json.loads(BASE64.decode(parts[0]))["alg"]
         seg=parts[2]
         try:
-            data=json.loads(BASE64.decode(parts[1]))
+            data=json.loads(BASE64.decode(parts[1].encode()))
         except Exception as ex :
-            data=parts[2]
+            try:
+                data=json.loads(BASE64.decode(parts[1]+'=='))
+            except:
+                data=parts[1]
         return {'algorithm':algorith,'data':data,'signature':seg}
 
 
