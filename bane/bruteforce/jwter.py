@@ -31,6 +31,7 @@ class JWT_Manager:
 
     @staticmethod
     def guess_secret_key(word_list,token):
+        word_list=Userful_Utilities.load_word_list(word_list)
         started_at=time.time()
         d=JWT_Manager.analyze_token(token)
         algo=d['algorithm']

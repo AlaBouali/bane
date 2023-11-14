@@ -84,4 +84,33 @@ class RANDOM_GENERATOR:
         random_date = start_date + datetime.timedelta(days=random_number_of_days)
         return random_date.strftime("%Y-%m-%d")
 
-
+    @staticmethod
+    def get_random_user_agent(browser_header=None,operating_system=None,system_info=None,system_platform=None,operating_system_name=None):
+        if browser_header in ['', None]:
+            browser_header = random.choice(Common_Variables.USER_AGENT_PARTS['browser_header'])
+        if operating_system in ['', None]:
+            operating_system = Common_Variables.USER_AGENT_PARTS['operating_system'][random.choice(list(Common_Variables.USER_AGENT_PARTS['operating_system'].keys()))]
+        if operating_system_name in ['', None]:
+            operating_system_name = random.choice(operating_system['name'])
+        if system_info in ['', None]:
+            system_info = operating_system_name
+        if system_platform in ['', None]:
+            system_platform = Common_Variables.USER_AGENT_PARTS['system_platform'][random.choice(list(Common_Variables.USER_AGENT_PARTS['system_platform'].keys()))]
+        if 'browser_info' in system_platform and system_platform['browser_info']:
+            browser = system_platform['browser_info']
+            browser_string = random.choice(browser['name'])
+            if 'ext_pre' in browser:
+                browser_string = "%s; %s" % (random.choice(browser['ext_pre']), browser_string)
+            system_info = "%s; %s" % (browser_string, system_info)
+            if 'ext_post' in browser:
+                system_info = "%s; %s" % (system_info, random.choice(browser['ext_post']))
+        if 'ext' in operating_system and operating_system['ext']:
+            system_info = "%s; %s" % (system_info, random.choice(operating_system['ext']))
+        ua_string = "%s (%s)" % (browser_header, system_info)
+        if 'name' in system_platform and system_platform['name']:
+            ua_string = "%s %s" % (ua_string, random.choice(system_platform['name']))
+        if 'details' in system_platform and system_platform['details']:
+            ua_string = "%s (%s)" % (ua_string, random.choice(system_platform['details']) if len(system_platform['details']) > 1 else system_platform['details'][0] )
+        if 'extensions' in system_platform and system_platform['extensions']:
+            ua_string = "%s %s" % (ua_string, random.choice(system_platform['extensions']))
+        return ua_string
