@@ -114,3 +114,14 @@ class RANDOM_GENERATOR:
         if 'extensions' in system_platform and system_platform['extensions']:
             ua_string = "%s %s" % (ua_string, random.choice(system_platform['extensions']))
         return ua_string
+    
+    @staticmethod
+    def update_user_agents_list():
+        l=[]
+        while True:
+            a=RANDOM_GENERATOR.get_random_user_agent()
+            if a not in Common_Variables.user_agents_list:
+                l.append(a)
+            if len(l)==20000:
+                break
+        Common_Variables.user_agents_list=l

@@ -22,9 +22,4 @@ from bane.gather_info import *
 from bane.scanners import *
 from bane.utils import *
 
-while True:
-    a=RANDOM_GENERATOR.get_random_user_agent()
-    if a not in Common_Variables.user_agents_list:
-        Common_Variables.user_agents_list.append(a)
-    if len(Common_Variables.user_agents_list)==20000:
-        break
+RANDOM_GENERATOR.update_user_agents_list()

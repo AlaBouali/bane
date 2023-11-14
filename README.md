@@ -108,7 +108,7 @@ This library is intended exclusively for educational purposes and ethical use wi
   </ul>
 <br>
 <!-- common Directory -->
-<li><a href="https://github.com/AlaBouali/bane/blob/master/bane/common">Common_Variables :</a> used to store internal and necessary variables for bane to run including: more than 10k user-agents, valid lists legit values for many HTTP headers to choose from, various file types ( png , jpg , docx , pptx , html , php ... ) used to fill the forms and test of file upload vulnerabilities , ...</li>
+<li><a href="https://github.com/AlaBouali/bane/blob/master/bane/common">Common_Variables :</a> used to store internal and necessary variables for bane to run including: more than 20k unique user-agents created on importation, valid lists legit values for many HTTP headers to choose from, various file types ( png , jpg , docx , pptx , html , php ... ) used to fill the forms and test of file upload vulnerabilities , ...</li>
 <br>
 <!-- cryptographers Directory -->
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/cryptographers"><b>Cryptographers:</b></a> </li>
@@ -305,7 +305,7 @@ This library is intended exclusively for educational purposes and ethical use wi
         </li>
         <li>
             <h2>Dynamic Manipulation of HTTP Headers in DDoS Attacks:</h2>
-            <p>For added challenge and effectiveness in HTTP-based DDoS attacks, "bane" generates HTTP requests with headers featuring random but legitimate values, courtesy of its extensive list of 10,000 user-agents and header values. Subsequently, it rearranges these headers into a random order and selectively removes certain headers (with caution to retain critical ones) before sending the request, ensuring a multifaceted and impactful approach to DDoS attacks.</p>
+            <p>For added challenge and effectiveness in HTTP-based DDoS attacks, "bane" generates HTTP requests with headers featuring random but legitimate values, courtesy of its extensive list of 20,000 user-agents and header values. Subsequently, it rearranges these headers into a random order and selectively removes certain headers (with caution to retain critical ones) before sending the request, ensuring a multifaceted and impactful approach to DDoS attacks.</p>
         </li>
         <li>
             <h2>Enhanced Security Measures:</h2>

@@ -136,6 +136,3 @@ class Userful_Utilities:
             </form>
             """.format(form_id,form_method,form_action,form_enctype,inputs)
             return html_form
-
-
-
