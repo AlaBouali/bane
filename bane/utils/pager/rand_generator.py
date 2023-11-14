@@ -85,11 +85,13 @@ class RANDOM_GENERATOR:
         return random_date.strftime("%Y-%m-%d")
 
     @staticmethod
-    def get_random_user_agent(browser_header=None,operating_system=None,system_info=None,system_platform=None,operating_system_name=None):
+    def get_random_user_agent(browser_header=None,system_info=None,system_platform=None,operating_system=None,operating_system_name=None):
         if browser_header in ['', None]:
             browser_header = random.choice(Common_Variables.USER_AGENT_PARTS['browser_header'])
         if operating_system in ['', None]:
             operating_system = Common_Variables.USER_AGENT_PARTS['operating_system'][random.choice(list(Common_Variables.USER_AGENT_PARTS['operating_system'].keys()))]
+        else:
+            operating_system = Common_Variables.USER_AGENT_PARTS['operating_system'][operating_system]
         if operating_system_name in ['', None]:
             operating_system_name = random.choice(operating_system['name'])
         if system_info in ['', None]:

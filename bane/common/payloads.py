@@ -11,7 +11,7 @@ class Common_Variables:
         'operating_system': {
             'linux': {
                 'name': ['Linux x86_64', 'Linux i386'],
-                'ext': ['X11']+['U; Android {}.{}.{}'.format(x,random.randint(0,10),random.randint(0,10)) for x in range(5,11)]
+                'ext': ['X11']*10 +['U; Android {}.{}.{}'.format(x,random.randint(0,10),random.randint(0,10)) for x in range(5,11)]
             },
             'windows': {
                 'name': ['Windows NT 6.1', 'Windows NT 6.3', 'Windows NT 5.1', 'Windows NT.6.2'],
