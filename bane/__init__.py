@@ -26,5 +26,5 @@ while True:
     a=RANDOM_GENERATOR.get_random_user_agent()
     if a not in Common_Variables.user_agents_list:
         Common_Variables.user_agents_list.append(a)
-    if len(Common_Variables.user_agents_list)==10000:
+    if len(Common_Variables.user_agents_list)==20000:
         break

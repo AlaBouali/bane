@@ -6,7 +6,7 @@ class Proxies_HTTP_Spam(DDoS_Class):
         u,
         p=80,
         cookie=None,
-        user_agents=Common_Variables.user_agents_list,
+        user_agents=None,
         method=3,
         threads_daemon=True,
         scraping_timeout=15,
@@ -35,8 +35,6 @@ class Proxies_HTTP_Spam(DDoS_Class):
         self.logs = logs
         self.cookie = cookie
         self.user_agents = user_agents
-        if not self.user_agents or len(self.user_agents) == 0:
-            self.user_agents = Common_Variables.user_agents_list
         self.method = method
         self.stop = False
         self.counter = 0
@@ -95,7 +93,7 @@ class Proxies_HTTP_Spam(DDoS_Class):
                             self.post_min,
                             self.post_max,
                             self.cookie,
-                            self.user_agents,
+                            [self.get_user_agent() for x in range(5)],
                         )
                         try:
                             if self.stop == True:

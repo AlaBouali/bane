@@ -30,8 +30,6 @@ class Slow_Read(DDoS_Class):
         self.fails=0
         self.cookie = cookie
         self.user_agents = user_agents
-        if not self.user_agents or len(self.user_agents) == 0:
-            self.user_agents = Common_Variables.user_agents_list
         self.stop = False
         self.target = u
         self.port = p
@@ -88,7 +86,7 @@ class Slow_Read(DDoS_Class):
                                     10,
                                     50,
                                     self.cookie,
-                                    self.user_agents,
+                                    [self.get_user_agent() for x in range(5)],
                                 ).encode("utf-8")
                             )
                             self.counter += 1

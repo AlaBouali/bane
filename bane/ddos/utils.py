@@ -69,6 +69,13 @@ class DDoS_Class:
             l.append(x)
         for x in l:
             delattr(self, x)
+    
+    def get_user_agent(self):
+        if "user_agents" in self.__dict__:
+            if self.user_agents not in [None,[]]:
+                return random.choice(self.user_agents)
+        else:
+            return RANDOM_GENERATOR.get_random_user_agent()
 
     def kill(self):
         self.stop = True

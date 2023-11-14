@@ -5,8 +5,11 @@ from .proxies_checker import *
 class Proxies_Collector:
 
     @staticmethod
-    def proxygeonode(is_socket=True,verify_request=False,protocols=['http','socks4','socks5'],anonymities=["elite" , "anonymous"],timeout=20,proxy=None,headers={'Referer': 'https://geonode.com/','User-Agent':random.choice(Common_Variables.user_agents_list)},check_proxies=True,check_timeout=10,logs=False,threads=250):
+    def proxygeonode(is_socket=True,user_agent=None,verify_request=False,protocols=['http','socks4','socks5'],anonymities=["elite" , "anonymous"],timeout=20,proxy=None,headers={'Referer': 'https://geonode.com/'},check_proxies=True,check_timeout=10,logs=False,threads=250):
         a=[]
+        if user_agent==None:
+            user_agent=random.choice(Common_Variables.user_agents_list)
+        headers.update({'User-Agent':user_agent})
         for x in anonymities:
             a.append('&anonymityLevel='+x)
         url='https://proxylist.geonode.com/api/proxy-list?limit=500&page={}&sort_by=lastChecked&sort_type=desc&protocols='+'%2C'.join(protocols)+''.join(a)

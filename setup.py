@@ -81,7 +81,7 @@ else:
 
 setuptools.setup(
     name="bane",
-    version="5.0.8",
+    version="5.0.9",
     author="AlaBouali",
     author_email="ala.bouali.1997@gmail.com",
     description='This Python library offers a comprehensive set of tools for various cybersecurity and networking tasks. Its functionalities encompass diverse capabilities such as bruteforce attacks, cryptographic methods, DDoS attacks, information gathering, botnet creation and management, CMS vulnerability scanning, network discovery, vulnerability scanning, useful modules for common tasks, web page analyzers, and proxy utilities making it a powerful toolkit for cybersecurity professionals and network administrators.',
