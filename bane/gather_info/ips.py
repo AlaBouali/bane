@@ -118,9 +118,9 @@ class IP_Info:
             resolved=socket.gethostbyname(ip.split(':')[0])
         except:
             return {}
-        if resolved!=ip:
+        if resolved!=ip.split(':')[0]:
             try:
-                ip=Domain_Info.resolve(ip)
+                ip=Domain_Info.resolve(ip.split(':')[0])
             except:
                 pass
         if type(ip) in [tuple,list]:
@@ -135,7 +135,7 @@ class IP_Info:
                             if data not in l and data!={}:
                                 l.append(data)
             return l
-        ip=socket.gethostbyname(ip)
+        ip=socket.gethostbyname(ip.split(':')[0])
         if logs==True:
             print('[i] IP scan via Shodan  ( in some cases they are outdated, so please verify them manually before submitting them ) :')
             print('[+] Target: '+ip)
