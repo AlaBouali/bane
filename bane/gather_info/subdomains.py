@@ -155,6 +155,10 @@ class Subdomain_Info:
                 match = re.match(r"https?://([^/]*)", original_url.split('?')[0])
                 if match:
                     subdomain = match.group(1)
+                    if ':' in subdomain:
+                        subdomain=subdomain.split(':')[0]
+                    if '@' in subdomain:
+                        subdomain=subdomain.split('@')[1]
                     if subdomain not in invalid_subd and Subdomain_Info.extract_root_domain(subdomain)==domain:
                         if subdomain not in urls:
                             try:

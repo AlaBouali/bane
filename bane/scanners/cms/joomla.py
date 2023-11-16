@@ -1,4 +1,4 @@
-from bane.scanners.cms.utils import *
+from ...scanners.cms.utils import *
 
 class Joomla_Scanner:
     

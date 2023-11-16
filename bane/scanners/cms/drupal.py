@@ -1,4 +1,4 @@
-from bane.scanners.cms.utils import *
+from ...scanners.cms.utils import *
 
 class Drupal_Scanner:
 
@@ -32,7 +32,7 @@ class Drupal_Scanner:
             server_os=''
         backend=response.headers.get('X-Powered-By','')
         if logs==True:
-            print("Joomla site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tDrupal version: {}\n".format(u,domain,ip,server,server_os,backend,version))
+            print("Drupal site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tDrupal version: {}\n".format(u,domain,ip,server,server_os,backend,version))
         clickj=ClickJacking_Scanner.scan(u,request_headers=response.headers)
         if logs==True:
             print("[i] Looking for subdomains...")

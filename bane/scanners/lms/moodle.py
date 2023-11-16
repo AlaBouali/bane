@@ -1,9 +1,17 @@
 from ...scanners.cms.utils import *
 
-class Magento_Scanner:
+class Moodle_Scanner:
 
     @staticmethod
-    def scan(u,user_agent=None,cookie=None,timeout=10,proxy=None,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
+    def get_version(text):
+        l=text.split('\n')
+        for x in l:
+            if x.count("===" )==2:
+                return x.split('===')[1].split('===')[0].strip()
+        return ''
+
+    @staticmethod
+    def scan(u,user_agent=None,moodle_paths=['',"moodle"],versions_paths=['/lib/upgrade.txt','/question/upgrade.txt'],cookie=None,timeout=10,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
         started_at=time.time()
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         domain=u.split('://')[1].split('/')[0].split(':')[0]
@@ -20,32 +28,15 @@ class Magento_Scanner:
             hed.update({"Cookie": cookie})
         hed.update(headers)
         try:
-            response = requests.Session().get(u+"/magento_version", headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
-            version= response.text.split('Magento/')[1].split()[0].strip()
-        except:
-            version= ''
-        if version=='':
-            try:
-                versions={
-                    '2006-':'1.9',
-                    '2013':'1.8',
-                    '2012':'1.7',
-                    '2011':'1.6',
-                    '2010':'1.4.1-1.5',
-                    '2009':'1.4.0',
-                    '2008':'1.0-1.3'
-                }
-                response = requests.Session().get(u+"/skin/frontend/default/default/css/styles.css", headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
-                for x in versions:
-                    if 'Copyright (c) {}'.format(x) in response.text:
-                        version=versions[x]
+            for root_path in moodle_paths:
+                for path in versions_paths:
+                    response = requests.Session().get(u+'/'+root_path+path, headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
+                    version=Moodle_Scanner.get_version(response.text)
+                    if version!='':
                         break
-            except:
-                version= ''
-        try:
-            response = requests.Session().get(u, headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
-        except:
-            pass
+        except Exception as ex:
+            #raise(ex)
+            version=''
         server=response.headers.get('Server','')
         try:
             server_os=[x for x in server.split() if x.startswith('(')==True][0].replace('(','').replace(')','')
@@ -53,7 +44,7 @@ class Magento_Scanner:
             server_os=''
         backend=response.headers.get('X-Powered-By','')
         if logs==True:
-            print("Magento site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tMagento version: {}\n".format(u,domain,ip,server,server_os,backend,version))
+            print("Moodle site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tMoodle version: {}\n".format(u,domain,ip,server,server_os,backend,version))
         clickj=ClickJacking_Scanner.scan(u,request_headers=response.headers)
         if logs==True:
             print("[i] Looking for subdomains...")
@@ -68,10 +59,9 @@ class Magento_Scanner:
         if version!='':
             if logs==True:
                 print('[i] looking for exploits for version: {}\n'.format(version))
-            wpvulns=Vulners_Search_Scanner.scan('magento',version=version,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
-            wp_vulns=[]
+            wpvulns=Vulners_Search_Scanner.scan('moodle',version=version,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
             for x in wpvulns:
-                if 'magento' in x['title'].lower() or 'magento' in x['description'].lower():
+                if 'moodle' in x['title'].lower() or 'moodle' in x['description'].lower():
                     wp_vulns.append(x)
             for x in wp_vulns:
                 for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
@@ -142,4 +132,4 @@ class Magento_Scanner:
         else:
             domains_list=subs
         domains_list_report=IP_Info.check_ip_via_shodan(domains_list,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies))
-        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,"subdomains_ips_report_shodan":domains_list_report,'server':server,'os':server_os,'backend_technology':backend,'magento_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits,'start_date':started_at,'end_date':time.time()}
+        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,"subdomains_ips_report_shodan":domains_list_report,'server':server,'os':server_os,'backend_technology':backend,'moodle_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits,'start_date':started_at,'end_date':time.time()}
