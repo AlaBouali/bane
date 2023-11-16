@@ -181,11 +181,11 @@ print(result)
 <h1>Moodle_Scanner Class</h1>
 
 <h2>Class Overview</h2>
-<p>The <code>Moodle_Scanner</code> class is used to scan a website for Drupal-related information and vulnerabilities. It checks the target URL for Drupal version, server information, subdomains, and possible vulnerabilities.</p>
+<p>The <code>Moodle_Scanner</code> class is used to scan a website for Moodle-related information and vulnerabilities. It checks the target URL for Moodle version, server information, subdomains, and possible vulnerabilities.</p>
 
 <h2>Static Method</h2>
 <h3><code>scan(u, user_agent=None, cookie=None, timeout=10, logs=True, crt_timeout=120, wayback_timeout=120, subdomain_check_timeout=10, max_wayback_urls=10, subdomains_only=True, headers={}, api_key=None, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
-<p>This static method scans a target website for Drupal-related information and vulnerabilities. It takes the following parameters:</p>
+<p>This static method scans a target website for Moodle-related information and vulnerabilities. It takes the following parameters:</p>
 
 <ul>
     <li><code>u</code> (str): The target website URL to scan.</li>
@@ -206,7 +206,7 @@ print(result)
 </ul>
 
 <h2>Example Usage</h2>
-<p>To use the <code>Moodle_Scanner</code> class, call the <code>scan</code> method with the required parameters, and it will perform the Drupal scanning process. Here's an example:</p>
+<p>To use the <code>Moodle_Scanner</code> class, call the <code>scan</code> method with the required parameters, and it will perform the Moodle scanning process. Here's an example:</p>
 
 <pre><code>
 from bane.scanners.cms import Moodle_Scanner
