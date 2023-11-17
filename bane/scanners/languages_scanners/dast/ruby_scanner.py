@@ -3,22 +3,43 @@ from ....scanners.cms.utils import *
 class Ruby_DAST_Scanner:
 
     @staticmethod
+    def get_details(text):
+        try:
+            soup=BeautifulSoup(text, 'html.parser')
+            table=soup.find('table')
+            data={}
+            for x in table.find_all('tr'):
+                data.update({x.find_all('td')[0].get_text().replace(' ','_').lower():x.find_all('td')[1].get_text()})
+            return data
+        except:
+            return {}
+
+    @staticmethod
     def get_ruby_version(text):
-        soup=BeautifulSoup(text, 'html.parser')
-        table=soup.find('table')
-        return table.find_all('tr')[0].find_all('td')[1].get_text()
+        try:
+            soup=BeautifulSoup(text, 'html.parser')
+            table=soup.find('table')
+            return table.find_all('tr')[0].find_all('td')[1].get_text()
+        except:
+            return ''
 
     @staticmethod
     def get_Rails_version(text):
-        soup=BeautifulSoup(text, 'html.parser')
-        table=soup.find('table')
-        return table.find_all('tr')[3].find_all('td')[1].get_text() 
+        try:
+            soup=BeautifulSoup(text, 'html.parser')
+            table=soup.find('table')
+            return table.find_all('tr')[3].find_all('td')[1].get_text()
+        except:
+            return ''
 
     @staticmethod
     def get_RubyGems_version(text):
-        soup=BeautifulSoup(text, 'html.parser')
-        table=soup.find('table')
-        return table.find_all('tr')[1].find_all('td')[1].get_text() 
+        try:
+            soup=BeautifulSoup(text, 'html.parser')
+            table=soup.find('table')
+            return table.find_all('tr')[1].find_all('td')[1].get_text()
+        except:
+            return ''
 
     @staticmethod
     def scan(u,user_agent=None,cookie=None,timeout=10,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
@@ -138,4 +159,4 @@ class Ruby_DAST_Scanner:
         else:
             domains_list=subs
         domains_list_report=IP_Info.check_ip_via_shodan(domains_list,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies))
-        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,"subdomains_ips_report_shodan":domains_list_report,'server':server,'os':server_os,'backend_technology':backend,'rail_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits,'start_date':started_at,'end_date':time.time()}
+        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,"subdomains_ips_report_shodan":domains_list_report,'server':server,'os':server_os,'backend_technology':backend,'rail_version':version,'installation_details':Ruby_DAST_Scanner.get_details(response.text),'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits,'start_date':started_at,'end_date':time.time()}

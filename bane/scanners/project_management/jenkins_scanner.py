@@ -1,6 +1,6 @@
 from ...scanners.cms.utils import *
 
-class Jinkins_Scanner:
+class Jenkins_Scanner:
 
     @staticmethod
     def get_version(text):
@@ -11,7 +11,7 @@ class Jinkins_Scanner:
         return ''
 
     @staticmethod
-    def scan(u,user_agent=None,moodle_paths=['',"moodle"],versions_paths=['/lib/upgrade.txt','/question/upgrade.txt'],cookie=None,timeout=10,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
+    def scan(u,user_agent=None,cookie=None,timeout=10,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
         started_at=time.time()
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         domain=u.split('://')[1].split('/')[0].split(':')[0]
@@ -28,23 +28,27 @@ class Jinkins_Scanner:
             hed.update({"Cookie": cookie})
         hed.update(headers)
         try:
-            for root_path in moodle_paths:
-                for path in versions_paths:
-                    response = requests.Session().get(u+'/'+root_path+path, headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
-                    version=Jinkins_Scanner.get_version(response.text)
-                    if version!='':
-                        break
+            response = requests.Session().get(u, headers=hed, proxies=Vulnerability_Scanner_Utilities.setup_proxy(proxies), timeout=timeout, verify=False)
+            version=response.headers.get('X-Jenkins','')
         except Exception as ex:
             #raise(ex)
             version=''
         server=response.headers.get('Server','')
+        ser=server.split()
+        s_m=[]
+        for x in ser:
+            if 'jetty' in x.lower():
+                s_m.append(x.lower().replace('jetty(','Jetty/').replace(')',''))
+            else:
+                s_m.append(x)
+        server=' '.join(s_m)
         try:
             server_os=[x for x in server.split() if x.startswith('(')==True][0].replace('(','').replace(')','')
         except:
             server_os=''
         backend=response.headers.get('X-Powered-By','')
         if logs==True:
-            print("Moodle site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tMoodle version: {}\n".format(u,domain,ip,server,server_os,backend,version))
+            print("Jenkins site info:\n\n\tURL: {}\n\tDomain: {}\n\tIP: {}\n\tServer: {}\n\tOS: {}\n\tBackend technology: {}\n\tJenkins version: {}\n".format(u,domain,ip,server,server_os,backend,version))
         clickj=ClickJacking_Scanner.scan(u,request_headers=response.headers)
         if logs==True:
             print("[i] Looking for subdomains...")
@@ -59,9 +63,9 @@ class Jinkins_Scanner:
         if version!='':
             if logs==True:
                 print('[i] looking for exploits for version: {}\n'.format(version))
-            wpvulns=Vulners_Search_Scanner.scan('moodle',version=version,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
+            wpvulns=Vulners_Search_Scanner.scan('jenkins',version=version,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies),api_key=api_key)
             for x in wpvulns:
-                if 'moodle' in x['title'].lower() or 'moodle' in x['description'].lower():
+                if 'jenkins' in x['title'].lower() or 'jenkins' in x['description'].lower():
                     wp_vulns.append(x)
             for x in wp_vulns:
                 for i in ['cpe', 'cpe23', 'cwe', 'affectedSoftware']:
@@ -132,4 +136,4 @@ class Jinkins_Scanner:
         else:
             domains_list=subs
         domains_list_report=IP_Info.check_ip_via_shodan(domains_list,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies))
-        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,"subdomains_ips_report_shodan":domains_list_report,'server':server,'os':server_os,'backend_technology':backend,'moodle_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits,'start_date':started_at,'end_date':time.time()}
+        return {'url':u,'domain':domain,'ip':ip,'shodan_report':IP_Info.check_ip_via_shodan(ip,logs=logs,timeout=timeout,proxy=Vulnerability_Scanner_Utilities.setup_proxy(proxies)),'root_domain':root_domain,'sub_domains':subs,"subdomains_ips_report_shodan":domains_list_report,'server':server,'os':server_os,'backend_technology':backend,'jenkins_version':version,'sniffable_links':media_non_ssl,'clickjackable':clickj,"exploits":wp_vulns,'backend_technology_exploits':backend_technology_exploits,'server_exploits':server_exploits,'start_date':started_at,'end_date':time.time()}
