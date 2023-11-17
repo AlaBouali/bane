@@ -2,6 +2,8 @@ from .big_data import *
 from .business_management import *
 from .botnet import *
 from .cms import *
+from .languages_scanners import *
 from .lms import *
 from .network_protocols import *
+from .project_management import *
 from .vulnerabilities import *
