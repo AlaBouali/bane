@@ -2,6 +2,7 @@ from .big_data import *
 from .business_management import *
 from .botnet import *
 from .cms import *
+from .js_web_apps import *
 from .languages_scanners import *
 from .lms import *
 from .network_protocols import *
