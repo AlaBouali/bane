@@ -2,13 +2,6 @@ from ...scanners.cms.utils import *
 
 class Jenkins_Scanner:
 
-    @staticmethod
-    def get_version(text):
-        l=text.split('\n')
-        for x in l:
-            if x.count("===" )==2:
-                return x.split('===')[1].split('===')[0].strip()
-        return ''
 
     @staticmethod
     def scan(u,user_agent=None,cookie=None,timeout=10,logs=True,crt_timeout=120,wayback_timeout=120,subdomain_check_timeout=10,max_wayback_urls=10,subdomains_only=True,headers={},api_key=None,http_proxies=None,socks4_proxies=None,socks5_proxies=None):
