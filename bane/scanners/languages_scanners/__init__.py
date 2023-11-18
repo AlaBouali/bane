@@ -1,2 +1,2 @@
-from .fingerprinting import *
+from .dast import *
 from .sast import *
