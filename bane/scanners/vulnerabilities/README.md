@@ -1243,7 +1243,7 @@ for page in scan_result:
 <h2>Class Overview</h2>
 <p>The <code>Vulners_Search_Scanner</code> class is part of the "bane" module and is used to search for vulnerabilities in software using the Vulners API.</p>
 
-<h2>Method</h2>
+<h2>Methods</h2>
 <h3><code>scan(self, software, url="https://vulners.com/api/v3/burp/software/", file_name="", save_to_file=False, max_vulnerabilities=100, version="", software_type="software", user_agent=None, cookie=None, api_key='', timeout=20, http_proxies=None, socks4_proxies=None, socks5_proxies=None, proxy=None)</code></h3>
 <p>The <code>scan</code> method searches for vulnerabilities in software using the Vulners API. It takes the following parameters:</p>
 
@@ -1264,6 +1264,9 @@ for page in scan_result:
 <li><code>socks5_proxies</code> (list, optional): List of SOCKS5 proxies to use for requests.</li>
 <li><code>proxy</code> (str, optional): Specific proxy settings for the request (overrides http_proxies, socks4_proxies, and socks5_proxies).</li>
 </ul>
+<h3><code>scan_cpe(software, vendor, url="https://vulners.com/api/v3/burp/software/", file_name="", save_to_file=False, max_vulnerabilities=100, version="", user_agent=None, cookie=None, api_key='', timeout=20, http_proxies=None, socks4_proxies=None, socks5_proxies=None, proxy=None)</code></h3>
+<p>This static method searches for vulnerabilities based on the specified CPE (Common Platform Enumeration). It takes parameters such as the target software, vendor, URL of the Vulners API, file name for saving results, maximum number of vulnerabilities to retrieve, version, user agent, cookie, API key, timeout, and proxy settings. The method returns a list of vulnerabilities.</p>
+
 
 <h2>Example Usage</h2>
 <p>To use the <code>Vulners_Search_Scanner</code> class, create an instance of it and call the <code>scan</code> method with the desired parameters. Here's an example:</p>
