@@ -106,6 +106,58 @@ nodejs_vulnerabilities = NodeJS_Scanner.scan(
 print("Node.js Vulnerabilities:", nodejs_vulnerabilities)
 </code></pre>
 
+<h1>NPM_Scanner Class</h1>
+
+<h2>Class Overview</h2>
+<p>The <code>NPM_Scanner</code> class is designed for scanning NPM (Node Package Manager) libraries and packages for vulnerabilities using the Snyk security database. It provides static methods for scanning libraries and library packages, fetching vulnerability information, and returning the results.</p>
+
+<h2>Static Methods</h2>
+
+<h3><code>scan_library_core(library, version, user_agent=None, cookie=None, timeout=20, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
+<p>This static method scans an NPM library for vulnerabilities using the Snyk security database. It takes parameters such as the library name, version, user agent, cookie, timeout, headers, and proxies. The method returns a list of dictionaries containing vulnerability information, including title and URL.</p>
+
+<h3><code>scan_library_package(library, package, version, user_agent=None, cookie=None, timeout=20, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
+<p>This static method scans an NPM library package for vulnerabilities using the Snyk security database. It takes parameters such as the library name, package name, version, user agent, cookie, timeout, headers, and proxies. The method returns a list of dictionaries containing vulnerability information, including title and URL.</p>
+
+<h2>Example Usage</h2>
+<p>To use the <code>NPM_Scanner</code> class, call the static methods <code>scan_library_core</code> or <code>scan_library_package</code> with the required parameters. Here's an example:</p>
+
+<pre><code>
+from bane import NPM_Scanner
+
+#Scan an NPM library for vulnerabilities
+library_core_result = NPM_Scanner.scan_library_core(
+    library="example_library",
+    version="1.2.3",
+    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+    cookie="your_cookie_string",
+    timeout=15,
+    headers={"Custom-Header": "header_value"},
+    http_proxies=["http://proxy1:8080", "http://proxy2:8080"],
+    socks4_proxies=["socks4://proxy3:1080"],
+    socks5_proxies=["socks5://proxy4:1080"]
+)
+
+#Scan an NPM library package for vulnerabilities
+library_package_result = NPM_Scanner.scan_library_package(
+    library="example_library",
+    package="example_package",
+    version="1.2.3",
+    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+    cookie="your_cookie_string",
+    timeout=15,
+    headers={"Custom-Header": "header_value"},
+    http_proxies=["http://proxy1:8080", "http://proxy2:8080"],
+    socks4_proxies=["socks4://proxy3:1080"],
+    socks5_proxies=["socks5://proxy4:1080"]
+)
+
+#Access the scan results
+print("Library Core Vulnerabilities:", library_core_result)
+print("Library Package Vulnerabilities:", library_package_result)
+</code></pre>
+
+
 <h1>ReactJS_Scanner Class</h1>
 
 <h2>Class Overview</h2>
