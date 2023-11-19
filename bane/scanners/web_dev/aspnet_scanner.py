@@ -1,4 +1,4 @@
-from ....scanners.cms.utils import *
+from ...scanners.cms.utils import *
 
 class ASPNET_DAST_Scanner:
 

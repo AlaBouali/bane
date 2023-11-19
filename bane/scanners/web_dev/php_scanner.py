@@ -1,4 +1,4 @@
-from ....scanners.cms.utils import *
+from ...scanners.cms.utils import *
 
 class PHP_DAST_Scanner:
 

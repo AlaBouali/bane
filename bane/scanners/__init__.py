@@ -5,6 +5,7 @@ from .devops_project_management import *
 from .erp_solutions import *
 from .js_dev_ecosystem import *
 from .lms import *
+from .mobile_dev import *
 from .network_protocols import *
 from .operating_systems import *
 from .vulnerabilities import *
