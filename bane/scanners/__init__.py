@@ -1,4 +1,4 @@
-from .data_vsualization_stack import *
+from .data_visualization_stack import *
 from .erp_solutions import *
 from .botnet import *
 from .cms import *
