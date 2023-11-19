@@ -7,4 +7,5 @@ from .programming_languages import *
 from .lms import *
 from .network_protocols import *
 from .devops_project_management import *
+from .dev_web_frameworks import *
 from .vulnerabilities import *
