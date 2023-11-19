@@ -5,7 +5,7 @@ class NPM_Scanner:
     @staticmethod
     def scan_library_core(libraray,version,user_agent=None,cookie=None,timeout=20,headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
-        url='https://security.snyk.io/package/npm/@{}%2Fcore/{}'.format(libraray,version)
+        url='https://security.snyk.io/package/npm/{}%2Fcore/{}'.format(libraray,version)
         if user_agent:
             us = user_agent
         else:
@@ -37,7 +37,7 @@ class NPM_Scanner:
     @staticmethod
     def scan_libraray_package(libraray,package,version,user_agent=None,cookie=None,timeout=20,headers={},http_proxies=None,socks4_proxies=None,socks5_proxies=None):
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
-        url='https://security.snyk.io/package/npm/@{}%2F{}/{}'.format(libraray,package,version)
+        url='https://security.snyk.io/package/npm/{}%2F{}/{}'.format(libraray,package,version)
         if user_agent:
             us = user_agent
         else:
