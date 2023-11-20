@@ -1,78 +1,65 @@
 <h1>Angular_Scanner Class</h1>
 
-<h2>Class Overview</h2>
-<p>The <code>Angular_Scanner</code> class is designed to scan Angular applications and packages for security vulnerabilities using the Snyk database. It provides methods to scan Angular core and specific packages for known vulnerabilities.</p>
+<p>Class that provides a static method for scanning AngularJS and Angular installations using the Vulners database.</p>
 
-<h2>Static Methods</h2>
-
-<h3><code>scan_core(version, user_agent=None, cookie=None, timeout=20, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
-<p>This static method scans the Angular core for security vulnerabilities based on the specified version. It takes the following parameters:</p>
+<h2>Static Method</h2>
+<h3><code>scan(version, **kwargs)</code></h3>
+<p>Static method that scans AngularJS and Angular installations for known vulnerabilities based on the specified version. It internally uses the <code>Vulners_Search_Scanner</code> with the 'angularjs' and 'angular' keywords.</p>
 
 <ul>
-    <li><code>version</code> (str): The version of Angular core to scan.</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests (default is None).</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 20).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include (default is an empty dictionary).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use (default is None).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use (default is None).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use (default is None).</li>
+    <li><code>version</code> (str): The version of AngularJS or Angular to scan.</li>
+    <li><code>**kwargs</code>: Additional keyword arguments to pass to the <code>Vulners_Search_Scanner</code>, such as HTTP proxies, API keys, etc.</li>
 </ul>
 
-<p>The method performs an HTTP request to the Snyk database for Angular core vulnerabilities and returns a list of vulnerabilities with their titles and URLs.</p>
-
-<h3><code>scan_package(package, version, user_agent=None, cookie=None, timeout=20, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
-<p>This static method scans a specific Angular package for security vulnerabilities based on the specified version. It takes the following parameters:</p>
-
-<ul>
-    <li><code>package</code> (str): The name of the Angular package to scan.</li>
-    <li><code>version</code> (str): The version of the Angular package to scan.</li>
-    <li><code>user_agent</code> (str): Custom User-Agent header for requests (default is None).</li>
-    <li><code>cookie</code> (str): Custom cookies to include in requests (default is None).</li>
-    <li><code>timeout</code> (int): Request timeout in seconds (default is 20).</li>
-    <li><code>headers</code> (dict): Additional HTTP headers to include (default is an empty dictionary).</li>
-    <li><code>http_proxies</code> (list): List of HTTP proxies to use (default is None).</li>
-    <li><code>socks4_proxies</code> (list): List of SOCKS4 proxies to use (default is None).</li>
-    <li><code>socks5_proxies</code> (list): List of SOCKS5 proxies to use (default is None).</li>
-</ul>
-
-<p>The method performs an HTTP request to the Snyk database for the specified Angular package vulnerabilities and returns a list of vulnerabilities with their titles and URLs.</p>
+<p>The method returns the result of the vulnerability scan.</p>
 
 <h2>Example Usage</h2>
-<p>To use the <code>Angular_Scanner</code> class, call the <code>scan_core</code> or <code>scan_package</code> method with the required parameters, and it will perform the Angular scanning process. Here's an example:</p>
+<p>To use the <code>Angular_Scanner</code> class, call the <code>scan</code> method with the AngularJS or Angular version and any additional parameters needed for the <code>Vulners_Search_Scanner</code>. Here's an example:</p>
 
 <pre><code>
 from bane import Angular_Scanner
 
-#Scan Angular core for vulnerabilities
-core_vulnerabilities = Angular_Scanner.scan_core(
-    version="12.3.4",
-    user_agent="CustomUserAgent",
-    cookie="CustomCookie",
-    timeout=20,
-    headers={"Custom-Header": "Value"},
+# Scan AngularJS or Angular for vulnerabilities
+angular_vulnerabilities = Angular_Scanner.scan(
+    version="2.5.2",
     http_proxies=["1.2.3.4:80"],
-    socks4_proxies=["5.6.7.8:1080"],
-    socks5_proxies=["9.10.11.12:1080"]
 )
 
-#Scan a specific Angular package for vulnerabilities
-package_vulnerabilities = Angular_Scanner.scan_package(
-    package="router",
-    version="5.6.7",
-    user_agent="CustomUserAgent",
-    cookie="CustomCookie",
-    timeout=20,
-    headers={"Custom-Header": "Value"},
-    http_proxies=["1.2.3.4:80"],
-    socks4_proxies=["5.6.7.8:1080"],
-    socks5_proxies=["9.10.11.12:1080"]
-)
-
-#Access the results
-print("Core Vulnerabilities:", core_vulnerabilities)
-print("Package Vulnerabilities:", package_vulnerabilities)
+# Access the results
+print("Angular Vulnerabilities:", angular_vulnerabilities)
 </code></pre>
+
+<h1>AngularJS_Scanner Class</h1>
+
+<p>Class that provides a static method for scanning AngularJS and Angular installations using the Vulners database.</p>
+
+<h2>Static Method</h2>
+<h3><code>scan(version, **kwargs)</code></h3>
+<p>Static method that scans AngularJS and Angular installations for known vulnerabilities based on the specified version. It internally uses the <code>Vulners_Search_Scanner</code> with the 'angularjs' and 'angular' keywords.</p>
+
+<ul>
+    <li><code>version</code> (str): The version of AngularJS or Angular to scan.</li>
+    <li><code>**kwargs</code>: Additional keyword arguments to pass to the <code>Vulners_Search_Scanner</code>, such as HTTP proxies, API keys, etc.</li>
+</ul>
+
+<p>The method returns the result of the vulnerability scan.</p>
+
+<h2>Example Usage</h2>
+<p>To use the <code>AngularJS_Scanner</code> class, call the <code>scan</code> method with the AngularJS or Angular version and any additional parameters needed for the <code>Vulners_Search_Scanner</code>. Here's an example:</p>
+
+<pre><code>
+from bane import AngularJS_Scanner
+
+# Scan AngularJS or Angular for vulnerabilities
+angular_vulnerabilities = AngularJS_Scanner.scan(
+    version="2.5.2",
+    http_proxies=["1.2.3.4:80"],
+)
+
+# Access the results
+print("Angular Vulnerabilities:", angular_vulnerabilities)
+</code></pre>
+
 
 <h1>NodeJS_Scanner Class</h1>
 
@@ -106,56 +93,37 @@ nodejs_vulnerabilities = NodeJS_Scanner.scan(
 print("Node.js Vulnerabilities:", nodejs_vulnerabilities)
 </code></pre>
 
-<h1>NPM_Scanner Class</h1>
+<h1>NPMJS_Scanner Class</h1>
 
-<h2>Class Overview</h2>
-<p>The <code>NPM_Scanner</code> class is designed for scanning NPM (Node Package Manager) libraries and packages for vulnerabilities using the Snyk security database. It provides static methods for scanning libraries and library packages, fetching vulnerability information, and returning the results.</p>
+<p>Class that provides a static method for scanning npm packages using the Vulners database.</p>
 
-<h2>Static Methods</h2>
+<h2>Static Method</h2>
+<h3><code>scan(version, **kwargs)</code></h3>
+<p>Static method that scans npm packages for known vulnerabilities based on the specified version. It internally uses the <code>Vulners_Search_Scanner</code> with the 'npmjs' and 'npm' keywords.</p>
 
-<h3><code>scan_library_core(library, version, user_agent=None, cookie=None, timeout=20, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
-<p>This static method scans an NPM library for vulnerabilities using the Snyk security database. It takes parameters such as the library name, version, user agent, cookie, timeout, headers, and proxies. The method returns a list of dictionaries containing vulnerability information, including title and URL.</p>
+<ul>
+    <li><code>version</code> (str): The version of npm package to scan.</li>
+    <li><code>**kwargs</code>: Additional keyword arguments to pass to the <code>Vulners_Search_Scanner</code>, such as HTTP proxies, API keys, etc.</li>
+</ul>
 
-<h3><code>scan_library_package(library, package, version, user_agent=None, cookie=None, timeout=20, headers={}, http_proxies=None, socks4_proxies=None, socks5_proxies=None)</code></h3>
-<p>This static method scans an NPM library package for vulnerabilities using the Snyk security database. It takes parameters such as the library name, package name, version, user agent, cookie, timeout, headers, and proxies. The method returns a list of dictionaries containing vulnerability information, including title and URL.</p>
+<p>The method returns the result of the vulnerability scan.</p>
 
 <h2>Example Usage</h2>
-<p>To use the <code>NPM_Scanner</code> class, call the static methods <code>scan_library_core</code> or <code>scan_library_package</code> with the required parameters. Here's an example:</p>
+<p>To use the <code>NPMJS_Scanner</code> class, call the <code>scan</code> method with the npm package version and any additional parameters needed for the <code>Vulners_Search_Scanner</code>. Here's an example:</p>
 
 <pre><code>
-from bane import NPM_Scanner
+from ..cms.utils import NPMJS_Scanner
 
-#Scan an NPM library for vulnerabilities
-library_core_result = NPM_Scanner.scan_library_core(
-    library="example_library",
-    version="1.2.3",
-    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
-    cookie="your_cookie_string",
-    timeout=15,
-    headers={"Custom-Header": "header_value"},
-    http_proxies=["http://proxy1:8080", "http://proxy2:8080"],
-    socks4_proxies=["socks4://proxy3:1080"],
-    socks5_proxies=["socks5://proxy4:1080"]
+# Scan npm package for vulnerabilities
+npm_vulnerabilities = NPMJS_Scanner.scan(
+    version="3.10.10",
+    http_proxies=["1.2.3.4:80"],
 )
 
-#Scan an NPM library package for vulnerabilities
-library_package_result = NPM_Scanner.scan_library_package(
-    library="example_library",
-    package="example_package",
-    version="1.2.3",
-    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
-    cookie="your_cookie_string",
-    timeout=15,
-    headers={"Custom-Header": "header_value"},
-    http_proxies=["http://proxy1:8080", "http://proxy2:8080"],
-    socks4_proxies=["socks4://proxy3:1080"],
-    socks5_proxies=["socks5://proxy4:1080"]
-)
-
-#Access the scan results
-print("Library Core Vulnerabilities:", library_core_result)
-print("Library Package Vulnerabilities:", library_package_result)
+# Access the results
+print("NPM Package Vulnerabilities:", npm_vulnerabilities)
 </code></pre>
+
 
 
 <h1>ReactJS_Scanner Class</h1>
