@@ -112,7 +112,7 @@ print("Node.js Vulnerabilities:", nodejs_vulnerabilities)
 <p>To use the <code>NPMJS_Scanner</code> class, call the <code>scan</code> method with the npm package version and any additional parameters needed for the <code>Vulners_Search_Scanner</code>. Here's an example:</p>
 
 <pre><code>
-from ..cms.utils import NPMJS_Scanner
+from bane import NPMJS_Scanner
 
 # Scan npm package for vulnerabilities
 npm_vulnerabilities = NPMJS_Scanner.scan(

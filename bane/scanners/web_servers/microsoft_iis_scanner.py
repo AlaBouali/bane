@@ -1,6 +1,6 @@
 from ..cms.utils import *
 
-class Apache_HTTP_Server_Scanner:
+class Microsoft_IIS_Server_Scanner:
 
     @staticmethod
     def scan(version,**kwargs):
