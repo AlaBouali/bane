@@ -39,14 +39,14 @@ class IP_Info:
             return 
 
     @staticmethod
-    def geo_ip(u, timeout=15, proxy=None):
+    def geo_ip(ip, timeout=15, proxy=None):
         """
         this function is for getting: geoip informations
         """
         ip=IP_Info.parse_IP(ip)
         try:
             return requests.Session().get(
-                "https://api.db-ip.com/v2/free/" + u,
+                "https://api.db-ip.com/v2/free/" + ip,
                 headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
                 proxies=proxy,
                 timeout=timeout,
