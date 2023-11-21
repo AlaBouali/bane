@@ -178,7 +178,7 @@ This library is intended exclusively for educational purposes and ethical use wi
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/data_visualization_stack#elasticsearch_scanner-class">ElasticSearch_Scanner :</a> designed to scan an Elasticsearch server for information and vulnerabilities. It checks the target server for Elasticsearch version, performs a basic HTTP request, and retrieves relevant vulnerability information using the Vulners database.</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/data_visualization_stack#grafana_scanner-class">Grafana_Scanner :</a> designed to scan a Grafana server for information and vulnerabilities. It checks the target server for Grafana version, server information, subdomains, and possible vulnerabilities.</li>
 <br>
-
+</ul>
 
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/databases"><b>Databases :</b></a> </li>
  <br> <ul>
@@ -190,7 +190,7 @@ This library is intended exclusively for educational purposes and ethical use wi
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/databases#postgresql_scanner-class">PostgreSQL_Scanner :</a> provides a static method for scanning PostgreSQL installations using the Vulners database.</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/databases#redis_scanner-class">Redis_Scanner :</a> provides a static method for scanning Redis installations using the Vulners database.</li>
 <br>
-
+</ul>
 
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols"><b>Network Discovery and Scanning:</b></a> </li>
   <br><ul>
