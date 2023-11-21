@@ -226,6 +226,22 @@ This library is intended exclusively for educational purposes and ethical use wi
 <br>
 </ul>
 
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/lms"><b>LMS's Vulnerability Scanner :</b></a> </li>
+ <br> <ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/lms#moodle_scanner-class">Moodle_Scanner :</a> used to scan a website for Moodle-related information and vulnerabilities. It checks the target URL for Moodle version, server information, subdomains, and possible vulnerabilities.</li>
+<br>
+</ul>
+
+
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/mobile_dev"><b>Mobile Applications development Stack :</b></a> </li>
+ <br> <ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/mobile_dev#flutter_scanner-class">Flutter_Scanner :</a> provides a static method for scanning Flutter installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/mobile_dev#react_native_scanner-class">React_Native_Scanner :</a> provides a static method for scanning React Native installations using the Vulners database.</li>
+<br>
+</ul>
+
+
+
 
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols"><b>Network Discovery and Scanning:</b></a> </li>
   <br><ul>
@@ -239,6 +255,28 @@ This library is intended exclusively for educational purposes and ethical use wi
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners#SSDP_Amplification_Scanner-class">SSDP_Amplification_Scanner :</a> used to calculate the amplification factor for a given SSDP (Simple Service Discovery Protocol) server.</li>
 <br>
 </ul>
+
+
+
+
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/operating_systems"><b>Operating Systems :</b></a> </li>
+ <br> <ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/operating_systems#android_os_scanner-class">Android_OS_Scanner :</a> provides a static method for scanning Android OS installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/operating_systems#busybox_os_scanner-class">Busybox_OS_Scanner :</a> provides a static method for scanning Busybox OS installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/operating_systems#centos_scanner-class">CentOS_Scanner :</a> provides a static method for scanning CentOS installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/operating_systems#debian_os_scanner-class">Debian_OS_Scanner :</a> provides a static method for scanning Debian OS installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/operating_systems#freebsd_os_scanner-class">FreeBSD_OS_Scanner :</a> provides a static method for scanning FreeBSD OS installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/operating_systems#ios_scanner-class">IOS_Scanner :</a> provides a static method for scanning iOS installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/operating_systems#mac_os_scanner-class">Mac_OS_Scanner :</a> provides a static method for scanning macOS installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/operating_systems#ubuntu_os_scanner-class">Ubuntu_OS_Scanner :</a> provides a static method for scanning Ubuntu OS installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/operating_systems#windows_os_scanner-class">Windows_OS_Scanner :</a> provides a static method for scanning Windows OS installations using the Vulners database.</li>
+<br>
+</ul>
+
+
+
+
+
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/vulnerabilities"><b>Vulnerability Scanners:</b></a> </li>
   <br><ul>
 
@@ -266,6 +304,36 @@ This library is intended exclusively for educational purposes and ethical use wi
 <br>
 <!-- Utils Directory -->
 </ul>
+
+
+
+
+
+
+
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_servers"><b>Web Servers :</b></a> </li>
+ <br> <ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_servers#apache_coyote_server_scanner-class">Apache_Coyote_Server_Scanner :</a> provides a static method for scanning Apache Coyote Server installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_servers#apache_http_server_scanner-class">Apache_HTTP_Server_Scanner :</a> provides a static method for scanning Apache HTTP Server installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_servers#apache_tomcat_server_scanner-class">Apache_Tomcat_Server_Scanner :</a> provides a static method for scanning Apache Tomcat Server installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_servers#glassfish_server_scanner-class">GlassFish_Server_Scanner :</a> provides a static method for scanning GlassFish Server installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_servers#jetty_server_scanner-class">Jetty_Server_Scanner :</a> provides a static method for scanning Jetty Server installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_servers#microsoft_iis_server_scanner-class">Microsoft_IIS_Server_Scanner :</a> provides a static method for scanning Microsoft IIS Server installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_servers#nginx_server_scanner-class">Nginx_Server_Scanner :</a> provides a static method for scanning Nginx Server installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_servers#payara_server_scanner-class">Payara_Server_Scanner :</a> provides a static method for scanning Payara Server installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_servers#windows_server_scanner-class">Windows_Server_Scanner :</a> provides a static method for scanning Windows Server installations using the Vulners database.</li>
+<br>
+</ul>
+
+
+
+
+
+
+
+
+
+
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils"><b>Additional Useful Modules :</b></a></li>
   <br><ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Userful_Utilities-class">Userful_Utilities :</a> provides various utility methods for common tasks and operations.</li>
