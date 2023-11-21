@@ -70,12 +70,13 @@ class Vulners_Search_Scanner:
                 i = 0
                 for x in m:
                     #print(x)
-                    l.append(
-                        x[
-                                "_source"
-                            ]
-                    )
-                    i += 1
+                    if software.lower() in str(x).lower():
+                        l.append(
+                            x[
+                                    "_source"
+                                ]
+                        )
+                        i += 1
                 return l
             else:
                 return []#{'error':"couldn't find vulnerabilities for this version"}
@@ -152,12 +153,13 @@ class Vulners_Search_Scanner:
                 i = 0
                 for x in m:
                     #print(x)
-                    l.append(
-                        x[
-                                "_source"
-                            ]
-                    )
-                    i += 1
+                    if software.lower() in str(x).lower():
+                        l.append(
+                            x[
+                                    "_source"
+                                ]
+                        )
+                        i += 1
                 return l
             else:
                 return []#{'error':"couldn't find vulnerabilities for this version"}
