@@ -306,6 +306,30 @@ This library is intended exclusively for educational purposes and ethical use wi
 
 
 
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_dev"><b>Web Development :</b></a> </li>
+ <br> <ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_dev#aspnet_dast_scanner-class">ASPNET_DAST_Scanner :</a> designed to perform dynamic application security testing (DAST) on ASP.NET sites. It scans for known vulnerabilities using the Vulners database and provides detailed information about the ASP.NET site's configuration, version, and potential exploits.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_dev#php_dast_scanner-class">PHP_DAST_Scanner :</a> designed to perform dynamic application security testing (DAST) on PHP sites. It scans for known vulnerabilities using the Vulners database and provides detailed information about the PHP site's configuration, version, and potential exploits.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_dev#ruby_dast_scanner-class">Ruby_DAST_Scanner :</a> designed to perform dynamic application security testing (DAST) on Ruby on Rails sites. It scans for known vulnerabilities using the Vulners database and provides detailed information about the Ruby on Rails site's configuration, versions, and potential exploits.</li>
+<br>
+</ul>
+
+
+
+
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_servers"><b>Web Development Frameworks :</b></a> </li>
+ <br> <ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_dev_frameworks#django_scanner-class">Django_Scanner :</a> provides a static method for scanning Django installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_dev_frameworks#fastapi_scanner-class">FastAPI_Scanner :</a> provides a static method for scanning FastAPI installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_dev_frameworks#flask_scanner-class">Flask_Scanner :</a> provides a static method for scanning Flask installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_dev_frameworks#laravel_scanner-class">Laravel_Scanner :</a> provides a static method for scanning Laravel installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_dev_frameworks#spring_boot_scanner-class">Spring_Boot_Scanner :</a> provides a static method for scanning Spring Boot installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_dev_frameworks#spring_security_scanner-class">Spring_Security_Scanner :</a> provides a static method for scanning Spring Security installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/web_dev_frameworks#symfony_scanner-class">Symfony_Scanner :</a> provides a static method for scanning Symfony installations using the Vulners database.</li>
+<br>
+</ul>
+
+
 
 
 
@@ -333,16 +357,7 @@ This library is intended exclusively for educational purposes and ethical use wi
 
 
 
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils"><b>Additional Useful Modules :</b></a></li>
-  <br><ul>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Userful_Utilities-class">Userful_Utilities :</a> provides various utility methods for common tasks and operations.</li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Files_Interface-class">Files_Interface :</a> provides utility methods for working with files, including clearing, deleting, writing, and reading files. It also includes methods for creating and reading JSON files.</li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Bane_Instances_Interface-class">Bane_Instances_Interface :</a> provides utility methods for working with instances of other classes, especially those created for parallel processing.</li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Socket_Connection-class">Socket_Connection :</a> provides methods for creating and configuring socket connections.</li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Tor_Switch_Interface-class">Tor_Switch_Interface :</a> provides methods for switching IP addresses when using the Tor network. It allows for automatic IP switching with or without a password, depending on the Tor configuration and platform.</li>
-<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Update_Module_Interface-class">Update_Module_Interface :</a> provides methods for updating the "bane" module to a specified version or the latest version available.</li>
-</ul>
-<br>
+
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/pager"><b>Web Pages Analyzers:</b></a> </li>
   <br><ul>
 
@@ -367,6 +382,16 @@ This library is intended exclusively for educational purposes and ethical use wi
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#ProxyChecker-class">ProxyChecker :</a> responsible for checking the validity and functionality of proxy servers in a list. It can perform proxy checks using either socket-level connections or HTTP requests, depending on the configuration.</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Getter-class">Proxies_Getter :</a> used to retrieve proxy sockets and proxy settings for various protocols.</li>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils/proxer#Proxies_Parser-class">Proxies_Parser :</a> used to parse and handle proxy configurations and settings.</li>
+</ul>
+<br>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils"><b>Additional Useful Modules :</b></a></li>
+  <br><ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Userful_Utilities-class">Userful_Utilities :</a> provides various utility methods for common tasks and operations.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Files_Interface-class">Files_Interface :</a> provides utility methods for working with files, including clearing, deleting, writing, and reading files. It also includes methods for creating and reading JSON files.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Bane_Instances_Interface-class">Bane_Instances_Interface :</a> provides utility methods for working with instances of other classes, especially those created for parallel processing.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Socket_Connection-class">Socket_Connection :</a> provides methods for creating and configuring socket connections.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Tor_Switch_Interface-class">Tor_Switch_Interface :</a> provides methods for switching IP addresses when using the Tor network. It allows for automatic IP switching with or without a password, depending on the Tor configuration and platform.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/utils#Update_Module_Interface-class">Update_Module_Interface :</a> provides methods for updating the "bane" module to a specified version or the latest version available.</li>
 </ul>
 <h1 id="why-you-should-use-bane">Why you should use "bane"</h1>
 <ul>
