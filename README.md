@@ -172,6 +172,26 @@ This library is intended exclusively for educational purposes and ethical use wi
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/cms#WordPress_Scanner-class">WordPress_Scanner :</a> used to scan a website for WordPress-related information and vulnerabilities. It checks the target URL for WordPress version, server information, subdomains, themes, plugins, and possible vulnerabilities.</li>
 </ul>
 <br>
+
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/data_visualization_stack"><b>Data Visualization Stack :</b></a> </li>
+ <br> <ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/data_visualization_stack#elasticsearch_scanner-class">ElasticSearch_Scanner :</a> designed to scan an Elasticsearch server for information and vulnerabilities. It checks the target server for Elasticsearch version, performs a basic HTTP request, and retrieves relevant vulnerability information using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/data_visualization_stack#grafana_scanner-class">Grafana_Scanner :</a> designed to scan a Grafana server for information and vulnerabilities. It checks the target server for Grafana version, server information, subdomains, and possible vulnerabilities.</li>
+<br>
+
+
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/databases"><b>Databases :</b></a> </li>
+ <br> <ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/databases#mariadb_scanner-class">MariaDB_Scanner :</a> provides a static method for scanning MariaDB installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/databases#mongodb_scanner-class">MongoDB_Scanner :</a> provides a static method for scanning MongoDB installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/databases#microsoft_sql_server_scanner-class">Microsoft_SQL_Server_Scanner :</a> provides a static method for scanning Microsoft SQL Server installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/databases#mysql_mysql_scanner-class">MySQL_MySQL_Scanner :</a> provides a static method for scanning MySQL Server installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/databases#mysql_oracle_scanner-class">MySQL_Oracle_Scanner :</a> provides a static method for scanning MySQL Server installations (Oracle variant) using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/databases#postgresql_scanner-class">PostgreSQL_Scanner :</a> provides a static method for scanning PostgreSQL installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/databases#redis_scanner-class">Redis_Scanner :</a> provides a static method for scanning Redis installations using the Vulners database.</li>
+<br>
+
+
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols"><b>Network Discovery and Scanning:</b></a> </li>
   <br><ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#Chargen_Amplification_Scanner-class">Chargen_Amplification_Scanner :</a> used to calculate the amplification factor for a given Chargen server.</li>
