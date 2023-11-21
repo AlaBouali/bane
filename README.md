@@ -192,6 +192,41 @@ This library is intended exclusively for educational purposes and ethical use wi
 <br>
 </ul>
 
+
+
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/devops_project_management"><b>DevOps ( project management ) :</b></a> </li>
+ <br> <ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/devops_project_management#ansible_scanner-class">Ansible_Scanner :</a> provides a static method for scanning Ansible installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/devops_project_management#docker_scanner-class">Docker_Scanner :</a> provides a static method for scanning Docker installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/devops_project_management#git_scanner-class">Git_Scanner :</a> provides a static method for scanning Git installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/devops_project_management#jenkins_scanner-class">Jenkins_Scanner :</a> designed to perform application security testing on Jenkins sites. It scans for known vulnerabilities using the Vulners database and provides detailed information about the Jenkins site's configuration, versions, and potential exploits.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/devops_project_management#jira_scanner-class">Jira_Scanner :</a> designed for application security testing on Jira sites. It scans for vulnerabilities using the Vulners database and provides detailed information about the Jira site's configuration, versions, and potential exploits.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/devops_project_management#kubernetes_scanner-class">Kubernetes_Scanner :</a> provides a static method for scanning Kubernetes installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/devops_project_management#maven_scanner-class">Maven_Scanner :</a> provides a static method for scanning Maven installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/devops_project_management#puppet_scanner-class">Puppet_Scanner :</a> provides a static method for scanning Puppet installations using the Vulners database.</li>
+<br>
+</ul>
+
+
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/erp_solutions"><b>ERP Solutions :</b></a> </li>
+ <br> <ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/erp_solutions#dolibarr_scanner-class">Dolibarr_Scanner :</a> designed to scan a Dolibarr server for information and vulnerabilities. It checks the target server for Dolibarr version, server information, subdomains, and possible vulnerabilities.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/erp_solutions#odoo_scanner-class">Odoo_scanner :</a> designed to scan a Odoo server for information and vulnerabilities. It checks the target server for Odoo version, server information, subdomains, and possible vulnerabilities.</li>
+<br>
+</ul>
+
+
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/js_dev_ecosystem"><b>Javasript Development Eco-System :</b></a> </li>
+ <br> <ul>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/js_dev_ecosystem#angular_scanner-class">Angular_Scanner :</a> provides a static method for scanning Angular installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/js_dev_ecosystem#angularjs_scanner-class">AngularJS_Scanner :</a> provides a static method for scanning AngularJS installations using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/js_dev_ecosystem#nodejs_scanner-class">NodeJS_Scanner :</a> designed to scan Node.js installations for known vulnerabilities using the Vulners database. It provides a static method to perform the scanning process based on the specified Node.js version.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/js_dev_ecosystem#npmjs_scanner-class">NPMJS_Scanner :</a> provides a static method for scanning npm packages using the Vulners database.</li>
+<li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/js_dev_ecosystem#reactjs_scanner-class">ReactJS_Scanner :</a> designed to scan React.js installations for known vulnerabilities using the Vulners database. It provides a static method to perform the scanning process based on the specified React.js version.</li>
+<br>
+</ul>
+
+
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols"><b>Network Discovery and Scanning:</b></a> </li>
   <br><ul>
 <li><a href="https://github.com/AlaBouali/bane/tree/master/bane/scanners/network_protocols#Chargen_Amplification_Scanner-class">Chargen_Amplification_Scanner :</a> used to calculate the amplification factor for a given Chargen server.</li>
