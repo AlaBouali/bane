@@ -1381,13 +1381,6 @@ results = SSTI_Scanner.scan(
 for result in results:
     print("Scan Result:", result)
 </code></pre>
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>XSS_Scanner Class - scan Method</title>
-</head>
-<body>
 <h1>XSS_Scanner Class - scan Method</h1>
 
 <h2>Description</h2>
