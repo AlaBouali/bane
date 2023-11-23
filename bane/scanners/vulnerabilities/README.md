@@ -1381,8 +1381,11 @@ results = SSTI_Scanner.scan(
 for result in results:
     print("Scan Result:", result)
 </code></pre>
-<h1>XSS_Scanner Class - scan Method</h1>
 
+<h1>XSS_Scanner Class</h1>
+<h2>Class Overview</h2>
+<p>The <code>XSS_Scanner</code> class is part of the "bane" module and is used for scanning websites for XSS vulnerabilities.</p>
+<h2>Method: <code>scan</code></h2>
 <h2>Description</h2>
 <p>
         The `scan` method is a part of the `XSS_Scanner` class in Python, designed for systematically identifying and testing Cross-Site Scripting (XSS) vulnerabilities in web applications. This method allows users to spider through web pages, identify forms, and test them for XSS vulnerabilities. It provides flexibility to test multiple pages and payloads.
