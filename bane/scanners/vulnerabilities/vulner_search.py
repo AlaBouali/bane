@@ -103,7 +103,8 @@ class Vulners_Search_Scanner:
         http_proxies=None,
         socks4_proxies=None,
         socks5_proxies=None,
-        proxy=None
+        proxy=None,
+        basic_only=True
         ):
         proxies=Proxies_Interface.get_requests_proxies_from_parameters(http_proxies=http_proxies,socks4_proxies=socks4_proxies,socks5_proxies=socks5_proxies)
         if proxy==None:
@@ -164,7 +165,10 @@ class Vulners_Search_Scanner:
                                 ]
                         )
                         i += 1
-                return l
+                if basic_only==False:
+                    return l
+                else:
+                    return [{'title':x.get('title',''),'description':x.get('description',''),'href':x.get('href',''),'sourceHref':x.get('sourceHref',''),'published':x.get('published','')} for x in l]
             else:
                 return []#{'error':"couldn't find vulnerabilities for this version"}
         except:
