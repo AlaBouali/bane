@@ -81,7 +81,7 @@ class Vulners_Search_Scanner:
                 if basic_only==False:
                     return l
                 else:
-                    return [{'title':x.get('title',''),'description':x.get('description',''),'href':x.get('href',''),'sourceHref':x.get('sourceHref',''),'published':x.get('published','')} for x in l]
+                    return [{'title':x.get('title',''),'description':x.get('description',''),'href':x.get('href',''),'sourceHref':x.get('sourceHref',''),'published':x.get('published',''),'cvelist':x.get('cvelist',[''])[0],'score':x.get('cvss',{'score':"N/A"})['score'],'vector':x.get('cvss',{'vector':"N/A"})['vector']} for x in l]
             else:
                 return []#{'error':"couldn't find vulnerabilities for this version"}
         except Exception as ex:
@@ -168,7 +168,7 @@ class Vulners_Search_Scanner:
                 if basic_only==False:
                     return l
                 else:
-                    return [{'title':x.get('title',''),'description':x.get('description',''),'href':x.get('href',''),'sourceHref':x.get('sourceHref',''),'published':x.get('published','')} for x in l]
+                    return [{'title':x.get('title',''),'description':x.get('description',''),'href':x.get('href',''),'sourceHref':x.get('sourceHref',''),'published':x.get('published',''),'cvelist':x.get('cvelist',[''])[0],'score':x.get('cvss',{'score':"N/A"})['score'],'vector':x.get('cvss',{'vector':"N/A"})['vector']} for x in l]
             else:
                 return []#{'error':"couldn't find vulnerabilities for this version"}
         except:
