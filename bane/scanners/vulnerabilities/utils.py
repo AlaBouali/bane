@@ -1,5 +1,16 @@
 import subprocess, os, xtelnet, sys, cgi, re, json,platform
-from colorama import Fore, Back, Style
+try:
+    from colorama import Fore, Back, Style
+except:
+    class Fore:
+        pass
+
+    class Back:
+        pass
+
+    class Style:
+        pass
+
 from ...utils.proxer import *
 from ...utils.handle_files import *
 

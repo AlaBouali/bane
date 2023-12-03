@@ -1,5 +1,9 @@
 import flask,os
-import socket,os,sys,pwinput
+import socket,os,sys
+try:
+    import pwinput
+except:
+    pwinput=input
 from ...utils.socket_connection import *
 from ...cryptographers.xor import XOR
 import os, sys, socket, random, time, threading, xtelnet

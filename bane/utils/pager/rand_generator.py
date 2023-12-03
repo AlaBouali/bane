@@ -118,12 +118,12 @@ class RANDOM_GENERATOR:
         return ua_string
     
     @staticmethod
-    def update_user_agents_list():
+    def update_user_agents_list(max_user_agents=20000):
         l=[]
         while True:
             a=RANDOM_GENERATOR.get_random_user_agent()
             if a not in Common_Variables.user_agents_list:
                 l.append(a)
-            if len(l)==20000:
+            if len(l)==max_user_agents:
                 break
         Common_Variables.user_agents_list=l

@@ -62,7 +62,10 @@ class Botnet_Master:
         data=Botnet_Master.read_data(s,timeout=read_timeout,real_timeout=timeout,xor_key=xor_key)
         username=user_input(data)
         data=Botnet_Master.send_data(username,s,timeout=read_timeout,real_timeout=timeout,xor_key=xor_key)
-        password=pwinput.pwinput(prompt=data, mask='*')
+        try:
+            password=pwinput.pwinput(prompt=data, mask='*')
+        except:
+            password=input(data)
         data=Botnet_Master.send_data(password,s,timeout=read_timeout,real_timeout=timeout,xor_key=xor_key)
         while True:
             cmd=user_input(data+' ')
