@@ -57,7 +57,7 @@ class IP_Info:
 
 
     @staticmethod
-    def reverse_ip_lookup(u, timeout=10, proxy=None):
+    def reverse_ip_lookup(ip, timeout=10, proxy=None):
         """
         this function is for: reverse ip look up
         if you've used it 100 times in 24 hours, your IP will be banned by "api.hackertarget.com" so i highly recommand you to use the "proxy" option by adding a http(s) proxy:
@@ -67,7 +67,7 @@ class IP_Info:
         ip=IP_Info.parse_IP(ip)
         try:
             r = requests.Session().get(
-                "https://api.hackertarget.com/reverseiplookup/?q=" + u,
+                "https://api.hackertarget.com/reverseiplookup/?q=" + ip,
                 headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
                 proxies=proxy,
                 timeout=timeout,
