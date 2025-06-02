@@ -1,4 +1,4 @@
-import subprocess, os, xtelnet, sys, cgi, re, json,platform
+import subprocess, os, xtelnet, sys, re, json,platform
 try:
     from colorama import Fore, Back, Style
 except:

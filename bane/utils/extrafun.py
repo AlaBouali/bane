@@ -1,4 +1,4 @@
-import cgi, requests, os, random, re, hashlib, urllib, sys, json, gc,socket,socks
+import requests, os, random, re, hashlib, urllib, sys, json, gc,socket,socks
 from ..cryptographers import *
 from ..utils.handle_files import *
 if sys.version_info < (3, 0):
@@ -50,7 +50,7 @@ class Userful_Utilities:
         """
         function to return escaped html string
         """
-        return cgi.escape(s, quote=True)
+        return HTMLParser.escape(s)
 
 
     @staticmethod
